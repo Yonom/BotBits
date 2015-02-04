@@ -35,7 +35,7 @@ namespace BotBits
         
         void IMessageQueue.SendTicks(int ticks, IConnection connection)
         {
-            var c = ticks - 4;
+            var c = ticks - 4; // Max number of messages sent at once
 
             for (this._lastTicks = Math.Max(c, this._lastTicks); this._lastTicks < ticks; this._lastTicks++)
             {

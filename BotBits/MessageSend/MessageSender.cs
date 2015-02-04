@@ -6,7 +6,6 @@ namespace BotBits
 {
     internal sealed class MessageSender : Package<MessageSender>, IDisposable
     {
-        // TODO: Disable when there are no messages waiting
         private readonly SendTimer _myTimer;
         private readonly ConcurrentDictionary<Type, IMessageQueue> _queues =
             new ConcurrentDictionary<Type, IMessageQueue>();

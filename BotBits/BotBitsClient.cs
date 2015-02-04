@@ -8,8 +8,6 @@ namespace BotBits
     public class BotBitsClient : ISchedulerHandle
     {
         // TODO: Physics (extension?)
-        // TODO: More helper classes
-
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ISchedulerHandle _schedulerHandle;
 
