@@ -7,6 +7,6 @@ namespace BotBits
 {
     internal interface IMessageQueue
     {
-        void SendTicks(int ticks, Connection connection);
+        void SendTicks(int ticks, IConnection connection);
     }
 }

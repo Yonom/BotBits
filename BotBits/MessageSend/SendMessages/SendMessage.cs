@@ -63,7 +63,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected abstract Message GetMessage();
         
-        internal void Send(Connection connection)
+        internal void Send(IConnection connection)
         {
             connection.Send(this.GetMessage());
         }

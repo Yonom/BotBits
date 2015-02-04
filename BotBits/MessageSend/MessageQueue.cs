@@ -33,7 +33,7 @@ namespace BotBits
             }
         }
         
-        void IMessageQueue.SendTicks(int ticks, Connection connection)
+        void IMessageQueue.SendTicks(int ticks, IConnection connection)
         {
             var c = ticks - 4;
 

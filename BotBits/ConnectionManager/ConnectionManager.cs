@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BotBits.Annotations;
 using BotBits.Events;
+using BotBits.SendMessages;
 using PlayerIOClient;
 
 namespace BotBits
@@ -10,9 +11,10 @@ namespace BotBits
     public sealed class ConnectionManager : Package<ConnectionManager>, IDisposable
     {
         private const string GameId = "everybody-edits-su9rn58o40itdbnw69plyw";
-        private Connection _connection;
+        private IConnection _connection;
+        private PlayerIOConnectionAdapter _adapter;
 
-        public Connection Connection
+        public IConnection Connection
         {
             get { return this._connection; }
         }
@@ -24,8 +26,8 @@ namespace BotBits
 
         void IDisposable.Dispose()
         {
-            if (this.Connection != null)
-                this.Connection.Disconnect();
+            if (this._adapter != null)
+                this._adapter.Dispose();
         }
 
         [Pure]
@@ -133,7 +135,7 @@ namespace BotBits
             return new LoginClient(this, client);
         }
 
-        public void SetConnection([NotNull] Connection connection)
+        public void SetConnection([NotNull] IConnection connection)
         {
             if (connection == null)
                 throw new ArgumentNullException("connection");
@@ -145,10 +147,30 @@ namespace BotBits
 
             new ConnectEvent()
                 .RaiseIn(this.BotBits);
-
+            
             this.Connection.OnDisconnect += this.Connection_OnDisconnect;
             if (!this.Connection.Connected)
+            {
                 this.HandleDisconnect(String.Empty);
+            }
+        }
+
+        internal void SetConnectionInternal([NotNull] Connection connection)
+        {
+            var adapter = new PlayerIOConnectionAdapter(connection);
+            try
+            {
+                this.SetConnection(adapter);
+                this._adapter = adapter;
+
+                new InitSendMessage()
+                    .SendIn(this.BotBits);
+            }
+            catch
+            {
+                adapter.Dispose();
+                throw;
+            }
         }
 
         private void Connection_OnDisconnect(object sender, string message)
@@ -202,7 +224,7 @@ namespace BotBits
                             {
                                 try
                                 {
-                                    this._connectionManager.SetConnection(conn);
+                                    this._connectionManager.SetConnectionInternal(conn);
                                     tcs.SetResult(true);
                                 }
                                 catch (Exception ex)
@@ -233,7 +255,7 @@ namespace BotBits
                 {
                     try
                     {
-                        this._connectionManager.SetConnection(conn);
+                        this._connectionManager.SetConnectionInternal(conn);
                         tcs.SetResult(true);
                     }
                     catch (Exception ex)

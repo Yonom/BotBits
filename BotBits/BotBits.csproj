@@ -48,6 +48,7 @@
     <Compile Include="Blocks\Events\PlaceEvent.cs" />
     <Compile Include="Chat\ChatExtensions.cs" />
     <Compile Include="ConnectionManager\ConnectionExtensions.cs" />
+    <Compile Include="ConnectionManager\Events\MessageEvent.cs" />
     <Compile Include="ConnectionManager\IConnection.cs" />
     <Compile Include="ConnectionManager\PlayerIOConnectionAdapter.cs" />
     <Compile Include="Enums\AccessRight.cs" />
