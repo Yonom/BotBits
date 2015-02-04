@@ -9,8 +9,6 @@ namespace BotBits
     {
         // TODO: Physics (extension?)
         // TODO: More helper classes
-        // TODO: who disposes the connection?
-        // Disposing support
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ISchedulerHandle _schedulerHandle;

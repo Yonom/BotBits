@@ -92,8 +92,6 @@ namespace BotBits
             lock (this._containers)
             {
                 this._containers.ForEach(c => c.Dispose());
-                this._containers.Clear();
-                this._packages.Clear();
             }
         }
 
