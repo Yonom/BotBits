@@ -56,6 +56,7 @@
     <Compile Include="Backgrounds.cs" />
     <Compile Include="Enums\Background.cs" />
     <Compile Include="Enums\Foreground.cs" />
+    <Compile Include="Event\EventHandleExtensions.cs" />
     <Compile Include="Foregrounds.cs" />
     <Compile Include="Enums\Key.cs" />
     <Compile Include="Enums\Layer.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="MessageReceive\Events\PlayerEvent.cs" />
     <Compile Include="MessageReceive\ReceiveEventAttribute.cs" />
     <Compile Include="MessageSend\SendMessages\TouchHologramSendMessage.cs" />
+    <Compile Include="Players\Events\FlyEvent.cs" />
     <Compile Include="Services\MessageServices.cs" />
     <Compile Include="Event\EventRaiseHandler.cs" />
     <Compile Include="Extension\DefaultExtension.cs" />

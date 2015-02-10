@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace BotBits
 {
@@ -6,13 +7,13 @@ namespace BotBits
     {
         public SynchronizationContextSchedulerHandle()
         {
-            this.Scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            this.SynchronizationContext = SynchronizationContext.Current;
         }
 
         public void Dispose()
         {
         }
 
-        public TaskScheduler Scheduler { get; private set; }
+        public SynchronizationContext SynchronizationContext { get; private set; }
     }
 }

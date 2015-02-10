@@ -165,13 +165,25 @@ namespace BotBits
         {
             Player p = e.Player;
             p.God = e.God;
+
+            if (!p.Mod && !p.Guardian)
+            {
+                new FlyEvent(p, p.Flying)
+                    .RaiseIn(this.BotBits);
+            }
         }
 
         [EventListener(EventPriority.High)]
         private void OnGuardianMode(GuardianModeEvent e)
         {
             Player p = e.Player;
-            p.Guardian = e.Guardian;
+            p.Guardian = e.Guardian; 
+            
+            if (!p.Mod && !p.God)
+            {
+                new FlyEvent(p, p.Flying)
+                    .RaiseIn(this.BotBits);
+            }
         }
 
         [EventListener(EventPriority.High)]
@@ -179,6 +191,12 @@ namespace BotBits
         {
             Player p = e.Player;
             p.Mod = e.Mod;
+
+            if (!p.God && !p.Guardian)
+            {
+                new FlyEvent(p, p.Flying)
+                    .RaiseIn(this.BotBits);
+            }
         }
 
         [EventListener(EventPriority.High)]

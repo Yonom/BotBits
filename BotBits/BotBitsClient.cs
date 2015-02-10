@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace BotBits
 {
@@ -26,9 +26,9 @@ namespace BotBits
                 .LoadInto(this);
         }
 
-        public TaskScheduler Scheduler
+        public SynchronizationContext SynchronizationContext
         {
-            get { return _schedulerHandle.Scheduler; }
+            get { return _schedulerHandle.SynchronizationContext; }
         }
 
         internal T Get<T>() where T : Package<T>, new()

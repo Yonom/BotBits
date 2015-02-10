@@ -15,7 +15,7 @@ namespace BotBits
             if (this._dispatcher == null)
                 throw new InvalidOperationException("No dispatcher running on the current thread.");
 
-            this.Scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            this.SynchronizationContext = SynchronizationContext.Current;
         }
 
         public void Dispose()
@@ -23,7 +23,7 @@ namespace BotBits
             this._dispatcher.QueueExit();
         }
 
-        public TaskScheduler Scheduler { get; private set; }
+        public SynchronizationContext SynchronizationContext { get; private set; }
 
         public static ActionDispatcherSchedulerHandle StartOnNewThread()
         {
@@ -31,11 +31,11 @@ namespace BotBits
             // ReSharper disable once AccessToDisposedClosure
             using (var resetEvent = new ManualResetEvent(false))
             {
-                Task.Factory.StartNew(() => BotServices.RunDispatcher(d =>
+                new Thread(o => BotServices.RunDispatcher(d =>
                 {
                     res = new ActionDispatcherSchedulerHandle();
                     resetEvent.Set();
-                }), TaskCreationOptions.LongRunning);
+                })) {IsBackground = true}.Start();
                 resetEvent.WaitOne();
             }
             return res;

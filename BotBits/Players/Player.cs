@@ -263,7 +263,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if this player is flying using god mode, guardian mode or moderator mode; otherwise, <c>false</c>.
         /// </value>
-        public bool IsFlying
+        public bool Flying
         {
             get { return this.God || this.Guardian || this.Mod; }
         }
@@ -274,7 +274,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if this player is a guest; otherwise, <c>false</c>.
         /// </value>
-        public bool IsGuest
+        public bool Guest
         {
             get { return PlayerUtils.IsGuest(this.Username); }
         }

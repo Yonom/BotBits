@@ -147,7 +147,8 @@ namespace BotBits
 
             new ConnectEvent()
                 .RaiseIn(this.BotBits);
-            
+
+            this.Connection.OnMessage += this.Connection_OnMessage;
             this.Connection.OnDisconnect += this.Connection_OnDisconnect;
             if (!this.Connection.Connected)
             {
@@ -173,10 +174,22 @@ namespace BotBits
             }
         }
 
+        private void Connection_OnMessage(object sender, Message e)
+        {
+            this.BotBits.RunOnContext(() =>
+                this.HandleMessage(e));
+        }
+
         private void Connection_OnDisconnect(object sender, string message)
         {
-            this.BotBits.Schedule(() => 
-                this.HandleDisconnect(message)).Wait();
+            this.BotBits.RunOnContext(() => 
+                this.HandleDisconnect(message));
+        }
+
+        private void HandleMessage(Message message)
+        {
+            new MessageEvent(message)
+                .RaiseIn(this.BotBits);
         }
 
         private void HandleDisconnect(string message)

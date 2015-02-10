@@ -1,4 +1,6 @@
-﻿namespace BotBits
+﻿using System;
+
+namespace BotBits
 {
     public static class BlockExtensions
     {

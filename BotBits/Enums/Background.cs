@@ -1,6 +1,6 @@
 ﻿namespace BotBits
 {
-    public enum Background
+    public enum Background : ushort
     {
     }
 }

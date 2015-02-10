@@ -16,7 +16,7 @@ namespace BotBits
             string strValue2;
             while ((strValue2 = m[pointer] as string) == null || strValue2 != "we")
             {
-                var block = (Foreground)m.GetInteger(pointer++);
+                var block = m.GetInteger(pointer++);
                 var l = (Layer)m.GetInteger(pointer++);
                 byte[] byteArrayX = m.GetByteArray(pointer++);
                 byte[] byteArrayY = m.GetByteArray(pointer++);
@@ -31,29 +31,29 @@ namespace BotBits
 
                     case Layer.Foreground:
                         ForegroundBlock foregroundBlock;
-                        BlockArgsType argsType = GetBlockArgsType(GetBlockType(block));
+                        BlockArgsType argsType = GetBlockArgsType(GetBlockType((Foreground)block));
 
                         switch (argsType)
                         {
                             case BlockArgsType.None:
-                                foregroundBlock = new ForegroundBlock(block);
+                                foregroundBlock = new ForegroundBlock((Foreground)block);
                                 break;
 
                             case BlockArgsType.Number:
                                 uint i = m.GetUInt(pointer++);
-                                foregroundBlock = new ForegroundBlock(block, i);
+                                foregroundBlock = new ForegroundBlock((Foreground)block, i);
                                 break;
 
                             case BlockArgsType.String:
                                 string str = m.GetString(pointer++);
-                                foregroundBlock = new ForegroundBlock(block, str);
+                                foregroundBlock = new ForegroundBlock((Foreground)block, str);
                                 break;
 
                             case BlockArgsType.Portal:
                                 var portalRotation = (PortalRotation)m.GetUInt(pointer++);
                                 uint portalId = m.GetUInt(pointer++);
                                 uint portalTarget = m.GetUInt(pointer++);
-                                foregroundBlock = new ForegroundBlock(block, portalId, portalTarget, portalRotation);
+                                foregroundBlock = new ForegroundBlock((Foreground)block, portalId, portalTarget, portalRotation);
                                 break;
 
                             default:

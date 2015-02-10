@@ -18,11 +18,9 @@ namespace BotBits
             return assembly.GetTypes().Where(type => type.GetCustomAttributes(t, true).Length > 0);
         }
 
-        public static Task Schedule(this BotBitsClient client, Action action)
+        public static void RunOnContext(this BotBitsClient client, Action action)
         {
-            return Task.Factory.StartNew(action, 
-                CancellationToken.None, TaskCreationOptions.None, 
-                client.Scheduler);
+            client.SynchronizationContext.Send(o => action(), null);
         }
 
         public static Point3D GetPoint3D(this PlaceSendMessage placeSendMessage)
