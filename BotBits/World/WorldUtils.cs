@@ -31,9 +31,9 @@ namespace BotBits
 
                     case Layer.Foreground:
                         ForegroundBlock foregroundBlock;
-                        BlockArgsType argsType = GetBlockArgsType(GetBlockType((Foreground)block));
+                        BlockArgsType blockArgsType = GetBlockArgsType(GetForegroundType((Foreground)block));
 
-                        switch (argsType)
+                        switch (blockArgsType)
                         {
                             case BlockArgsType.None:
                                 foregroundBlock = new ForegroundBlock((Foreground)block);
@@ -117,7 +117,7 @@ namespace BotBits
             return world;
         }
 
-        public static BlockType GetBlockType(Foreground id)
+        public static ForegroundType GetForegroundType(Foreground id)
         {
             switch (id)
             {
@@ -125,66 +125,66 @@ namespace BotBits
                 case Foregrounds.Gate.Coin:
                 case Foregrounds.Door.BlueCoin:
                 case Foregrounds.Gate.BlueCoin:
-                    return BlockType.CoinDoor;
+                    return ForegroundType.CoinDoor;
 
                 case Foregrounds.Hazard.Spike:
-                    return BlockType.Spike;
+                    return ForegroundType.Spike;
 
                 case Foregrounds.SciFi2013.BlueStraight:
                 case Foregrounds.SciFi2013.YellowStraight:
                 case Foregrounds.SciFi2013.GreenStraight:
-                    return BlockType.SciFiStraight;
+                    return ForegroundType.SciFiStraight;
 
                 case Foregrounds.SciFi2013.YellowSlope:
                 case Foregrounds.SciFi2013.GreenSlope:
                 case Foregrounds.SciFi2013.BlueSlope:
-                    return BlockType.SciFiSlope;
+                    return ForegroundType.SciFiSlope;
 
                 case Foregrounds.Music.Piano:
-                    return BlockType.Piano;
+                    return ForegroundType.Piano;
 
                 case Foregrounds.Music.Drum:
-                    return BlockType.Drum;
+                    return ForegroundType.Drum;
 
                 case Foregrounds.Portal.Invisible:
                 case Foregrounds.Portal.Normal:
-                    return BlockType.Portal;
+                    return ForegroundType.Portal;
 
                 case Foregrounds.Portal.World:
-                    return BlockType.WorldPortal;
+                    return ForegroundType.WorldPortal;
 
                 case Foregrounds.Admin.Text:
-                    return BlockType.Text;
+                    return ForegroundType.Text;
                     
                 case Foregrounds.Sign.Block:
-                    return BlockType.Sign;
+                    return ForegroundType.Sign;
 
                 default:
-                    return BlockType.Normal;
+                    return ForegroundType.Normal;
             }
         }
 
-        public static BlockArgsType GetBlockArgsType(BlockType type)
+        public static BlockArgsType GetBlockArgsType(ForegroundType type)
         {
             switch (type)
             {
-                case BlockType.Normal:
+                case ForegroundType.Normal:
                     return BlockArgsType.None;
 
-                case BlockType.CoinDoor:
-                case BlockType.Drum:
-                case BlockType.Piano:
-                case BlockType.Spike:
-                case BlockType.SciFiSlope:
-                case BlockType.SciFiStraight:
+                case ForegroundType.CoinDoor:
+                case ForegroundType.Drum:
+                case ForegroundType.Piano:
+                case ForegroundType.Spike:
+                case ForegroundType.SciFiSlope:
+                case ForegroundType.SciFiStraight:
                     return BlockArgsType.Number;
 
-                case BlockType.Sign:
-                case BlockType.Text:
-                case BlockType.WorldPortal:
+                case ForegroundType.Sign:
+                case ForegroundType.Text:
+                case ForegroundType.WorldPortal:
                     return BlockArgsType.String;
 
-                case BlockType.Portal:
+                case ForegroundType.Portal:
                     return BlockArgsType.Portal;
 
                 default:

@@ -135,14 +135,6 @@ namespace BotBits
         public int BlueCoins { get; internal set; }
 
         /// <summary>
-        /// Gets a value indicating whether this player has toggled the purple switches.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if purple switches are toggled; otherwise, <c>false</c>.
-        /// </value>
-        public bool PurpleSwitch { get; internal set; }
-
-        /// <summary>
         ///     Gets the x-coordinate of the player's spawn.
         /// </summary>
         /// <value>

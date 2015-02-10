@@ -28,15 +28,15 @@ namespace BotBits.Demo
                 .Of(_botBits)
                 .EmailLoginAsync("email", "pass")
                 .CreateJoinRoomAsync("worldid");
-            _botBits.Dispose();
         }
 
         [EventListener]
         private static void OnJoin(JoinEvent e)
         {
+            for (var i = 0; i < 10; i++)
             Chat
                 .Of(_botBits)
-                .Say("{0}: Hello", e);
+                .Say("{0}: Hello.", e.Username);
         }
     }
 }

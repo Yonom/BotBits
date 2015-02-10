@@ -78,7 +78,7 @@ namespace BotBits
             // There is no speed limit on commands
             if (msg.StartsWith("/", StringComparison.Ordinal))
             {
-                var e = msg.Length >= 80
+                var e = msg.Length > 80
                     ? new ChatSendMessage(msg.Substring(0, 80))
                     : new ChatSendMessage(msg);
                 e.SendIn(this.BotBits);
@@ -101,10 +101,10 @@ namespace BotBits
             }
 
             // Queue the message and chop it into 80 char parts
-            for (int i = 0; i <= msg.Length; i += 80)
+            for (int i = 0; i < msg.Length; i += 80)
             {
                 int left = msg.Length - i;
-                this._myChatQueue.Enqueue(left >= 80
+                this._myChatQueue.Enqueue(left > 80
                     ? msg.Substring(i, 80)
                     : msg.Substring(i, left));
             }

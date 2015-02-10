@@ -8,33 +8,23 @@ namespace BotBits
     {
         private readonly object _args;
         private readonly Foreground _id;
-        private readonly BlockType _type;
+        private readonly ForegroundType _type;
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ForegroundBlock" /> struct.
-        /// </summary>
-        /// <param name="id">The block.</param>
-        /// <exception cref="System.ArgumentException">The given block is missing required arguments.;block</exception>
         public ForegroundBlock(Foreground id)
         {
-            BlockType type = WorldUtils.GetBlockType(id);
+            ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.None)
                 throw new ArgumentException("The given block is missing required arguments.", "id");
 
             this._args = null;
-            this._type = BlockType.Normal;
+            this._type = ForegroundType.Normal;
             this._id = id;
         }
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ForegroundBlock" /> struct.
-        /// </summary>
-        /// <param name="id">The block.</param>
-        /// <param name="args">The arguments.</param>
-        /// <exception cref="System.ArgumentException">Invalid arguments for the specified block.;args</exception>
+
         public ForegroundBlock(Foreground id, uint args)
         {
-            BlockType type = WorldUtils.GetBlockType(id);
+            ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Number)
                 throw new ArgumentException("Invalid arguments for the specified block.", "args");
 
@@ -43,15 +33,9 @@ namespace BotBits
             this._id = id;
         }
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ForegroundBlock" /> struct.
-        /// </summary>
-        /// <param name="id">The block.</param>
-        /// <param name="args">The arguments.</param>
-        /// <exception cref="System.ArgumentException">Invalid arguments for the specified block.;args</exception>
         public ForegroundBlock(Foreground id, string args)
         {
-            BlockType type = WorldUtils.GetBlockType(id);
+            ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.String)
                 throw new ArgumentException("Invalid arguments for the specified block.", "args");
 
@@ -60,22 +44,14 @@ namespace BotBits
             this._id = id;
         }
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ForegroundBlock" /> struct.
-        /// </summary>
-        /// <param name="id">The block.</param>
-        /// <param name="portalId">The portal identifier.</param>
-        /// <param name="portalTarget">The portal target.</param>
-        /// <param name="portalRotation">The portal rotation.</param>
-        /// <exception cref="System.ArgumentException">The given block is not a portal.;block</exception>
         public ForegroundBlock(Foreground id, uint portalId, uint portalTarget, PortalRotation portalRotation)
         {
-            BlockType type = WorldUtils.GetBlockType(id);
+            ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Portal)
                 throw new ArgumentException("The given block is not a portal.", "id");
 
             this._args = new PortalArgs(portalId, portalTarget, portalRotation);
-            this._type = BlockType.Portal;
+            this._type = ForegroundType.Portal;
             this._id = id;
         }
 
@@ -89,51 +65,27 @@ namespace BotBits
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ForegroundBlock"/> struct.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="rotation">The rotation.</param>
+        
         public ForegroundBlock(Foreground id, SciFiSlopeRotation rotation) 
             : this(id, (uint)rotation)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ForegroundBlock"/> struct.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="rotation">The rotation.</param>
         public ForegroundBlock(Foreground id, SciFiStraightRotation rotation)
             : this(id, (uint)rotation)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ForegroundBlock"/> struct.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="rotation">The rotation.</param>
         public ForegroundBlock(Foreground id, SpikeRotation rotation)
             : this(id, (uint)rotation)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ForegroundBlock"/> struct.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="soundId">The sound identifier.</param>
         public ForegroundBlock(Foreground id, PianoId soundId)
             : this(id, (uint)soundId)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ForegroundBlock"/> struct.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="soundId">The sound identifier.</param>
         public ForegroundBlock(Foreground id, PercussionId soundId)
             : this(id, (uint)soundId)
         {
@@ -156,7 +108,7 @@ namespace BotBits
         /// <value>
         ///     The type.
         /// </value>
-        public BlockType Type
+        public ForegroundType Type
         {
             get { return this._type; }
         }
@@ -172,7 +124,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != BlockType.Text && this.Type != BlockType.Sign)
+                if (this.Type != ForegroundType.Text && this.Type != ForegroundType.Sign)
                     throw new InvalidOperationException("This property can only be accessed on label or sign blocks.");
 
                 return (string)this._args;
@@ -190,7 +142,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != BlockType.WorldPortal)
+                if (this.Type != ForegroundType.WorldPortal)
                     throw new InvalidOperationException("This property can only be accessed on WorldPortal blocks.");
 
                 return (string)this._args;
@@ -208,7 +160,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != BlockType.CoinDoor)
+                if (this.Type != ForegroundType.CoinDoor)
                     throw new InvalidOperationException("This property can only be accessed on CoinDoor blocks.");
 
                 return (uint)this._args;
@@ -226,7 +178,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != BlockType.Portal)
+                if (this.Type != ForegroundType.Portal)
                     throw new InvalidOperationException("This property can only be accessed on Portal blocks.");
 
                 return this.GetPortalArgs().PortalId;
@@ -244,7 +196,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != BlockType.Portal)
+                if (this.Type != ForegroundType.Portal)
                     throw new InvalidOperationException("This property can only be accessed on Portal blocks.");
 
                 return this.GetPortalArgs().PortalTarget;
@@ -262,7 +214,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != BlockType.Portal)
+                if (this.Type != ForegroundType.Portal)
                     throw new InvalidOperationException("This property can only be accessed on Portal blocks.");
 
                 return this.GetPortalArgs().PortalRotation;
@@ -280,7 +232,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != BlockType.Piano)
+                if (this.Type != ForegroundType.Piano)
                     throw new InvalidOperationException("This property can only be accessed on Piano blocks.");
 
                 return (PianoId)this._args;
@@ -298,7 +250,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != BlockType.Drum)
+                if (this.Type != ForegroundType.Drum)
                     throw new InvalidOperationException("This property can only be accessed on Drum blocks.");
 
                 return (PercussionId)this._args;
@@ -316,7 +268,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != BlockType.Spike)
+                if (this.Type != ForegroundType.Spike)
                     throw new InvalidOperationException("This property can only be accessed on Spike blocks.");
 
                 return (SpikeRotation)this._args;
@@ -334,7 +286,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != BlockType.SciFiStraight)
+                if (this.Type != ForegroundType.SciFiStraight)
                     throw new InvalidOperationException("This property can only be accessed on SciFiStraight blocks.");
 
                 return (SciFiStraightRotation)this._args;
@@ -353,7 +305,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != BlockType.SciFiSlope)
+                if (this.Type != ForegroundType.SciFiSlope)
                     throw new InvalidOperationException("This property can only be accessed on SciFiSlope blocks.");
 
                 return (SciFiSlopeRotation)this._args;
@@ -383,9 +335,9 @@ namespace BotBits
         {
             switch (this.Type)
             {
-                case BlockType.Normal:
+                case ForegroundType.Normal:
                     return new object[0];
-                case BlockType.Portal:
+                case ForegroundType.Portal:
                     return new object[] {(uint)this.PortalRotation, this.PortalId, this.PortalTarget};
                 default:
                     return new[] { this._args };

@@ -3,7 +3,7 @@ namespace BotBits
     /// <summary>
     ///     Represents the types a <see cref="Foreground" /> can be.
     /// </summary>
-    public enum BlockType : byte
+    public enum ForegroundType : byte
     {
         /// <summary>
         ///     A normal block

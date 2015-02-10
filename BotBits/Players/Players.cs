@@ -105,7 +105,6 @@ namespace BotBits
             p.SpawnY = e.Y;
             p.ClubMember = e.ClubMember;
             p.MagicClass = e.MagicClass;
-            p.PurpleSwitch = e.PurpleSwitch;
 
             new NewPlayerEvent(p)
                 .RaiseIn(this.BotBits);
@@ -156,7 +155,6 @@ namespace BotBits
             p.X = e.X;
             p.Y = e.Y;
             p.Dead = false;
-            p.PurpleSwitch = e.PurpleSwitch;
             p.SpaceDown = e.SpaceDown;
         }
 

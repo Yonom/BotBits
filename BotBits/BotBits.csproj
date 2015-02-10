@@ -103,6 +103,7 @@
     <Compile Include="Services\SchedulerHandle\ActionDispatcherSchedulerHandle.cs" />
     <Compile Include="Services\SchedulerHandle\ISchedulerHandle.cs" />
     <Compile Include="Services\SchedulerHandle\SynchronizationContextSchedulerHandle.cs" />
+    <Compile Include="World\Block\BackgroundType.cs" />
     <Compile Include="World\WorldUtils.cs" />
     <Compile Include="Chat\Chat.cs" />
     <Compile Include="Consumables\Consumables.cs" />
@@ -221,11 +222,11 @@
     <Compile Include="Helpers\Nito\Async\ActionDispatcher.cs" />
     <Compile Include="Helpers\Nito\Async\ActionDispatcherSynchronizationContext.cs" />
     <Compile Include="Helpers\Utils.cs" />
-    <Compile Include="World\BackgroundBlock.cs" />
-    <Compile Include="World\BlockArgsType.cs" />
+    <Compile Include="World\Block\BackgroundBlock.cs" />
+    <Compile Include="World\Block\BlockArgsType.cs" />
     <Compile Include="World\BlockLayer.cs" />
-    <Compile Include="World\BlockType.cs" />
-    <Compile Include="World\ForegroundBlock.cs" />
+    <Compile Include="World\Block\ForegroundType.cs" />
+    <Compile Include="World\Block\ForegroundBlock.cs" />
     <Compile Include="World\IBlockLayer.cs" />
     <Compile Include="World\IWorld.cs" />
     <Compile Include="World\World.cs" />
