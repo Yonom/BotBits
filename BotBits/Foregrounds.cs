@@ -791,5 +791,13 @@ namespace BotBits
                 Yellow = (Foreground)1003,
                 Pink = (Foreground)1004;
         }
+
+        public static class Valentines2015
+        {
+            public const Foreground
+                RedHeart = (Foreground)405,
+                PurpleHeart = (Foreground)406,
+                PinkHeart = (Foreground)407;
+        }
     }
 }
