@@ -14,17 +14,13 @@ namespace BotBits.Events
         internal ShowKeyEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Keys = new Key[message.Count];
-            for (uint i = 0; i <= message.Count - 1u; i++)
-            {
-                this.Keys[(int)i] = (Key)Enum.Parse(typeof(Key), message.GetString(i), true);
-            }
+            this.Key = (Key)Enum.Parse(typeof(Key), message.GetString(0), true);
         }
 
         /// <summary>
         ///     Gets or sets the keys.
         /// </summary>
         /// <value>The keys.</value>
-        public Key[] Keys { get; set; }
+        public Key Key { get; set; }
     }
 }

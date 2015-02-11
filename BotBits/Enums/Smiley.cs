@@ -56,7 +56,7 @@ namespace BotBits
         Sigh = 51,
         Robber = 52,
         Police = 53,
-        //SmileUpsideDown = 54
+        PurpleGhost = 54,
         Pirate = 55,
         Viking = 56,
         Karate = 57,

@@ -12,17 +12,17 @@ namespace BotBits
             return pos + 8 >> 4;
         }
 
-        public static bool IsAlreadyPlaced(PlaceSendMessage sent, IWorld world)
+        public static bool IsAlreadyPlaced(PlaceSendMessage sent, Blocks world)
         {
             switch (sent.Layer)
             {
                 case Layer.Foreground:
                     var fg = world.Foreground[sent.X, sent.Y];
-                    return sent.Id == (int)fg.Id &&
-                           sent.Args.SequenceEqual(fg.GetArgs());
+                    return sent.Id == (int)fg.Block.Id &&
+                           sent.Args.SequenceEqual(fg.Block.GetArgs());
                 case Layer.Background:
                     var bg = world.Background[sent.X, sent.Y];
-                    return sent.Id == (int)bg.Id;
+                    return sent.Id == (int)bg.Block.Id;
                 default:
                     throw new NotSupportedException("Unknown layer.");
             }
@@ -30,13 +30,13 @@ namespace BotBits
 
         public static bool AreSame(PlaceSendMessage sent, ForegroundPlaceEvent received)
         {
-            return sent.Id == (int)received.NewBlock.Id &&
-                sent.Args.SequenceEqual(received.NewBlock.GetArgs());
+            return sent.Id == (int)received.New.Block.Id &&
+                sent.Args.SequenceEqual(received.New.Block.GetArgs());
         }
 
         public static bool AreSame(PlaceSendMessage sent, BackgroundPlaceEvent received)
         {
-            return sent.Id == (int)received.NewBlock.Id;
+            return sent.Id == (int)received.New.Block.Id;
         }
 
         public static bool AreSame(PlaceSendMessage b1, PlaceSendMessage b2)
@@ -44,7 +44,7 @@ namespace BotBits
             return b1.Id == b2.Id && b1.Args.SequenceEqual(b2.Args);
         }
 
-        public static bool IsPlaceable(PlaceSendMessage p, IWorld world)
+        public static bool IsPlaceable(PlaceSendMessage p, Blocks world)
         {
             if (p.X < 0 || p.Y < 0 || p.X >= world.Width || p.Y >= world.Height) return false; // If out of range
             if (p.X == 0 || p.Y == 0 || p.X == world.Width - 1 || p.Y == world.Height - 1) // If on border

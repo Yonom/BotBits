@@ -3,7 +3,7 @@ using PlayerIOClient;
 namespace BotBits.Events
 {
     [ReceiveEvent("br")]
-    public sealed class RotatablePlaceEvent : ReceiveEvent<RotatablePlaceEvent>
+    public sealed class RotatablePlaceEvent : PlayerEvent<RotatablePlaceEvent>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="RotatablePlaceEvent" /> class.
@@ -11,13 +11,22 @@ namespace BotBits.Events
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
         internal RotatablePlaceEvent(BotBitsClient client, Message message)
-            : base(client, message)
+            : base(client, message, 5)
         {
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);
             this.Id = message.GetInteger(2);
             this.Rotation = message.GetUInt(3);
+            this.Layer = (Layer)message.GetUInt(4);
         }
+
+        /// <summary>
+        /// Gets or sets the layer.
+        /// </summary>
+        /// <value>
+        /// The layer.
+        /// </value>
+        public Layer Layer { get; set; }
 
         /// <summary>
         ///     Gets or sets the rotation.

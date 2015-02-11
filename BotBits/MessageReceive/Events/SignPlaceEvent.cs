@@ -3,7 +3,7 @@
 namespace BotBits.Events
 {
     [ReceiveEvent("ts")]
-    public sealed class SignPlaceEvent : ReceiveEvent<SignPlaceEvent>
+    public sealed class SignPlaceEvent : PlayerEvent<SignPlaceEvent>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SignPlaceEvent"/> class.
@@ -11,7 +11,7 @@ namespace BotBits.Events
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
         internal SignPlaceEvent(BotBitsClient client, Message message)
-            : base(client, message)
+            : base(client, message, 4)
         {
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);

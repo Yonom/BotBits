@@ -4,19 +4,17 @@ namespace BotBits.Events
         where T : PlaceEvent<T, TBlock> 
         where TBlock : struct
     {
-        internal PlaceEvent(int x, int y, TBlock oldBlock, TBlock newBlock, Player player)
+        internal PlaceEvent(int x, int y, BlockData<TBlock> old, BlockData<TBlock> @new)
         {
             this.X = x;
             this.Y = y;
-            this.OldBlock = oldBlock;
-            this.NewBlock = newBlock;
-            this.Player = player;
+            this.Old = old;
+            this.New = @new;
         }
 
         public int X { get; private set; }
         public int Y { get; private set; }
-        public TBlock OldBlock { get; private set; }
-        public TBlock NewBlock { get; private set; }
-        public Player Player { get; private set; }
+        public BlockData<TBlock> Old { get; private set; }
+        public BlockData<TBlock> New { get; private set; }
     }
 }

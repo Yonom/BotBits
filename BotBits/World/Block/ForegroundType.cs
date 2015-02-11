@@ -13,7 +13,7 @@ namespace BotBits
         /// <summary>
         ///     A coin door block
         /// </summary>
-        CoinDoor,
+        Goal,
 
         /// <summary>
         ///     A portal block
@@ -23,12 +23,12 @@ namespace BotBits
         /// <summary>
         ///     A label block
         /// </summary>
-        Text,
+        Label,
 
         /// <summary>
         ///     A world portal block
         /// </summary>
-        WorldPortal,
+        Text,
 
         /// <summary>
         ///     A piano block
@@ -41,9 +41,9 @@ namespace BotBits
         Drum,
 
         /// <summary>
-        ///     A spike block
+        ///     A rotatable block
         /// </summary>
-        Spike,
+        Rotatable,
 
         /// <summary>
         ///     A sci fi straight block
@@ -53,11 +53,6 @@ namespace BotBits
         /// <summary>
         ///     A sci fi slope block
         /// </summary>
-        SciFiSlope,
-
-        /// <summary>
-        ///     A sign block
-        /// </summary>
-        Sign,
+        SciFiSlope
     }
 }

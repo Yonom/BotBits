@@ -5,6 +5,7 @@
         None,
         Number,
         String,
-        Portal
+        Portal,
+        Label
     }
 }

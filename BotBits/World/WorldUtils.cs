@@ -4,13 +4,13 @@ using PlayerIOClient;
 
 namespace BotBits
 {
-    public static class WorldUtils
+    internal static class WorldUtils
     {
         private const uint InitOffset = 19;
 
-        internal static World GetWorld(Message m, int width, int height, uint offset = InitOffset)
+        internal static BlocksWorld GetWorld(Message m, int width, int height, uint offset = InitOffset)
         {
-            var world = new World(width, height);
+            var world = new BlocksWorld(width, height);
             uint pointer = GetStart(m, offset);
 
             string strValue2;
@@ -26,7 +26,7 @@ namespace BotBits
                     case Layer.Background:
                         var bgWorldBlock = new BackgroundBlock((Background)block);
                         foreach (Point pos in GetPos(byteArrayX, byteArrayY))
-                            world.Background[pos.X, pos.Y] = bgWorldBlock;
+                            world.Background[pos.X, pos.Y] = new BlockData<BackgroundBlock>(bgWorldBlock);
                         break;
 
                     case Layer.Foreground:
@@ -60,8 +60,9 @@ namespace BotBits
                                 throw new NotSupportedException("Invalid block.");
                         }
 
+                        var fg = new BlockData<ForegroundBlock>(foregroundBlock);
                         foreach (Point pos in GetPos(byteArrayX, byteArrayY))
-                            world.Foreground[pos.X, pos.Y] = foregroundBlock;
+                            world.Foreground[pos.X, pos.Y] = fg;
                         break;
                 }
             }
@@ -125,10 +126,18 @@ namespace BotBits
                 case Foregrounds.Gate.Coin:
                 case Foregrounds.Door.BlueCoin:
                 case Foregrounds.Gate.BlueCoin:
-                    return ForegroundType.CoinDoor;
+                case Foregrounds.Door.Purple:
+                case Foregrounds.Gate.Purple:
+                case Foregrounds.Door.Death:
+                case Foregrounds.Gate.Death:
+                    return ForegroundType.Goal;
 
                 case Foregrounds.Hazard.Spike:
-                    return ForegroundType.Spike;
+                case Foregrounds.OneWay.Cyan:
+                case Foregrounds.OneWay.Pink:
+                case Foregrounds.OneWay.Red:
+                case Foregrounds.OneWay.Yellow:
+                    return ForegroundType.Rotatable;
 
                 case Foregrounds.SciFi2013.BlueStraight:
                 case Foregrounds.SciFi2013.YellowStraight:
@@ -151,13 +160,11 @@ namespace BotBits
                     return ForegroundType.Portal;
 
                 case Foregrounds.Portal.World:
-                    return ForegroundType.WorldPortal;
-
-                case Foregrounds.Admin.Text:
                     return ForegroundType.Text;
-                    
+
                 case Foregrounds.Sign.Block:
-                    return ForegroundType.Sign;
+                case Foregrounds.Admin.Text:
+                    return ForegroundType.Label;
 
                 default:
                     return ForegroundType.Normal;
@@ -171,21 +178,22 @@ namespace BotBits
                 case ForegroundType.Normal:
                     return BlockArgsType.None;
 
-                case ForegroundType.CoinDoor:
+                case ForegroundType.Goal:
                 case ForegroundType.Drum:
                 case ForegroundType.Piano:
-                case ForegroundType.Spike:
+                case ForegroundType.Rotatable:
                 case ForegroundType.SciFiSlope:
                 case ForegroundType.SciFiStraight:
                     return BlockArgsType.Number;
 
-                case ForegroundType.Sign:
                 case ForegroundType.Text:
-                case ForegroundType.WorldPortal:
                     return BlockArgsType.String;
 
                 case ForegroundType.Portal:
                     return BlockArgsType.Portal;
+
+                case ForegroundType.Label:
+                    return BlockArgsType.Label;
 
                 default:
                     throw new ArgumentException("Invalid BlockType.", "type");

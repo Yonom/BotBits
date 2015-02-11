@@ -43,9 +43,11 @@
   <ItemGroup>
     <Compile Include="Actions\Actions.cs" />
     <Compile Include="Actions\ActionsExtensions.cs" />
+    <Compile Include="Blocks\ReadOnlyBlocksWorld.cs" />
     <Compile Include="Blocks\Events\BackgroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\ForegroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\PlaceEvent.cs" />
+    <Compile Include="Blocks\BlockData.cs" />
     <Compile Include="Chat\ChatExtensions.cs" />
     <Compile Include="ConnectionManager\ConnectionExtensions.cs" />
     <Compile Include="ConnectionManager\Events\MessageEvent.cs" />
@@ -68,7 +70,7 @@
     <Compile Include="Enums\ScifiSlopeRotation.cs" />
     <Compile Include="Enums\ScifiStraightRotation.cs" />
     <Compile Include="Enums\Smiley.cs" />
-    <Compile Include="Enums\SpikeRotation.cs" />
+    <Compile Include="Enums\BlockRotation.cs" />
     <Compile Include="EventLoader\EventListenerAttribute.cs" />
     <Compile Include="EventLoader\EventLoader.cs" />
     <Compile Include="BlockChecker\BlockChecker.cs" />
@@ -80,6 +82,9 @@
     <Compile Include="MessageReceive\Events\SignPlaceEvent.cs" />
     <Compile Include="MessageReceive\Events\PlayerEvent.cs" />
     <Compile Include="MessageReceive\ReceiveEventAttribute.cs" />
+    <Compile Include="MessageSend\SendMessages\CyanKeySendMessage.cs" />
+    <Compile Include="MessageSend\SendMessages\MagentaKeySendMessage.cs" />
+    <Compile Include="MessageSend\SendMessages\YellowKeySendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\TouchHologramSendMessage.cs" />
     <Compile Include="Players\Events\FlyEvent.cs" />
     <Compile Include="Services\MessageServices.cs" />
@@ -95,7 +100,7 @@
     <Compile Include="Blocks\Blocks.cs" />
     <Compile Include="Blocks\Events\WorldResizeEvent.cs" />
     <Compile Include="Blocks\ReadOnlyBlockLayer.cs" />
-    <Compile Include="Blocks\ReadOnlyWorld.cs" />
+    <Compile Include="Blocks\BlocksWorld.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Point3D.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -135,11 +140,7 @@
     <Compile Include="MessageReceive\Events\CoinEvent.cs" />
     <Compile Include="MessageReceive\Events\CrownEvent.cs" />
     <Compile Include="MessageReceive\Events\SmileyEvent.cs" />
-    <Compile Include="MessageReceive\Events\GiveDarkWizardEvent.cs" />
-    <Compile Include="MessageReceive\Events\GiveFireWizardEvent.cs" />
-    <Compile Include="MessageReceive\Events\GiveGrinchEvent.cs" />
-    <Compile Include="MessageReceive\Events\GiveWitchEvent.cs" />
-    <Compile Include="MessageReceive\Events\GiveWizardEvent.cs" />
+    <Compile Include="MessageReceive\Events\GiveMagicSmiley.cs" />
     <Compile Include="MessageReceive\Events\GodModeEvent.cs" />
     <Compile Include="MessageReceive\Events\GuardianModeEvent.cs" />
     <Compile Include="MessageReceive\Events\HideKeyEvent.cs" />
@@ -201,7 +202,6 @@
     <Compile Include="MessageSend\SendMessages\SaveSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\ChatSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\SendMessage.cs" />
-    <Compile Include="MessageSend\SendMessages\PurpleSwitchSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\TouchCakeSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\TouchDiamondSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\TouchUserSendMessage.cs" />

@@ -26,20 +26,31 @@ namespace BotBits
         {
             ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Number)
-                throw new ArgumentException("Invalid arguments for the specified block.", "args");
+                throw new ArgumentException("Invalid arguments for the specified block.", "id");
 
             this._args = args;
             this._type = type;
             this._id = id;
         }
 
-        public ForegroundBlock(Foreground id, string args)
+        public ForegroundBlock(Foreground id, string text)
         {
             ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.String)
-                throw new ArgumentException("Invalid arguments for the specified block.", "args");
+                throw new ArgumentException("Invalid arguments for the specified block.", "id");
 
-            this._args = args;
+            this._args = text;
+            this._type = type;
+            this._id = id;
+        }
+
+        public ForegroundBlock(Foreground id, string text, string textColor)
+        {
+            ForegroundType type = WorldUtils.GetForegroundType(id);
+            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.String)
+                throw new ArgumentException("Invalid arguments for the specified block.", "id");
+
+            this._args = new LabelArgs(text, textColor);
             this._type = type;
             this._id = id;
         }
@@ -55,8 +66,8 @@ namespace BotBits
             this._id = id;
         }
 
-        public ForegroundBlock(Foreground id, int coinsToCollect)
-            : this(id, (uint)coinsToCollect)
+        public ForegroundBlock(Foreground id, int goal)
+            : this(id, (uint)goal)
         {
         }
 
@@ -76,7 +87,7 @@ namespace BotBits
         {
         }
 
-        public ForegroundBlock(Foreground id, SpikeRotation rotation)
+        public ForegroundBlock(Foreground id, BlockRotation rotation)
             : this(id, (uint)rotation)
         {
         }
@@ -114,54 +125,56 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Gets the Text. (Only on label or sign blocks)
+        ///     Gets the Text. (Only on label or text blocks)
         /// </summary>
         /// <value>
         ///     The text.
         /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on label or sign blocks.</exception>
+        /// <exception cref="System.InvalidOperationException">This property can only be accessed on label or text blocks.</exception>
         public string Text
         {
             get
             {
-                if (this.Type != ForegroundType.Text && this.Type != ForegroundType.Sign)
-                    throw new InvalidOperationException("This property can only be accessed on label or sign blocks.");
+                if (this.Type == ForegroundType.Text)
+                    return (string)this._args;
+                if (this.Type == ForegroundType.Label)
+                    return this.GetLabelArgs().Text;
 
-                return (string)this._args;
+                throw new InvalidOperationException("This property can only be accessed on label or text blocks.");
             }
         }
 
         /// <summary>
-        ///     Gets the world portal target. (Only on world portal blocks)
+        ///     Gets the Text. (Only on label blocks)
         /// </summary>
         /// <value>
-        ///     The world portal target.
+        ///     The text.
         /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on WorldPortal blocks.</exception>
-        public string WorldPortalTarget
+        /// <exception cref="System.InvalidOperationException">This property can only be accessed on label blocks.</exception>
+        public string TextColor
         {
             get
             {
-                if (this.Type != ForegroundType.WorldPortal)
-                    throw new InvalidOperationException("This property can only be accessed on WorldPortal blocks.");
+                if (this.Type != ForegroundType.Label)
+                    throw new InvalidOperationException("This property can only be accessed on label blocks.");
 
-                return (string)this._args;
+                return this.GetLabelArgs().TextColor;
             }
         }
 
         /// <summary>
-        ///     Gets the coins to collect. (Only on coin doors)
+        ///     Gets the goal. (Only on goal blocks)
         /// </summary>
         /// <value>
         ///     The coins to collect.
         /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on CoinDoor blocks.</exception>
-        public uint CoinsToCollect
+        /// <exception cref="System.InvalidOperationException">This property can only be accessed on goal blocks.</exception>
+        public uint Goal
         {
             get
             {
-                if (this.Type != ForegroundType.CoinDoor)
-                    throw new InvalidOperationException("This property can only be accessed on CoinDoor blocks.");
+                if (this.Type != ForegroundType.Goal)
+                    throw new InvalidOperationException("This property can only be accessed on goal blocks.");
 
                 return (uint)this._args;
             }
@@ -258,20 +271,20 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Gets the spike rotation. (Only on spike blocks)
+        ///     Gets the rotation. (Only on rotatable blocks)
         /// </summary>
         /// <value>
-        ///     The spike rotation.
+        ///     The rotation.
         /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on Spike blocks.</exception>
-        public SpikeRotation SpikeRotation
+        /// <exception cref="System.InvalidOperationException">This property can only be accessed on rotatable blocks.</exception>
+        public BlockRotation BlockRotation
         {
             get
             {
-                if (this.Type != ForegroundType.Spike)
-                    throw new InvalidOperationException("This property can only be accessed on Spike blocks.");
+                if (this.Type != ForegroundType.Rotatable)
+                    throw new InvalidOperationException("This property can only be accessed on rotatable blocks.");
 
-                return (SpikeRotation)this._args;
+                return (BlockRotation)this._args;
             }
         }
 
@@ -317,6 +330,11 @@ namespace BotBits
             return (PortalArgs)this._args;
         }
 
+        private LabelArgs GetLabelArgs()
+        {
+            return (LabelArgs)this._args;
+        }
+
         private class PortalArgs
         {
             public PortalArgs(uint portalId, uint portalTarget, PortalRotation portalRotation)
@@ -331,6 +349,18 @@ namespace BotBits
             public PortalRotation PortalRotation { get; private set; }
         }
 
+        private class LabelArgs
+        {
+            public string Text { get; private set; }
+            public string TextColor { get; private set; }
+
+            public LabelArgs(string text, string textColor)
+            {
+                this.Text = text;
+                this.TextColor = textColor;
+            }
+        }
+
         public object[] GetArgs()
         {
             switch (this.Type)
@@ -338,7 +368,9 @@ namespace BotBits
                 case ForegroundType.Normal:
                     return new object[0];
                 case ForegroundType.Portal:
-                    return new object[] {(uint)this.PortalRotation, this.PortalId, this.PortalTarget};
+                    return new object[] { (uint)this.PortalRotation, this.PortalId, this.PortalTarget };
+                case ForegroundType.Label:
+                    return new object[] { this.Text, this.TextColor };
                 default:
                     return new[] { this._args };
             }

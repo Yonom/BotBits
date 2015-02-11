@@ -70,10 +70,17 @@ namespace BotBits
                 Red = (Foreground)23,
                 Green = (Foreground)24,
                 Blue = (Foreground)25,
+                Cyan = (Foreground)1005, // TODO Ids
+                Magenta = (Foreground)1006,
+                Yellow = (Foreground)1007,
+
                 Coin = (Foreground)43,
                 BlueCoin = (Foreground)213,
+                Purple = (Foreground)184,
+                Death = (Foreground)1011,
+
+
                 Timed = (Foreground)156,
-                PurpleSwitch = (Foreground)184,
                 BuildersClub = (Foreground)200,
                 Zombie = (Foreground)207;
         }
@@ -85,10 +92,16 @@ namespace BotBits
                 Red = (Foreground)26,
                 Green = (Foreground)27,
                 Blue = (Foreground)28,
+                Cyan = (Foreground)1008,
+                Magenta = (Foreground)1009,
+                Yellow = (Foreground)1010,
+
                 Coin = (Foreground)165,
                 BlueCoin = (Foreground)214,
+                Purple = (Foreground)185,
+                Death = (Foreground)1012,
+
                 Timed = (Foreground)157,
-                PurpleSwitch = (Foreground)185,
                 BuildersClub = (Foreground)201,
                 Zombie = (Foreground)206;
         }
@@ -280,8 +293,8 @@ namespace BotBits
         public static class Coin
         {
             public const Foreground
-                CoinGold = (Foreground)100,
-                CoinBlue = (Foreground)101;
+                Gold = (Foreground)100,
+                Blue = (Foreground)101;
         }
 
         public static class Switch
@@ -581,7 +594,7 @@ namespace BotBits
         public static class Prize
         {
             public const Foreground
-                PrizeTrophy = (Foreground)223;
+                Trophy = (Foreground)223;
         }
 
         public static class Spring2011
@@ -768,6 +781,15 @@ namespace BotBits
         {
             public const Foreground
                 Text = (Foreground)1000;
+        }
+
+        public static class OneWay
+        {
+            public const Foreground
+                Cyan = (Foreground)1001,
+                Red = (Foreground)1002,
+                Yellow = (Foreground)1003,
+                Pink = (Foreground)1004;
         }
     }
 }

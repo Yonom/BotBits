@@ -124,11 +124,5 @@ namespace BotBits
             new ModModeSendMessage()
                 .SendIn(this.BotBits);
         }
-
-        public void PurpleSwitch(bool show)
-        {
-            new PurpleSwitchSendMessage(show)
-                .SendIn(this.BotBits);
-        }
     }
 }

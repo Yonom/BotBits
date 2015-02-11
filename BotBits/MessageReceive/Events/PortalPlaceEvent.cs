@@ -3,7 +3,7 @@ using PlayerIOClient;
 namespace BotBits.Events
 {
     [ReceiveEvent("pt")]
-    public sealed class PortalPlaceEvent : ReceiveEvent<PortalPlaceEvent>
+    public sealed class PortalPlaceEvent : PlayerEvent<PortalPlaceEvent>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="PortalPlaceEvent" /> class.
@@ -11,7 +11,7 @@ namespace BotBits.Events
         /// <param name="message">The EE message.</param>
         /// <param name="client"></param>
         internal PortalPlaceEvent(BotBitsClient client, Message message)
-            : base(client, message)
+            : base(client, message, 6)
         {
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);

@@ -3,7 +3,7 @@ using PlayerIOClient;
 namespace BotBits.Events
 {
     [ReceiveEvent("bc")]
-    public sealed class CoinDoorPlaceEvent : ReceiveEvent<CoinDoorPlaceEvent>
+    public sealed class CoinDoorPlaceEvent : PlayerEvent<CoinDoorPlaceEvent>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="CoinDoorPlaceEvent" /> class.
@@ -11,7 +11,7 @@ namespace BotBits.Events
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
         internal CoinDoorPlaceEvent(BotBitsClient client, Message message)
-            : base(client, message)
+            : base(client, message, 4)
         {
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);

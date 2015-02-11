@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BotBits
 {
-    internal class ReadOnlyBlockLayer<T> : IEnumerable<T> where T : struct
+    internal class ReadOnlyBlockLayer<T> : IBlockLayer<T> where T : struct
     {
         private readonly BlockLayer<T> _blockLayer;
 

@@ -2,8 +2,8 @@
 {
     public sealed class BackgroundPlaceEvent : PlaceEvent<BackgroundPlaceEvent, BackgroundBlock>
     {
-        internal BackgroundPlaceEvent(int x, int y, BackgroundBlock oldBlock, BackgroundBlock newBlock, Player player)
-            : base(x, y, oldBlock, newBlock, player)
+        internal BackgroundPlaceEvent(int x, int y, BlockData<BackgroundBlock> old, BlockData<BackgroundBlock> @new)
+            : base(x, y, old, @new)
         {
         }
     }

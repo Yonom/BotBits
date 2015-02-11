@@ -133,19 +133,13 @@ namespace BotBits
         [EventListener(EventPriority.High)]
         private void OnHideKey(HideKeyEvent e)
         {
-            foreach (Key k in e.Keys)
-            {
-                this._enabledKeys.Remove(k);
-            }
+            this._enabledKeys.Remove(e.Key);
         }
 
         [EventListener(EventPriority.High)]
         private void OnShowKey(ShowKeyEvent e)
         {
-            foreach (Key k in e.Keys)
-            {
-                this._enabledKeys.Add(k);
-            }
+            this._enabledKeys.Add(e.Key);
         }
 
         [EventListener(EventPriority.High)]

@@ -51,7 +51,7 @@ namespace BotBits
             blocks.Place(x, y, new ForegroundBlock(block, rotation));
         }
 
-        public static void Place(this Blocks blocks, int x, int y, Foreground block, SpikeRotation rotation)
+        public static void Place(this Blocks blocks, int x, int y, Foreground block, BlockRotation rotation)
         {
             blocks.Place(x, y, new ForegroundBlock(block, rotation));
         }

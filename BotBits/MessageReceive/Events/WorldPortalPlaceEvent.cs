@@ -6,7 +6,7 @@ namespace BotBits.Events
     ///     Occurs when a world portal is placed in the world.
     /// </summary>
     [ReceiveEvent("wp")]
-    public sealed class WorldPortalPlaceEvent : ReceiveEvent<WorldPortalPlaceEvent>
+    public sealed class WorldPortalPlaceEvent : PlayerEvent<WorldPortalPlaceEvent>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="WorldPortalPlaceEvent" /> class.
@@ -14,7 +14,7 @@ namespace BotBits.Events
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
         internal WorldPortalPlaceEvent(BotBitsClient client, Message message)
-            : base(client, message)
+            : base(client, message, 4)
         {
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);

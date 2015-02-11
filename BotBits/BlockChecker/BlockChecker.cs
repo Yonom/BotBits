@@ -16,7 +16,7 @@ namespace BotBits
         private readonly AutoResetEvent _timeoutResetEvent = new AutoResetEvent(true);
         private readonly ManualResetEvent _finishResetEvent = new ManualResetEvent(true);
         private readonly RegisteredWaitHandle _registration;
-        private IWorld _world;
+        private Blocks _world;
         private MessageQueue<PlaceSendMessage> _messageQueue;
             
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
@@ -88,7 +88,7 @@ namespace BotBits
             where T : PlaceEvent<T, TBlock> where TBlock : struct
         {
             // Make sure the block was uploaded by this bot
-            var p = e.Player;
+            var p = e.New.Placer;
             if (p != null && p != Package<Players>.Of(this.BotBits).OwnPlayer) return;
 
             lock (this._sentBlocks)

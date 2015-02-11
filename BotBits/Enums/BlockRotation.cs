@@ -1,6 +1,6 @@
 namespace BotBits
 {
-    public enum SpikeRotation : uint
+    public enum BlockRotation : uint
     {
         Left = 0,
         Up = 1,

@@ -4,46 +4,46 @@ using BotBits.SendMessages;
 
 namespace BotBits
 {
-    public sealed class Blocks : EventListenerPackage<Blocks>, IWorld
+    public sealed class Blocks : EventListenerPackage<Blocks>
     {
-        private ReadOnlyWorld _readOnlyWorld;
-        private World _world;
+        private BlocksWorld _blocksWorld;
+        private ReadOnlyBlocksWorld _readOnlyBlocksWorld;
 
-        private World World
+        private BlocksWorld World
         {
-            get { return this._world; }
+            get { return this._blocksWorld; }
             set
             {
-                this._world = value;
-                this._readOnlyWorld = new ReadOnlyWorld(value);
+                this._blocksWorld = value;
+                this._readOnlyBlocksWorld = new ReadOnlyBlocksWorld(_blocksWorld);
             }
         }
 
         public int Height
         {
-            get { return this._readOnlyWorld.Height; }
+            get { return this._blocksWorld.Height; }
         }
 
         public int Width
         {
-            get { return this._readOnlyWorld.Width; }
+            get { return this._blocksWorld.Width; }
         }
 
-        public IBlockLayer<ForegroundBlock> Foreground
+        public IBlockLayer<BlockData<ForegroundBlock>> Foreground
         {
-            get { return this._readOnlyWorld.Foreground; }
+            get { return this._readOnlyBlocksWorld.Foreground; }
         }
 
-        public IBlockLayer<BackgroundBlock> Background
+        public IBlockLayer<BlockData<BackgroundBlock>> Background
         {
-            get { return this._readOnlyWorld.Background; }
+            get { return this._readOnlyBlocksWorld.Background; }
         }
 
 
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
         public Blocks()
         {
-            this.World = new World(0, 0);
+            this.World = new BlocksWorld(0, 0);
         }
 
         public void Place(int x, int y, BackgroundBlock block)
@@ -98,43 +98,43 @@ namespace BotBits
         [EventListener(EventPriority.High)]
         private void OnPortal(PortalPlaceEvent e)
         {
-            this.RaisePortalBlock(e.X, e.Y, (Foreground)e.Id, e.PortalId, e.PortalTarget, e.PortalRotation);
+            this.RaisePortalBlock(e.X, e.Y, (Foreground)e.Id, e.PortalId, e.PortalTarget, e.PortalRotation, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnCoinDoorPlace(CoinDoorPlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground)e.Id, e.CoinsToOpen);
+            this.RaiseNumberBlock(e.X, e.Y, (Foreground)e.Id, e.CoinsToOpen, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnSoundPlace(SoundPlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground)e.Id, e.SoundId);
+            this.RaiseNumberBlock(e.X, e.Y, (Foreground)e.Id, e.SoundId, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnRotatablePlace(RotatablePlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground)e.Id, e.Rotation);
+            this.RaiseNumberBlock(e.X, e.Y, (Foreground)e.Id, e.Rotation, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnWorldPortalPlace(WorldPortalPlaceEvent e)
         {
-            this.RaiseStringBlock(e.X, e.Y, (Foreground)e.Id, e.WorldPortalTarget);
+            this.RaiseStringBlock(e.X, e.Y, (Foreground)e.Id, e.WorldPortalTarget, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnLabelPlace(LabelPlaceEvent e)
         {
-            this.RaiseStringBlock(e.X, e.Y, (Foreground)e.Id, e.Text);
+            this.RaiseLabelBlock(e.X, e.Y, (Foreground)e.Id, e.Text, e.TextColor, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnSignPlace(SignPlaceEvent e)
         {
-            this.RaiseStringBlock(e.X, e.Y, (Foreground)e.Id, e.Text);
+            this.RaiseStringBlock(e.X, e.Y, (Foreground)e.Id, e.Text, e.Player);
         }
 
         private void RaiseBlock(int x, int y, Foreground block, Player player)
@@ -142,37 +142,44 @@ namespace BotBits
             this.RaiseForeground(x, y, new ForegroundBlock(block), player);
         }
 
-        private void RaiseNumberBlock(int x, int y, Foreground block, uint args)
+        private void RaiseNumberBlock(int x, int y, Foreground block, uint args, Player player)
         {
-            this.RaiseForeground(x, y, new ForegroundBlock(block, args));
+            this.RaiseForeground(x, y, new ForegroundBlock(block, args), player);
         }
 
-        private void RaiseStringBlock(int x, int y, Foreground block, string args)
+        private void RaiseStringBlock(int x, int y, Foreground block, string text, Player player)
         {
-            this.RaiseForeground(x, y, new ForegroundBlock(block, args));
+            this.RaiseForeground(x, y, new ForegroundBlock(block, text), player);
         }
 
-        private void RaisePortalBlock(int x, int y,
-            Foreground block, uint portalId, uint portalTarget, PortalRotation portalRotation)
+        private void RaiseLabelBlock(int x, int y, Foreground block, string text, string textColor, Player player)
         {
-            this.RaiseForeground(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation));
+            this.RaiseForeground(x, y, new ForegroundBlock(block, text, textColor), player);
         }
 
-        private void RaiseForeground(int x, int y, ForegroundBlock newBlock, Player player = null)
+        private void RaisePortalBlock(int x, int y, Foreground block, 
+            uint portalId, uint portalTarget, PortalRotation portalRotation, Player player)
         {
-            if (player == null) player = Player.Nobody;
+            this.RaiseForeground(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation), player);
+        }
 
-            var oldBlock = this.World.Foreground[x, y];
-            this.World.Foreground[x, y] = newBlock;
-            new ForegroundPlaceEvent(x, y, oldBlock, newBlock, player)
+        private void RaiseForeground(int x, int y, ForegroundBlock newBlock, Player player)
+        {
+            var oldData = this.World.Foreground[x, y];
+            var newData = new BlockData<ForegroundBlock>(player, newBlock);
+            this.World.Foreground[x, y] = newData;
+
+            new ForegroundPlaceEvent(x, y, oldData, newData)
                 .RaiseIn(this.BotBits);
         }
 
         private void RaiseBackground(int x, int y, BackgroundBlock newBlock, Player player)
         {
-            BackgroundBlock oldBlock = this.World.Background[x, y];
-            this.World.Background[x, y] = newBlock;
-            new BackgroundPlaceEvent(x, y, oldBlock, newBlock, player)
+            var oldData = this.World.Background[x, y];
+            var newData = new BlockData<BackgroundBlock>(player, newBlock);
+            this.World.Background[x, y] = newData;
+
+            new BackgroundPlaceEvent(x, y, oldData, newData)
                 .RaiseIn(this.BotBits);
         }
     }
