@@ -2,7 +2,7 @@
 {
     internal class BlocksWorld
     {
-        public BlocksWorld(int height, int width)
+        public BlocksWorld(int width, int height)
         {
             this.Height = height;
             this.Width = width;
