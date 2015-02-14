@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
-using JetBrains.Annotations;
 using BotBits.Events;
 using BotBits.SendMessages;
 
@@ -76,7 +75,8 @@ namespace BotBits
         private void QueueChat(string msg)
         {
             // There is no speed limit on commands
-            if (msg.StartsWith("/", StringComparison.Ordinal))
+            if (msg.StartsWith("/", StringComparison.Ordinal) && 
+                !msg.StartsWith("/pm", StringComparison.OrdinalIgnoreCase))
             {
                 var e = msg.Length > 80
                     ? new ChatSendMessage(msg.Substring(0, 80))
@@ -88,7 +88,10 @@ namespace BotBits
             // Dont send the same thing more than 3 times
             if (this.CheckHistory(msg))
             {
-                this.QueueChat("." + msg);
+                if (msg.StartsWith("/", StringComparison.Ordinal))
+                    this.QueueChat(msg + ".");
+                else
+                    this.QueueChat("." + msg);
                 return;
             }
 
@@ -271,6 +274,16 @@ namespace BotBits
         public void GetPosition()
         {
             this.Say("/getpos");
+        }
+
+        public void PrivateMessage(string target, string message)
+        {
+            this.Say("/pm {0} {1}", target, message);
+        }
+
+        public void HideLobby(bool hidden)
+        {
+            this.Say("/hidelobby {0}", hidden);
         }
     }
 }
