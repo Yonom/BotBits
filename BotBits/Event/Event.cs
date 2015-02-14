@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
-using BotBits.Annotations;
+using JetBrains.Annotations;
 
 namespace BotBits
 {

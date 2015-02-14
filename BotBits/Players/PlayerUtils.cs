@@ -1,4 +1,4 @@
-﻿using BotBits.Annotations;
+﻿using JetBrains.Annotations;
 using BotBits.Events;
 
 namespace BotBits

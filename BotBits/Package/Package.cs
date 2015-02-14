@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
-using BotBits.Annotations;
+using JetBrains.Annotations;
 
 namespace BotBits
 {

@@ -1,6 +1,6 @@
 using System;
 using System.Threading;
-using BotBits.Annotations;
+using JetBrains.Annotations;
 using PlayerIOClient;
 
 namespace BotBits.SendMessages

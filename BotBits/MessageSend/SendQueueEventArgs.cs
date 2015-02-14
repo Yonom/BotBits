@@ -1,5 +1,5 @@
 ﻿using System;
-using BotBits.Annotations;
+using JetBrains.Annotations;
 using BotBits.Events;
 using BotBits.SendMessages;
 

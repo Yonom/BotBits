@@ -10,7 +10,7 @@
 // ReSharper disable InconsistentNaming
 // ReSharper disable CheckNamespace
 
-namespace BotBits.Annotations
+namespace JetBrains.Annotations
 {
     /// <summary>
     ///     Indicates that the value of the marked element could be <c>null</c> sometimes,
@@ -29,7 +29,7 @@ namespace BotBits.Annotations
         AttributeTargets.Method | AttributeTargets.Parameter |
         AttributeTargets.Property | AttributeTargets.Delegate |
         AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public sealed class CanBeNullAttribute : Attribute
+    internal sealed class CanBeNullAttribute : Attribute
     {
     }
 
@@ -47,7 +47,7 @@ namespace BotBits.Annotations
         AttributeTargets.Method | AttributeTargets.Parameter |
         AttributeTargets.Property | AttributeTargets.Delegate |
         AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public sealed class NotNullAttribute : Attribute
+    internal sealed class NotNullAttribute : Attribute
     {
     }
 
@@ -68,7 +68,7 @@ namespace BotBits.Annotations
     [AttributeUsage(
         AttributeTargets.Constructor | AttributeTargets.Method,
         AllowMultiple = false, Inherited = true)]
-    public sealed class StringFormatMethodAttribute : Attribute
+    internal sealed class StringFormatMethodAttribute : Attribute
     {
         /// <param name="formatParameterName">
         ///     Specifies which parameter of an annotated method should be treated as format-string
@@ -95,7 +95,7 @@ namespace BotBits.Annotations
     /// </code>
     /// </example>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
-    public sealed class InvokerParameterNameAttribute : Attribute
+    internal sealed class InvokerParameterNameAttribute : Attribute
     {
     }
 
@@ -155,7 +155,7 @@ namespace BotBits.Annotations
     ///     </list>
     /// </example>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public sealed class NotifyPropertyChangedInvocatorAttribute : Attribute
+    internal sealed class NotifyPropertyChangedInvocatorAttribute : Attribute
     {
         public NotifyPropertyChangedInvocatorAttribute()
         {
@@ -224,7 +224,7 @@ namespace BotBits.Annotations
     ///     </list>
     /// </examples>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public sealed class ContractAnnotationAttribute : Attribute
+    internal sealed class ContractAnnotationAttribute : Attribute
     {
         public ContractAnnotationAttribute([NotNull] string contract)
             : this(contract, false)
@@ -253,7 +253,7 @@ namespace BotBits.Annotations
     /// </code>
     /// </example>
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
-    public sealed class LocalizationRequiredAttribute : Attribute
+    internal sealed class LocalizationRequiredAttribute : Attribute
     {
         public LocalizationRequiredAttribute()
             : this(true)
@@ -292,7 +292,7 @@ namespace BotBits.Annotations
     [AttributeUsage(
         AttributeTargets.Interface | AttributeTargets.Class |
         AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
-    public sealed class CannotApplyEqualityOperatorAttribute : Attribute
+    internal sealed class CannotApplyEqualityOperatorAttribute : Attribute
     {
     }
 
@@ -310,7 +310,7 @@ namespace BotBits.Annotations
     /// </example>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     [BaseTypeRequired(typeof(Attribute))]
-    public sealed class BaseTypeRequiredAttribute : Attribute
+    internal sealed class BaseTypeRequiredAttribute : Attribute
     {
         public BaseTypeRequiredAttribute([NotNull] Type baseType)
         {
@@ -327,7 +327,7 @@ namespace BotBits.Annotations
     ///     will not be marked as unused (as well as by other usage inspections)
     /// </summary>
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
-    public sealed class UsedImplicitlyAttribute : Attribute
+    internal sealed class UsedImplicitlyAttribute : Attribute
     {
         public UsedImplicitlyAttribute()
             : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default)
@@ -361,7 +361,7 @@ namespace BotBits.Annotations
     ///     (as well as by other usage inspections)
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public sealed class MeansImplicitUseAttribute : Attribute
+    internal sealed class MeansImplicitUseAttribute : Attribute
     {
         public MeansImplicitUseAttribute()
             : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default)
@@ -393,7 +393,7 @@ namespace BotBits.Annotations
     }
 
     [Flags]
-    public enum ImplicitUseKindFlags
+    internal enum ImplicitUseKindFlags
     {
         Default = Access | Assign | InstantiatedWithFixedConstructorSignature,
 
@@ -419,7 +419,7 @@ namespace BotBits.Annotations
     ///     or <see cref="UsedImplicitlyAttribute" />
     /// </summary>
     [Flags]
-    public enum ImplicitUseTargetFlags
+    internal enum ImplicitUseTargetFlags
     {
         Default = Itself,
         Itself = 1,
@@ -436,7 +436,7 @@ namespace BotBits.Annotations
     ///     which should not be removed and so is treated as used
     /// </summary>
     [MeansImplicitUse]
-    public sealed class PublicAPIAttribute : Attribute
+    internal sealed class PublicAPIAttribute : Attribute
     {
         public PublicAPIAttribute()
         {
@@ -459,7 +459,7 @@ namespace BotBits.Annotations
     ///     while the method is executed
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter, Inherited = true)]
-    public sealed class InstantHandleAttribute : Attribute
+    internal sealed class InstantHandleAttribute : Attribute
     {
     }
 
@@ -477,7 +477,7 @@ namespace BotBits.Annotations
     /// </code>
     /// </example>
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
-    public sealed class PureAttribute : Attribute
+    internal sealed class PureAttribute : Attribute
     {
     }
 
@@ -487,7 +487,7 @@ namespace BotBits.Annotations
     ///     starting from web root (~)
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public class PathReferenceAttribute : Attribute
+    internal class PathReferenceAttribute : Attribute
     {
         public PathReferenceAttribute()
         {
@@ -505,7 +505,7 @@ namespace BotBits.Annotations
     // ASP.NET MVC attributes
 
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-    public sealed class AspMvcAreaMasterLocationFormatAttribute : Attribute
+    internal sealed class AspMvcAreaMasterLocationFormatAttribute : Attribute
     {
         public AspMvcAreaMasterLocationFormatAttribute(string format)
         {
@@ -513,7 +513,7 @@ namespace BotBits.Annotations
     }
 
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-    public sealed class AspMvcAreaPartialViewLocationFormatAttribute : Attribute
+    internal sealed class AspMvcAreaPartialViewLocationFormatAttribute : Attribute
     {
         public AspMvcAreaPartialViewLocationFormatAttribute(string format)
         {
@@ -521,7 +521,7 @@ namespace BotBits.Annotations
     }
 
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-    public sealed class AspMvcAreaViewLocationFormatAttribute : Attribute
+    internal sealed class AspMvcAreaViewLocationFormatAttribute : Attribute
     {
         public AspMvcAreaViewLocationFormatAttribute(string format)
         {
@@ -529,7 +529,7 @@ namespace BotBits.Annotations
     }
 
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-    public sealed class AspMvcMasterLocationFormatAttribute : Attribute
+    internal sealed class AspMvcMasterLocationFormatAttribute : Attribute
     {
         public AspMvcMasterLocationFormatAttribute(string format)
         {
@@ -537,7 +537,7 @@ namespace BotBits.Annotations
     }
 
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-    public sealed class AspMvcPartialViewLocationFormatAttribute : Attribute
+    internal sealed class AspMvcPartialViewLocationFormatAttribute : Attribute
     {
         public AspMvcPartialViewLocationFormatAttribute(string format)
         {
@@ -545,7 +545,7 @@ namespace BotBits.Annotations
     }
 
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-    public sealed class AspMvcViewLocationFormatAttribute : Attribute
+    internal sealed class AspMvcViewLocationFormatAttribute : Attribute
     {
         public AspMvcViewLocationFormatAttribute(string format)
         {
@@ -559,7 +559,7 @@ namespace BotBits.Annotations
     ///     <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
-    public sealed class AspMvcActionAttribute : Attribute
+    internal sealed class AspMvcActionAttribute : Attribute
     {
         public AspMvcActionAttribute()
         {
@@ -580,7 +580,7 @@ namespace BotBits.Annotations
     ///     <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcAreaAttribute : PathReferenceAttribute
+    internal sealed class AspMvcAreaAttribute : PathReferenceAttribute
     {
         public AspMvcAreaAttribute()
         {
@@ -603,7 +603,7 @@ namespace BotBits.Annotations
     ///     <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
-    public sealed class AspMvcControllerAttribute : Attribute
+    internal sealed class AspMvcControllerAttribute : Attribute
     {
         public AspMvcControllerAttribute()
         {
@@ -624,7 +624,7 @@ namespace BotBits.Annotations
     ///     <c>System.Web.Mvc.Controller.View(String, String)</c>
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcMasterAttribute : Attribute
+    internal sealed class AspMvcMasterAttribute : Attribute
     {
     }
 
@@ -634,7 +634,7 @@ namespace BotBits.Annotations
     ///     <c>System.Web.Mvc.Controller.View(String, Object)</c>
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcModelTypeAttribute : Attribute
+    internal sealed class AspMvcModelTypeAttribute : Attribute
     {
     }
 
@@ -646,7 +646,7 @@ namespace BotBits.Annotations
     ///     <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
-    public sealed class AspMvcPartialViewAttribute : PathReferenceAttribute
+    internal sealed class AspMvcPartialViewAttribute : PathReferenceAttribute
     {
     }
 
@@ -655,7 +655,7 @@ namespace BotBits.Annotations
     ///     for MVC views within a class or a method.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public sealed class AspMvcSupressViewErrorAttribute : Attribute
+    internal sealed class AspMvcSupressViewErrorAttribute : Attribute
     {
     }
 
@@ -665,7 +665,7 @@ namespace BotBits.Annotations
     ///     <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcDisplayTemplateAttribute : Attribute
+    internal sealed class AspMvcDisplayTemplateAttribute : Attribute
     {
     }
 
@@ -675,7 +675,7 @@ namespace BotBits.Annotations
     ///     <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcEditorTemplateAttribute : Attribute
+    internal sealed class AspMvcEditorTemplateAttribute : Attribute
     {
     }
 
@@ -685,7 +685,7 @@ namespace BotBits.Annotations
     ///     <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcTemplateAttribute : Attribute
+    internal sealed class AspMvcTemplateAttribute : Attribute
     {
     }
 
@@ -696,7 +696,7 @@ namespace BotBits.Annotations
     ///     <c>System.Web.Mvc.Controller.View(Object)</c>
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
-    public sealed class AspMvcViewAttribute : PathReferenceAttribute
+    internal sealed class AspMvcViewAttribute : PathReferenceAttribute
     {
     }
 
@@ -714,14 +714,14 @@ namespace BotBits.Annotations
     /// </code>
     /// </example>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property)]
-    public sealed class AspMvcActionSelectorAttribute : Attribute
+    internal sealed class AspMvcActionSelectorAttribute : Attribute
     {
     }
 
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Property |
         AttributeTargets.Field, Inherited = true)]
-    public sealed class HtmlElementAttributesAttribute : Attribute
+    internal sealed class HtmlElementAttributesAttribute : Attribute
     {
         public HtmlElementAttributesAttribute()
         {
@@ -739,7 +739,7 @@ namespace BotBits.Annotations
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Field |
         AttributeTargets.Property, Inherited = true)]
-    public sealed class HtmlAttributeValueAttribute : Attribute
+    internal sealed class HtmlAttributeValueAttribute : Attribute
     {
         public HtmlAttributeValueAttribute([NotNull] string name)
         {
@@ -758,7 +758,7 @@ namespace BotBits.Annotations
     ///     <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method, Inherited = true)]
-    public sealed class RazorSectionAttribute : Attribute
+    internal sealed class RazorSectionAttribute : Attribute
     {
     }
 }

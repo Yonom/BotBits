@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
-using BotBits.Annotations;
+using JetBrains.Annotations;
 using BotBits.Events;
 using BotBits.SendMessages;
 

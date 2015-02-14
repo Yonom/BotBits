@@ -6,7 +6,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Linq;
-using BotBits.Annotations;
+using JetBrains.Annotations;
 
 namespace BotBits
 {

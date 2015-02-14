@@ -1,5 +1,5 @@
 using System.Linq;
-using BotBits.Annotations;
+using JetBrains.Annotations;
 using PlayerIOClient;
 
 namespace BotBits.SendMessages
