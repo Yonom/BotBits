@@ -8,7 +8,6 @@ namespace BotBits
 {
     public static class ChatExtensions
     {
-
         [StringFormatMethod("msg")]
         public static void Say(this Chat chat, string msg, params object[] args)
         {
