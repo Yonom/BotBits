@@ -49,6 +49,7 @@
     <Compile Include="Blocks\Events\PlaceEvent.cs" />
     <Compile Include="Blocks\BlockData.cs" />
     <Compile Include="Chat\ChatExtensions.cs" />
+    <Compile Include="Chat\IChat.cs" />
     <Compile Include="ConnectionManager\ConnectionExtensions.cs" />
     <Compile Include="ConnectionManager\Events\MessageEvent.cs" />
     <Compile Include="ConnectionManager\IConnection.cs" />
