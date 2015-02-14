@@ -13,7 +13,11 @@ namespace BotBits
                 Left = (Foreground)1,
                 Up = (Foreground)2,
                 Right = (Foreground)3,
-                Dot = (Foreground)4;
+                Dot = (Foreground)4,
+                InvisibleLeft = (Foreground)411,
+                InvisibleUp = (Foreground)412,
+                InvisibleRight = (Foreground)413,
+                InvisibleDot = (Foreground)414;
         }
 
         public static class Crown
@@ -27,7 +31,10 @@ namespace BotBits
             public const Foreground
                 Red = (Foreground)6,
                 Green = (Foreground)7,
-                Blue = (Foreground)8;
+                Blue = (Foreground)8,
+                Cyan = (Foreground)408,
+                Magenta = (Foreground)409,
+                Yellow = (Foreground)410;
         }
 
         public static class Basic

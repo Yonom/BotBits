@@ -263,7 +263,7 @@ namespace BotBits
             this.Say("/listportals");
         }
 
-        public void GetBlockPlayer()
+        public void GetBlockPlacer()
         {
             this.Say("/getblockplacer");
         }
