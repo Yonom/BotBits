@@ -122,6 +122,7 @@ namespace BotBits
         {
             switch (id)
             {
+                case Foregrounds.Switch.Purple:
                 case Foregrounds.Door.Coin:
                 case Foregrounds.Gate.Coin:
                 case Foregrounds.Door.BlueCoin:
