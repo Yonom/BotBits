@@ -44,7 +44,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if this this player has god mode enabled; otherwise, <c>false</c>.
         /// </value>
-        public bool God { get; internal set; }
+        public bool GodMode { get; internal set; }
 
         /// <summary>
         ///     Gets a value indicating whether this player has guardian mode enabled.
@@ -52,7 +52,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if this player has guardian mode enabled; otherwise, <c>false</c>.
         /// </value>
-        public bool Guardian { get; internal set; }
+        public bool GuardianMode { get; internal set; }
 
         /// <summary>
         ///     Gets a value indicating whether this player has moderator mode enabled.
@@ -60,7 +60,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if this player has moderator mode enabled; otherwise, <c>false</c>.
         /// </value>
-        public bool Mod { get; internal set; }
+        public bool ModMode { get; internal set; }
 
         /// <summary>
         ///     Gets a value indicating whether this player is dead.
@@ -257,7 +257,7 @@ namespace BotBits
         /// </value>
         public bool Flying
         {
-            get { return this.God || this.Guardian || this.Mod; }
+            get { return this.GodMode || this.GuardianMode || this.ModMode; }
         }
 
         /// <summary>

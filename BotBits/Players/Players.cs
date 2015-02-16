@@ -93,9 +93,9 @@ namespace BotBits
             p.Username = e.Username;
             p.Smiley = e.Smiley;
             p.HasChat = e.HasChat;
-            p.God = e.God;
-            p.Guardian = e.Guardian;
-            p.Mod = e.Mod;
+            p.GodMode = e.God;
+            p.GuardianMode = e.Guardian;
+            p.ModMode = e.Mod;
             p.Friend = e.Friend;
             p.Coins = e.Coins;
             p.BlueCoins = e.BlueCoins;
@@ -162,9 +162,9 @@ namespace BotBits
         private void OnGodMode(GodModeEvent e)
         {
             Player p = e.Player;
-            p.God = e.God;
+            p.GodMode = e.God;
 
-            if (!p.Mod && !p.Guardian)
+            if (!p.ModMode && !p.GuardianMode)
             {
                 new FlyEvent(p, p.Flying)
                     .RaiseIn(this.BotBits);
@@ -175,9 +175,9 @@ namespace BotBits
         private void OnGuardianMode(GuardianModeEvent e)
         {
             Player p = e.Player;
-            p.Guardian = e.Guardian; 
+            p.GuardianMode = e.Guardian; 
             
-            if (!p.Mod && !p.God)
+            if (!p.ModMode && !p.GodMode)
             {
                 new FlyEvent(p, p.Flying)
                     .RaiseIn(this.BotBits);
@@ -188,9 +188,9 @@ namespace BotBits
         private void OnModMode(ModModeEvent e)
         {
             Player p = e.Player;
-            p.Mod = e.Mod;
+            p.ModMode = e.Mod;
 
-            if (!p.God && !p.Guardian)
+            if (!p.GodMode && !p.GuardianMode)
             {
                 new FlyEvent(p, p.Flying)
                     .RaiseIn(this.BotBits);
