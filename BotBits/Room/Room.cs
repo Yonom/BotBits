@@ -79,7 +79,7 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void ChangeKey(string newKey)
+        public void SetEditKey(string newKey)
         {
             if (this.AccessRight < AccessRight.Owner)
                 throw new InvalidOperationException("Only owners are allowed to change key.");
