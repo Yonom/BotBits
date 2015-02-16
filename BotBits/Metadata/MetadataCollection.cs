@@ -47,7 +47,7 @@ namespace BotBits
                 oldObj = v;
                 return value;
             });
-            if (!ReferenceEquals(newObj, value))
+            if (!newObj.Equals(value))
                 return false; // There was another insert at the same time
 
             this.OnMetadataChanged(new MetadataChangedEventArgs(metadataId, oldObj, newObj));
