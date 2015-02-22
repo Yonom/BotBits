@@ -69,7 +69,7 @@ namespace BotBits
         [EventListener(EventPriority.High)]
         private void OnClear(ClearEvent e)
         {
-            this.World = WorldUtils.GetWorld(e.PlayerIOMessage, e.RoomWidth, e.RoomHeight);
+            this.World = WorldUtils.GetClearedWorld(e.RoomWidth, e.RoomHeight, e.BorderBlock);
             new WorldResizeEvent(e.RoomWidth, e.RoomHeight)
                 .RaiseIn(this.BotBits);
         }
@@ -83,6 +83,8 @@ namespace BotBits
         [EventListener(EventPriority.High)]
         private void OnBlockPlace(BlockPlaceEvent e)
         {
+            if (this.Height <= e.Y || this.Width <= e.X) return;
+
             switch (e.Layer)
             {
                 case Layer.Foreground:

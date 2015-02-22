@@ -52,13 +52,13 @@ namespace BotBits
                 if (p.Layer == Layer.Background)
                     return false;
 
-                return IsBasic((Foreground)p.Id);
+                return IsBorderPlaceable((Foreground)p.Id);
             }
 
             return true;
         }
 
-        private static bool IsBasic(Foreground id)
+        private static bool IsBorderPlaceable(Foreground id)
         {
             switch (id)
             {
@@ -70,6 +70,7 @@ namespace BotBits
                 case Foregrounds.Basic.Purple:
                 case Foregrounds.Basic.Red:
                 case Foregrounds.Basic.Yellow:
+                case Foregrounds.Special.FullyBlack:
                     return true;
 
                 default:

@@ -80,9 +80,6 @@ namespace BotBits
             this.OwnPlayer.Y = e.SpawnY;
             this.OwnPlayer.SpawnX = e.SpawnX;
             this.OwnPlayer.SpawnY = e.SpawnY;
-
-            new NewPlayerEvent(this.OwnPlayer)
-                .RaiseIn(this.BotBits);
         }
 
         [EventListener(EventPriority.High)]
@@ -105,9 +102,6 @@ namespace BotBits
             p.SpawnY = e.Y;
             p.ClubMember = e.ClubMember;
             p.MagicClass = e.MagicClass;
-
-            new NewPlayerEvent(p)
-                .RaiseIn(this.BotBits);
         }
 
         [EventListener(EventPriority.High)]

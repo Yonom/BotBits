@@ -39,8 +39,9 @@
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PlayerIOClient">
-      <HintPath>..\packages\PlayerIOClient-Signed.2.3.6.0\lib\PlayerIOClient.dll</HintPath>
+    <Reference Include="PlayerIOClient, Version=2.3.6.0, Culture=neutral, PublicKeyToken=c7f7b730653f6a44, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PlayerIOClient-Signed.3.1.0\lib\PlayerIOClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -120,7 +121,6 @@
     <Compile Include="Chat\Chat.cs" />
     <Compile Include="Consumables\Consumables.cs" />
     <Compile Include="Consumables\Events\PotionCountEvent.cs" />
-    <Compile Include="Players\Events\NewPlayerEvent.cs" />
     <Compile Include="Players\Events\TeleportEvent.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\Players.cs" />

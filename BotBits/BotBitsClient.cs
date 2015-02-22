@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace BotBits
 {
-    public class BotBitsClient : ISchedulerHandle
+    public class BotBitsClient
     {
         // TODO: Physics (extension?)
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -26,9 +26,9 @@ namespace BotBits
                 .LoadInto(this);
         }
 
-        public SynchronizationContext SynchronizationContext
+        public void Schedule(Action task)
         {
-            get { return _schedulerHandle.SynchronizationContext; }
+            this._schedulerHandle.SynchronizationContext.Post(o => task(), null);
         }
 
         internal T Get<T>() where T : Package<T>, new()

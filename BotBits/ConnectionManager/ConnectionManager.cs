@@ -176,13 +176,13 @@ namespace BotBits
 
         private void Connection_OnMessage(object sender, Message e)
         {
-            this.BotBits.RunOnContext(() =>
+            this.BotBits.Schedule(() =>
                 this.HandleMessage(e));
         }
 
         private void Connection_OnDisconnect(object sender, string message)
         {
-            this.BotBits.RunOnContext(() => 
+            this.BotBits.Schedule(() => 
                 this.HandleDisconnect(message));
         }
 

@@ -648,7 +648,7 @@ namespace BotBits
                 RightCornerSnow = (Foreground)249,
                 LeftCornerSnow = (Foreground)250,
                 Tree = (Foreground)251,
-                SnowyTree = (Foreground)252,
+                DecoratedTree = (Foreground)252,
                 SnowyFence = (Foreground)253,
                 Fence = (Foreground)254;
         }

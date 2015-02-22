@@ -53,6 +53,11 @@ namespace BotBits
         /// <summary>
         ///     A sci fi slope block
         /// </summary>
-        SciFiSlope
+        SciFiSlope,
+
+        /// <summary>
+        ///     A world portal block
+        /// </summary>
+        WorldPortal
     }
 }

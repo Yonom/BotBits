@@ -4,7 +4,7 @@ using PlayerIOClient;
 
 namespace BotBits
 {
-    internal static class WorldUtils
+    public static class WorldUtils
     {
         private const uint InitOffset = 19;
 
@@ -96,14 +96,14 @@ namespace BotBits
             }
         }
 
-        public static World GetClearedWorld(int width, int height, Foreground borderBlock)
+        internal static BlocksWorld GetClearedWorld(int width, int height, Foreground borderBlock)
         {
-            var world = new World(width, height);
+            var world = new BlocksWorld(width, height);
 
             // Border drawing
             int maxX = width - 1;
             int maxY = height - 1;
-            var block = new ForegroundBlock(borderBlock);
+            var block = new BlockData<ForegroundBlock>(new ForegroundBlock(borderBlock));
             for (int y = 0; y <= maxY; y++)
             {
                 world.Foreground[0, y] = block;
@@ -160,12 +160,14 @@ namespace BotBits
                 case Foregrounds.Portal.Normal:
                     return ForegroundType.Portal;
 
-                case Foregrounds.Portal.World:
+                case Foregrounds.Sign.Block:
                     return ForegroundType.Text;
 
-                case Foregrounds.Sign.Block:
                 case Foregrounds.Admin.Text:
                     return ForegroundType.Label;
+                    
+                case Foregrounds.Portal.World:
+                    return ForegroundType.WorldPortal;
 
                 default:
                     return ForegroundType.Normal;
@@ -188,6 +190,7 @@ namespace BotBits
                     return BlockArgsType.Number;
 
                 case ForegroundType.Text:
+                case ForegroundType.WorldPortal:
                     return BlockArgsType.String;
 
                 case ForegroundType.Portal:

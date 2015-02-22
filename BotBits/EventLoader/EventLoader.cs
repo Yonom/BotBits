@@ -23,14 +23,9 @@ namespace BotBits
             this.LoadEventhandlers(obj.GetType(), obj, methods);
         }
 
-        [Obsolete("The method Load(obj) cannot be used with typeof(T). Did you mean: EventLoader.Load(this)", true)]
-        public void Load(Type type)
+        public void LoadStatic<T>()
         {
-            throw new NotSupportedException("Type objects cannot be loaded.");
-        }
-
-        public void LoadStatic(Type type)
-        {
+            var type = typeof(T);
             MethodInfo[] methods =
                 type.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
             this.LoadEventhandlers(type, null, methods);

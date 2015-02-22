@@ -18,11 +18,6 @@ namespace BotBits
             return assembly.GetTypes().Where(type => type.GetCustomAttributes(t, true).Length > 0);
         }
 
-        public static void RunOnContext(this BotBitsClient client, Action action)
-        {
-            client.SynchronizationContext.Send(o => action(), null);
-        }
-
         public static Point3D GetPoint3D(this PlaceSendMessage placeSendMessage)
         {
             return new Point3D(placeSendMessage.Layer, placeSendMessage.X, placeSendMessage.Y);

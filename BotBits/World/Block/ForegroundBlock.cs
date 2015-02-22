@@ -47,7 +47,7 @@ namespace BotBits
         public ForegroundBlock(Foreground id, string text, string textColor)
         {
             ForegroundType type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.String)
+            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Label)
                 throw new ArgumentException("Invalid arguments for the specified block.", "id");
 
             this._args = new LabelArgs(text, textColor);
@@ -213,6 +213,24 @@ namespace BotBits
                     throw new InvalidOperationException("This property can only be accessed on Portal blocks.");
 
                 return this.GetPortalArgs().PortalTarget;
+            }
+        }
+
+        /// <summary>
+        ///     Gets the world portal target.  (Only on world portal blocks)
+        /// </summary>
+        /// <value>
+        ///     The portal target.
+        /// </value>
+        /// <exception cref="System.InvalidOperationException">This property can only be accessed on WorldPortal blocks.</exception>
+        public string WorldPortalTarget
+        {
+            get
+            {
+                if (this.Type != ForegroundType.WorldPortal)
+                    throw new InvalidOperationException("This property can only be accessed on WorldPortal blocks.");
+
+                return (string)this._args;
             }
         }
 
