@@ -56,6 +56,12 @@ namespace BotBits
                                 foregroundBlock = new ForegroundBlock((Foreground)block, portalId, portalTarget, portalRotation);
                                 break;
 
+                            case BlockArgsType.Label:
+                                string text = m.GetString(pointer++);
+                                string textcolor = m.GetString(pointer++);
+                                foregroundBlock = new ForegroundBlock((Foreground)block, text, textcolor);
+                                break;
+
                             default:
                                 throw new NotSupportedException("Invalid block.");
                         }
