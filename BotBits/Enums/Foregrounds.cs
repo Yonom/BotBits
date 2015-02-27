@@ -516,7 +516,9 @@ namespace BotBits
                 Red = (Foreground)189,
                 Yellow = (Foreground)190,
                 Green = (Foreground)191,
-                LightBlue = (Foreground)192;
+                LightBlue = (Foreground)192,
+                Orange = (Foreground)1025,
+                Black = (Foreground)1026;
         }
 
         public static class Jungle
@@ -812,6 +814,16 @@ namespace BotBits
                 RedHeart = (Foreground)405,
                 PurpleHeart = (Foreground)406,
                 PinkHeart = (Foreground)407;
+        }
+
+        public static class Magic
+        {
+            public const Foreground
+                Green = (Foreground)1013,
+                Purple = (Foreground)1014,
+                Orange = (Foreground)1015,
+                Blue = (Foreground)1016,
+                Red = (Foreground)1017;
         }
     }
 }
