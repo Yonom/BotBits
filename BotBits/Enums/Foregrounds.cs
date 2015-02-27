@@ -44,6 +44,7 @@ namespace BotBits
                 Blue = (Foreground)10,
                 Purple = (Foreground)11,
                 Red = (Foreground)12,
+                Orange = (Foreground)1018,
                 Yellow = (Foreground)13,
                 Green = (Foreground)14,
                 Cyan = (Foreground)15,
@@ -53,12 +54,15 @@ namespace BotBits
         public static class Brick
         {
             public const Foreground
+                Gray = (Foreground)1022,
                 Orange = (Foreground)16,
+                Blue = (Foreground)1023,
                 Teal = (Foreground)17,
                 Purple = (Foreground)18,
                 Green = (Foreground)19,
                 Red = (Foreground)20,
-                Tan = (Foreground)21;
+                Tan = (Foreground)21,
+                Black = (Foreground)1024;
         }
 
         public static class Special
@@ -77,7 +81,7 @@ namespace BotBits
                 Red = (Foreground)23,
                 Green = (Foreground)24,
                 Blue = (Foreground)25,
-                Cyan = (Foreground)1005, // TODO Ids
+                Cyan = (Foreground)1005, 
                 Magenta = (Foreground)1006,
                 Yellow = (Foreground)1007,
 
@@ -134,10 +138,13 @@ namespace BotBits
             public const Foreground
                 Pink = (Foreground)37,
                 Green = (Foreground)38,
+                Cyan = (Foreground)1019,
                 Blue = (Foreground)39,
                 Red = (Foreground)40,
+                Orange = (Foreground)1020,
                 Yellow = (Foreground)41,
-                Gray = (Foreground)42;
+                Gray = (Foreground)42,
+                Black = (Foreground)1021;
         }
 
         public static class Factory

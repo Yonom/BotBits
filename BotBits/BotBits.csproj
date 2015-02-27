@@ -63,11 +63,11 @@
     <Compile Include="ConnectionManager\PlayerIOConnectionAdapter.cs" />
     <Compile Include="Enums\AccessRight.cs" />
     <Compile Include="Enums\AutoText.cs" />
-    <Compile Include="Backgrounds.cs" />
+    <Compile Include="Enums\Backgrounds.cs" />
     <Compile Include="Enums\Background.cs" />
     <Compile Include="Enums\Foreground.cs" />
     <Compile Include="Event\EventHandleExtensions.cs" />
-    <Compile Include="Foregrounds.cs" />
+    <Compile Include="Enums\Foregrounds.cs" />
     <Compile Include="Enums\Key.cs" />
     <Compile Include="Enums\Layer.cs" />
     <Compile Include="Enums\MagicClass.cs" />
@@ -156,7 +156,6 @@
     <Compile Include="MessageReceive\Events\KillEvent.cs" />
     <Compile Include="MessageReceive\Events\LabelPlaceEvent.cs" />
     <Compile Include="MessageReceive\Events\LeaveEvent.cs" />
-    <Compile Include="MessageReceive\Events\LevelUpEvent.cs" />
     <Compile Include="MessageReceive\Events\LoseAccessEvent.cs" />
     <Compile Include="MessageReceive\Events\MagicEvent.cs" />
     <Compile Include="MessageReceive\Events\ModModeEvent.cs" />

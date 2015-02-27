@@ -101,7 +101,6 @@ namespace BotBits
             p.SpawnX = e.X;
             p.SpawnY = e.Y;
             p.ClubMember = e.ClubMember;
-            p.MagicClass = e.MagicClass;
         }
 
         [EventListener(EventPriority.High)]
@@ -211,13 +210,6 @@ namespace BotBits
             {
                 p.RemovePotion(e.Potion);
             }
-        }
-
-        [EventListener(EventPriority.High)]
-        private void OnLevelUp(LevelUpEvent e)
-        {
-            Player p = e.Player;
-            p.MagicClass = e.NewClass;
         }
 
         [EventListener(EventPriority.High)]

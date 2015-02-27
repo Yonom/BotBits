@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading;
 using BotBits.Events;
+using BotBits.SendMessages;
 
 namespace BotBits.Demo
 {
@@ -15,29 +17,16 @@ namespace BotBits.Demo
 
             ConnectionManager
                 .Of(bot)
-                .EmailLogin("sepi1376@gmail.com", "1346279")
-                .CreateJoinRoom("PWXRezGVBebEI");
+                .EmailLogin("", "")
+                .CreateJoinRoom("PWAARLDluVa0I");
 
-            Chat.Of(bot).Kill()
-            Console.ReadLine();
+            Thread.Sleep(-1);
         }
 
-        [EventListener]
-        void OnInit(InitEvent e)
-        {
-            for (var x = 0; x < 20; x++)
-            {
-                for (var y = 0; y < 20; y++)
-                {
-                    Blocks.Of(bot).Place(x, y, Foregrounds.Basic.Gray);
-                }
-            }
-        }
 
         [EventListener]
-        void OnLeft(JoinEvent e)
-        {
-            Console.WriteLine("Player left: " + e.Username);
+        static void OnJoin(JoinEvent e)
+        {    
         }
     }
 }

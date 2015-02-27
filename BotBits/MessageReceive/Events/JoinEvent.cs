@@ -22,11 +22,10 @@ namespace BotBits.Events
             this.HasChat = message.GetBoolean(7);
             this.Coins = message.GetInteger(8);
             this.BlueCoins = message.GetInteger(9);
-            this.PurpleSwitch = message.GetBoolean(10); 
-            this.Friend = message.GetBoolean(11);
-            this.MagicClass = (MagicClass)message.GetInteger(12);
-            this.ClubMember = message.GetBoolean(13);
-            this.Guardian = message.GetBoolean(14);
+            //this.PurpleSwitch = message.GetBoolean(10); TODO
+            this.Friend = message.GetBoolean(10);
+            this.ClubMember = message.GetBoolean(11);
+            this.Guardian = message.GetBoolean(12);
         }
 
         /// <summary>
@@ -88,12 +87,6 @@ namespace BotBits.Events
         /// </summary>
         /// <value><c>true</c> if the player has toggled a purple switch; otherwise, <c>false</c>.</value>
         public bool PurpleSwitch { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the magic class of this player.
-        /// </summary>
-        /// <value>The magic class.</value>
-        public MagicClass MagicClass { get; set; }
 
         /// <summary>
         ///     Gets or sets the username of the player.

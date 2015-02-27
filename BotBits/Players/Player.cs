@@ -103,14 +103,6 @@ namespace BotBits
         public bool HasChat { get; internal set; }
 
         /// <summary>
-        ///     Gets the player's magic class.
-        /// </summary>
-        /// <value>
-        ///     The player's magic class.
-        /// </value>
-        public MagicClass MagicClass { get; internal set; }
-
-        /// <summary>
         ///     Gets the player's smiley.
         /// </summary>
         /// <value>

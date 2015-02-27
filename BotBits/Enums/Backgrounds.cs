@@ -12,20 +12,25 @@
                 Blue = (Background)501,
                 Purple = (Background)502,
                 Red = (Background)503,
+                Orange = (Background)644,
                 Yellow = (Background)504,
                 Green = (Background)505,
-                Cyan = (Background)506;
+                Cyan = (Background)506,
+                Black = (Background)645;
         }
 
         public static class Brick
         {
             public const Background
+                Gray = (Background)646,
                 Orange = (Background)507,
+                Blue = (Background)647,
                 Teal = (Background)508,
                 Purple = (Background)509,
                 Green = (Background)510,
                 Red = (Background)511,
-                Tan = (Background)512;
+                Tan = (Background)512,
+                Black = (Background)648;
         }
 
         public static class Checker
