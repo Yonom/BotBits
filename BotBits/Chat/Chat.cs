@@ -2,6 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
+using System.Text.RegularExpressions;
 using System.Timers;
 using BotBits.Events;
 using BotBits.SendMessages;
@@ -10,12 +12,21 @@ namespace BotBits
 {
     public sealed class Chat : EventListenerPackage<Chat>, IDisposable, IChat
     {
-        private readonly ConcurrentQueue<string> _myChatQueue = new ConcurrentQueue<string>();
-        private readonly List<string> _myHistoryList = new List<string>(10);
+        private class ChatChannel
+        {
+            public ConcurrentQueue<string> Queue = new ConcurrentQueue<string>();
+            public string LastChat = String.Empty;
+            public int RepeatCount;
+            public string LastSent = String.Empty;
+            public string LastReceived = String.Empty;
+        }
+
+        private readonly ConcurrentDictionary<string, ChatChannel> _channels
+            = new ConcurrentDictionary<string, ChatChannel>();
+
         private readonly Timer _mySendTimer;
         private Players _players;
-        private string _lastReceived = String.Empty;
-        private string _lastSent = String.Empty;
+        private bool _warning;
 
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
         public Chat()
@@ -42,40 +53,40 @@ namespace BotBits
 
         private void DoSendTick()
         {
-            if (this._lastReceived != this._lastSent)
+            foreach (var channel in _channels.Values.ToArray())
             {
-                this.SendChat(this._lastSent);
-            }
-            else
-            {
-                string chatMessage;
-                if (this._myChatQueue.TryDequeue(out chatMessage))
+                if (this._warning && channel.LastReceived != channel.LastSent)
                 {
-                    this.SendChat(chatMessage);
+                    this.SendChat(channel.LastSent, channel);
                 }
                 else
                 {
-                    this._mySendTimer.Stop();
+                    string chatMessage;
+                    if (channel.Queue.TryDequeue(out chatMessage))
+                    {
+                        this.SendChat(chatMessage, channel);
+                    }
+                    else
+                    {
+                        this._mySendTimer.Stop();
+                    }
                 }
             }
         }
 
-        private void SendChat(string message)
+        private void SendChat(string message, ChatChannel channel)
         {
-            this._lastSent = message;
-            new ChatSendMessage(this._lastSent)
+            channel.LastSent = message;
+            new ChatSendMessage(channel.LastSent)
                 .SendIn(this.BotBits);
-        }
-
-        private bool CheckHistory(string str)
-        {
-            return this._myHistoryList.Count(str.Equals) >= 4;
         }
 
         private void QueueChat(string msg)
         {
+            msg = this.TrimChars(msg);
+
             // There is no speed limit on commands
-            if (msg.StartsWith("/", StringComparison.Ordinal) && 
+            if (msg.StartsWith("/", StringComparison.OrdinalIgnoreCase) && 
                 !msg.StartsWith("/pm", StringComparison.OrdinalIgnoreCase))
             {
                 var e = msg.Length > 80
@@ -85,8 +96,10 @@ namespace BotBits
                 return;
             }
 
+            var channel = GetChannel(msg);
+
             // Dont send the same thing more than 3 times
-            if (this.CheckHistory(msg))
+            if (this.CheckHistory(msg, channel))
             {
                 if (msg.StartsWith("/", StringComparison.Ordinal))
                     this.QueueChat(msg + ".");
@@ -95,21 +108,13 @@ namespace BotBits
                 return;
             }
 
-            lock (this._myHistoryList)
-            {
-                if (this._myHistoryList.Count >= 10)
-                    this._myHistoryList.RemoveAt(0);
-
-                this._myHistoryList.Add(msg);
-            }
-
             // Queue the message and chop it into 80 char parts
             for (int i = 0; i < msg.Length; i += 80)
             {
                 int left = msg.Length - i;
-                this._myChatQueue.Enqueue(left > 80
+                this.Enqueue(left > 80
                     ? msg.Substring(i, 80)
-                    : msg.Substring(i, left));
+                    : msg.Substring(i, left), channel);
             }
 
             // Init Timer
@@ -121,19 +126,86 @@ namespace BotBits
             }
         }
 
+        private string GetChannel(string msg)
+        {
+            string channel = null;
+            if (msg.StartsWith("/pm", StringComparison.OrdinalIgnoreCase))
+                channel = msg.Split(' ').Skip(1).FirstOrDefault();
+            return channel;
+        }
+
         [EventListener(EventPriority.High)]
         private void OnChat(ChatEvent e)
         {
             if (e.Player == this._players.OwnPlayer)
             {
-                if (this._lastSent == e.Text)
-                    this._lastReceived = e.Text;
+                var channel = this.GetChatChannel("");
+                if (channel.LastSent == e.Text)
+                    channel.LastReceived = e.Text;
+            }
+        }
+
+        [EventListener(EventPriority.High)]
+        private void OnWrite(WriteEvent e)
+        {
+            const string pmPrefix = "* ";
+            const string pmSuffix = " > you";
+            if (e.Title.StartsWith(pmPrefix) && e.Title.EndsWith(pmSuffix))
+            {
+                var username = e.Title.Substring(pmPrefix.Length, pmSuffix.Length);
+                var message = e.Text;
+
+                new PrivateMessageEvent(username, message)
+                    .RaiseIn(this.BotBits);
+            }
+            else if (e.Title == "SYSTEM" &&
+                     e.Text == "You are trying to chat too fast, spamming the chat is not nice!")
+            {
+                _warning = true;
             }
         }
 
         public void Say(string msg)
         {
             this.QueueChat(msg);
+        }
+        
+        private void Enqueue(string str, string channel)
+        {
+            this.GetChatChannel(channel).Queue.Enqueue(str);
+        }
+
+        private bool CheckHistory(string str, string channel)
+        {
+            return this.GetChatRepeats(str, channel) > 4;
+        }
+
+        public int GetChatRepeats(string chat, string channel)
+        {
+            var c = this.GetChatChannel(channel);
+            if (chat != c.LastChat)
+            {
+                c.RepeatCount = 0;
+                c.LastChat = chat;
+            }
+
+            return ++c.RepeatCount;
+        }
+
+        private string TrimChars(String text)
+        {
+            //Limit range to 31 - 255
+            text = Regex.Replace(text, @"[^\x1F-\xFF]", "").Trim();
+
+            //Remove del char 127
+            text = Regex.Replace(text, @"[\x7F]", "").Trim();
+
+            return text;
+        }
+
+        private ChatChannel GetChatChannel(string channel)
+        {
+            return this._channels.GetOrAdd(channel, c => new ChatChannel());
         }
     }
 }
