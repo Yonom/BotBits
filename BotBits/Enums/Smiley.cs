@@ -52,7 +52,7 @@ namespace BotBits
         Reindeer = 47,
         Grinch = 48,
         Maestro = 49,
-        //DJ = 50
+        DJ = 50,
         Sigh = 51,
         Robber = 52,
         Police = 53,
@@ -106,6 +106,7 @@ namespace BotBits
         Gingerbread = 101,
         Caroler = 102,
         Elf = 103,
-        Nutcracker = 104
+        Nutcracker = 104,
+        Blushing = 105
     }
 }
