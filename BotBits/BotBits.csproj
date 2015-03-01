@@ -64,11 +64,10 @@
     <Compile Include="ConnectionManager\PlayerIOConnectionAdapter.cs" />
     <Compile Include="Enums\AccessRight.cs" />
     <Compile Include="Enums\AutoText.cs" />
-    <Compile Include="Enums\Backgrounds.cs" />
     <Compile Include="Enums\Background.cs" />
-    <Compile Include="Enums\Foreground.cs" />
+    <Compile Include="Enums\Id.cs" />
     <Compile Include="Event\EventHandleExtensions.cs" />
-    <Compile Include="Enums\Foregrounds.cs" />
+    <Compile Include="Enums\Foreground.cs" />
     <Compile Include="Enums\Key.cs" />
     <Compile Include="Enums\Layer.cs" />
     <Compile Include="Enums\MagicClass.cs" />

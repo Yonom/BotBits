@@ -24,42 +24,42 @@ namespace BotBits
                 switch (l)
                 {
                     case Layer.Background:
-                        var bgWorldBlock = new BackgroundBlock((Background)block);
+                        var bgWorldBlock = new BackgroundBlock((Background.Id)block);
                         foreach (Point pos in GetPos(byteArrayX, byteArrayY))
                             world.Background[pos.X, pos.Y] = new BlockData<BackgroundBlock>(bgWorldBlock);
                         break;
 
                     case Layer.Foreground:
                         ForegroundBlock foregroundBlock;
-                        BlockArgsType blockArgsType = GetBlockArgsType(GetForegroundType((Foreground)block));
+                        BlockArgsType blockArgsType = GetBlockArgsType(GetForegroundType(id: (Foreground.Id)block));
 
                         switch (blockArgsType)
                         {
                             case BlockArgsType.None:
-                                foregroundBlock = new ForegroundBlock((Foreground)block);
+                                foregroundBlock = new ForegroundBlock((Foreground.Id)block);
                                 break;
 
                             case BlockArgsType.Number:
                                 uint i = m.GetUInt(pointer++);
-                                foregroundBlock = new ForegroundBlock((Foreground)block, i);
+                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, i);
                                 break;
 
                             case BlockArgsType.String:
                                 string str = m.GetString(pointer++);
-                                foregroundBlock = new ForegroundBlock((Foreground)block, str);
+                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, str);
                                 break;
 
                             case BlockArgsType.Portal:
                                 var portalRotation = (PortalRotation)m.GetUInt(pointer++);
                                 uint portalId = m.GetUInt(pointer++);
                                 uint portalTarget = m.GetUInt(pointer++);
-                                foregroundBlock = new ForegroundBlock((Foreground)block, portalId, portalTarget, portalRotation);
+                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, portalId, portalTarget, portalRotation);
                                 break;
 
                             case BlockArgsType.Label:
                                 string text = m.GetString(pointer++);
                                 string textcolor = m.GetString(pointer++);
-                                foregroundBlock = new ForegroundBlock((Foreground)block, text, textcolor);
+                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, text, textcolor);
                                 break;
 
                             default:
@@ -102,7 +102,7 @@ namespace BotBits
             }
         }
 
-        internal static BlocksWorld GetClearedWorld(int width, int height, Foreground borderBlock)
+        internal static BlocksWorld GetClearedWorld(int width, int height, Foreground.Id borderBlock)
         {
             var world = new BlocksWorld(width, height);
 
@@ -124,55 +124,55 @@ namespace BotBits
             return world;
         }
 
-        public static ForegroundType GetForegroundType(Foreground id)
+        public static ForegroundType GetForegroundType(Foreground.Id id)
         {
             switch (id)
             {
-                case Foregrounds.Switch.Purple:
-                case Foregrounds.Door.Coin:
-                case Foregrounds.Gate.Coin:
-                case Foregrounds.Door.BlueCoin:
-                case Foregrounds.Gate.BlueCoin:
-                case Foregrounds.Door.Purple:
-                case Foregrounds.Gate.Purple:
-                case Foregrounds.Door.Death:
-                case Foregrounds.Gate.Death:
+                case Foreground.Switch.Purple:
+                case Foreground.Door.Coin:
+                case Foreground.Gate.Coin:
+                case Foreground.Door.BlueCoin:
+                case Foreground.Gate.BlueCoin:
+                case Foreground.Door.Purple:
+                case Foreground.Gate.Purple:
+                case Foreground.Door.Death:
+                case Foreground.Gate.Death:
                     return ForegroundType.Goal;
 
-                case Foregrounds.Hazard.Spike:
-                case Foregrounds.OneWay.Cyan:
-                case Foregrounds.OneWay.Pink:
-                case Foregrounds.OneWay.Red:
-                case Foregrounds.OneWay.Yellow:
+                case Foreground.Hazard.Spike:
+                case Foreground.OneWay.Cyan:
+                case Foreground.OneWay.Pink:
+                case Foreground.OneWay.Red:
+                case Foreground.OneWay.Yellow:
                     return ForegroundType.Rotatable;
 
-                case Foregrounds.SciFi2013.BlueStraight:
-                case Foregrounds.SciFi2013.YellowStraight:
-                case Foregrounds.SciFi2013.GreenStraight:
+                case Foreground.SciFi2013.BlueStraight:
+                case Foreground.SciFi2013.YellowStraight:
+                case Foreground.SciFi2013.GreenStraight:
                     return ForegroundType.SciFiStraight;
 
-                case Foregrounds.SciFi2013.YellowSlope:
-                case Foregrounds.SciFi2013.GreenSlope:
-                case Foregrounds.SciFi2013.BlueSlope:
+                case Foreground.SciFi2013.YellowSlope:
+                case Foreground.SciFi2013.GreenSlope:
+                case Foreground.SciFi2013.BlueSlope:
                     return ForegroundType.SciFiSlope;
 
-                case Foregrounds.Music.Piano:
+                case Foreground.Music.Piano:
                     return ForegroundType.Piano;
 
-                case Foregrounds.Music.Drum:
+                case Foreground.Music.Drum:
                     return ForegroundType.Drum;
 
-                case Foregrounds.Portal.Invisible:
-                case Foregrounds.Portal.Normal:
+                case Foreground.Portal.Invisible:
+                case Foreground.Portal.Normal:
                     return ForegroundType.Portal;
 
-                case Foregrounds.Sign.Block:
+                case Foreground.Sign.Block:
                     return ForegroundType.Text;
 
-                case Foregrounds.Admin.Text:
+                case Foreground.Admin.Text:
                     return ForegroundType.Label;
                     
-                case Foregrounds.Portal.World:
+                case Foreground.Portal.World:
                     return ForegroundType.WorldPortal;
 
                 default:

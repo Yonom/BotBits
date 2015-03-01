@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using BotBits.Events;
 using BotBits.SendMessages;
@@ -19,7 +20,7 @@ namespace BotBits.Demo
                 .Of(bot)
                 .EmailLogin("guest", "guest")
                 .CreateJoinRoom("PWAARLDluVa0I");
-
+            
             Thread.Sleep(-1);
         }
 

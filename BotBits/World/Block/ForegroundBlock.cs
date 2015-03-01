@@ -7,10 +7,10 @@ namespace BotBits
     public struct ForegroundBlock
     {
         private readonly object _args;
-        private readonly Foreground _id;
+        private readonly Foreground.Id _id;
         private readonly ForegroundType _type;
 
-        public ForegroundBlock(Foreground id)
+        public ForegroundBlock(Foreground.Id id)
         {
             ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.None)
@@ -22,7 +22,7 @@ namespace BotBits
         }
 
 
-        public ForegroundBlock(Foreground id, uint args)
+        public ForegroundBlock(Foreground.Id id, uint args)
         {
             ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Number)
@@ -33,7 +33,7 @@ namespace BotBits
             this._id = id;
         }
 
-        public ForegroundBlock(Foreground id, string text)
+        public ForegroundBlock(Foreground.Id id, string text)
         {
             ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.String)
@@ -44,7 +44,7 @@ namespace BotBits
             this._id = id;
         }
 
-        public ForegroundBlock(Foreground id, string text, string textColor)
+        public ForegroundBlock(Foreground.Id id, string text, string textColor)
         {
             ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Label)
@@ -55,7 +55,7 @@ namespace BotBits
             this._id = id;
         }
 
-        public ForegroundBlock(Foreground id, uint portalId, uint portalTarget, PortalRotation portalRotation)
+        public ForegroundBlock(Foreground.Id id, uint portalId, uint portalTarget, PortalRotation portalRotation)
         {
             ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Portal)
@@ -66,38 +66,38 @@ namespace BotBits
             this._id = id;
         }
 
-        public ForegroundBlock(Foreground id, int goal)
+        public ForegroundBlock(Foreground.Id id, int goal)
             : this(id, (uint)goal)
         {
         }
 
-        public ForegroundBlock(Foreground id, int portalId, int portalTarget, PortalRotation portalRotation)
+        public ForegroundBlock(Foreground.Id id, int portalId, int portalTarget, PortalRotation portalRotation)
             : this(id, (uint)portalId, (uint)portalTarget, portalRotation)
         {
         }
 
         
-        public ForegroundBlock(Foreground id, SciFiSlopeRotation rotation) 
+        public ForegroundBlock(Foreground.Id id, SciFiSlopeRotation rotation) 
             : this(id, (uint)rotation)
         {
         }
 
-        public ForegroundBlock(Foreground id, SciFiStraightRotation rotation)
+        public ForegroundBlock(Foreground.Id id, SciFiStraightRotation rotation)
             : this(id, (uint)rotation)
         {
         }
 
-        public ForegroundBlock(Foreground id, BlockRotation rotation)
+        public ForegroundBlock(Foreground.Id id, BlockRotation rotation)
             : this(id, (uint)rotation)
         {
         }
 
-        public ForegroundBlock(Foreground id, PianoId soundId)
+        public ForegroundBlock(Foreground.Id id, PianoId soundId)
             : this(id, (uint)soundId)
         {
         }
 
-        public ForegroundBlock(Foreground id, PercussionId soundId)
+        public ForegroundBlock(Foreground.Id id, PercussionId soundId)
             : this(id, (uint)soundId)
         {
         }
@@ -108,7 +108,7 @@ namespace BotBits
         /// <value>
         ///     The block.
         /// </value>
-        public Foreground Id
+        public Foreground.Id Id
         {
             get { return this._id; }
         }

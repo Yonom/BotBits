@@ -88,11 +88,11 @@ namespace BotBits
             switch (e.Layer)
             {
                 case Layer.Foreground:
-                    this.RaiseBlock(e.X, e.Y, (Foreground)e.Id, e.Player);
+                    this.RaiseBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Player);
                     break;
 
                 case Layer.Background:
-                    this.RaiseBackground(e.X, e.Y, new BackgroundBlock((Background)e.Id), e.Player);
+                    this.RaiseBackground(e.X, e.Y, new BackgroundBlock((Background.Id)e.Id), e.Player);
                     break;
             }
         }
@@ -100,66 +100,66 @@ namespace BotBits
         [EventListener(EventPriority.High)]
         private void OnPortal(PortalPlaceEvent e)
         {
-            this.RaisePortalBlock(e.X, e.Y, (Foreground)e.Id, e.PortalId, e.PortalTarget, e.PortalRotation, e.Player);
+            this.RaisePortalBlock(e.X, e.Y, (Foreground.Id)e.Id, e.PortalId, e.PortalTarget, e.PortalRotation, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnCoinDoorPlace(CoinDoorPlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground)e.Id, e.CoinsToOpen, e.Player);
+            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.CoinsToOpen, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnSoundPlace(SoundPlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground)e.Id, e.SoundId, e.Player);
+            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.SoundId, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnRotatablePlace(RotatablePlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground)e.Id, e.Rotation, e.Player);
+            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Rotation, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnWorldPortalPlace(WorldPortalPlaceEvent e)
         {
-            this.RaiseStringBlock(e.X, e.Y, (Foreground)e.Id, e.WorldPortalTarget, e.Player);
+            this.RaiseStringBlock(e.X, e.Y, (Foreground.Id)e.Id, e.WorldPortalTarget, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnLabelPlace(LabelPlaceEvent e)
         {
-            this.RaiseLabelBlock(e.X, e.Y, (Foreground)e.Id, e.Text, e.TextColor, e.Player);
+            this.RaiseLabelBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.TextColor, e.Player);
         }
 
         [EventListener(EventPriority.High)]
         private void OnSignPlace(SignPlaceEvent e)
         {
-            this.RaiseStringBlock(e.X, e.Y, (Foreground)e.Id, e.Text, e.Player);
+            this.RaiseStringBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.Player);
         }
 
-        private void RaiseBlock(int x, int y, Foreground block, Player player)
+        private void RaiseBlock(int x, int y, Foreground.Id block, Player player)
         {
             this.RaiseForeground(x, y, new ForegroundBlock(block), player);
         }
 
-        private void RaiseNumberBlock(int x, int y, Foreground block, uint args, Player player)
+        private void RaiseNumberBlock(int x, int y, Foreground.Id block, uint args, Player player)
         {
             this.RaiseForeground(x, y, new ForegroundBlock(block, args), player);
         }
 
-        private void RaiseStringBlock(int x, int y, Foreground block, string text, Player player)
+        private void RaiseStringBlock(int x, int y, Foreground.Id block, string text, Player player)
         {
             this.RaiseForeground(x, y, new ForegroundBlock(block, text), player);
         }
 
-        private void RaiseLabelBlock(int x, int y, Foreground block, string text, string textColor, Player player)
+        private void RaiseLabelBlock(int x, int y, Foreground.Id block, string text, string textColor, Player player)
         {
             this.RaiseForeground(x, y, new ForegroundBlock(block, text, textColor), player);
         }
 
-        private void RaisePortalBlock(int x, int y, Foreground block, 
+        private void RaisePortalBlock(int x, int y, Foreground.Id block, 
             uint portalId, uint portalTarget, PortalRotation portalRotation, Player player)
         {
             this.RaiseForeground(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation), player);

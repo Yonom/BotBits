@@ -5,14 +5,14 @@ namespace BotBits
     [DebuggerDisplay("Id = {Id}")]
     public struct BackgroundBlock
     {
-        private readonly Background _id;
+        private readonly Background.Id _id;
 
-        public BackgroundBlock(Background id)
+        public BackgroundBlock(Background.Id id)
         {
             this._id = id;
         }
 
-        public Background Id
+        public Background.Id Id
         {
             get { return this._id; }
         }
