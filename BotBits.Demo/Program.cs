@@ -17,7 +17,7 @@ namespace BotBits.Demo
 
             ConnectionManager
                 .Of(bot)
-                .EmailLogin("", "")
+                .EmailLogin("guest", "guest")
                 .CreateJoinRoom("PWAARLDluVa0I");
 
             Thread.Sleep(-1);
