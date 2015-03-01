@@ -8,29 +8,23 @@ namespace BotBits
     public class BotBitsClient
     {
         // TODO: Physics (extension?)
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ISchedulerHandle _schedulerHandle;
+
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly PackageLoader _packageLoader = new PackageLoader();
 
-        public BotBitsClient() : this(BotServices.GetScheduler())
+        public BotBitsClient()
         {
-        }
-
-        internal BotBitsClient(ISchedulerHandle schedulerHandle)
-        {
-            this._schedulerHandle = schedulerHandle;
-
             DefaultExtension
                 .LoadInto(this);
         }
 
-        public void Schedule(Action task)
+        internal BotBitsClient(ISchedulerHandle handle) : this()
         {
-            this._schedulerHandle.SynchronizationContext.Post(o => task(), null);
+            DefaultExtension
+                .LoadInto(this, handle);
         }
-
+        
         internal T Get<T>() where T : Package<T>, new()
         {
             return this._packageLoader.Get<T>();
@@ -44,7 +38,6 @@ namespace BotBits
         public void Dispose()
         {
             this._packageLoader.Dispose();
-            this._schedulerHandle.Dispose();
         }
 
         private PackageLoader Packages

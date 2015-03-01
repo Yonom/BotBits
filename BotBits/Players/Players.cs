@@ -11,9 +11,20 @@ namespace BotBits
     public sealed class Players : EventListenerPackage<Players>, IEnumerable<Player>
     {
         private readonly Dictionary<int, Player> _players = new Dictionary<int, Player>();
-        public Player OwnPlayer { get; private set; }
-        [CanBeNull]
-        public Player CrownPlayer { get; private set; }
+        private Player _crownPlayer = Player.Nobody;
+        private Player _ownPlayer = Player.Nobody;
+
+        public Player OwnPlayer
+        {
+            get { return this._ownPlayer; }
+            private set { this._ownPlayer = value; }
+        }
+
+        public Player CrownPlayer
+        {
+            get { return this._crownPlayer; }
+            private set { this._crownPlayer = value; }
+        }
 
         public int Count
         {
@@ -24,7 +35,6 @@ namespace BotBits
             }
         }
 
-        [CanBeNull]
         public Player this[int userId]
         {
             get
@@ -32,11 +42,8 @@ namespace BotBits
                 if (userId == Player.Nobody.UserId)
                     return Player.Nobody;
 
-                Player player;
                 lock (this._players)
-                    if (this._players.TryGetValue(userId, out player))
-                        return player;
-                return null;
+                    return this._players[userId];
             }
         }
 
@@ -76,19 +83,29 @@ namespace BotBits
                 return this._players.Values.Where(p => p.Username == username).ToArray();
         }
 
-        internal Player GetOrAddPlayer(int userId)
-        {
-            if (userId == Player.Nobody.UserId)
-                return Player.Nobody;
+        //internal Player GetPlayer(int userId)
+        //{
+        //    if (userId == Player.Nobody.UserId)
+        //        return Player.Nobody;
 
-            Player player;
+        //    Player player;
+        //    lock (this._players)
+        //        if (!this._players.TryGetValue(userId, out player))
+        //        {
+        //            player = new Player(this, userId);
+        //            this._players.Add(userId, player);
+        //        }
+        //    return player;
+        //}
+
+        internal Player AddPlayer(int userId)
+        {
             lock (this._players)
-                if (!this._players.TryGetValue(userId, out player))
-                {
-                    player = new Player(this, userId);
-                    this._players.Add(userId, player);
-                }
-            return player;
+            {
+                var player = new Player(this, userId);
+                this._players.Add(userId, player);
+                return player;
+            }
         }
 
         [EventListener(EventPriority.High)]
@@ -99,8 +116,6 @@ namespace BotBits
             this.OwnPlayer.Username = e.Username;
             this.OwnPlayer.X = e.SpawnX;
             this.OwnPlayer.Y = e.SpawnY;
-            this.OwnPlayer.SpawnX = e.SpawnX;
-            this.OwnPlayer.SpawnY = e.SpawnY;
         }
 
         [EventListener(EventPriority.High)]
@@ -119,8 +134,6 @@ namespace BotBits
             p.BlueCoins = e.BlueCoins;
             p.X = e.X;
             p.Y = e.Y;
-            p.SpawnX = e.X;
-            p.SpawnY = e.Y;
             p.ClubMember = e.ClubMember;
         }
 
@@ -278,14 +291,11 @@ namespace BotBits
         {
             foreach (var tele in e.Coordinates)
             {
-                Player p = this.GetOrAddPlayer(tele.Key);
+                Player p = tele.Key;
                 Point location = tele.Value;
 
                 p.X = location.X;
                 p.Y = location.Y;
-                p.SpawnX = location.X;
-                p.SpawnY = location.Y;
-
                 p.Dead = false;
 
                 if (e.ResetCoins)

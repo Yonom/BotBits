@@ -18,8 +18,8 @@ namespace BotBits.Demo
 
             ConnectionManager
                 .Of(bot)
-                .EmailLogin("guest", "guest")
-                .CreateJoinRoom("PWAARLDluVa0I");
+                .EmailLoginAsync("guest", "guest")
+                .CreateJoinRoomAsync("PWAARLDluVa0I").Wait();
             
             Thread.Sleep(-1);
         }

@@ -17,15 +17,17 @@ namespace BotBits.Events
         internal TeleportEveryoneEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            var coords = new List<KeyValuePair<int, Point>>();
-            this.Coordinates = new List<KeyValuePair<int, Point>>(coords);
+            this.Coordinates = new List<KeyValuePair<Player, Point>>();
 
             this.ResetCoins = message.GetBoolean(0);
 
             for (uint i = 1; i <= message.Count - 1u; i += 3)
             {
-                coords.Add(new KeyValuePair<int, Point>(message.GetInteger(i),
-                    new Point(message.GetInteger(i + 1u), message.GetInteger(i + 2u))));
+                var player = Players.Of(client)[message.GetInteger(i)];
+                var x = message.GetInteger(i + 1u);
+                var y =  message.GetInteger(i + 2u);
+
+                this.Coordinates.Add(new KeyValuePair<Player, Point>(player, new Point(x, y)));
             }
         }
 
@@ -33,7 +35,7 @@ namespace BotBits.Events
         ///     Gets or sets the coordinates.
         /// </summary>
         /// <value>The coordinates.</value>
-        public List<KeyValuePair<int, Point>> Coordinates { get; set; }
+        public List<KeyValuePair<Player, Point>> Coordinates { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether the coins need to be reset.

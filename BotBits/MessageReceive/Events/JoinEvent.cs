@@ -11,7 +11,7 @@ namespace BotBits.Events
         /// <param name="message">The EE message.</param>
         /// <param name="client"></param>
         internal JoinEvent(BotBitsClient client, Message message)
-            : base(client, message)
+            : base(client, message, create: true)
         {
             this.Username = message.GetString(1);
             this.Smiley = (Smiley)message.GetInteger(2);

@@ -11,10 +11,10 @@ namespace BotBits
         /// <param name="username">The player's username.</param>
         /// <returns></returns>
         [Pure]
-        public static bool IsGuest([CanBeNull] string username)
+        public static bool IsGuest(string username)
         {
             // Official implementation in SWF, don't blame me
-            return username != null && username.Contains("-");
+            return username.Contains("-");
         }
 
         /// <summary>
@@ -23,11 +23,8 @@ namespace BotBits
         /// <param name="username">The player's username.</param>
         /// <returns></returns>
         [Pure]
-        public static string GetChatName([CanBeNull] string username)
+        public static string GetChatName(string username)
         {
-            if (username == null)
-                return null;
-
             return username.ToUpperInvariant();
         }
     }

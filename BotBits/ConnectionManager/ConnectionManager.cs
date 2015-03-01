@@ -13,7 +13,7 @@ namespace BotBits
         private const string GameId = "everybody-edits-su9rn58o40itdbnw69plyw";
         private IConnection _connection;
         private PlayerIOConnectionAdapter _adapter;
-
+        public Scheduler CurrentScheduler { get; private set; }
         public IConnection Connection
         {
             get { return this._connection; }
@@ -22,12 +22,15 @@ namespace BotBits
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
         public ConnectionManager()
         {
+            this.CurrentScheduler = new Scheduler();
         }
 
         void IDisposable.Dispose()
         {
             if (this._adapter != null)
                 this._adapter.Dispose();
+
+            this.CurrentScheduler.Dispose();
         }
 
         [Pure]
@@ -57,6 +60,8 @@ namespace BotBits
         [Pure]
         public Task<LoginClient> EmailLoginAsync(string email, string password)
         {
+            this.CurrentScheduler.InitScheduler();
+
             var tcs = new TaskCompletionSource<LoginClient>();
             PlayerIO.QuickConnect.SimpleConnect(GameId, email, password, null,
                 cl => tcs.SetResult(this.WithClient(cl)),
@@ -67,6 +72,8 @@ namespace BotBits
         [Pure]
         public Task<LoginClient> FacebookLoginAsync(string token)
         {
+            this.CurrentScheduler.InitScheduler();
+
             var tcs = new TaskCompletionSource<LoginClient>();
             PlayerIO.QuickConnect.FacebookOAuthConnect(GameId, token, null, null,
                 cl => tcs.SetResult(this.WithClient(cl)),
@@ -77,6 +84,8 @@ namespace BotBits
         [Pure]
         public Task<LoginClient> KongregateLoginAsync(string userId, string token)
         {
+            this.CurrentScheduler.InitScheduler();
+
             var tcs = new TaskCompletionSource<LoginClient>();
             PlayerIO.QuickConnect.KongregateConnect(GameId, userId, token, null,
                 cl => tcs.SetResult(this.WithClient(cl)),
@@ -87,6 +96,8 @@ namespace BotBits
         [Pure]
         public Task<LoginClient> ArmorGamesLoginAsync(string userId, string token)
         {
+            this.CurrentScheduler.InitScheduler();
+
             return this.EmailLoginAsync("guest", "guest").ContinueWith(t =>
             {
                 var tcs = new TaskCompletionSource<LoginClient>();
@@ -129,6 +140,8 @@ namespace BotBits
         [Pure]
         public LoginClient WithClient([NotNull] Client client)
         {
+            this.CurrentScheduler.InitScheduler();
+
             if (client == null)
                 throw new ArgumentNullException("client");
 
@@ -176,13 +189,13 @@ namespace BotBits
 
         private void Connection_OnMessage(object sender, Message e)
         {
-            this.BotBits.Schedule(() =>
+            this.CurrentScheduler.Schedule(() =>
                 this.HandleMessage(e));
         }
 
         private void Connection_OnDisconnect(object sender, string message)
         {
-            this.BotBits.Schedule(() => 
+            this.CurrentScheduler.Schedule(() => 
                 this.HandleDisconnect(message));
         }
 
@@ -262,8 +275,9 @@ namespace BotBits
 
             public Task JoinRoomAsync(string roomId)
             {
-                var tcs = new TaskCompletionSource<bool>();
+                this._connectionManager.CurrentScheduler.InitScheduler();
 
+                var tcs = new TaskCompletionSource<bool>();
                 this.Client.Multiplayer.JoinRoom(roomId, null, conn =>
                 {
                     try
@@ -278,6 +292,47 @@ namespace BotBits
                 }, tcs.SetException);
 
                 return tcs.Task;
+            }
+        }
+
+        public sealed class Scheduler : IDisposable
+        {
+            private ISchedulerHandle _schedulerHandle;
+
+            internal Scheduler()
+            {
+            }
+
+            public void Schedule(Action task)
+            {
+                this._schedulerHandle.SynchronizationContext.Post(o => task(), null);
+            }
+
+            public void CaptureScheduler()
+            {
+                this._schedulerHandle = BotServices.GetScheduler();
+            }
+
+            internal void SetScheduler(ISchedulerHandle handle)
+            {
+                this._schedulerHandle = handle;
+            }
+
+            internal void InitScheduler()
+            {
+                if (this._schedulerHandle == null)
+                {
+                    var scheduler = BotServices.GetScheduler();
+                    if (Interlocked.CompareExchange(ref this._schedulerHandle, scheduler, null) != null)
+                    {
+                        scheduler.Dispose();
+                    }
+                }
+            }
+
+            public void Dispose()
+            {
+                this._schedulerHandle.Dispose();
             }
         }
     }

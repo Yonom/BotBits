@@ -9,7 +9,7 @@ namespace BotBits
     [DebuggerDisplay("Username = {Username}, Smiley = {Smiley}")]
     public sealed class Player : MetadataCollection, IEquatable<Player>
     {
-        public static readonly Player Nobody = new Player(null, -1);
+        public static readonly Player Nobody = new Player(null, -1) {Username = String.Empty};
 
         [CanBeNull]
         private readonly Players _players;
@@ -27,7 +27,6 @@ namespace BotBits
         /// <value>
         ///     The player's username.
         /// </value>
-        [CanBeNull]
         public string Username { get; internal set; }
 
         /// <summary>
@@ -125,22 +124,6 @@ namespace BotBits
         ///     The player's number of blue coins.
         /// </value>
         public int BlueCoins { get; internal set; }
-
-        /// <summary>
-        ///     Gets the x-coordinate of the player's spawn.
-        /// </summary>
-        /// <value>
-        ///     The x-coordinate of the player's spawn.
-        /// </value>
-        public int SpawnX { get; internal set; }
-
-        /// <summary>
-        ///     Gets the y-coordinate of the player's spawn.
-        /// </summary>
-        /// <value>
-        ///     The y-coordinate of the player's spawn.
-        /// </value>
-        public int SpawnY { get; internal set; }
 
         /// <summary>
         ///     Gets the x-coordinate of the player's current position.

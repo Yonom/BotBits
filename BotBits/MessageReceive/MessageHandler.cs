@@ -39,11 +39,18 @@ namespace BotBits
             Type handler;
             if (this._messageRegister.TryGetHandler(e.Message.Type, out handler))
             {
-                const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
-                var instance = (IEvent)Activator.CreateInstance(handler, flags, null,
-                    new object[] { this.BotBits, e.Message }, null);
+                try
+                {
+                    const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
+                    var instance = (IEvent)Activator.CreateInstance(handler, flags, null,
+                        new object[] { this.BotBits, e.Message }, null);
 
-                instance.RaiseIn(this.BotBits);
+                    instance.RaiseIn(this.BotBits);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Error parsing message: {0} \n {1}", e.Message, ex);
+                }
             }
             else
             {
@@ -51,5 +58,7 @@ namespace BotBits
                     .RaiseIn(this.BotBits);
             }
         }
+
+        
     }
 }
