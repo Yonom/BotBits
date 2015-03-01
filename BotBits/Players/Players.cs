@@ -10,14 +10,18 @@ namespace BotBits
 {
     public sealed class Players : EventListenerPackage<Players>, IEnumerable<Player>
     {
-        private readonly ConcurrentDictionary<int, Player> _players = new ConcurrentDictionary<int, Player>();
+        private readonly Dictionary<int, Player> _players = new Dictionary<int, Player>();
         public Player OwnPlayer { get; private set; }
         [CanBeNull]
         public Player CrownPlayer { get; private set; }
 
         public int Count
         {
-            get { return this._players.Count; }
+            get
+            {
+                lock (this._players) 
+                    return this._players.Count;
+            }
         }
 
         [CanBeNull]
@@ -29,8 +33,9 @@ namespace BotBits
                     return Player.Nobody;
 
                 Player player;
-                if (this._players.TryGetValue(userId, out player))
-                    return player;
+                lock (this._players)
+                    if (this._players.TryGetValue(userId, out player))
+                        return player;
                 return null;
             }
         }
@@ -42,7 +47,7 @@ namespace BotBits
 
         public IEnumerator<Player> GetEnumerator()
         {
-            return this.GetPlayers().GetEnumerator();
+            return ((IEnumerable<Player>)this.GetPlayers()).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -53,13 +58,22 @@ namespace BotBits
         [Pure]
         public bool Contains(int userId)
         {
-            return this._players.ContainsKey(userId);
+            lock (this._players)
+                return this._players.ContainsKey(userId);
         }
 
         [Pure]
-        public List<Player> GetPlayers()
+        public Player[] GetPlayers()
         {
-            return this._players.Values.Where(p => p.Connected).ToList();
+            lock (this._players)
+                return this._players.Values.Where(p => p.Connected).ToArray();
+        }
+
+        [Pure]
+        public Player[] FromUsername(string username)
+        {
+            lock (this._players)
+                return this._players.Values.Where(p => p.Username == username).ToArray();
         }
 
         internal Player GetOrAddPlayer(int userId)
@@ -67,7 +81,14 @@ namespace BotBits
             if (userId == Player.Nobody.UserId)
                 return Player.Nobody;
 
-            return this._players.GetOrAdd(userId, i => new Player(this, i));
+            Player player;
+            lock (this._players)
+                if (!this._players.TryGetValue(userId, out player))
+                {
+                    player = new Player(this, userId);
+                    this._players.Add(userId, player);
+                }
+            return player;
         }
 
         [EventListener(EventPriority.High)]
@@ -113,10 +134,12 @@ namespace BotBits
         private void OnLeave(LeaveEvent e)
         {
             Player leftPlayer;
-            if (this._players.TryRemove(e.Player.UserId, out leftPlayer))
-            {
-                leftPlayer.Connected = false;
-            }
+            lock (this._players)
+                if (this._players.TryGetValue(e.Player.UserId, out leftPlayer))
+                {
+                    this._players.Remove(e.Player.UserId);
+                    leftPlayer.Connected = false;
+                }
         }
 
         [EventListener(EventPriority.High)]
