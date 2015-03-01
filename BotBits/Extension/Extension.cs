@@ -16,11 +16,6 @@ namespace BotBits
         {
         }
 
-        public static void LoadInto(BotBitsClient client)
-        {
-            LoadInto(client, null);
-        }
-
         protected static void LoadInto(BotBitsClient client, object args)
         {
             var type = typeof(T);

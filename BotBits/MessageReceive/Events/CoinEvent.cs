@@ -13,7 +13,7 @@ namespace BotBits.Events
         internal CoinEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Coins = message.GetInteger(1);
+            this.GoldCoins = message.GetInteger(1);
             this.BlueCoins = message.GetInteger(2);
         }
 
@@ -21,7 +21,7 @@ namespace BotBits.Events
         ///     Gets or sets the coins of the player.
         /// </summary>
         /// <value>The coins.</value>
-        public int Coins { get; set; }
+        public int GoldCoins { get; set; }
 
         /// <summary>
         ///     Gets or sets the blue coins of the player.

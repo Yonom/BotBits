@@ -95,6 +95,8 @@
     <Compile Include="MessageSend\SendMessages\YellowKeySendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\TouchHologramSendMessage.cs" />
     <Compile Include="Players\Events\FlyEvent.cs" />
+    <Compile Include="Players\Events\BlueCoinEvent.cs" />
+    <Compile Include="Players\Events\GoldCoinEvent.cs" />
     <Compile Include="Services\MessageServices.cs" />
     <Compile Include="Event\EventRaiseHandler.cs" />
     <Compile Include="Extension\DefaultExtension.cs" />
@@ -157,7 +159,6 @@
     <Compile Include="MessageReceive\Events\LabelPlaceEvent.cs" />
     <Compile Include="MessageReceive\Events\LeaveEvent.cs" />
     <Compile Include="MessageReceive\Events\LoseAccessEvent.cs" />
-    <Compile Include="MessageReceive\Events\MagicEvent.cs" />
     <Compile Include="MessageReceive\Events\ModModeEvent.cs" />
     <Compile Include="MessageReceive\Events\MoveEvent.cs" />
     <Compile Include="MessageReceive\Events\PortalPlaceEvent.cs" />

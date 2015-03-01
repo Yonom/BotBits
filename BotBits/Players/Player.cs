@@ -116,7 +116,7 @@ namespace BotBits
         /// <value>
         ///     The player's number of coins.
         /// </value>
-        public int Coins { get; internal set; }
+        public int GoldCoins { get; internal set; }
 
         /// <summary>
         ///     Gets the player's number of blue coins.
@@ -258,7 +258,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if this player is a guest; otherwise, <c>false</c>.
         /// </value>
-        public bool Guest
+        public bool IsGuest
         {
             get { return PlayerUtils.IsGuest(this.Username); }
         }

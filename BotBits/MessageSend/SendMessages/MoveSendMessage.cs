@@ -117,11 +117,7 @@ namespace BotBits.SendMessages
         {
             this.GravityMultiplier = Room.Of(client).GravityMultiplier;
 
-            // "m" messages can be sent more than 100 times a second
-            MessageServices.EnableInstantSend(() =>
-            {
-                base.SendIn(client);
-            });
+            base.SendIn(client);
         }
 
         /// <summary>

@@ -94,7 +94,7 @@ namespace BotBits
             p.GuardianMode = e.Guardian;
             p.ModMode = e.Mod;
             p.Friend = e.Friend;
-            p.Coins = e.Coins;
+            p.GoldCoins = e.Coins;
             p.BlueCoins = e.BlueCoins;
             p.X = e.X;
             p.Y = e.Y;
@@ -123,8 +123,19 @@ namespace BotBits
         private void OnCoin(CoinEvent e)
         {
             Player p = e.Player;
-            p.Coins = e.Coins;
-            p.BlueCoins = e.BlueCoins;
+
+            if (p.GoldCoins != e.GoldCoins)
+            {
+                p.GoldCoins = e.GoldCoins;
+                new GoldCoinEvent(p, p.GoldCoins)
+                    .RaiseIn(this.BotBits);
+            } 
+            if (p.BlueCoins != e.BlueCoins)
+            {
+                p.BlueCoins = e.BlueCoins;
+                new BlueCoinEvent(p, p.BlueCoins)
+                    .RaiseIn(this.BotBits);
+            }
         }
 
         [EventListener(EventPriority.High)]
@@ -138,7 +149,7 @@ namespace BotBits
         private void OnMove(MoveEvent e)
         {
             Player p = e.Player;
-            p.Coins = e.Coins;
+            p.GoldCoins = e.Coins;
             p.Horizontal = e.Horizontal;
             p.Vertical = e.Vertical;
             p.ModifierX = e.ModifierX;
@@ -256,7 +267,7 @@ namespace BotBits
 
                 if (e.ResetCoins)
                 {
-                    p.Coins = default(int);
+                    p.GoldCoins = default(int);
                 }
 
                 var point = new Point(p.X, p.Y);
