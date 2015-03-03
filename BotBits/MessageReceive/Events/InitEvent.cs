@@ -148,5 +148,23 @@ namespace BotBits.Events
         /// </summary>
         /// <value>The name of the world.</value>
         public string WorldName { get; set; }
+
+        /// <summary>
+        ///     Gets the block x.
+        /// </summary>
+        /// <value>The block x.</value>
+        public int BlockX
+        {
+            get { return BlockUtils.PosToBlock(this.SpawnX); }
+        }
+
+        /// <summary>
+        ///     Gets the block y.
+        /// </summary>
+        /// <value>The block y.</value>
+        public int BlockY
+        {
+            get { return BlockUtils.PosToBlock(this.SpawnY); }
+        }
     }
 }

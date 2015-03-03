@@ -84,6 +84,7 @@
     <Compile Include="BlockChecker\BlockChecker.cs" />
     <Compile Include="Event\IEvent.cs" />
     <Compile Include="Helpers\Nito\Deque.cs" />
+    <Compile Include="Helpers\Shop\PackAttribute.cs" />
     <Compile Include="Helpers\WaitHandleExtensions.cs" />
     <Compile Include="MessageReceive\Events\GemEvent.cs" />
     <Compile Include="MessageReceive\Events\RoomVisibleEvent.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Players\Events\FlyEvent.cs" />
     <Compile Include="Players\Events\BlueCoinEvent.cs" />
     <Compile Include="Players\Events\GoldCoinEvent.cs" />
+    <Compile Include="Services\BlockServices.cs" />
     <Compile Include="Services\MessageServices.cs" />
     <Compile Include="Event\EventRaiseHandler.cs" />
     <Compile Include="Extension\DefaultExtension.cs" />

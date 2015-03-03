@@ -105,5 +105,23 @@ namespace BotBits.Events
         /// </summary>
         /// <value>The user position y.</value>
         public int Y { get; set; }
+
+        /// <summary>
+        ///     Gets the block x.
+        /// </summary>
+        /// <value>The block x.</value>
+        public int BlockX
+        {
+            get { return BlockUtils.PosToBlock(this.X); }
+        }
+
+        /// <summary>
+        ///     Gets the block y.
+        /// </summary>
+        /// <value>The block y.</value>
+        public int BlockY
+        {
+            get { return BlockUtils.PosToBlock(this.Y); }
+        }
     }
 }

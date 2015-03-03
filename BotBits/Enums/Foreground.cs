@@ -1,4 +1,8 @@
+using System.Runtime.InteropServices.ComTypes;
+using BotBits.Shop;
 // ReSharper disable MemberHidesStaticFromOuterClass
+
+
 namespace BotBits
 {
     public static class Foreground
@@ -74,7 +78,10 @@ namespace BotBits
             public const Id
                 Striped = (Id)22,
                 Face = (Id)32,
-                GlossyBlack = (Id)33,
+                GlossyBlack = (Id)33;
+
+            [Pack("brickblackblock")]
+            public const Id
                 FullyBlack = (Id)44;
         }
 
@@ -85,18 +92,36 @@ namespace BotBits
                 Red = (Id)23,
                 Green = (Id)24,
                 Blue = (Id)25,
-                Cyan = (Id)1005, 
+                Cyan = (Id)1005,
                 Magenta = (Id)1006,
-                Yellow = (Id)1007,
+                Yellow = (Id)1007;
 
-                Coin = (Id)43,
-                BlueCoin = (Id)213,
-                Purple = (Id)184,
-                Death = (Id)1011,
+            [Pack("brickcoindoor", BlocksPerPack = 10)]
+            public const Id
+                Coin = (Id)43;
 
+            [Pack("brickbluecoindoor", BlocksPerPack = 10)]
+            public const Id
+                BlueCoin = (Id)213;
 
-                Timed = (Id)156,
-                BuildersClub = (Id)200,
+            [Pack("brickswitchpurple", BlocksPerPack = 10)]
+            public const Id
+                Purple = (Id)184;
+
+            [Pack("brickdeathdoor", BlocksPerPack = 10)]
+            public const Id
+                Death = (Id)1011;
+
+            [Pack("bricktimeddoor", BlocksPerPack = 10)]
+            public const Id
+                Time = (Id)156;
+
+            [Pack("bc")]
+            public const Id
+                BuildersClub = (Id)200;
+
+            [Pack("brickzombiedoor", BlocksPerPack = 10)]
+            public const Id
                 Zombie = (Id)207;
         }
 
@@ -109,15 +134,34 @@ namespace BotBits
                 Blue = (Id)28,
                 Cyan = (Id)1008,
                 Magenta = (Id)1009,
-                Yellow = (Id)1010,
+                Yellow = (Id)1010;
 
-                Coin = (Id)165,
-                BlueCoin = (Id)214,
-                Purple = (Id)185,
-                Death = (Id)1012,
+            [Pack("brickcoingate", BlocksPerPack = 10)]
+            public const Id
+                Coin = (Id)165;
 
-                Timed = (Id)157,
-                BuildersClub = (Id)201,
+            [Pack("brickbluecoingate", BlocksPerPack = 10)]
+            public const Id
+                BlueCoin = (Id)214;
+
+            [Pack("brickswitchpurple", BlocksPerPack = 10)]
+            public const Id
+                Purple = (Id)185;
+
+            [Pack("brickdeathdoor", BlocksPerPack = 10)]
+            public const Id
+                Death = (Id)1012;
+
+            [Pack("bricktimeddoor", BlocksPerPack = 10)]
+            public const Id
+                Time = (Id)157;
+
+            [Pack("bc")]
+            public const Id
+                BuildersClub = (Id)201;
+
+            [Pack("brickzombiedoor", BlocksPerPack = 10)]
+            public const Id
                 Zombie = (Id)206;
         }
 
@@ -139,6 +183,7 @@ namespace BotBits
 
         public static class Beta
         {
+            [Pack("pro")]
             public const Id
                 Pink = (Id)37,
                 Green = (Id)38,
@@ -153,6 +198,7 @@ namespace BotBits
 
         public static class Factory
         {
+            [Pack("brickfactorypack")]
             public const Id
                 TanCross = (Id)45,
                 Planks = (Id)46,
@@ -163,6 +209,7 @@ namespace BotBits
 
         public static class Secret
         {
+            [Pack("bricksecret")]
             public const Id
                 Unpassable = (Id)50,
                 InvisibleUnpassable = (Id)136,
@@ -171,6 +218,7 @@ namespace BotBits
 
         public static class Glass
         {
+            [Pack("brickglass")]
             public const Id
                 Red = (Id)51,
                 Pink = (Id)52,
@@ -184,6 +232,7 @@ namespace BotBits
 
         public static class Summer2011
         {
+            [Pack("bricksummer2012")]
             public const Id
                 Sand = (Id)59,
                 Sunshade = (Id)228,
@@ -194,6 +243,7 @@ namespace BotBits
 
         public static class Candy
         {
+            [Pack("brickcandy")]
             public const Id
                 Pink = (Id)60,
                 OneWayPink = (Id)61,
@@ -208,6 +258,7 @@ namespace BotBits
 
         public static class Halloween2011
         {
+            [Pack("brickhw2011")]
             public const Id
                 Blood = (Id)68,
                 FullBrick = (Id)69,
@@ -218,6 +269,7 @@ namespace BotBits
 
         public static class Mineral
         {
+            [Pack("brickminiral")]
             public const Id
                 Red = (Id)70,
                 Pink = (Id)71,
@@ -230,14 +282,18 @@ namespace BotBits
 
         public static class Music
         {
-
+            [Pack("bricknode")]
             public const Id
-                Piano = (Id)77,
+                Piano = (Id)77;
+
+            [Pack("brickdrums")]
+            public const Id
                 Drum = (Id)83;
         }
 
         public static class Christmas2011
         {
+            [Pack("brickxmas2011")]
             public const Id
                 YellowBox = (Id)78,
                 WhiteBox = (Id)79,
@@ -253,6 +309,7 @@ namespace BotBits
 
         public static class SciFi
         {
+            [Pack("brickscifi")]
             public const Id
                 Red = (Id)84,
                 Blue = (Id)85,
@@ -266,6 +323,7 @@ namespace BotBits
 
         public static class Prison
         {
+            [Pack("brickprison")]
             public const Id
                 Wall = (Id)92,
                 Bars = (Id)261;
@@ -273,6 +331,7 @@ namespace BotBits
 
         public static class Pirate
         {
+            [Pack("brickpirate")]
             public const Id
                 Planks = (Id)93,
                 Chest = (Id)94,
@@ -283,6 +342,7 @@ namespace BotBits
 
         public static class Viking
         {
+            [Pack("brickviking")]
             public const Id
                 Gray = (Id)95,
                 RedShield = (Id)273,
@@ -293,6 +353,7 @@ namespace BotBits
 
         public static class Ninja
         {
+            [Pack("brickninja")]
             public const Id
                 White = (Id)96,
                 Gray = (Id)97,
@@ -317,12 +378,14 @@ namespace BotBits
 
         public static class Switch
         {
+            [Pack("brickswitchpurple")]
             public const Id
                 Purple = (Id)113;
         }
 
         public static class Boost
         {
+            [Pack("brickboost")]
             public const Id
                 Left = (Id)114,
                 Right = (Id)115,
@@ -332,6 +395,7 @@ namespace BotBits
 
         public static class Water
         {
+            [Pack("brickwater")]
             public const Id
                 Liquid = (Id)119,
                 Waves = (Id)300;
@@ -340,15 +404,23 @@ namespace BotBits
 
         public static class Tool
         {
+            [Pack("brickcomplete", BlocksPerPack = 1)]
             public const Id
-                Trophy = (Id)121,
-                SpawnPoint = (Id)255,
+                Trophy = (Id)121;
+
+            [Pack("brickspawn", BlocksPerPack = 1)]
+            public const Id
+                SpawnPoint = (Id)255;
+
+            [Pack("brickcheckpoint", BlocksPerPack = 1)]
+            public const Id
                 Checkpoint = (Id)360;
 
         }
 
         public static class Cowboy
         {
+            [Pack("brickcowboy")]
             public const Id
                 BrownLit = (Id)122,
                 RedLit = (Id)123,
@@ -376,6 +448,7 @@ namespace BotBits
 
         public static class Plastic
         {
+            [Pack("brickplastic")]
             public const Id
                 LightGreen = (Id)128,
                 Red = (Id)129,
@@ -390,6 +463,7 @@ namespace BotBits
 
         public static class Sand
         {
+            [Pack("bricksand")]
             public const Id
                 White = (Id)137,
                 Gray = (Id)138,
@@ -408,6 +482,7 @@ namespace BotBits
 
         public static class Cloud
         {
+            [Pack("brickcloud")]
             public const Id
                 White = (Id)143,
                 Bottom = (Id)311,
@@ -422,6 +497,7 @@ namespace BotBits
 
         public static class PlateIron
         {
+            [Pack("brickplateiron")]
             public const Id
                 Iron = (Id)144,
                 Wires = (Id)145;
@@ -430,6 +506,7 @@ namespace BotBits
 
         public static class Industrial
         {
+            [Pack("brickindustrial")]
             public const Id
                 OneWay = (Id)146,
                 CrossSupport = (Id)147,
@@ -444,6 +521,7 @@ namespace BotBits
 
         public static class Timbered
         {
+            [Pack("bricktimbered")]
             public const Id
                 OneWay = (Id)154;
 
@@ -451,6 +529,7 @@ namespace BotBits
 
         public static class Castle
         {
+            [Pack("brickcastle")]
             public const Id
                 Ladder = (Id)118,
                 CastleOneWay = (Id)158,
@@ -463,6 +542,7 @@ namespace BotBits
 
         public static class Medieval
         {
+            [Pack("brickmedieval")]
             public const Id
                 Anvil = (Id)162,
                 Barrel = (Id)163,
@@ -476,6 +556,7 @@ namespace BotBits
 
         public static class Pipe
         {
+            [Pack("brickpipe")]
             public const Id
                 Left = (Id)166,
                 Horizontal = (Id)167,
@@ -487,6 +568,7 @@ namespace BotBits
 
         public static class Rocket
         {
+            [Pack("brickrocket")]
             public const Id
                 White = (Id)172,
                 Blue = (Id)173,
@@ -500,6 +582,7 @@ namespace BotBits
 
         public static class Mars
         {
+            [Pack("brickmars")]
             public const Id
                 Sand = (Id)176,
                 Pattern1 = (Id)177,
@@ -513,6 +596,7 @@ namespace BotBits
 
         public static class Checker
         {
+            [Pack("brickchecker")]
             public const Id
                 Gray = (Id)186,
                 DarkBlue = (Id)187,
@@ -527,6 +611,7 @@ namespace BotBits
 
         public static class Jungle
         {
+            [Pack("brickjungle")]
             public const Id
                 LadderVertical = (Id)98,
                 LadderHorizontal = (Id)99,
@@ -538,6 +623,7 @@ namespace BotBits
 
         public static class JungleRuins
         {
+            [Pack("brickjungleruins")]
             public const Id
                 RoundedEdgeFace = (Id)193,
                 OneWay = (Id)194,
@@ -549,6 +635,7 @@ namespace BotBits
 
         public static class Lava
         {
+            [Pack("bricklava")]
             public const Id
                 Yellow = (Id)202,
                 Orange = (Id)203,
@@ -557,6 +644,7 @@ namespace BotBits
 
         public static class Sparta
         {
+            [Pack("bricksparta")]
             public const Id
                 Gray = (Id)208,
                 Green = (Id)209,
@@ -570,6 +658,7 @@ namespace BotBits
 
         public static class Farm
         {
+            [Pack("brickfarm")]
             public const Id
                 Hay = (Id)212,
                 Crop = (Id)386,
@@ -581,6 +670,7 @@ namespace BotBits
 
         public static class Autumn2014
         {
+            [Pack("brickautumn2014")]
             public const Id
                 RightCornerLeaves = (Id)390,
                 LeftCornerLeaves = (Id)391,
@@ -593,6 +683,7 @@ namespace BotBits
 
         public static class Christmas2014
         {
+            [Pack("brickchristmas2014")]
             public const Id
                 Ice = (Id)215,
                 OneWay = (Id)216,
@@ -607,18 +698,21 @@ namespace BotBits
 
         public static class Hologram
         {
+            [Pack("brickhologram", BlocksPerPack = 1)]
             public const Id
                 Block = (Id)397;
         }
 
         public static class Prize
         {
+            [Pack("brickhwtrophy")]
             public const Id
                 Trophy = (Id)223;
         }
 
         public static class Spring2011
         {
+            [Pack("brickspring2011")]
             public const Id
                 LeftGrass = (Id)233,
                 MiddleGrass = (Id)234,
@@ -632,20 +726,29 @@ namespace BotBits
 
         public static class Diamond
         {
+            [Pack("brickdiamond", BlocksPerPack = 1)]
             public const Id
                 Block = (Id)241;
         }
 
         public static class Portal
         {
+            [Pack("brickportal", BlocksPerPack = 5)]
             public const Id
-                Normal = (Id)242,
-                World = (Id)374,
+                Normal = (Id)242;
+
+            [Pack("brickinvisibleportal", BlocksPerPack = 5)]
+            public const Id
                 Invisible = (Id)381;
+
+            [Pack("brickworldportal", BlocksPerPack = 1)]
+            public const Id
+                World = (Id)374;
         }
 
         public static class NewYear2010
         {
+            [Pack("mixednewyear2010")]
             public const Id
                 Purple = (Id)244,
                 Yellow = (Id)245,
@@ -657,6 +760,7 @@ namespace BotBits
 
         public static class Christmas2010
         {
+            [Pack("brickchristmas2010")]
             public const Id
                 RightCornerSnow = (Id)249,
                 LeftCornerSnow = (Id)250,
@@ -668,6 +772,7 @@ namespace BotBits
 
         public static class Easter2012
         {
+            [Pack("brickeaster2012")]
             public const Id
                 BlueEgg = (Id)256,
                 PinkEgg = (Id)257,
@@ -678,6 +783,7 @@ namespace BotBits
 
         public static class Window
         {
+            [Pack("brickwindow")]
             public const Id
                 Clear = (Id)262,
                 Green = (Id)263,
@@ -692,6 +798,7 @@ namespace BotBits
 
         public static class Summer2012
         {
+            [Pack("bricksummer2012")]
             public const Id
                 Ball = (Id)307,
                 Bucket = (Id)308,
@@ -701,6 +808,7 @@ namespace BotBits
 
         public static class WarningSign
         {
+            [Pack("bricksigns")]
             public const Id
                 Fire = (Id)319,
                 Skull = (Id)320,
@@ -712,12 +820,14 @@ namespace BotBits
 
         public static class Cake
         {
+            [Pack("brickcake", BlocksPerPack = 1)]
             public const Id
                 Block = (Id)337;
         }
 
         public static class Monster
         {
+            [Pack("brickmonster")]
             public const Id
                 BigToothBottom = (Id)338,
                 SmallTeethBottom = (Id)339,
@@ -728,6 +838,7 @@ namespace BotBits
 
         public static class Fog
         {
+            [Pack("brickfog")]
             public const Id
                 Full = (Id)343,
                 Bottom = (Id)344,
@@ -742,6 +853,7 @@ namespace BotBits
 
         public static class Halloween2012
         {
+            [Pack("brickhw2012")]
             public const Id
                 TeslaCap = (Id)352,
                 TeslaCoil= (Id)353,
@@ -752,14 +864,18 @@ namespace BotBits
         
         public static class Hazard
         {
+            [Pack("brickspike", BlocksPerPack = 10)]
             public const Id
-                Spike = (Id)361,
-                Fire = (Id)368;
+                Spike = (Id)361;
 
+            [Pack("brickfire", BlocksPerPack = 10)]
+            public const Id
+                Fire = (Id)368;
         }
 
         public static class Swamp
         {
+            [Pack("brickswamp")]
             public const Id
                 Liquid = (Id)369,
                 MudBubbles = (Id)370,
@@ -771,6 +887,7 @@ namespace BotBits
 
         public static class Christmas2012
         {
+            [Pack("brickxmas2012")]
             public const Id
                 BlueVertical = (Id)362,
                 BlueHorizontal = (Id)363,
@@ -782,6 +899,7 @@ namespace BotBits
 
         public static class SciFi2013
         {
+            [Pack("brickscifi2013")]
             public const Id
                 BlueSlope = (Id)375,
                 BlueStraight = (Id)376,
@@ -793,18 +911,21 @@ namespace BotBits
 
         public static class Sign
         {
+            [Pack("bricksign", BlocksPerPack = 1)]
             public const Id
                 Block = (Id)385;
         }
        
         public static class Admin
         {
+            [Pack("mod")]
             public const Id
                 Text = (Id)1000;
         }
 
         public static class OneWay
         {
+            [Pack("brickoneway")]
             public const Id
                 Cyan = (Id)1001,
                 Red = (Id)1002,
@@ -814,6 +935,7 @@ namespace BotBits
 
         public static class Valentines2015
         {
+            [Pack("brickvalentines2015")]
             public const Id
                 RedHeart = (Id)405,
                 PurpleHeart = (Id)406,
@@ -822,11 +944,20 @@ namespace BotBits
 
         public static class Magic
         {
+            [Pack("brickmagic")]
             public const Id
-                Green = (Id)1013,
-                Purple = (Id)1014,
-                Orange = (Id)1015,
-                Blue = (Id)1016,
+                Green = (Id)1013;
+            [Pack("brickmagic2")]
+            public const Id
+                Purple = (Id)1014;
+            [Pack("brickmagic3")]
+            public const Id
+                Orange = (Id)1015;
+            [Pack("brickmagic4")]
+            public const Id
+                Blue = (Id)1016;
+            [Pack("brickmagic5")]
+            public const Id
                 Red = (Id)1017;
         }
     }

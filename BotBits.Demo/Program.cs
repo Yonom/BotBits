@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using System.Threading;
 using BotBits.Events;
 using BotBits.SendMessages;
@@ -12,6 +14,8 @@ namespace BotBits.Demo
 
         static void Main()
         {
+            var pack = BlockServices.GetPackage((int)Foreground.Beta.Blue);
+
             EventLoader
                 .Of(bot)
                 .LoadStatic<Program>();
@@ -22,12 +26,6 @@ namespace BotBits.Demo
                 .CreateJoinRoomAsync("PWAARLDluVa0I").Wait();
             
             Thread.Sleep(-1);
-        }
-
-
-        [EventListener]
-        static void OnJoin(JoinEvent e)
-        {    
         }
     }
 }

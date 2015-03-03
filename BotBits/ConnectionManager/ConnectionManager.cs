@@ -34,6 +34,12 @@ namespace BotBits
         }
 
         [Pure]
+        public LoginClient GuestLogin()
+        {
+            return this.GuestLoginAsnyc().Result;
+        }
+
+        [Pure]
         public LoginClient EmailLogin(string email, string password)
         {
             return this.EmailLoginAsync(email, password).Result;
@@ -55,6 +61,12 @@ namespace BotBits
         public LoginClient ArmorGamesLogin(string userId, string token)
         {
             return this.ArmorGamesLoginAsync(userId, token).Result;
+        }
+
+        [Pure]
+        public Task<LoginClient> GuestLoginAsnyc()
+        {
+            return this.EmailLoginAsync("guest", "guest");
         }
 
         [Pure]

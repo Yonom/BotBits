@@ -1,4 +1,7 @@
-﻿namespace BotBits
+﻿using BotBits.Shop;
+
+// ReSharper disable InconsistentNaming
+namespace BotBits
 {
     public static class Background
     {
@@ -39,6 +42,7 @@
 
         public static class Checker
         {
+            [Pack("brickbgchecker")]
             public const Id
                 Gray = (Id)513,
                 Blue = (Id)514,
@@ -51,6 +55,7 @@
 
         public static class Dark
         {
+            [Pack("brickbgdark")]
             public const Id
                 Gray = (Id)520,
                 Blue = (Id)521,
@@ -63,6 +68,7 @@
 
         public static class Pastel
         {
+            [Pack("brickbgpastel")]
             public const Id
                Orange = (Id)527,
                Green = (Id)528,
@@ -74,6 +80,7 @@
 
         public static class Canvas
         {
+            [Pack("brickbgcanvas")]
             public const Id
                 Red = (Id)533,
                 Tan = (Id)534,
@@ -85,6 +92,7 @@
 
         public static class Candy
         {
+            [Pack("brickcandy")]
             public const Id
                 Pink = (Id)539,
                 Blue = (Id)540;
@@ -92,6 +100,7 @@
 
         public static class Halloween2011
         {
+            [Pack("brickhw2011")]
             public const Id
                Gray = (Id)541,
                FullBrick = (Id)542,
@@ -101,6 +110,7 @@
         
         public static class Carnival
         {
+            [Pack("brickbgcarnival")]
             public const Id
                 RedStripe = (Id)545,
                 BlueStripe = (Id)546,
@@ -111,6 +121,7 @@
 
         public static class Prison
         {
+            [Pack("brickprison")]
             public const Id
                 Wall = (Id)550,
                 Picture = (Id)551,
@@ -120,6 +131,7 @@
 
         public static class Pirate
         {
+            [Pack("brickpirate")]
             public const Id
                 DarkPlank = (Id)554,
                 LightPlank = (Id)555,
@@ -132,6 +144,7 @@
 
         public static class Viking
         {
+            [Pack("brickviking")]
             public const Id
                 FullBrick = (Id)561,
                 HalfBrick = (Id)562,
@@ -140,6 +153,7 @@
 
         public static class Ninja
         {
+            [Pack("brickninja")]
             public const Id
                 White = (Id)564,
                 Gray = (Id)565,
@@ -149,6 +163,7 @@
 
         public static class Cowboy
         {
+            [Pack("brickcowboy")]
             public const Id
                 LitBrown = (Id)568,
                 DarkBrown = (Id)569,
@@ -160,6 +175,7 @@
 
         public static class Water
         {
+            [Pack("brickwater")]
             public const Id
                 Plain = (Id)574,
                 Octopus = (Id)575,
@@ -170,6 +186,7 @@
 
         public static class Sand
         {
+            [Pack("bricksand")]
             public const Id
                 LightYellow = (Id)579,
                 Gray = (Id)580,
@@ -181,6 +198,7 @@
 
         public static class Industrial
         {
+            [Pack("brickindustrial")]
             public const Id
                NoPlate = (Id)585,
                GrayPlate = (Id)586,
@@ -191,6 +209,7 @@
 
         public static class Timbered
         {
+            [Pack("bricktimbered")]
             public const Id
                 ThatchRoof = (Id)590,
                 RedShingles = (Id)591,
@@ -205,18 +224,21 @@
 
         public static class Castle
         {
+            [Pack("brickcastle")]
             public const Id
                 Bricks = (Id)599;
         }
 
         public static class Medieval
         {
+            [Pack("brickmedieval")]
             public const Id
                 Planks = (Id)600;
         }
 
         public static class Rocket
         {
+            [Pack("brickrocket")]
             public const Id
                 White = (Id)601,
                 Blue = (Id)602,
@@ -226,6 +248,7 @@
 
         public static class Mars
         {
+            [Pack("brickmars")]
             public const Id
                 NoStars = (Id)605,
                 SmallStar = (Id)606,
@@ -234,6 +257,7 @@
 
         public static class Monster
         {
+            [Pack("brickmonster")]
             public const Id
                 LightFur = (Id)608,
                 DarkFur = (Id)609;
@@ -241,6 +265,7 @@
 
         public static class Normal
         {
+            [Pack("brickbgnormal")]
             public const Id
                 Gray = (Id)610,
                 Blue = (Id)611,
@@ -253,6 +278,7 @@
 
         public static class JungleRuins
         {
+            [Pack("brickjungleruins")]
             public const Id
                 Gray = (Id)617,
                 Red = (Id)618,
@@ -262,6 +288,7 @@
 
         public static class Jungle
         {
+            [Pack("brickjungle")]
             public const Id
                 BrightPlants = (Id)621,
                 Plants = (Id)622,
@@ -270,6 +297,7 @@
 
         public static class Christmas2012
         {
+            [Pack("brickxmas2012")]
             public const Id
                 Yellow = (Id)624,
                 Green = (Id)625,
@@ -278,6 +306,7 @@
 
         public static class Lava
         {
+            [Pack("bricklava")]
             public const Id
                 Yellow = (Id)627,
                 Orange = (Id)628,
@@ -286,6 +315,7 @@
 
         public static class Swamp
         {
+            [Pack("brickswamp")]
             public const Id
                 Underbrush = (Id)630;
         }
@@ -294,12 +324,14 @@
 
         public static class SciFi2013
         {
+            [Pack("brickscifi2013")]
             public const Id
                 Gray = (Id)637;
         }
 
         public static class Sparta
         {
+            [Pack("bricksparta")]
             public const Id
                 Gray = (Id)638,
                 Green = (Id)639,
@@ -308,6 +340,7 @@
 
         public static class Autumn2014
         {
+            [Pack("brickautumn2014")]
             public const Id
                 Yellow = (Id)641,
                 Orange = (Id)642,
