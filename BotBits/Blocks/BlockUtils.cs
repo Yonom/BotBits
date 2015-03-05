@@ -47,6 +47,7 @@ namespace BotBits
         public static bool IsPlaceable(PlaceSendMessage p, Blocks world)
         {
             if (p.X < 0 || p.Y < 0 || p.X >= world.Width || p.Y >= world.Height) return false; // If out of range
+
             if (p.X == 0 || p.Y == 0 || p.X == world.Width - 1 || p.Y == world.Height - 1) // If on border
             {
                 if (p.Layer == Layer.Background)
@@ -60,22 +61,13 @@ namespace BotBits
 
         private static bool IsBorderPlaceable(Foreground.Id id)
         {
-            switch (id)
-            {
-                case Foreground.Basic.Black:
-                case Foreground.Basic.Blue:
-                case Foreground.Basic.Cyan:
-                case Foreground.Basic.Gray:
-                case Foreground.Basic.Green:
-                case Foreground.Basic.Purple:
-                case Foreground.Basic.Red:
-                case Foreground.Basic.Yellow:
-                case Foreground.Special.FullyBlack:
-                    return true;
+            if (id == Foreground.Special.FullyBlack)
+                return true;
 
-                default:
-                    return false;
-            }
+            var type = BlockServices.GetGroup((int)id);
+            return type == typeof(Foreground.Basic) ||
+                   type == typeof(Foreground.Beta) ||
+                   type == typeof(Foreground.Brick);
         }
     }
 }

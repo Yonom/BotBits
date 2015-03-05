@@ -8,9 +8,9 @@ namespace BotBits
     {
         private const uint InitOffset = 19;
 
-        internal static BlocksWorld GetWorld(Message m, int width, int height, uint offset = InitOffset)
+        internal static BlockDataWorld GetWorld(Message m, int width, int height, uint offset = InitOffset)
         {
-            var world = new BlocksWorld(width, height);
+            var world = new BlockDataWorld(width, height);
             uint pointer = GetStart(m, offset);
 
             string strValue2;
@@ -102,9 +102,9 @@ namespace BotBits
             }
         }
 
-        internal static BlocksWorld GetClearedWorld(int width, int height, Foreground.Id borderBlock)
+        internal static BlockDataWorld GetClearedWorld(int width, int height, Foreground.Id borderBlock)
         {
-            var world = new BlocksWorld(width, height);
+            var world = new BlockDataWorld(width, height);
 
             // Border drawing
             int maxX = width - 1;

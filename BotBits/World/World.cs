@@ -3,7 +3,7 @@
 namespace BotBits
 {
     [DebuggerDisplay("Width = {Width}, Height = {Height}")]
-    public class World : IWorld
+    public class World
     {
         public World(int width, int height)
         {
@@ -17,15 +17,5 @@ namespace BotBits
         public BlockLayer<ForegroundBlock> Foreground { get; private set; }
         public int Height { get; private set; }
         public int Width { get; private set; }
-
-        IBlockLayer<ForegroundBlock> IWorld.Foreground
-        {
-            get { return this.Foreground; }
-        }
-
-        IBlockLayer<BackgroundBlock> IWorld.Background
-        {
-            get { return this.Background; }
-        }
     }
 }

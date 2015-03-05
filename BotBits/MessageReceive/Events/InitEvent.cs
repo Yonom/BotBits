@@ -153,7 +153,7 @@ namespace BotBits.Events
         ///     Gets the block x.
         /// </summary>
         /// <value>The block x.</value>
-        public int BlockX
+        public int SpawnBlockX
         {
             get { return BlockUtils.PosToBlock(this.SpawnX); }
         }
@@ -162,7 +162,7 @@ namespace BotBits.Events
         ///     Gets the block y.
         /// </summary>
         /// <value>The block y.</value>
-        public int BlockY
+        public int SpawnBlockY
         {
             get { return BlockUtils.PosToBlock(this.SpawnY); }
         }

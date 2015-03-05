@@ -2,7 +2,7 @@
 {
     internal class ReadOnlyBlocksWorld
     {
-        public ReadOnlyBlocksWorld(BlocksWorld world)
+        public ReadOnlyBlocksWorld(BlockDataWorld world)
         {
             this.Height = world.Height;
             this.Width = world.Width;

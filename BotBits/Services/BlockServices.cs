@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.ComTypes;
 using BotBits.Shop;
-using JetBrains.Annotations;
-using PlayerIOClient;
 
 namespace BotBits
 {
     public static class BlockServices
     {
         private static readonly Dictionary<int, PackAttribute> _blockPacks = new Dictionary<int, PackAttribute>();
-
+        private static readonly Dictionary<int, Type> _blockGroups = new Dictionary<int, Type>();
         private static readonly Dictionary<Smiley, PackAttribute> _smileyPacks = new Dictionary<Smiley, PackAttribute>();
 
         static BlockServices()
@@ -22,6 +17,13 @@ namespace BotBits
             LoadPacks(typeof(Foreground));
             LoadPacks(typeof(Background));
             LoadSmileys(typeof(Smiley));
+        }
+
+        public static Type GetGroup(int id)
+        {
+            Type type;
+            _blockGroups.TryGetValue(id, out type);
+            return type;
         }
 
         public static string GetPackage(int id)
@@ -49,7 +51,9 @@ namespace BotBits
                 var pack = GetPack(field);
                 if (pack != null)
                 {
-                    _blockPacks.Add((ushort)field.GetValue(null), pack);
+                    var value = (ushort)field.GetValue(null);
+                    _blockPacks.Add(value, pack);
+                    _blockGroups.Add(value, type);
                 }
             }
 

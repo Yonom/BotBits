@@ -6,27 +6,27 @@ namespace BotBits
 {
     public sealed class Blocks : EventListenerPackage<Blocks>
     {
-        private BlocksWorld _blocksWorld;
+        private BlockDataWorld _blockDataWorld;
         private ReadOnlyBlocksWorld _readOnlyBlocksWorld;
 
-        private BlocksWorld World
+        private BlockDataWorld World
         {
-            get { return this._blocksWorld; }
+            get { return this._blockDataWorld; }
             set
             {
-                this._blocksWorld = value;
-                this._readOnlyBlocksWorld = new ReadOnlyBlocksWorld(_blocksWorld);
+                this._blockDataWorld = value;
+                this._readOnlyBlocksWorld = new ReadOnlyBlocksWorld(this._blockDataWorld);
             }
         }
 
         public int Height
         {
-            get { return this._blocksWorld.Height; }
+            get { return this._blockDataWorld.Height; }
         }
 
         public int Width
         {
-            get { return this._blocksWorld.Width; }
+            get { return this._blockDataWorld.Width; }
         }
 
         public IBlockLayer<BlockData<ForegroundBlock>> Foreground
@@ -43,7 +43,7 @@ namespace BotBits
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
         public Blocks()
         {
-            this.World = new BlocksWorld(0, 0);
+            this.World = new BlockDataWorld(0, 0);
         }
 
         public void Place(int x, int y, BackgroundBlock block)
@@ -57,6 +57,32 @@ namespace BotBits
             new PlaceSendMessage(Layer.Foreground, x, y, (int)block.Id, block.GetArgs())
                 .SendIn(this.BotBits);
         }
+
+        public World CreateCopy()
+        {
+            var world = new World(this.Width, this.Height);
+            for (var x = 0; x < this.Width; x++)
+                for (var y = 0; y < this.Height; y++)
+                {
+                    world.Foreground[x, y] = this.Foreground[x, y].Block;
+                    world.Background[x, y] = this.Background[x, y].Block;
+                }
+            return world;
+        }
+
+        public void UploadWorld(World world)
+        {
+            if (world.Width > this.Width || world.Height > this.Height)
+                throw new NotSupportedException("The world is too big for this room.");
+
+            for (var x = 0; x < this.Width; x++)
+                for (var y = 0; y < this.Height; y++)
+                {
+                    this.Place(x, y, world.Foreground[x, y]);
+                    this.Place(x, y, world.Background[x, y]);
+                }
+        }
+
 
         [EventListener(EventPriority.High)]
         private void OnInit(InitEvent e)

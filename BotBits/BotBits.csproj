@@ -54,7 +54,7 @@
     <Compile Include="Blocks\Events\BackgroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\ForegroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\PlaceEvent.cs" />
-    <Compile Include="Blocks\BlockData.cs" />
+    <Compile Include="World\BlockData\BlockData.cs" />
     <Compile Include="Chat\ChatExtensions.cs" />
     <Compile Include="Chat\Events\PrivateMessageEvent.cs" />
     <Compile Include="Chat\IChat.cs" />
@@ -64,10 +64,10 @@
     <Compile Include="ConnectionManager\PlayerIOConnectionAdapter.cs" />
     <Compile Include="Enums\AccessRight.cs" />
     <Compile Include="Enums\AutoText.cs" />
-    <Compile Include="Enums\Background.cs" />
+    <Compile Include="World\Block\Background.cs" />
     <Compile Include="Enums\Id.cs" />
     <Compile Include="Event\EventHandleExtensions.cs" />
-    <Compile Include="Enums\Foreground.cs" />
+    <Compile Include="World\Block\Foreground.cs" />
     <Compile Include="Enums\Key.cs" />
     <Compile Include="Enums\Layer.cs" />
     <Compile Include="Enums\MagicClass.cs" />
@@ -112,7 +112,7 @@
     <Compile Include="Blocks\Blocks.cs" />
     <Compile Include="Blocks\Events\WorldResizeEvent.cs" />
     <Compile Include="Blocks\ReadOnlyBlockLayer.cs" />
-    <Compile Include="Blocks\BlocksWorld.cs" />
+    <Compile Include="World\BlockData\BlockDataWorld.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Point3D.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -237,7 +237,6 @@
     <Compile Include="World\Block\ForegroundType.cs" />
     <Compile Include="World\Block\ForegroundBlock.cs" />
     <Compile Include="World\IBlockLayer.cs" />
-    <Compile Include="World\IWorld.cs" />
     <Compile Include="World\World.cs" />
   </ItemGroup>
   <ItemGroup>

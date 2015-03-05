@@ -1,8 +1,8 @@
 ﻿namespace BotBits
 {
-    internal class BlocksWorld
+    internal class BlockDataWorld
     {
-        public BlocksWorld(int width, int height)
+        public BlockDataWorld(int width, int height)
         {
             this.Height = height;
             this.Width = width;
