@@ -266,7 +266,7 @@ namespace BotBits
         /// </value>
         public int BlockX
         {
-            get { return BlockUtils.PosToBlock(this.X); }
+            get { return WorldUtils.PosToBlock(this.X); }
         }
 
         /// <summary>
@@ -277,7 +277,7 @@ namespace BotBits
         /// </value>
         public int BlockY
         {
-            get { return BlockUtils.PosToBlock(this.Y); }
+            get { return WorldUtils.PosToBlock(this.Y); }
         }
 
         public bool Equals(Player other)

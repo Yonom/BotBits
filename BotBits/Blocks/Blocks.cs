@@ -4,7 +4,7 @@ using BotBits.SendMessages;
 
 namespace BotBits
 {
-    public sealed class Blocks : EventListenerPackage<Blocks>
+    public sealed class Blocks : EventListenerPackage<Blocks>, IWorld<BlockData<ForegroundBlock>, BlockData<BackgroundBlock>>
     {
         private BlockDataWorld _blockDataWorld;
         private ReadOnlyBlocksWorld _readOnlyBlocksWorld;
@@ -87,7 +87,7 @@ namespace BotBits
         [EventListener(EventPriority.High)]
         private void OnInit(InitEvent e)
         {
-            this.World = WorldUtils.GetWorld(e.PlayerIOMessage, e.RoomWidth, e.RoomHeight);
+            this.World = BlockUtils.GetWorld(e.PlayerIOMessage, e.RoomWidth, e.RoomHeight);
             new WorldResizeEvent(e.RoomWidth, e.RoomHeight)
                 .RaiseIn(this.BotBits);
         }
@@ -95,7 +95,7 @@ namespace BotBits
         [EventListener(EventPriority.High)]
         private void OnClear(ClearEvent e)
         {
-            this.World = WorldUtils.GetClearedWorld(e.RoomWidth, e.RoomHeight, e.BorderBlock);
+            this.World = BlockUtils.GetClearedWorld(e.RoomWidth, e.RoomHeight, e.BorderBlock);
             new WorldResizeEvent(e.RoomWidth, e.RoomHeight)
                 .RaiseIn(this.BotBits);
         }
@@ -103,7 +103,7 @@ namespace BotBits
         [EventListener(EventPriority.High)]
         private void OnLoadLevel(LoadLevelEvent e)
         {
-            this.World = WorldUtils.GetWorld(e.PlayerIOMessage, this.Width, this.Height, 0);
+            this.World = BlockUtils.GetWorld(e.PlayerIOMessage, this.Width, this.Height, 0);
         }
 
         [EventListener(EventPriority.High)]

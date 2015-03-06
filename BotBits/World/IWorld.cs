@@ -10,7 +10,7 @@ namespace BotBits
         int Width { get; }
         int Height { get; }
 
-        BlockLayer<TForeground> Foreground { get; }
-        BlockLayer<TBackground> Background { get; }
+        IBlockLayer<TForeground> Foreground { get; }
+        IBlockLayer<TBackground> Background { get; }
     }
 }

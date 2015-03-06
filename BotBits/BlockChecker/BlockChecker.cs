@@ -177,12 +177,12 @@ namespace BotBits
         {
             if (b.SendCount > 10) return false;
             if (b.NoChecks) return true;
-            if (!BlockUtils.IsPlaceable(b, this._world)) return false;
+            if (!WorldUtils.IsPlaceable(b, this._world)) return false;
 
             CheckHandle handle;
-            return !(this._sentLocations.TryGetValue(p, out handle) 
-                ? BlockUtils.AreSame(b, handle.Message) 
-                : BlockUtils.IsAlreadyPlaced(b, this._world));
+            return !(this._sentLocations.TryGetValue(p, out handle)
+                ? WorldUtils.AreSame(b, handle.Message)
+                : WorldUtils.IsAlreadyPlaced(b, this._world));
         }
 
         private static bool AreSame<T, TBlock>(PlaceSendMessage sent, T received)
@@ -191,10 +191,10 @@ namespace BotBits
         {
             var bg = received as BackgroundPlaceEvent;
             if (bg != null)
-                return BlockUtils.AreSame(sent, bg);
+                return WorldUtils.AreSame(sent, bg);
             var fg = received as ForegroundPlaceEvent;
             if (fg != null)
-                return BlockUtils.AreSame(sent, fg);
+                return WorldUtils.AreSame(sent, fg);
 
             throw new NotSupportedException("Unknown PlaceEvent.");
         }

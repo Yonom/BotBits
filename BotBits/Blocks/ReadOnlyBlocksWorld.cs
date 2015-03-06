@@ -1,6 +1,6 @@
 ﻿namespace BotBits
 {
-    internal class ReadOnlyBlocksWorld
+    internal class ReadOnlyBlocksWorld : IWorld<BlockData<ForegroundBlock>, BlockData<BackgroundBlock>>
     {
         public ReadOnlyBlocksWorld(BlockDataWorld world)
         {
@@ -10,8 +10,8 @@
             this.Background = new ReadOnlyBlockLayer<BlockData<BackgroundBlock>>(world.Background);
         }
 
-        public ReadOnlyBlockLayer<BlockData<BackgroundBlock>> Background { get; private set; }
-        public ReadOnlyBlockLayer<BlockData<ForegroundBlock>> Foreground { get; private set; }
+        public IBlockLayer<BlockData<BackgroundBlock>> Background { get; private set; }
+        public IBlockLayer<BlockData<ForegroundBlock>> Foreground { get; private set; }
         public int Height { get; private set; }
         public int Width { get; private set; }
     }

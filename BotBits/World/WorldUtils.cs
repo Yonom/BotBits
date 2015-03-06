@@ -1,116 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using BotBits.Events;
+using BotBits.SendMessages;
 using PlayerIOClient;
 
 namespace BotBits
 {
     public static class WorldUtils
     {
-        private const uint InitOffset = 19;
-
-        internal static BlockDataWorld GetWorld(Message m, int width, int height, uint offset = InitOffset)
-        {
-            var world = new BlockDataWorld(width, height);
-            uint pointer = GetStart(m, offset);
-
-            string strValue2;
-            while ((strValue2 = m[pointer] as string) == null || strValue2 != "we")
-            {
-                var block = m.GetInteger(pointer++);
-                var l = (Layer)m.GetInteger(pointer++);
-                byte[] byteArrayX = m.GetByteArray(pointer++);
-                byte[] byteArrayY = m.GetByteArray(pointer++);
-
-                switch (l)
-                {
-                    case Layer.Background:
-                        var bgWorldBlock = new BackgroundBlock((Background.Id)block);
-                        foreach (Point pos in GetPos(byteArrayX, byteArrayY))
-                            world.Background[pos.X, pos.Y] = new BlockData<BackgroundBlock>(bgWorldBlock);
-                        break;
-
-                    case Layer.Foreground:
-                        ForegroundBlock foregroundBlock;
-                        BlockArgsType blockArgsType = GetBlockArgsType(GetForegroundType(id: (Foreground.Id)block));
-
-                        switch (blockArgsType)
-                        {
-                            case BlockArgsType.None:
-                                foregroundBlock = new ForegroundBlock((Foreground.Id)block);
-                                break;
-
-                            case BlockArgsType.Number:
-                                uint i = m.GetUInt(pointer++);
-                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, i);
-                                break;
-
-                            case BlockArgsType.String:
-                                string str = m.GetString(pointer++);
-                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, str);
-                                break;
-
-                            case BlockArgsType.Portal:
-                                var portalRotation = (PortalRotation)m.GetUInt(pointer++);
-                                uint portalId = m.GetUInt(pointer++);
-                                uint portalTarget = m.GetUInt(pointer++);
-                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, portalId, portalTarget, portalRotation);
-                                break;
-
-                            case BlockArgsType.Label:
-                                string text = m.GetString(pointer++);
-                                string textcolor = m.GetString(pointer++);
-                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, text, textcolor);
-                                break;
-
-                            default:
-                                throw new NotSupportedException("Invalid block.");
-                        }
-
-                        var fg = new BlockData<ForegroundBlock>(foregroundBlock);
-                        foreach (Point pos in GetPos(byteArrayX, byteArrayY))
-                            world.Foreground[pos.X, pos.Y] = fg;
-                        break;
-                }
-            }
-
-            return world;
-        }
-
-        private static uint GetStart(Message m, uint offset)
-        {
-            uint start = 0;
-            for (uint i = offset; i <= m.Count - 1; i++)
-            {
-                string strValue;
-                if ((strValue = m[i] as string) != null && strValue == "ws")
-                {
-                    start = i + 1;
-                    break;
-                }
-            }
-            return start;
-        }
-
-        private static IEnumerable<Point> GetPos(byte[] byteArrayX, byte[] byteArrayY)
-        {
-            for (int i = 0; i <= byteArrayX.Length - 1; i += 2)
-            {
-                int x = byteArrayX[i] * 256 + byteArrayX[i + 1];
-                int y = byteArrayY[i] * 256 + byteArrayY[i + 1];
-
-                yield return new Point(x, y);
-            }
-        }
-
-        internal static BlockDataWorld GetClearedWorld(int width, int height, Foreground.Id borderBlock)
-        {
-            var world = new BlockDataWorld(width, height);
-            DrawBorder(world, new BlockData<ForegroundBlock>(new ForegroundBlock(borderBlock)));
-            return world;
-        }
-
         public static void DrawBorder<TForeground, TBackground>
-            (IWorld<TForeground, TBackground> world, TForeground borderBlock)
+            (World<TForeground, TBackground> world, TForeground borderBlock)
             where TForeground : struct
             where TBackground : struct
         {
@@ -175,7 +75,7 @@ namespace BotBits
 
                 case Foreground.Admin.Text:
                     return ForegroundType.Label;
-                    
+
                 case Foreground.Portal.World:
                     return ForegroundType.WorldPortal;
 
@@ -212,6 +112,72 @@ namespace BotBits
                 default:
                     throw new ArgumentException("Invalid BlockType.", "type");
             }
+        }
+
+        public static int PosToBlock(int pos)
+        {
+            return pos + 8 >> 4;
+        }
+
+        public static bool IsAlreadyPlaced(PlaceSendMessage sent, Blocks world)
+        {
+            switch (sent.Layer)
+            {
+                case Layer.Foreground:
+                    var fg = world.Foreground[sent.X, sent.Y];
+                    return sent.Id == (int)fg.Block.Id &&
+                           sent.Args.SequenceEqual(fg.Block.GetArgs());
+                case Layer.Background:
+                    var bg = world.Background[sent.X, sent.Y];
+                    return sent.Id == (int)bg.Block.Id;
+                default:
+                    throw new NotSupportedException("Unknown layer.");
+            }
+        }
+
+        public static bool AreSame(PlaceSendMessage sent, ForegroundPlaceEvent received)
+        {
+            return sent.Id == (int)received.New.Block.Id &&
+                   sent.Args.SequenceEqual(received.New.Block.GetArgs());
+        }
+
+        public static bool AreSame(PlaceSendMessage sent, BackgroundPlaceEvent received)
+        {
+            return sent.Id == (int)received.New.Block.Id;
+        }
+
+        public static bool AreSame(PlaceSendMessage b1, PlaceSendMessage b2)
+        {
+            return b1.Id == b2.Id && b1.Args.SequenceEqual(b2.Args);
+        }
+
+        public static bool IsPlaceable<TForeground, TBackground>
+            (PlaceSendMessage p, IWorld<TForeground, TBackground> world)
+            where TForeground : struct
+            where TBackground : struct
+        {
+            if (p.X < 0 || p.Y < 0 || p.X >= world.Width || p.Y >= world.Height) return false; // If out of range
+
+            if (p.X == 0 || p.Y == 0 || p.X == world.Width - 1 || p.Y == world.Height - 1) // If on border
+            {
+                if (p.Layer == Layer.Background)
+                    return false;
+
+                return IsBorderPlaceable((Foreground.Id)p.Id);
+            }
+
+            return true;
+        }
+
+        private static bool IsBorderPlaceable(Foreground.Id id)
+        {
+            if (id == Foreground.Special.FullyBlack)
+                return true;
+
+            var type = BlockServices.GetGroup((int)id);
+            return type == typeof(Foreground.Basic) ||
+                   type == typeof(Foreground.Beta) ||
+                   type == typeof(Foreground.Brick);
         }
     }
 }

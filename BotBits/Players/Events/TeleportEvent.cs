@@ -19,7 +19,7 @@
         /// <value>The block x.</value>
         public int BlockX
         {
-            get { return BlockUtils.PosToBlock(this.X); }
+            get { return WorldUtils.PosToBlock(this.X); }
         }
 
         /// <summary>
@@ -28,7 +28,7 @@
         /// <value>The block y.</value>
         public int BlockY
         {
-            get { return BlockUtils.PosToBlock(this.Y); }
+            get { return WorldUtils.PosToBlock(this.Y); }
         }
     }
 }

@@ -155,7 +155,7 @@ namespace BotBits.Events
         /// <value>The block x.</value>
         public int SpawnBlockX
         {
-            get { return BlockUtils.PosToBlock(this.SpawnX); }
+            get { return WorldUtils.PosToBlock(this.SpawnX); }
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace BotBits.Events
         /// <value>The block y.</value>
         public int SpawnBlockY
         {
-            get { return BlockUtils.PosToBlock(this.SpawnY); }
+            get { return WorldUtils.PosToBlock(this.SpawnY); }
         }
     }
 }
