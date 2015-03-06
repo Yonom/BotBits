@@ -38,12 +38,12 @@ namespace BotBits
             this._y = y;
         }
 
-        public void Place(ForegroundBlock block)
+        public void Set(ForegroundBlock block)
         {
             this._blocks.Place(this._x, this._y, block);
         }
 
-        public void Place(BackgroundBlock block)
+        public void Set(BackgroundBlock block)
         {
             this._blocks.Place(this._x, this._y, block);
         }
