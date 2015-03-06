@@ -1,12 +1,14 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
+using BotBits.Events;
 
 namespace BotBits.Demo
 {
-    class Program
+    internal class Program
     {
-        static BotBitsClient bot = new BotBitsClient();
+        private static BotBitsClient bot = new BotBitsClient();
 
-        static void Main()
+        private static void Main()
         {
             EventLoader
                 .Of(bot)

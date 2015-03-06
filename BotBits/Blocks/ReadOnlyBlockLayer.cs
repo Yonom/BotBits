@@ -27,7 +27,7 @@ namespace BotBits
             get { return this._blockLayer[x, y]; }
         }
 
-        public IEnumerator<KeyValuePair<Point, T>> GetEnumerator()
+        public IEnumerator<WorldItem<T>> GetEnumerator()
         {
             return this._blockLayer.GetEnumerator();
         }

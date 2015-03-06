@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -225,6 +227,9 @@ namespace BotBits
 
         public sealed class LoginClient
         {
+            private const string EverybodyEdits = "Everybodyedits";
+            private const string Beta = "Beta";
+
             [NotNull]
             private readonly ConnectionManager _connectionManager;
 
@@ -239,6 +244,45 @@ namespace BotBits
             [NotNull]
             public Client Client { get; private set; }
 
+            public LobbyItem[] GetLobby()
+            {
+                return this.GetLobbyAsync().Result;
+            }
+
+            public Task<LobbyItem[]> GetLobbyAsync()
+            {
+                var tcs = new TaskCompletionSource<LobbyItem[]>();
+                this.Client.BigDB.Load("config", "config", dbo =>
+                {
+                    try
+                    {
+                        var serverVersion = dbo["version"];
+
+                        var normals = this.GetLobbyRoomsAsync(EverybodyEdits + serverVersion);
+                        var betas = this.GetLobbyRoomsAsync(Beta + serverVersion);
+                        Task.Factory.ContinueWhenAll(new[] {normals, betas}, items =>
+                        {
+                            tcs.SetResult(items.SelectMany(i => i.Result).ToArray());
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        tcs.SetException(ex);
+                    }
+                }, tcs.SetException);
+                return tcs.Task;
+            }
+
+            private Task<LobbyItem[]> GetLobbyRoomsAsync(string roomId)
+            {
+                var tcs = new TaskCompletionSource<LobbyItem[]>();
+                this.Client.Multiplayer.ListRooms(roomId, null, 0, 0, rooms =>
+                {
+                    tcs.SetResult(rooms.Select(room => new LobbyItem(this, room)).ToArray());
+                }, tcs.SetException);
+                return tcs.Task;
+            }
+
             public void CreateJoinRoom(string worldId)
             {
                 this.CreateJoinRoomAsync(worldId).Wait();
@@ -247,8 +291,8 @@ namespace BotBits
             public Task CreateJoinRoomAsync(string roomId)
             {
                 var roomPrefix = roomId.StartsWith("BW", StringComparison.OrdinalIgnoreCase)
-                    ? "Beta"
-                    : "Everybodyedits";
+                    ? Beta
+                    : EverybodyEdits;
 
                 var tcs = new TaskCompletionSource<bool>();
 
@@ -304,6 +348,63 @@ namespace BotBits
                 }, tcs.SetException);
 
                 return tcs.Task;
+            }
+        }
+
+        [DebuggerDisplay("{Id}: {Name}")]
+        public sealed class LobbyItem
+        {
+            private readonly LoginClient _client;
+            public int Online { get; private set; }
+            public string Id { get; private set; }
+            public string Name { get; private set; }
+            public int Plays { get; private set; }
+            public int Woots { get; private set; }
+            public bool Owned { get; private set; }
+            public bool HasCode { get; private set; }
+            public bool Featured { get; private set; }
+
+            public LobbyItem(LoginClient client, RoomInfo roomInfo)
+            {
+                this._client = client;
+
+
+                this.Id = roomInfo.Id;
+                this.Online = roomInfo.OnlineUsers;
+                foreach (var data in roomInfo.RoomData)
+                {
+                    switch (data.Key)
+                    {
+                        case "name":
+                            this.Name = data.Value;
+                            break;
+                        case "plays":
+                            this.Plays = int.Parse(data.Value);
+                            break;
+                        case "woots":
+                            this.Woots = int.Parse(data.Value);
+                            break;
+                        case "owned":
+                            this.Owned = bool.Parse(data.Value);
+                            break;
+                        case "needskey":
+                            this.HasCode = (data.Value == "yep");
+                            break;
+                        case "IsFeatured":
+                            this.Featured = bool.Parse(data.Value);
+                            break;
+                    }
+                }
+            }
+
+            public void JoinRoom()
+            {
+                this.JoinRoomAsync().Wait();
+            }
+
+            public Task JoinRoomAsync()
+            {
+                return this._client.JoinRoomAsync(this.Id);
             }
         }
 

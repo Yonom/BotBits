@@ -23,11 +23,11 @@ namespace BotBits
             set { this._blocks[x, y] = value; }
         }
 
-        public IEnumerator<KeyValuePair<Point, T>> GetEnumerator()
+        public IEnumerator<WorldItem<T>> GetEnumerator()
         {
             for (int y = 0; y < this.Height; y++)
                 for (int x = 0; x < this.Width; x++)
-                    yield return new KeyValuePair<Point, T>(
+                    yield return new WorldItem<T>(
                         new Point(x, y), this._blocks[x, y]);
         }
 

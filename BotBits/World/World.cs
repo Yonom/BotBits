@@ -11,11 +11,11 @@ namespace BotBits
     }
 
     [DebuggerDisplay("Width = {Width}, Height = {Height}")]
-    public class World<TForeground, TBackground> : IWorld<TForeground, TBackground> 
+    public abstract class World<TForeground, TBackground> : IWorld<TForeground, TBackground> 
         where TForeground : struct 
         where TBackground : struct
     {
-        public World(int width, int height)
+        protected World(int width, int height)
         {
             this.Height = height;
             this.Width = width;

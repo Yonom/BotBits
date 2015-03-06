@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using BotBits.Events;
 using BotBits.SendMessages;
 
 namespace BotBits
 {
-    public sealed class Blocks : EventListenerPackage<Blocks>, IWorld<BlockData<ForegroundBlock>, BlockData<BackgroundBlock>>
+    public sealed class Blocks : EventListenerPackage<Blocks>, 
+        IWorld<BlockData<ForegroundBlock>, BlockData<BackgroundBlock>>, IEnumerable<BlocksItem>
     {
         private BlockDataWorld _blockDataWorld;
         private ReadOnlyBlocksWorld _readOnlyBlocksWorld;
+        private BlocksEnumerable _enumerable;
 
         private BlockDataWorld World
         {
@@ -16,7 +20,23 @@ namespace BotBits
             {
                 this._blockDataWorld = value;
                 this._readOnlyBlocksWorld = new ReadOnlyBlocksWorld(this._blockDataWorld);
+                this._enumerable = new BlocksEnumerable(this, new Rectangle(0, 0, this.Width, this.Height));
             }
+        }
+
+        public BlocksEnumerable In(Rectangle area)
+        {
+            return this._enumerable.In(area);
+        }
+
+        public BlocksItem At(Point point)
+        {
+            return this.At(point.X, point.Y);
+        }
+
+        public BlocksItem At(int x, int y)
+        {
+            return new BlocksItem(this, x, y);
         }
 
         public int Height
@@ -38,7 +58,6 @@ namespace BotBits
         {
             get { return this._readOnlyBlocksWorld.Background; }
         }
-
 
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
         public Blocks()
@@ -73,10 +92,10 @@ namespace BotBits
         public void UploadWorld(World world)
         {
             if (world.Width > this.Width || world.Height > this.Height)
-                throw new NotSupportedException("The world is too big for this room.");
+                throw new ArgumentException("The world is too big for this room.", "world");
 
-            for (var x = 0; x < this.Width; x++)
-                for (var y = 0; y < this.Height; y++)
+            for (var y = 0; y < this.Height; y++)
+                for (var x = 0; x < this.Width; x++)
                 {
                     this.Place(x, y, world.Foreground[x, y]);
                     this.Place(x, y, world.Background[x, y]);
@@ -209,6 +228,16 @@ namespace BotBits
 
             new BackgroundPlaceEvent(x, y, oldData, newData)
                 .RaiseIn(this.BotBits);
+        }
+
+        public IEnumerator<BlocksItem> GetEnumerator()
+        {
+            return this._enumerable.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
     }
 }

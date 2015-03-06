@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Actions\Actions.cs" />
     <Compile Include="Actions\ActionsExtensions.cs" />
+    <Compile Include="Blocks\BlocksEnumerable.cs" />
+    <Compile Include="Blocks\BlocksItem.cs" />
     <Compile Include="Blocks\ReadOnlyBlocksWorld.cs" />
     <Compile Include="Blocks\Events\BackgroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\ForegroundPlaceEvent.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="Services\SchedulerHandle\SynchronizationContextSchedulerHandle.cs" />
     <Compile Include="World\Block\BackgroundType.cs" />
     <Compile Include="World\IWorld.cs" />
+    <Compile Include="World\WorldItem.cs" />
     <Compile Include="World\WorldUtils.cs" />
     <Compile Include="Chat\Chat.cs" />
     <Compile Include="Consumables\Consumables.cs" />
