@@ -1,6 +1,6 @@
 ﻿namespace BotBits
 {
-    internal class BlockDataWorld
+    internal class BlockDataWorld : IWorld<BlockData<ForegroundBlock>, BlockData<BackgroundBlock>>
     {
         public BlockDataWorld(int width, int height)
         {

@@ -3,7 +3,7 @@
 namespace BotBits
 {
     [DebuggerDisplay("Width = {Width}, Height = {Height}")]
-    public class World
+    public class World : IWorld<ForegroundBlock, BackgroundBlock>
     {
         public World(int width, int height)
         {

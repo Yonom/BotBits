@@ -105,23 +105,27 @@ namespace BotBits
         internal static BlockDataWorld GetClearedWorld(int width, int height, Foreground.Id borderBlock)
         {
             var world = new BlockDataWorld(width, height);
+            DrawBorder(world, new BlockData<ForegroundBlock>(new ForegroundBlock(borderBlock)));
+            return world;
+        }
 
-            // Border drawing
-            int maxX = width - 1;
-            int maxY = height - 1;
-            var block = new BlockData<ForegroundBlock>(new ForegroundBlock(borderBlock));
+        public static void DrawBorder<TForeground, TBackground>
+            (IWorld<TForeground, TBackground> world, TForeground borderBlock)
+            where TForeground : struct
+            where TBackground : struct
+        {
+            int maxX = world.Width - 1;
+            int maxY = world.Height - 1;
             for (int y = 0; y <= maxY; y++)
             {
-                world.Foreground[0, y] = block;
-                world.Foreground[maxX, y] = block;
+                world.Foreground[0, y] = borderBlock;
+                world.Foreground[maxX, y] = borderBlock;
             }
             for (int x = 0; x <= maxX; x++)
             {
-                world.Foreground[x, 0] = block;
-                world.Foreground[x, maxY] = block;
+                world.Foreground[x, 0] = borderBlock;
+                world.Foreground[x, maxY] = borderBlock;
             }
-
-            return world;
         }
 
         public static ForegroundType GetForegroundType(Foreground.Id id)
