@@ -131,7 +131,7 @@ namespace BotBits
             string channel = null;
             if (msg.StartsWith("/pm", StringComparison.OrdinalIgnoreCase))
                 channel = msg.Split(' ').Skip(1).FirstOrDefault();
-            return channel;
+            return channel ?? String.Empty;
         }
 
         [EventListener(EventPriority.High)]

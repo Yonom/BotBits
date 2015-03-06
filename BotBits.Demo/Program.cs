@@ -1,10 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using BotBits.Events;
-using BotBits.SendMessages;
+﻿using System.Threading;
 
 namespace BotBits.Demo
 {
@@ -14,17 +8,15 @@ namespace BotBits.Demo
 
         static void Main()
         {
-            var pack = BlockServices.GetPackage((int)Foreground.Beta.Blue);
-
             EventLoader
                 .Of(bot)
                 .LoadStatic<Program>();
 
             ConnectionManager
                 .Of(bot)
-                .EmailLoginAsync("guest", "guest")
-                .CreateJoinRoomAsync("PWAARLDluVa0I").Wait();
-            
+                .GuestLogin()
+                .CreateJoinRoom("PWAARLDluVa0I");
+
             Thread.Sleep(-1);
         }
     }
