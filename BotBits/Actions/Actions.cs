@@ -14,8 +14,14 @@ namespace BotBits
 
         public void ChangeSmiley(Smiley newSmiley)
         {
-            new SmileySendMessage(newSmiley)
-                .SendIn(this.BotBits);
+            if (this.HasSmiley(newSmiley)) // Server kicks people if they do not own a smiley
+                new SmileySendMessage(newSmiley)
+                    .SendIn(this.BotBits);
+        }
+
+        private bool HasSmiley(Smiley smiley)
+        {
+            return  ConnectionManager.Of(this.BotBits).ShopData.HasSmiley(smiley);
         }
 
         public void MoveToLocation(int x, int y)

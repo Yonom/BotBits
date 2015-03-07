@@ -19,6 +19,7 @@ namespace BotBits
         private Blocks _world;
         private MessageQueue<PlaceSendMessage> _messageQueue;
         private ConnectionManager _connectionManager;
+        private Room _room;
             
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
         public BlockChecker()
@@ -30,7 +31,8 @@ namespace BotBits
         private void BlockChecker_InitializeFinish(object sender, EventArgs e)
         {
             this._connectionManager = ConnectionManager.Of(this.BotBits);
-            this._world = Package<Blocks>.Of(this.BotBits);
+            this._room = Room.Of(this.BotBits);
+            this._world = Blocks.Of(this.BotBits);
             this._messageQueue = PlaceSendMessage.Of(this.BotBits);
             this._messageQueue.Send += this.OnSendPlace;
         }
@@ -179,6 +181,7 @@ namespace BotBits
         {
             if (b.SendCount > 15) return false;
             if (b.NoChecks) return true;
+            if (this._room.AccessRight < AccessRight.Edit) return false;
 
             // TODO: Count blocks
             var isMod = this._connectionManager.PlayerObject.IsModerator;
