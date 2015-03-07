@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using BotBits.Events;
 using BotBits.SendMessages;
 
@@ -65,6 +66,7 @@ namespace BotBits
             this.World = new BlockDataWorld(0, 0);
         }
 
+
         public void Place(int x, int y, BackgroundBlock block)
         {
             new PlaceSendMessage(Layer.Background, x, y, (int)block.Id)
@@ -101,7 +103,6 @@ namespace BotBits
                     this.Place(x, y, world.Background[x, y]);
                 }
         }
-
 
         [EventListener(EventPriority.High)]
         private void OnInit(InitEvent e)

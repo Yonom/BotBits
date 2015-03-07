@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -26,6 +24,22 @@ namespace BotBits
         {
             this.CurrentScheduler = new Scheduler();
         }
+
+        /// <summary>
+        /// Gets the items.
+        /// </summary>
+        /// <value>
+        /// The items.
+        /// </value>
+        public ShopData ShopData { get; private set; }
+
+        /// <summary>
+        /// Gets the player object.
+        /// </summary>
+        /// <value>
+        /// The player object.
+        /// </value>
+        public PlayerObject PlayerObject { get; private set; }
 
         void IDisposable.Dispose()
         {
@@ -112,7 +126,7 @@ namespace BotBits
         {
             this.CurrentScheduler.InitScheduler();
 
-            return this.EmailLoginAsync("guest", "guest").ContinueWith(t =>
+            return this.GuestLoginAsnyc().ContinueWith(t =>
             {
                 var tcs = new TaskCompletionSource<LoginClient>();
                 t.Result.Client.Multiplayer.JoinRoom(String.Empty, null, guestConn =>
@@ -144,7 +158,6 @@ namespace BotBits
                         tcs.TrySetException(new ArgumentException("Auth failed."));
                     if (!guestConn.Connected)
                         tcs.TrySetException(new ArgumentException("Auth failed."));
-
                     guestConn.Send("auth", userId, token);
                 }, tcs.SetException);
                 return tcs.Task;
@@ -162,7 +175,7 @@ namespace BotBits
             return new LoginClient(this, client);
         }
 
-        public void SetConnection([NotNull] IConnection connection)
+        public void SetConnection([NotNull] IConnection connection, ConnectionArgs args)
         {
             if (connection == null)
                 throw new ArgumentNullException("connection");
@@ -172,8 +185,14 @@ namespace BotBits
                 throw new InvalidOperationException("A connection has already been established.");
             }
 
+            this.PlayerObject = args.PlayerObject;
+            this.ShopData = args.ShopData;
+
             new ConnectEvent()
                 .RaiseIn(this.BotBits);
+
+            new InitSendMessage()
+                .SendIn(this.BotBits);
 
             this.Connection.OnMessage += this.Connection_OnMessage;
             this.Connection.OnDisconnect += this.Connection_OnDisconnect;
@@ -183,16 +202,13 @@ namespace BotBits
             }
         }
 
-        internal void SetConnectionInternal([NotNull] Connection connection)
+        internal void SetConnectionInternal([NotNull] Connection connection, ConnectionArgs args)
         {
             var adapter = new PlayerIOConnectionAdapter(connection);
             try
             {
-                this.SetConnection(adapter);
+                this.SetConnection(adapter, args);
                 this._adapter = adapter;
-
-                new InitSendMessage()
-                    .SendIn(this.BotBits);
             }
             catch
             {
@@ -223,230 +239,6 @@ namespace BotBits
         {
             new DisconnectEvent(message)
                 .RaiseIn(this.BotBits);
-        }
-
-        public sealed class LoginClient
-        {
-            private const string EverybodyEdits = "Everybodyedits";
-            private const string Beta = "Beta";
-
-            [NotNull]
-            private readonly ConnectionManager _connectionManager;
-
-            public LoginClient([NotNull] ConnectionManager connectionManager, [NotNull] Client client)
-            {
-                if (connectionManager == null) throw new ArgumentNullException("connectionManager");
-                if (client == null) throw new ArgumentNullException("client");
-                this._connectionManager = connectionManager;
-                this.Client = client;
-            }
-
-            [NotNull]
-            public Client Client { get; private set; }
-
-            public LobbyItem[] GetLobby()
-            {
-                return this.GetLobbyAsync().Result;
-            }
-
-            public Task<LobbyItem[]> GetLobbyAsync()
-            {
-                var tcs = new TaskCompletionSource<LobbyItem[]>();
-                this.Client.BigDB.Load("config", "config", dbo =>
-                {
-                    try
-                    {
-                        var serverVersion = dbo["version"];
-
-                        var normals = this.GetLobbyRoomsAsync(EverybodyEdits + serverVersion);
-                        var betas = this.GetLobbyRoomsAsync(Beta + serverVersion);
-                        Task.Factory.ContinueWhenAll(new[] {normals, betas}, items =>
-                        {
-                            tcs.SetResult(items.SelectMany(i => i.Result).ToArray());
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        tcs.SetException(ex);
-                    }
-                }, tcs.SetException);
-                return tcs.Task;
-            }
-
-            private Task<LobbyItem[]> GetLobbyRoomsAsync(string roomId)
-            {
-                var tcs = new TaskCompletionSource<LobbyItem[]>();
-                this.Client.Multiplayer.ListRooms(roomId, null, 0, 0, rooms =>
-                {
-                    tcs.SetResult(rooms.Select(room => new LobbyItem(this, room)).ToArray());
-                }, tcs.SetException);
-                return tcs.Task;
-            }
-
-            public void CreateJoinRoom(string worldId)
-            {
-                this.CreateJoinRoomAsync(worldId).Wait();
-            }
-
-            public Task CreateJoinRoomAsync(string roomId)
-            {
-                var roomPrefix = roomId.StartsWith("BW", StringComparison.OrdinalIgnoreCase)
-                    ? Beta
-                    : EverybodyEdits;
-
-                var tcs = new TaskCompletionSource<bool>();
-
-                this.Client.BigDB.Load("config", "config", dbo =>
-                {
-                    try
-                    {
-                        var serverVersion = dbo["version"];
-                        this.Client.Multiplayer.CreateJoinRoom(roomId,
-                            roomPrefix + serverVersion, true, null, null, conn =>
-                            {
-                                try
-                                {
-                                    this._connectionManager.SetConnectionInternal(conn);
-                                    tcs.SetResult(true);
-                                }
-                                catch (Exception ex)
-                                {
-                                    tcs.SetException(ex);
-                                }
-                            }, tcs.SetException);
-                    }
-                    catch (Exception ex)
-                    {
-                        tcs.SetException(ex);
-                    }
-                }, tcs.SetException);
-
-                return tcs.Task;
-            }
-            
-            public void JoinRoom(string worldId)
-            {
-                this.JoinRoomAsync(worldId).Wait();
-            }
-
-            public Task JoinRoomAsync(string roomId)
-            {
-                this._connectionManager.CurrentScheduler.InitScheduler();
-
-                var tcs = new TaskCompletionSource<bool>();
-                this.Client.Multiplayer.JoinRoom(roomId, null, conn =>
-                {
-                    try
-                    {
-                        this._connectionManager.SetConnectionInternal(conn);
-                        tcs.SetResult(true);
-                    }
-                    catch (Exception ex)
-                    {
-                        tcs.SetException(ex);
-                    }
-                }, tcs.SetException);
-
-                return tcs.Task;
-            }
-        }
-
-        [DebuggerDisplay("{Id}: {Name}")]
-        public sealed class LobbyItem
-        {
-            private readonly LoginClient _client;
-            public int Online { get; private set; }
-            public string Id { get; private set; }
-            public string Name { get; private set; }
-            public int Plays { get; private set; }
-            public int Woots { get; private set; }
-            public bool Owned { get; private set; }
-            public bool HasCode { get; private set; }
-            public bool Featured { get; private set; }
-
-            public LobbyItem(LoginClient client, RoomInfo roomInfo)
-            {
-                this._client = client;
-
-
-                this.Id = roomInfo.Id;
-                this.Online = roomInfo.OnlineUsers;
-                foreach (var data in roomInfo.RoomData)
-                {
-                    switch (data.Key)
-                    {
-                        case "name":
-                            this.Name = data.Value;
-                            break;
-                        case "plays":
-                            this.Plays = int.Parse(data.Value);
-                            break;
-                        case "woots":
-                            this.Woots = int.Parse(data.Value);
-                            break;
-                        case "owned":
-                            this.Owned = bool.Parse(data.Value);
-                            break;
-                        case "needskey":
-                            this.HasCode = (data.Value == "yep");
-                            break;
-                        case "IsFeatured":
-                            this.Featured = bool.Parse(data.Value);
-                            break;
-                    }
-                }
-            }
-
-            public void JoinRoom()
-            {
-                this.JoinRoomAsync().Wait();
-            }
-
-            public Task JoinRoomAsync()
-            {
-                return this._client.JoinRoomAsync(this.Id);
-            }
-        }
-
-        public sealed class Scheduler : IDisposable
-        {
-            private ISchedulerHandle _schedulerHandle;
-
-            internal Scheduler()
-            {
-            }
-
-            public void Schedule(Action task)
-            {
-                this._schedulerHandle.SynchronizationContext.Post(o => task(), null);
-            }
-
-            public void CaptureScheduler()
-            {
-                this._schedulerHandle = BotServices.GetScheduler();
-            }
-
-            internal void SetScheduler(ISchedulerHandle handle)
-            {
-                this._schedulerHandle = handle;
-            }
-
-            internal void InitScheduler()
-            {
-                if (this._schedulerHandle == null)
-                {
-                    var scheduler = BotServices.GetScheduler();
-                    if (Interlocked.CompareExchange(ref this._schedulerHandle, scheduler, null) != null)
-                    {
-                        scheduler.Dispose();
-                    }
-                }
-            }
-
-            public void Dispose()
-            {
-                this._schedulerHandle.Dispose();
-            }
         }
     }
 }

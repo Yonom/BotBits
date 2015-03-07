@@ -18,6 +18,7 @@ namespace BotBits
         private readonly RegisteredWaitHandle _registration;
         private Blocks _world;
         private MessageQueue<PlaceSendMessage> _messageQueue;
+        private ConnectionManager _connectionManager;
             
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
         public BlockChecker()
@@ -28,6 +29,7 @@ namespace BotBits
 
         private void BlockChecker_InitializeFinish(object sender, EventArgs e)
         {
+            this._connectionManager = ConnectionManager.Of(this.BotBits);
             this._world = Package<Blocks>.Of(this.BotBits);
             this._messageQueue = PlaceSendMessage.Of(this.BotBits);
             this._messageQueue.Send += this.OnSendPlace;
@@ -175,9 +177,14 @@ namespace BotBits
 
         private bool ShouldSend(PlaceSendMessage b, Point3D p)
         {
-            if (b.SendCount > 10) return false;
+            if (b.SendCount > 15) return false;
             if (b.NoChecks) return true;
-            if (!WorldUtils.IsPlaceable(b, this._world)) return false;
+
+            // TODO: Count blocks
+            var isMod = this._connectionManager.PlayerObject.IsModerator;
+            var isClubMember = this._connectionManager.PlayerObject.ClubMember;
+            if (!WorldUtils.IsPlaceable(b, this._world, !isMod)) return false;
+            if (!this._connectionManager.ShopData.HasBlock(b.Id, 0, isClubMember, isMod)) return false;
 
             CheckHandle handle;
             return !(this._sentLocations.TryGetValue(p, out handle)

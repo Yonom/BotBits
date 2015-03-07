@@ -56,6 +56,15 @@
     <Compile Include="Blocks\Events\BackgroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\ForegroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\PlaceEvent.cs" />
+    <Compile Include="ConnectionManager\ConnectionArgs.cs" />
+    <Compile Include="ConnectionManager\ConnectionUtils.cs" />
+    <Compile Include="Helpers\PlayerIOAsync.cs" />
+    <Compile Include="ConnectionManager\LobbyItem.cs" />
+    <Compile Include="ConnectionManager\LoginClient.cs" />
+    <Compile Include="ConnectionManager\Scheduler.cs" />
+    <Compile Include="Helpers\TaskHelper.cs" />
+    <Compile Include="PlayerObject.cs" />
+    <Compile Include="ShopData.cs" />
     <Compile Include="World\BlockData\BlockData.cs" />
     <Compile Include="Chat\ChatExtensions.cs" />
     <Compile Include="Chat\Events\PrivateMessageEvent.cs" />

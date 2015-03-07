@@ -26,6 +26,13 @@ namespace BotBits
             return type;
         }
 
+        internal static PackAttribute GetPackageInternal(int id)
+        {
+            PackAttribute pack;
+            _blockPacks.TryGetValue(id, out pack);
+            return pack;
+        }
+
         public static string GetPackage(int id)
         {
             PackAttribute pack;
@@ -33,6 +40,15 @@ namespace BotBits
             return pack != null 
                 ? pack.Package 
                 : null;
+        }
+
+        public static int GetBlocksPerPackage(int id)
+        {
+            PackAttribute pack;
+            _blockPacks.TryGetValue(id, out pack);
+            return pack != null
+                ? pack.BlocksPerPack
+                : 0;
         }
 
         public static string GetPackage(Smiley id)

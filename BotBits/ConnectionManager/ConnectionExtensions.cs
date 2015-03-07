@@ -6,7 +6,7 @@ namespace BotBits
 {
     public static class ConnectionExtensions
     {
-        public static Task JoinRoomAsync(this Task<ConnectionManager.LoginClient> client, string roomId)
+        public static Task JoinRoomAsync(this Task<LoginClient> client, string roomId)
         {
             return client.ContinueWith(c =>
             {
@@ -21,7 +21,7 @@ namespace BotBits
             }).Unwrap();
         }
 
-        public static Task CreateJoinRoomAsync(this Task<ConnectionManager.LoginClient> client, string roomId)
+        public static Task CreateJoinRoomAsync(this Task<LoginClient> client, string roomId)
         {
             return client.ContinueWith(c =>
             {
