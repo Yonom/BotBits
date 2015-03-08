@@ -34,7 +34,7 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.High)]
-        private void OnMessage(MessageEvent e)
+        private void OnMessage(PlayerIOMessageEvent e)
         {
             Type handler;
             if (this._messageRegister.TryGetHandler(e.Message.Type, out handler))

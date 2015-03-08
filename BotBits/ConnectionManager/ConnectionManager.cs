@@ -10,10 +10,10 @@ namespace BotBits
 {
     public sealed class ConnectionManager : Package<ConnectionManager>, IDisposable
     {
-        private const string GameId = "everybody-edits-su9rn58o40itdbnw69plyw";
         private IConnection _connection;
         private PlayerIOConnectionAdapter _adapter;
         public Scheduler CurrentScheduler { get; private set; }
+
         public IConnection Connection
         {
             get { return this._connection; }
@@ -52,37 +52,40 @@ namespace BotBits
         [Pure]
         public LoginClient GuestLogin()
         {
-            return this.GuestLoginAsnyc().Result;
+            return this.GuestLoginAsync().GetResultEx();
         }
 
         [Pure]
         public LoginClient EmailLogin(string email, string password)
         {
-            return this.EmailLoginAsync(email, password).Result;
+            return this.EmailLoginAsync(email, password).GetResultEx();
         }
 
         [Pure]
         public LoginClient FacebookLogin(string token)
         {
-            return this.FacebookLoginAsync(token).Result;
+            return this.FacebookLoginAsync(token).GetResultEx();
         }
 
         [Pure]
         public LoginClient KongregateLogin(string userId, string token)
         {
-            return this.KongregateLoginAsync(userId, token).Result;
+            return this.KongregateLoginAsync(userId, token).GetResultEx();
         }
 
         [Pure]
         public LoginClient ArmorGamesLogin(string userId, string token)
         {
-            return this.ArmorGamesLoginAsync(userId, token).Result;
+            return this.ArmorGamesLoginAsync(userId, token).GetResultEx();
         }
 
         [Pure]
-        public Task<LoginClient> GuestLoginAsnyc()
+        public Task<LoginClient> GuestLoginAsync()
         {
-            return this.EmailLoginAsync("guest", "guest");
+            this.CurrentScheduler.InitScheduler();
+
+            return ConnectionUtils.GuestLoginAsync()
+                .Then(task => this.WithClient(task.Result));
         }
 
         [Pure]
@@ -90,11 +93,8 @@ namespace BotBits
         {
             this.CurrentScheduler.InitScheduler();
 
-            var tcs = new TaskCompletionSource<LoginClient>();
-            PlayerIO.QuickConnect.SimpleConnect(GameId, email, password, null,
-                cl => tcs.SetResult(this.WithClient(cl)),
-                tcs.SetException);
-            return tcs.Task;
+            return PlayerIO.QuickConnect.SimpleConnectAsync(ConnectionUtils.GameId, email, password, null)
+                .Then(task => this.WithClient(task.Result));
         }
 
         [Pure]
@@ -102,11 +102,8 @@ namespace BotBits
         {
             this.CurrentScheduler.InitScheduler();
 
-            var tcs = new TaskCompletionSource<LoginClient>();
-            PlayerIO.QuickConnect.FacebookOAuthConnect(GameId, token, null, null,
-                cl => tcs.SetResult(this.WithClient(cl)),
-                tcs.SetException);
-            return tcs.Task;
+            return PlayerIO.QuickConnect.FacebookOAuthConnectAsync(ConnectionUtils.GameId, token, null, null)
+                .Then(task => this.WithClient(task.Result));
         }
 
         [Pure]
@@ -114,11 +111,8 @@ namespace BotBits
         {
             this.CurrentScheduler.InitScheduler();
 
-            var tcs = new TaskCompletionSource<LoginClient>();
-            PlayerIO.QuickConnect.KongregateConnect(GameId, userId, token, null,
-                cl => tcs.SetResult(this.WithClient(cl)),
-                tcs.SetException);
-            return tcs.Task;
+            return PlayerIO.QuickConnect.KongregateConnectAsync(ConnectionUtils.GameId, userId, token, null)
+                .Then(task => this.WithClient(task.Result));
         }
 
         [Pure]
@@ -126,42 +120,8 @@ namespace BotBits
         {
             this.CurrentScheduler.InitScheduler();
 
-            return this.GuestLoginAsnyc().ContinueWith(t =>
-            {
-                var tcs = new TaskCompletionSource<LoginClient>();
-                t.Result.Client.Multiplayer.JoinRoom(String.Empty, null, guestConn =>
-                {
-                    guestConn.OnMessage += (sender, message) =>
-                    {
-                        try
-                        {
-                            if (message.Type != "auth" || message.Count < 2)
-                                throw new ArgumentException("Auth failed.");
-
-                            tcs.TrySetResult(this.WithClient(PlayerIO.Connect(
-                                GameId,
-                                "secure",
-                                message.GetString(0),
-                                message.GetString(1),
-                                "armorgames")));
-                        }
-                        catch (Exception ex)
-                        {
-                            tcs.TrySetException(ex);
-                        }
-                        finally
-                        {
-                            guestConn.Disconnect();
-                        }
-                    };
-                    guestConn.OnDisconnect += (sender, message) =>
-                        tcs.TrySetException(new ArgumentException("Auth failed."));
-                    if (!guestConn.Connected)
-                        tcs.TrySetException(new ArgumentException("Auth failed."));
-                    guestConn.Send("auth", userId, token);
-                }, tcs.SetException);
-                return tcs.Task;
-            }).Unwrap();
+            return ConnectionUtils.ArmorGamesRoomLoginAsync(userId, token)
+                .Then(task => this.WithClient(task.Result));
         }
 
         [Pure]
@@ -173,6 +133,21 @@ namespace BotBits
                 throw new ArgumentNullException("client");
 
             return new LoginClient(this, client);
+        }
+
+        internal void SetConnectionInternal([NotNull] Connection connection, ConnectionArgs args)
+        {
+            var adapter = new PlayerIOConnectionAdapter(connection);
+            try
+            {
+                this.SetConnection(adapter, args);
+                this._adapter = adapter;
+            }
+            catch
+            {
+                adapter.Dispose();
+                throw;
+            }
         }
 
         public void SetConnection([NotNull] IConnection connection, ConnectionArgs args)
@@ -202,21 +177,6 @@ namespace BotBits
             }
         }
 
-        internal void SetConnectionInternal([NotNull] Connection connection, ConnectionArgs args)
-        {
-            var adapter = new PlayerIOConnectionAdapter(connection);
-            try
-            {
-                this.SetConnection(adapter, args);
-                this._adapter = adapter;
-            }
-            catch
-            {
-                adapter.Dispose();
-                throw;
-            }
-        }
-
         private void Connection_OnMessage(object sender, Message e)
         {
             this.CurrentScheduler.Schedule(() =>
@@ -231,7 +191,7 @@ namespace BotBits
 
         private void HandleMessage(Message message)
         {
-            new MessageEvent(message)
+            new PlayerIOMessageEvent(message)
                 .RaiseIn(this.BotBits);
         }
 

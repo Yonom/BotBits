@@ -28,6 +28,27 @@ namespace BotBits
             return tcs.Task;
         }
 
+        public static Task<Client> SimpleConnectAsync(this QuickConnect quickConnect, string gameId, string usernameOrEmail, string password, string[] playerInsightSegments)
+        {
+            var tcs = new TaskCompletionSource<Client>();
+            quickConnect.SimpleConnect(gameId, usernameOrEmail, password, playerInsightSegments, tcs.SetResult, tcs.SetException);
+            return tcs.Task;
+        }
+        
+        public static Task<Client> FacebookOAuthConnectAsync(this QuickConnect quickConnect, string gameId, string accessToken, string partnerId, string[] playerInsightSegments)
+        {
+            var tcs = new TaskCompletionSource<Client>();
+            quickConnect.FacebookOAuthConnect(gameId, accessToken, partnerId, playerInsightSegments, tcs.SetResult, tcs.SetException);
+            return tcs.Task;
+        }
+
+        public static Task<Client> KongregateConnectAsync(this QuickConnect quickConnect, string gameId, string userId, string gameAuthToken, string[] playerInsightSegments)
+        {
+            var tcs = new TaskCompletionSource<Client>();
+            quickConnect.KongregateConnect(gameId, userId, gameAuthToken, playerInsightSegments, tcs.SetResult, tcs.SetException);
+            return tcs.Task;
+        }
+
         public static Task<Connection> JoinRoomAsync(this Multiplayer multiplayer, string roomId, Dictionary<string, string> joinData)
         {
             var tcs = new TaskCompletionSource<Connection>();

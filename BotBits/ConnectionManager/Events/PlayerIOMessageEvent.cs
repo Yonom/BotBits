@@ -2,9 +2,9 @@
 
 namespace BotBits.Events
 {
-    public sealed class MessageEvent : Event<MessageEvent>
+    public sealed class PlayerIOMessageEvent : Event<PlayerIOMessageEvent>
     {
-        internal MessageEvent(Message message)
+        internal PlayerIOMessageEvent(Message message)
         {
             this.Message = message;
         }

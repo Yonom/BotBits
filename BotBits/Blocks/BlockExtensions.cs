@@ -6,64 +6,69 @@ namespace BotBits
     public static class BlockExtensions
     {
         #region Place
-        public static void Set(this Blocks blocks, int x, int y, Background.Id block)
+        public static void Place(this Blocks blocks, int x, int y, Background.Id block)
         {
             blocks.Place(x, y, new BackgroundBlock(block));
         }
 
-        public static void Set(this Blocks blocks, int x, int y, Foreground.Id block)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block)
         {
             blocks.Place(x, y, new ForegroundBlock(block));
         }
 
-        public static void Set(this Blocks blocks, int x, int y, Foreground.Id block, int coinsToCollect)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, int coinsToCollect)
         {
             blocks.Place(x, y, new ForegroundBlock(block, coinsToCollect));
         }
 
-        public static void Set(this Blocks blocks, int x, int y, Foreground.Id block, uint args)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, uint args)
         {
             blocks.Place(x, y, new ForegroundBlock(block, args));
         }
 
-        public static void Set(this Blocks blocks, int x, int y, Foreground.Id block, string args)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, string args)
         {
             blocks.Place(x, y, new ForegroundBlock(block, args));
         }
 
-        public static void Set(this Blocks blocks, int x, int y, Foreground.Id block,
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, string text, string textColor)
+        {
+            blocks.Place(x, y, new ForegroundBlock(block, text, textColor));
+        }
+
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block,
             int portalId, int portalTarget, PortalRotation portalRotation)
         {
             blocks.Place(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
-        public static void Set(this Blocks blocks, int x, int y, Foreground.Id block,
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block,
             uint portalId, uint portalTarget, PortalRotation portalRotation)
         {
             blocks.Place(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
-        public static void Set(this Blocks blocks, int x, int y, Foreground.Id block, SciFiSlopeRotation rotation)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, SciFiSlopeRotation rotation)
         {
             blocks.Place(x, y, new ForegroundBlock(block, rotation));
         }
 
-        public static void Set(this Blocks blocks, int x, int y, Foreground.Id block, SciFiStraightRotation rotation)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, SciFiStraightRotation rotation)
         {
             blocks.Place(x, y, new ForegroundBlock(block, rotation));
         }
 
-        public static void Set(this Blocks blocks, int x, int y, Foreground.Id block, BlockRotation rotation)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, BlockRotation rotation)
         {
             blocks.Place(x, y, new ForegroundBlock(block, rotation));
         }
 
-        public static void Set(this Blocks blocks, int x, int y, Foreground.Id block, PianoId soundId)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, PianoId soundId)
         {
             blocks.Place(x, y, new ForegroundBlock(block, soundId));
         }
 
-        public static void Set(this Blocks blocks, int x, int y, Foreground.Id block, PercussionId soundId)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, PercussionId soundId)
         {
             blocks.Place(x, y, new ForegroundBlock(block, soundId));
         }
@@ -106,6 +111,11 @@ namespace BotBits
         public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, string args)
         {
             blocks.Set(new ForegroundBlock(block, args));
+        }
+
+        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, string text, string textColor)
+        {
+            blocks.Set(new ForegroundBlock(block, text, textColor));
         }
 
         public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block,

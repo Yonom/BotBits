@@ -62,6 +62,7 @@
     <Compile Include="ConnectionManager\LobbyItem.cs" />
     <Compile Include="ConnectionManager\LoginClient.cs" />
     <Compile Include="ConnectionManager\Scheduler.cs" />
+    <Compile Include="Helpers\TaskExtensions.cs" />
     <Compile Include="Helpers\TaskHelper.cs" />
     <Compile Include="PlayerObject.cs" />
     <Compile Include="ShopData.cs" />
@@ -70,7 +71,7 @@
     <Compile Include="Chat\Events\PrivateMessageEvent.cs" />
     <Compile Include="Chat\IChat.cs" />
     <Compile Include="ConnectionManager\ConnectionExtensions.cs" />
-    <Compile Include="ConnectionManager\Events\MessageEvent.cs" />
+    <Compile Include="ConnectionManager\Events\PlayerIOMessageEvent.cs" />
     <Compile Include="ConnectionManager\IConnection.cs" />
     <Compile Include="ConnectionManager\PlayerIOConnectionAdapter.cs" />
     <Compile Include="Enums\AccessRight.cs" />

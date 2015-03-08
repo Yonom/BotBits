@@ -14,7 +14,7 @@ namespace BotBits
         [NotNull]
         private readonly ConnectionManager _connectionManager;
 
-        private Task<ConnectionArgs> _argsAsync;
+        private readonly Task<ConnectionArgs> _argsAsync;
 
         public LoginClient([NotNull] ConnectionManager connectionManager, [NotNull] Client client)
         {
@@ -31,7 +31,7 @@ namespace BotBits
 
         public LobbyItem[] GetLobby()
         {
-            return this.GetLobbyAsync().Result;
+            return this.GetLobbyAsync().GetResultEx();
         }
 
         public Task<LobbyItem[]> GetLobbyAsync()
@@ -57,7 +57,7 @@ namespace BotBits
 
         public void CreateJoinRoom(string worldId)
         {
-            this.CreateJoinRoomAsync(worldId).Wait();
+            this.CreateJoinRoomAsync(worldId).WaitEx();
         }
 
         public Task CreateJoinRoomAsync(string roomId)
@@ -74,7 +74,7 @@ namespace BotBits
 
         public void JoinRoom(string roomId)
         {
-            this.JoinRoomAsync(roomId).Wait();
+            this.JoinRoomAsync(roomId).WaitEx();
         }
 
         public Task JoinRoomAsync(string roomId)
