@@ -281,7 +281,7 @@ namespace BotBits
             p.Y = e.Y;
             p.Dead = false;
 
-            new TeleportEvent(p, e.X, e.Y)
+            new TeleportEvent(p, e.X, e.Y, false)
                 .RaiseIn(this.BotBits);
         }
 
@@ -303,7 +303,7 @@ namespace BotBits
                     p.BlueCoins = default(int);
                 }
 
-                new TeleportEvent(p, location.X, location.Y)
+                new TeleportEvent(p, location.X, location.Y, e.ResetCoins)
                     .RaiseIn(this.BotBits);
             }
         }
