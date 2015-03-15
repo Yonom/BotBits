@@ -16,7 +16,7 @@ namespace BotBits
             }
             catch (AggregateException ex)
             {
-                throw ex.Flatten().InnerExceptions.FirstOrDefault() ?? ex;
+                throw ex.InnerExceptions.FirstOrDefault() ?? ex;
             }
         }
 
@@ -28,8 +28,34 @@ namespace BotBits
             }
             catch (AggregateException ex)
             {
-                throw ex.Flatten().InnerExceptions.FirstOrDefault() ?? ex;
+                throw ex.InnerExceptions.FirstOrDefault() ?? ex;
             }
+        }
+
+        public static Task ToSafeTask(this Task task)
+        {
+            var tcs = new TaskCompletionSource<AsyncVoid>();
+            task.ContinueWith(t =>
+            {
+                if (t.IsFaulted) 
+                    tcs.TrySetException(t.Exception.Flatten().InnerExceptions.FirstOrDefault() ?? t.Exception);
+                else if (t.IsCanceled) tcs.TrySetCanceled();
+                else tcs.TrySetResult(default(AsyncVoid));
+            });
+            return tcs.Task;
+        }
+
+        public static Task<T> ToSafeTask<T>(this Task<T> task)
+        {
+            var tcs = new TaskCompletionSource<T>();
+            task.ContinueWith(t =>
+            {
+                if (t.IsFaulted) 
+                    tcs.TrySetException(t.Exception.Flatten().InnerExceptions.FirstOrDefault() ?? t.Exception);
+                else if (t.IsCanceled) tcs.TrySetCanceled();
+                else tcs.TrySetResult(t.Result);
+            });
+            return tcs.Task;
         }
     }
 }

@@ -6,14 +6,14 @@ namespace BotBits.Events
     ///     Occurs when a player is teleported to another location.
     /// </summary>
     [ReceiveEvent("teleport")]
-    public sealed class TeleportUserEvent : PlayerEvent<TeleportUserEvent>
+    public sealed class TeleportEvent : PlayerEvent<TeleportEvent>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TeleportUserEvent" /> class.
+        ///     Initializes a new instance of the <see cref="TeleportEvent" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
-        internal TeleportUserEvent(BotBitsClient client, Message message)
+        internal TeleportEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
             this.X = message.GetInteger(1);

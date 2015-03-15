@@ -307,6 +307,21 @@ namespace BotBits
         Nutcracker = 104,
 
         [Pack("brickvalentines2015")]
-        Blushing = 105
+        Blushing = 105,
+
+        [Pack("smileyartist")]
+        Artist = 106,
+
+        [Pack("smileyprincess")]
+        Princess = 107,
+
+        [Pack("smileychef")]
+        Chef = 108,
+
+        [Pack("smileyclown")]
+        Clown = 109,
+
+        [Pack("smileyredninja")]
+        RedNinja = 110,
     }
 }

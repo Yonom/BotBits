@@ -274,19 +274,16 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.High)]
-        private void OnTeleportUser(TeleportUserEvent e)
+        private void OnTeleportUser(TeleportEvent e)
         {
             Player p = e.Player;
             p.X = e.X;
             p.Y = e.Y;
             p.Dead = false;
-
-            new TeleportEvent(p, e.X, e.Y, false)
-                .RaiseIn(this.BotBits);
         }
 
         [EventListener(EventPriority.High)]
-        private void OnTeleportEveryone(TeleportEveryoneEvent e)
+        private void OnMultiRespawn(MultiRespawnEvent e)
         {
             foreach (var tele in e.Coordinates)
             {
@@ -303,7 +300,7 @@ namespace BotBits
                     p.BlueCoins = default(int);
                 }
 
-                new TeleportEvent(p, location.X, location.Y, e.ResetCoins)
+                new RespawnEvent(p, location.X, location.Y, e.ResetCoins)
                     .RaiseIn(this.BotBits);
             }
         }

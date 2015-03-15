@@ -41,9 +41,9 @@ namespace BotBits
                 var version = task.Result;
                 var normals = this.GetLobbyRoomsAsync(EverybodyEdits + version);
                 var betas = this.GetLobbyRoomsAsync(Beta + version);
-                return Task.Factory.ContinueWhenAll(new[] {normals, betas}, 
+                return Task.Factory.ContinueWhenAll(new[] {normals, betas},
                     items => items.SelectMany(i => i.Result).ToArray());
-            });
+            }).ToSafeTask();
         }
 
         private Task<LobbyItem[]> GetLobbyRoomsAsync(string roomId)
@@ -52,7 +52,8 @@ namespace BotBits
                 .ListRoomsAsync(roomId, null, 0, 0)
                 .Then(r => r.Result
                     .Select(room => new LobbyItem(this, room))
-                    .ToArray());
+                    .ToArray())
+                .ToSafeTask();
         }
 
         public void CreateJoinRoom(string worldId)
@@ -69,7 +70,8 @@ namespace BotBits
             return this.GetVersionAsync()
                 .Then(task => this.Client.Multiplayer
                     .CreateJoinRoomAsync(roomId, roomPrefix + task.Result, true, null, null))
-                .Then(task => this.InitConnection(task.Result));
+                .Then(task => this.InitConnection(task.Result))
+                .ToSafeTask();
         }
 
         public void JoinRoom(string roomId)
@@ -81,7 +83,8 @@ namespace BotBits
         {
             return this.Client.Multiplayer
                 .JoinRoomAsync(roomId, null)
-                .Then(task => this.InitConnection(task.Result));
+                .Then(task => this.InitConnection(task.Result))
+                .ToSafeTask();
         }
 
         private Task<int> GetVersionAsync()

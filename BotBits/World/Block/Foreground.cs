@@ -12,12 +12,11 @@ namespace BotBits
         }
 
         public const Id
-            Empty = Gravity.Down;
+            Empty = 0;
 
         public static class Gravity
         {
             public const Id
-                Down = 0,
                 Left = (Id)1,
                 Up = (Id)2,
                 Right = (Id)3,
@@ -639,7 +638,9 @@ namespace BotBits
             public const Id
                 Yellow = (Id)202,
                 Orange = (Id)203,
-                Red = (Id)204;
+                Red = (Id)204,
+                Waves = (Id)415,
+                Liquid = (Id)416;
         }
 
         public static class Sparta

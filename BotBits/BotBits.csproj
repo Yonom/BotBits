@@ -139,7 +139,7 @@
     <Compile Include="Chat\Chat.cs" />
     <Compile Include="Consumables\Consumables.cs" />
     <Compile Include="Consumables\Events\PotionCountEvent.cs" />
-    <Compile Include="Players\Events\TeleportEvent.cs" />
+    <Compile Include="Players\Events\RespawnEvent.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\Players.cs" />
     <Compile Include="Players\PlayerUtils.cs" />
@@ -190,8 +190,8 @@
     <Compile Include="MessageReceive\Events\ShowKeyEvent.cs" />
     <Compile Include="MessageReceive\Events\SilverCrownEvent.cs" />
     <Compile Include="MessageReceive\Events\SoundPlaceEvent.cs" />
-    <Compile Include="MessageReceive\Events\TeleportEveryoneEvent.cs" />
-    <Compile Include="MessageReceive\Events\TeleportUserEvent.cs" />
+    <Compile Include="MessageReceive\Events\MultiRespawnEvent.cs" />
+    <Compile Include="MessageReceive\Events\TeleportEvent.cs" />
     <Compile Include="MessageReceive\Events\UpdateMetaEvent.cs" />
     <Compile Include="MessageReceive\Events\UpgradeEvent.cs" />
     <Compile Include="MessageReceive\Events\WootUpEvent.cs" />

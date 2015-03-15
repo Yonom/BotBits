@@ -7,14 +7,14 @@ namespace BotBits.Events
     ///     Occurs when mutliple players are teleported. This event gets raised for respawns of any kind, including death.
     /// </summary>
     [ReceiveEvent("tele")]
-    public sealed class TeleportEveryoneEvent : ReceiveEvent<TeleportEveryoneEvent>
+    public sealed class MultiRespawnEvent : ReceiveEvent<MultiRespawnEvent>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TeleportEveryoneEvent" /> class.
+        ///     Initializes a new instance of the <see cref="MultiRespawnEvent" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
-        internal TeleportEveryoneEvent(BotBitsClient client, Message message)
+        internal MultiRespawnEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
             this.Coordinates = new List<KeyValuePair<Player, Point>>();

@@ -1,8 +1,8 @@
 ﻿namespace BotBits.Events
 {
-    public sealed class TeleportEvent : Event<TeleportEvent>
+    public sealed class RespawnEvent : Event<RespawnEvent>
     {
-        internal TeleportEvent(Player player, int x, int y, bool resetCoins)
+        internal RespawnEvent(Player player, int x, int y, bool resetCoins)
         {
             this.Player = player;
             this.X = x;

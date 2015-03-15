@@ -85,7 +85,8 @@ namespace BotBits
             this.CurrentScheduler.InitScheduler();
 
             return ConnectionUtils.GuestLoginAsync()
-                .Then(task => this.WithClient(task.Result));
+                .Then(task => this.WithClient(task.Result))
+                .ToSafeTask();
         }
 
         [Pure]
@@ -94,7 +95,8 @@ namespace BotBits
             this.CurrentScheduler.InitScheduler();
 
             return PlayerIO.QuickConnect.SimpleConnectAsync(ConnectionUtils.GameId, email, password, null)
-                .Then(task => this.WithClient(task.Result));
+                .Then(task => this.WithClient(task.Result))
+                .ToSafeTask();
         }
 
         [Pure]
@@ -103,7 +105,8 @@ namespace BotBits
             this.CurrentScheduler.InitScheduler();
 
             return PlayerIO.QuickConnect.FacebookOAuthConnectAsync(ConnectionUtils.GameId, token, null, null)
-                .Then(task => this.WithClient(task.Result));
+                .Then(task => this.WithClient(task.Result))
+                .ToSafeTask();
         }
 
         [Pure]
@@ -112,7 +115,8 @@ namespace BotBits
             this.CurrentScheduler.InitScheduler();
 
             return PlayerIO.QuickConnect.KongregateConnectAsync(ConnectionUtils.GameId, userId, token, null)
-                .Then(task => this.WithClient(task.Result));
+                .Then(task => this.WithClient(task.Result))
+                .ToSafeTask();
         }
 
         [Pure]
@@ -121,7 +125,8 @@ namespace BotBits
             this.CurrentScheduler.InitScheduler();
 
             return ConnectionUtils.ArmorGamesRoomLoginAsync(userId, token)
-                .Then(task => this.WithClient(task.Result));
+                .Then(task => this.WithClient(task.Result))
+                .ToSafeTask();
         }
 
         [Pure]

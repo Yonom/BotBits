@@ -7,12 +7,12 @@ namespace BotBits
     {
         public static Task JoinRoomAsync(this Task<LoginClient> client, string roomId)
         {
-            return client.Then(task => task.Result.JoinRoomAsync(roomId));
+            return client.Then(task => task.Result.JoinRoomAsync(roomId)).ToSafeTask();
         }
 
         public static Task CreateJoinRoomAsync(this Task<LoginClient> client, string roomId)
         {
-            return client.Then(task => task.Result.CreateJoinRoomAsync(roomId));
+            return client.Then(task => task.Result.CreateJoinRoomAsync(roomId)).ToSafeTask();
         }
 
         /// <summary>
