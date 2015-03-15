@@ -43,10 +43,15 @@ namespace BotBits
 
         public void GetCrown()
         {
-            new GetCrownSendMessage()
-                .SendIn(this.BotBits);
+            this.GetCrown(0, 0);
         }
 
+        public void GetCrown(int x, int y)
+        {
+            new GetCrownSendMessage(x, y)
+                .SendIn(this.BotBits);
+        }
+        
         public void GetCoin(int coins, int blueCoins, int x, int y)
         {
             new CoinSendMessage(coins, blueCoins, x, y)
@@ -91,7 +96,12 @@ namespace BotBits
 
         public void CompleteLevel()
         {
-            new CompleteLevelSendMessage()
+            this.CompleteLevel(0, 0);
+        }
+
+        public void CompleteLevel(int x, int y)
+        {
+            new CompleteLevelSendMessage(x, y)
                 .SendIn(this.BotBits);
         }
 
@@ -129,6 +139,50 @@ namespace BotBits
         {
             new ModModeSendMessage()
                 .SendIn(this.BotBits);
+        }
+
+        public void PressKey(Key key)
+        {
+            this.PressKey(key, 0, 0);
+        }
+
+        public void PressKey(Key key, int x, int y)
+        {
+            switch (key)
+            {
+                case Key.Blue:
+                    new BlueKeySendMessage(x, y)
+                        .SendIn(this.BotBits);
+                    break;
+
+                case Key.Green:
+                    new GreenKeySendMessage(x, y)
+                        .SendIn(this.BotBits);
+                    break;
+
+                case Key.Red:
+                    new RedKeySendMessage(x, y)
+                        .SendIn(this.BotBits);
+                    break;
+
+                case Key.Cyan:
+                    new CyanKeySendMessage(x, y)
+                        .SendIn(this.BotBits);
+                    break;
+
+                case Key.Magenta:
+                    new MagentaKeySendMessage(x, y)
+                        .SendIn(this.BotBits);
+                    break;
+
+                case Key.Yellow:
+                    new YellowKeySendMessage(x, y)
+                        .SendIn(this.BotBits);
+                    break;
+
+                default:
+                    throw new NotSupportedException("The given key could not be sent.");
+            }
         }
     }
 }

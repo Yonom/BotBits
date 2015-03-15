@@ -48,30 +48,6 @@ namespace BotBits
             return this._enabledKeys.Contains(key);
         }
 
-        public void PressKey(Key key)
-        {
-            switch (key)
-            {
-                case Key.Blue:
-                    new BlueKeySendMessage()
-                        .SendIn(this.BotBits);
-                    break;
-
-                case Key.Green:
-                    new GreenKeySendMessage()
-                        .SendIn(this.BotBits);
-                    break;
-
-                case Key.Red:
-                    new RedKeySendMessage()
-                        .SendIn(this.BotBits);
-                    break;
-
-                default:
-                    throw new NotSupportedException("The given key could not be sent.");
-            }
-        }
-
         public void Access(string roomKey)
         {
             new AccessSendMessage(roomKey)
