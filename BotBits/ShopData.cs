@@ -30,13 +30,13 @@ namespace BotBits
             var pack = BlockServices.GetPackageInternal(id);
             if (pack == null) return true;
 
-            if (pack.BlocksPerPack > 0)
-            {
-                int owned;
-                this._itemCounts.TryGetValue(pack.Package, out owned);
-                return (isBuildersClub && pack.Package != "brickdiamond") || 
-                       pack.BlocksPerPack * owned > count;
-            }
+            //if (pack.BlocksPerPack > 0)
+            //{
+            //    int owned;
+            //    this._itemCounts.TryGetValue(pack.Package, out owned);
+            //    return (isBuildersClub && pack.Package != "brickdiamond") || 
+            //           pack.BlocksPerPack * owned > count;
+            //}
 
             switch (pack.Package)
             {

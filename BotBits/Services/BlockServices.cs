@@ -14,8 +14,8 @@ namespace BotBits
 
         static BlockServices()
         {
-            LoadPacks(typeof(Foreground));
             LoadPacks(typeof(Background));
+            LoadPacks(typeof(Foreground));
             LoadSmileys(typeof(Smiley));
         }
 
@@ -62,15 +62,14 @@ namespace BotBits
 
         static void LoadPacks(Type type)
         {
-            foreach (var field in type.GetFields())
+            foreach (var field in type.GetFields(BindingFlags.Static | BindingFlags.Public))
             {
+                var value = (ushort)field.GetValue(null);
+                _blockGroups[value] = type;
+
                 var pack = GetPack(field);
                 if (pack != null)
-                {
-                    var value = (ushort)field.GetValue(null);
                     _blockPacks.Add(value, pack);
-                    _blockGroups.Add(value, type);
-                }
             }
 
             foreach (var i in type.GetNestedTypes())

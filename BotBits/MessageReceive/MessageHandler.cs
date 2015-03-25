@@ -45,8 +45,13 @@ namespace BotBits
                     var instance = (IEvent)Activator.CreateInstance(handler, flags, null,
                         new object[] { this.BotBits, e.Message }, null);
 
+                    var playerEvent = instance as IPlayerEvent;
+                    if (playerEvent != null && playerEvent.Player == null)
+                        throw new InvalidOperationException();
+
                     instance.RaiseIn(this.BotBits);
                 }
+                catch (InvalidOperationException) { }
                 catch (Exception ex)
                 {
                     Debug.WriteLine("Error parsing message: {0} \n {1}", e.Message, ex);

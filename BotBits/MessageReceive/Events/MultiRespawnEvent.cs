@@ -23,7 +23,9 @@ namespace BotBits.Events
 
             for (uint i = 1; i <= message.Count - 1u; i += 3)
             {
-                var player = Players.Of(client)[message.GetInteger(i)];
+                var userId = message.GetInteger(i);
+                if (!Players.Of(client).Contains(userId)) continue;
+                var player = Players.Of(client)[userId];
                 var x = message.GetInteger(i + 1u);
                 var y =  message.GetInteger(i + 2u);
 

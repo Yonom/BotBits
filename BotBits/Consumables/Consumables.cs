@@ -38,8 +38,7 @@ namespace BotBits
             lock (this._potionCounts)
             {
                 this._potionCounts[potion] = value;
-
-
+                
                 new PotionCountEvent(potion, value)
                     .RaiseIn(this.BotBits);
             }

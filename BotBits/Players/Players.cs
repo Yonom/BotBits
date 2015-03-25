@@ -185,7 +185,7 @@ namespace BotBits
         private void OnMove(MoveEvent e)
         {
             Player p = e.Player;
-            p.GoldCoins = e.Coins;
+            //p.GoldCoins = e.Coins;
             p.Horizontal = e.Horizontal;
             p.Vertical = e.Vertical;
             p.ModifierX = e.ModifierX;
