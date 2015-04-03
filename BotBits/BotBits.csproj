@@ -56,10 +56,14 @@
     <Compile Include="Blocks\Events\BackgroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\ForegroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\PlaceEvent.cs" />
+    <Compile Include="ConnectionManager\ClientUtils.cs" />
     <Compile Include="ConnectionManager\ConnectionArgs.cs" />
-    <Compile Include="ConnectionManager\ConnectionManagerExtensions.cs" />
+    <Compile Include="ConnectionManager\ILoginClient.cs" />
+    <Compile Include="ConnectionManager\LoginClientExtensions.cs" />
+    <Compile Include="ConnectionManager\PlayerIOGame.cs" />
+    <Compile Include="ConnectionManager\PlayerIOGameExtensions.cs" />
     <Compile Include="ConnectionManager\ConnectionUtils.cs" />
-    <Compile Include="ConnectionManager\IConnectionManager.cs" />
+    <Compile Include="ConnectionManager\IPlayerIOGame.cs" />
     <Compile Include="Helpers\PlayerIOAsync.cs" />
     <Compile Include="ConnectionManager\LobbyItem.cs" />
     <Compile Include="ConnectionManager\LoginClient.cs" />

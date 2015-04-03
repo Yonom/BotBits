@@ -6,17 +6,17 @@ using PlayerIOClient;
 
 namespace BotBits
 {
-    public sealed class LoginClient
+    public sealed class LoginClient : ILoginClient
     {
         private const string EverybodyEdits = "Everybodyedits";
         private const string Beta = "Beta";
 
         [NotNull]
-        private readonly IConnectionManager<LoginClient> _connectionManager;
+        private readonly IConnectionManager _connectionManager;
 
         private readonly Task<ConnectionArgs> _argsAsync;
 
-        public LoginClient([NotNull] IConnectionManager<LoginClient> connectionManager, [NotNull] Client client)
+        public LoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client)
         {
             if (connectionManager == null) throw new ArgumentNullException("connectionManager");
             if (client == null) throw new ArgumentNullException("client");
@@ -29,36 +29,16 @@ namespace BotBits
         [NotNull]
         public Client Client { get; private set; }
 
-        public LobbyItem[] GetLobby()
-        {
-            return this.GetLobbyAsync().GetResultEx();
-        }
-
         public Task<LobbyItem[]> GetLobbyAsync()
         {
             return this.GetVersionAsync().Then(task =>
             {
                 var version = task.Result;
-                var normals = this.GetLobbyRoomsAsync(EverybodyEdits + version);
-                var betas = this.GetLobbyRoomsAsync(Beta + version);
+                var normals = this.Client.GetLobbyRoomsAsync(this, EverybodyEdits + version);
+                var betas = this.Client.GetLobbyRoomsAsync(this, Beta + version);
                 return Task.Factory.ContinueWhenAll(new[] {normals, betas},
                     items => items.SelectMany(i => i.Result).ToArray());
             }).ToSafeTask();
-        }
-
-        private Task<LobbyItem[]> GetLobbyRoomsAsync(string roomId)
-        {
-            return this.Client.Multiplayer
-                .ListRoomsAsync(roomId, null, 0, 0)
-                .Then(r => r.Result
-                    .Select(room => new LobbyItem(this, room))
-                    .ToArray())
-                .ToSafeTask();
-        }
-
-        public void CreateJoinRoom(string worldId)
-        {
-            this.CreateJoinRoomAsync(worldId).WaitEx();
         }
 
         public Task CreateJoinRoomAsync(string roomId)
@@ -72,11 +52,6 @@ namespace BotBits
                     .CreateJoinRoomAsync(roomId, roomPrefix + task.Result, true, null, null))
                 .Then(task => this.InitConnection(task.Result))
                 .ToSafeTask();
-        }
-
-        public void JoinRoom(string roomId)
-        {
-            this.JoinRoomAsync(roomId).WaitEx();
         }
 
         public Task JoinRoomAsync(string roomId)

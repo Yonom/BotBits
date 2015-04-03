@@ -6,8 +6,6 @@ namespace BotBits
 {
     internal static class ConnectionUtils
     {
-        public const string GameId = "everybody-edits-su9rn58o40itdbnw69plyw";
-
         public static Task<ConnectionArgs> GetConnectionArgsAsync(Client client)
         {
             var args = new ConnectionArgs();
@@ -21,14 +19,14 @@ namespace BotBits
             return vaultTask.Then(t => playerObjectTask).Then(t => args);
         }
 
-        public static Task<Client> GuestLoginAsync()
+        public static Task<Client> GuestLoginAsync(string gameId)
         {
-            return PlayerIO.QuickConnect.SimpleConnectAsync(GameId, "guest", "guest", null);
+            return PlayerIO.QuickConnect.SimpleConnectAsync(gameId, "guest", "guest", null);
         }
 
-        public static Task<Client> ArmorGamesRoomLoginAsync(string userId, string token)
+        public static Task<Client> ArmorGamesRoomLoginAsync(string gameId, string userId, string token)
         {
-            return GuestLoginAsync()
+            return GuestLoginAsync(gameId)
                 .Then(t => t.Result.Multiplayer.JoinRoomAsync(String.Empty, null)
                 .Then(task =>
                 {
@@ -42,7 +40,7 @@ namespace BotBits
                                 throw new ArgumentException("Auth failed.");
 
                             tcs.TrySetResult(PlayerIO.Connect(
-                                GameId,
+                                gameId,
                                 "secure",
                                 message.GetString(0),
                                 message.GetString(1),

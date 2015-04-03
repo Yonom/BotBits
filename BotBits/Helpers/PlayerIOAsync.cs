@@ -13,6 +13,13 @@ namespace BotBits
             payVault.Refresh(() => tcs.SetResult(default(AsyncVoid)), tcs.SetException);
             return tcs.Task;
         }
+
+        public static Task<Client> ConnectAsync(string gameId, string connectionId, string userId, string auth, string partnerId, string[] playerInsightSegments)
+        {
+            var tcs = new TaskCompletionSource<Client>();
+            PlayerIO.Connect(gameId, connectionId, userId, auth, partnerId, playerInsightSegments, tcs.SetResult, tcs.SetException);
+            return tcs.Task;
+        }
         
         public static Task<DatabaseObject> LoadAsync(this BigDB bigDB, string table, string key)
         {

@@ -7,7 +7,7 @@ namespace BotBits
     [DebuggerDisplay("{Id}: {Name}")]
     public sealed class LobbyItem
     {
-        private readonly LoginClient _client;
+        private readonly ILoginClient _client;
         public int Online { get; private set; }
         public string Id { get; private set; }
         public string Name { get; private set; }
@@ -17,7 +17,7 @@ namespace BotBits
         public bool HasCode { get; private set; }
         public bool Featured { get; private set; }
 
-        public LobbyItem(LoginClient client, RoomInfo roomInfo)
+        public LobbyItem(ILoginClient client, RoomInfo roomInfo)
         {
             this._client = client;
 

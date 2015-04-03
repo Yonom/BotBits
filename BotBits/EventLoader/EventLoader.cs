@@ -18,6 +18,8 @@ namespace BotBits
 
         public void Load([NotNull]object obj)
         {
+            ConnectionManager.Of(this.BotBits).CurrentScheduler.InitScheduler(false);
+
             MethodInfo[] methods =
                 obj.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             this.LoadEventhandlers(obj.GetType(), obj, methods);
@@ -26,6 +28,16 @@ namespace BotBits
         public void LoadStatic<T>()
         {
             var type = typeof(T);
+            MethodInfo[] methods =
+                type.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
+            this.LoadEventhandlers(type, null, methods);
+        }
+
+        public void LoadModule(Type type)
+        {
+            if (!type.IsAbstract || !type.IsSealed)
+                throw new NotSupportedException("Only static types may be passed to LoadModule!");
+
             MethodInfo[] methods =
                 type.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
             this.LoadEventhandlers(type, null, methods);
@@ -80,7 +92,6 @@ namespace BotBits
 
         private static Exception GetEventEx(Type type, string name, string reason)
         {
-            
             return
                 new TypeLoadException(String.Format("Unable to assign the method {0}.{1} to an event listener. {2}",
                     type.FullName, name, reason));

@@ -7,7 +7,8 @@ using PlayerIOClient;
 
 namespace BotBits
 {
-    public sealed class ConnectionManager : Package<ConnectionManager>, IDisposable, IConnectionManager<LoginClient>
+    public sealed class ConnectionManager : Package<ConnectionManager>, IDisposable, 
+        IPlayerIOGame<LoginClient>, IConnectionManager<LoginClient>
     {
         private IConnection _connection;
         private PlayerIOConnectionAdapter _adapter;
@@ -47,7 +48,7 @@ namespace BotBits
             this.CurrentScheduler.Dispose();
         }
 
-        void IConnectionManager<LoginClient>.AttachConnection(Connection connection, ConnectionArgs args)
+        void IConnectionManager.AttachConnection(Connection connection, ConnectionArgs args)
         {
             var adapter = new PlayerIOConnectionAdapter(connection);
             try
@@ -65,6 +66,11 @@ namespace BotBits
         public LoginClient WithClient(Client client)
         {
             return new LoginClient(this, client);
+        }
+
+        public PlayerIOGame WithGameId(string gameId)
+        {
+            return new PlayerIOGame(this, gameId);
         }
 
         public void SetConnection(IConnection connection, ConnectionArgs args)
@@ -117,5 +123,8 @@ namespace BotBits
             new DisconnectEvent(message)
                 .RaiseIn(this.BotBits);
         }
+
+        public string GameId { get { return "everybody-edits-su9rn58o40itdbnw69plyw"; } }
+        IConnectionManager<LoginClient> IPlayerIOGame<LoginClient>.ConnectionManager { get { return this; } }
     }
 }

@@ -32,6 +32,7 @@ namespace BotBits
             add { this._connection.OnMessage += value; }
             remove { this._connection.OnMessage -= value; }
         }
+
         public event DisconnectEventHandler OnDisconnect
         {
             add { this._connection.OnDisconnect += value; }
