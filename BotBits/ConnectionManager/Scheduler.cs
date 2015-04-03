@@ -13,6 +13,7 @@ namespace BotBits
 
         public void Schedule(Action task)
         {
+            this.InitScheduler(true);
             this._schedulerHandle.SynchronizationContext.Post(o => task(), null);
         }
 
@@ -28,16 +29,22 @@ namespace BotBits
                 old.Dispose();
         }
 
-        internal void InitScheduler()
+        internal void InitScheduler(bool create)
         {
             if (this._schedulerHandle == null)
             {
-                var scheduler = BotServices.GetScheduler();
-                if (Interlocked.CompareExchange(ref this._schedulerHandle, scheduler, null) != null)
-                {
+                var scheduler = create
+                    ? BotServices.GetOrCreateScheduler()
+                    : BotServices.GetScheduler();
+
+                if (!CompareSetScheduler(scheduler))
                     scheduler.Dispose();
-                }
             }
+        }
+
+        private bool CompareSetScheduler(ISchedulerHandle handle)
+        {
+            return Interlocked.CompareExchange(ref this._schedulerHandle, handle, null) == null;
         }
 
         public void Dispose()

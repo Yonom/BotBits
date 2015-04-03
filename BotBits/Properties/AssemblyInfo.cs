@@ -16,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-//[assembly: InternalsVisibleTo("BotBits.Tests")]
+[assembly: InternalsVisibleTo("BotBits.Tests, PublicKey=00240000048000009400000006020000002400005253413100040000010001009bf09d008233dcf2c323a6510901a0d488ff7d6b3a8db30a727a7892a2018cf820d960d937256c1d4f8b120fbffba101bfcd105b2ae1e0f73345b68445bebcdc79b3e6845f5f5958ca084a53a01b3d22cd232eeb45125a2c5184c37219f990e83c8587f815b6946373ed32ec096f84ceb25d05c4b39ab14ff48949976104f4ad")]

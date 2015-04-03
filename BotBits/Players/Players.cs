@@ -83,21 +83,6 @@ namespace BotBits
                 return this._players.Values.Where(p => p.Username == username).ToArray();
         }
 
-        //internal Player GetPlayer(int userId)
-        //{
-        //    if (userId == Player.Nobody.UserId)
-        //        return Player.Nobody;
-
-        //    Player player;
-        //    lock (this._players)
-        //        if (!this._players.TryGetValue(userId, out player))
-        //        {
-        //            player = new Player(this, userId);
-        //            this._players.Add(userId, player);
-        //        }
-        //    return player;
-        //}
-
         internal Player AddPlayer(int userId)
         {
             lock (this._players)

@@ -57,7 +57,9 @@
     <Compile Include="Blocks\Events\ForegroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\PlaceEvent.cs" />
     <Compile Include="ConnectionManager\ConnectionArgs.cs" />
+    <Compile Include="ConnectionManager\ConnectionManagerExtensions.cs" />
     <Compile Include="ConnectionManager\ConnectionUtils.cs" />
+    <Compile Include="ConnectionManager\IConnectionManager.cs" />
     <Compile Include="Helpers\PlayerIOAsync.cs" />
     <Compile Include="ConnectionManager\LobbyItem.cs" />
     <Compile Include="ConnectionManager\LoginClient.cs" />

@@ -11,12 +11,17 @@ namespace BotBits
             RunDispatcher(d => callback(new BotBitsClient(new ActionDispatcherSchedulerHandle())));
         }
 
-        internal static ISchedulerHandle GetScheduler()
+        internal static ISchedulerHandle GetOrCreateScheduler()
         {
             // If the current SynchronizationContext is not set, create a new ActionThread
+            return GetScheduler() ?? ActionDispatcherSchedulerHandle.StartOnNewThread();
+        }
+
+        internal static ISchedulerHandle GetScheduler()
+        {
             return SynchronizationContext.Current != null
-                ? (ISchedulerHandle)new SynchronizationContextSchedulerHandle()
-                : ActionDispatcherSchedulerHandle.StartOnNewThread();
+                ? new SynchronizationContextSchedulerHandle()
+                : null;
         }
 
         internal static void RunDispatcher(Action<ActionDispatcher> task)

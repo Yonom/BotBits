@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Reflection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BotBits.Tests.Events
 {
@@ -27,7 +29,7 @@ namespace BotBits.Tests.Events
 
             EventLoader
                 .Of(botBits)
-                .LoadStatic(typeof(EventLoaderTests));
+                .LoadStatic<EventLoaderTests>();
 
             Assert.IsTrue(
                 TestEvent

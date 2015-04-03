@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using BotBits.Events;
 using BotBits.SendMessages;
 using PlayerIOClient;
 
 namespace BotBits
 {
-    public sealed class ConnectionManager : Package<ConnectionManager>, IDisposable
+    public sealed class ConnectionManager : Package<ConnectionManager>, IDisposable, IConnectionManager<LoginClient>
     {
         private IConnection _connection;
         private PlayerIOConnectionAdapter _adapter;
         public Scheduler CurrentScheduler { get; private set; }
-
         public IConnection Connection
         {
             get { return this._connection; }
@@ -49,98 +47,7 @@ namespace BotBits
             this.CurrentScheduler.Dispose();
         }
 
-        [Pure]
-        public LoginClient GuestLogin()
-        {
-            return this.GuestLoginAsync().GetResultEx();
-        }
-
-        [Pure]
-        public LoginClient EmailLogin(string email, string password)
-        {
-            return this.EmailLoginAsync(email, password).GetResultEx();
-        }
-
-        [Pure]
-        public LoginClient FacebookLogin(string token)
-        {
-            return this.FacebookLoginAsync(token).GetResultEx();
-        }
-
-        [Pure]
-        public LoginClient KongregateLogin(string userId, string token)
-        {
-            return this.KongregateLoginAsync(userId, token).GetResultEx();
-        }
-
-        [Pure]
-        public LoginClient ArmorGamesLogin(string userId, string token)
-        {
-            return this.ArmorGamesLoginAsync(userId, token).GetResultEx();
-        }
-
-        [Pure]
-        public Task<LoginClient> GuestLoginAsync()
-        {
-            this.CurrentScheduler.InitScheduler();
-
-            return ConnectionUtils.GuestLoginAsync()
-                .Then(task => this.WithClient(task.Result))
-                .ToSafeTask();
-        }
-
-        [Pure]
-        public Task<LoginClient> EmailLoginAsync(string email, string password)
-        {
-            this.CurrentScheduler.InitScheduler();
-
-            return PlayerIO.QuickConnect.SimpleConnectAsync(ConnectionUtils.GameId, email, password, null)
-                .Then(task => this.WithClient(task.Result))
-                .ToSafeTask();
-        }
-
-        [Pure]
-        public Task<LoginClient> FacebookLoginAsync(string token)
-        {
-            this.CurrentScheduler.InitScheduler();
-
-            return PlayerIO.QuickConnect.FacebookOAuthConnectAsync(ConnectionUtils.GameId, token, null, null)
-                .Then(task => this.WithClient(task.Result))
-                .ToSafeTask();
-        }
-
-        [Pure]
-        public Task<LoginClient> KongregateLoginAsync(string userId, string token)
-        {
-            this.CurrentScheduler.InitScheduler();
-
-            return PlayerIO.QuickConnect.KongregateConnectAsync(ConnectionUtils.GameId, userId, token, null)
-                .Then(task => this.WithClient(task.Result))
-                .ToSafeTask();
-        }
-
-        [Pure]
-        public Task<LoginClient> ArmorGamesLoginAsync(string userId, string token)
-        {
-            this.CurrentScheduler.InitScheduler();
-
-            return ConnectionUtils.ArmorGamesRoomLoginAsync(userId, token)
-                .Then(task => this.WithClient(task.Result))
-                .ToSafeTask();
-        }
-
-        [Pure]
-        public LoginClient WithClient([NotNull] Client client)
-        {
-            this.CurrentScheduler.InitScheduler();
-
-            if (client == null)
-                throw new ArgumentNullException("client");
-
-            return new LoginClient(this, client);
-        }
-
-        internal void SetConnectionInternal([NotNull] Connection connection, ConnectionArgs args)
+        void IConnectionManager<LoginClient>.AttachConnection(Connection connection, ConnectionArgs args)
         {
             var adapter = new PlayerIOConnectionAdapter(connection);
             try
@@ -155,7 +62,12 @@ namespace BotBits
             }
         }
 
-        public void SetConnection([NotNull] IConnection connection, ConnectionArgs args)
+        public LoginClient WithClient(Client client)
+        {
+            return new LoginClient(this, client);
+        }
+
+        public void SetConnection(IConnection connection, ConnectionArgs args)
         {
             if (connection == null)
                 throw new ArgumentNullException("connection");

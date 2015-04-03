@@ -8,18 +8,15 @@ namespace BotBits
     public class BotBitsClient
     {
         // TODO: Physics (extension?)
-
-
+        
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly PackageLoader _packageLoader = new PackageLoader();
 
-        public BotBitsClient()
+        public BotBitsClient() : this(BotServices.GetScheduler())
         {
-            DefaultExtension
-                .LoadInto(this);
         }
 
-        internal BotBitsClient(ISchedulerHandle handle) : this()
+        internal BotBitsClient(ISchedulerHandle handle)
         {
             DefaultExtension
                 .LoadInto(this, handle);

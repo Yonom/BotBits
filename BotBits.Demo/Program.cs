@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using BotBits.Events;
 
@@ -18,20 +21,9 @@ namespace BotBits.Demo
             ConnectionManager
                 .Of(bot)
                 .GuestLogin()
-                .CreateJoinRoom("PWAARLDluVa0I");
-
+                .CreateJoinRoom("PWUKW1nu-Ta0I");
 
             Thread.Sleep(-1);
-        }
-
-        [EventListener]
-        static void OnInit(InitEvent e)
-        {
-
-            foreach (var a in Enumerable.Range(0, 1000))
-            {
-                Actions.Of(bot).PressKey(Key.Blue);
-            }
         }
     }
 }

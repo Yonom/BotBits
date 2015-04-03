@@ -12,11 +12,11 @@ namespace BotBits
         private const string Beta = "Beta";
 
         [NotNull]
-        private readonly ConnectionManager _connectionManager;
+        private readonly IConnectionManager<LoginClient> _connectionManager;
 
         private readonly Task<ConnectionArgs> _argsAsync;
 
-        public LoginClient([NotNull] ConnectionManager connectionManager, [NotNull] Client client)
+        public LoginClient([NotNull] IConnectionManager<LoginClient> connectionManager, [NotNull] Client client)
         {
             if (connectionManager == null) throw new ArgumentNullException("connectionManager");
             if (client == null) throw new ArgumentNullException("client");
@@ -95,7 +95,7 @@ namespace BotBits
 
         private Task InitConnection(Connection conn)
         {
-            return this._argsAsync.Then(task => this._connectionManager.SetConnectionInternal(conn, task.Result));
+            return this._argsAsync.Then(task => this._connectionManager.AttachConnection(conn, task.Result));
         }
     }
 }

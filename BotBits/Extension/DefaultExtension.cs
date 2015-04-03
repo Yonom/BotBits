@@ -8,11 +8,6 @@
             ConnectionManager.Of(client).CurrentScheduler.SetScheduler(handle);
         }
 
-        public static void LoadInto(BotBitsClient client)
-        {
-            LoadInto(client, null);
-        }
-
         public static void LoadInto(BotBitsClient client, ISchedulerHandle handle)
         {
             LoadInto(client, (object)handle);
