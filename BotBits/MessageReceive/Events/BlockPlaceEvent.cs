@@ -2,8 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    // NOTE: Internal to avoid confusion with Foreground/Background place
+
     [ReceiveEvent("b")]
-    public sealed class BlockPlaceEvent : PlayerEvent<BlockPlaceEvent>
+    internal sealed class BlockPlaceEvent : PlayerEvent<BlockPlaceEvent>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="BlockPlaceEvent" /> class.

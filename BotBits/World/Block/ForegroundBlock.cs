@@ -4,8 +4,40 @@ using System.Diagnostics;
 namespace BotBits
 {
     [DebuggerDisplay("Id = {Id}")]
-    public struct ForegroundBlock
+    public struct ForegroundBlock : IEquatable<ForegroundBlock>
     {
+        public bool Equals(ForegroundBlock other)
+        {
+            return Equals(this._args, other._args) && this._id == other._id && this._type == other._type;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            return obj is ForegroundBlock && Equals((ForegroundBlock)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = (this._args != null ? this._args.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (int)this._id;
+                hashCode = (hashCode * 397) ^ (int)this._type;
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(ForegroundBlock left, ForegroundBlock right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(ForegroundBlock left, ForegroundBlock right)
+        {
+            return !left.Equals(right);
+        }
+
         private readonly object _args;
         private readonly Foreground.Id _id;
         private readonly ForegroundType _type;
@@ -353,8 +385,44 @@ namespace BotBits
             return (LabelArgs)this._args;
         }
 
-        private class PortalArgs
+        private class PortalArgs : IEquatable<PortalArgs>
         {
+            public bool Equals(PortalArgs other)
+            {
+                if (ReferenceEquals(null, other)) return false;
+                if (ReferenceEquals(this, other)) return true;
+                return this.PortalId == other.PortalId && this.PortalTarget == other.PortalTarget && this.PortalRotation == other.PortalRotation;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+                if (obj.GetType() != this.GetType()) return false;
+                return Equals((PortalArgs)obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    int hashCode = (int)this.PortalId;
+                    hashCode = (hashCode * 397) ^ (int)this.PortalTarget;
+                    hashCode = (hashCode * 397) ^ (int)this.PortalRotation;
+                    return hashCode;
+                }
+            }
+
+            public static bool operator ==(PortalArgs left, PortalArgs right)
+            {
+                return Equals(left, right);
+            }
+
+            public static bool operator !=(PortalArgs left, PortalArgs right)
+            {
+                return !Equals(left, right);
+            }
+
             public PortalArgs(uint portalId, uint portalTarget, PortalRotation portalRotation)
             {
                 this.PortalId = portalId;
@@ -367,8 +435,41 @@ namespace BotBits
             public PortalRotation PortalRotation { get; private set; }
         }
 
-        private class LabelArgs
+        private class LabelArgs : IEquatable<LabelArgs>
         {
+            public bool Equals(LabelArgs other)
+            {
+                if (ReferenceEquals(null, other)) return false;
+                if (ReferenceEquals(this, other)) return true;
+                return string.Equals(this.Text, other.Text) && string.Equals(this.TextColor, other.TextColor);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+                if (obj.GetType() != this.GetType()) return false;
+                return Equals((LabelArgs)obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    return ((this.Text != null ? this.Text.GetHashCode() : 0) * 397) ^ (this.TextColor != null ? this.TextColor.GetHashCode() : 0);
+                }
+            }
+
+            public static bool operator ==(LabelArgs left, LabelArgs right)
+            {
+                return Equals(left, right);
+            }
+
+            public static bool operator !=(LabelArgs left, LabelArgs right)
+            {
+                return !Equals(left, right);
+            }
+
             public string Text { get; private set; }
             public string TextColor { get; private set; }
 

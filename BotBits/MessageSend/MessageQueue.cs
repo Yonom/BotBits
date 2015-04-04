@@ -10,11 +10,19 @@ namespace BotBits
 {
     public class MessageQueue<T> : IMessageQueue where T : SendMessage<T>
     {
-        public event EventHandler<SendQueueEventArgs<T>> Send;
+        public event EventHandler<SendEventArgs<T>> Send;
 
-        protected virtual void OnSend(SendQueueEventArgs<T> e)
+        protected virtual void OnSend(SendEventArgs<T> e)
         {
             var handler = this.Send;
+            if (handler != null) handler(this, e);
+        }
+
+        public event EventHandler<SendingEventArgs<T>> Sending;
+
+        protected virtual void OnSending(SendingEventArgs<T> e)
+        {
+            var handler = this.Sending;
             if (handler != null) handler(this, e);
         }
 
@@ -42,10 +50,13 @@ namespace BotBits
                 var msg = this.Dequeue();
                 if (msg == null) return;
 
-                var e = new SendQueueEventArgs<T>(msg);
-                this.OnSend(e);
+                var e = new SendingEventArgs<T>(msg);
+                this.OnSending(e);
                 if (!e.Cancelled)
                 {
+                    var e2 = new SendEventArgs<T>(msg);
+                    this.OnSend(e2);
+
                     e.Message.Send(connection);
                 }
                 else

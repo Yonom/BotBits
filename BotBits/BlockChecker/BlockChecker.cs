@@ -34,9 +34,10 @@ namespace BotBits
             this._room = Room.Of(this.BotBits);
             this._world = Blocks.Of(this.BotBits);
             this._messageQueue = PlaceSendMessage.Of(this.BotBits);
+            this._messageQueue.Sending += this.OnSendingPlace;
             this._messageQueue.Send += this.OnSendPlace;
         }
-        
+
         private RegisteredWaitHandle RegisterSendTimeout()
         {
             return ThreadPool.RegisterWaitForSingleObject(this._timeoutResetEvent, (state, timedOut) =>
@@ -144,36 +145,43 @@ namespace BotBits
             });
         }
 
-        private void OnSendPlace(object sender, SendQueueEventArgs<PlaceSendMessage> e)
+        private void OnSendingPlace(object sender, SendingEventArgs<PlaceSendMessage> e)
         {
             var b = e.Message;
             var p = b.GetPoint3D();
 
             lock (this._sentBlocks)
             {
-                if (this.ShouldSend(b, p))
-                {
-                    this._timeoutResetEvent.Set();
-                    this._finishResetEvent.Reset();
-
-                    var overwrritenSends = 0;
-                    CheckHandle oldHandle;
-                    if (this._sentLocations.TryGetValue(p, out oldHandle))
-                    {
-                        this._sentBlocks.Remove(oldHandle);
-                        overwrritenSends = oldHandle.OverwrittenSends + 1;
-                    }
-
-                    var newHandle = new CheckHandle(b, overwrritenSends);
-                    this._sentBlocks.AddToBack(newHandle);
-                    this._sentLocations[p] = newHandle;
-                }
-                else
+                if (!this.ShouldSend(b, p))
                 {
                     e.Cancelled = true;
 
                     this.UpdateFinish();
                 }
+            }
+        }
+
+        private void OnSendPlace(object sender, SendEventArgs<PlaceSendMessage> e)
+        {
+            var b = e.Message;
+            var p = b.GetPoint3D();
+
+            lock (this._sentBlocks)
+            {
+                this._timeoutResetEvent.Set();
+                this._finishResetEvent.Reset();
+
+                var overwrritenSends = 0;
+                CheckHandle oldHandle;
+                if (this._sentLocations.TryGetValue(p, out oldHandle))
+                {
+                    this._sentBlocks.Remove(oldHandle);
+                    overwrritenSends = oldHandle.OverwrittenSends + 1;
+                }
+
+                var newHandle = new CheckHandle(b, overwrritenSends);
+                this._sentBlocks.AddToBack(newHandle);
+                this._sentLocations[p] = newHandle;
             }
         }
 

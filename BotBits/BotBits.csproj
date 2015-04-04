@@ -122,7 +122,7 @@
     <Compile Include="Extension\DefaultExtension.cs" />
     <Compile Include="Extension\Extension.cs" />
     <Compile Include="Services\BotServices.cs" />
-    <Compile Include="MessageSend\SendQueueEventArgs.cs" />
+    <Compile Include="MessageSend\SendingEventArgs.cs" />
     <Compile Include="MessageSend\IMessageQueue.cs" />
     <Compile Include="MessageSend\MessageQueue.cs" />
     <Compile Include="MessageSend\MessageSender.cs" />
