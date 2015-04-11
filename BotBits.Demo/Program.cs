@@ -1,29 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
 using System.Threading;
+using BotBits;
 using BotBits.Events;
 
 namespace BotBits.Demo
 {
     internal class Program
     {
+        // TODO Raise Send event on instantsend
         private static BotBitsClient bot = new BotBitsClient();
 
         private static void Main()
         {
-            EventLoader
-                .Of(bot)
-                .LoadStatic<Program>();
-
             ConnectionManager
                 .Of(bot)
                 .GuestLogin()
-                .CreateJoinRoom("PWUKW1nu-Ta0I");
+                .CreateJoinRoom("world");
 
-            Thread.Sleep(-1);
+            Thread.Sleep(Timeout.Infinite);
         }
     }
 }

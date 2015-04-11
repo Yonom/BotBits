@@ -40,7 +40,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("touch", this.UserId, this.Reason);
+            return Message.Create("touch", this.UserId, (int)this.Reason);
         }
     }
 }

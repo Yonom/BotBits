@@ -18,6 +18,7 @@ namespace BotBits
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
         public Consumables()
         {
+            this.DisabledPotions = new Potion[0];
         }
 
         [Pure]
