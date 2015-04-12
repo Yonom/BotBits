@@ -51,7 +51,9 @@
     <Compile Include="Actions\Actions.cs" />
     <Compile Include="Actions\ActionsExtensions.cs" />
     <Compile Include="Blocks\BlockAreaEnumerable.cs" />
+    <Compile Include="Blocks\BlockAreaEnumerableExtensions.cs" />
     <Compile Include="Blocks\BlocksItem.cs" />
+    <Compile Include="Blocks\IBlockAreaEnumerable.cs" />
     <Compile Include="Blocks\ReadOnlyBlocksWorld.cs" />
     <Compile Include="Blocks\Events\BackgroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\ForegroundPlaceEvent.cs" />

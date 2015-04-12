@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BotBits
 {
-    public class BlockAreaEnumerable : IEnumerable<BlocksItem>
+    public class BlockAreaEnumerable : IBlockAreaEnumerable
     {
         public Blocks Blocks { get; private set; }
         public Rectangle Area { get; private set; }
@@ -12,11 +12,6 @@ namespace BotBits
         {
             this.Blocks = blocks;
             this.Area = area;
-        }
-
-        public BlockAreaEnumerable In(Rectangle area)
-        {
-            return new BlockAreaEnumerable(this.Blocks, Rectangle.Intersect(area, this.Area));
         }
 
         public IEnumerator<BlocksItem> GetEnumerator()

@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using BotBits.Events;
 using BotBits.SendMessages;
 
 namespace BotBits
 {
-    public sealed class Blocks : EventListenerPackage<Blocks>, 
-        IWorld<BlockData<ForegroundBlock>, BlockData<BackgroundBlock>>, IEnumerable<BlocksItem>
+    public sealed class Blocks : EventListenerPackage<Blocks>,  IBlockAreaEnumerable,
+        IWorld<BlockData<ForegroundBlock>, BlockData<BackgroundBlock>>
     {
         private BlockDataWorld _blockDataWorld;
         private ReadOnlyBlocksWorld _readOnlyBlocksWorld;
-        private BlockAreaEnumerable _enumerable;
 
         private BlockDataWorld World
         {
@@ -21,13 +19,7 @@ namespace BotBits
             {
                 this._blockDataWorld = value;
                 this._readOnlyBlocksWorld = new ReadOnlyBlocksWorld(this._blockDataWorld);
-                this._enumerable = new BlockAreaEnumerable(this, new Rectangle(0, 0, this.Width, this.Height));
             }
-        }
-
-        public BlockAreaEnumerable In(Rectangle area)
-        {
-            return this._enumerable.In(area);
         }
 
         public BlocksItem At(Point point)
@@ -77,31 +69,6 @@ namespace BotBits
         {
             new PlaceSendMessage(Layer.Foreground, x, y, (int)block.Id, block.GetArgs())
                 .SendIn(this.BotBits);
-        }
-
-        public World CreateCopy()
-        {
-            var world = new World(this.Width, this.Height);
-            for (var x = 0; x < this.Width; x++)
-                for (var y = 0; y < this.Height; y++)
-                {
-                    world.Foreground[x, y] = this.Foreground[x, y].Block;
-                    world.Background[x, y] = this.Background[x, y].Block;
-                }
-            return world;
-        }
-
-        public void UploadWorld(World world)
-        {
-            if (world.Width > this.Width || world.Height > this.Height)
-                throw new ArgumentException("The world is too big for this room.", "world");
-
-            for (var y = 0; y < this.Height; y++)
-                for (var x = 0; x < this.Width; x++)
-                {
-                    this.Place(x, y, world.Foreground[x, y]);
-                    this.Place(x, y, world.Background[x, y]);
-                }
         }
 
         [EventListener(EventPriority.High)]
@@ -233,12 +200,15 @@ namespace BotBits
 
         public IEnumerator<BlocksItem> GetEnumerator()
         {
-            return this._enumerable.GetEnumerator();
+            return this.In(this.Area).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
+
+        Blocks IBlockAreaEnumerable.Blocks { get { return this; } }
+        public Rectangle Area { get { return new Rectangle(0, 0, this.Width, this.Height); } }
     }
 }
