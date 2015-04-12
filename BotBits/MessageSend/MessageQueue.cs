@@ -49,17 +49,7 @@ namespace BotBits
             {
                 var msg = this.Dequeue();
                 if (msg == null) return;
-
-                var e = new SendingEventArgs<T>(msg);
-                this.OnSending(e);
-                if (!e.Cancelled)
-                {
-                    var e2 = new SendEventArgs<T>(msg);
-                    this.OnSend(e2);
-
-                    e.Message.Send(connection);
-                }
-                else
+                if (!this.SendMessage(msg, connection))
                 {
                     this._lastTicks--;
                 }
@@ -94,6 +84,22 @@ namespace BotBits
 
                 this._finishEvent.Reset();
             }
+        }
+
+        internal bool SendMessage(T msg, IConnection connection)
+        {
+            var e = new SendingEventArgs<T>(msg);
+            this.OnSending(e);
+            if (!e.Cancelled)
+            {
+                var e2 = new SendEventArgs<T>(msg);
+                this.OnSend(e2);
+
+                e.Message.Send(connection);
+
+                return true;
+            }
+            return false;
         }
 
         public void ClearQueue()

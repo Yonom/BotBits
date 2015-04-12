@@ -9,6 +9,71 @@ namespace BotBits
 {
     public static class WorldUtils
     {
+        public static WorldType GetLegacyWorldType(int width, int height)
+        {
+            if (width == 25 && height == 25) return WorldType.Small;
+            if (width == 50 && height == 50) return WorldType.Medium;
+            if (width == 100 && height == 100) return WorldType.Large;
+            if (width == 200 && height == 200) return WorldType.Massive;
+            if (width == 400 && height == 50) return WorldType.Wide;
+            if (width == 400 && height == 200) return WorldType.Great;
+            if (width == 100 && height == 400) return WorldType.Tall;
+            if (width == 636 && height == 50) return WorldType.UltraWide;
+            if (width == 150 && height == 25) return WorldType.Tutorial;
+            if (width == 110 && height == 110) return WorldType.MoonLarge;
+            if (width == 300 && height == 300) return WorldType.Huge;
+            if (width == 250 && height == 150) return WorldType.Big;
+            return WorldType.Unknown;
+        }
+
+        public static ForegroundBlock GetDatabaseBlock(DatabaseObject obj, Foreground.Id foreground)
+        {
+            var foregroundType = WorldUtils.GetForegroundType(foreground);
+
+            switch (foregroundType)
+            {
+                case ForegroundType.Normal:
+                    return new ForegroundBlock(foreground);
+
+                case ForegroundType.Drum:
+                case ForegroundType.Piano:
+                    return new ForegroundBlock(foreground,
+                        obj.GetInt("id", 0));
+
+                case ForegroundType.Goal:
+                    return new ForegroundBlock(foreground,
+                        obj.GetInt("goal", 0));
+
+                case ForegroundType.SciFiSlope:
+                case ForegroundType.SciFiStraight:
+                case ForegroundType.Rotatable:
+                    return new ForegroundBlock(foreground,
+                        obj.GetInt("rotation", 0));
+
+                case ForegroundType.Portal:
+                    return new ForegroundBlock(foreground,
+                        obj.GetUInt("id", 0),
+                        obj.GetUInt("target", 0),
+                        (PortalRotation)obj.GetUInt("rotation", 0));
+
+                case ForegroundType.WorldPortal:
+                    return new ForegroundBlock(foreground,
+                        obj.GetString("target"));
+
+                case ForegroundType.Text:
+                    return new ForegroundBlock(foreground,
+                        obj.GetString("text", "No text found."));
+
+                case ForegroundType.Label:
+                    return new ForegroundBlock(foreground,
+                        obj.GetString("text", "no text found"),
+                        obj.GetString("text_color", "#FFFFFF"));
+
+                default:
+                    throw new NotSupportedException("Encountered an unsupported block!");
+            }
+        }
+
         public static void DrawBorder<TForeground, TBackground>
             (World<TForeground, TBackground> world, TForeground borderBlock)
             where TForeground : struct
@@ -175,10 +240,10 @@ namespace BotBits
             if (id == Foreground.Special.FullyBlack)
                 return true;
 
-            var type = BlockServices.GetGroup((int)id);
-            return type == typeof(Foreground.Basic) ||
-                   type == typeof(Foreground.Beta) ||
-                   type == typeof(Foreground.Brick);
+            var block = BlockServices.GetGroup((int)id);
+            return block == typeof(Foreground.Basic) ||
+                   block == typeof(Foreground.Beta) ||
+                   block == typeof(Foreground.Brick);
         }
     }
 }

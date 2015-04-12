@@ -8,7 +8,6 @@ namespace BotBits.Demo
 {
     internal class Program
     {
-        // TODO Raise Send event on instantsend
         private static BotBitsClient bot = new BotBitsClient();
 
         private static void Main()

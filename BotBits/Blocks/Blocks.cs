@@ -12,7 +12,7 @@ namespace BotBits
     {
         private BlockDataWorld _blockDataWorld;
         private ReadOnlyBlocksWorld _readOnlyBlocksWorld;
-        private BlocksEnumerable _enumerable;
+        private BlockAreaEnumerable _enumerable;
 
         private BlockDataWorld World
         {
@@ -21,11 +21,11 @@ namespace BotBits
             {
                 this._blockDataWorld = value;
                 this._readOnlyBlocksWorld = new ReadOnlyBlocksWorld(this._blockDataWorld);
-                this._enumerable = new BlocksEnumerable(this, new Rectangle(0, 0, this.Width, this.Height));
+                this._enumerable = new BlockAreaEnumerable(this, new Rectangle(0, 0, this.Width, this.Height));
             }
         }
 
-        public BlocksEnumerable In(Rectangle area)
+        public BlockAreaEnumerable In(Rectangle area)
         {
             return this._enumerable.In(area);
         }

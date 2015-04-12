@@ -7,5 +7,6 @@ namespace BotBits
         Task<LobbyItem[]> GetLobbyAsync();
         Task CreateJoinRoomAsync(string roomId);
         Task JoinRoomAsync(string roomId);
+        Task<DatabaseWorld> LoadWorldAsync(string roomId);
     }
 }

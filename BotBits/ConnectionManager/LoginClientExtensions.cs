@@ -16,5 +16,10 @@ namespace BotBits
         {
             client.JoinRoomAsync(roomId).WaitEx();
         }
+
+        public static DatabaseWorld LoadWorld(this ILoginClient client, string roomId)
+        {
+            return client.LoadWorldAsync(roomId).GetResultEx();
+        }
     }
 }

@@ -62,6 +62,12 @@ namespace BotBits
                 .ToSafeTask();
         }
 
+        public Task<DatabaseWorld> LoadWorldAsync(string roomId)
+        {
+            return this.Client.BigDB.LoadAsync("Worlds", roomId)
+                .Then(t => DatabaseWorld.FromDatabaseObject(t.Result));
+        }
+
         private Task<int> GetVersionAsync()
         {
             return this.Client.BigDB.LoadAsync("config", "config")

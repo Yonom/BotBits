@@ -77,7 +77,7 @@ namespace BotBits.SendMessages
 
             if (this.InstantSend)
             {
-                this.Send(ConnectionManager.Of(client).Connection);
+                Of(client).SendMessage((T)this, ConnectionManager.Of(client).Connection);
             }
             else
             {
