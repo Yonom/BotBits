@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using PlayerIOClient;
 
@@ -39,12 +40,15 @@ namespace BotBits
                             if (message.Type != "auth" || message.Count < 2)
                                 throw new ArgumentException("Auth failed.");
 
-                            tcs.TrySetResult(PlayerIO.Connect(
+                            tcs.TrySetResult(PlayerIO.Authenticate(
                                 gameId,
                                 "secure",
-                                message.GetString(0),
-                                message.GetString(1),
-                                "armorgames"));
+                                new Dictionary<string, string>
+                                {
+                                    {"userId", message.GetString(0)},
+                                    {"auth", message.GetString(1)}
+                                }, 
+                                null));
                         }
                         catch (Exception ex)
                         {
