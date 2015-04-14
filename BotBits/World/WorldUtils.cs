@@ -38,17 +38,17 @@ namespace BotBits
                 case ForegroundType.Drum:
                 case ForegroundType.Piano:
                     return new ForegroundBlock(foreground,
-                        obj.GetInt("id", 0));
+                        obj.GetUInt("id", 0));
 
                 case ForegroundType.Goal:
                     return new ForegroundBlock(foreground,
-                        obj.GetInt("goal", 0));
+                        obj.GetUInt("goal", 0));
 
                 case ForegroundType.SciFiSlope:
                 case ForegroundType.SciFiStraight:
                 case ForegroundType.Rotatable:
                     return new ForegroundBlock(foreground,
-                        obj.GetInt("rotation", 0));
+                        obj.GetUInt("rotation", 0));
 
                 case ForegroundType.Portal:
                     return new ForegroundBlock(foreground,

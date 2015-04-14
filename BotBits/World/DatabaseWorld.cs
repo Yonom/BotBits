@@ -7,6 +7,11 @@ namespace BotBits
     {
         private readonly DatabaseObject _obj;
 
+        public DatabaseObject DatabaseObject
+        {
+            get { return _obj; }
+        }
+
         public string Name
         {
             get { return this._obj.GetString("name", "Untitled World"); }
