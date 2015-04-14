@@ -20,6 +20,13 @@ namespace BotBits
             PlayerIO.Connect(gameId, connectionId, userId, auth, partnerId, playerInsightSegments, tcs.SetResult, tcs.SetException);
             return tcs.Task;
         }
+
+        public static Task<Client> AuthenticateAsync(string gameId, string connectionId, Dictionary<string, string> authenticationArguments, string[] playerInsightSegments)
+        {
+            var tcs = new TaskCompletionSource<Client>();
+            PlayerIO.Authenticate(gameId, connectionId, authenticationArguments, playerInsightSegments, tcs.SetResult, tcs.SetException);
+            return tcs.Task;
+        }
         
         public static Task<DatabaseObject> LoadAsync(this BigDB bigDB, string table, string key)
         {

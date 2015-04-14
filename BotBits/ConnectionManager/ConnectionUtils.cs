@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using PlayerIOClient;
 
@@ -25,48 +26,23 @@ namespace BotBits
             return PlayerIO.QuickConnect.SimpleConnectAsync(gameId, "guest", "guest", null);
         }
 
+        public static Task<int> GetVersionAsync(Client client)
+        {
+            return client.BigDB.LoadAsync("config", "config")
+                .Then(task => task.Result.GetInt("version"));
+        }
+
         public static Task<Client> ArmorGamesRoomLoginAsync(string gameId, string userId, string token)
         {
-            return GuestLoginAsync(gameId)
-                .Then(t => t.Result.Multiplayer.JoinRoomAsync(String.Empty, null)
-                .Then(task =>
+            return PlayerIOAsync.AuthenticateAsync(
+                gameId,
+                "secure",
+                new Dictionary<string, string>
                 {
-                    var guestConn = task.Result;
-                    var tcs = new TaskCompletionSource<Client>();
-                    guestConn.OnMessage += (sender, message) =>
-                    {
-                        try
-                        {
-                            if (message.Type != "auth" || message.Count < 2)
-                                throw new ArgumentException("Auth failed.");
-
-                            tcs.TrySetResult(PlayerIO.Authenticate(
-                                gameId,
-                                "secure",
-                                new Dictionary<string, string>
-                                {
-                                    {"userId", message.GetString(0)},
-                                    {"auth", message.GetString(1)}
-                                }, 
-                                null));
-                        }
-                        catch (Exception ex)
-                        {
-                            tcs.TrySetException(ex);
-                        }
-                        finally
-                        {
-                            guestConn.Disconnect();
-                        }
-                    };
-                    guestConn.OnDisconnect += (sender, message) =>
-                        tcs.TrySetException(new ArgumentException("Auth failed."));
-                    if (guestConn.Connected)
-                        guestConn.Send("auth", userId, token);
-                    else
-                        tcs.TrySetException(new ArgumentException("Auth failed."));
-                    return tcs.Task;
-                }));
+                    {"userId", userId},
+                    {"authToken", token}
+                },
+                null);
         }
     }
 }

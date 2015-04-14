@@ -70,8 +70,7 @@ namespace BotBits
 
         private Task<int> GetVersionAsync()
         {
-            return this.Client.BigDB.LoadAsync("config", "config")
-                .Then(task => task.Result.GetInt("version"));
+            return ConnectionUtils.GetVersionAsync(this.Client); 
         }
 
         private Task InitConnection(Connection conn)
