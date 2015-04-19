@@ -259,6 +259,13 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.High)]
+        private void OnTeam(TeamEvent e)
+        {
+            Player p = e.Player;
+            p.Team = e.Team;
+        }
+
+        [EventListener(EventPriority.High)]
         private void OnWootUp(WootUpEvent e)
         {
             Player p = e.Player;

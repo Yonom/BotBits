@@ -25,16 +25,4 @@ namespace BotBits.Events
 
         public Effect Effect { get; set; }
     }
-
-    [ReceiveEvent("effect")]
-    public sealed class AuraEvent : PlayerEvent<AuraEvent>
-    {
-        public AuraEvent(BotBitsClient client, Message message)
-            : base(client, message)
-        {
-            this.Aura = (Aura)message.GetInt(1);
-        }
-
-        public Aura Aura { get; set; }
-    }
 }

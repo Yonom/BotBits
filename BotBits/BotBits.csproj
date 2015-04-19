@@ -77,9 +77,11 @@
     <Compile Include="Helpers\TaskExtensions.cs" />
     <Compile Include="Helpers\TaskHelper.cs" />
     <Compile Include="MessageReceive\Events\AllowSpectatingEvent.cs" />
+    <Compile Include="MessageReceive\Events\AuraEvent.cs" />
     <Compile Include="MessageReceive\Events\EffectEvent.cs" />
     <Compile Include="MessageReceive\Events\HideLobbyEvent.cs" />
     <Compile Include="MessageReceive\Events\RoomDescriptionEvent.cs" />
+    <Compile Include="MessageReceive\Events\TeamEvent.cs" />
     <Compile Include="MessageSend\SendMessages\AuraSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\EffectSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\TeamSendMessage.cs" />
