@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 using BotBits.Events;
 using BotBits.SendMessages;
 
@@ -16,6 +17,13 @@ namespace BotBits
         {
             if (this.HasSmiley(newSmiley)) // Server kicks people if they do not own a smiley
                 new SmileySendMessage(newSmiley)
+                    .SendIn(this.BotBits);
+        }
+
+        public void ChangeAura(Aura newAura)
+        {
+            //if (this.HasSmiley(newSmiley)) // Server kicks people if they do not own a smiley
+                new AuraSendMessage(newAura)
                     .SendIn(this.BotBits);
         }
 
@@ -58,15 +66,15 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void TouchPlayer(Player player, Potion reason)
+        public void TouchPlayer(Player player, Effect effect)
         {
-            new TouchUserSendMessage(player.UserId, reason)
+            new TouchUserSendMessage(player.UserId, effect)
                 .SendIn(this.BotBits);
         }
 
-        public void TouchPlayer(int userId, Potion reason)
+        public void TouchPlayer(int userId, Effect effect)
         {
-            new TouchUserSendMessage(userId, reason)
+            new TouchUserSendMessage(userId, effect)
                 .SendIn(this.BotBits);
         }
 
@@ -91,6 +99,24 @@ namespace BotBits
         public void TouchCheckpoint(int x, int y)
         {
             new CheckpointSendMessage(x, y)
+                .SendIn(this.BotBits);
+        }
+
+        public void ApplyEffect(Effect effect, bool activate, int x, int y)
+        {
+            new EffectSendMessage(effect, activate, x, y)
+                .SendIn(this.BotBits);
+        }
+
+        public void ApplyTimedEffect(Effect effect, TimeSpan duration, int x, int y)
+        {
+            new TimedEffectSendMessage(effect, duration, x, y)
+                .SendIn(this.BotBits);
+        }
+
+        public void EnterTeam(Team team, int x, int y)
+        {
+            new TeamSendMessage(team, x, y)
                 .SendIn(this.BotBits);
         }
 

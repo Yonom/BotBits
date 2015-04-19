@@ -13,7 +13,7 @@ namespace BotBits
 
         [CanBeNull]
         private readonly Players _players;
-        private readonly HashSet<Potion> _potions = new HashSet<Potion>();
+        private readonly Dictionary<Effect, ActiveEffect> _effects = new Dictionary<Effect, ActiveEffect>();
 
         internal Player([CanBeNull] Players players, int userId)
         {
@@ -108,6 +108,14 @@ namespace BotBits
         ///     The player's smiley.
         /// </value>
         public Smiley Smiley { get; internal set; }
+        
+        /// <summary>
+        /// Gets the aura that apperars around this user when they go in god mode.
+        /// </summary>
+        /// <value>
+        /// The aura.
+        /// </value>
+        public Aura Aura { get; internal set; }
 
         /// <summary>
         ///     Gets the player's number of coins.
@@ -212,6 +220,14 @@ namespace BotBits
         ///     <c>true</c> if this player has wooted the level; otherwise, <c>false</c>.
         /// </value>
         public bool HasWooted { get; internal set; }
+        
+        /// <summary>
+        /// Gets the team this user is in.
+        /// </summary>
+        /// <value>
+        /// The team.
+        /// </value>
+        public Team Team { get; internal set; }
 
         /// <summary>
         ///     Gets a value indicating whether this player has a crown.
@@ -223,6 +239,14 @@ namespace BotBits
         {
             get { return this._players != null && this._players.CrownPlayer == this; }
         }
+
+        /// <summary>
+        /// Gets the color of this user's name when he/she chats.
+        /// </summary>
+        /// <value>
+        /// The color of the chat.
+        /// </value>
+        public uint ChatColor { get; internal set; }
 
         /// <summary>
         ///     Gets a value indicating whether this player is flying using god mode, guardian mode or moderator mode.
@@ -310,36 +334,36 @@ namespace BotBits
         }
 
         [Pure]
-        public bool HasPotion(Potion potion)
+        public bool HasEffect(Effect effect)
         {
-            lock (this._potions)
+            lock (this._effects)
             {
-                return this._potions.Contains(potion);
+                return this._effects.ContainsKey(effect);
             }
         }
 
         [Pure]
-        public Potion[] GetPotions()
+        public ActiveEffect[] GetEffects()
         {
-            lock (this._potions)
+            lock (this._effects)
             {
-                return this._potions.ToArray();
+                return this._effects.Values.ToArray();
             }
         }
 
-        internal void AddPotion(Potion potion)
+        internal void AddEffect(ActiveEffect effect)
         {
-            lock (this._potions)
+            lock (this._effects)
             {
-                this._potions.Add(potion);
+                this._effects.Add(effect.Effect, effect);
             }
         }
 
-        internal void RemovePotion(Potion potion)
+        internal void RemoveEffect(Effect effect)
         {
-            lock (this._potions)
+            lock (this._effects)
             {
-                this._potions.Remove(potion);
+                this._effects.Remove(effect);
             }
         }
 
@@ -349,6 +373,21 @@ namespace BotBits
                 throw new NotSupportedException("Cannot set metadata on Player.Nobody.");
 
             base.Set(id, value);
+        }
+    }
+
+    public class ActiveEffect
+    {
+        private readonly DateTime _expires;
+        public Effect Effect { get; private set; }
+        public TimeSpan Duration { get; private set; }
+        public TimeSpan TimeLeft { get { return DateTime.UtcNow.Subtract(this._expires); } }
+
+        public ActiveEffect(Effect effect, TimeSpan timeLeft, TimeSpan duration)
+        {
+            this.Effect = effect;
+            this.Duration = duration;
+            this._expires = DateTime.UtcNow.Add(timeLeft);
         }
     }
 }

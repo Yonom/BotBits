@@ -18,24 +18,41 @@ namespace BotBits.Events
         {
             this.Owner = message.GetString(0);
             this.WorldName = message.GetString(1);
-            this.Plays = message.GetInteger(2);
-            this.CurrentWoots = message.GetInteger(3);
-            this.TotalWoots = message.GetInteger(4);
+            this.Plays = message.GetInt(2);
+            this.CurrentWoots = message.GetInt(3);
+            this.TotalWoots = message.GetInt(4);
             this.EncryptedToken = message.GetString(5);
             // 6: UserId
-            this.SpawnX = message.GetInteger(7);
-            this.SpawnY = message.GetInteger(8);
-            this.Username = message.GetString(9);
-            this.CanEdit = message.GetBoolean(10);
-            this.IsOwner = message.GetBoolean(11);
-            this.RoomWidth = message.GetInteger(12);
-            this.RoomHeight = message.GetInteger(13);
-            this.TutorialRoom = message.GetBoolean(14);
-            this.GravityMultiplier = message.GetDouble(15);
-            this.AllowPotions = message.GetBoolean(16);
-            this.BackgroundColor = message.GetUInt(17);
-            this.Visible = message.GetBoolean(18);
+            this.Smiley = (Smiley)message.GetInt(7);
+            this.Aura = (Aura)message.GetInt(8);
+            this.SpawnX = message.GetInt(9);
+            this.SpawnY = message.GetInt(10);
+            this.ChatColor = message.GetUInt(11);
+            this.Username = message.GetString(12);
+            this.CanEdit = message.GetBoolean(13);
+            this.IsOwner = message.GetBoolean(14);
+            this.RoomWidth = message.GetInt(15);
+            this.RoomHeight = message.GetInt(16);
+            this.TutorialRoom = message.GetBoolean(17);
+            this.GravityMultiplier = message.GetDouble(18);
+            this.BackgroundColor = message.GetUInt(19);
+            this.Visible = message.GetBoolean(20);
+            this.HideLobby = message.GetBoolean(21);
+            this.AllowSpectating = message.GetBoolean(22);
+            this.RoomDescription = message.GetString(23);
         }
+
+        public string RoomDescription { get; set; }
+
+        public bool AllowSpectating { get; set; }
+
+        public uint ChatColor { get; set; }
+
+        public bool HideLobby { get; set; }
+
+        public Aura Aura { get; set; }
+
+        public Smiley Smiley { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="InitEvent"/> is visible.
@@ -52,12 +69,6 @@ namespace BotBits.Events
         /// The color of the background.
         /// </value>
         public uint BackgroundColor { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether the world has potions allowed.
-        /// </summary>
-        /// <value><c>true</c> if [allow potions]; otherwise, <c>false</c>.</value>
-        public bool AllowPotions { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this player is allowed to edit.

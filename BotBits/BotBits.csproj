@@ -66,6 +66,9 @@
     <Compile Include="ConnectionManager\PlayerIOGameExtensions.cs" />
     <Compile Include="ConnectionManager\ConnectionUtils.cs" />
     <Compile Include="ConnectionManager\IPlayerIOGame.cs" />
+    <Compile Include="Enums\Aura.cs" />
+    <Compile Include="Enums\EffectId.cs" />
+    <Compile Include="Enums\Team.cs" />
     <Compile Include="Enums\WorldType.cs" />
     <Compile Include="Helpers\PlayerIOAsync.cs" />
     <Compile Include="ConnectionManager\LobbyItem.cs" />
@@ -73,6 +76,18 @@
     <Compile Include="ConnectionManager\Scheduler.cs" />
     <Compile Include="Helpers\TaskExtensions.cs" />
     <Compile Include="Helpers\TaskHelper.cs" />
+    <Compile Include="MessageReceive\Events\AllowSpectatingEvent.cs" />
+    <Compile Include="MessageReceive\Events\EffectEvent.cs" />
+    <Compile Include="MessageReceive\Events\HideLobbyEvent.cs" />
+    <Compile Include="MessageReceive\Events\RoomDescriptionEvent.cs" />
+    <Compile Include="MessageSend\SendMessages\AuraSendMessage.cs" />
+    <Compile Include="MessageSend\SendMessages\EffectSendMessage.cs" />
+    <Compile Include="MessageSend\SendMessages\TeamSendMessage.cs" />
+    <Compile Include="MessageSend\SendMessages\SetAllowSpectatingSendMessage.cs" />
+    <Compile Include="MessageSend\SendMessages\SetHideLobbySendMessage.cs" />
+    <Compile Include="MessageSend\SendMessages\SetRoomDescriptionSendMessage.cs" />
+    <Compile Include="MessageSend\SendMessages\SetRoomVisibleSendMessage.cs" />
+    <Compile Include="MessageSend\SendMessages\TimedEffectSendMessage.cs" />
     <Compile Include="PlayerObject.cs" />
     <Compile Include="ShopData.cs" />
     <Compile Include="World\BlockData\BlockData.cs" />
@@ -95,7 +110,6 @@
     <Compile Include="Enums\PercussionId.cs" />
     <Compile Include="Enums\PianoId.cs" />
     <Compile Include="Enums\PortalRotation.cs" />
-    <Compile Include="Enums\Potion.cs" />
     <Compile Include="Enums\ScifiSlopeRotation.cs" />
     <Compile Include="Enums\ScifiStraightRotation.cs" />
     <Compile Include="Enums\Smiley.cs" />
@@ -147,8 +161,6 @@
     <Compile Include="World\WorldItem.cs" />
     <Compile Include="World\WorldUtils.cs" />
     <Compile Include="Chat\Chat.cs" />
-    <Compile Include="Consumables\Consumables.cs" />
-    <Compile Include="Consumables\Events\PotionCountEvent.cs" />
     <Compile Include="Players\Events\RespawnEvent.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\Players.cs" />
@@ -166,7 +178,6 @@
     <Compile Include="Blocks\BlockUtils.cs" />
     <Compile Include="MessageReceive\Events\AccessEvent.cs" />
     <Compile Include="MessageReceive\Events\JoinEvent.cs" />
-    <Compile Include="MessageReceive\Events\AllowPotionsEvent.cs" />
     <Compile Include="MessageReceive\Events\AutoTextEvent.cs" />
     <Compile Include="MessageReceive\Events\BackgroundColorEvent.cs" />
     <Compile Include="MessageReceive\Events\BlockPlaceEvent.cs" />
@@ -188,8 +199,6 @@
     <Compile Include="MessageReceive\Events\ModModeEvent.cs" />
     <Compile Include="MessageReceive\Events\MoveEvent.cs" />
     <Compile Include="MessageReceive\Events\PortalPlaceEvent.cs" />
-    <Compile Include="MessageReceive\Events\PotionsCountEvent.cs" />
-    <Compile Include="MessageReceive\Events\PotionEvent.cs" />
     <Compile Include="MessageReceive\Events\ReceiveEvent.cs" />
     <Compile Include="MessageReceive\Events\RefreshShopEvent.cs" />
     <Compile Include="MessageReceive\Events\LoadLevelEvent.cs" />
@@ -208,7 +217,6 @@
     <Compile Include="MessageReceive\Events\WorldPortalPlaceEvent.cs" />
     <Compile Include="MessageReceive\Events\WriteEvent.cs" />
     <Compile Include="MessageSend\SendMessages\AccessSendMessage.cs" />
-    <Compile Include="MessageSend\SendMessages\AllowPotionsSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\AutoTextSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\PlaceSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\SmileySendMessage.cs" />
@@ -228,7 +236,6 @@
     <Compile Include="MessageSend\SendMessages\KillRoomSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\ModModeSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\MoveSendMessage.cs" />
-    <Compile Include="MessageSend\SendMessages\PotionSendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\BlueKeySendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\GreenKeySendMessage.cs" />
     <Compile Include="MessageSend\SendMessages\RedKeySendMessage.cs" />

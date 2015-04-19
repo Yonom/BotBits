@@ -22,11 +22,38 @@ namespace BotBits.Events
             this.HasChat = message.GetBoolean(7);
             this.Coins = message.GetInteger(8);
             this.BlueCoins = message.GetInteger(9);
-            //this.PurpleSwitch = message.GetBoolean(10); TODO
             this.Friend = message.GetBoolean(10);
             this.ClubMember = message.GetBoolean(11);
             this.Guardian = message.GetBoolean(12);
+            this.Team = (Team)message.GetInt(12);
+            this.Aura = (Aura)message.GetInt(12);
+            this.ChatColor = message.GetUInt(12);
+
         }
+
+        /// <summary>
+        /// Gets or sets the aura.
+        /// </summary>
+        /// <value>
+        /// The aura.
+        /// </value>
+        public Aura Aura { get; set; }
+
+        /// <summary>
+        /// Gets or sets the team.
+        /// </summary>
+        /// <value>
+        /// The team.
+        /// </value>
+        public Team Team { get; set; }
+
+        /// <summary>
+        /// Gets or sets the color of the chat.
+        /// </summary>
+        /// <value>
+        /// The color of the chat.
+        /// </value>
+        public uint ChatColor { get; set; }
 
         /// <summary>
         ///     Gets or sets whether the user is in guardian mode or not.

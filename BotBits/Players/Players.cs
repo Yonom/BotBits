@@ -99,6 +99,9 @@ namespace BotBits
             this.OwnPlayer = e.Player;
             this.OwnPlayer.Connected = true;
             this.OwnPlayer.Username = e.Username;
+            this.OwnPlayer.Smiley = e.Smiley;
+            this.OwnPlayer.Aura = e.Aura;
+            this.OwnPlayer.ChatColor = e.ChatColor;
             this.OwnPlayer.X = e.SpawnX;
             this.OwnPlayer.Y = e.SpawnY;
         }
@@ -110,6 +113,7 @@ namespace BotBits
             p.Connected = true;
             p.Username = e.Username;
             p.Smiley = e.Smiley;
+            p.Aura = e.Aura;
             p.HasChat = e.HasChat;
             p.GodMode = e.God;
             p.GuardianMode = e.Guardian;
@@ -120,6 +124,8 @@ namespace BotBits
             p.X = e.X;
             p.Y = e.Y;
             p.ClubMember = e.ClubMember;
+            p.ChatColor = e.ChatColor;
+            p.Team = e.Team;
         }
 
         [EventListener(EventPriority.High)]
@@ -230,18 +236,26 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.High)]
-        private void OnPotion(PotionEvent e)
+        private void OnEffect(EffectEvent e)
         {
             Player p = e.Player;
 
             if (e.Enabled)
             {
-                p.AddPotion(e.Potion);
+                var effect = new ActiveEffect(e.Effect, e.TimeLeft, e.Duration);
+                p.AddEffect(effect);
             }
             else
             {
-                p.RemovePotion(e.Potion);
+                p.RemoveEffect(e.Effect);
             }
+        }
+
+        [EventListener(EventPriority.High)]
+        private void OnAura(AuraEvent e)
+        {
+            Player p = e.Player;
+            p.Aura = e.Aura;
         }
 
         [EventListener(EventPriority.High)]

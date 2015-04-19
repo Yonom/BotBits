@@ -28,7 +28,7 @@ namespace BotBits
 
         public static ForegroundBlock GetDatabaseBlock(DatabaseObject obj, Foreground.Id foreground)
         {
-            var foregroundType = WorldUtils.GetForegroundType(foreground);
+            var foregroundType = GetForegroundType(foreground);
 
             switch (foregroundType)
             {
@@ -106,6 +106,15 @@ namespace BotBits
                 case Foreground.Gate.Purple:
                 case Foreground.Door.Death:
                 case Foreground.Gate.Death:
+                case Foreground.Door.Team:
+                case Foreground.Gate.Team:
+                case Foreground.Effect.Jump:
+                case Foreground.Effect.Fly:
+                case Foreground.Effect.Protection:
+                case Foreground.Effect.Speed:
+                case Foreground.Effect.Curse:
+                case Foreground.Effect.Zombie:
+                case Foreground.Effect.Team:
                     return ForegroundType.Goal;
 
                 case Foreground.Hazard.Spike:

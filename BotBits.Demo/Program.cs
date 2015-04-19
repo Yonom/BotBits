@@ -8,6 +8,8 @@ namespace BotBits.Demo
 {
     internal class Program
     {
+        // Aura
+        // TODO add custom Color class
         private static BotBitsClient bot = new BotBitsClient();
 
         private static void Main()

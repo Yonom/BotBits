@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using JetBrains.Annotations;
 
 namespace BotBits
@@ -156,66 +153,6 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Enables the given potions (/potionson &lt;potion1&gt; &lt;potion2&gt; ...).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="potions">The potions.</param>
-        public static void PotionsOn(this IChat chat, params string[] potions)
-        {
-            chat.Say("/potionson  {0}", String.Join(" ", potions));
-        }
-
-        /// <summary>
-        /// Enables the given potions (/potionson &lt;potion1&gt; &lt;potion2&gt; ...).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="potions">The potions.</param>
-        public static void PotionsOn(this IChat chat, params int[] potions)
-        {
-            chat.Say("/potionson  {0}", String.Join(" ", potions));
-        }
-
-        /// <summary>
-        /// Enables the given potions (/potionson &lt;potion1&gt; &lt;potion2&gt; ...).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="potions">The potions.</param>
-        public static void PotionsOn(this IChat chat, params Potion[] potions)
-        {
-            chat.Say("/potionson {0}", String.Join(" ", potions.Cast<int>()));
-        }
-
-        /// <summary>
-        /// Disables the given potions (/potionsoff &lt;potion1&gt; &lt;potion2&gt; ...).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="potions">The potions.</param>
-        public static void PotionsOff(this IChat chat, params string[] potions)
-        {
-            chat.Say("/potionsoff {0}", String.Join(" ", potions));
-        }
-
-        /// <summary>
-        /// Disables the given potions (/potionsoff &lt;potion1&gt; &lt;potion2&gt; ...).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="potions">The potions.</param>
-        public static void PotionsOff(this IChat chat, params int[] potions)
-        {
-            chat.Say("/potionsoff {0}", String.Join(" ", potions));
-        }
-
-        /// <summary>
-        /// Disables the given potions (/potionsoff &lt;potion1&gt; &lt;potion2&gt; ...).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="potions">The potions.</param>
-        public static void PotionsOff(this IChat chat, params Potion[] potions)
-        {
-            chat.Say("/potionsoff {0}", String.Join(" ", potions.Cast<int>()));
-        }
-
-        /// <summary>
         /// Changes the visibility of the room (/visible &lt;visible&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
@@ -261,6 +198,14 @@ namespace BotBits
         public static void ListPortals(this IChat chat)
         {
             chat.Say("/listportals");
+        }
+
+        /// <summary>
+        /// Clears the map (/clear)
+        /// </summary>
+        public static void Clear(this IChat chat)
+        {
+            chat.Say("/clear");
         }
 
         /// <summary>

@@ -48,11 +48,6 @@ namespace BotBits
             get { return this._obj.GetInt("totalwoots", 0); }
         }
 
-        public bool AllowPotions
-        {
-            get { return this._obj.GetBool("allowpotions", false); }
-        }
-
         public bool Visible
         {
             get { return this._obj.GetBool("visible", true); }
@@ -77,6 +72,23 @@ namespace BotBits
         {
             get { return this._obj.GetBool("IsFeatured", false); }
         }
+
+        public bool AllowSpectating
+        {
+            get
+            {
+                return this._obj.GetBool("allowSpectating", true);
+            }
+        }
+
+        public String WorldDescription
+        {
+            get
+            {
+                return this._obj.GetString("worldDescription", "");
+            }
+        }
+
 
         private DatabaseWorld(DatabaseObject obj, int width, int height)
             : base(width, height)

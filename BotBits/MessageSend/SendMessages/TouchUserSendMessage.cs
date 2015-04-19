@@ -11,11 +11,11 @@ namespace BotBits.SendMessages
         ///     Initializes a new instance of the <see cref="TouchUserSendMessage" /> class.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <param name="reason">The reason (transferred potion).</param>
-        public TouchUserSendMessage(int userId, Potion reason)
+        /// <param name="effect">The effect being transferred.</param>
+        public TouchUserSendMessage(int userId, Effect effect)
         {
             this.UserId = userId;
-            this.Reason = reason;
+            this.Effect = effect;
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace BotBits.SendMessages
         /// <value>
         ///     The reason (transferred potion).
         /// </value>
-        public Potion Reason { get; set; }
+        public Effect Effect { get; set; }
 
         /// <summary>
         ///     Gets or sets the user identifier.
@@ -40,7 +40,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("touch", this.UserId, (int)this.Reason);
+            return Message.Create("touch", this.UserId, (int)this.Effect);
         }
     }
 }

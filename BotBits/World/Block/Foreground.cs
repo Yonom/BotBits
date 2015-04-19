@@ -119,9 +119,13 @@ namespace BotBits
             public const Id
                 BuildersClub = (Id)200;
 
-            [Pack("brickzombiedoor", BlocksPerPack = 10)]
+            [Pack("brickzombiedoor", BlocksPerPack = 10)] // TODO: brickeffectzombie also gives +10
             public const Id
                 Zombie = (Id)207;
+
+            [Pack("brickeffectteam", BlocksPerPack = 10)]
+            public const Id
+                Team = (Id)1027;
         }
 
 
@@ -162,6 +166,10 @@ namespace BotBits
             [Pack("brickzombiedoor", BlocksPerPack = 10)]
             public const Id
                 Zombie = (Id)206;
+
+            [Pack("brickeffectteam", BlocksPerPack = 10)]
+            public const Id
+                Team = (Id)1028;
         }
 
         public static class Metal
@@ -960,6 +968,31 @@ namespace BotBits
             [Pack("brickmagic5")]
             public const Id
                 Red = (Id)1017;
+        }
+
+        public static class Effect
+        {
+            [Pack("brickeffectjump")]
+            public const Id
+                Jump = (Id)417;
+            [Pack("brickeffectfly")]
+            public const Id
+                Fly = (Id)418;
+            [Pack("brickeffectspeed")]
+            public const Id
+                Speed = (Id)419;
+            [Pack("brickeffectprotection")]
+            public const Id
+                Protection = (Id)420;
+            [Pack("brickeffectcurse")]
+            public const Id
+                Curse = (Id)421;
+            [Pack("brickeffectzombie")]
+            public const Id
+                Zombie = (Id)422;
+            [Pack("brickeffectteam")]
+            public const Id
+                Team = (Id)423;
         }
     }
 }
