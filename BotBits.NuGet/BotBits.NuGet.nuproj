@@ -22,7 +22,7 @@
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>BotBits</Id>
-    <Version>1.2.3</Version>
+    <Version>1.2.4</Version>
     <Title>BotBits</Title>
     <Authors>Younom</Authors>
     <Owners>Younom</Owners>
@@ -37,10 +37,5 @@
     <Copyright>Copyright © Sepehr Farshid</Copyright>
     <Tags>BotBits EverybodyEdits</Tags>
   </PropertyGroup>
-  <ItemGroup>
-    <Dependency Include="PlayerIOClient-Signed">
-      <Version>3.1.0</Version>
-    </Dependency>
-  </ItemGroup>
   <Import Project="$(NuProjPath)\NuProj.targets" />
 </Project>
