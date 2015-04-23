@@ -76,6 +76,7 @@
     <Compile Include="ConnectionManager\Scheduler.cs" />
     <Compile Include="Helpers\TaskExtensions.cs" />
     <Compile Include="Helpers\TaskHelper.cs" />
+    <Compile Include="LoaderBase.cs" />
     <Compile Include="MessageReceive\Events\AllowSpectatingEvent.cs" />
     <Compile Include="MessageReceive\Events\AuraEvent.cs" />
     <Compile Include="MessageReceive\Events\EffectEvent.cs" />
