@@ -25,9 +25,9 @@ namespace BotBits.Events
             this.Friend = message.GetBoolean(10);
             this.ClubMember = message.GetBoolean(11);
             this.Guardian = message.GetBoolean(12);
-            this.Team = (Team)message.GetInt(12);
-            this.Aura = (Aura)message.GetInt(12);
-            this.ChatColor = message.GetUInt(12);
+            this.Team = (Team)message.GetInt(13);
+            this.Aura = (Aura)message.GetInt(14);
+            this.ChatColor = message.GetUInt(15);
 
         }
 
