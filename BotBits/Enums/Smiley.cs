@@ -66,7 +66,7 @@ namespace BotBits
         [Pack("smileyterminator")]
         Terminator = 24,
 
-        [Pack("smileyterminatxd")]
+        [Pack("smileyxd")]
         ExtraGrin = 25,
 
         [Pack("smileybully")]
@@ -321,7 +321,7 @@ namespace BotBits
         [Pack("smileyclown")]
         Clown = 109,
 
-        [Pack("smileyredninja")]
+        [Pack("smileyninjared")]
         RedNinja = 110,
         
         [Pack("smiley3dglasses")]
