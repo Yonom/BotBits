@@ -6,7 +6,7 @@ namespace BotBits.Events
     [ReceiveEvent("effect")]
     public sealed class EffectEvent : PlayerEvent<EffectEvent>
     {
-        public EffectEvent(BotBitsClient client, Message message)
+        internal EffectEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
             this.Effect = (Effect)message.GetInt(1);
