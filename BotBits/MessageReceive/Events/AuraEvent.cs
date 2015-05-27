@@ -5,7 +5,7 @@ namespace BotBits.Events
     [ReceiveEvent("aura")]
     public sealed class AuraEvent : PlayerEvent<AuraEvent>
     {
-        public AuraEvent(BotBitsClient client, Message message)
+        internal AuraEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
             this.Aura = (Aura)message.GetInt(1);

@@ -5,7 +5,7 @@ namespace BotBits.Events
     [ReceiveEvent("team")]
     public sealed class TeamEvent : PlayerEvent<TeamEvent>
     {
-        public TeamEvent(BotBitsClient client, Message message)
+        internal TeamEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
             this.Team = (Team)message.GetInt(1);
