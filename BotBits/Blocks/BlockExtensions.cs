@@ -37,40 +37,30 @@ namespace BotBits
         }
 
         public static void Place(this Blocks blocks, int x, int y, Foreground.Id block,
-            int portalId, int portalTarget, PortalRotation portalRotation)
+            int portalId, int portalTarget, Morph.Id portalRotation)
         {
             blocks.Place(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
         public static void Place(this Blocks blocks, int x, int y, Foreground.Id block,
-            uint portalId, uint portalTarget, PortalRotation portalRotation)
+            uint portalId, uint portalTarget, Morph.Id portalRotation)
         {
             blocks.Place(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
-        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, SciFiSlopeRotation rotation)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, Morph.Id morph)
         {
-            blocks.Place(x, y, new ForegroundBlock(block, rotation));
+            blocks.Place(x, y, new ForegroundBlock(block, morph));
+        }
+        
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, bool enabled)
+        {
+            blocks.Place(x, y, new ForegroundBlock(block, enabled));
         }
 
-        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, SciFiStraightRotation rotation)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, Team team)
         {
-            blocks.Place(x, y, new ForegroundBlock(block, rotation));
-        }
-
-        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, BlockRotation rotation)
-        {
-            blocks.Place(x, y, new ForegroundBlock(block, rotation));
-        }
-
-        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, PianoId soundId)
-        {
-            blocks.Place(x, y, new ForegroundBlock(block, soundId));
-        }
-
-        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, PercussionId soundId)
-        {
-            blocks.Place(x, y, new ForegroundBlock(block, soundId));
+            blocks.Place(x, y, new ForegroundBlock(block, team));
         }
         #endregion
 
@@ -119,40 +109,30 @@ namespace BotBits
         }
 
         public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block,
-            int portalId, int portalTarget, PortalRotation portalRotation)
+            int portalId, int portalTarget, Morph.Id portalRotation)
         {
             blocks.Set(new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
         public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block,
-            uint portalId, uint portalTarget, PortalRotation portalRotation)
+            uint portalId, uint portalTarget, Morph.Id portalRotation)
         {
             blocks.Set(new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
-        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, SciFiSlopeRotation rotation)
+        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, Morph.Id morph)
         {
-            blocks.Set(new ForegroundBlock(block, rotation));
+            blocks.Set(new ForegroundBlock(block, morph));
         }
 
-        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, SciFiStraightRotation rotation)
+        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, bool enabled)
         {
-            blocks.Set(new ForegroundBlock(block, rotation));
+            blocks.Set(new ForegroundBlock(block, enabled));
         }
 
-        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, BlockRotation rotation)
+        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, Team team)
         {
-            blocks.Set(new ForegroundBlock(block, rotation));
-        }
-
-        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, PianoId soundId)
-        {
-            blocks.Set(new ForegroundBlock(block, soundId));
-        }
-
-        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, PercussionId soundId)
-        {
-            blocks.Set(new ForegroundBlock(block, soundId));
+            blocks.Set(new ForegroundBlock(block, team));
         }
         #endregion
 
@@ -183,40 +163,30 @@ namespace BotBits
         }
 
         public static void Set(this BlocksItem blocks, Foreground.Id block,
-            int portalId, int portalTarget, PortalRotation portalRotation)
+            int portalId, int portalTarget, Morph.Id portalRotation)
         {
             blocks.Set(new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
         public static void Set(this BlocksItem blocks, Foreground.Id block,
-            uint portalId, uint portalTarget, PortalRotation portalRotation)
+            uint portalId, uint portalTarget, Morph.Id portalRotation)
         {
             blocks.Set(new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
-        public static void Set(this BlocksItem blocks, Foreground.Id block, SciFiSlopeRotation rotation)
+        public static void Set(this BlocksItem blocks, Foreground.Id block, Morph.Id morph)
         {
-            blocks.Set(new ForegroundBlock(block, rotation));
+            blocks.Set(new ForegroundBlock(block, morph));
         }
 
-        public static void Set(this BlocksItem blocks, Foreground.Id block, SciFiStraightRotation rotation)
+        public static void Set(this BlocksItem blocks, Foreground.Id block, bool enabled)
         {
-            blocks.Set(new ForegroundBlock(block, rotation));
+            blocks.Set(new ForegroundBlock(block, enabled));
         }
 
-        public static void Set(this BlocksItem blocks, Foreground.Id block, BlockRotation rotation)
+        public static void Set(this BlocksItem blocks, Foreground.Id block, Team team)
         {
-            blocks.Set(new ForegroundBlock(block, rotation));
-        }
-
-        public static void Set(this BlocksItem blocks, Foreground.Id block, PianoId soundId)
-        {
-            blocks.Set(new ForegroundBlock(block, soundId));
-        }
-
-        public static void Set(this BlocksItem blocks, Foreground.Id block, PercussionId soundId)
-        {
-            blocks.Set(new ForegroundBlock(block, soundId));
+            blocks.Set(new ForegroundBlock(block, team));
         }
         #endregion
     }

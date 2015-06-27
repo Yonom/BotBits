@@ -14,6 +14,7 @@ namespace BotBits.Shop
         }
 
         public int BlocksPerPack { get; set; }
+        public ForegroundType ForegroundType { get; set; }
 
         public PackAttribute(string package)
         {

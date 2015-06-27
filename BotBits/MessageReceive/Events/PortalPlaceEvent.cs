@@ -16,7 +16,7 @@ namespace BotBits.Events
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);
             this.Id = message.GetInteger(2);
-            this.PortalRotation = (PortalRotation)message.GetUInt(3);
+            this.PortalRotation = (Morph.Id)message.GetUInt(3);
             this.PortalId = message.GetUInt(4);
             this.PortalTarget = message.GetUInt(5);
         }
@@ -31,7 +31,7 @@ namespace BotBits.Events
         ///     Gets or sets the portal rotation.
         /// </summary>
         /// <value>The portal rotation.</value>
-        public PortalRotation PortalRotation { get; set; }
+        public Morph.Id PortalRotation { get; set; }
 
         /// <summary>
         ///     Gets or sets the portal target.

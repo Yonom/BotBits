@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.ComTypes;
 using BotBits.Shop;
 // ReSharper disable MemberHidesStaticFromOuterClass
 
@@ -25,12 +24,6 @@ namespace BotBits
                 InvisibleUp = (Id)412,
                 InvisibleRight = (Id)413,
                 InvisibleDot = (Id)414;
-        }
-
-        public static class Crown
-        {
-            public const Id
-                Gold = (Id)5;
         }
 
         public static class Key
@@ -94,38 +87,6 @@ namespace BotBits
                 Cyan = (Id)1005,
                 Magenta = (Id)1006,
                 Yellow = (Id)1007;
-
-            [Pack("brickcoindoor", BlocksPerPack = 10)]
-            public const Id
-                Coin = (Id)43;
-
-            [Pack("brickbluecoindoor", BlocksPerPack = 10)]
-            public const Id
-                BlueCoin = (Id)213;
-
-            [Pack("brickswitchpurple", BlocksPerPack = 10)]
-            public const Id
-                Purple = (Id)184;
-
-            [Pack("brickdeathdoor", BlocksPerPack = 10)]
-            public const Id
-                Death = (Id)1011;
-
-            [Pack("bricktimeddoor", BlocksPerPack = 10)]
-            public const Id
-                Time = (Id)156;
-
-            [Pack("bc")]
-            public const Id
-                BuildersClub = (Id)200;
-
-            [Pack("brickzombiedoor", BlocksPerPack = 10)] // TODO: brickeffectzombie also gives +10
-            public const Id
-                Zombie = (Id)207;
-
-            [Pack("brickeffectteam", BlocksPerPack = 10)]
-            public const Id
-                Team = (Id)1027;
         }
 
 
@@ -138,38 +99,43 @@ namespace BotBits
                 Cyan = (Id)1008,
                 Magenta = (Id)1009,
                 Yellow = (Id)1010;
+        }
 
-            [Pack("brickcoingate", BlocksPerPack = 10)]
+        public static class BuildersClub
+        {
+            [Pack("bc")]
             public const Id
-                Coin = (Id)165;
-
-            [Pack("brickbluecoingate", BlocksPerPack = 10)]
-            public const Id
-                BlueCoin = (Id)214;
-
-            [Pack("brickswitchpurple", BlocksPerPack = 10)]
-            public const Id
-                Purple = (Id)185;
-
-            [Pack("brickdeathdoor", BlocksPerPack = 10)]
-            public const Id
-                Death = (Id)1012;
-
-            [Pack("bricktimeddoor", BlocksPerPack = 10)]
-            public const Id
-                Time = (Id)157;
+                Door = (Id)200;
 
             [Pack("bc")]
             public const Id
-                BuildersClub = (Id)201;
+                Gate = (Id)201;
+        }
 
-            [Pack("brickzombiedoor", BlocksPerPack = 10)]
+        public static class Team
+        {
+            [Pack("brickeffectteam", ForegroundType = ForegroundType.Team)]
             public const Id
-                Zombie = (Id)206;
+                Effect = (Id)423;
 
-            [Pack("brickeffectteam", BlocksPerPack = 10)]
+            [Pack("brickeffectteam", BlocksPerPack = 10, ForegroundType = ForegroundType.Team)]
             public const Id
-                Team = (Id)1028;
+                Door = (Id)1027;
+
+            [Pack("brickeffectteam", BlocksPerPack = 10, ForegroundType = ForegroundType.Team)]
+            public const Id
+                Gate = (Id)1028;
+        }
+
+        public static class Death
+        {
+            [Pack("brickdeathdoor", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
+            public const Id
+                Door = (Id)1011;
+
+            [Pack("brickdeathdoor", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
+            public const Id
+                Gate = (Id)1012;
         }
 
         public static class Metal
@@ -260,7 +226,11 @@ namespace BotBits
                 CandyCane = (Id)65,
                 CandyCorn = (Id)66,
                 Chocolate = (Id)67,
-                Topping = (Id)227;
+                ToppingSmall = (Id)227,
+                ToppingBig = (Id)431,
+                PuddingRed = (Id)432,
+                PuddingGreen = (Id)433,
+                PuddingPurple = (Id)434;
         }
 
         public static class Halloween2011
@@ -289,11 +259,11 @@ namespace BotBits
 
         public static class Music
         {
-            [Pack("bricknode")]
+            [Pack("bricknode", ForegroundType = ForegroundType.Note)]
             public const Id
                 Piano = (Id)77;
 
-            [Pack("brickdrums")]
+            [Pack("brickdrums", ForegroundType = ForegroundType.Note)]
             public const Id
                 Drum = (Id)83;
         }
@@ -326,6 +296,17 @@ namespace BotBits
                 OneWayRed = (Id)89,
                 OneWayBlue = (Id)90,
                 OneWayGreen = (Id)91;
+            
+            [Pack("brickscifi", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                BlueSlope = (Id)375,
+                BlueStraight = (Id)376,
+                GreenSlope = (Id)379,
+                GreenStraight = (Id)380,
+                YellowSlope = (Id)377,
+                YellowStraight = (Id)378,
+                RedSlope = (Id)438,
+                RedStraight = (Id)439;
         }
 
         public static class Prison
@@ -343,37 +324,57 @@ namespace BotBits
                 Planks = (Id)93,
                 Chest = (Id)94,
                 Canoncover = (Id)271,
-                Skull = (Id)272;
-
+                Skull = (Id)272,
+                Canon = (Id)435,
+                Window = (Id)436,
+                OneWay = (Id)154;
         }
 
-        public static class Viking
+        public static class Stone
         {
-            [Pack("brickviking")]
+            [Pack("brickstone")]
             public const Id
-                Gray = (Id)95,
-                RedShield = (Id)273,
-                BlueShield = (Id)274,
-                Axe = (Id)275;
-
+                Gray = (Id)95;
         }
-
-        public static class Ninja
+        
+        public static class Dojo
         {
             [Pack("brickninja")]
             public const Id
                 White = (Id)96,
                 Gray = (Id)97,
-                Ladder = (Id)120,
-                LeftBrightRoofTop = (Id)276,
-                RightBrightRoofTop = (Id)277,
                 BrightWindow = (Id)278,
-                LeftDarkRoofTop = (Id)279,
-                RightDarkRoofTop = (Id)280,
                 DarkWindow = (Id)281,
                 LadderShape = (Id)282,
                 AntennaShape = (Id)283,
                 YinYang = (Id)284;
+
+            [Pack("brickninja", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                LeftBrightRoofTop = (Id)276,
+                RightBrightRoofTop = (Id)277,
+                LeftDarkRoofTop = (Id)279,
+                RightDarkRoofTop = (Id)280;
+        }
+
+        public static class Ladder
+        {
+            [Pack("brickmedieval")]
+            public const Id
+                Chain = (Id)118;
+
+            [Pack("brickninja")]
+            public const Id
+                Wood = (Id)120;
+
+            [Pack("brickjungle")]
+            public const Id
+                VineVertical = (Id)98,
+                VineHorizontal = (Id)99;
+
+            [Pack("brickcowboy")]
+            public const Id
+                Rope = (Id)424;
         }
 
         public static class Coin
@@ -381,13 +382,37 @@ namespace BotBits
             public const Id
                 Gold = (Id)100,
                 Blue = (Id)101;
+
+            [Pack("brickcoindoor", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
+            public const Id
+                GoldDoor = (Id)43;
+
+            [Pack("brickcoingate", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
+            public const Id
+                GoldGate = (Id)165;
+
+            [Pack("brickbluecoindoor", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
+            public const Id
+                BlueDoor = (Id)213;
+
+            [Pack("brickbluecoingate", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
+            public const Id
+                BlueGate = (Id)214;
         }
 
         public static class Switch
         {
-            [Pack("brickswitchpurple")]
+            [Pack("brickswitchpurple", ForegroundType = ForegroundType.Goal)]
             public const Id
                 Purple = (Id)113;
+
+            [Pack("brickswitchpurple", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
+            public const Id
+                PurpleDoor = (Id)184;
+
+            [Pack("brickswitchpurple", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
+            public const Id
+                PurpleGate = (Id)185;
         }
 
         public static class Boost
@@ -404,13 +429,15 @@ namespace BotBits
         {
             [Pack("brickwater")]
             public const Id
-                Liquid = (Id)119,
                 Waves = (Id)300;
 
         }
 
         public static class Tool
         {
+            public const Id
+                Crown = (Id)5;
+
             [Pack("brickcomplete", BlocksPerPack = 1)]
             public const Id
                 Trophy = (Id)121;
@@ -425,7 +452,7 @@ namespace BotBits
 
         }
 
-        public static class Cowboy
+        public static class WildWest
         {
             [Pack("brickcowboy")]
             public const Id
@@ -450,7 +477,6 @@ namespace BotBits
                 TableRedDark = (Id)297,
                 TableBlueLit = (Id)298,
                 TableBlueDark = (Id)299;
-
         }
 
         public static class Plastic
@@ -502,19 +528,12 @@ namespace BotBits
                 TopLeftCorner = (Id)318;
         }
 
-        public static class PlateIron
-        {
-            [Pack("brickplateiron")]
-            public const Id
-                Iron = (Id)144,
-                Wires = (Id)145;
-
-        }
-
         public static class Industrial
         {
             [Pack("brickindustrial")]
             public const Id
+                Iron = (Id)144,
+                Wires = (Id)145,
                 OneWay = (Id)146,
                 CrossSupport = (Id)147,
                 Elevator = (Id)148,
@@ -522,43 +541,52 @@ namespace BotBits
                 LeftConveyor = (Id)150,
                 SupportedMiddleConveyor = (Id)151,
                 MiddleConveyor = (Id)152,
-                RightConveyor = (Id)153;
-
+                RightConveyor = (Id)153,
+                SignFire = (Id)319,
+                SignSkull = (Id)320,
+                SignLightning = (Id)321,
+                SignCross = (Id)322,
+                HorizontalLine = (Id)323,
+                VerticalLine = (Id)324;
         }
 
-        public static class Timbered
+        public static class Timed
         {
-            [Pack("bricktimbered")]
+            [Pack("bricktimeddoor", BlocksPerPack = 10)]
             public const Id
-                OneWay = (Id)154;
+                Door = (Id)156;
 
+            [Pack("bricktimeddoor", BlocksPerPack = 10)]
+            public const Id
+                Gate = (Id)157;
         }
 
-        public static class Castle
-        {
-            [Pack("brickcastle")]
-            public const Id
-                Ladder = (Id)118,
-                CastleOneWay = (Id)158,
-                CastleWall = (Id)159,
-                CastleWindow = (Id)160,
-                Castle1 = (Id)325,
-                Castle2 = (Id)326;
-
-        }
-
+        // TODO names
         public static class Medieval
         {
             [Pack("brickmedieval")]
             public const Id
+                OneWay = (Id)158,
+                Wall = (Id)159,
+                Window = (Id)160,
                 Anvil = (Id)162,
                 Barrel = (Id)163,
-                BlueBanner = (Id)327,
-                RedBanner = (Id)328,
-                Sword = (Id)329,
-                Shield = (Id)330,
-                Rock = (Id)331;
 
+                NONAME1 = (Id)325,
+                NONAME2 = (Id)326,
+
+                NONAME3 = (Id)437;
+
+                
+            [Pack("brickmedieval", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                Timber = (Id)440,
+                Shield = (Id)330,
+                Axe = (Id)275,
+                Sword = (Id)329,
+                Circle = (Id)273,
+                CoatOfArms = (Id)328,
+                Banner = (Id)327;
         }
 
         public static class Pipe
@@ -573,7 +601,7 @@ namespace BotBits
                 Down = (Id)171;
         }
 
-        public static class Rocket
+        public static class OuterSpace
         {
             [Pack("brickrocket")]
             public const Id
@@ -581,24 +609,32 @@ namespace BotBits
                 Blue = (Id)173,
                 Green = (Id)174,
                 Red = (Id)175,
+                Dust = (Id)176,
+                SilverTexture = (Id)1029,
                 GreenSign = (Id)332,
                 RedLight = (Id)333,
                 BlueLight = (Id)334,
-                Computer = (Id)335;
+                Computer = (Id)335,
+                BigStar = (Id)428,
+                MediumStar = (Id)429,
+                LittleStar = (Id)430,
+                Stone = (Id)331;
         }
 
-        public static class Mars
+        public static class Desert
         {
-            [Pack("brickmars")]
+            // TODO find better names for Patterns
+            [Pack("brickdesert")]
             public const Id
-                Sand = (Id)176,
                 Pattern1 = (Id)177,
                 Pattern2 = (Id)178,
                 Pattern3 = (Id)179,
-                Rock1 = (Id)180,
-                Rock2 = (Id)181,
-                Rock = (Id)336;
-
+                Pattern4 = (Id)180,
+                Pattern5 = (Id)181,
+                Rock = (Id)336,
+                Cactus = (Id)425,
+                Shrub = (Id)425,
+                Tree = (Id)425;
         }
 
         public static class Checker
@@ -620,24 +656,16 @@ namespace BotBits
         {
             [Pack("brickjungle")]
             public const Id
-                LadderVertical = (Id)98,
-                LadderHorizontal = (Id)99,
+                Tiki = (Id)193,
+                OneWay = (Id)194,
+                Gray = (Id)195,
+                Red = (Id)196,
+                Blue = (Id)197,
+                Yellow = (Id)198,
                 Vase = (Id)199,
                 Undergrowth = (Id)357,
                 Log = (Id)358,
                 Idol = (Id)359;
-        }
-
-        public static class JungleRuins
-        {
-            [Pack("brickjungleruins")]
-            public const Id
-                RoundedEdgeFace = (Id)193,
-                OneWay = (Id)194,
-                NonRoundedGray = (Id)195,
-                Red = (Id)196,
-                Blue = (Id)197,
-                Yellow = (Id)198;
         }
 
         public static class Lava
@@ -647,8 +675,7 @@ namespace BotBits
                 Yellow = (Id)202,
                 Orange = (Id)203,
                 Red = (Id)204,
-                Waves = (Id)415,
-                Liquid = (Id)416;
+                Waves = (Id)415;
         }
 
         public static class Sparta
@@ -705,6 +732,21 @@ namespace BotBits
                 Bow = (Id)404;
         }
 
+        public static class Zombie
+        {
+            [Pack("brickeffectzombie", ForegroundType = ForegroundType.Goal)]
+            public const Id
+                Effect = (Id)422;
+
+            [Pack("brickzombiedoor", BlocksPerPack = 10)] // TODO: brickeffectzombie also gives +10
+            public const Id
+                Door = (Id)207;
+
+            [Pack("brickzombiedoor", BlocksPerPack = 10)]
+            public const Id
+                Gate = (Id)206;
+        }
+
         public static class Hologram
         {
             [Pack("brickhologram", BlocksPerPack = 1)]
@@ -742,15 +784,15 @@ namespace BotBits
 
         public static class Portal
         {
-            [Pack("brickportal", BlocksPerPack = 5)]
+            [Pack("brickportal", BlocksPerPack = 5, ForegroundType = ForegroundType.Portal)]
             public const Id
                 Normal = (Id)242;
 
-            [Pack("brickinvisibleportal", BlocksPerPack = 5)]
+            [Pack("brickinvisibleportal", BlocksPerPack = 5, ForegroundType = ForegroundType.Portal)]
             public const Id
                 Invisible = (Id)381;
 
-            [Pack("brickworldportal", BlocksPerPack = 1)]
+            [Pack("brickworldportal", BlocksPerPack = 1, ForegroundType = ForegroundType.WorldPortal)]
             public const Id
                 World = (Id)374;
         }
@@ -815,18 +857,6 @@ namespace BotBits
                 Cocktail = (Id)310;
         }
 
-        public static class WarningSign
-        {
-            [Pack("bricksigns")]
-            public const Id
-                Fire = (Id)319,
-                Skull = (Id)320,
-                Lightning = (Id)321,
-                Cross = (Id)322,
-                HorizontalLine = (Id)323,
-                VerticalLine = (Id)324;
-        }
-
         public static class Cake
         {
             [Pack("brickcake", BlocksPerPack = 1)]
@@ -836,11 +866,15 @@ namespace BotBits
 
         public static class Monster
         {
+            [Pack("brickmonster", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                BigTooth = (Id)338,
+                SmallTooth = (Id)339,
+                TripleTooth = (Id)340;
+            
             [Pack("brickmonster")]
             public const Id
-                BigToothBottom = (Id)338,
-                SmallTeethBottom = (Id)339,
-                SmallTeethTop = (Id)340,
+                PurpleEye = (Id)274,
                 OrangeEye = (Id)341,
                 BlueEye = (Id)342;
         }
@@ -886,7 +920,6 @@ namespace BotBits
         {
             [Pack("brickswamp")]
             public const Id
-                Liquid = (Id)369,
                 MudBubbles = (Id)370,
                 Grass = (Id)371,
                 Log = (Id)372,
@@ -906,35 +939,23 @@ namespace BotBits
                 RedCross = (Id)367;
         }
 
-        public static class SciFi2013
-        {
-            [Pack("brickscifi2013")]
-            public const Id
-                BlueSlope = (Id)375,
-                BlueStraight = (Id)376,
-                YellowSlope = (Id)377,
-                YellowStraight = (Id)378,
-                GreenSlope = (Id)379,
-                GreenStraight = (Id)380;
-        }
-
         public static class Sign
         {
-            [Pack("bricksign", BlocksPerPack = 1)]
+            [Pack("bricksign", BlocksPerPack = 1, ForegroundType = ForegroundType.Text)]
             public const Id
                 Block = (Id)385;
         }
        
         public static class Admin
         {
-            [Pack("mod")]
+            [Pack("mod", ForegroundType = ForegroundType.Label)]
             public const Id
                 Text = (Id)1000;
         }
 
         public static class OneWay
         {
-            [Pack("brickoneway")]
+            [Pack("brickoneway", ForegroundType = ForegroundType.Morphable)]
             public const Id
                 Cyan = (Id)1001,
                 Red = (Id)1002,
@@ -972,27 +993,48 @@ namespace BotBits
 
         public static class Effect
         {
-            [Pack("brickeffectjump")]
+            [Pack("brickeffectjump", ForegroundType = ForegroundType.Toggle)]
             public const Id
                 Jump = (Id)417;
-            [Pack("brickeffectfly")]
+            [Pack("brickeffectfly", ForegroundType = ForegroundType.Toggle)]
             public const Id
                 Fly = (Id)418;
-            [Pack("brickeffectspeed")]
+            [Pack("brickeffectspeed", ForegroundType = ForegroundType.Toggle)]
             public const Id
                 Speed = (Id)419;
-            [Pack("brickeffectprotection")]
+            [Pack("brickeffectprotection", ForegroundType = ForegroundType.Toggle)]
             public const Id
                 Protection = (Id)420;
-            [Pack("brickeffectcurse")]
+            [Pack("brickeffectcurse", ForegroundType = ForegroundType.Goal)]
             public const Id
                 Curse = (Id)421;
-            [Pack("brickeffectzombie")]
-            public const Id
-                Zombie = (Id)422;
-            [Pack("brickeffectteam")]
-            public const Id
-                Team = (Id)423;
         }
+
+        public static class Liquid
+        {
+            [Pack("brickswamp")]
+            public const Id
+                Swamp = (Id)369;
+
+            [Pack("brickwater")]
+            public const Id
+                Water = (Id)119;
+
+            [Pack("bricklava")]
+            public const Id
+                Lava = (Id)416;
+        }
+
+        public static class Summer2015
+        {
+            [Pack("bricksummer2015")]
+            public const Id
+                Lifesaver = (Id)405,
+                Anchor = (Id)405,
+                RopeLeftEnded = (Id)406,
+                RopeRightEnded = (Id)405,
+                PalmTree = (Id)406;
+        }
+
     }
 }

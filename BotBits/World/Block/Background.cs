@@ -82,12 +82,15 @@ namespace BotBits
         {
             [Pack("brickbgcanvas")]
             public const Id
-                Red = (Id)533,
+                Orange = (Id)533,
                 Tan = (Id)534,
                 Gold = (Id)535,
                 Lime = (Id)536,
-                Blue = (Id)537,
-                Gray = (Id)538;
+                Cyan = (Id)537,
+                Gray = (Id)538,
+                Blue = (Id)606,
+                Red = (Id)671,
+                Purple = (Id)672;
         }
 
         public static class Candy
@@ -116,7 +119,11 @@ namespace BotBits
                 BlueStripe = (Id)546,
                 Pink = (Id)547,
                 Checkered = (Id)548,
-                Green = (Id)549;
+                Green = (Id)549,
+                Yellow = (Id)558,
+                RedWhiteStripe = (Id)563,
+                Blue = (Id)607;
+
         }
 
         public static class Prison
@@ -133,35 +140,36 @@ namespace BotBits
         {
             [Pack("brickpirate")]
             public const Id
-                DarkPlank = (Id)554,
+                Plank = (Id)554,
                 LightPlank = (Id)555,
-                PeggedPlank = (Id)556,
-                Lifesaver = (Id)557,
-                Window = (Id)558,
-                Cannon = (Id)559,
+                DarkPlank = (Id)559,
                 Flag = (Id)560;
         }
 
-        public static class Viking
+        public static class Stone
         {
-            [Pack("brickviking")]
+            [Pack("brickstone")]
             public const Id
                 FullBrick = (Id)561,
-                HalfBrick = (Id)562,
-                RedWhiteStripe = (Id)563;
+                HalfBrick = (Id)562;
         }
 
-        public static class Ninja
+
+        public static class Dojo
         {
             [Pack("brickninja")]
             public const Id
                 White = (Id)564,
                 Gray = (Id)565,
-                LitShingles = (Id)566,
-                DarkShingles = (Id)567;
+                BlueShingles = (Id)566,
+                DarkBlueShingles = (Id)567,
+                RedShingles = (Id)667,
+                DarkRedShingles = (Id)668,
+                GreenShingles = (Id)669,
+                DarkGreenShingles = (Id)670;
         }
 
-        public static class Cowboy
+        public static class WildWest
         {
             [Pack("brickcowboy")]
             public const Id
@@ -206,37 +214,24 @@ namespace BotBits
                GreenPlate = (Id)588,
                YellowPlate = (Id)589;
         }
-
-        public static class Timbered
-        {
-            [Pack("bricktimbered")]
-            public const Id
-                ThatchRoof = (Id)590,
-                RedShingles = (Id)591,
-                TealShingles = (Id)592,
-                VSupport = (Id)593,
-                LeftDiagonalSupport = (Id)594,
-                RightDiagonalSupport = (Id)595,
-                HorizontalSupport = (Id)596,
-                TSupport = (Id)597,
-                ClosedWindow = (Id)598;
-        }
-
-        public static class Castle
-        {
-            [Pack("brickcastle")]
-            public const Id
-                Bricks = (Id)599;
-        }
-
+        
+        // TODO NONAME
         public static class Medieval
         {
             [Pack("brickmedieval")]
             public const Id
-                Planks = (Id)600;
+                Bricks = (Id)599,
+                Planks = (Id)600,
+                ThatchRoof = (Id)590,
+                RedShingles = (Id)591,
+                TealShingles = (Id)592,
+                BrownShingles = (Id)556,
+                NONAME = (Id)593;
         }
 
-        public static class Rocket
+        // TODO Dojo?
+
+        public static class OuterSpace
         {
             [Pack("brickrocket")]
             public const Id
@@ -246,21 +241,16 @@ namespace BotBits
                 Red = (Id)604;
         }
 
-        public static class Mars
-        {
-            [Pack("brickmars")]
-            public const Id
-                NoStars = (Id)605,
-                SmallStar = (Id)606,
-                BigStar = (Id)607;
-        }
-
         public static class Monster
         {
             [Pack("brickmonster")]
             public const Id
-                LightFur = (Id)608,
-                DarkFur = (Id)609;
+                GreenFur = (Id)608,
+                DarkGreenFur = (Id)609,
+                RedFur = (Id)663,
+                DarkRedFur = (Id)664,
+                PurpleFur = (Id)665,
+                DarkPurpleFur = (Id)666;
         }
 
         public static class Normal
@@ -276,20 +266,14 @@ namespace BotBits
                 Cyan = (Id)616;
         }
 
-        public static class JungleRuins
-        {
-            [Pack("brickjungleruins")]
-            public const Id
-                Gray = (Id)617,
-                Red = (Id)618,
-                Blue = (Id)619,
-                Yellow = (Id)620;
-        }
-
         public static class Jungle
         {
             [Pack("brickjungle")]
             public const Id
+                Gray = (Id)617,
+                Red = (Id)618,
+                Blue = (Id)619,
+                Yellow = (Id)620,
                 BrightPlants = (Id)621,
                 Plants = (Id)622,
                 DarkPlants = (Id)623;
@@ -317,14 +301,15 @@ namespace BotBits
         {
             [Pack("brickswamp")]
             public const Id
+                Dirt = (Id)557,
                 Underbrush = (Id)630;
         }
 
         // 6 ids skipped
 
-        public static class SciFi2013
+        public static class SciFi
         {
-            [Pack("brickscifi2013")]
+            [Pack("brickscifi")]
             public const Id
                 Gray = (Id)637;
         }
@@ -345,6 +330,27 @@ namespace BotBits
                 Yellow = (Id)641,
                 Orange = (Id)642,
                 Red = (Id)643;
+        }
+
+        public static class Clay
+        {
+            [Pack("brickclay")]
+            public const Id
+                Plain = (Id)594,
+                Brick = (Id)595,
+                Diamond = (Id)596,
+                Cross = (Id)597,
+                Deteriorated = (Id)598;
+        }
+
+        public static class Neon
+        {
+            [Pack("brickneon")]
+            public const Id
+                Blue = (Id)605,
+                Orange = (Id)673,
+                Green = (Id)674,
+                Red = (Id)675;
         }
     }
 }

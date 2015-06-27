@@ -110,13 +110,7 @@
     <Compile Include="Enums\Key.cs" />
     <Compile Include="Enums\Layer.cs" />
     <Compile Include="Enums\MagicClass.cs" />
-    <Compile Include="Enums\PercussionId.cs" />
-    <Compile Include="Enums\PianoId.cs" />
-    <Compile Include="Enums\PortalRotation.cs" />
-    <Compile Include="Enums\ScifiSlopeRotation.cs" />
-    <Compile Include="Enums\ScifiStraightRotation.cs" />
     <Compile Include="Enums\Smiley.cs" />
-    <Compile Include="Enums\BlockRotation.cs" />
     <Compile Include="EventLoader\EventListenerAttribute.cs" />
     <Compile Include="EventLoader\EventLoader.cs" />
     <Compile Include="BlockChecker\BlockChecker.cs" />
@@ -159,6 +153,7 @@
     <Compile Include="Services\SchedulerHandle\ISchedulerHandle.cs" />
     <Compile Include="Services\SchedulerHandle\SynchronizationContextSchedulerHandle.cs" />
     <Compile Include="World\Block\BackgroundType.cs" />
+    <Compile Include="World\Block\Morph.cs" />
     <Compile Include="World\DatabaseWorld.cs" />
     <Compile Include="World\IWorld.cs" />
     <Compile Include="World\WorldItem.cs" />

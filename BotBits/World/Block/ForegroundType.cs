@@ -1,7 +1,7 @@
 namespace BotBits
 {
     /// <summary>
-    ///     Represents the types a <see cref="Foreground" /> can be.
+    /// Represents the types a <see cref="Foreground" /> can be.
     /// </summary>
     public enum ForegroundType : byte
     {
@@ -9,6 +9,16 @@ namespace BotBits
         ///     A normal block
         /// </summary>
         Normal,
+
+        /// <summary>
+        ///      A toggle block
+        /// </summary>
+        Toggle,
+
+        /// <summary>
+        ///     A coin door block
+        /// </summary>
+        Team,
 
         /// <summary>
         ///     A coin door block
@@ -33,27 +43,12 @@ namespace BotBits
         /// <summary>
         ///     A piano block
         /// </summary>
-        Piano,
+        Note,
 
         /// <summary>
-        ///     A drum block
+        ///     A morphable block
         /// </summary>
-        Drum,
-
-        /// <summary>
-        ///     A rotatable block
-        /// </summary>
-        Rotatable,
-
-        /// <summary>
-        ///     A sci fi straight block
-        /// </summary>
-        SciFiStraight,
-
-        /// <summary>
-        ///     A sci fi slope block
-        /// </summary>
-        SciFiSlope,
+        Morphable,
 
         /// <summary>
         ///     A world portal block

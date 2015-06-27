@@ -28,7 +28,6 @@ namespace BotBits.Events
             this.Team = (Team)message.GetInt(13);
             this.Aura = (Aura)message.GetInt(14);
             this.ChatColor = message.GetUInt(15);
-
         }
 
         /// <summary>

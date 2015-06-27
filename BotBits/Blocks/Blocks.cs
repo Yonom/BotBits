@@ -173,7 +173,7 @@ namespace BotBits
         }
 
         private void RaisePortalBlock(int x, int y, Foreground.Id block, 
-            uint portalId, uint portalTarget, PortalRotation portalRotation, Player player)
+            uint portalId, uint portalTarget, Morph.Id portalRotation, Player player)
         {
             this.RaiseForeground(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation), player);
         }

@@ -87,7 +87,7 @@ namespace BotBits
             this._id = id;
         }
 
-        public ForegroundBlock(Foreground.Id id, uint portalId, uint portalTarget, PortalRotation portalRotation)
+        public ForegroundBlock(Foreground.Id id, uint portalId, uint portalTarget, Morph.Id portalRotation)
         {
             ForegroundType type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Portal)
@@ -98,39 +98,28 @@ namespace BotBits
             this._id = id;
         }
 
+        public ForegroundBlock(Foreground.Id id, int portalId, int portalTarget, Morph.Id portalRotation)
+            : this(id, (uint)portalId, (uint)portalTarget, portalRotation)
+        {
+        }
+
         public ForegroundBlock(Foreground.Id id, int goal)
             : this(id, (uint)goal)
         {
         }
 
-        public ForegroundBlock(Foreground.Id id, int portalId, int portalTarget, PortalRotation portalRotation)
-            : this(id, (uint)portalId, (uint)portalTarget, portalRotation)
+        public ForegroundBlock(Foreground.Id id, bool enabled)
+            : this(id, enabled ? 1 : 0)
         {
         }
 
-        
-        public ForegroundBlock(Foreground.Id id, SciFiSlopeRotation rotation) 
-            : this(id, (uint)rotation)
+        public ForegroundBlock(Foreground.Id id, Morph.Id morph)
+            : this(id, (uint)morph)
         {
         }
 
-        public ForegroundBlock(Foreground.Id id, SciFiStraightRotation rotation)
-            : this(id, (uint)rotation)
-        {
-        }
-
-        public ForegroundBlock(Foreground.Id id, BlockRotation rotation)
-            : this(id, (uint)rotation)
-        {
-        }
-
-        public ForegroundBlock(Foreground.Id id, PianoId soundId)
-            : this(id, (uint)soundId)
-        {
-        }
-
-        public ForegroundBlock(Foreground.Id id, PercussionId soundId)
-            : this(id, (uint)soundId)
+        public ForegroundBlock(Foreground.Id id, Team morph)
+            : this(id, (uint)morph)
         {
         }
 
@@ -191,6 +180,24 @@ namespace BotBits
                     throw new InvalidOperationException("This property can only be accessed on label blocks.");
 
                 return this.GetLabelArgs().TextColor;
+            }
+        }
+
+        /// <summary>
+        ///     Gets the toggled state. (Only on toggle)
+        /// </summary>
+        /// <value>
+        ///     The toggle state.
+        /// </value>
+        /// <exception cref="System.InvalidOperationException">This property can only be accessed on toggle blocks.</exception>
+        public bool Enabled
+        {
+            get
+            {
+                if (this.Type != ForegroundType.Toggle)
+                    throw new InvalidOperationException("This property can only be accessed on label blocks.");
+
+                return (int)this._args != 0;
             }
         }
 
@@ -267,111 +274,38 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Gets the portal rotation. (Only on portal blocks)
+        ///     Gets the morph. (Only on morphable blocks)
         /// </summary>
         /// <value>
-        ///     The portal rotation.
+        ///     The morph.
         /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on Portal blocks.</exception>
-        public PortalRotation PortalRotation
+        /// <exception cref="System.InvalidOperationException">This property can only be accessed on morphable blocks.</exception>
+        public Morph.Id Morph
         {
             get
             {
-                if (this.Type != ForegroundType.Portal)
-                    throw new InvalidOperationException("This property can only be accessed on Portal blocks.");
+                switch (this.Type)
+                {
+                    case ForegroundType.Portal:
+                        return this.GetPortalArgs().PortalRotation;
+                    case ForegroundType.Toggle:
+                    case ForegroundType.Morphable:
+                        return (Morph.Id)this._args;
+                    default:
+                        throw new InvalidOperationException("This property can only be accessed on morphable blocks.");
+                }
 
-                return this.GetPortalArgs().PortalRotation;
             }
         }
 
-        /// <summary>
-        ///     Gets the piano identifier. (Only on piano blocks)
-        /// </summary>
-        /// <value>
-        ///     The piano identifier.
-        /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on Piano blocks.</exception>
-        public PianoId PianoId
+        public Team Team
         {
             get
             {
-                if (this.Type != ForegroundType.Piano)
-                    throw new InvalidOperationException("This property can only be accessed on Piano blocks.");
+                if (this.Type != ForegroundType.Team)
+                    throw new InvalidOperationException("This property can only be accessed on Team blocks.");
 
-                return (PianoId)this._args;
-            }
-        }
-
-        /// <summary>
-        ///     Gets the percussion identifier. (Only on drum blocks)
-        /// </summary>
-        /// <value>
-        ///     The percussion identifier.
-        /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on Drum blocks.</exception>
-        public PercussionId PercussionId
-        {
-            get
-            {
-                if (this.Type != ForegroundType.Drum)
-                    throw new InvalidOperationException("This property can only be accessed on Drum blocks.");
-
-                return (PercussionId)this._args;
-            }
-        }
-
-        /// <summary>
-        ///     Gets the rotation. (Only on rotatable blocks)
-        /// </summary>
-        /// <value>
-        ///     The rotation.
-        /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on rotatable blocks.</exception>
-        public BlockRotation BlockRotation
-        {
-            get
-            {
-                if (this.Type != ForegroundType.Rotatable)
-                    throw new InvalidOperationException("This property can only be accessed on rotatable blocks.");
-
-                return (BlockRotation)this._args;
-            }
-        }
-
-        /// <summary>
-        ///     Gets the scifi straight rotation. (Only on scifi straight blocks)
-        /// </summary>
-        /// <value>
-        ///     The scifi straight rotation.
-        /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on SciFiStraight blocks.</exception>
-        public SciFiStraightRotation SciFiStraightRotation
-        {
-            get
-            {
-                if (this.Type != ForegroundType.SciFiStraight)
-                    throw new InvalidOperationException("This property can only be accessed on SciFiStraight blocks.");
-
-                return (SciFiStraightRotation)this._args;
-            }
-        }
-
-
-        /// <summary>
-        ///     Gets the scifi slope rotation. (Only on scifi slope blocks)
-        /// </summary>
-        /// <value>
-        ///     The scifi slope rotation.
-        /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on SciFiSlope blocks.</exception>
-        public SciFiSlopeRotation SciFiSlopeRotation
-        {
-            get
-            {
-                if (this.Type != ForegroundType.SciFiSlope)
-                    throw new InvalidOperationException("This property can only be accessed on SciFiSlope blocks.");
-
-                return (SciFiSlopeRotation)this._args;
+                return (Team)this._args;
             }
         }
 
@@ -423,7 +357,7 @@ namespace BotBits
                 return !Equals(left, right);
             }
 
-            public PortalArgs(uint portalId, uint portalTarget, PortalRotation portalRotation)
+            public PortalArgs(uint portalId, uint portalTarget, Morph.Id portalRotation)
             {
                 this.PortalId = portalId;
                 this.PortalTarget = portalTarget;
@@ -432,7 +366,7 @@ namespace BotBits
 
             public uint PortalId { get; private set; }
             public uint PortalTarget { get; private set; }
-            public PortalRotation PortalRotation { get; private set; }
+            public Morph.Id PortalRotation { get; private set; }
         }
 
         private class LabelArgs : IEquatable<LabelArgs>
@@ -487,7 +421,7 @@ namespace BotBits
                 case ForegroundType.Normal:
                     return new object[0];
                 case ForegroundType.Portal:
-                    return new object[] { (uint)this.PortalRotation, this.PortalId, this.PortalTarget };
+                    return new object[] { (uint)this.Morph, this.PortalId, this.PortalTarget };
                 case ForegroundType.Label:
                     return new object[] { this.Text, this.TextColor };
                 default:
