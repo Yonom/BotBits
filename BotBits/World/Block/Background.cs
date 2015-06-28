@@ -229,8 +229,6 @@ namespace BotBits
                 NONAME = (Id)593;
         }
 
-        // TODO Dojo?
-
         public static class OuterSpace
         {
             [Pack("brickrocket")]

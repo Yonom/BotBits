@@ -1,8 +1,10 @@
 ﻿namespace BotBits
 {
+    // TODO: payvault keys
     public enum Aura
     {
         Normal = 0,
+
         Red = 1,
         Blue = 2,
         Yellow = 3,
@@ -13,6 +15,9 @@
         BcBlue = 8,
         BcYellow = 9,
         BcGreen = 10,
-        BcPurple = 11
+        BcPurple = 11,
+
+        Orange = 12,
+        BcOrange = 13,
     }
 }

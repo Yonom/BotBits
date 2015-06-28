@@ -326,5 +326,11 @@ namespace BotBits
         
         [Pack("smiley3dglasses")]
         Glasses3D = 111,
+
+        [Pack("smileysunburned")]
+        Sunburned = 112,
+
+        [Pack("smileytourist")]
+        Tourist = 113,
     }
 }
