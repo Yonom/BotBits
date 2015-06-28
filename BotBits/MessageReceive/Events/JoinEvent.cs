@@ -18,13 +18,13 @@ namespace BotBits.Events
             this.X = message.GetInteger(3);
             this.Y = message.GetInteger(4);
             this.God = message.GetBoolean(5);
-            this.Mod = message.GetBoolean(6);
+            this.Admin = message.GetBoolean(6);
             this.HasChat = message.GetBoolean(7);
             this.Coins = message.GetInteger(8);
             this.BlueCoins = message.GetInteger(9);
             this.Friend = message.GetBoolean(10);
             this.ClubMember = message.GetBoolean(11);
-            this.Guardian = message.GetBoolean(12);
+            this.Mod = message.GetBoolean(12);
             this.Team = (Team)message.GetInt(13);
             this.Aura = (Aura)message.GetInt(14);
             this.ChatColor = message.GetUInt(15);
@@ -55,10 +55,10 @@ namespace BotBits.Events
         public uint ChatColor { get; set; }
 
         /// <summary>
-        ///     Gets or sets whether the user is in guardian mode or not.
+        ///     Gets or sets whether the user is in admin mode or not.
         /// </summary>
-        /// <value><c>true</c> if the player has activated guardian mode; otherwise, <c>false</c>.</value>
-        public bool Guardian { get; set; }
+        /// <value><c>true</c> if the player has activated admin mode; otherwise, <c>false</c>.</value>
+        public bool Admin { get; set; }
 
         /// <summary>
         ///     Gets or sets the amount of yellow coins the player has.

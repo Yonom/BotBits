@@ -129,7 +129,7 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.High)]
-        private void OnRotatablePlace(RotatablePlaceEvent e)
+        private void OnMorphablePlace(MorphablePlaceEvent e)
         {
             this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Rotation, e.Player);
         }

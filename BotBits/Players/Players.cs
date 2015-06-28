@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
@@ -116,7 +115,7 @@ namespace BotBits
             p.Aura = e.Aura;
             p.HasChat = e.HasChat;
             p.GodMode = e.God;
-            p.GuardianMode = e.Guardian;
+            p.AdminMode = e.Admin;
             p.ModMode = e.Mod;
             p.Friend = e.Friend;
             p.GoldCoins = e.Coins;
@@ -195,7 +194,7 @@ namespace BotBits
             Player p = e.Player;
             p.GodMode = e.God;
 
-            if (!p.ModMode && !p.GuardianMode)
+            if (!p.ModMode && !p.AdminMode)
             {
                 new FlyEvent(p, p.Flying)
                     .RaiseIn(this.BotBits);
@@ -203,10 +202,10 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.High)]
-        private void OnGuardianMode(GuardianModeEvent e)
+        private void OnAdminMode(AdminModeEvent e)
         {
             Player p = e.Player;
-            p.GuardianMode = e.Guardian; 
+            p.AdminMode = e.Admin; 
             
             if (!p.ModMode && !p.GodMode)
             {
@@ -221,7 +220,7 @@ namespace BotBits
             Player p = e.Player;
             p.ModMode = e.Mod;
 
-            if (!p.GodMode && !p.GuardianMode)
+            if (!p.GodMode && !p.AdminMode)
             {
                 new FlyEvent(p, p.Flying)
                     .RaiseIn(this.BotBits);
@@ -277,6 +276,34 @@ namespace BotBits
         {
             Player p = e.Player;
             p.Dead = true;
+        }
+
+        [EventListener(EventPriority.High)]
+        private void OnSwitchInit(PurpleSwitchInitEvent e)
+        {
+            Player p = e.Player;
+            for (var i = 0; i < e.PurpleSwitches.Length; i++)
+            {
+                if (e.PurpleSwitches[i] == 0) continue;
+
+                p.AddSwitch(i);
+                new PurpleSwitchEvent(p, i, true)
+                    .RaiseIn(this.BotBits);
+            }
+        }
+
+        [EventListener(EventPriority.High)]
+        private void OnSwitchUpdate(PurpleSwitchUpdateEvent e)
+        {
+            Player p = e.Player;
+            var enabled = e.Enabled != 0;
+            if (enabled)
+                p.AddSwitch(e.SwitchId);
+            else
+                p.RemoveSwitch(e.SwitchId);
+
+            new PurpleSwitchEvent(p, e.SwitchId, enabled)
+                .RaiseIn(this.BotBits);
         }
 
         [EventListener(EventPriority.High)]

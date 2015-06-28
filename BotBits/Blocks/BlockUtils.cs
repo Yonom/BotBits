@@ -9,7 +9,7 @@ namespace BotBits
 {
     public static class BlockUtils
     {
-        private const uint InitOffset = 24;
+        private const uint InitOffset = 26;
 
         internal static BlockDataWorld GetWorld(Message m, int width, int height, uint offset = InitOffset)
         {

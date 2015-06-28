@@ -129,6 +129,24 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
+        public void SetCurseLimit(int limit)
+        {
+            if (this.AccessRight < AccessRight.Owner)
+                throw new InvalidOperationException("Only owners are allowed to change curse limit.");
+
+            new SetCurseLimitSendMessage(limit)
+                .SendIn(this.BotBits);
+        }
+
+        public void SetZombieLimit(int limit)
+        {
+            if (this.AccessRight < AccessRight.Owner)
+                throw new InvalidOperationException("Only owners are allowed to change zombie limit.");
+
+            new SetZombieLimitSendMessage(limit)
+                .SendIn(this.BotBits);
+        }
+
         public void KillRoom()
         {
             new KillRoomSendMessage()
@@ -163,6 +181,8 @@ namespace BotBits
             this.HideLobby = e.HideLobby;
             this.AllowSpectating = e.AllowSpectating;
             this.Description = e.RoomDescription;
+            this.ZombieLimit = e.ZombieLimit;
+            this.CurseLimit = e.CurseLimit;
 
             if (e.IsOwner)
             {
@@ -177,6 +197,10 @@ namespace BotBits
                 .RaiseIn(this.BotBits);
             this.InitComplete = true;
         }
+
+        public int CurseLimit { get; set; }
+
+        public int ZombieLimit { get; set; }
 
         [EventListener(EventPriority.High)]
         private void OnAccess(AccessEvent e)
@@ -242,6 +266,13 @@ namespace BotBits
         private void OnRoomDescription(RoomDescriptionEvent e)
         {
             this.Description = e.Description;
+        }
+
+        [EventListener(EventPriority.High)]
+        private void OnEffectsLimit(EffectLimitsEvent e)
+        {
+            this.ZombieLimit = e.ZombieLimit;
+            this.CurseLimit = e.CurseLimit;
         }
     }
 }

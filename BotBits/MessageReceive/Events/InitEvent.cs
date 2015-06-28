@@ -40,7 +40,13 @@ namespace BotBits.Events
             this.HideLobby = message.GetBoolean(21);
             this.AllowSpectating = message.GetBoolean(22);
             this.RoomDescription = message.GetString(23);
+            this.CurseLimit = message.GetInt(24);
+            this.ZombieLimit = message.GetInt(25);
         }
+
+        public int ZombieLimit { get; set; }
+
+        public int CurseLimit { get; set; }
 
         public string RoomDescription { get; set; }
 

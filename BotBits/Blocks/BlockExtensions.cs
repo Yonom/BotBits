@@ -64,7 +64,7 @@ namespace BotBits
         }
         #endregion
 
-        #region FillWith IEnumerable
+        #region BlocksItem IEnumerable
 
         public static void Set(this IEnumerable<BlocksItem> blocks, ForegroundBlock block)
         {

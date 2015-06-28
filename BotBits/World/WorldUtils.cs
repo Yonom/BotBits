@@ -95,68 +95,6 @@ namespace BotBits
         public static ForegroundType GetForegroundType(Foreground.Id id)
         {
             return BlockServices.GetPackageInternal((int)id).ForegroundType;
-
-            //switch (id)
-            //{
-            //    case Foreground.Switch.Purple:
-            //    case Foreground.Door.Coin:
-            //    case Foreground.Gate.Coin:
-            //    case Foreground.Door.BlueCoin:
-            //    case Foreground.Gate.BlueCoin:
-            //    case Foreground.Door.Purple:
-            //    case Foreground.Gate.Purple:
-            //    case Foreground.Door.Death:
-            //    case Foreground.Gate.Death:
-            //    case Foreground.Door.Team:
-            //    case Foreground.Gate.Team:
-            //    case Foreground.Effect.Jump:
-            //    case Foreground.Effect.Fly:
-            //    case Foreground.Effect.Protection:
-            //    case Foreground.Effect.Speed:
-            //    case Foreground.Effect.Curse:
-            //    case Foreground.Effect.Zombie:
-            //    case Foreground.Effect.Team:
-            //        return ForegroundType.Goal;
-
-            //    case Foreground.Hazard.Spike:
-            //    case Foreground.OneWay.Cyan:
-            //    case Foreground.OneWay.Pink:
-            //    case Foreground.OneWay.Red:
-            //    case Foreground.OneWay.Yellow:
-            //        return ForegroundType.Rotatable;
-
-            //    case Foreground.SciFi2013.BlueStraight:
-            //    case Foreground.SciFi2013.YellowStraight:
-            //    case Foreground.SciFi2013.GreenStraight:
-            //        return ForegroundType.SciFiStraight;
-
-            //    case Foreground.SciFi2013.YellowSlope:
-            //    case Foreground.SciFi2013.GreenSlope:
-            //    case Foreground.SciFi2013.BlueSlope:
-            //        return ForegroundType.SciFiSlope;
-
-            //    case Foreground.Music.Piano:
-            //        return ForegroundType.Piano;
-
-            //    case Foreground.Music.Drum:
-            //        return ForegroundType.Drum;
-
-            //    case Foreground.Portal.Invisible:
-            //    case Foreground.Portal.Normal:
-            //        return ForegroundType.Portal;
-
-            //    case Foreground.Sign.Block:
-            //        return ForegroundType.Text;
-
-            //    case Foreground.Admin.Text:
-            //        return ForegroundType.Label;
-
-            //    case Foreground.Portal.World:
-            //        return ForegroundType.WorldPortal;
-
-            //    default:
-            //        return ForegroundType.Normal;
-            //}
         }
 
         public static BlockArgsType GetBlockArgsType(ForegroundType type)

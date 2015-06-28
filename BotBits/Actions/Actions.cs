@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
-using BotBits.Events;
 using BotBits.SendMessages;
 
 namespace BotBits
@@ -11,6 +8,17 @@ namespace BotBits
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
         public Actions()
         {
+        }
+
+        public void RequestServerTime()
+        {
+            this.RequestServerTime(0);
+        }
+
+        public void RequestServerTime(double data)
+        {
+            new TimeSendMessage(data)
+                .SendIn(this.BotBits);
         }
 
         public void ChangeSmiley(Smiley newSmiley)
@@ -63,6 +71,12 @@ namespace BotBits
         public void GetCoin(int coins, int blueCoins, int x, int y)
         {
             new CoinSendMessage(coins, blueCoins, x, y)
+                .SendIn(this.BotBits);
+        }
+
+        public void PressPurpleSwitch(int switchId, int enabled)
+        {
+            new PurpleSwitchSendMessage(switchId, enabled)
                 .SendIn(this.BotBits);
         }
 
@@ -155,9 +169,9 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void ToggleGuardianMode()
+        public void ToggleAdminMode()
         {
-            new GuardianModeSendMessage()
+            new AdminModeSendMessage()
                 .SendIn(this.BotBits);
         }
 

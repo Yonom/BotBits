@@ -14,6 +14,7 @@ namespace BotBits
         [CanBeNull]
         private readonly Players _players;
         private readonly Dictionary<Effect, ActiveEffect> _effects = new Dictionary<Effect, ActiveEffect>();
+        private readonly HashSet<int> _switches = new HashSet<int>();
 
         internal Player([CanBeNull] Players players, int userId)
         {
@@ -46,12 +47,12 @@ namespace BotBits
         public bool GodMode { get; internal set; }
 
         /// <summary>
-        ///     Gets a value indicating whether this player has guardian mode enabled.
+        ///     Gets a value indicating whether this player has admin mode enabled.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if this player has guardian mode enabled; otherwise, <c>false</c>.
+        ///     <c>true</c> if this player has admin mode enabled; otherwise, <c>false</c>.
         /// </value>
-        public bool GuardianMode { get; internal set; }
+        public bool AdminMode { get; internal set; }
 
         /// <summary>
         ///     Gets a value indicating whether this player has moderator mode enabled.
@@ -249,14 +250,14 @@ namespace BotBits
         public uint ChatColor { get; internal set; }
 
         /// <summary>
-        ///     Gets a value indicating whether this player is flying using god mode, guardian mode or moderator mode.
+        ///     Gets a value indicating whether this player is flying using god mode, admin mode or moderator mode.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if this player is flying using god mode, guardian mode or moderator mode; otherwise, <c>false</c>.
+        ///     <c>true</c> if this player is flying using god mode, admin mode or moderator mode; otherwise, <c>false</c>.
         /// </value>
         public bool Flying
         {
-            get { return this.GodMode || this.GuardianMode || this.ModMode; }
+            get { return this.GodMode || this.AdminMode || this.ModMode; }
         }
 
         /// <summary>
@@ -334,6 +335,41 @@ namespace BotBits
         }
 
         [Pure]
+        public bool HasSwitchPressed(int id)
+        {
+            lock (this._effects)
+            {
+                return this._switches.Add(id);
+            }
+        }
+
+        [Pure]
+        public int[] GetSwitches()
+        {
+            lock (this._effects)
+            {
+                return this._switches.ToArray();
+            }
+        }
+
+        internal void AddSwitch(int id)
+        {
+            lock (this._effects)
+            {
+                this._switches.Add(id);
+            }
+        }
+
+        internal void RemoveSwitch(int id)
+        {
+            lock (this._effects)
+            {
+                this._switches.Remove(id);
+            }
+        }
+
+
+        [Pure]
         public bool HasEffect(Effect effect)
         {
             lock (this._effects)
@@ -366,6 +402,7 @@ namespace BotBits
                 this._effects.Remove(effect);
             }
         }
+
 
         public override void Set<T>(string id, T value)
         {

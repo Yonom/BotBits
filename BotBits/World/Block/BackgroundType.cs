@@ -10,11 +10,6 @@ namespace BotBits
         /// <summary>
         /// A normal block
         /// </summary>
-        Normal,
-
-        /// <summary>
-        /// A rotatable block
-        /// </summary>
-        Rotatable
+        Normal
     }
 }

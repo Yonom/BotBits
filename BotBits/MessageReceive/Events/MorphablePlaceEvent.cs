@@ -3,14 +3,14 @@ using PlayerIOClient;
 namespace BotBits.Events
 {
     [ReceiveEvent("br")]
-    public sealed class RotatablePlaceEvent : PlayerEvent<RotatablePlaceEvent>
+    public sealed class MorphablePlaceEvent : PlayerEvent<MorphablePlaceEvent>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="RotatablePlaceEvent" /> class.
+        ///     Initializes a new instance of the <see cref="MorphablePlaceEvent" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
-        internal RotatablePlaceEvent(BotBitsClient client, Message message)
+        internal MorphablePlaceEvent(BotBitsClient client, Message message)
             : base(client, message, 5)
         {
             this.X = message.GetInteger(0);

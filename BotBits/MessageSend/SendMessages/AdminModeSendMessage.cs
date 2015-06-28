@@ -3,9 +3,9 @@
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class GuardianMode Send Event
+    ///     Class Admin Mode Send Event
     /// </summary>
-    public sealed class GuardianModeSendMessage : SendMessage<GuardianModeSendMessage>
+    public sealed class AdminModeSendMessage : SendMessage<AdminModeSendMessage>
     {
         /// <summary>
         ///     Gets the PlayerIO message representing the data in this <see cref="SendMessage{T}" />.
@@ -13,7 +13,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("guardian");
+            return Message.Create("admin");
         }
     }
 }
