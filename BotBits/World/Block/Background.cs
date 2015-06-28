@@ -215,7 +215,6 @@ namespace BotBits
                YellowPlate = (Id)589;
         }
         
-        // TODO NONAME
         public static class Medieval
         {
             [Pack("brickmedieval")]
@@ -226,7 +225,7 @@ namespace BotBits
                 RedShingles = (Id)591,
                 TealShingles = (Id)592,
                 BrownShingles = (Id)556,
-                NONAME = (Id)593;
+                Wallpaper = (Id)593;
         }
 
         public static class OuterSpace

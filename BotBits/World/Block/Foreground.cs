@@ -1,7 +1,6 @@
 using BotBits.Shop;
 // ReSharper disable MemberHidesStaticFromOuterClass
 
-
 namespace BotBits
 {
     public static class Foreground
@@ -566,16 +565,16 @@ namespace BotBits
         {
             [Pack("brickmedieval")]
             public const Id
-                OneWay = (Id)158,
-                Wall = (Id)159,
-                Window = (Id)160,
+                CastleOneWay = (Id)158,
+                CastleWall = (Id)159,
+                CastleWindow = (Id)160,
                 Anvil = (Id)162,
                 Barrel = (Id)163,
 
-                NONAME1 = (Id)325,
-                NONAME2 = (Id)326,
+                CastleSupport = (Id)325,
+                Tombstone = (Id)326,
 
-                NONAME3 = (Id)437;
+                ClosedDoor = (Id)437;
 
                 
             [Pack("brickmedieval", ForegroundType = ForegroundType.Morphable)]
@@ -633,8 +632,8 @@ namespace BotBits
                 Pattern5 = (Id)181,
                 Rock = (Id)336,
                 Cactus = (Id)425,
-                Shrub = (Id)425,
-                Tree = (Id)425;
+                Shrub = (Id)426,
+                Tree = (Id)427;
         }
 
         public static class Checker
@@ -1029,11 +1028,11 @@ namespace BotBits
         {
             [Pack("bricksummer2015")]
             public const Id
-                Lifesaver = (Id)405,
-                Anchor = (Id)405,
-                RopeLeftEnded = (Id)406,
-                RopeRightEnded = (Id)405,
-                PalmTree = (Id)406;
+                Lifesaver = (Id)441,
+                Anchor = (Id)442,
+                RopeLeftEnded = (Id)443,
+                RopeRightEnded = (Id)444,
+                PalmTree = (Id)445;
         }
 
     }
