@@ -39,7 +39,7 @@ namespace BotBits
             _blockPacks.TryGetValue(id, out pack);
             return pack != null 
                 ? pack.Package 
-                : "";
+                : null;
         }
 
         public static int GetBlocksPerPackage(int id)
@@ -57,7 +57,7 @@ namespace BotBits
             _smileyPacks.TryGetValue(id, out pack);
             return pack != null
                 ? pack.Package
-                : "";
+                : null;
         }
 
         static void LoadPacks(Type type)

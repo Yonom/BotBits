@@ -14,7 +14,7 @@ namespace BotBits
         {
             foreach (var item in items)
             {
-                var count = 0;
+                int count;
                 this._itemCounts.TryGetValue(item.ItemKey, out count);
                 this._itemCounts[item.ItemKey] = count;
             }
@@ -23,7 +23,7 @@ namespace BotBits
         public bool HasSmiley(Smiley smiley)
         {
             var pack = BlockServices.GetPackage(smiley);
-            if (pack == "") return true;
+            if (pack == null) return true;
 
             return this._itemCounts.ContainsKey(pack);
         }
@@ -43,8 +43,6 @@ namespace BotBits
 
             switch (pack.Package)
             {
-                case "":
-                    return true;
                 case "mod":
                     return isModerator;
                 case "bc":

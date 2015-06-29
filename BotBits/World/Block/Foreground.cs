@@ -560,7 +560,6 @@ namespace BotBits
                 Gate = (Id)157;
         }
 
-        // TODO names
         public static class Medieval
         {
             [Pack("brickmedieval")]
