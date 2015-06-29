@@ -89,8 +89,8 @@ namespace BotBits
             if (msg.StartsWith("/", StringComparison.OrdinalIgnoreCase) && 
                 !msg.StartsWith("/pm", StringComparison.OrdinalIgnoreCase))
             {
-                var e = msg.Length > 80
-                    ? new ChatSendMessage(msg.Substring(0, 80))
+                var e = msg.Length > 140
+                    ? new ChatSendMessage(msg.Substring(0, 140))
                     : new ChatSendMessage(msg);
                 e.SendIn(this.BotBits);
                 return;
@@ -108,12 +108,12 @@ namespace BotBits
                 return;
             }
 
-            // Queue the message and chop it into 80 char parts
-            for (int i = 0; i < msg.Length; i += 80)
+            // Queue the message and chop it into 140 char parts
+            for (int i = 0; i < msg.Length; i += 140)
             {
                 int left = msg.Length - i;
-                this.Enqueue(left > 80
-                    ? msg.Substring(i, 80)
+                this.Enqueue(left > 140
+                    ? msg.Substring(i, 140)
                     : msg.Substring(i, left), channel);
             }
 
