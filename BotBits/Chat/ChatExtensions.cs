@@ -129,6 +129,45 @@ namespace BotBits
         }
 
         /// <summary>
+        /// Enables god mode of the specified username (/godon &lt;username&gt;).
+        /// </summary>
+        /// <param name="chat">Chat.</param>
+        /// <param name="username">Username.</param>
+        public static void GodOn(this IChat chat, string username)
+        {
+            chat.Say("/godon {0}", username);
+        }
+
+        /// <summary>
+        /// Disables god mode of the specified username (/godoff &lt;username&gt;).
+        /// </summary>
+        /// <param name="chat">Chat.</param>
+        /// <param name="username">Username.</param>
+        public static void GodOff(this IChat chat, string username)
+        {
+            chat.Say("/godoff {0}", username);
+        }
+
+        /// <summary>
+        /// Gives the crown to the specified username (/givecrown &lt;username&gt;).
+        /// </summary>
+        /// <param name="chat">Chat.</param>
+        /// <param name="username">Username.</param>
+        public static void GiveCrown(this IChat chat, string username)
+        {
+            chat.Say("/givecrown {0}", username);
+        }
+
+        /// <summary>
+        /// Removes the crown from it's owner (/removecrown).
+        /// </summary>
+        /// <param name="chat">Chat.</param>
+        public static void RemoveCrown(this IChat chat)
+        {
+            chat.Say("/removecrown");
+        }
+
+        /// <summary>
         ///     Resets all the users' positions (/reset).
         /// </summary>
         public static void Reset(this IChat chat)
@@ -466,6 +505,36 @@ namespace BotBits
         public static void ReportAbuse(this IChat chat, Player player, string reason)
         {
             chat.ReportAbuse(player.Username, reason);
+        }
+
+        /// <summary>
+        /// Enables god mode of the specified player (/godon &lt;player&gt;).
+        /// </summary>
+        /// <param name="chat">Chat.</param>
+        /// <param name="username">Username.</param>
+        public static void GodOn(this IChat chat, Player player)
+        {
+            chat.Say("/godon {0}", player.Username);
+        }
+
+        /// <summary>
+        /// Disables god mode of the specified player (/godoff &lt;player&gt;).
+        /// </summary>
+        /// <param name="chat">Chat.</param>
+        /// <param name="username">Username.</param>
+        public static void GodOff(this IChat chat, Player player)
+        {
+            chat.Say("/godoff {0}", player.Username);
+        }
+
+        /// <summary>
+        /// Gives the crown to the specified player (/givecrown &lt;player&gt;).
+        /// </summary>
+        /// <param name="chat">Chat.</param>
+        /// <param name="username">Username.</param>
+        public static void GiveCrown(this IChat chat, Player player)
+        {
+            chat.Say("/givecrown {0}", player.Username);
         }
 
         /// <summary>
