@@ -572,6 +572,7 @@ namespace BotBits
 
                 CastleSupport = (Id)325,
                 Tombstone = (Id)326,
+                Shield = (Id)330,
 
                 ClosedDoor = (Id)437;
 
@@ -579,7 +580,6 @@ namespace BotBits
             [Pack("brickmedieval", ForegroundType = ForegroundType.Morphable)]
             public const Id
                 Timber = (Id)440,
-                Shield = (Id)330,
                 Axe = (Id)275,
                 Sword = (Id)329,
                 Circle = (Id)273,
@@ -905,7 +905,7 @@ namespace BotBits
         
         public static class Hazard
         {
-            [Pack("brickspike", BlocksPerPack = 10)]
+            [Pack("brickspike", BlocksPerPack = 10, ForegroundType = ForegroundType.Morphable)]
             public const Id
                 Spike = (Id)361;
 
