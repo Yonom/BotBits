@@ -12,13 +12,15 @@ namespace BotBits
         {
             var args = new ConnectionArgs();
             var vaultTask = client.PayVault.RefreshAsync()
-                .Then(task =>
-                    args.ShopData = new ShopData(client.PayVault.Items));
+                .Then(task => args.ShopData = new ShopData(client.PayVault.Items));
 
              var playerObjectTask = client.BigDB.LoadMyPlayerObjectAsync()
                 .Then(task => args.PlayerObject = new PlayerObject(task.Result));
 
-            return vaultTask.Then(t => playerObjectTask).Then(t => args);
+            return vaultTask
+                .Then(t => playerObjectTask)
+                .Then(t => args)
+                .ToSafeTask();
         }
 
         public static Task<Client> GuestLoginAsync(string gameId)
@@ -29,7 +31,8 @@ namespace BotBits
         public static Task<int> GetVersionAsync(Client client)
         {
             return client.BigDB.LoadAsync("config", "config")
-                .Then(task => task.Result.GetInt("version"));
+                .Then(task => task.Result.GetInt("version"))
+                .ToSafeTask();
         }
 
         public static Task<Client> ArmorGamesRoomLoginAsync(string gameId, string userId, string token)

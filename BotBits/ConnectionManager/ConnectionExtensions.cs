@@ -5,16 +5,6 @@ namespace BotBits
 {
     public static class ConnectionExtensions
     {
-        public static Task JoinRoomAsync(this Task<LoginClient> client, string roomId)
-        {
-            return client.Then(task => task.Result.JoinRoomAsync(roomId)).ToSafeTask();
-        }
-
-        public static Task CreateJoinRoomAsync(this Task<LoginClient> client, string roomId)
-        {
-            return client.Then(task => task.Result.CreateJoinRoomAsync(roomId)).ToSafeTask();
-        }
-
         /// <summary>
         /// Send a message to the connected client without first having to construct a Message object.
         /// </summary>
@@ -33,8 +23,7 @@ namespace BotBits
         {
             connection.OnMessage += handler;
         }
-
-
+        
         /// <summary>
         /// Add a disconnect handler to the OnDisconnect event
         /// </summary>
