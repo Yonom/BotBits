@@ -74,6 +74,7 @@
     <Compile Include="ConnectionManager\LobbyItem.cs" />
     <Compile Include="ConnectionManager\LoginClient.cs" />
     <Compile Include="ConnectionManager\Scheduler.cs" />
+    <Compile Include="Helpers\StringUtils.cs" />
     <Compile Include="Helpers\TaskExtensions.cs" />
     <Compile Include="Helpers\TaskHelper.cs" />
     <Compile Include="LoaderBase.cs" />

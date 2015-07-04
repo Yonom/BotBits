@@ -111,11 +111,6 @@ namespace BotBits
             }
         }
 
-        public void FinishQueue()
-        {
-            this._finishEvent.WaitOne();
-        }
-
         public Task FinishQueueAsync()
         {
            return this._finishEvent.AsTask();

@@ -60,11 +60,6 @@ namespace BotBits
             this._finishResetEvent.Dispose();
         }
 
-        public void FinishChecks()
-        {
-            this._finishResetEvent.WaitOne();
-        }
-
         public Task FinishChecksAsync()
         {
             return this._finishResetEvent.AsTask();

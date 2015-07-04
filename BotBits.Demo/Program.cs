@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
-using BotBits;
 using BotBits.Events;
+using BotBits.SendMessages;
 
 namespace BotBits.Demo
 {
@@ -15,8 +14,8 @@ namespace BotBits.Demo
         {
             ConnectionManager
                 .Of(bot)
-                .GuestLoginAsync()
-                .CreateJoinRoomAsync("world");
+                .GuestLogin()
+                .CreateOpenWorld("Hai");
 
             Thread.Sleep(Timeout.Infinite);
         }

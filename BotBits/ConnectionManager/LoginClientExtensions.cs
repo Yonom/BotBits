@@ -25,11 +25,6 @@ namespace BotBits
             client.CreateOpenWorldAsync(roomId, name).WaitEx();
         }
 
-        public static void CreateOpenWorld(this ILoginClient client, string name)
-        {
-            client.CreateOpenWorldAsync(name).WaitEx();
-        }
-
         public static DatabaseWorld LoadWorld(this ILoginClient client, string roomId)
         {
             return client.LoadWorldAsync(roomId).GetResultEx();
@@ -38,9 +33,19 @@ namespace BotBits
 
         public static Task CreateOpenWorldAsync(this ILoginClient client, string name)
         {
-            return client.CreateOpenWorldAsync("OW" + name, name);
+            return client.CreateOpenWorldAsync("OW" + GenerateUniqueRoomId(name), name);
         }
 
+        public static void CreateOpenWorld(this ILoginClient client, string name)
+        {
+            client.CreateOpenWorldAsync(name).WaitEx();
+        }
+
+        private static string GenerateUniqueRoomId(string str)
+        {
+            return (((new Random().Next() * 1000 >> 0) + 
+                StringUtils.DecimalToArbitrarySystem(DateTime.UtcNow.Millisecond, 36))) + " " + str;
+        }
 
 
         public static Task JoinRoomAsync(this Task<LoginClient> client, string roomId)
@@ -56,6 +61,11 @@ namespace BotBits
         public static Task CreateOpenWorldAsync(this Task<LoginClient> client, string roomId, string name)
         {
             return client.Then(task => task.Result.CreateOpenWorldAsync(roomId, name)).ToSafeTask();
+        }
+
+        public static Task CreateOpenWorldAsync(this Task<LoginClient> client, string name)
+        {
+            return client.Then(task => task.Result.CreateOpenWorldAsync(name)).ToSafeTask();
         }
 
         public static Task<LobbyItem[]> GetLobbyAsync(this Task<LoginClient> client)
