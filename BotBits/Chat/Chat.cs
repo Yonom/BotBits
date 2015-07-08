@@ -152,7 +152,7 @@ namespace BotBits
             const string pmSuffix = " > you";
             if (e.Title.StartsWith(pmPrefix) && e.Title.EndsWith(pmSuffix))
             {
-                var username = e.Title.Substring(pmPrefix.Length, pmSuffix.Length);
+                var username = e.Title.Substring(pmPrefix.Length, e.Title.Length - pmPrefix.Length - pmSuffix.Length);
                 var message = e.Text;
 
                 new PrivateMessageEvent(username, message)

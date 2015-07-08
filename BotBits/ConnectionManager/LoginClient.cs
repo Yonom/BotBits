@@ -119,7 +119,7 @@ namespace BotBits
             var roomData = new Dictionary<string, string> { { "name", name } };
 
             return this.Client.Multiplayer
-                .CreateJoinRoomAsync(roomId, EverybodyEdits + this.Version, true, roomData, null)
+                .CreateJoinRoomAsync(roomId, EverybodyEdits + this.Version, true, roomData, new Dictionary<string, string>())
                 .Then(task => this.InitConnection(task.Result))
                 .ToSafeTask();
         }
