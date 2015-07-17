@@ -18,16 +18,10 @@ namespace BotBits.Demo
 
             ConnectionManager
                 .Of(bot)
-                .EmailLogin("guest1@tbp.com", "guest")
+                .GuestLogin()
                 .CreateJoinRoom("PW01");
 
             Thread.Sleep(Timeout.Infinite);
-
-            switch (Morph.Axe.BottomLeft)
-            {
-                case Morph.Axe.BottomRight:
-                    break;
-            }
         }
 
         [EventListener]
