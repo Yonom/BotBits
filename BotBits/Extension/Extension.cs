@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.Composition.Hosting;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -16,18 +17,28 @@ namespace BotBits
         {
         }
 
-        protected static void LoadInto(BotBitsClient client, object args)
+        protected static bool LoadInto(BotBitsClient client, object args)
         {
             var type = typeof(T);
             if (!type.IsSealed)
                 throw new InvalidOperationException("Extension classes must be marked as sealed!");
 
+            if (IsLoadedInto(client)) return false;
+            client.Extensions.Add(type);
+
             var assembly = Assembly.GetAssembly(type);
             using (var catalog = new AssemblyCatalog(assembly))
             {
                 var obj = (T)FormatterServices.GetUninitializedObject(type);
-                client.Add(catalog, () => obj.Initialize(client, args));
+                client.Packages.AddPackages(catalog, () => obj.Initialize(client, args));
             }
+
+            return true;
+        }
+
+        public static bool IsLoadedInto(BotBitsClient client)
+        {
+            return client.Extensions.Contains(typeof(T));
         }
     }
 }

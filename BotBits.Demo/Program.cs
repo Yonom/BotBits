@@ -12,12 +12,28 @@ namespace BotBits.Demo
 
         private static void Main()
         {
+            EventLoader
+                .Of(bot)
+                .LoadStatic<Program>();
+
             ConnectionManager
                 .Of(bot)
-                .GuestLogin()
-                .CreateOpenWorld("Hai");
+                .EmailLogin("guest1@tbp.com", "guest")
+                .CreateJoinRoom("PW01");
 
             Thread.Sleep(Timeout.Infinite);
+
+            switch (Morph.Axe.BottomLeft)
+            {
+                case Morph.Axe.BottomRight:
+                    break;
+            }
+        }
+
+        [EventListener]
+        static void OnJoin(JoinEvent e)
+        {
+            Chat.Of(bot).PrivateMessage(e.Player, e.Username);
         }
     }
 }

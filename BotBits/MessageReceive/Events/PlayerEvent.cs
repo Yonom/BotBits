@@ -23,7 +23,7 @@ namespace BotBits.Events
             }
             catch (Exception)
             {
-                Player = null;
+                this.Player = null;
             }
         }
 

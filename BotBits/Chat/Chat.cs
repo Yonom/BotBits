@@ -84,10 +84,10 @@ namespace BotBits
         private void QueueChat(string msg)
         {
             msg = this.TrimChars(msg);
+            var pm = msg.StartsWith("/pm", StringComparison.OrdinalIgnoreCase);
 
             // There is no speed limit on commands
-            if (msg.StartsWith("/", StringComparison.OrdinalIgnoreCase) && 
-                !msg.StartsWith("/pm", StringComparison.OrdinalIgnoreCase))
+            if (msg.StartsWith("/", StringComparison.OrdinalIgnoreCase) && !pm)
             {
                 var e = msg.Length > 140
                     ? new ChatSendMessage(msg.Substring(0, 140))
@@ -101,7 +101,7 @@ namespace BotBits
             // Dont send the same thing more than 3 times
             if (this.CheckHistory(msg, channel))
             {
-                if (msg.StartsWith("/", StringComparison.Ordinal))
+                if (pm)
                     this.QueueChat(msg + ".");
                 else
                     this.QueueChat("." + msg);
@@ -109,12 +109,24 @@ namespace BotBits
             }
 
             // Queue the message and chop it into 140 char parts
-            for (int i = 0; i < msg.Length; i += 140)
             {
-                int left = msg.Length - i;
-                this.Enqueue(left > 140
-                    ? msg.Substring(i, 140)
-                    : msg.Substring(i, left), channel);
+                string prefix = String.Empty;
+                string message = msg;
+                if (pm)
+                {
+                    var args = msg.Split(' ');
+                    prefix = String.Join(" ", args.Take(2)) + " ";
+                    message = String.Join(" ", args.Skip(2));
+                }
+
+                var maxLength = 140 - prefix.Length;
+                for (int i = 0; i < message.Length; i += maxLength)
+                {
+                    int left = message.Length - i;
+                    this.Enqueue(prefix + (left > maxLength
+                        ? message.Substring(i, maxLength)
+                        : message.Substring(i, left)), channel);
+                }
             }
 
             // Init Timer
@@ -153,7 +165,7 @@ namespace BotBits
             if (e.Title.StartsWith(pmPrefix) && e.Title.EndsWith(pmSuffix))
             {
                 var username = e.Title.Substring(pmPrefix.Length, e.Title.Length - pmPrefix.Length - pmSuffix.Length);
-                var message = e.Text;
+                var message = e.Text.Substring(0, e.Text.Length - 1); // Bug ingame, space after each private message
 
                 new PrivateMessageEvent(username, message)
                     .RaiseIn(this.BotBits);

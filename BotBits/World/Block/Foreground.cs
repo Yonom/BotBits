@@ -350,10 +350,10 @@ namespace BotBits
 
             [Pack("brickninja", ForegroundType = ForegroundType.Morphable)]
             public const Id
-                LeftBrightRoofTop = (Id)276,
-                RightBrightRoofTop = (Id)277,
-                LeftDarkRoofTop = (Id)279,
-                RightDarkRoofTop = (Id)280;
+                LeftRooftop = (Id)276,
+                RightRooftop = (Id)277,
+                LeftDarkRooftop = (Id)279,
+                RightDarkRooftop = (Id)280;
         }
 
         public static class Ladder

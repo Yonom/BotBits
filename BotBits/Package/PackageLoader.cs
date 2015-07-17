@@ -13,14 +13,20 @@ namespace BotBits
     [DebuggerTypeProxy(typeof(DebugView))]
     internal sealed class PackageLoader : IDisposable
     {
+        private readonly BotBitsClient _client;
         private readonly List<CompositionContainer> _containers = new List<CompositionContainer>();
         private readonly ConcurrentDictionary<Type, IPackage> _packages = new ConcurrentDictionary<Type, IPackage>();
+
+        public PackageLoader(BotBitsClient client)
+        {
+            this._client = client;
+        }
 
         [ImportMany]
         [UsedImplicitly(ImplicitUseKindFlags.Access)]
         private IPackage[] _importedPackages;
 
-        public void AddPackages(BotBitsClient client, ComposablePartCatalog catalog, [CanBeNull] Action initialize)
+        public void AddPackages(ComposablePartCatalog catalog, [CanBeNull] Action initialize)
         {
             lock (this._containers)
             {
@@ -31,7 +37,7 @@ namespace BotBits
                     container.ComposeParts(this);
                     try
                     {
-                        this.LoadPackages(client, this._importedPackages, initialize);
+                        this.LoadPackages(this._importedPackages, initialize);
                         this._containers.Add(container);
                     }
                     catch (Exception)
@@ -63,11 +69,11 @@ namespace BotBits
                 String.Format("The package {0} has not been loaded into BotBits.", t.FullName));
         }
 
-        private void LoadPackages(BotBitsClient client, IPackage[] packages, [CanBeNull] Action initialize)
+        private void LoadPackages(IPackage[] packages, [CanBeNull] Action initialize)
         {
             foreach (IPackage l in packages)
             {
-                l.Setup(client);
+                l.Setup(this._client);
                 this._packages.TryAdd(l.GetType(), l);
             }
             if (initialize != null)
@@ -104,7 +110,7 @@ namespace BotBits
                 this._loader = loader;
             }
 
-            [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
+            [DebuggerBrowsable(DebuggerBrowsableState.RootHidden), UsedImplicitly]
             private PackageView[] Items
             {
                 get
@@ -119,9 +125,9 @@ namespace BotBits
             [DebuggerDisplay("{_package}", Name="{_type.Name,nq}")]
             private class PackageView
             {
-                [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+                [DebuggerBrowsable(DebuggerBrowsableState.Never), UsedImplicitly]
                 private readonly Type _type;
-                [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
+                [DebuggerBrowsable(DebuggerBrowsableState.RootHidden), UsedImplicitly]
                 private readonly IPackage _package;
 
                 public PackageView(Type type, IPackage package)

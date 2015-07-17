@@ -1,6 +1,5 @@
 ﻿namespace BotBits
 {
-    // TODO: Verify ids
     public class Morph
     {
         public enum Id : ushort
@@ -9,7 +8,7 @@
 
         public static class Portal
         {
-            public static Id
+            public const Id
                 Down = (Id)0,
                 Left = (Id)1,
                 Up = (Id)2,
@@ -18,7 +17,7 @@
 
         public static class OneWay
         {
-            public static Id
+            public const Id
                 Left = (Id)0,
                 Up = (Id)1,
                 Right = (Id)2,
@@ -27,7 +26,7 @@
 
         public static class Spike
         {
-            public static Id
+            public const Id
                 Left = (Id)0,
                 Up = (Id)1,
                 Right = (Id)2,
@@ -36,69 +35,69 @@
 
         public static class Dojo
         {
-            public static Id
-                Blue = (Id)0,
-                Green = (Id)1,
-                Red = (Id)2;
+            public const Id
+                Red = (Id)0,
+                Blue = (Id)1,
+                Green = (Id)2;
         }
 
         public static class Medieval
         {
-            public static Id
-                Blue = (Id)0,
-                Green = (Id)1,
-                Yellow = (Id)2,
-                Red = (Id)3;
+            public const Id
+                Red = (Id)0,
+                Blue = (Id)1,
+                Green = (Id)2,
+                Yellow = (Id)3;
         }
                 
         public static class SciFiSlope
         {
-            public static Id
-                InSouthEastPart = (Id)0,
-                InSouthWestPart = (Id)1,
-                InNorthWestPart = (Id)2,
-                InNorthEastPart = (Id)3;
-        }
-
-        public static class SciFiStraight
-        {
-            public static Id
-                Horizontal = (Id)0,
-                Vertical = (Id)1;
-        }
-
-        public static class Sword
-        {
-            public static Id
-                BottomLeft = (Id)0,
-                BottomRight = (Id)1,
-                TopRight = (Id)2,
-                TopLeft = (Id)3;
-        }
-
-        public static class Axe
-        {
-            public static Id
+            public const Id
                 TopLeft = (Id)0,
                 BottomLeft = (Id)1,
                 BottomRight = (Id)2,
                 TopRight = (Id)3;
         }
 
+        public static class SciFiStraight
+        {
+            public const Id
+                Vertical = (Id)0,
+                Horizontal = (Id)1;
+        }
+
+        public static class Sword
+        {
+            public const Id
+                TopLeft = (Id)0,
+                BottomLeft = (Id)1,
+                BottomRight = (Id)2,
+                TopRight = (Id)3;
+        }
+
+        public static class Axe
+        {
+            public const Id
+                TopRight = (Id)0,
+                TopLeft = (Id)1,
+                BottomLeft = (Id)2,
+                BottomRight = (Id)3;
+        }
+
         public static class Timber
         {
-            public static Id
-                None = (Id)0,
-                TSupport = (Id)1,
-                HorizontalSupport = (Id)2,
-                LeftDiagonalSupport = (Id)3,
-                RightDiagonalSupport = (Id)4,
-                VSupport = (Id)5;
+            public const Id
+                VSupport = (Id)0,
+                None = (Id)1,
+                TSupport = (Id)2,
+                HorizontalSupport = (Id)3,
+                LeftDiagonalSupport = (Id)4,
+                RightDiagonalSupport = (Id)5;
         }
 
         public static class Piano
         {
-            public static Id
+            public const Id
                 C1 = (Id)1,
                 Csharp1 = (Id)2,
                 D1 = (Id)3,
@@ -128,7 +127,7 @@
 
         public static class Percussion
         {
-            public static Id
+            public const Id
                 Base1 = (Id)0,
                 Base2 = (Id)1,
                 Snare1 = (Id)2,

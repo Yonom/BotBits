@@ -39,23 +39,24 @@ namespace BotBits
             Type handler;
             if (this._messageRegister.TryGetHandler(e.Message.Type, out handler))
             {
+                IEvent instance;
                 try
                 {
                     const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
-                    var instance = (IEvent)Activator.CreateInstance(handler, flags, null,
+                    instance = (IEvent)Activator.CreateInstance(handler, flags, null,
                         new object[] { this.BotBits, e.Message }, null);
-
-                    var playerEvent = instance as IPlayerEvent;
-                    if (playerEvent != null && playerEvent.Player == null)
-                        throw new InvalidOperationException();
-
-                    instance.RaiseIn(this.BotBits);
                 }
-                catch (InvalidOperationException) { }
                 catch (Exception ex)
                 {
                     Debug.WriteLine("Error parsing message: {0} \n {1}", e.Message, ex);
+                    return;
                 }
+
+                var playerEvent = instance as IPlayerEvent;
+                if (playerEvent != null && playerEvent.Player == null)
+                    return;
+
+                instance.RaiseIn(this.BotBits);
             }
             else
             {

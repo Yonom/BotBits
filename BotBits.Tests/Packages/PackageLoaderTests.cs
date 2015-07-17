@@ -10,9 +10,9 @@ namespace BotBits.Tests.Packages
         [TestMethod]
         public void PackageLoadTest()
         {
-            using (var loader = new PackageLoader())
+            using (var loader = new PackageLoader(null))
             {
-                loader.AddPackages(null, new AssemblyCatalog(Assembly.GetExecutingAssembly()), null);
+                loader.AddPackages(new AssemblyCatalog(Assembly.GetExecutingAssembly()), null);
 
                 Assert.IsNull(loader.Get<TestPackage>().BotBits);
             }
@@ -22,9 +22,9 @@ namespace BotBits.Tests.Packages
         public void DisposeTest()
         {
             TestPackage package;
-            using (var loader = new PackageLoader())
+            using (var loader = new PackageLoader(null))
             {
-                loader.AddPackages(null, new AssemblyCatalog(Assembly.GetExecutingAssembly()), null);
+                loader.AddPackages(new AssemblyCatalog(Assembly.GetExecutingAssembly()), null);
                 package = loader.Get<TestPackage>();
             }
 

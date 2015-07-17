@@ -45,7 +45,7 @@ namespace BotBits
             if (client == null)
                 throw new ArgumentNullException("client");
 
-            return client.Get<T>();
+            return client.Packages.Get<T>();
         }
     }
 }

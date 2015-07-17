@@ -176,14 +176,6 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Respawns the bot (/respawn).
-        /// </summary>
-        public static void Respawn(this IChat chat)
-        {
-            chat.Say("/respawn");
-        }
-
-        /// <summary>
         ///     Respawns all users in the world (/respawnall).
         /// </summary>
         public static void RespawnAll(this IChat chat)

@@ -79,7 +79,9 @@ namespace BotBits
         public Player[] FromUsername(string username)
         {
             lock (this._players)
-                return this._players.Values.Where(p => p.Username == username).ToArray();
+                return this._players.Values
+                    .Where(p => p.Username.Equals(username, StringComparison.OrdinalIgnoreCase))
+                    .ToArray();
         }
 
         internal Player AddPlayer(int userId)
@@ -106,7 +108,7 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.High)]
-        private void OnAdd(JoinEvent e)
+        private void OnJoin(JoinEvent e)
         {
             Player p = e.Player;
             p.Connected = true;
