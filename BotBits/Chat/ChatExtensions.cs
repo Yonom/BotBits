@@ -429,7 +429,7 @@ namespace BotBits
         /// <param name="point">The point.</param>
         public static void Teleport(this IChat chat, string username, Point point)
         {
-            chat.Teleport(username, point.X + 1, point.Y + 1);
+            chat.Teleport(username, point.X, point.Y);
         }
 
         /// <summary>
