@@ -2,7 +2,7 @@
 {
     public class Morph
     {
-        public enum Id : ushort
+        public enum Id
         {
         }
 
