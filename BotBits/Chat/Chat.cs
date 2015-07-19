@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
@@ -23,7 +24,7 @@ namespace BotBits
 
         private readonly ConcurrentDictionary<string, ChatChannel> _channels
             = new ConcurrentDictionary<string, ChatChannel>();
-
+        private const int MaxMessageLength = 140;
         private readonly Timer _mySendTimer;
         private Players _players;
         private bool _warning;
@@ -83,51 +84,8 @@ namespace BotBits
 
         private void QueueChat(string msg)
         {
-            msg = this.TrimChars(msg);
-            var pm = msg.StartsWith("/pm", StringComparison.OrdinalIgnoreCase);
-
-            // There is no speed limit on commands
-            if (msg.StartsWith("/", StringComparison.OrdinalIgnoreCase) && !pm)
-            {
-                var e = msg.Length > 140
-                    ? new ChatSendMessage(msg.Substring(0, 140))
-                    : new ChatSendMessage(msg);
-                e.SendIn(this.BotBits);
-                return;
-            }
-
             var channel = GetChannel(msg);
-
-            // Dont send the same thing more than 3 times
-            if (this.CheckHistory(msg, channel))
-            {
-                if (pm)
-                    this.QueueChat(msg + ".");
-                else
-                    this.QueueChat("." + msg);
-                return;
-            }
-
-            // Queue the message and chop it into 140 char parts
-            {
-                string prefix = String.Empty;
-                string message = msg;
-                if (pm)
-                {
-                    var args = msg.Split(' ');
-                    prefix = String.Join(" ", args.Take(2)) + " ";
-                    message = String.Join(" ", args.Skip(2));
-                }
-
-                var maxLength = 140 - prefix.Length;
-                for (int i = 0; i < message.Length; i += maxLength)
-                {
-                    int left = message.Length - i;
-                    this.Enqueue(prefix + (left > maxLength
-                        ? message.Substring(i, maxLength)
-                        : message.Substring(i, left)), channel);
-                }
-            }
+            this.Enqueue(msg, channel);
 
             // Init Timer
             if (!this._mySendTimer.Enabled)
@@ -144,6 +102,62 @@ namespace BotBits
             if (msg.StartsWith("/pm", StringComparison.OrdinalIgnoreCase))
                 channel = msg.Split(' ').Skip(1).FirstOrDefault();
             return channel ?? String.Empty;
+        }
+
+        [EventListener(EventPriority.High)]
+        private void OnQueueChatEx(QueueChatEvent e)
+        {
+            // Trim chars
+            e.Message = this.TrimChars(e.Message);
+
+            // There is no speed limit on commands
+            var pm = e.Message.StartsWith("/pm", StringComparison.OrdinalIgnoreCase);
+            if (e.Message.StartsWith("/", StringComparison.OrdinalIgnoreCase) && !pm)
+            {
+                new ChatSendMessage(this.Truncate(e.Message, MaxMessageLength))
+                    .SendIn(this.BotBits);
+                e.Cancelled = true;
+                return;
+            }
+            
+            // Queue the message and chop it into 140 char parts
+            var prefix = String.Empty;
+            var message = e.Message;
+            if (pm)
+            {
+                var args = e.Message.Split(' ');
+                prefix = String.Join(" ", args.Take(2)) + " ";
+                message = String.Join(" ", args.Skip(2));
+            }
+
+            // Dont send the same thing more than 3 times
+            var channel = GetChannel(e.Message);
+            var maxLength = MaxMessageLength - prefix.Length;
+            while (this.CheckHistory(this.Truncate(message, maxLength), channel))
+            {
+                message = "." + message;
+            }
+
+            if (message.Length > maxLength)
+            {
+                new QueueChatEvent(prefix + this.Truncate(message, maxLength))
+                    .RaiseIn(this.BotBits);
+
+                this.OnQueueChatEx(new QueueChatEvent(prefix + message.Substring(maxLength)));
+            }
+            else
+            {
+                e.Message = prefix + message;
+            }
+            
+        }
+
+
+        [EventListener(EventPriority.Lowest)]
+        private void OnQueueChat(QueueChatEvent e)
+        {
+            if (!e.Cancelled)
+                this.QueueChat(e.Message);
         }
 
         [EventListener(EventPriority.High)]
@@ -179,7 +193,8 @@ namespace BotBits
 
         public void Say(string msg)
         {
-            this.QueueChat(msg);
+            new QueueChatEvent(msg)
+                .RaiseIn(this.BotBits);
         }
         
         private void Enqueue(string str, string channel)
@@ -189,6 +204,7 @@ namespace BotBits
 
         private bool CheckHistory(string str, string channel)
         {
+            str = this.Truncate(str, MaxMessageLength);
             return this.GetChatRepeats(str, channel) > 4;
         }
 
@@ -204,7 +220,7 @@ namespace BotBits
             return ++c.RepeatCount;
         }
 
-        private string TrimChars(String text)
+        private string TrimChars(string text)
         {
             //Limit range to 31 - 255
             text = Regex.Replace(text, @"[^\x1F-\xFF]", "").Trim();
@@ -213,6 +229,12 @@ namespace BotBits
             text = Regex.Replace(text, @"[\x7F]", "").Trim();
 
             return text;
+        }
+
+        public string Truncate(string input, int length)
+        {
+            if (input.Length < length) return input;
+            return input.Substring(0, length);
         }
 
         private ChatChannel GetChatChannel(string channel)

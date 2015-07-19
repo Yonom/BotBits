@@ -58,6 +58,7 @@
     <Compile Include="Blocks\Events\BackgroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\ForegroundPlaceEvent.cs" />
     <Compile Include="Blocks\Events\PlaceEvent.cs" />
+    <Compile Include="Chat\Events\QueueChatEvent.cs" />
     <Compile Include="ConnectionManager\ClientUtils.cs" />
     <Compile Include="ConnectionManager\ConnectionArgs.cs" />
     <Compile Include="ConnectionManager\ILoginClient.cs" />
