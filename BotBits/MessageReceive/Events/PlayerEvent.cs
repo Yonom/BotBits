@@ -21,7 +21,7 @@ namespace BotBits.Events
                         ? Players.Of(client).AddPlayer(message.GetInt(userId))
                         : Players.Of(client)[message.GetInt(userId)];
             }
-            catch (Exception)
+            catch (InvalidOperationException)
             {
                 this.Player = null;
             }

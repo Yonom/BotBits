@@ -99,7 +99,7 @@ namespace BotBits
         private string GetChannel(string msg)
         {
             string channel = null;
-            if (msg.StartsWith("/pm", StringComparison.OrdinalIgnoreCase))
+            if (msg.StartsWith("/pm ", StringComparison.OrdinalIgnoreCase))
                 channel = msg.Split(' ').Skip(1).FirstOrDefault();
             return channel ?? String.Empty;
         }
@@ -111,7 +111,7 @@ namespace BotBits
             e.Message = this.TrimChars(e.Message);
 
             // There is no speed limit on commands
-            var pm = e.Message.StartsWith("/pm", StringComparison.OrdinalIgnoreCase);
+            var pm = e.Message.StartsWith("/pm ", StringComparison.OrdinalIgnoreCase);
             if (e.Message.StartsWith("/", StringComparison.OrdinalIgnoreCase) && !pm)
             {
                 new ChatSendMessage(this.Truncate(e.Message, MaxMessageLength))

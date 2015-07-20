@@ -21,6 +21,7 @@ namespace BotBits
         {
             var type = typeof(T);
             if (!type.IsSealed)
+                
                 throw new InvalidOperationException("Extension classes must be marked as sealed!");
 
             if (IsLoadedInto(client)) return false;
