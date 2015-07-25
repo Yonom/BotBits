@@ -2,8 +2,8 @@ namespace BotBits
 {
     public enum GlobalPriority
     {
-        BeforeMost = -1,
+        BeforeMost = -2,
         Normal = 0,
-        AfterMost = 1
+        AfterMost = 2
     }
 }
