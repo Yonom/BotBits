@@ -79,6 +79,7 @@
     <Compile Include="Helpers\TaskExtensions.cs" />
     <Compile Include="Helpers\TaskHelper.cs" />
     <Compile Include="Packages\EventLoader\LoaderBase.cs" />
+    <Compile Include="Packages\EventManager\GlobalPriority.cs" />
     <Compile Include="Packages\MessageHandler\Events\AllowSpectatingEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\AuraEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\EffectEvent.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Packages\MessageSender\SendMessages\TouchHologramSendMessage.cs" />
     <Compile Include="Packages\Players\Events\FlyEvent.cs" />
     <Compile Include="Services\BlockServices.cs" />
+    <Compile Include="Services\ExtensionServices.cs" />
     <Compile Include="Services\MessageServices.cs" />
     <Compile Include="Packages\EventManager\EventRaiseHandler.cs" />
     <Compile Include="DefaultExtension.cs" />

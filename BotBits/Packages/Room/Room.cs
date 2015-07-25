@@ -22,9 +22,11 @@ namespace BotBits
         public bool Visible { get; private set; }
         public bool InitComplete { get; private set; }
         public bool JoinComplete { get; private set; }
-        public bool AllowSpectating { get; set; }
-        public bool HideLobby { get; set; }
-        public string Description { get; set; }
+        public bool AllowSpectating { get; private set; }
+        public bool HideLobby { get; private set; }
+        public string Description { get; private set; }
+        public int CurseLimit { get; private set; }
+        public int ZombieLimit { get; private set; }
 
         public AccessRight AccessRight
         {
@@ -197,10 +199,6 @@ namespace BotBits
                 .RaiseIn(this.BotBits);
             this.InitComplete = true;
         }
-
-        public int CurseLimit { get; set; }
-
-        public int ZombieLimit { get; set; }
 
         [EventListener(EventPriority.High)]
         private void OnAccess(AccessEvent e)

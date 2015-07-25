@@ -55,7 +55,7 @@ namespace BotBits
 
             Event<TEvent>
                 .Of(this.BotBits)
-                .Bind(handler, attribute.Priority);
+                .Bind(handler, attribute.GlobalPriority, attribute.Priority);
         }
 
         private static Exception GetEventEx(MethodInfo handler, string reason)

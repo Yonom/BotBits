@@ -24,8 +24,11 @@ namespace BotBits
                 
                 throw new InvalidOperationException("Extension classes must be marked as sealed!");
 
-            if (IsLoadedInto(client)) return false;
-            client.Extensions.Add(type);
+            lock (client.Extensions)
+            {
+                if (IsLoadedInto(client)) return false;
+                client.Extensions.Add(type);
+            }
 
             var assembly = Assembly.GetAssembly(type);
             using (var catalog = new AssemblyCatalog(assembly))

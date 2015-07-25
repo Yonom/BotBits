@@ -10,6 +10,7 @@ namespace BotBits
     public sealed class EventListenerAttribute : Attribute
     {
         private readonly EventPriority _priority;
+        private readonly GlobalPriority _globalPriority;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EventListenerAttribute" /> class.
@@ -27,6 +28,17 @@ namespace BotBits
             this._priority = priority;
         }
 
+        public EventListenerAttribute(GlobalPriority globalPriority)
+        {
+            this._globalPriority = globalPriority;
+        }
+
+        public EventListenerAttribute(GlobalPriority globalPriority, EventPriority priority)
+            : this(priority)
+        {
+            this._globalPriority = globalPriority;
+        }
+
         /// <summary>
         ///     Gets the priority of this event handler.
         /// </summary>
@@ -36,6 +48,11 @@ namespace BotBits
         public EventPriority Priority
         {
             get { return this._priority; }
+        }
+
+        public GlobalPriority GlobalPriority
+        {
+            get { return this._globalPriority; }
         }
     }
 }

@@ -152,7 +152,7 @@ namespace BotBits
         }
 
 
-        [EventListener(EventPriority.Lowest)]
+        [EventListener(GlobalPriority.AfterMost)]
         private void OnQueueChat(QueueChatEvent e)
         {
             if (!e.Cancelled)

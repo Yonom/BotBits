@@ -1,6 +1,6 @@
 namespace BotBits.Events
 {
-    public class PlaceEvent<T, TBlock> : Event<T>
+    public abstract class PlaceEvent<T, TBlock> : Event<T>
         where T : PlaceEvent<T, TBlock> 
         where TBlock : struct
     {
