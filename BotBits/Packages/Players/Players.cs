@@ -151,20 +151,10 @@ namespace BotBits
         private void OnCoin(CoinEvent e)
         {
             Player p = e.Player;
-
-            if (p.GoldCoins != e.GoldCoins)
-            {
-                p.GoldCoins = e.GoldCoins;
-                new GoldCoinEvent(p, p.GoldCoins)
-                    .RaiseIn(this.BotBits);
-            } 
-            if (p.BlueCoins != e.BlueCoins)
-            {
-                p.BlueCoins = e.BlueCoins;
-                new BlueCoinEvent(p, p.BlueCoins)
-                    .RaiseIn(this.BotBits);
-            }
+            p.GoldCoins = e.GoldCoins;
+            p.BlueCoins = e.BlueCoins;
         }
+        
 
         [EventListener(EventPriority.High)]
         private void OnSmiley(SmileyEvent e)
