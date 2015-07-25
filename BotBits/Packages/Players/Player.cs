@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using JetBrains.Annotations;
@@ -11,6 +12,7 @@ namespace BotBits
     {
         public static readonly Player Nobody = new Player(null, -1) {Username = String.Empty};
 
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
         public BotBitsClient BotBits
         {
             get

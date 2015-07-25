@@ -10,7 +10,8 @@ namespace BotBits
     [InheritedExport(typeof(IPackage))]
     public abstract class Package<T> : IPackage where T : Package<T>, new()
     {
-        protected BotBitsClient BotBits { get; private set; }
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public BotBitsClient BotBits { get; private set; }
 
         protected Package()
         {

@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace BotBits
 {
     public sealed class EventHandle<T> where T : Event<T>
     {
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
         public BotBitsClient BotBits { get; private set; }
 
         private class EventHandlerCollection :
