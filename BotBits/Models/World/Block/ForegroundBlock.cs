@@ -290,7 +290,7 @@ namespace BotBits
                         return this.GetPortalArgs().PortalRotation;
                     case ForegroundType.Toggle:
                     case ForegroundType.Morphable:
-                        return (Morph.Id)this._args;
+                        return (Morph.Id)(uint)this._args;
                     default:
                         throw new InvalidOperationException("This property can only be accessed on morphable blocks.");
                 }

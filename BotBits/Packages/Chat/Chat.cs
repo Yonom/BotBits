@@ -149,7 +149,6 @@ namespace BotBits
             {
                 e.Message = prefix + message;
             }
-            
         }
 
 
