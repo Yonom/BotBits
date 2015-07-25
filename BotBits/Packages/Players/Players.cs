@@ -94,7 +94,7 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnInit(InitEvent e)
         {
             this.OwnPlayer = e.Player;
@@ -107,7 +107,7 @@ namespace BotBits
             this.OwnPlayer.Y = e.SpawnY;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnJoin(JoinEvent e)
         {
             Player p = e.Player;
@@ -129,13 +129,13 @@ namespace BotBits
             p.Team = e.Team;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnCrown(CrownEvent e)
         {
             this.CrownPlayer = e.Player;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnLeave(LeaveEvent e)
         {
             Player leftPlayer;
@@ -147,7 +147,7 @@ namespace BotBits
                 }
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnCoin(CoinEvent e)
         {
             Player p = e.Player;
@@ -156,14 +156,14 @@ namespace BotBits
         }
         
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnSmiley(SmileyEvent e)
         {
             Player p = e.Player;
             p.Smiley = e.Smiley;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnMove(MoveEvent e)
         {
             Player p = e.Player;
@@ -180,7 +180,7 @@ namespace BotBits
             p.SpaceDown = e.SpaceDown;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnGodMode(GodModeEvent e)
         {
             Player p = e.Player;
@@ -193,7 +193,7 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnAdminMode(AdminModeEvent e)
         {
             Player p = e.Player;
@@ -206,7 +206,7 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnModMode(ModModeEvent e)
         {
             Player p = e.Player;
@@ -219,14 +219,14 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnSilverCrown(SilverCrownEvent e)
         {
             Player p = e.Player;
             p.HasSilverCrown = true;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnEffect(EffectEvent e)
         {
             Player p = e.Player;
@@ -242,35 +242,35 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnAura(AuraEvent e)
         {
             Player p = e.Player;
             p.Aura = e.Aura;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnTeam(TeamEvent e)
         {
             Player p = e.Player;
             p.Team = e.Team;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnWootUp(WootUpEvent e)
         {
             Player p = e.Player;
             p.HasWooted = true;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnKill(KillEvent e)
         {
             Player p = e.Player;
             p.Dead = true;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnSwitchInit(PurpleSwitchInitEvent e)
         {
             Player p = e.Player;
@@ -284,7 +284,7 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnSwitchUpdate(PurpleSwitchUpdateEvent e)
         {
             Player p = e.Player;
@@ -298,7 +298,7 @@ namespace BotBits
                 .RaiseIn(this.BotBits);
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnTeleportUser(TeleportEvent e)
         {
             Player p = e.Player;
@@ -307,7 +307,7 @@ namespace BotBits
             p.Dead = false;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnMultiRespawn(MultiRespawnEvent e)
         {
             foreach (var tele in e.Coordinates)

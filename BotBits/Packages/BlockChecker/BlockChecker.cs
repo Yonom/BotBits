@@ -72,13 +72,13 @@ namespace BotBits
                 this._finishResetEvent.Set();
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnForeground(ForegroundPlaceEvent e)
         {
             this.Repair<ForegroundPlaceEvent, ForegroundBlock>(Layer.Foreground, e);
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnBackground(BackgroundPlaceEvent e)
         {
             this.Repair<BackgroundPlaceEvent, BackgroundBlock>(Layer.Background, e);

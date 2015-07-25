@@ -104,7 +104,7 @@ namespace BotBits
             return channel ?? String.Empty;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnQueueChatEx(QueueChatEvent e)
         {
             // Trim chars
@@ -159,7 +159,7 @@ namespace BotBits
                 this.QueueChat(e.Message);
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnChat(ChatEvent e)
         {
             if (e.Player == this._players.OwnPlayer)
@@ -170,7 +170,7 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnWrite(WriteEvent e)
         {
             const string pmPrefix = "* ";

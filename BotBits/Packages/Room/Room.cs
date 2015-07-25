@@ -155,19 +155,19 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnHideKey(HideKeyEvent e)
         {
             this._enabledKeys.Remove(e.Key);
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnShowKey(ShowKeyEvent e)
         {
             this._enabledKeys.Add(e.Key);
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnInit(InitEvent e)
         {
             this.Owner = e.Owner;
@@ -200,19 +200,19 @@ namespace BotBits
             this.InitComplete = true;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnAccess(AccessEvent e)
         {
             this.AccessRight = AccessRight.Edit;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnLostAccess(LoseAccessEvent e)
         {
             this.AccessRight = AccessRight.None;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnCrown(CrownEvent e)
         {
             if (!this.JoinComplete)
@@ -223,7 +223,7 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener(EventPriority.Low)]
         private void OnUpdateMeta(UpdateMetaEvent e)
         {
             this.WorldName = e.WorldName;
@@ -236,37 +236,37 @@ namespace BotBits
                 .RaiseIn(this.BotBits);
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnBackgroundColor(BackgroundColorEvent e)
         {
             this.BackgroundColor = e.BackgroundColor;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnRoomVisible(RoomVisibleEvent e)
         {
             this.Visible = e.Visible;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnHideLobby(HideLobbyEvent e)
         {
             this.HideLobby = e.Hidden;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnAllowSpectating(AllowSpectatingEvent e)
         {
             this.AllowSpectating = e.Allow;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnRoomDescription(RoomDescriptionEvent e)
         {
             this.Description = e.Description;
         }
 
-        [EventListener(EventPriority.High)]
+        [EventListener]
         private void OnEffectsLimit(EffectLimitsEvent e)
         {
             this.ZombieLimit = e.ZombieLimit;
