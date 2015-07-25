@@ -26,7 +26,14 @@ namespace BotBits
             }
         }
 
-        [EventListener]
+        [EventListener(EventPriority.Lowest)]
+        private void OnConnect(ConnectEvent e)
+        {
+            new InitSendMessage()
+                .SendIn(this.BotBits);
+        }
+
+        [EventListener(EventPriority.Lowest)]
         private void OnInit(InitEvent e)
         {
             new Init2SendMessage()

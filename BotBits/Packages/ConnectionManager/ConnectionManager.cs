@@ -89,9 +89,6 @@ namespace BotBits
             new ConnectEvent()
                 .RaiseIn(this.BotBits);
 
-            new InitSendMessage()
-                .SendIn(this.BotBits);
-
             this.Connection.OnMessage += this.Connection_OnMessage;
             this.Connection.OnDisconnect += this.Connection_OnDisconnect;
             if (!this.Connection.Connected)

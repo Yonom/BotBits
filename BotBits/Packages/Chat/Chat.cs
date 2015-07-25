@@ -104,7 +104,7 @@ namespace BotBits
             return channel ?? String.Empty;
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener(EventPriority.Lowest)]
         private void OnQueueChatEx(QueueChatEvent e)
         {
             // Trim chars
