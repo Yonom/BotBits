@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using BotBits.Nito;
 using BotBits.SendMessages;
-using PlayerIOClient;
 
 namespace BotBits
 {

@@ -11,14 +11,25 @@ namespace BotBits
     {
         public static readonly Player Nobody = new Player(null, -1) {Username = String.Empty};
 
-        [CanBeNull]
-        private readonly Players _players;
+        public BotBitsClient BotBits
+        {
+            get
+            {
+                if (this == Nobody)
+                    throw new NotSupportedException("Cannot access BotBits on Player.Nobody.");
+                return this._botBits;
+            }
+        }
+
         private readonly Dictionary<Effect, ActiveEffect> _effects = new Dictionary<Effect, ActiveEffect>();
         private readonly HashSet<int> _switches = new HashSet<int>();
 
-        internal Player([CanBeNull] Players players, int userId)
+        [CanBeNull]
+        private readonly BotBitsClient _botBits;
+
+        internal Player([CanBeNull] BotBitsClient botBits, int userId)
         {
-            this._players = players;
+            this._botBits = botBits;
             this.UserId = userId;
         }
         
@@ -238,7 +249,7 @@ namespace BotBits
         /// </value>
         public bool HasCrown
         {
-            get { return this._players != null && this._players.CrownPlayer == this; }
+            get { return this.BotBits != null && Players.Of(this.BotBits).CrownPlayer == this; }
         }
 
         /// <summary>

@@ -167,7 +167,7 @@ namespace BotBits
             this._enabledKeys.Add(e.Key);
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void OnInit(InitEvent e)
         {
             this.Owner = e.Owner;
@@ -185,7 +185,12 @@ namespace BotBits
             this.Description = e.RoomDescription;
             this.ZombieLimit = e.ZombieLimit;
             this.CurseLimit = e.CurseLimit;
+            this.InitComplete = true;
+        }
 
+        [EventListener(EventPriority.Low)]
+        private void OnInitLow(InitEvent e)
+        {
             if (e.IsOwner)
             {
                 this.AccessRight = AccessRight.Owner;
@@ -194,10 +199,9 @@ namespace BotBits
             {
                 this.AccessRight = AccessRight.Edit;
             }
-            
+
             new MetaChangedEvent(e.Owner, e.Plays, e.CurrentWoots, e.TotalWoots, e.WorldName)
                 .RaiseIn(this.BotBits);
-            this.InitComplete = true;
         }
 
         [EventListener(EventPriority.Low)]

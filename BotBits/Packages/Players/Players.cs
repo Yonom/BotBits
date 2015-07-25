@@ -88,7 +88,7 @@ namespace BotBits
         {
             lock (this._players)
             {
-                var player = new Player(this, userId);
+                var player = new Player(this.BotBits, userId);
                 this._players.Add(userId, player);
                 return player;
             }

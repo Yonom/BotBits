@@ -71,10 +71,15 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void OnInit(InitEvent e)
         {
             this.World = BlockUtils.GetWorld(e.PlayerIOMessage, e.RoomWidth, e.RoomHeight);
+        }
+
+        [EventListener(EventPriority.Low)]
+        private void OnInitLow(InitEvent e)
+        {
             new WorldResizeEvent(e.RoomWidth, e.RoomHeight)
                 .RaiseIn(this.BotBits);
         }

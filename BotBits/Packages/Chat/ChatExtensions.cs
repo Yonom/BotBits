@@ -291,20 +291,7 @@ namespace BotBits
         {
             chat.PrivateMessage(target, String.Format(message, args));
         }
-
-        /// <summary>
-        /// Sends a private message (/pm &lt;target&gt; &lt;message&gt;)
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="target">The target.</param>
-        /// <param name="message">The message.</param>
-        /// <param name="args">The arguments.</param>
-        [StringFormatMethod("args")]
-        public static void PrivateMessage(this IChat chat, Player target, string message, params object[] args)
-        {
-            chat.PrivateMessage(target.Username, String.Format(message, args));
-        }
-
+        
         /// <summary>
         /// Hides the level from the lobby (/hidelobby &lt;hidden&gt;).
         /// </summary>
@@ -341,19 +328,6 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Kicks the specified player (/kick &lt;player&gt; &lt;reason&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        /// <param name="reason">The reason.</param>
-        /// <param name="args">The arguments.</param>
-        [StringFormatMethod("reason")]
-        public static void Kick(this IChat chat, Player player, string reason, params object[] args)
-        {
-            chat.Kick(player.Username, reason, args);
-        }
-
-        /// <summary>
         /// Reports the specified user with the given reason (/reportabuse &lt;username&gt; &lt;reason&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
@@ -364,61 +338,6 @@ namespace BotBits
         public static void ReportAbuse(this IChat chat, string username, string reason, params object[] args)
         {
             chat.ReportAbuse(username, String.Format(reason, args));
-        }
-
-        /// <summary>
-        /// Reports the specified user with the given reason (/reportabuse &lt;player&gt; &lt;reason&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        /// <param name="reason">The reason.</param>
-        /// <param name="args">The arguments.</param>
-        [StringFormatMethod("reason")]
-        public static void ReportAbuse(this IChat chat, Player player, string reason, params object[] args)
-        {
-            chat.ReportAbuse(player.Username, reason, args);
-        }
-
-        /// <summary>
-        /// Gives edit to the specified player  (/giveedit &lt;player&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        public static void GiveEdit(this IChat chat, Player player)
-        {
-            chat.GiveEdit(player.Username);
-        }
-
-        /// <summary>
-        /// Removes edit from the specified player (/removeedit &lt;player&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        public static void RemoveEdit(this IChat chat, Player player)
-        {
-            chat.RemoveEdit(player.Username);
-        }
-
-        /// <summary>
-        /// Teleports the specified player to the bot (&lt;player&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        public static void Teleport(this IChat chat, Player player)
-        {
-            chat.Teleport(player.Username);
-        }
-
-        /// <summary>
-        /// Teleports the specified player (/teleport &lt;player&gt; &lt;x&gt; &lt;y&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        /// <param name="x">The x.</param>
-        /// <param name="y">The y.</param>
-        public static void Teleport(this IChat chat, Player player, int x, int y)
-        {
-            chat.Teleport(player.Username, x, y);
         }
 
         /// <summary>
@@ -433,103 +352,6 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Teleports the specified player (/teleport &lt;player&gt; &lt;point.X+1&gt; &lt;point.Y+1&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        /// <param name="point">The point.</param>
-        public static void Teleport(this IChat chat, Player player, Point point)
-        {
-            chat.Teleport(player.Username, point);
-        }
-
-        /// <summary>
-        /// Kicks the specified player (/kick &lt;player&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        public static void Kick(this IChat chat, Player player)
-        {
-            chat.Kick(player.Username);
-        }
-
-        /// <summary>
-        /// Kicks the specified player (/kick &lt;player&gt; &lt;reason&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        /// <param name="reason">The reason.</param>
-        public static void Kick(this IChat chat, Player player, string reason)
-        {
-            chat.Kick(player.Username, reason);
-        }
-
-        /// <summary>
-        /// Kills the specified player (/kill &lt;player&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        public static void Kill(this IChat chat, Player player)
-        {
-            chat.Kill(player.Username);
-        }
-
-        /// <summary>
-        /// Mutes the specified player (/mute &lt;player&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        public static void Mute(this IChat chat, Player player)
-        {
-            chat.Mute(player.Username);
-        }
-
-        /// <summary>
-        /// Unmutes the specified player (/unmute &lt;player&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="player">The player.</param>
-        public static void Unmute(this IChat chat, Player player)
-        {
-            chat.Unmute(player.Username);
-        }
-
-        public static void ReportAbuse(this IChat chat, Player player, string reason)
-        {
-            chat.ReportAbuse(player.Username, reason);
-        }
-
-        /// <summary>
-        /// Enables god mode of the specified player (/godon &lt;player&gt;).
-        /// </summary>
-        /// <param name="chat">Chat.</param>
-        /// <param name="username">Username.</param>
-        public static void GodOn(this IChat chat, Player player)
-        {
-            chat.Say("/godon {0}", player.Username);
-        }
-
-        /// <summary>
-        /// Disables god mode of the specified player (/godoff &lt;player&gt;).
-        /// </summary>
-        /// <param name="chat">Chat.</param>
-        /// <param name="username">Username.</param>
-        public static void GodOff(this IChat chat, Player player)
-        {
-            chat.Say("/godoff {0}", player.Username);
-        }
-
-        /// <summary>
-        /// Gives the crown to the specified player (/givecrown &lt;player&gt;).
-        /// </summary>
-        /// <param name="chat">Chat.</param>
-        /// <param name="username">Username.</param>
-        public static void GiveCrown(this IChat chat, Player player)
-        {
-            chat.Say("/givecrown {0}", player.Username);
-        }
-
-        /// <summary>
         /// Removes the background color (/bgcolor none).
         /// </summary>
         /// <param name="chat">The chat.</param>
@@ -537,7 +359,5 @@ namespace BotBits
         {
             chat.SetBackgroundColor("none");
         }
-        
-      //  TODO: async save
     }
 }
