@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using PlayerIOClient;
 
 namespace BotBits.Events
@@ -21,7 +22,7 @@ namespace BotBits.Events
                         ? Players.Of(client).AddPlayer(message.GetInt(userId))
                         : Players.Of(client)[message.GetInt(userId)];
             }
-            catch (InvalidOperationException)
+            catch (KeyNotFoundException)
             {
                 this.Player = null;
             }

@@ -297,6 +297,17 @@ namespace BotBits
         }
 
         /// <summary>
+        /// Gets a value indicating whether this <see cref="Player"/> is the room owner.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if owner; otherwise, <c>false</c>.
+        /// </value>
+        public bool Owner
+        {
+            get { return this.Username.Equals(Room.Of(this.BotBits).Owner, StringComparison.OrdinalIgnoreCase); }
+        }
+
+        /// <summary>
         ///     Gets the x-coordinate of the block that the player is located on.
         /// </summary>
         /// <value>
