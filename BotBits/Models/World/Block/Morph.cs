@@ -1,6 +1,8 @@
-﻿namespace BotBits
+﻿using BotBits.SendMessages;
+
+namespace BotBits
 {
-    public class Morph
+    public static class Morph
     {
         public enum Id
         {
@@ -53,7 +55,7 @@
         public static class SciFiSlope
         {
             public const Id
-                TopLeft = (Id)0,
+                TopLeft = 0,
                 BottomLeft = (Id)1,
                 BottomRight = (Id)2,
                 TopRight = (Id)3;
@@ -138,6 +140,23 @@
                 Clap = (Id)7,
                 Cymbal4 = (Id)8,
                 Maraca = (Id)9;
+        }
+
+        public static class Team
+        {
+            public const Id
+                None = (Id)BotBits.Team.None,
+                Red = (Id)BotBits.Team.Red,
+                Blue = (Id) BotBits.Team.Blue,
+                Green = (Id)BotBits.Team.Green,
+                Cyan = (Id)BotBits.Team.Cyan,
+                Magenta = (Id)BotBits.Team.Magenta,
+                Yellow = (Id)BotBits.Team.Yellow;
+        }
+
+        public static BotBits.Team ToTeam(this Id morph)
+        {
+            return (BotBits.Team)morph;
         }
     }
 }

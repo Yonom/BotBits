@@ -118,11 +118,6 @@ namespace BotBits
         {
         }
 
-        public ForegroundBlock(Foreground.Id id, Team morph)
-            : this(id, (uint)morph)
-        {
-        }
-
         /// <summary>
         ///     Gets the block.
         /// </summary>
@@ -156,12 +151,15 @@ namespace BotBits
         {
             get
             {
-                if (this.Type == ForegroundType.Text)
-                    return (string)this._args;
-                if (this.Type == ForegroundType.Label)
-                    return this.GetLabelArgs().Text;
-
-                throw new InvalidOperationException("This property can only be accessed on label or text blocks.");
+                switch (this.Type)
+                {
+                    case ForegroundType.Text:
+                        return (string)this._args;
+                    case ForegroundType.Label:
+                        return this.GetLabelArgs().Text;
+                    default:
+                        throw new InvalidOperationException("This property can only be accessed on label or text blocks.");
+                }
             }
         }
 
@@ -195,7 +193,7 @@ namespace BotBits
             get
             {
                 if (this.Type != ForegroundType.Toggle)
-                    throw new InvalidOperationException("This property can only be accessed on label blocks.");
+                    throw new InvalidOperationException("This property can only be accessed on toggle blocks.");
 
                 return (int)this._args != 0;
             }
@@ -288,24 +286,14 @@ namespace BotBits
                 {
                     case ForegroundType.Portal:
                         return this.GetPortalArgs().PortalRotation;
-                    case ForegroundType.Toggle:
                     case ForegroundType.Morphable:
+                    case ForegroundType.Note:
+                    case ForegroundType.Team:
                         return (Morph.Id)(uint)this._args;
                     default:
                         throw new InvalidOperationException("This property can only be accessed on morphable blocks.");
                 }
 
-            }
-        }
-
-        public Team Team
-        {
-            get
-            {
-                if (this.Type != ForegroundType.Team)
-                    throw new InvalidOperationException("This property can only be accessed on Team blocks.");
-
-                return (Team)this._args;
             }
         }
 

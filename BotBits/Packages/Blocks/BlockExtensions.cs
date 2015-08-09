@@ -57,11 +57,6 @@ namespace BotBits
         {
             blocks.Place(x, y, new ForegroundBlock(block, enabled));
         }
-
-        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, Team team)
-        {
-            blocks.Place(x, y, new ForegroundBlock(block, team));
-        }
         #endregion
 
         #region BlocksItem IEnumerable
@@ -129,11 +124,6 @@ namespace BotBits
         {
             blocks.Set(new ForegroundBlock(block, enabled));
         }
-
-        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, Team team)
-        {
-            blocks.Set(new ForegroundBlock(block, team));
-        }
         #endregion
 
         #region Place IBlockSettable
@@ -182,11 +172,6 @@ namespace BotBits
         public static void Set(this BlocksItem blocks, Foreground.Id block, bool enabled)
         {
             blocks.Set(new ForegroundBlock(block, enabled));
-        }
-
-        public static void Set(this BlocksItem blocks, Foreground.Id block, Team team)
-        {
-            blocks.Set(new ForegroundBlock(block, team));
         }
         #endregion
     }
