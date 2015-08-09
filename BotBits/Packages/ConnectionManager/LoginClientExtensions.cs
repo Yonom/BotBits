@@ -49,6 +49,12 @@ namespace BotBits
         }
 
 
+        public static VersionLoginClient WithAutomaticVersion(this LoginClient client)
+        {
+            return client.WithAutomaticVersionAsync().GetResultEx();
+        }
+
+
         public static Task JoinRoomAsync(this Task<LoginClient> client, string roomId)
         {
             return client.Then(task => task.Result.JoinRoomAsync(roomId)).ToSafeTask();
