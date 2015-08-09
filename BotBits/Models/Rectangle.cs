@@ -52,13 +52,13 @@ namespace BotBits
         [Browsable(false)]
         public int Right
         {
-            get { return this.X + this.Width; }
+            get { return this.X + this.Width - 1; }
         }
 
         [Browsable(false)]
         public int Bottom
         {
-            get { return this.Y + this.Height; }
+            get { return this.Y + this.Height - 1; }
         }
 
         public bool Equals(Rectangle other)

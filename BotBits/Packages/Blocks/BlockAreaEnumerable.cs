@@ -16,8 +16,8 @@ namespace BotBits
 
         public IEnumerator<BlocksItem> GetEnumerator()
         {
-            for (int y = this.Area.Top; y < this.Area.Bottom; y++)
-                for (int x = this.Area.Left; x < this.Area.Right; x++)
+            for (int y = this.Area.Top; y <= this.Area.Bottom; y++)
+                for (int x = this.Area.Left; x <= this.Area.Right; x++)
                     yield return new BlocksItem(
                         this.Blocks, x, y);
         }
