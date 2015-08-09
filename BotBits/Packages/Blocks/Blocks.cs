@@ -116,7 +116,7 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.Low)]
-        private void OnPortal(PortalPlaceEvent e)
+        private void OnPortalPlace(PortalPlaceEvent e)
         {
             this.RaisePortalBlock(e.X, e.Y, (Foreground.Id)e.Id, e.PortalId, e.PortalTarget, e.PortalRotation, e.Player);
         }

@@ -4,7 +4,7 @@ namespace BotBits
 {
     public static class Morph
     {
-        public enum Id
+        public enum Id : uint
         {
         }
 
