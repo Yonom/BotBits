@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\VersionCache.cs" />
     <Compile Include="Packages\Actions\Actions.cs" />
     <Compile Include="Packages\Actions\ActionsExtensions.cs" />
     <Compile Include="Packages\Blocks\BlockAreaEnumerable.cs" />
@@ -71,13 +72,13 @@
     <Compile Include="Models\EffectId.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\WorldType.cs" />
-    <Compile Include="Helpers\PlayerIOAsync.cs" />
+    <Compile Include="Internal\PlayerIOAsync.cs" />
     <Compile Include="Packages\ConnectionManager\LobbyItem.cs" />
     <Compile Include="Packages\ConnectionManager\LoginClient.cs" />
     <Compile Include="Packages\ConnectionManager\Scheduler.cs" />
-    <Compile Include="Helpers\StringUtils.cs" />
-    <Compile Include="Helpers\TaskExtensions.cs" />
-    <Compile Include="Helpers\TaskHelper.cs" />
+    <Compile Include="Internal\StringUtils.cs" />
+    <Compile Include="Internal\TaskExtensions.cs" />
+    <Compile Include="Internal\TaskHelper.cs" />
     <Compile Include="Packages\EventLoader\LoaderBase.cs" />
     <Compile Include="Packages\EventManager\GlobalPriority.cs" />
     <Compile Include="Packages\MessageHandler\Events\AllowSpectatingEvent.cs" />
@@ -128,9 +129,9 @@
     <Compile Include="Packages\EventLoader\EventLoader.cs" />
     <Compile Include="Packages\BlockChecker\BlockChecker.cs" />
     <Compile Include="Packages\EventManager\IEvent.cs" />
-    <Compile Include="Helpers\Nito\Deque.cs" />
-    <Compile Include="Helpers\Shop\PackAttribute.cs" />
-    <Compile Include="Helpers\WaitHandleExtensions.cs" />
+    <Compile Include="Internal\Nito\Deque.cs" />
+    <Compile Include="Internal\Shop\PackAttribute.cs" />
+    <Compile Include="Internal\WaitHandleExtensions.cs" />
     <Compile Include="Packages\MessageHandler\Events\GemEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\RoomVisibleEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\SignPlaceEvent.cs" />
@@ -162,9 +163,9 @@
     <Compile Include="Models\Point3D.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Models\Rectangle.cs" />
-    <Compile Include="Models\SchedulerHandle\ActionDispatcherSchedulerHandle.cs" />
-    <Compile Include="Models\SchedulerHandle\ISchedulerHandle.cs" />
-    <Compile Include="Models\SchedulerHandle\SynchronizationContextSchedulerHandle.cs" />
+    <Compile Include="Helpers\SchedulerHandle\ActionDispatcherSchedulerHandle.cs" />
+    <Compile Include="Helpers\SchedulerHandle\ISchedulerHandle.cs" />
+    <Compile Include="Helpers\SchedulerHandle\SynchronizationContextSchedulerHandle.cs" />
     <Compile Include="Models\World\Block\BackgroundType.cs" />
     <Compile Include="Models\World\Block\Morph.cs" />
     <Compile Include="Models\World\DatabaseWorld.cs" />
@@ -263,16 +264,16 @@
     <Compile Include="Packages\EventManager\EventPriority.cs" />
     <Compile Include="Packages\MessageHandler\MessageRegister.cs" />
     <Compile Include="Packages\MessageSender\SendTimer.cs" />
-    <Compile Include="Models\Metadata\MetadataChangedEventArgs.cs" />
-    <Compile Include="Models\Metadata\MetadataCollection.cs" />
+    <Compile Include="Helpers\Metadata\MetadataChangedEventArgs.cs" />
+    <Compile Include="Helpers\Metadata\MetadataCollection.cs" />
     <Compile Include="Packages\EventLoader\EventListenerPackage.cs" />
     <Compile Include="Packages\IPackage.cs" />
     <Compile Include="Packages\Package.cs" />
     <Compile Include="Packages\PackageLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helpers\Nito\Async\ActionDispatcher.cs" />
-    <Compile Include="Helpers\Nito\Async\ActionDispatcherSynchronizationContext.cs" />
-    <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="Internal\Nito\Async\ActionDispatcher.cs" />
+    <Compile Include="Internal\Nito\Async\ActionDispatcherSynchronizationContext.cs" />
+    <Compile Include="Internal\Utils.cs" />
     <Compile Include="Models\World\Block\BackgroundBlock.cs" />
     <Compile Include="Models\World\Block\BlockArgsType.cs" />
     <Compile Include="Models\World\BlockLayer.cs" />
