@@ -386,7 +386,7 @@ namespace BotBits
             public const Id
                 GoldDoor = (Id)43;
 
-            [Pack("brickcoingate", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
+            [Pack("brickcoindoor", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
             public const Id
                 GoldGate = (Id)165;
 
@@ -394,7 +394,7 @@ namespace BotBits
             public const Id
                 BlueDoor = (Id)213;
 
-            [Pack("brickbluecoingate", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
+            [Pack("brickbluecoindoor", BlocksPerPack = 10, ForegroundType = ForegroundType.Goal)]
             public const Id
                 BlueGate = (Id)214;
         }
