@@ -26,6 +26,10 @@ namespace BotBits.Events
             {
                 this.Player = null;
             }
+            catch (ArgumentException)
+            {
+                this.Player = null;
+            }
         }
 
         public Player Player { get; private set; }
