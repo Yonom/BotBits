@@ -28,7 +28,7 @@ namespace BotBits
             return this._itemCounts.ContainsKey(pack);
         }
 
-        public bool HasBlock(int id, int count, bool isBuildersClub, bool isModerator)
+        public bool HasBlock(int id, int count, bool isBuildersClub, bool isAdministrator)
         {
             var pack = BlockServices.GetPackageInternal(id);
             if (pack == null) return true;
@@ -43,8 +43,8 @@ namespace BotBits
 
             switch (pack.Package)
             {
-                case "mod":
-                    return isModerator;
+                case "admin":
+                    return isAdministrator;
                 case "bc":
                     return isBuildersClub;
                 case "brickdiamond":

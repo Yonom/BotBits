@@ -187,10 +187,10 @@ namespace BotBits
             if (this._room.AccessRight < AccessRight.Edit) return false;
 
             // TODO: Count blocks
-            var isMod = this._connectionManager.PlayerObject.IsModerator;
+            var isAdministrator = this._connectionManager.PlayerObject.IsAdministrator;
             var isClubMember = this._connectionManager.PlayerObject.ClubMember;
-            if (!WorldUtils.IsPlaceable(b, this._world, !isMod)) return false;
-            if (!this._connectionManager.ShopData.HasBlock(b.Id, 0, isClubMember, isMod)) return false;
+            if (!WorldUtils.IsPlaceable(b, this._world, !isAdministrator)) return false;
+            if (!this._connectionManager.ShopData.HasBlock(b.Id, 0, isClubMember, isAdministrator)) return false;
 
             CheckHandle handle;
             return !(this._sentLocations.TryGetValue(p, out handle)

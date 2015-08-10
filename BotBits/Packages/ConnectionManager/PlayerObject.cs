@@ -24,9 +24,9 @@ namespace BotBits
             }
         }
 
-        public bool IsModerator
+        public bool IsAdministrator
         {
-            get { return this._databaseObject.GetBool("isModerator", false); }
+            get { return this._databaseObject.GetBool("isAdministrator", false); }
         }
     }
 }

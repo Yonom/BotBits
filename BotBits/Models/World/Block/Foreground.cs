@@ -946,7 +946,7 @@ namespace BotBits
        
         public static class Admin
         {
-            [Pack("mod", ForegroundType = ForegroundType.Label)]
+            [Pack("admin", ForegroundType = ForegroundType.Label)]
             public const Id
                 Text = (Id)1000;
         }
