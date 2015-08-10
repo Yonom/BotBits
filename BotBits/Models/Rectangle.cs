@@ -28,8 +28,8 @@ namespace BotBits
 
             this.X = topLeft.X;
             this.Y = topLeft.Y;
-            this.Width = bottomRight.X - topLeft.X;
-            this.Height = bottomRight.Y - topLeft.Y;
+            this.Width = bottomRight.X - topLeft.X + 1;
+            this.Height = bottomRight.Y - topLeft.Y + 1;
         }
 
         public int X { get; set; }
