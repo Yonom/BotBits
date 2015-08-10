@@ -59,8 +59,8 @@ namespace BotBits
                     return;
                 }
 
-                var playerEvent = instance as IPlayerEvent;
-                if (playerEvent != null && playerEvent.Player == null)
+                var playerEvent = instance as ICancellable;
+                if (playerEvent != null && playerEvent.Cancelled)
                     return;
 
                 instance.RaiseIn(this.BotBits);

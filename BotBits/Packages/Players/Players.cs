@@ -84,10 +84,17 @@ namespace BotBits
                     .ToArray();
         }
 
-        internal Player AddPlayer(int userId)
+        public bool TryGetPlayer(int userId, out Player player)
+        {
+            lock (this._players)
+                return this._players.TryGetValue(userId, out player);
+        }
+
+        internal Player TryAddPlayer(int userId)
         {
             lock (this._players)
             {
+                if (this._players.ContainsKey(userId)) return null;
                 var player = new Player(this.BotBits, userId);
                 this._players.Add(userId, player);
                 return player;
