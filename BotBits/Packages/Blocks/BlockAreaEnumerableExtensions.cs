@@ -39,8 +39,8 @@ namespace BotBits
             if (world.Width > area.Width || world.Height > area.Height)
                 throw new ArgumentException("The world is too big for this area.", "world");
 
-            for (var y = area.Top; y <= area.Bottom; y++)
-                for (var x = area.Left; x <= area.Right; x++)
+            for (var y = area.Top; y < area.Top + world.Height; y++)
+                for (var x = area.Left; x < area.Left + world.Width; x++)
                 {
                     blockArea.Blocks.Place(x, y, world.Foreground[x - area.Left, y - area.Top]);
                     blockArea.Blocks.Place(x, y, world.Background[x - area.Left, y - area.Top]);
