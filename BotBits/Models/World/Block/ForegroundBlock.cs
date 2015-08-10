@@ -192,7 +192,7 @@ namespace BotBits
         {
             get
             {
-                if (this.Type != ForegroundType.Toggle)
+                if (this.Type != ForegroundType.Toggle && this.Type != ForegroundType.ToggleGoal)
                     throw new InvalidOperationException("This property can only be accessed on toggle blocks.");
 
                 return (uint)this._args != 0;

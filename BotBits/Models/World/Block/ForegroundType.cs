@@ -16,6 +16,11 @@ namespace BotBits
         Toggle,
 
         /// <summary>
+        ///      A goal block that can be toggled
+        /// </summary>
+        ToggleGoal,
+
+        /// <summary>
         ///     A coin door block
         /// </summary>
         Team,
@@ -41,7 +46,7 @@ namespace BotBits
         Text,
 
         /// <summary>
-        ///     A piano block
+        ///     A piano/drum block
         /// </summary>
         Note,
 

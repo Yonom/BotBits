@@ -732,7 +732,7 @@ namespace BotBits
 
         public static class Zombie
         {
-            [Pack("brickeffectzombie", ForegroundType = ForegroundType.Goal)]
+            [Pack("brickeffectzombie", ForegroundType = ForegroundType.ToggleGoal)]
             public const Id
                 Effect = (Id)422;
 
@@ -1003,7 +1003,7 @@ namespace BotBits
             [Pack("brickeffectprotection", ForegroundType = ForegroundType.Toggle)]
             public const Id
                 Protection = (Id)420;
-            [Pack("brickeffectcurse", ForegroundType = ForegroundType.Goal)]
+            [Pack("brickeffectcurse", ForegroundType = ForegroundType.ToggleGoal)]
             public const Id
                 Curse = (Id)421;
         }

@@ -41,6 +41,7 @@ namespace BotBits
 
                 case ForegroundType.Goal:
                 case ForegroundType.Toggle:
+                case ForegroundType.ToggleGoal:
                 case ForegroundType.Team:
                     return new ForegroundBlock(foreground,
                         obj.GetUInt("goal", 0));
@@ -106,8 +107,9 @@ namespace BotBits
                     return BlockArgsType.None;
 
                 case ForegroundType.Goal:
-                case ForegroundType.Morphable:
                 case ForegroundType.Toggle:
+                case ForegroundType.ToggleGoal:
+                case ForegroundType.Morphable:
                 case ForegroundType.Team:
                 case ForegroundType.Note:
                     return BlockArgsType.Number;
