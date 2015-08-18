@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using PlayerIOClient;
+﻿using PlayerIOClient;
 
 namespace BotBits.Events
 {
@@ -9,12 +7,7 @@ namespace BotBits.Events
         bool Cancelled { get; }
     }
 
-    public interface IPlayerEvent
-    {
-        Player Player { get; }
-    }
-
-    public abstract class PlayerEvent<T> : ReceiveEvent<T>, IPlayerEvent, ICancellable where T : PlayerEvent<T>
+    public abstract class PlayerEvent<T> : ReceiveEvent<T>, ICancellable where T : PlayerEvent<T>
     {
         private readonly Player _player;
 
