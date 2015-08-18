@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace BotBits
@@ -439,16 +440,24 @@ namespace BotBits
 
     public class ActiveEffect
     {
-        private readonly DateTime _expires;
+        private readonly DateTime _expireTime;
         public Effect Effect { get; private set; }
+        public bool Expires { get; private set; }
         public TimeSpan Duration { get; private set; }
-        public TimeSpan TimeLeft { get { return DateTime.UtcNow.Subtract(this._expires); } }
+        public TimeSpan TimeLeft { get
+        {
+            if (!this.Expires)
+                throw new NotSupportedException("Cannot call TimeLeft on an effect that does not expire.");
+            return DateTime.UtcNow.Subtract(this._expireTime); } 
+        }
 
-        public ActiveEffect(Effect effect, TimeSpan timeLeft, TimeSpan duration)
+        internal ActiveEffect(Effect effect, bool expires, TimeSpan timeLeft, TimeSpan duration)
         {
             this.Effect = effect;
+            this.Expires = expires;
             this.Duration = duration;
-            this._expires = DateTime.UtcNow.Add(timeLeft);
+            
+            if (this.Expires) this._expireTime = DateTime.UtcNow.Add(timeLeft);
         }
     }
 }

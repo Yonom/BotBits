@@ -21,6 +21,8 @@ namespace BotBits.Events
 
         public TimeSpan TimeLeft { get; set; }
 
+        public bool Expires { get { return this.Duration.Ticks != 0; } }
+
         public bool Enabled { get; set; }
 
         public Effect Effect { get; set; }
