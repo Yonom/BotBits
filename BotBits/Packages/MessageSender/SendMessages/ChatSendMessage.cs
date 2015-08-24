@@ -2,9 +2,6 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
-    /// <summary>
-    ///     Class Say Send Event
-    /// </summary>
     public sealed class ChatSendMessage : SendMessage<ChatSendMessage>
     {
         /// <summary>

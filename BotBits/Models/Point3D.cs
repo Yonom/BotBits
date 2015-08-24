@@ -14,9 +14,9 @@ namespace BotBits
             this.Y = y;
         }
 
-        public Layer Layer { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
+        public Layer Layer { get; private set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
 
         public override string ToString()
         {

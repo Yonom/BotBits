@@ -8,7 +8,7 @@ namespace BotBits.SendMessages
     public sealed class MoveSendMessage : SendMessage<MoveSendMessage>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MoveSendMessage" /> class.
+        /// Initializes a new instance of the <see cref="MoveSendMessage" /> class.
         /// </summary>
         /// <param name="x">The x-coordinate of the position.</param>
         /// <param name="y">The y-coordinate of the position.</param>
@@ -19,8 +19,10 @@ namespace BotBits.SendMessages
         /// <param name="horizontal">The horizontal speed direction.</param>
         /// <param name="vertical">The vertical speed direction.</param>
         /// <param name="spaceDown">if set to <c>true</c> then spacebar is pressed.</param>
+        /// <param name="spaceJustDown">if set to <c>true</c> the spacebar is just pressed.</param>
+        /// <param name="tickId">The tick identifier.</param>
         public MoveSendMessage(int x, int y, double speedX, double speedY, double modifierX, double modifierY,
-            double horizontal, double vertical, bool spaceDown)
+            double horizontal, double vertical, bool spaceDown, bool spaceJustDown, int tickId)
         {
             this.X = x;
             this.Y = y;
@@ -31,15 +33,9 @@ namespace BotBits.SendMessages
             this.Horizontal = horizontal;
             this.Vertical = vertical;
             this.SpaceDown = spaceDown;
+            this.SpaceJustDown = spaceJustDown;
+            this.TickId = tickId;
         }
-
-        /// <summary>
-        ///     Gets or sets the gravity multiplier.
-        /// </summary>
-        /// <value>
-        ///     The gravity multiplier.
-        /// </value>
-        private double GravityMultiplier { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether spacebar is pressed.
@@ -48,6 +44,10 @@ namespace BotBits.SendMessages
         ///     <c>true</c> if spacebar is pressed; otherwise, <c>false</c>.
         /// </value>
         public bool SpaceDown { get; set; }
+
+        public bool SpaceJustDown { get; set; }
+
+        public int TickId { get; set; }
 
         /// <summary>
         ///     Gets or sets the horizontal speed direction.
@@ -113,13 +113,6 @@ namespace BotBits.SendMessages
         /// </value>
         public double SpeedY { get; set; }
 
-        public override void SendIn(BotBitsClient client)
-        {
-            this.GravityMultiplier = Room.Of(client).GravityMultiplier;
-
-            base.SendIn(client);
-        }
-
         /// <summary>
         ///     Gets the PlayerIO message representing the data in this <see cref="SendMessage{T}" />.
         /// </summary>
@@ -127,7 +120,7 @@ namespace BotBits.SendMessages
         protected override Message GetMessage()
         {
             return Message.Create("m", this.X, this.Y, this.SpeedX, this.SpeedY, this.ModifierX, this.ModifierY,
-                this.Horizontal, this.Vertical, this.GravityMultiplier, this.SpaceDown);
+                this.Horizontal, this.Vertical, this.SpaceDown, this.SpaceJustDown, this.TickId);
         }
     }
 }

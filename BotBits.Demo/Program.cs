@@ -24,11 +24,5 @@ namespace BotBits.Demo
 
             Thread.Sleep(Timeout.Infinite);
         }
-
-        [EventListener]
-        static void OnJoin(JoinEvent e)
-        {
-            Chat.Of(bot).PrivateMessage(e.Player, e.Username);
-        }
     }
 }

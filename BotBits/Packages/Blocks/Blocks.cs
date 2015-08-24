@@ -74,13 +74,13 @@ namespace BotBits
         [EventListener]
         private void OnInit(InitEvent e)
         {
-            this.World = BlockUtils.GetWorld(e.PlayerIOMessage, e.RoomWidth, e.RoomHeight);
+            this.World = BlockUtils.GetWorld(e.PlayerIOMessage, e.WorldWidth, e.WorldHeight);
         }
 
         [EventListener(EventPriority.Low)]
         private void OnInitLow(InitEvent e)
         {
-            new WorldResizeEvent(e.RoomWidth, e.RoomHeight)
+            new WorldResizeEvent(e.WorldWidth, e.WorldHeight)
                 .RaiseIn(this.BotBits);
         }
 

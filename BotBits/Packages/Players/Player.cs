@@ -133,6 +133,14 @@ namespace BotBits
         public Aura Aura { get; internal set; }
 
         /// <summary>
+        /// Gets the badge this player has selected.
+        /// </summary>
+        /// <value>
+        /// The badge.
+        /// </value>
+        public Badge Badge { get; internal set; }
+
+        /// <summary>
         ///     Gets the player's number of coins.
         /// </summary>
         /// <value>
@@ -221,20 +229,20 @@ namespace BotBits
         public bool SpaceDown { get; internal set; }
 
         /// <summary>
+        /// Gets a value indicating whether has just pressed spacebar.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if space was just pressed; otherwise, <c>false</c>.
+        /// </value>
+        public bool SpaceJustDown { get; internal set; }
+
+        /// <summary>
         ///     Gets a value indicating whether this player has a silver crown.
         /// </summary>
         /// <value>
         ///     <c>true</c> if this player has a silver crown; otherwise, <c>false</c>.
         /// </value>
         public bool HasSilverCrown { get; internal set; }
-
-        /// <summary>
-        ///     Gets a value indicating whether this player has wooted the level.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this player has wooted the level; otherwise, <c>false</c>.
-        /// </value>
-        public bool HasWooted { get; internal set; }
         
         /// <summary>
         /// Gets the team this user is in.
@@ -262,6 +270,14 @@ namespace BotBits
         /// The color of the chat.
         /// </value>
         public uint ChatColor { get; internal set; }
+
+        /// <summary>
+        /// Gets a value indicating whether this player is a crew member.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the player is a crew member; otherwise, <c>false</c>.
+        /// </value>
+        public bool CrewMember { get; internal set; }
 
         /// <summary>
         ///     Gets a value indicating whether this player is flying using god mode, admin mode or moderator mode.
@@ -328,6 +344,15 @@ namespace BotBits
         public int BlockY
         {
             get { return WorldUtils.PosToBlock(this.Y); }
+        }
+
+        public bool HasGodRights { get; internal set; }
+
+        public bool HasEditRights { get; internal set; }
+
+        public bool CanToggleGod
+        {
+            get { return this.HasGodRights || this.HasEditRights; }
         }
 
         public bool Equals(Player other)

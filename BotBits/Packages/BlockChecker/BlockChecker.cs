@@ -184,7 +184,7 @@ namespace BotBits
         {
             if (b.SendCount > 15) return false;
             if (b.NoChecks) return true;
-            if (this._room.AccessRight < AccessRight.Edit) return false;
+            if (!this._room.CanEdit) return false;
 
             // TODO: Count blocks
             var isAdministrator = this._connectionManager.PlayerObject.IsAdministrator;

@@ -23,7 +23,16 @@ namespace BotBits.Events
             this.Vertical = message.GetDouble(8);
             this.Coins = message.GetInteger(9);
             this.SpaceDown = message.GetBoolean(10);
+            this.SpaceJustDown = message.GetBoolean(11);
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether space was just pressed.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if space was pressed; otherwise, <c>false</c>.
+        /// </value>
+        public bool SpaceJustDown { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether the player is holding down the space bar.
