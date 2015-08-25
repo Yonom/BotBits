@@ -1034,5 +1034,15 @@ namespace BotBits
                 PalmTree = (Id)445;
         }
 
+        public static class Environment
+        {
+            [Pack("brickenvironment")]
+            public const Id
+                Tree = (Id)1030,
+                Grass = (Id)1031,
+                Bamboo = (Id)1032,
+                Rock = (Id)1033,
+                Lava = (Id)1034;
+        }
     }
 }
