@@ -2,6 +2,8 @@
 {
     public enum Badge
     {
+        Unknown = 0,
+
         None,
         /// <summary>
         /// Adventure League

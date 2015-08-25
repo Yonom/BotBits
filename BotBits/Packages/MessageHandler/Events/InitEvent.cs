@@ -49,11 +49,7 @@ namespace BotBits.Events
             this.CrewName = message.GetString(29);
             this.CanChangeWorldOptions = message.GetBoolean(30);
             this.WorldStatus = (WorldStatus)message.GetInt(31);
-
-            Badge badge;
-            Enum.TryParse(message.GetString(32), true, out badge);
-            this.Badge = badge;
-
+            this.Badge = message.GetBadge(32);
             this.CrewMember = message.GetBoolean(33);
         }
 

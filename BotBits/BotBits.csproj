@@ -116,6 +116,7 @@
     <Compile Include="Packages\MessageHandler\Events\UnknownMessageTypeException.cs" />
     <Compile Include="Packages\MessageHandler\Events\UnlikedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\WorldReleasedEvent.cs" />
+    <Compile Include="Packages\MessageHandler\MessageUtils.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\AddToCrewSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\AuraSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\EffectSendMessage.cs" />

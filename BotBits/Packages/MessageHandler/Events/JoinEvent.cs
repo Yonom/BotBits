@@ -30,11 +30,7 @@ namespace BotBits.Events
             this.Team = (Team)message.GetInt(14);
             this.Aura = (Aura)message.GetInt(15);
             this.ChatColor = message.GetUInt(16);
-
-            Badge badge;
-            Enum.TryParse(message.GetString(17), true, out badge);
-            this.Badge = badge;
-
+            this.Badge = message.GetBadge(17);
             this.CrewMember = message.GetBoolean(18);
         }
 
