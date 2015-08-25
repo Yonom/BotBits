@@ -55,7 +55,8 @@ namespace BotBits
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Error parsing message: {0} \n {1}", e.Message, ex);
+                    new UnknownMessageEvent(this.BotBits, e.Message, ex)
+                        .RaiseIn(this.BotBits);
                     return;
                 }
 
@@ -67,7 +68,8 @@ namespace BotBits
             }
             else
             {
-                new UnknownMessageEvent(this.BotBits, e.Message)
+                new UnknownMessageEvent(this.BotBits, e.Message, 
+                    new UnknownMessageTypeException("The received message type is not supported."))
                     .RaiseIn(this.BotBits);
             }
         }

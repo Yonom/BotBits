@@ -113,6 +113,7 @@
     <Compile Include="Packages\MessageHandler\Events\TeamEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\TimeEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\UnfavoritedEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\UnknownMessageTypeException.cs" />
     <Compile Include="Packages\MessageHandler\Events\UnlikedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\WorldReleasedEvent.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\AddToCrewSendMessage.cs" />
