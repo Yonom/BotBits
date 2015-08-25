@@ -80,8 +80,8 @@ namespace BotBits
                Cyan = (Id)530,
                Blue = (Id)531,
                Red = (Id)532,
-               Orange = (Id)531,
-               Purple = (Id)532;
+               Orange = (Id)676,
+               Purple = (Id)677;
         }
 
         public static class Canvas
