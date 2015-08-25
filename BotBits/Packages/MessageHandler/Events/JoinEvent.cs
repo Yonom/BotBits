@@ -32,7 +32,7 @@ namespace BotBits.Events
             this.ChatColor = message.GetUInt(16);
 
             Badge badge;
-            Enum.TryParse(message.GetString(32), true, out badge);
+            Enum.TryParse(message.GetString(17), true, out badge);
             this.Badge = badge;
 
             this.CrewMember = message.GetBoolean(18);
