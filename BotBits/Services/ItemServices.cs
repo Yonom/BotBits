@@ -6,13 +6,13 @@ using BotBits.Shop;
 
 namespace BotBits
 {
-    public static class BlockServices
+    public static class ItemServices
     {
         private static readonly Dictionary<int, PackAttribute> _blockPacks = new Dictionary<int, PackAttribute>();
         private static readonly Dictionary<int, Type> _blockGroups = new Dictionary<int, Type>();
         private static readonly Dictionary<Smiley, PackAttribute> _smileyPacks = new Dictionary<Smiley, PackAttribute>();
 
-        static BlockServices()
+        static ItemServices()
         {
             LoadPacks(typeof(Background));
             LoadPacks(typeof(Foreground));

@@ -175,7 +175,7 @@
     <Compile Include="Packages\MessageSender\SendMessages\TouchHologramSendMessage.cs" />
     <Compile Include="Packages\Players\Events\FlyEvent.cs" />
     <Compile Include="Packages\Players\PlayerExtensions.cs" />
-    <Compile Include="Services\BlockServices.cs" />
+    <Compile Include="Services\ItemServices.cs" />
     <Compile Include="Services\ExtensionServices.cs" />
     <Compile Include="Services\MessageServices.cs" />
     <Compile Include="Packages\EventManager\EventRaiseHandler.cs" />

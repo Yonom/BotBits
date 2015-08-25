@@ -22,7 +22,7 @@ namespace BotBits
 
         public bool HasSmiley(Smiley smiley)
         {
-            var pack = BlockServices.GetPackage(smiley);
+            var pack = ItemServices.GetPackage(smiley);
             if (pack == null) return true;
 
             return this._itemCounts.ContainsKey(pack);
@@ -30,7 +30,7 @@ namespace BotBits
 
         public bool HasBlock(int id, int count, bool isBuildersClub, bool isAdministrator)
         {
-            var pack = BlockServices.GetPackageInternal(id);
+            var pack = ItemServices.GetPackageInternal(id);
             if (pack == null) return true;
 
             //if (pack.BlocksPerPack > 0)
