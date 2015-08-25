@@ -86,6 +86,12 @@ namespace BotBits
 
         public bool TryGetPlayer(int userId, out Player player)
         {
+            if (userId == Player.Nobody.UserId)
+            {
+                player = Player.Nobody;
+                return true;
+            }
+
             lock (this._players)
                 return this._players.TryGetValue(userId, out player);
         }
