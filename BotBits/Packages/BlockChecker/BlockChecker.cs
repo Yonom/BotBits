@@ -12,9 +12,9 @@ namespace BotBits
     public sealed class BlockChecker : EventListenerPackage<BlockChecker>, IDisposable
     {
         private readonly Deque<CheckHandle> _sentBlocks = new Deque<CheckHandle>(100);
-        private readonly Dictionary<Point3D, CheckHandle> _sentLocations = new Dictionary<Point3D, CheckHandle>(100);
         private readonly AutoResetEvent _timeoutResetEvent = new AutoResetEvent(true);
         private readonly ManualResetEvent _finishResetEvent = new ManualResetEvent(true);
+        private readonly Dictionary<Point3D, CheckHandle> _sentLocations = new Dictionary<Point3D, CheckHandle>(100);
         private readonly RegisteredWaitHandle _registration;
         private Blocks _world;
         private MessageQueue<PlaceSendMessage> _messageQueue;
@@ -187,10 +187,9 @@ namespace BotBits
             if (!this._room.CanEdit) return false;
 
             // TODO: Count blocks
-            var isAdministrator = this._connectionManager.PlayerObject.IsAdministrator;
-            var isClubMember = this._connectionManager.PlayerObject.ClubMember;
+            var isAdministrator = this._connectionManager.PlayerData.PlayerObject.IsAdministrator;
             if (!WorldUtils.IsPlaceable(b, this._world, !isAdministrator)) return false;
-            if (!this._connectionManager.ShopData.HasBlock(b.Id, 0, isClubMember, isAdministrator)) return false;
+            if (!this._connectionManager.PlayerData .HasBlock(b.Id, 0)) return false;
 
             CheckHandle handle;
             return !(this._sentLocations.TryGetValue(p, out handle)

@@ -48,6 +48,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\PlayerData\PlayerAchivements.cs" />
+    <Compile Include="Helpers\PlayerData\PlayerData.cs" />
     <Compile Include="Helpers\VersionCache.cs" />
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\CampaignDifficulty.cs" />
@@ -135,11 +137,11 @@
     <Compile Include="Packages\MessageSender\SendMessages\SetRoomVisibleSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TimedEffectSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TimeSendMessage.cs" />
-    <Compile Include="Packages\ConnectionManager\PlayerObject.cs" />
+    <Compile Include="Helpers\PlayerData\PlayerObject.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\UnfavoriteSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\UnlikeSendMessage.cs" />
     <Compile Include="Packages\Players\Events\PurpleSwitchEvent.cs" />
-    <Compile Include="Packages\ConnectionManager\ShopData.cs" />
+    <Compile Include="Helpers\PlayerData\ShopData.cs" />
     <Compile Include="Models\World\BlockData\BlockData.cs" />
     <Compile Include="Packages\Chat\ChatExtensions.cs" />
     <Compile Include="Packages\Chat\Events\PrivateMessageEvent.cs" />
@@ -151,7 +153,6 @@
     <Compile Include="Models\AccessRight.cs" />
     <Compile Include="Models\AutoText.cs" />
     <Compile Include="Models\World\Block\Background.cs" />
-    <Compile Include="Models\Id.cs" />
     <Compile Include="Packages\EventManager\EventHandleExtensions.cs" />
     <Compile Include="Models\World\Block\Foreground.cs" />
     <Compile Include="Models\Key.cs" />

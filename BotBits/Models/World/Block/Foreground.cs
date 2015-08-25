@@ -102,12 +102,9 @@ namespace BotBits
 
         public static class BuildersClub
         {
-            [Pack("bc")]
+            [Pack("-", BuildersClubOnly = true)]
             public const Id
-                Door = (Id)200;
-
-            [Pack("bc")]
-            public const Id
+                Door = (Id)200,
                 Gate = (Id)201;
         }
 

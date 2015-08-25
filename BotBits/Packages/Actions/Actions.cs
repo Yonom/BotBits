@@ -78,14 +78,19 @@ namespace BotBits
 
         public void ChangeAura(Aura newAura)
         {
-            //if (this.HasSmiley(newSmiley)) // Server kicks people if they do not own a smiley
+            if (this.HasAura(newAura)) // Server kicks people if they do not own an aura
                 new AuraSendMessage(newAura)
                     .SendIn(this.BotBits);
         }
 
         private bool HasSmiley(Smiley smiley)
         {
-            return  ConnectionManager.Of(this.BotBits).ShopData.HasSmiley(smiley);
+            return ConnectionManager.Of(this.BotBits).PlayerData.HasSmiley(smiley);
+        }
+
+        private bool HasAura(Aura aura)
+        {
+            return ConnectionManager.Of(this.BotBits).PlayerData.HasAura(aura);
         }
 
         public void MoveToLocation(int x, int y)

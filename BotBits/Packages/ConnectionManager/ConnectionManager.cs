@@ -25,20 +25,12 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Gets the items.
+        /// Gets the player data.
         /// </summary>
         /// <value>
-        /// The items.
+        /// The player data.
         /// </value>
-        public ShopData ShopData { get; private set; }
-
-        /// <summary>
-        /// Gets the player object.
-        /// </summary>
-        /// <value>
-        /// The player object.
-        /// </value>
-        public PlayerObject PlayerObject { get; private set; }
+        public PlayerData PlayerData { get; private set; }
 
         void IDisposable.Dispose()
         {
@@ -83,8 +75,7 @@ namespace BotBits
                 throw new InvalidOperationException("A connection has already been established.");
             }
 
-            this.PlayerObject = args.PlayerObject;
-            this.ShopData = args.ShopData;
+            this.PlayerData = new PlayerData(args.PlayerObject, args.ShopData);
 
             new ConnectEvent()
                 .RaiseIn(this.BotBits);
