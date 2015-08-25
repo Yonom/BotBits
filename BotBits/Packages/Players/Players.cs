@@ -113,6 +113,7 @@ namespace BotBits
             this.OwnPlayer = e.Player;
             this.OwnPlayer.Connected = true;
             this.OwnPlayer.Username = e.Username;
+            this.OwnPlayer.ConnectUserId = ConnectionManager.Of(this.BotBits).ConnectUserId;
             this.OwnPlayer.Smiley = e.Smiley;
             this.OwnPlayer.Aura = e.Aura;
             this.OwnPlayer.Badge = e.Badge;
@@ -128,6 +129,7 @@ namespace BotBits
             Player p = e.Player;
             p.Connected = true;
             p.Username = e.Username;
+            p.ConnectUserId = e.ConnectUserId;
             p.Smiley = e.Smiley;
             p.Aura = e.Aura;
             p.Badge = e.Badge;

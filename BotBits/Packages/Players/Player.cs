@@ -109,6 +109,14 @@ namespace BotBits
         public bool Connected { get; internal set; }
 
         /// <summary>
+        /// Gets or sets the user identifier unique to this user's account.
+        /// </summary>
+        /// <value>
+        /// The user identifier.
+        /// </value>
+        public string ConnectUserId { get; set; }
+
+        /// <summary>
         ///     Gets a value indicating whether this player has chat access.
         /// </summary>
         /// <value>

@@ -32,6 +32,10 @@ namespace BotBits
         /// </value>
         public PlayerData PlayerData { get; private set; }
 
+        public string RoomId { get; private set; }
+
+        public string ConnectUserId { get; private set; }
+
         void IDisposable.Dispose()
         {
             if (this._adapter != null)
@@ -75,7 +79,9 @@ namespace BotBits
                 throw new InvalidOperationException("A connection has already been established.");
             }
 
-            this.PlayerData = new PlayerData(args.PlayerObject, args.ShopData);
+            this.ConnectUserId = args.ConnectUserId;
+            this.RoomId = args.RoomId;
+            this.PlayerData = args.PlayerData;
 
             new ConnectEvent()
                 .RaiseIn(this.BotBits);

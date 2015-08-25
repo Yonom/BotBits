@@ -8,18 +8,19 @@ namespace BotBits
 {
     internal static class ConnectionUtils
     {
-        public static Task<ConnectionArgs> GetConnectionArgsAsync(Client client)
+        public static Task<PlayerData> GetConnectionArgsAsync(Client client)
         {
-            var args = new ConnectionArgs();
+            ShopData shopData = null;
+            PlayerObject playerObject = null;
             var vaultTask = client.PayVault.RefreshAsync()
-                .Then(task => args.ShopData = new ShopData(client.PayVault.Items));
+                .Then(task => shopData = new ShopData(client.PayVault.Items));
 
              var playerObjectTask = client.BigDB.LoadMyPlayerObjectAsync()
-                .Then(task => args.PlayerObject = new PlayerObject(task.Result));
+                .Then(task => playerObject = new PlayerObject(task.Result));
 
             return vaultTask
                 .Then(t => playerObjectTask)
-                .Then(t => args)
+                .Then(t => new PlayerData(playerObject, shopData))
                 .ToSafeTask();
         }
 
