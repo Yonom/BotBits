@@ -3,11 +3,12 @@ using System.Threading;
 
 namespace BotBits
 {
-    public sealed class Scheduler : IDisposable
+    public sealed class Scheduler : Package<Scheduler>, IDisposable
     {
         private ISchedulerHandle _schedulerHandle;
 
-        internal Scheduler()
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
+        public Scheduler()
         {
         }
 

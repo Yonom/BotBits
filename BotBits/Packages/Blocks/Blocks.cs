@@ -52,7 +52,7 @@ namespace BotBits
             get { return this._readOnlyBlocksWorld.Background; }
         }
 
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Blocks()
         {
             this.World = new BlockDataWorld(0, 0);

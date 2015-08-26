@@ -84,7 +84,7 @@
     <Compile Include="Internal\PlayerIOAsync.cs" />
     <Compile Include="Packages\ConnectionManager\LobbyItem.cs" />
     <Compile Include="Packages\ConnectionManager\LoginClient.cs" />
-    <Compile Include="Packages\ConnectionManager\Scheduler.cs" />
+    <Compile Include="Packages\Scheduler\Scheduler.cs" />
     <Compile Include="Internal\StringUtils.cs" />
     <Compile Include="Internal\TaskExtensions.cs" />
     <Compile Include="Internal\TaskHelper.cs" />
@@ -197,9 +197,9 @@
     <Compile Include="Models\Point3D.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Models\Rectangle.cs" />
-    <Compile Include="Helpers\SchedulerHandle\ActionDispatcherSchedulerHandle.cs" />
-    <Compile Include="Helpers\SchedulerHandle\ISchedulerHandle.cs" />
-    <Compile Include="Helpers\SchedulerHandle\SynchronizationContextSchedulerHandle.cs" />
+    <Compile Include="Packages\Scheduler\SchedulerHandle\ActionDispatcherSchedulerHandle.cs" />
+    <Compile Include="Packages\Scheduler\SchedulerHandle\ISchedulerHandle.cs" />
+    <Compile Include="Packages\Scheduler\SchedulerHandle\SynchronizationContextSchedulerHandle.cs" />
     <Compile Include="Models\World\Block\BackgroundType.cs" />
     <Compile Include="Models\World\Block\Morph.cs" />
     <Compile Include="Models\World\DatabaseWorld.cs" />

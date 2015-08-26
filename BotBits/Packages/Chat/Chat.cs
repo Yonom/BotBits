@@ -29,7 +29,7 @@ namespace BotBits
         private Players _players;
         private bool _warning;
 
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Chat()
         {
             this._mySendTimer = new Timer(600); 

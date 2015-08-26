@@ -21,7 +21,7 @@ namespace BotBits
         private ConnectionManager _connectionManager;
         private Room _room;
             
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public BlockChecker()
         {
             this.InitializeFinish += this.BlockChecker_InitializeFinish;

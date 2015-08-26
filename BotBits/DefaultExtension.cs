@@ -5,7 +5,7 @@
         protected override void Initialize(BotBitsClient client, object args)
         {
             var handle = (ISchedulerHandle)args;
-            ConnectionManager.Of(client).CurrentScheduler.SetScheduler(handle);
+            Scheduler.Of(client).SetScheduler(handle);
         }
 
         public static bool LoadInto(BotBitsClient client, ISchedulerHandle handle)

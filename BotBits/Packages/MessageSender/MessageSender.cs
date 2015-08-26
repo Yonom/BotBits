@@ -12,7 +12,7 @@ namespace BotBits
 
         private ConnectionManager _connectionManager;
 
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public MessageSender()
         {
             this._myTimer = new SendTimer();

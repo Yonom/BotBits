@@ -10,18 +10,16 @@ namespace BotBits
     public sealed class ConnectionManager : Package<ConnectionManager>, IDisposable, 
         IPlayerIOGame<LoginClient>, IConnectionManager<LoginClient>
     {
-        private IConnection _connection;
         private PlayerIOConnectionAdapter _adapter;
-        public Scheduler CurrentScheduler { get; private set; }
+        private IConnection _connection;
         public IConnection Connection
         {
             get { return this._connection; }
         }
 
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public ConnectionManager()
         {
-            this.CurrentScheduler = new Scheduler();
         }
 
         /// <summary>
@@ -40,8 +38,6 @@ namespace BotBits
         {
             if (this._adapter != null)
                 this._adapter.Dispose();
-
-            this.CurrentScheduler.Dispose();
         }
 
         void IConnectionManager.AttachConnection(Connection connection, ConnectionArgs args)
@@ -96,13 +92,13 @@ namespace BotBits
 
         private void Connection_OnMessage(object sender, Message e)
         {
-            this.CurrentScheduler.Schedule(() =>
+            Scheduler.Of(this.BotBits).Schedule(() =>
                 this.HandleMessage(e));
         }
 
         private void Connection_OnDisconnect(object sender, string message)
         {
-            this.CurrentScheduler.Schedule(() => 
+            Scheduler.Of(this.BotBits).Schedule(() => 
                 this.HandleDisconnect(message));
         }
 
