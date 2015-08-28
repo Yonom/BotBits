@@ -17,7 +17,7 @@ namespace BotBits
             {
                 int count;
                 this._itemCounts.TryGetValue(item.ItemKey, out count);
-                this._itemCounts[item.ItemKey] = count;
+                this._itemCounts[item.ItemKey] = count + 1;
             }
         }
 
