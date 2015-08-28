@@ -16,10 +16,7 @@ namespace BotBits
         private readonly ManualResetEvent _finishResetEvent = new ManualResetEvent(true);
         private readonly Dictionary<Point3D, CheckHandle> _sentLocations = new Dictionary<Point3D, CheckHandle>(100);
         private readonly RegisteredWaitHandle _registration;
-        private Blocks _world;
         private MessageQueue<PlaceSendMessage> _messageQueue;
-        private ConnectionManager _connectionManager;
-        private Room _room;
             
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public BlockChecker()
@@ -30,9 +27,6 @@ namespace BotBits
 
         private void BlockChecker_InitializeFinish(object sender, EventArgs e)
         {
-            this._connectionManager = ConnectionManager.Of(this.BotBits);
-            this._room = Room.Of(this.BotBits);
-            this._world = Blocks.Of(this.BotBits);
             this._messageQueue = PlaceSendMessage.Of(this.BotBits);
             this._messageQueue.Sending += this.OnSendingPlace;
             this._messageQueue.Send += this.OnSendPlace;
@@ -184,17 +178,20 @@ namespace BotBits
         {
             if (b.SendCount > 15) return false;
             if (b.NoChecks) return true;
-            if (!this._room.CanEdit) return false;
+            if (!Room.Of(this.BotBits).CanEdit) return false;
 
             // TODO: Count blocks
-            var isAdministrator = this._connectionManager.PlayerData.PlayerObject.IsAdministrator;
-            if (!WorldUtils.IsPlaceable(b, this._world, !isAdministrator)) return false;
-            if (!this._connectionManager.PlayerData .HasBlock(b.Id, 0)) return false;
+            var playerData = ConnectionManager.Of(this.BotBits).PlayerData;
+            var blocks = Blocks.Of(this.BotBits);
+            var isAdministrator = playerData.PlayerObject.IsAdministrator;
+
+            if (!WorldUtils.IsPlaceable(b, blocks, !isAdministrator)) return false;
+            if (!playerData.HasBlock(b.Id, 0)) return false;  
 
             CheckHandle handle;
             return !(this._sentLocations.TryGetValue(p, out handle)
                 ? WorldUtils.AreSame(b, handle.Message)
-                : WorldUtils.IsAlreadyPlaced(b, this._world));
+                : WorldUtils.IsAlreadyPlaced(b, blocks));
         }
 
         private static bool AreSame<T, TBlock>(PlaceSendMessage sent, T received)

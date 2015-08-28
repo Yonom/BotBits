@@ -57,8 +57,7 @@ namespace BotBits
         {
             this.World = new BlockDataWorld(0, 0);
         }
-
-
+        
         public void Place(int x, int y, BackgroundBlock block)
         {
             new PlaceSendMessage(Layer.Background, x, y, (int)block.Id)
