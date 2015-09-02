@@ -59,6 +59,10 @@
     <Compile Include="Models\CampaignStatus.cs" />
     <Compile Include="Models\PlayerPoint.cs" />
     <Compile Include="Models\WorldStatus.cs" />
+    <Compile Include="Models\World\IWorldAreaEnumerable.cs" />
+    <Compile Include="Models\World\WorldAreaEnumerable.cs" />
+    <Compile Include="Models\World\WorldAreaEnumerableExtensions.cs" />
+    <Compile Include="Models\World\WorldItem.cs" />
     <Compile Include="Packages\Actions\Actions.cs" />
     <Compile Include="Packages\Actions\ActionsExtensions.cs" />
     <Compile Include="Packages\Blocks\BlockAreaEnumerable.cs" />
@@ -205,7 +209,7 @@
     <Compile Include="Models\World\Block\Morph.cs" />
     <Compile Include="Models\World\DatabaseWorld.cs" />
     <Compile Include="Models\World\IWorld.cs" />
-    <Compile Include="Models\World\WorldItem.cs" />
+    <Compile Include="Models\World\LayerItem.cs" />
     <Compile Include="Models\World\WorldUtils.cs" />
     <Compile Include="Packages\Chat\Chat.cs" />
     <Compile Include="Packages\Players\Events\RespawnEvent.cs" />
