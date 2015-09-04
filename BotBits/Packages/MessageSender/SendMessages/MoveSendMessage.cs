@@ -36,6 +36,14 @@ namespace BotBits.SendMessages
             this.SpaceJustDown = spaceJustDown;
             this.TickId = tickId;
         }
+        
+        /// <summary>
+        /// Gets or sets the gravity multiplier.
+        /// </summary>
+        /// <value>
+        /// The gravity multiplier.
+        /// </value>
+        private double GravityMultiplier { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether spacebar is pressed.
@@ -45,8 +53,20 @@ namespace BotBits.SendMessages
         /// </value>
         public bool SpaceDown { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether space was just pressed.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if space was just pressed; otherwise, <c>false</c>.
+        /// </value>
         public bool SpaceJustDown { get; set; }
 
+        /// <summary>
+        /// Gets or sets the physics tick number.
+        /// </summary>
+        /// <value>
+        /// The physics tick number.
+        /// </value>
         public int TickId { get; set; }
 
         /// <summary>
@@ -120,7 +140,14 @@ namespace BotBits.SendMessages
         protected override Message GetMessage()
         {
             return Message.Create("m", this.X, this.Y, this.SpeedX, this.SpeedY, this.ModifierX, this.ModifierY,
-                this.Horizontal, this.Vertical, this.SpaceDown, this.SpaceJustDown, this.TickId);
+                this.Horizontal, this.Vertical, this.GravityMultiplier, this.SpaceDown, this.SpaceJustDown, this.TickId);
+        }
+
+        public override void SendIn(BotBitsClient client)
+        {
+            this.GravityMultiplier = Room.Of(client).GravityMultiplier;
+
+            base.SendIn(client);
         }
     }
 }
