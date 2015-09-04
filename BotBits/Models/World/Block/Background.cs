@@ -48,9 +48,11 @@ namespace BotBits
                 Blue = (Id)514,
                 Purple = (Id)515,
                 Red = (Id)516,
+                Orange = (Id)649,
                 Yellow = (Id)517,
                 Green = (Id)518,
-                Cyan = (Id)519;
+                Cyan = (Id)519,
+                Black = (Id)650;
         }
 
         public static class Dark
@@ -61,21 +63,25 @@ namespace BotBits
                 Blue = (Id)521,
                 Purple = (Id)522,
                 Red = (Id)523,
+                Orange = (Id)651,
                 Yellow = (Id)524,
                 Green = (Id)525,
-                Cyan = (Id)526;
+                Cyan = (Id)526,
+                Black = (Id)652;
         }
 
         public static class Pastel
         {
             [Pack("brickbgpastel")]
             public const Id
-               Orange = (Id)527,
+               Yellow = (Id)527,
                Green = (Id)528,
                Lime = (Id)529,
                Cyan = (Id)530,
                Blue = (Id)531,
-               Red = (Id)532;
+               Red = (Id)532,
+               Orange = (Id)676,
+               Purple = (Id)677;
         }
 
         public static class Canvas
@@ -258,9 +264,11 @@ namespace BotBits
                 Blue = (Id)611,
                 Purple = (Id)612,
                 Red = (Id)613,
+                Orange = (Id)653,
                 Yellow = (Id)614,
                 Green = (Id)615,
-                Cyan = (Id)616;
+                Cyan = (Id)616,
+                Black = (Id)654;
         }
 
         public static class Jungle
@@ -340,14 +348,39 @@ namespace BotBits
                 Deteriorated = (Id)598;
         }
 
+        public static class Cave
+        {
+            [Pack("brickenvironment")]
+            public const Id
+                Purple = (Id)655,
+                Cyan = (Id)656,
+                Blue = (Id)657,
+                Pink = (Id)658,
+                Green = (Id)659,
+                Brown = (Id)660,
+                Yellow = (Id)661,
+                Red = (Id)662;
+        }
+
         public static class Neon
         {
-            [Pack("brickneon")]
+            [Pack("brickneon")] 
             public const Id
-                Blue = (Id)605,
-                Orange = (Id)673,
-                Green = (Id)674,
-                Red = (Id)675;
+                Blue = (Id) 605,
+                Orange = (Id) 673,
+                Green = (Id) 674,
+                Red = (Id) 675;
+        }
+
+        public static class Environment
+        {
+            [Pack("brickenvironment")]
+            public const Id
+                Tree = (Id)678,
+                Grass = (Id)679,
+                Bamboo = (Id)680,
+                Rock = (Id)681,
+                Lava = (Id)682;
         }
     }
 }

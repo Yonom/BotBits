@@ -9,4 +9,14 @@
 
         public AccessRight NewRights { get; private set; }
     }
+
+    public sealed class EditRightChangedEvent : Event<EditRightChangedEvent>
+    {
+        internal EditRightChangedEvent(bool canEdit)
+        {
+            this.CanEdit = canEdit;
+        }
+
+        public bool CanEdit { get; private set; }
+    }
 }

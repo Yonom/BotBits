@@ -2,19 +2,19 @@
 {
     public sealed class MetaChangedEvent : Event<MetaChangedEvent>
     {
-        internal MetaChangedEvent(string ownerUsername, int plays, int currentWoots, int totalWoots, string worldName)
+        internal MetaChangedEvent(string ownerUsername, int plays, int favorites, int likes, string worldName)
         {
             this.OwnerUsername = ownerUsername;
             this.Plays = plays;
-            this.CurrentWoots = currentWoots;
-            this.TotalWoots = totalWoots;
+            this.Favorites = favorites;
+            this.Likes = likes;
             this.WorldName = worldName;
         }
 
-        public int CurrentWoots { get; private set; }
+        public int Favorites { get; private set; }
         public string OwnerUsername { get; private set; }
         public int Plays { get; private set; }
-        public int TotalWoots { get; private set; }
+        public int Likes { get; private set; }
         public string WorldName { get; private set; }
     }
 }

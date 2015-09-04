@@ -12,7 +12,12 @@ namespace BotBits
         [NotNull]
         private readonly IConnectionManager _connectionManager;
 
-        private readonly Task<ConnectionArgs> _argsAsync;
+        private readonly Task<PlayerData> _argsAsync;
+
+        public string ConnectUserId
+        {
+            get { return this.Client.ConnectUserId; }
+        }
 
         internal LoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client)
             : this(connectionManager, client, ConnectionUtils.GetConnectionArgsAsync(client))
@@ -20,7 +25,7 @@ namespace BotBits
         }
 
         internal LoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client,
-            Task<ConnectionArgs> argsAsync)
+            Task<PlayerData> argsAsync)
         {
             if (connectionManager == null) throw new ArgumentNullException("connectionManager");
             if (client == null) throw new ArgumentNullException("client");
@@ -58,7 +63,7 @@ namespace BotBits
         {
             return this.Client.Multiplayer
                 .JoinRoomAsync(roomId, null)
-                .Then(task => this.InitConnection(task.Result))
+                .Then(task => this.InitConnection(roomId, task.Result))
                 .ToSafeTask();
         }
 
@@ -69,7 +74,7 @@ namespace BotBits
                 .ToSafeTask();
         }
 
-        public virtual VersionLoginClient WithVersion(int version)
+        public VersionLoginClient WithVersion(int version)
         {
             return new VersionLoginClient(this._connectionManager, this.Client, this._argsAsync, version);
         }
@@ -81,10 +86,11 @@ namespace BotBits
                 .ToSafeTask();
         }
 
-        protected Task InitConnection(Connection conn)
+        protected Task InitConnection(string roomId, Connection conn)
         {
             return this._argsAsync
-                .Then(task => this._connectionManager.AttachConnection(conn, task.Result))
+                .Then(task => this._connectionManager.AttachConnection(conn,
+                    new ConnectionArgs(this.ConnectUserId, roomId, task.Result)))
                 .ToSafeTask();
         }
     }
@@ -97,7 +103,7 @@ namespace BotBits
         public int Version { get; private set; }
 
         internal VersionLoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client,
-            Task<ConnectionArgs> argsAsync, int version)
+            Task<PlayerData> argsAsync, int version)
             : base(connectionManager, client, argsAsync)
         {
             this.Version = version;
@@ -120,7 +126,7 @@ namespace BotBits
 
             return this.Client.Multiplayer
                 .CreateJoinRoomAsync(roomId, EverybodyEdits + this.Version, true, roomData, new Dictionary<string, string>())
-                .Then(task => this.InitConnection(task.Result))
+                .Then(task => this.InitConnection(roomId, task.Result))
                 .ToSafeTask();
         }
 
@@ -132,7 +138,7 @@ namespace BotBits
 
             return this.Client.Multiplayer
                 .CreateJoinRoomAsync(roomId, roomPrefix + this.Version, true, null, null)
-                .Then(task => this.InitConnection(task.Result))
+                .Then(task => this.InitConnection(roomId, task.Result))
                 .ToSafeTask();
         }
 

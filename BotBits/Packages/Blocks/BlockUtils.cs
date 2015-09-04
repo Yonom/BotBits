@@ -7,9 +7,9 @@ using PlayerIOClient;
 
 namespace BotBits
 {
-    public static class BlockUtils
+    internal static class BlockUtils
     {
-        private const uint InitOffset = 26;
+        private const uint InitOffset = 34;
 
         internal static BlockDataWorld GetWorld(Message m, int width, int height, uint offset = InitOffset)
         {

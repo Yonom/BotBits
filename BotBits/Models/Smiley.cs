@@ -332,5 +332,14 @@ namespace BotBits
 
         [Pack("smileytourist")]
         Tourist = 113,
+
+        [Pack("smileygraduate")]
+        Graduate = 114,
+
+        [Pack("smileysombrero")]
+        Sombrero = 115,
+
+        [Pack("smileycat")]
+        Cat = 116,
     }
 }

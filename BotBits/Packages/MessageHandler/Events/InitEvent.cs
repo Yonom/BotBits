@@ -1,3 +1,4 @@
+using System;
 using PlayerIOClient;
 
 namespace BotBits.Events
@@ -19,8 +20,8 @@ namespace BotBits.Events
             this.Owner = message.GetString(0);
             this.WorldName = message.GetString(1);
             this.Plays = message.GetInt(2);
-            this.CurrentWoots = message.GetInt(3);
-            this.TotalWoots = message.GetInt(4);
+            this.Favorites = message.GetInt(3);
+            this.Likes = message.GetInt(4);
             this.EncryptedToken = message.GetString(5);
             // 6: UserId
             this.Smiley = (Smiley)message.GetInt(7);
@@ -31,18 +32,44 @@ namespace BotBits.Events
             this.Username = message.GetString(12);
             this.CanEdit = message.GetBoolean(13);
             this.IsOwner = message.GetBoolean(14);
-            this.RoomWidth = message.GetInt(15);
-            this.RoomHeight = message.GetInt(16);
-            this.TutorialRoom = message.GetBoolean(17);
-            this.GravityMultiplier = message.GetDouble(18);
-            this.BackgroundColor = message.GetUInt(19);
-            this.Visible = message.GetBoolean(20);
-            this.HideLobby = message.GetBoolean(21);
-            this.AllowSpectating = message.GetBoolean(22);
-            this.RoomDescription = message.GetString(23);
-            this.CurseLimit = message.GetInt(24);
-            this.ZombieLimit = message.GetInt(25);
+            this.Favorited = message.GetBoolean(15);
+            this.Liked = message.GetBoolean(16);
+            this.WorldWidth = message.GetInt(17);
+            this.WorldHeight = message.GetInt(18);
+            this.GravityMultiplier = message.GetDouble(19);
+            this.BackgroundColor = message.GetUInt(20);
+            this.Visible = message.GetBoolean(21);
+            this.HideLobby = message.GetBoolean(22);
+            this.AllowSpectating = message.GetBoolean(23);
+            this.RoomDescription = message.GetString(24);
+            this.CurseLimit = message.GetInt(25);
+            this.ZombieLimit = message.GetInt(26);
+            this.Campaign = message.GetBoolean(27);
+            this.CrewId = message.GetString(28);
+            this.CrewName = message.GetString(29);
+            this.CanChangeWorldOptions = message.GetBoolean(30);
+            this.WorldStatus = (WorldStatus)message.GetInt(31);
+            this.Badge = message.GetBadge(32);
+            this.CrewMember = message.GetBoolean(33);
         }
+
+        public bool CrewMember { get; set; }
+
+        public WorldStatus WorldStatus { get; set; }
+
+        public Badge Badge { get; set; }
+
+        public bool CanChangeWorldOptions { get; set; }
+
+        public string CrewName { get; set; }
+
+        public string CrewId { get; set; }
+
+        public bool Campaign { get; set; }
+
+        public bool Liked { get; set; }
+
+        public bool Favorited { get; set; }
 
         public int ZombieLimit { get; set; }
 
@@ -101,22 +128,16 @@ namespace BotBits.Events
         public bool IsOwner { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether this world is a tutorial world.
-        /// </summary>
-        /// <value><c>true</c> if this world is a tutorial world; otherwise, <c>false</c>.</value>
-        public bool TutorialRoom { get; set; }
-
-        /// <summary>
         ///     Gets or sets the width of the world.
         /// </summary>
         /// <value>The width of the room.</value>
-        public int RoomWidth { get; set; }
+        public int WorldWidth { get; set; }
 
         /// <summary>
         ///     Gets or sets the height of the world.
         /// </summary>
         /// <value>The height of the room.</value>
-        public int RoomHeight { get; set; }
+        public int WorldHeight { get; set; }
 
         /// <summary>
         ///     Gets or sets the spawn x coordinate.
@@ -140,7 +161,7 @@ namespace BotBits.Events
         ///     Gets or sets the current woots of the world.
         /// </summary>
         /// <value>The current woots.</value>
-        public int CurrentWoots { get; set; }
+        public int Favorites { get; set; }
 
         /// <summary>
         ///     Gets or sets the owner username of the world.
@@ -158,7 +179,7 @@ namespace BotBits.Events
         ///     Gets or sets the total woots of the world.
         /// </summary>
         /// <value>The total woots.</value>
-        public int TotalWoots { get; set; }
+        public int Likes { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the world.

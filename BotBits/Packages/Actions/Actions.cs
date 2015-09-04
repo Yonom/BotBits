@@ -1,13 +1,61 @@
 ﻿using System;
+using BotBits.Events;
 using BotBits.SendMessages;
 
 namespace BotBits
 {
-    public sealed class Actions : Package<Actions>
+    public sealed class Actions : EventListenerPackage<Actions>
     {
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        public bool Liked { get; private set; }
+        public bool Favorited { get; private set; }
+        public bool CompletedLevel { get; private set; }
+
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Actions()
         {
+        }
+
+        [EventListener]
+        private void OnInit(InitEvent e)
+        {
+            this.Liked = e.Liked;
+            this.Favorited = e.Favorited;
+        }
+
+        [EventListener]
+        private void OnLiked(LikedEvent e)
+        {
+            this.Liked = true;
+        }
+
+        [EventListener]
+        private void OnUnliked(UnlikedEvent e)
+        {
+            this.Liked = false;
+        }
+
+        [EventListener]
+        private void OnFavorited(FavoritedEvent e)
+        {
+            this.Favorited = true;
+        }
+
+        [EventListener]
+        private void OnUnfavorited(UnfavoritedEvent e)
+        {
+            this.Favorited = false;
+        }
+
+        [EventListener]
+        private void OnCompletedLevel(CompletedLevelEvent e)
+        {
+            this.CompletedLevel = true;
+        }
+
+        public void Access(string roomKey)
+        {
+            new AccessSendMessage(roomKey)
+                .SendIn(this.BotBits);
         }
 
         public void RequestServerTime()
@@ -30,19 +78,24 @@ namespace BotBits
 
         public void ChangeAura(Aura newAura)
         {
-            //if (this.HasSmiley(newSmiley)) // Server kicks people if they do not own a smiley
+            if (this.HasAura(newAura)) // Server kicks people if they do not own an aura
                 new AuraSendMessage(newAura)
                     .SendIn(this.BotBits);
         }
 
         private bool HasSmiley(Smiley smiley)
         {
-            return  ConnectionManager.Of(this.BotBits).ShopData.HasSmiley(smiley);
+            return ConnectionManager.Of(this.BotBits).PlayerData.HasSmiley(smiley);
+        }
+
+        private bool HasAura(Aura aura)
+        {
+            return ConnectionManager.Of(this.BotBits).PlayerData.HasAura(aura);
         }
 
         public void MoveToLocation(int x, int y)
         {
-            new MoveSendMessage(x, y, 0, 0, 0, 0, 0, 0, false)
+            new MoveSendMessage(x, y, 0, 0, 0, 0, 0, 0, false, false, 0)
                 .SendIn(this.BotBits);
         }
 
@@ -51,9 +104,10 @@ namespace BotBits
             double speedX, double speedY, 
             double modifierX, double modifierY,
             double horizontal, double vertical, 
-            bool spaceDown)
+            bool spaceDown, bool spaceJustDown,
+            int tickId)
         {
-            new MoveSendMessage(x, y, speedX, speedY, modifierX, modifierY, horizontal, vertical, spaceDown)
+            new MoveSendMessage(x, y, speedX, speedY, modifierX, modifierY, horizontal, vertical, spaceDown, spaceJustDown, tickId)
                 .SendIn(this.BotBits);
         }
 
@@ -157,9 +211,27 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void WootUp()
+        public void Like()
         {
-            new WootUpSendMessage()
+            new LikeSendMessage()
+                .SendIn(this.BotBits);
+        }
+
+        public void Unlike()
+        {
+            new UnlikeSendMessage()
+                .SendIn(this.BotBits);
+        }
+
+        public void Favorite()
+        {
+            new FavoriteSendMessage()
+                .SendIn(this.BotBits);
+        }
+
+        public void Unfavorite()
+        {
+            new UnfavoriteSendMessage()
                 .SendIn(this.BotBits);
         }
 

@@ -4,7 +4,7 @@ using System.Threading;
 namespace BotBits.Shop
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class)]
-    internal sealed class PackAttribute : Attribute
+    public sealed class PackAttribute : Attribute
     {
         private readonly string _package;
 
@@ -15,6 +15,7 @@ namespace BotBits.Shop
 
         public int BlocksPerPack { get; set; }
         public ForegroundType ForegroundType { get; set; }
+        public bool BuildersClubOnly { get; set; }
 
         public PackAttribute(string package)
         {

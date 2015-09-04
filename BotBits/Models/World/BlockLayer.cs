@@ -23,11 +23,11 @@ namespace BotBits
             set { this._blocks[x, y] = value; }
         }
 
-        public IEnumerator<WorldItem<T>> GetEnumerator()
+        public IEnumerator<LayerItem<T>> GetEnumerator()
         {
             for (int y = 0; y < this.Height; y++)
                 for (int x = 0; x < this.Width; x++)
-                    yield return new WorldItem<T>(
+                    yield return new LayerItem<T>(
                         new Point(x, y), this._blocks[x, y]);
         }
 

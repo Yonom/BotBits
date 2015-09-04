@@ -52,13 +52,12 @@ namespace BotBits
             get { return this._readOnlyBlocksWorld.Background; }
         }
 
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Blocks()
         {
             this.World = new BlockDataWorld(0, 0);
         }
-
-
+        
         public void Place(int x, int y, BackgroundBlock block)
         {
             new PlaceSendMessage(Layer.Background, x, y, (int)block.Id)
@@ -74,13 +73,13 @@ namespace BotBits
         [EventListener]
         private void OnInit(InitEvent e)
         {
-            this.World = BlockUtils.GetWorld(e.PlayerIOMessage, e.RoomWidth, e.RoomHeight);
+            this.World = BlockUtils.GetWorld(e.PlayerIOMessage, e.WorldWidth, e.WorldHeight);
         }
 
         [EventListener(EventPriority.Low)]
         private void OnInitLow(InitEvent e)
         {
-            new WorldResizeEvent(e.RoomWidth, e.RoomHeight)
+            new WorldResizeEvent(e.WorldWidth, e.WorldHeight)
                 .RaiseIn(this.BotBits);
         }
 

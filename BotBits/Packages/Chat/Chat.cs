@@ -26,20 +26,13 @@ namespace BotBits
             = new ConcurrentDictionary<string, ChatChannel>();
         private const int MaxMessageLength = 140;
         private readonly Timer _mySendTimer;
-        private Players _players;
         private bool _warning;
 
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Chat()
         {
             this._mySendTimer = new Timer(600); 
             this._mySendTimer.Elapsed += this.SendTimer_Elapsed;
-            this.InitializeFinish += Chat_InitializeFinish;
-        }
-
-        void Chat_InitializeFinish(object sender, EventArgs e)
-        {
-            this._players = Players.Of(this.BotBits);
         }
 
         void IDisposable.Dispose()
@@ -162,7 +155,7 @@ namespace BotBits
         [EventListener]
         private void OnChat(ChatEvent e)
         {
-            if (e.Player == this._players.OwnPlayer)
+            if (e.Player == Players.Of(this.BotBits).OwnPlayer)
             {
                 var channel = this.GetChatChannel("");
                 if (channel.LastSent == e.Text)

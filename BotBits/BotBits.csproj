@@ -31,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\BotBits.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -48,7 +49,20 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\PlayerData\PlayerAchivements.cs" />
+    <Compile Include="Helpers\PlayerData\PlayerData.cs" />
     <Compile Include="Helpers\VersionCache.cs" />
+    <Compile Include="Models\Badge.cs" />
+    <Compile Include="Models\CampaignDifficulty.cs" />
+    <Compile Include="Models\CampaignReward.cs" />
+    <Compile Include="Models\CampaignRewardType.cs" />
+    <Compile Include="Models\CampaignStatus.cs" />
+    <Compile Include="Models\PlayerPoint.cs" />
+    <Compile Include="Models\WorldStatus.cs" />
+    <Compile Include="Models\World\IWorldAreaEnumerable.cs" />
+    <Compile Include="Models\World\WorldAreaEnumerable.cs" />
+    <Compile Include="Models\World\WorldAreaEnumerableExtensions.cs" />
+    <Compile Include="Models\World\WorldItem.cs" />
     <Compile Include="Packages\Actions\Actions.cs" />
     <Compile Include="Packages\Actions\ActionsExtensions.cs" />
     <Compile Include="Packages\Blocks\BlockAreaEnumerable.cs" />
@@ -75,27 +89,51 @@
     <Compile Include="Internal\PlayerIOAsync.cs" />
     <Compile Include="Packages\ConnectionManager\LobbyItem.cs" />
     <Compile Include="Packages\ConnectionManager\LoginClient.cs" />
-    <Compile Include="Packages\ConnectionManager\Scheduler.cs" />
+    <Compile Include="Packages\Scheduler\Scheduler.cs" />
     <Compile Include="Internal\StringUtils.cs" />
     <Compile Include="Internal\TaskExtensions.cs" />
     <Compile Include="Internal\TaskHelper.cs" />
     <Compile Include="Packages\EventLoader\LoaderBase.cs" />
     <Compile Include="Packages\EventManager\GlobalPriority.cs" />
+    <Compile Include="Packages\MessageHandler\Events\AddedToCrewEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\AllowSpectatingEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\AllowToggleGodEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\AuraEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\BannedEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\CampaignRewardsEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\CompletedLevelEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\CrewAddRequestEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\CrewAddRequestFailedEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\EditRightsEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\EffectEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\EffectLimitsEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\FavoritedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\GiveMagicSmileyEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\HideLobbyEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\Info2Event.cs" />
+    <Compile Include="Packages\MessageHandler\Events\JoinCampaignEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\LikedEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\MagicEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\PurpleSwitchInitEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\PurpleSwitchUpdateEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\RoomDescriptionEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\TeamEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\TimeEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\UnfavoritedEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\UnknownMessageTypeException.cs" />
+    <Compile Include="Packages\MessageHandler\Events\UnlikedEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\WorldReleasedEvent.cs" />
+    <Compile Include="Packages\MessageHandler\MessageUtils.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\AddToCrewSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\AuraSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\EffectSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\FavoriteSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\LikeSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\PurpleSwitchSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\RejectAddToCrewSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\RequestAddToCrewSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetCurseLimitSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\SetStatusSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetZombieLimitSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TeamSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetAllowSpectatingSendMessage.cs" />
@@ -104,9 +142,11 @@
     <Compile Include="Packages\MessageSender\SendMessages\SetRoomVisibleSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TimedEffectSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TimeSendMessage.cs" />
-    <Compile Include="Packages\ConnectionManager\PlayerObject.cs" />
+    <Compile Include="Helpers\PlayerData\PlayerObject.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\UnfavoriteSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\UnlikeSendMessage.cs" />
     <Compile Include="Packages\Players\Events\PurpleSwitchEvent.cs" />
-    <Compile Include="Packages\ConnectionManager\ShopData.cs" />
+    <Compile Include="Helpers\PlayerData\ShopData.cs" />
     <Compile Include="Models\World\BlockData\BlockData.cs" />
     <Compile Include="Packages\Chat\ChatExtensions.cs" />
     <Compile Include="Packages\Chat\Events\PrivateMessageEvent.cs" />
@@ -118,7 +158,6 @@
     <Compile Include="Models\AccessRight.cs" />
     <Compile Include="Models\AutoText.cs" />
     <Compile Include="Models\World\Block\Background.cs" />
-    <Compile Include="Models\Id.cs" />
     <Compile Include="Packages\EventManager\EventHandleExtensions.cs" />
     <Compile Include="Models\World\Block\Foreground.cs" />
     <Compile Include="Models\Key.cs" />
@@ -143,7 +182,7 @@
     <Compile Include="Packages\MessageSender\SendMessages\TouchHologramSendMessage.cs" />
     <Compile Include="Packages\Players\Events\FlyEvent.cs" />
     <Compile Include="Packages\Players\PlayerExtensions.cs" />
-    <Compile Include="Services\BlockServices.cs" />
+    <Compile Include="Services\ItemServices.cs" />
     <Compile Include="Services\ExtensionServices.cs" />
     <Compile Include="Services\MessageServices.cs" />
     <Compile Include="Packages\EventManager\EventRaiseHandler.cs" />
@@ -163,14 +202,14 @@
     <Compile Include="Models\Point3D.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Models\Rectangle.cs" />
-    <Compile Include="Helpers\SchedulerHandle\ActionDispatcherSchedulerHandle.cs" />
-    <Compile Include="Helpers\SchedulerHandle\ISchedulerHandle.cs" />
-    <Compile Include="Helpers\SchedulerHandle\SynchronizationContextSchedulerHandle.cs" />
+    <Compile Include="Packages\Scheduler\SchedulerHandle\ActionDispatcherSchedulerHandle.cs" />
+    <Compile Include="Packages\Scheduler\SchedulerHandle\ISchedulerHandle.cs" />
+    <Compile Include="Packages\Scheduler\SchedulerHandle\SynchronizationContextSchedulerHandle.cs" />
     <Compile Include="Models\World\Block\BackgroundType.cs" />
     <Compile Include="Models\World\Block\Morph.cs" />
     <Compile Include="Models\World\DatabaseWorld.cs" />
     <Compile Include="Models\World\IWorld.cs" />
-    <Compile Include="Models\World\WorldItem.cs" />
+    <Compile Include="Models\World\LayerItem.cs" />
     <Compile Include="Models\World\WorldUtils.cs" />
     <Compile Include="Packages\Chat\Chat.cs" />
     <Compile Include="Packages\Players\Events\RespawnEvent.cs" />
@@ -225,7 +264,6 @@
     <Compile Include="Packages\MessageHandler\Events\TeleportEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\UpdateMetaEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\UpgradeEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\WootUpEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\WorldPortalPlaceEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\WriteEvent.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\AccessSendMessage.cs" />
@@ -257,7 +295,6 @@
     <Compile Include="Packages\MessageSender\SendMessages\TouchCakeSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TouchDiamondSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TouchUserSendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\WootUpSendMessage.cs" />
     <Compile Include="Packages\EventManager\Event.cs" />
     <Compile Include="Packages\EventManager\EventHandle.cs" />
     <Compile Include="Packages\EventManager\EventManager.cs" />

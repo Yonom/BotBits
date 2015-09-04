@@ -11,14 +11,14 @@ namespace BotBits
         private static readonly MethodInfo _bindMethod =
             typeof(EventLoader).GetMethod("Bind", BindingFlags.NonPublic | BindingFlags.Instance);
 
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public EventLoader()
         {
         }
 
         public override void Load(object obj)
         {
-            ConnectionManager.Of(this.BotBits).CurrentScheduler.InitScheduler(false);
+            Scheduler.Of(this.BotBits).InitScheduler(false);
             base.Load(obj);
         }
 

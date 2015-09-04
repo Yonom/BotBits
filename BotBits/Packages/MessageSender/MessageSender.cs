@@ -6,23 +6,20 @@ namespace BotBits
 {
     internal sealed class MessageSender : Package<MessageSender>, IDisposable
     {
-        private readonly SendTimer _myTimer;
+        private SendTimer _myTimer;
         private readonly ConcurrentDictionary<Type, IMessageQueue> _queues =
             new ConcurrentDictionary<Type, IMessageQueue>();
 
-        private ConnectionManager _connectionManager;
-
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public MessageSender()
         {
-            this._myTimer = new SendTimer();
-            this._myTimer.Elapsed += this.Send;
             this.InitializeFinish += this.MessageSender_InitializeFinish;
         }
 
-        private void MessageSender_InitializeFinish(object sender, EventArgs e)
+        void MessageSender_InitializeFinish(object sender, EventArgs e)
         {
-            this._connectionManager = ConnectionManager.Of(this.BotBits);
+            this._myTimer = new SendTimer();
+            this._myTimer.Elapsed += this.Send;
         }
 
         void IDisposable.Dispose()
@@ -32,12 +29,12 @@ namespace BotBits
 
         private void Send(int ticks)
         {
-            if (this._connectionManager == null) return;
-            if (this._connectionManager.Connection == null) return;
+            var con = ConnectionManager.Of(this.BotBits).Connection;
+            if (con == null) return;
 
             foreach (var e in this._queues.Values)
             {
-                e.SendTicks(ticks, this._connectionManager.Connection);
+                e.SendTicks(ticks, con);
             }
         }
 

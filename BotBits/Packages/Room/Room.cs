@@ -10,14 +10,14 @@ namespace BotBits
     {
         private readonly HashSet<Key> _enabledKeys = new HashSet<Key>();
         private AccessRight _accessRight;
+        private bool _canEdit;
         public string WorldName { get; private set; }
         public string Owner { get; private set; }
         public int Plays { get; private set; }
-        public int CurrentWoots { get; private set; }
-        public int TotalWoots { get; private set; }
+        public int Favorites { get; private set; }
+        public int Likes { get; private set; }
         public string Token { get; private set; }
         public double GravityMultiplier { get; private set; }
-        public bool TutorialRoom { get; private set; }
         public uint BackgroundColor { get; private set; }
         public bool Visible { get; private set; }
         public bool InitComplete { get; private set; }
@@ -27,6 +27,23 @@ namespace BotBits
         public string Description { get; private set; }
         public int CurseLimit { get; private set; }
         public int ZombieLimit { get; private set; }
+        public string CrewName { get; private set; }
+        public string CrewId { get; private set; }
+        public bool Campaign { get; private set; }
+        public WorldStatus WorldStatus { get; private set; }
+
+        public bool CanEdit
+        {
+            get { return this._canEdit; }
+            private set {             
+                if (this.CanEdit != value)
+                {
+                    this._canEdit = value;
+                    new EditRightChangedEvent(this._canEdit)
+                        .RaiseIn(this.BotBits);
+                }
+            } 
+        }
 
         public AccessRight AccessRight
         {
@@ -42,7 +59,7 @@ namespace BotBits
             }
         }
 
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Room()
         {
         }
@@ -53,15 +70,9 @@ namespace BotBits
             return this._enabledKeys.Contains(key);
         }
 
-        public void Access(string roomKey)
-        {
-            new AccessSendMessage(roomKey)
-                .SendIn(this.BotBits);
-        }
-
         public void SetEditKey(string newKey)
         {
-            if (this.AccessRight < AccessRight.Owner)
+            if (this.AccessRight < AccessRight.WorldOptions)
                 throw new InvalidOperationException("Only owners are allowed to change key.");
 
             new SetEditKeySendMessage(newKey)
@@ -70,7 +81,7 @@ namespace BotBits
 
         public void Clear()
         {
-            if (this.AccessRight < AccessRight.Owner)
+            if (this.AccessRight < AccessRight.WorldOptions)
                 throw new InvalidOperationException("Only owners are allowed to clear room.");
 
             new ClearSendMessage()
@@ -79,7 +90,7 @@ namespace BotBits
 
         public void Save()
         {
-            if (this.AccessRight < AccessRight.Owner)
+            if (this.AccessRight < AccessRight.WorldOptions)
                 throw new InvalidOperationException("Only owners are allowed to save.");
 
             new SaveSendMessage()
@@ -88,7 +99,7 @@ namespace BotBits
 
         public void SetName(string newName)
         {
-            if (this.AccessRight < AccessRight.Owner)
+            if (this.AccessRight < AccessRight.WorldOptions)
                 throw new InvalidOperationException("Only owners are allowed to change room name.");
 
             new RoomNameSendMessage(newName)
@@ -97,7 +108,7 @@ namespace BotBits
 
         public void SetRoomVisible(bool visible)
         {
-            if (this.AccessRight < AccessRight.Owner)
+            if (this.AccessRight < AccessRight.WorldOptions)
                 throw new InvalidOperationException("Only owners are allowed to change room visiblity.");
 
             new SetRoomVisibleSendMessage(visible)
@@ -106,7 +117,7 @@ namespace BotBits
 
         public void SetHideLobby(bool hidden)
         {
-            if (this.AccessRight < AccessRight.Owner)
+            if (this.AccessRight < AccessRight.WorldOptions)
                 throw new InvalidOperationException("Only owners are allowed to change room visibility.");
 
             new SetHideLobbySendMessage(hidden)
@@ -115,7 +126,7 @@ namespace BotBits
 
         public void SetAllowSpectating(bool allow)
         {
-            if (this.AccessRight < AccessRight.Owner)
+            if (this.AccessRight < AccessRight.WorldOptions)
                 throw new InvalidOperationException("Only owners are allowed to change spectator settings.");
 
             new SetAllowSpectatingSendMessage(allow)
@@ -124,7 +135,7 @@ namespace BotBits
 
         public void SetRoomDescription(string description)
         {
-            if (this.AccessRight < AccessRight.Owner)
+            if (this.AccessRight < AccessRight.WorldOptions)
                 throw new InvalidOperationException("Only owners are allowed to change room description.");
 
             new SetRoomDescriptionSendMessage(description)
@@ -133,7 +144,7 @@ namespace BotBits
 
         public void SetCurseLimit(int limit)
         {
-            if (this.AccessRight < AccessRight.Owner)
+            if (this.AccessRight < AccessRight.WorldOptions)
                 throw new InvalidOperationException("Only owners are allowed to change curse limit.");
 
             new SetCurseLimitSendMessage(limit)
@@ -142,10 +153,36 @@ namespace BotBits
 
         public void SetZombieLimit(int limit)
         {
-            if (this.AccessRight < AccessRight.Owner)
+            if (this.AccessRight < AccessRight.WorldOptions)
                 throw new InvalidOperationException("Only owners are allowed to change zombie limit.");
 
             new SetZombieLimitSendMessage(limit)
+                .SendIn(this.BotBits);
+        }
+
+        public void SetStatus(WorldStatus status)
+        {
+            if (this.AccessRight < AccessRight.WorldOptions)
+                throw new InvalidOperationException("Only owners are allowed to change world status."); // TODO update messages
+
+            new SetStatusSendMessage(status)
+                .SendIn(this.BotBits);
+        }
+
+        public void RequestAddToCrew(string crewId)
+        {
+            new RequestAddToCrewSendMessage(crewId)
+                .SendIn(this.BotBits);
+        }
+
+        public void AddToCrew()
+        {
+            new AddToCrewSendMessage()
+                .SendIn(this.BotBits);
+        }
+        public void RejectAddToCrew()
+        {
+            new RejectAddToCrewSendMessage()
                 .SendIn(this.BotBits);
         }
 
@@ -168,16 +205,23 @@ namespace BotBits
         }
 
         [EventListener]
+        private void OnReleased(WorldReleasedEvent e)
+        {
+            this.WorldStatus = WorldStatus.Released;
+            this.AccessRight = this.AccessRight == AccessRight.Owner ? AccessRight.Owner : AccessRight.None;
+        }
+
+        [EventListener]
         private void OnInit(InitEvent e)
         {
             this.Owner = e.Owner;
             this.WorldName = e.WorldName;
             this.Plays = e.Plays;
             this.Token = Utils.Rot13(e.EncryptedToken);
-            this.TutorialRoom = e.TutorialRoom;
+            this.Campaign = e.Campaign;
             this.GravityMultiplier = e.GravityMultiplier;
-            this.CurrentWoots = e.CurrentWoots;
-            this.TotalWoots = e.TotalWoots;
+            this.Favorites = e.Favorites;
+            this.Likes = e.Likes;
             this.BackgroundColor = e.BackgroundColor;
             this.Visible = e.Visible;
             this.HideLobby = e.HideLobby;
@@ -185,6 +229,10 @@ namespace BotBits
             this.Description = e.RoomDescription;
             this.ZombieLimit = e.ZombieLimit;
             this.CurseLimit = e.CurseLimit;
+            this.CrewId = e.CrewId;
+            this.CrewName = e.CrewId;
+            this.WorldStatus = e.WorldStatus;
+            this.CanEdit = e.CanEdit;
             this.InitComplete = true;
         }
 
@@ -195,25 +243,25 @@ namespace BotBits
             {
                 this.AccessRight = AccessRight.Owner;
             }
-            else if (e.CanEdit)
+            else if (e.CanChangeWorldOptions)
             {
-                this.AccessRight = AccessRight.Edit;
+                this.AccessRight = AccessRight.WorldOptions;
             }
 
-            new MetaChangedEvent(e.Owner, e.Plays, e.CurrentWoots, e.TotalWoots, e.WorldName)
+            new MetaChangedEvent(e.Owner, e.Plays, e.Favorites, e.Likes, e.WorldName)
                 .RaiseIn(this.BotBits);
         }
 
         [EventListener(EventPriority.Low)]
         private void OnAccess(AccessEvent e)
         {
-            this.AccessRight = AccessRight.Edit;
+            this.CanEdit = true;
         }
 
         [EventListener(EventPriority.Low)]
         private void OnLostAccess(LoseAccessEvent e)
         {
-            this.AccessRight = AccessRight.None;
+            this.CanEdit = false;
         }
 
         [EventListener(EventPriority.Low)]
@@ -233,10 +281,10 @@ namespace BotBits
             this.WorldName = e.WorldName;
             this.Plays = e.Plays;
             this.Owner = e.OwnerUsername;
-            this.CurrentWoots = e.CurrentWoots;
-            this.TotalWoots = e.TotalWoots;
+            this.Favorites = e.Favorites;
+            this.Likes = e.Likes;
 
-            new MetaChangedEvent(e.OwnerUsername, e.Plays, e.CurrentWoots, e.TotalWoots, e.WorldName)
+            new MetaChangedEvent(e.OwnerUsername, e.Plays, e.Favorites, e.Likes, e.WorldName)
                 .RaiseIn(this.BotBits);
         }
 
@@ -244,6 +292,13 @@ namespace BotBits
         private void OnBackgroundColor(BackgroundColorEvent e)
         {
             this.BackgroundColor = e.BackgroundColor;
+        }
+
+        [EventListener]
+        private void OnAddedToCrew(AddedToCrewEvent e)
+        {
+            this.CrewId = e.CrewId;
+            this.CrewName = e.CrewName;
         }
 
         [EventListener]

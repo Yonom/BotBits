@@ -1,3 +1,4 @@
+using System;
 using PlayerIOClient;
 
 namespace BotBits.Events
@@ -14,21 +15,30 @@ namespace BotBits.Events
             : base(client, message, create: true)
         {
             this.Username = message.GetString(1);
-            this.Smiley = (Smiley)message.GetInteger(2);
-            this.X = message.GetInteger(3);
-            this.Y = message.GetInteger(4);
-            this.God = message.GetBoolean(5);
-            this.Admin = message.GetBoolean(6);
-            this.HasChat = message.GetBoolean(7);
-            this.Coins = message.GetInteger(8);
-            this.BlueCoins = message.GetInteger(9);
-            this.Friend = message.GetBoolean(10);
-            this.ClubMember = message.GetBoolean(11);
-            this.Mod = message.GetBoolean(12);
-            this.Team = (Team)message.GetInt(13);
-            this.Aura = (Aura)message.GetInt(14);
-            this.ChatColor = message.GetUInt(15);
+            this.ConnectUserId = message.GetString(2);
+            this.Smiley = (Smiley)message.GetInteger(3);
+            this.X = message.GetInteger(4);
+            this.Y = message.GetInteger(5);
+            this.God = message.GetBoolean(6);
+            this.Admin = message.GetBoolean(7);
+            this.HasChat = message.GetBoolean(8);
+            this.Coins = message.GetInteger(9);
+            this.BlueCoins = message.GetInteger(10);
+            this.Friend = message.GetBoolean(11);
+            this.ClubMember = message.GetBoolean(12);
+            this.Mod = message.GetBoolean(13);
+            this.Team = (Team)message.GetInt(14);
+            this.Aura = (Aura)message.GetInt(15);
+            this.ChatColor = message.GetUInt(16);
+            this.Badge = message.GetBadge(17);
+            this.CrewMember = message.GetBoolean(18);
         }
+
+        public bool CrewMember { get; set; }
+
+        public Badge Badge { get; set; }
+
+        public string ConnectUserId { get; set; }
 
         /// <summary>
         /// Gets or sets the aura.

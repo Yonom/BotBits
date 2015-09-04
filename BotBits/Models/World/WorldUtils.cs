@@ -95,7 +95,7 @@ namespace BotBits
 
         public static ForegroundType GetForegroundType(Foreground.Id id)
         {
-            var package = BlockServices.GetPackageInternal((int)id);
+            var package = ItemServices.GetPackageInternal((int)id);
             return package != null ? package.ForegroundType : ForegroundType.Normal;
         }
 
@@ -190,7 +190,7 @@ namespace BotBits
             if (id == Foreground.Special.FullyBlack)
                 return true;
 
-            var block = BlockServices.GetGroup((int)id);
+            var block = ItemServices.GetGroup((int)id);
             return block == typeof(Foreground.Basic) ||
                    block == typeof(Foreground.Beta) ||
                    block == typeof(Foreground.Brick);

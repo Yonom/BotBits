@@ -1,24 +1,40 @@
 ﻿namespace BotBits
 {
-    public struct WorldItem<T> where T : struct
+    public struct WorldItem<TForeground, TBackground>        
+        where TForeground : struct
+        where TBackground : struct
     {
-        private readonly Point _location;
-        private readonly T _data;
+        private readonly World<TForeground, TBackground> _world;
+        private readonly int _x;
+        private readonly int _y;
 
-        public Point Location
+        public int X
         {
-            get { return this._location; }
+            get { return this._x; }
         }
 
-        public T Data
+        public int Y
         {
-            get { return this._data; }
+            get { return this._y; }
         }
 
-        public WorldItem(Point location, T data)
+        public TForeground Foreground
         {
-            this._location = location;
-            this._data = data;
+            get { return this._world.Foreground[this._x, this._y]; }
+            set { this._world.Foreground[this._x, this._y] = value; }
+        }
+
+        public TBackground Background
+        {
+            get { return this._world.Background[this._x, this._y]; }
+            set { this._world.Background[this._x, this._y] = value; }
+        } 
+
+        public WorldItem(World<TForeground, TBackground> world, int x, int y)
+        {
+            this._world = world;
+            this._x = x;
+            this._y = y;
         }
     }
 }

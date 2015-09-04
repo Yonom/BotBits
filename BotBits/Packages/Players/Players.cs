@@ -46,7 +46,7 @@ namespace BotBits
             }
         }
 
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(botBits) method instead.", true)]
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Players()
         {
         }
@@ -86,6 +86,12 @@ namespace BotBits
 
         public bool TryGetPlayer(int userId, out Player player)
         {
+            if (userId == Player.Nobody.UserId)
+            {
+                player = Player.Nobody;
+                return true;
+            }
+
             lock (this._players)
                 return this._players.TryGetValue(userId, out player);
         }
@@ -107,11 +113,14 @@ namespace BotBits
             this.OwnPlayer = e.Player;
             this.OwnPlayer.Connected = true;
             this.OwnPlayer.Username = e.Username;
+            this.OwnPlayer.ConnectUserId = ConnectionManager.Of(this.BotBits).ConnectUserId;
             this.OwnPlayer.Smiley = e.Smiley;
             this.OwnPlayer.Aura = e.Aura;
+            this.OwnPlayer.Badge = e.Badge;
             this.OwnPlayer.ChatColor = e.ChatColor;
             this.OwnPlayer.X = e.SpawnX;
             this.OwnPlayer.Y = e.SpawnY;
+            this.OwnPlayer.CrewMember = e.CrewMember;
         }
 
         [EventListener]
@@ -120,8 +129,10 @@ namespace BotBits
             Player p = e.Player;
             p.Connected = true;
             p.Username = e.Username;
+            p.ConnectUserId = e.ConnectUserId;
             p.Smiley = e.Smiley;
             p.Aura = e.Aura;
+            p.Badge = e.Badge;
             p.HasChat = e.HasChat;
             p.GodMode = e.God;
             p.AdminMode = e.Admin;
@@ -134,6 +145,7 @@ namespace BotBits
             p.ClubMember = e.ClubMember;
             p.ChatColor = e.ChatColor;
             p.Team = e.Team;
+            p.CrewMember = e.CrewMember;
         }
 
         [EventListener]
@@ -185,6 +197,7 @@ namespace BotBits
             p.Y = e.Y;
             p.Dead = false;
             p.SpaceDown = e.SpaceDown;
+            p.SpaceJustDown = e.SpaceJustDown;
         }
 
         [EventListener(EventPriority.Low)]
@@ -264,17 +277,25 @@ namespace BotBits
         }
 
         [EventListener]
-        private void OnWootUp(WootUpEvent e)
-        {
-            Player p = e.Player;
-            p.HasWooted = true;
-        }
-
-        [EventListener]
         private void OnKill(KillEvent e)
         {
             Player p = e.Player;
             p.Dead = true;
+        }
+
+        [EventListener]
+        private void OnAllowToggleGod(AllowToggleGodEvent e)
+        {
+            Player p = e.Player;
+            p.HasGodRights = e.AllowToggle;
+            p.GodMode &= e.AllowToggle; // TODO Ugh...
+        }
+
+        [EventListener]
+        private void OnEditRights(EditRightsEvent e)
+        {
+            Player p = e.Player;
+            p.HasEditRights = e.AllowEdit;
         }
 
         [EventListener]
@@ -319,11 +340,9 @@ namespace BotBits
         {
             foreach (var tele in e.Coordinates)
             {
-                Player p = tele.Key;
-                Point location = tele.Value;
-
-                p.X = location.X;
-                p.Y = location.Y;
+                Player p = tele.Player;
+                p.X = tele.X;
+                p.Y = tele.Y;
                 p.Dead = false;
 
                 if (e.ResetCoins)
@@ -332,7 +351,7 @@ namespace BotBits
                     p.BlueCoins = default(int);
                 }
 
-                new RespawnEvent(p, location.X, location.Y, e.ResetCoins)
+                new RespawnEvent(p, tele.X, tele.Y, e.ResetCoins)
                     .RaiseIn(this.BotBits);
             }
         }

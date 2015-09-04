@@ -102,12 +102,9 @@ namespace BotBits
 
         public static class BuildersClub
         {
-            [Pack("bc")]
+            [Pack("-", BuildersClubOnly = true)]
             public const Id
-                Door = (Id)200;
-
-            [Pack("bc")]
-            public const Id
+                Door = (Id)200,
                 Gate = (Id)201;
         }
 
@@ -1034,5 +1031,15 @@ namespace BotBits
                 PalmTree = (Id)445;
         }
 
+        public static class Environment
+        {
+            [Pack("brickenvironment")]
+            public const Id
+                Tree = (Id)1030,
+                Grass = (Id)1031,
+                Bamboo = (Id)1032,
+                Rock = (Id)1033,
+                Lava = (Id)1034;
+        }
     }
 }

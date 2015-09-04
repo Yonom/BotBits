@@ -7,13 +7,15 @@ namespace BotBits
 {
     public class ConnectionArgs
     {
-        public ShopData ShopData { get; set; }
-        public PlayerObject PlayerObject { get; set; }
+        public PlayerData PlayerData { get; private set; }
+        public string ConnectUserId { get; private set; }
+        public string RoomId { get; private set; }
 
-        public ConnectionArgs(ShopData shopData, PlayerObject playerObject)
+        public ConnectionArgs(string connectUserId, string roomId, PlayerData playerData)
         {
-            this.ShopData = shopData;
-            this.PlayerObject = playerObject;
+            this.ConnectUserId = connectUserId;
+            this.RoomId = roomId;
+            this.PlayerData = playerData;
         }
 
         public ConnectionArgs()

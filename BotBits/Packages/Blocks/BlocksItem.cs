@@ -29,9 +29,9 @@ namespace BotBits
         public BlockData<BackgroundBlock> Background
         {
             get { return _blocks.Background[this._x, this._y]; }
-        } 
+        }
 
-        internal BlocksItem(Blocks blocks, int x, int y)
+        public BlocksItem(Blocks blocks, int x, int y)
         {
             this._blocks = blocks;
             this._x = x;

@@ -11,9 +11,9 @@
         None = 0,
 
         /// <summary>
-        ///     Represents the state where the bot has edit rights in the world.
+        ///     Represents the state where the bot can change world options.
         /// </summary>
-        Edit = 1,
+        WorldOptions = 1,
 
         /// <summary>
         ///     Represents the state where bot has command access and edit rights in the world.
