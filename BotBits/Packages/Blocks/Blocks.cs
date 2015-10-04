@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BotBits.Events;
 using BotBits.SendMessages;
 
@@ -214,5 +215,75 @@ namespace BotBits
 
         Blocks IBlockAreaEnumerable.Blocks { get { return this; } }
         public Rectangle Area { get { return new Rectangle(0, 0, this.Width, this.Height); } }
+
+        public IWorld GetWorld()
+        {
+            return new ProxyWorld(this);
+        }
+
+        private class ProxyWorld : IWorld
+        {
+            private readonly Blocks _innerWorld;
+
+            public ProxyWorld(Blocks innerWorld)
+            {
+                this._innerWorld = innerWorld;
+            }
+
+            public int Width { get { return this._innerWorld.Width; } }
+            public int Height { get { return this._innerWorld.Height; } }
+
+            public IBlockLayer<ForegroundBlock> Foreground
+            {
+                get { return new ProxyLayer<ForegroundBlock>(this._innerWorld.Foreground); }
+            }
+
+            public IBlockLayer<BackgroundBlock> Background
+            {
+                get { return new ProxyLayer<BackgroundBlock>(this._innerWorld.Background); }
+            }
+        }
+
+        private class ProxyLayer<T> : IBlockLayer<T> where T : struct
+        {
+            private readonly IBlockLayer<BlockData<T>> _innerLayer;
+
+            public ProxyLayer(IBlockLayer<BlockData<T>> innerLayer)
+            {
+                this._innerLayer = innerLayer;
+            }
+
+            public T this[Point p]
+            {
+                get { return this._innerLayer[p].Block; }
+            }
+
+            public T this[int x, int y]
+            {
+                get { return this._innerLayer[x, y].Block; }
+            }
+
+            public int Height
+            {
+                get { return this._innerLayer.Height; }
+            }
+
+            public int Width
+            {
+                get { return this._innerLayer.Width; }
+            }
+
+            public IEnumerator<LayerItem<T>> GetEnumerator()
+            {
+                return this._innerLayer
+                    .Select(item => new LayerItem<T>(item.Location, item.Data.Block))
+                    .GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return this.GetEnumerator();
+            }
+        }
     }
 }

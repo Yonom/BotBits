@@ -138,11 +138,9 @@ namespace BotBits
                 {
                     var background = (Background.Id)type;
                     var block = new BackgroundBlock(background);
-                    for (var b = 0; b < xs.Length; b += 2)
+                    foreach (var loc in points)
                     {
-                        var nx = (xs[b] << 8) + xs[b + 1];
-                        var ny = (ys[b] << 8) + ys[b + 1];
-                        this.Background[nx, ny] = block;
+                        this.Background[loc.X, loc.Y] = block;
                     }
                 }
             }

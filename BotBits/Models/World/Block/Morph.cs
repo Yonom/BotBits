@@ -26,6 +26,15 @@ namespace BotBits
                 Down = (Id)3;
         }
 
+        public static class HalfBlock
+        {
+            public const Id
+                Left = (Id)0,
+                Down = (Id)1,
+                Right = (Id)2,
+                Up = (Id)3;
+        }
+
         public static class Spike
         {
             public const Id
@@ -152,6 +161,60 @@ namespace BotBits
                 Cyan = (Id)BotBits.Team.Cyan,
                 Magenta = (Id)BotBits.Team.Magenta,
                 Yellow = (Id)BotBits.Team.Yellow;
+        }
+
+        public static class LightBulb
+        {
+            public const Id
+                StandingOff = (Id)0,
+                HangingOn = (Id)1,
+                HangingOff = (Id)2,
+                SandingOn = (Id)3;
+        }
+
+        public static class Pipe
+        {
+            public const Id
+                TopLeft = 0,
+                BottomLeft = (Id) 1,
+                BottomRight = (Id) 2,
+                TopRight = (Id) 3;
+        }
+
+        public static class Painting
+        {
+            public const Id
+                Cabin = 0,
+                River = (Id)1,
+                Mountain = (Id)2,
+                Sunset = (Id)3;
+        }
+
+        public static class Vase
+        {
+            public const Id
+                Blue = 0,
+                Yellow = (Id)1,
+                Orange = (Id)2,
+                Red = (Id)3;
+        }
+
+        public static class Television
+        {
+            public const Id
+                Yellow = 0,
+                Black = (Id)1,
+                Gray = (Id)2,
+                Blue = (Id)3;
+        }
+
+        public static class Window
+        {
+            public const Id
+                Yellow = 0,
+                Gray = (Id)1,
+                Blue = (Id)2,
+                Orange = (Id)3;
         }
 
         public static BotBits.Team ToTeam(this Id morph)

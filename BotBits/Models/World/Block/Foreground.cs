@@ -953,5 +953,28 @@ namespace BotBits
                 Rock = (Id) 1033,
                 Lava = (Id) 1034;
         }
+
+        public static class Domestic
+        {
+            [Pack("brickdomestic")] public const Id
+                Tile = (Id) 1035,
+                Wood = (Id) 1036,
+                CarpetRed = (Id) 1037,
+                CarpetBlue = (Id) 1038,
+                CarpetGreen = (Id) 1039,
+                WoodenPanel = (Id) 1040,
+                Lamp = (Id) 446;
+
+            [Pack("brickdomestic", ForegroundType = ForegroundType.Morphable)] public const Id
+                BeigeHalfBlock = (Id)1041,
+                WoodHalfBlock = (Id)1042,
+                WhiteHalfBlock = (Id)1043,
+                LightBulb = (Id)447,
+                Pipe = (Id)448,
+                Painting = (Id)449,
+                Vase = (Id)450,
+                Television = (Id)451,
+                Window = (Id)452;
+        }
     }
 }

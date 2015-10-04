@@ -5,6 +5,11 @@ using System.Text;
 
 namespace BotBits
 {
+    public interface IWorld : IWorld<ForegroundBlock, BackgroundBlock>
+    {
+        
+    }
+
     public interface IWorld<TForeground, TBackground> where TForeground : struct where TBackground : struct
     {
         int Width { get; }

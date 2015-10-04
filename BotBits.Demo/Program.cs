@@ -8,6 +8,7 @@ namespace BotBits.Demo
     internal class Program
     {
         private static BotBitsClient bot = new BotBitsClient();
+        private static BotBitsClient bot2 = new BotBitsClient();
 
         private static void Main()
         {
@@ -18,10 +19,9 @@ namespace BotBits.Demo
             ConnectionManager
                 .Of(bot)
                 .GuestLogin()
-                .CreateJoinRoom("BWAMCqXHiVa0I");
-         
+                .CreateJoinRoom("PW01");
 
-             Thread.Sleep(Timeout.Infinite);
+            Thread.Sleep(Timeout.Infinite);
         }
     }
 }

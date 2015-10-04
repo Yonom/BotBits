@@ -33,7 +33,7 @@ namespace BotBits
             return world;
         }
 
-        public static void UploadWorld(this IBlockAreaEnumerable blockArea, World world)
+        public static void UploadWorld(this IBlockAreaEnumerable blockArea, IWorld world)
         {
             var area = blockArea.Area;
             if (world.Width > area.Width || world.Height > area.Height)

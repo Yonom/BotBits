@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace BotBits
 {
-    public class World : World<ForegroundBlock, BackgroundBlock>
+    public class World : World<ForegroundBlock, BackgroundBlock>, IWorld
     {
         public World(int width, int height) 
             : base(width, height)

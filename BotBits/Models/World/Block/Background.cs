@@ -359,5 +359,16 @@ namespace BotBits
                 Rock = (Id) 681,
                 Lava = (Id) 682;
         }
+
+        public static class Domestic
+        {
+            [Pack("brickdomestic")]
+            public const Id
+                Yellow = (Id)683,
+                Brown = (Id)684,
+                Red = (Id)685,
+                Blue = (Id)686,
+                Greeb = (Id)687;
+        }
     }
 }
