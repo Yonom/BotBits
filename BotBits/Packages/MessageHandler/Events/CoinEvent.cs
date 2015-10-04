@@ -15,7 +15,13 @@ namespace BotBits.Events
         {
             this.GoldCoins = message.GetInteger(1);
             this.BlueCoins = message.GetInteger(2);
+            this.X = message.GetInteger(3);
+            this.Y = message.GetInteger(4);
         }
+
+        public int Y { get; set; }
+
+        public int X { get; set; }
 
         /// <summary>
         ///     Gets or sets the coins of the player.

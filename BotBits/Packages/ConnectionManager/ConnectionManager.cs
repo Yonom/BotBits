@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
 using BotBits.Events;
-using BotBits.SendMessages;
 using PlayerIOClient;
 
 namespace BotBits

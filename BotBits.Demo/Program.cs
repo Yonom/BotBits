@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using System.Threading;
 using BotBits.Events;
-using BotBits.SendMessages;
+using PlayerIOClient;
 
 namespace BotBits.Demo
 {
@@ -20,9 +18,10 @@ namespace BotBits.Demo
             ConnectionManager
                 .Of(bot)
                 .GuestLogin()
-                .CreateJoinRoom("PW01");
+                .CreateJoinRoom("BWAMCqXHiVa0I");
+         
 
-            Thread.Sleep(Timeout.Infinite);
+             Thread.Sleep(Timeout.Infinite);
         }
     }
 }

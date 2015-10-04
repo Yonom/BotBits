@@ -27,6 +27,11 @@ namespace BotBits
             get { return this._blockLayer[x, y]; }
         }
 
+        public T this[Point p]
+        {
+            get { return this._blockLayer[p.X, p.Y]; }
+        }
+
         public IEnumerator<LayerItem<T>> GetEnumerator()
         {
             return this._blockLayer.GetEnumerator();

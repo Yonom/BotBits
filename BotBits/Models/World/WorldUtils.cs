@@ -54,7 +54,7 @@ namespace BotBits
                     return new ForegroundBlock(foreground,
                         obj.GetUInt("id", 0),
                         obj.GetUInt("target", 0),
-                        (Morph.Id)obj.GetUInt("rotation", 0));
+                        (Morph.Id) obj.GetUInt("rotation", 0));
 
                 case ForegroundType.WorldPortal:
                     return new ForegroundBlock(foreground,
@@ -74,28 +74,9 @@ namespace BotBits
             }
         }
 
-        public static void DrawBorder<TForeground, TBackground>
-            (World<TForeground, TBackground> world, TForeground borderBlock)
-            where TForeground : struct
-            where TBackground : struct
-        {
-            int maxX = world.Width - 1;
-            int maxY = world.Height - 1;
-            for (int y = 0; y <= maxY; y++)
-            {
-                world.Foreground[0, y] = borderBlock;
-                world.Foreground[maxX, y] = borderBlock;
-            }
-            for (int x = 0; x <= maxX; x++)
-            {
-                world.Foreground[x, 0] = borderBlock;
-                world.Foreground[x, maxY] = borderBlock;
-            }
-        }
-
         public static ForegroundType GetForegroundType(Foreground.Id id)
         {
-            var package = ItemServices.GetPackageInternal((int)id);
+            var package = ItemServices.GetPackageInternal((int) id);
             return package != null ? package.ForegroundType : ForegroundType.Normal;
         }
 
@@ -129,9 +110,28 @@ namespace BotBits
             }
         }
 
-        public static int PosToBlock(int pos)
+        public static void DrawBorder<TForeground, TBackground>
+            (World<TForeground, TBackground> world, TForeground borderBlock)
+            where TForeground : struct
+            where TBackground : struct
         {
-            return pos + 8 >> 4;
+            int maxX = world.Width - 1;
+            int maxY = world.Height - 1;
+            for (int y = 0; y <= maxY; y++)
+            {
+                world.Foreground[0, y] = borderBlock;
+                world.Foreground[maxX, y] = borderBlock;
+            }
+            for (int x = 0; x <= maxX; x++)
+            {
+                world.Foreground[x, 0] = borderBlock;
+                world.Foreground[x, maxY] = borderBlock;
+            }
+        }
+
+        public static int PosToBlock(double pos)
+        {
+            return (int) pos + 8 >> 4;
         }
 
         public static bool IsAlreadyPlaced(PlaceSendMessage sent, Blocks world)
@@ -140,28 +140,43 @@ namespace BotBits
             {
                 case Layer.Foreground:
                     var fg = world.Foreground[sent.X, sent.Y];
-                    return sent.Id == (int)fg.Block.Id &&
+                    return sent.Id == (int) fg.Block.Id &&
                            sent.Args.SequenceEqual(fg.Block.GetArgs());
                 case Layer.Background:
                     var bg = world.Background[sent.X, sent.Y];
-                    return sent.Id == (int)bg.Block.Id;
+                    return sent.Id == (int) bg.Block.Id;
                 default:
                     throw new NotSupportedException("Unknown layer.");
             }
         }
 
-        public static bool AreSame(PlaceSendMessage sent, ForegroundPlaceEvent received)
+        internal static bool AreSame<T, TBlock>(PlaceSendMessage sent, T received)
+            where T : PlaceEvent<T, TBlock>
+            where TBlock : struct
         {
-            return sent.Id == (int)received.New.Block.Id &&
+            var bg = received as BackgroundPlaceEvent;
+            if (bg != null)
+                return AreSame(sent, bg);
+            var fg = received as ForegroundPlaceEvent;
+            if (fg != null)
+                return AreSame(sent, fg);
+
+            throw new NotSupportedException("Unknown PlaceEvent.");
+        }
+
+
+        internal static bool AreSame(PlaceSendMessage sent, ForegroundPlaceEvent received)
+        {
+            return sent.Id == (int) received.New.Block.Id &&
                    sent.Args.SequenceEqual(received.New.Block.GetArgs());
         }
 
-        public static bool AreSame(PlaceSendMessage sent, BackgroundPlaceEvent received)
+        internal static bool AreSame(PlaceSendMessage sent, BackgroundPlaceEvent received)
         {
-            return sent.Id == (int)received.New.Block.Id;
+            return sent.Id == (int) received.New.Block.Id;
         }
 
-        public static bool AreSame(PlaceSendMessage b1, PlaceSendMessage b2)
+        internal static bool AreSame(PlaceSendMessage b1, PlaceSendMessage b2)
         {
             return b1.Id == b2.Id && b1.Args.SequenceEqual(b2.Args);
         }
@@ -179,7 +194,7 @@ namespace BotBits
                 if (p.Layer == Layer.Background)
                     return false;
 
-                return IsBorderPlaceable((Foreground.Id)p.Id);
+                return IsBorderPlaceable((Foreground.Id) p.Id);
             }
 
             return true;
@@ -190,10 +205,32 @@ namespace BotBits
             if (id == Foreground.Special.FullyBlack)
                 return true;
 
-            var block = ItemServices.GetGroup((int)id);
-            return block == typeof(Foreground.Basic) ||
-                   block == typeof(Foreground.Beta) ||
-                   block == typeof(Foreground.Brick);
+            var block = ItemServices.GetGroup((int) id);
+            return block == typeof (Foreground.Basic) ||
+                   block == typeof (Foreground.Beta) ||
+                   block == typeof (Foreground.Brick);
+        }
+
+        internal static IEnumerable<Point> GetPos(byte[] byteArrayX, byte[] byteArrayY)
+        {
+            for (int i = 0; i <= byteArrayX.Length - 1; i += 2)
+            {
+                int x = byteArrayX[i]*256 + byteArrayX[i + 1];
+                int y = byteArrayY[i]*256 + byteArrayY[i + 1];
+
+                yield return new Point(x, y);
+            }
+        }
+
+        internal static IEnumerable<Point> GetShortPos(byte[] byteArrayX, byte[] byteArrayY)
+        {
+            for (int i = 0; i <= byteArrayX.Length - 1; i++)
+            {
+                int x = byteArrayX[i];
+                int y = byteArrayY[i];
+
+                yield return new Point(x, y);
+            }
         }
     }
 }

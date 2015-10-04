@@ -77,14 +77,6 @@ namespace BotBits
         public bool ModMode { get; internal set; }
 
         /// <summary>
-        ///     Gets a value indicating whether this player is dead.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this player is dead; otherwise, <c>false</c>.
-        /// </value>
-        public bool Dead { get; internal set; }
-
-        /// <summary>
         ///     Gets a value indicating whether this player is the bot user's friend.
         /// </summary>
         /// <value>
@@ -170,7 +162,7 @@ namespace BotBits
         /// <value>
         ///     The x-coordinate of the player's current position.
         /// </value>
-        public int X { get; internal set; }
+        public double X { get; internal set; }
 
         /// <summary>
         ///     Gets the y-coordinate of the player's current position.
@@ -178,7 +170,7 @@ namespace BotBits
         /// <value>
         ///     The y-coordinate of the player's current position.
         /// </value>
-        public int Y { get; internal set; }
+        public double Y { get; internal set; }
 
         /// <summary>
         ///     Gets the player's horizontal speed.
@@ -357,6 +349,10 @@ namespace BotBits
         public bool HasGodRights { get; internal set; }
 
         public bool HasEditRights { get; internal set; }
+
+        public int Deaths { get; internal set; }
+
+        public bool Muted { get; set; }
 
         public bool CanToggleGod
         {

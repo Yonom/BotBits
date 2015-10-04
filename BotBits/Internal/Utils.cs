@@ -18,11 +18,6 @@ namespace BotBits
             return assembly.GetTypes().Where(type => type.GetCustomAttributes(t, true).Length > 0);
         }
 
-        public static Point3D GetPoint3D(this PlaceSendMessage placeSendMessage)
-        {
-            return new Point3D(placeSendMessage.Layer, placeSendMessage.X, placeSendMessage.Y);
-        }
-
         public static bool IsEvent(Type givenType)
         {
             try
@@ -35,40 +30,6 @@ namespace BotBits
             {
                 return false;
             }
-        }
-
-        public static string Rot13(string input)
-        {
-            char[] array = input.ToCharArray();
-            for (int i = 0; i < array.Length; i++)
-            {
-                var number = (int)array[i];
-
-                if (number >= 'a' && number <= 'z')
-                {
-                    if (number > 'm')
-                    {
-                        number -= 13;
-                    }
-                    else
-                    {
-                        number += 13;
-                    }
-                }
-                else if (number >= 'A' && number <= 'Z')
-                {
-                    if (number > 'M')
-                    {
-                        number -= 13;
-                    }
-                    else
-                    {
-                        number += 13;
-                    }
-                }
-                array[i] = (char)number;
-            }
-            return new string(array);
         }
     }
 }

@@ -2,18 +2,22 @@
 {
     public sealed class RespawnEvent : Event<RespawnEvent>
     {
-        internal RespawnEvent(Player player, int x, int y, bool resetCoins)
+        internal RespawnEvent(Player player, double x, double y, int deaths, bool resetCoins, bool causedByDeath)
         {
             this.Player = player;
             this.X = x;
             this.Y = y;
+            this.Deaths = deaths;
             this.ResetCoins = resetCoins;
+            this.CausedByDeath = causedByDeath;
         }
 
         public Player Player { get; private set; }
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        public double X { get; private set; }
+        public double Y { get; private set; }
+        public int Deaths { get; set; }
         public bool ResetCoins { get; private set; }
+        public bool CausedByDeath { get; set; }
 
         /// <summary>
         ///     Gets the block x.

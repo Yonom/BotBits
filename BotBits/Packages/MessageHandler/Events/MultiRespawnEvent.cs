@@ -17,19 +17,20 @@ namespace BotBits.Events
         internal MultiRespawnEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Coordinates = new List<PlayerPoint>();
+            this.Data = new List<RespawnData>();
 
             this.ResetCoins = message.GetBoolean(0);
 
-            for (uint i = 1; i <= message.Count - 1u; i += 3)
+            for (uint i = 1; i <= message.Count - 1u; i += 4)
             {
                 var userId = message.GetInteger(i);
                 if (!Players.Of(client).Contains(userId)) continue;
                 var player = Players.Of(client)[userId];
                 var x = message.GetInteger(i + 1u);
                 var y =  message.GetInteger(i + 2u);
+                var deaths = message.GetInteger(i + 3u);
 
-                this.Coordinates.Add(new PlayerPoint(player, x, y));
+                this.Data.Add(new RespawnData(player, x, y, deaths));
             }
         }
 
@@ -37,7 +38,7 @@ namespace BotBits.Events
         ///     Gets or sets the coordinates.
         /// </summary>
         /// <value>The coordinates.</value>
-        public List<PlayerPoint> Coordinates { get; set; }
+        public List<RespawnData> Data { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether the coins need to be reset.

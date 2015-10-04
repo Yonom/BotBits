@@ -217,7 +217,7 @@ namespace BotBits
             this.Owner = e.Owner;
             this.WorldName = e.WorldName;
             this.Plays = e.Plays;
-            this.Token = Utils.Rot13(e.EncryptedToken);
+            this.Token = StringUtils.Rot13(e.EncryptedToken);
             this.Campaign = e.Campaign;
             this.GravityMultiplier = e.GravityMultiplier;
             this.Favorites = e.Favorites;
@@ -265,14 +265,9 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.Low)]
-        private void OnCrown(CrownEvent e)
+        private void OnJoinComplete(JoinCompleteEvent e)
         {
-            if (!this.JoinComplete)
-            {
-                this.JoinComplete = true;
-                new JoinCompleteEvent()
-                    .RaiseIn(this.BotBits);
-            }
+            this.JoinComplete = true;
         }
 
         [EventListener(EventPriority.Low)]

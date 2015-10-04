@@ -98,7 +98,7 @@ namespace BotBits
                 {
                     testB.OverwrittenSends--;
                 }
-                else if (AreSame<T, TBlock>(testB.Message, e))
+                else if (WorldUtils.AreSame<T, TBlock>(testB.Message, e))
                 {
                     // Reset the timeout
                     this._timeoutResetEvent.Set();
@@ -186,7 +186,7 @@ namespace BotBits
             var isAdministrator = playerData.PlayerObject.IsAdministrator;
 
             if (!WorldUtils.IsPlaceable(b, blocks, !isAdministrator)) return false;
-            if (!playerData.HasBlock(b.Id, 0)) return false;  
+            if (!playerData.HasBlock(b.Id, 0)) return false;
 
             CheckHandle handle;
             return !(this._sentLocations.TryGetValue(p, out handle)
@@ -194,20 +194,6 @@ namespace BotBits
                 : WorldUtils.IsAlreadyPlaced(b, blocks));
         }
 
-        private static bool AreSame<T, TBlock>(PlaceSendMessage sent, T received)
-            where T : PlaceEvent<T, TBlock>
-            where TBlock : struct
-        {
-            var bg = received as BackgroundPlaceEvent;
-            if (bg != null)
-                return WorldUtils.AreSame(sent, bg);
-            var fg = received as ForegroundPlaceEvent;
-            if (fg != null)
-                return WorldUtils.AreSame(sent, fg);
-
-            throw new NotSupportedException("Unknown PlaceEvent.");
-        }
-        
         private sealed class CheckHandle
         {
             public int OverwrittenSends { get; set; }

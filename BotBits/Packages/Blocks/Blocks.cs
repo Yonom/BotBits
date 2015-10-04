@@ -94,7 +94,7 @@ namespace BotBits
         [EventListener]
         private void OnLoadLevel(LoadLevelEvent e)
         {
-            this.World = BlockUtils.GetWorld(e.PlayerIOMessage, this.Width, this.Height, 0);
+            this.World = BlockUtils.GetWorld(e.PlayerIOMessage, this.Width, this.Height);
         }
 
         [EventListener(EventPriority.Low)]

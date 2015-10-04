@@ -9,26 +9,21 @@ namespace BotBits
 {
     internal static class BlockUtils
     {
-        private const uint InitOffset = 34;
-
-        internal static BlockDataWorld GetWorld(Message m, int width, int height, uint offset = InitOffset)
+        internal static BlockDataWorld GetWorld(Message m, int width, int height)
         {
             var world = new BlockDataWorld(width, height);
-            uint pointer = GetStart(m, offset);
+            var datas = InitParse.Parse(m);
 
-            string strValue2;
-            while ((strValue2 = m[pointer] as string) == null || strValue2 != "we")
+            foreach (var data in datas)
             {
-                var block = m.GetInteger(pointer++);
-                var l = (Layer)m.GetInteger(pointer++);
-                byte[] byteArrayX = m.GetByteArray(pointer++);
-                byte[] byteArrayY = m.GetByteArray(pointer++);
+                var block = data.Type;
+                var l = (Layer)data.Layer;
 
                 switch (l)
                 {
                     case Layer.Background:
                         var bgWorldBlock = new BackgroundBlock((Background.Id)block);
-                        foreach (Point pos in GetPos(byteArrayX, byteArrayY))
+                        foreach (Point pos in data.Locations)
                             world.Background[pos.X, pos.Y] = new BlockData<BackgroundBlock>(bgWorldBlock);
                         break;
 
@@ -43,25 +38,25 @@ namespace BotBits
                                 break;
 
                             case BlockArgsType.Number:
-                                uint i = m.GetUInt(pointer++);
+                                var i = (uint) data.Args[0];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, i);
                                 break;
 
                             case BlockArgsType.String:
-                                string str = m.GetString(pointer++);
+                                string str = (string) data.Args[0];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, str);
                                 break;
 
                             case BlockArgsType.Portal:
-                                var portalRotation = (Morph.Id)m.GetUInt(pointer++);
-                                uint portalId = m.GetUInt(pointer++);
-                                uint portalTarget = m.GetUInt(pointer++);
+                                var portalRotation = (Morph.Id)data.Args[0];
+                                var portalId = (uint) data.Args[1];
+                                var portalTarget = (uint) data.Args[2];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, portalId, portalTarget, portalRotation);
                                 break;
 
                             case BlockArgsType.Label:
-                                string text = m.GetString(pointer++);
-                                string textcolor = m.GetString(pointer++);
+                                string text = (string) data.Args[0];
+                                string textcolor = (string) data.Args[1];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, text, textcolor);
                                 break;
 
@@ -70,39 +65,13 @@ namespace BotBits
                         }
 
                         var fg = new BlockData<ForegroundBlock>(foregroundBlock);
-                        foreach (Point pos in GetPos(byteArrayX, byteArrayY))
+                        foreach (Point pos in data.Locations)
                             world.Foreground[pos.X, pos.Y] = fg;
                         break;
                 }
             }
 
             return world;
-        }
-
-        private static uint GetStart(Message m, uint offset)
-        {
-            uint start = 0;
-            for (uint i = offset; i <= m.Count - 1; i++)
-            {
-                string strValue;
-                if ((strValue = m[i] as string) != null && strValue == "ws")
-                {
-                    start = i + 1;
-                    break;
-                }
-            }
-            return start;
-        }
-
-        private static IEnumerable<Point> GetPos(byte[] byteArrayX, byte[] byteArrayY)
-        {
-            for (int i = 0; i <= byteArrayX.Length - 1; i += 2)
-            {
-                int x = byteArrayX[i] * 256 + byteArrayX[i + 1];
-                int y = byteArrayY[i] * 256 + byteArrayY[i + 1];
-
-                yield return new Point(x, y);
-            }
         }
 
         internal static BlockDataWorld GetClearedWorld(int width, int height, Foreground.Id borderBlock)

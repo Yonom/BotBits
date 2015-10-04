@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using PlayerIOClient;
 
 namespace BotBits
@@ -119,16 +120,18 @@ namespace BotBits
                 var layerNum = ct.GetInt("layer", 0);
                 var xs = ct.GetBytes("x", new byte[0]);
                 var ys = ct.GetBytes("y", new byte[0]);
+                var x1s = ct.GetBytes("x1", new byte[0]);
+                var y1s = ct.GetBytes("y1", new byte[0]);
+                var points = WorldUtils.GetShortPos(x1s, y1s)
+                  .Concat(WorldUtils.GetPos(xs, ys));
 
                 if (layerNum == 0)
                 {
                     var foreground = (Foreground.Id)type;
                     var block = WorldUtils.GetDatabaseBlock(ct, foreground);
-                    for (var b = 0; b < xs.Length; b += 2)
+                    foreach (var loc in points)
                     {
-                        var nx = (xs[b] << 8) + xs[b + 1];
-                        var ny = (ys[b] << 8) + ys[b + 1];
-                        this.Foreground[nx, ny] = block;
+                        this.Foreground[loc.X, loc.Y] = block;
                     }
                 }
                 else

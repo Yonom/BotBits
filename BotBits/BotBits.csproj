@@ -40,8 +40,8 @@
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PlayerIOClient">
-      <HintPath>..\packages\PlayerIOClient-Signed.3.2.353\lib\PlayerIOClient.dll</HintPath>
+    <Reference Include="PlayerIOClient, Version=2.3.6.0, Culture=neutral, PublicKeyToken=c7f7b730653f6a44, processorArchitecture=MSIL">
+      <HintPath>..\packages\PlayerIOClient-Signed.3.2.369\lib\PlayerIOClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -52,12 +52,14 @@
     <Compile Include="Helpers\PlayerData\PlayerAchivements.cs" />
     <Compile Include="Helpers\PlayerData\PlayerData.cs" />
     <Compile Include="Helpers\VersionCache.cs" />
+    <Compile Include="Internal\InitParse.cs" />
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\CampaignDifficulty.cs" />
     <Compile Include="Models\CampaignReward.cs" />
     <Compile Include="Models\CampaignRewardType.cs" />
     <Compile Include="Models\CampaignStatus.cs" />
     <Compile Include="Models\PlayerPoint.cs" />
+    <Compile Include="Models\RespawnData.cs" />
     <Compile Include="Models\WorldStatus.cs" />
     <Compile Include="Models\World\IWorldAreaEnumerable.cs" />
     <Compile Include="Models\World\WorldAreaEnumerable.cs" />
@@ -74,10 +76,10 @@
     <Compile Include="Packages\Blocks\Events\ForegroundPlaceEvent.cs" />
     <Compile Include="Packages\Blocks\Events\PlaceEvent.cs" />
     <Compile Include="Packages\Chat\Events\QueueChatEvent.cs" />
-    <Compile Include="Packages\ConnectionManager\ClientUtils.cs" />
+    <Compile Include="Packages\ConnectionManager\Client\ClientUtils.cs" />
     <Compile Include="Packages\ConnectionManager\ConnectionArgs.cs" />
-    <Compile Include="Packages\ConnectionManager\ILoginClient.cs" />
-    <Compile Include="Packages\ConnectionManager\LoginClientExtensions.cs" />
+    <Compile Include="Packages\ConnectionManager\Client\ILoginClient.cs" />
+    <Compile Include="Packages\ConnectionManager\Client\LoginClientExtensions.cs" />
     <Compile Include="Packages\ConnectionManager\PlayerIOGame.cs" />
     <Compile Include="Packages\ConnectionManager\PlayerIOGameExtensions.cs" />
     <Compile Include="Packages\ConnectionManager\ConnectionUtils.cs" />
@@ -87,8 +89,11 @@
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\WorldType.cs" />
     <Compile Include="Internal\PlayerIOAsync.cs" />
-    <Compile Include="Packages\ConnectionManager\LobbyItem.cs" />
-    <Compile Include="Packages\ConnectionManager\LoginClient.cs" />
+    <Compile Include="Packages\ConnectionManager\Client\LobbyItem.cs" />
+    <Compile Include="Packages\ConnectionManager\Client\LoginClient.cs" />
+    <Compile Include="Packages\MessageHandler\Events\JoinCompleteEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\RestoreProgressEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\MutedEvent.cs" />
     <Compile Include="Packages\Scheduler\Scheduler.cs" />
     <Compile Include="Internal\StringUtils.cs" />
     <Compile Include="Internal\TaskExtensions.cs" />
@@ -151,10 +156,10 @@
     <Compile Include="Packages\Chat\ChatExtensions.cs" />
     <Compile Include="Packages\Chat\Events\PrivateMessageEvent.cs" />
     <Compile Include="Packages\Chat\IChat.cs" />
-    <Compile Include="Packages\ConnectionManager\ConnectionExtensions.cs" />
+    <Compile Include="Packages\ConnectionManager\Connection\ConnectionExtensions.cs" />
     <Compile Include="Packages\ConnectionManager\Events\PlayerIOMessageEvent.cs" />
-    <Compile Include="Packages\ConnectionManager\IConnection.cs" />
-    <Compile Include="Packages\ConnectionManager\PlayerIOConnectionAdapter.cs" />
+    <Compile Include="Packages\ConnectionManager\Connection\IConnection.cs" />
+    <Compile Include="Packages\ConnectionManager\Connection\PlayerIOConnectionAdapter.cs" />
     <Compile Include="Models\AccessRight.cs" />
     <Compile Include="Models\AutoText.cs" />
     <Compile Include="Models\World\Block\Background.cs" />
@@ -217,7 +222,6 @@
     <Compile Include="Packages\Players\Players.cs" />
     <Compile Include="Packages\Players\PlayerUtils.cs" />
     <Compile Include="Packages\Room\Events\AccessRightChangedEvent.cs" />
-    <Compile Include="Packages\Room\Events\JoinCompleteEvent.cs" />
     <Compile Include="Packages\Room\Events\MetaChangedEvent.cs" />
     <Compile Include="Packages\Room\Room.cs" />
     <Compile Include="BotBitsClient.cs" />

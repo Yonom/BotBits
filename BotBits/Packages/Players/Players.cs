@@ -140,6 +140,7 @@ namespace BotBits
             p.Friend = e.Friend;
             p.GoldCoins = e.Coins;
             p.BlueCoins = e.BlueCoins;
+            p.Deaths = e.Deaths;
             p.X = e.X;
             p.Y = e.Y;
             p.ClubMember = e.ClubMember;
@@ -186,7 +187,6 @@ namespace BotBits
         private void OnMove(MoveEvent e)
         {
             Player p = e.Player;
-            //p.GoldCoins = e.Coins;
             p.Horizontal = e.Horizontal;
             p.Vertical = e.Vertical;
             p.ModifierX = e.ModifierX;
@@ -195,9 +195,30 @@ namespace BotBits
             p.SpeedY = e.SpeedY;
             p.X = e.X;
             p.Y = e.Y;
-            p.Dead = false;
             p.SpaceDown = e.SpaceDown;
             p.SpaceJustDown = e.SpaceJustDown;
+        }
+
+
+        [EventListener]
+        private void OnRestoreProgress(RestoreProgressEvent e)
+        {
+            Player p = e.Player;
+            p.X = e.X;
+            p.Y = e.Y;
+            p.SpeedX = e.SpeedX;
+            p.SpeedY = e.SpeedY;
+            p.GoldCoins = e.GoldCoins;
+            p.BlueCoins = e.BlueCoins;
+            p.Deaths = e.Deaths;
+            
+            foreach (var ps in e.PurpleSwitches)
+            {
+                p.AddSwitch(ps);
+                new PurpleSwitchEvent(p, ps, true)
+                    .RaiseIn(this.BotBits);
+            }
+            // TODO: coins
         }
 
         [EventListener(EventPriority.Low)]
@@ -277,18 +298,11 @@ namespace BotBits
         }
 
         [EventListener]
-        private void OnKill(KillEvent e)
-        {
-            Player p = e.Player;
-            p.Dead = true;
-        }
-
-        [EventListener]
         private void OnAllowToggleGod(AllowToggleGodEvent e)
         {
             Player p = e.Player;
             p.HasGodRights = e.AllowToggle;
-            p.GodMode &= e.AllowToggle; // TODO Ugh...
+            p.GodMode &= e.AllowToggle;
         }
 
         [EventListener]
@@ -302,12 +316,10 @@ namespace BotBits
         private void OnSwitchInit(PurpleSwitchInitEvent e)
         {
             Player p = e.Player;
-            for (var i = 0; i < e.PurpleSwitches.Length; i++)
+            foreach (var ps in e.PurpleSwitches)
             {
-                if (e.PurpleSwitches[i] == 0) continue;
-
-                p.AddSwitch(i);
-                new PurpleSwitchEvent(p, i, true)
+                p.AddSwitch(ps);
+                new PurpleSwitchEvent(p, ps, true)
                     .RaiseIn(this.BotBits);
             }
         }
@@ -332,18 +344,18 @@ namespace BotBits
             Player p = e.Player;
             p.X = e.X;
             p.Y = e.Y;
-            p.Dead = false;
         }
 
         [EventListener(EventPriority.Low)]
         private void OnMultiRespawn(MultiRespawnEvent e)
         {
-            foreach (var tele in e.Coordinates)
+            foreach (var tele in e.Data)
             {
                 Player p = tele.Player;
+                var causedByDeath = p.Deaths < tele.Deaths;
                 p.X = tele.X;
                 p.Y = tele.Y;
-                p.Dead = false;
+                p.Deaths = tele.Deaths;
 
                 if (e.ResetCoins)
                 {
@@ -351,9 +363,16 @@ namespace BotBits
                     p.BlueCoins = default(int);
                 }
 
-                new RespawnEvent(p, tele.X, tele.Y, e.ResetCoins)
+                new RespawnEvent(p, tele.X, tele.Y, tele.Deaths, e.ResetCoins, causedByDeath)
                     .RaiseIn(this.BotBits);
             }
+        }
+
+        [EventListener]
+        private void OnMuted(MutedEvent e)
+        {
+            Player p = e.Player;
+            p.Muted = e.Muted;
         }
     }
 }

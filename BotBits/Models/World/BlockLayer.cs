@@ -23,6 +23,12 @@ namespace BotBits
             set { this._blocks[x, y] = value; }
         }
 
+        public T this[Point p]
+        {
+            get { return this[p.X, p.Y]; }
+            set { this[p.X, p.Y] = value; }
+        }
+
         public IEnumerator<LayerItem<T>> GetEnumerator()
         {
             for (int y = 0; y < this.Height; y++)

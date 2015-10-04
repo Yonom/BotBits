@@ -93,12 +93,6 @@ namespace BotBits
             return ConnectionManager.Of(this.BotBits).PlayerData.HasAura(aura);
         }
 
-        public void MoveToLocation(int x, int y)
-        {
-            new MoveSendMessage(x, y, 0, 0, 0, 0, 0, 0, false, false, 0)
-                .SendIn(this.BotBits);
-        }
-
         public void Move(
             int x, int y, 
             double speedX, double speedY, 
@@ -109,11 +103,6 @@ namespace BotBits
         {
             new MoveSendMessage(x, y, speedX, speedY, modifierX, modifierY, horizontal, vertical, spaceDown, spaceJustDown, tickId)
                 .SendIn(this.BotBits);
-        }
-
-        public void GetCrown()
-        {
-            this.GetCrown(0, 0);
         }
 
         public void GetCrown(int x, int y)
@@ -188,11 +177,6 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void CompleteLevel()
-        {
-            this.CompleteLevel(0, 0);
-        }
-
         public void CompleteLevel(int x, int y)
         {
             new CompleteLevelSendMessage(x, y)
@@ -251,11 +235,6 @@ namespace BotBits
         {
             new ModModeSendMessage()
                 .SendIn(this.BotBits);
-        }
-
-        public void PressKey(Key key)
-        {
-            this.PressKey(key, 0, 0);
         }
 
         public void PressKey(Key key, int x, int y)

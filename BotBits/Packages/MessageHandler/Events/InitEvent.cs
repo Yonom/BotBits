@@ -26,8 +26,8 @@ namespace BotBits.Events
             // 6: UserId
             this.Smiley = (Smiley)message.GetInt(7);
             this.Aura = (Aura)message.GetInt(8);
-            this.SpawnX = message.GetInt(9);
-            this.SpawnY = message.GetInt(10);
+            this.SpawnX = message.GetDouble(9);
+            this.SpawnY = message.GetDouble(10);
             this.ChatColor = message.GetUInt(11);
             this.Username = message.GetString(12);
             this.CanEdit = message.GetBoolean(13);
@@ -143,13 +143,13 @@ namespace BotBits.Events
         ///     Gets or sets the spawn x coordinate.
         /// </summary>
         /// <value>The spawn x.</value>
-        public int SpawnX { get; set; }
+        public double SpawnX { get; set; }
 
         /// <summary>
         ///     Gets or sets the spawn y coordinate.
         /// </summary>
         /// <value>The spawn y.</value>
-        public int SpawnY { get; set; }
+        public double SpawnY { get; set; }
 
         /// <summary>
         ///     Gets or sets the username.

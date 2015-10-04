@@ -7,5 +7,6 @@ namespace BotBits
         int Height { get; }
         int Width { get; }
         T this[int x, int y] { get; }
+        T this[Point p] { get; }
     }
 }

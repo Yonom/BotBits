@@ -13,17 +13,16 @@ namespace BotBits.Events
         internal MoveEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.X = message.GetInteger(1);
-            this.Y = message.GetInteger(2);
+            this.X = message.GetDouble(1);
+            this.Y = message.GetDouble(2);
             this.SpeedX = message.GetDouble(3);
             this.SpeedY = message.GetDouble(4);
             this.ModifierX = message.GetDouble(5);
             this.ModifierY = message.GetDouble(6);
             this.Horizontal = message.GetDouble(7);
             this.Vertical = message.GetDouble(8);
-            this.Coins = message.GetInteger(9);
-            this.SpaceDown = message.GetBoolean(10);
-            this.SpaceJustDown = message.GetBoolean(11);
+            this.SpaceDown = message.GetBoolean(9);
+            this.SpaceJustDown = message.GetBoolean(10);
         }
 
         /// <summary>
@@ -39,12 +38,6 @@ namespace BotBits.Events
         /// </summary>
         /// <value><c>true</c> if the space bar is held down; otherwise, <c>false</c>.</value>
         public bool SpaceDown { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the coins.
-        /// </summary>
-        /// <value>The coins.</value>
-        public int Coins { get; set; }
 
         /// <summary>
         ///     Gets or sets the horizontal.
@@ -104,12 +97,12 @@ namespace BotBits.Events
         ///     Gets or sets the user coordinate x.
         /// </summary>
         /// <value>The user position x.</value>
-        public int X { get; set; }
+        public double X { get; set; }
 
         /// <summary>
         ///     Gets or sets the user coordinate y.
         /// </summary>
         /// <value>The user position y.</value>
-        public int Y { get; set; }
+        public double Y { get; set; }
     }
 }

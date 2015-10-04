@@ -14,14 +14,7 @@ namespace BotBits.Events
             : base(client, message)
         {
             this.Text = message.GetString(1);
-            this.Friend = message.GetBoolean(2);
         }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether this player is your friend.
-        /// </summary>   
-        /// <value><c>true</c> if this player is your friend; otherwise, <c>false</c>.</value>
-        public bool Friend { get; set; }
 
         /// <summary>
         ///     Gets or sets the text.
