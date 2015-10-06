@@ -14,7 +14,7 @@ namespace BotBits
             if (obj is Type)
                 throw new InvalidOperationException("Cannot load Types! Did you mean to use LoadModule?");
 
-            var methods = obj.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            var methods = Utils.GetMethods(obj.GetType());
             this.LoadEventhandlers(obj, methods);
         }
 

@@ -111,7 +111,7 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
         
-        public void GetCoin(int coins, int blueCoins, int x, int y)
+        public void GetCoin(int coins, int blueCoins, uint x, uint y)
         {
             new CoinSendMessage(coins, blueCoins, x, y)
                 .SendIn(this.BotBits);

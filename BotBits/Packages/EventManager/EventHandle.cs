@@ -64,7 +64,7 @@ namespace BotBits
             {
                 lock (this._eventHandlers)
                 {
-                    return this._eventHandlers.Values.Sum(handlerGroup => handlerGroup.Count);
+                    return this._eventHandlers.Values.Sum(ex => ex.Values.Sum(pr => pr.Values.Sum(l => l.Count)));
                 }
             }
         }

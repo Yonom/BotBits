@@ -15,7 +15,7 @@ namespace BotBits.SendMessages
         /// <param name="blueCoins">The blue coins count.</param>
         /// <param name="coinX">The coin x-coordinate.</param>
         /// <param name="coinY">The coin y-coordinate.</param>
-        public CoinSendMessage(int coins, int blueCoins, int coinX, int coinY)
+        public CoinSendMessage(int coins, int blueCoins, uint coinX, uint coinY)
         {
             this.Coins = coins;
             this.BlueCoins = blueCoins;
@@ -29,7 +29,7 @@ namespace BotBits.SendMessages
         /// <value>
         ///     The coin x-coordinate.
         /// </value>
-        public int CoinX { get; set; }
+        public uint CoinX { get; set; }
 
         /// <summary>
         ///     Gets or sets the coin y-coordinate.
@@ -37,7 +37,7 @@ namespace BotBits.SendMessages
         /// <value>
         ///     The coin y-coordinate.
         /// </value>
-        public int CoinY { get; set; }
+        public uint CoinY { get; set; }
 
         /// <summary>
         ///     Gets or sets the number of yellow coins the player has.
