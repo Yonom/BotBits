@@ -8,8 +8,8 @@ namespace BotBits.Events
         /// <summary>
         ///     Initializes a new instance of the <see cref="PurpleSwitchInitEvent" /> class.
         /// </summary>
+        /// <param name="client">The client.</param>
         /// <param name="message">The EE message.</param>
-        /// <param name="message">The message.</param>
         internal PurpleSwitchInitEvent(BotBitsClient client, Message message)
             : base(client, message)
         {

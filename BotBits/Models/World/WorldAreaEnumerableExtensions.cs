@@ -29,8 +29,6 @@ namespace BotBits
         /// <summary>
         /// Creates a copy of the given world.
         /// </summary>
-        /// <typeparam name="TForeground">The type of the foreground.</typeparam>
-        /// <typeparam name="TBackground">The type of the background.</typeparam>
         /// <param name="worldArea">The block area.</param>
         /// <returns></returns>
         public static World CreateCopy(this IWorldAreaEnumerable<ForegroundBlock, BackgroundBlock> worldArea) 

@@ -976,5 +976,23 @@ namespace BotBits
                 Television = (Id)451,
                 Window = (Id)452;
         }
+
+        public static class Halloween2015
+        {
+            [Pack("brickhalloween2015")]
+            public const Id
+                MossyBrick = (Id)1047,
+                Siding = (Id)1048,
+                Rooftop = (Id)1049,
+                OneWay = (Id)1050,
+                DeadShrub = (Id)454,
+                IronFence = (Id)455;
+
+            [Pack("brickhalloween2015", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                Window = (Id)456,
+                WoodHalfBlock = (Id)457,
+                Lantern = (Id)458;
+        }
     }
 }

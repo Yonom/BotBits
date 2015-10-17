@@ -341,5 +341,19 @@ namespace BotBits
 
         [Pack("smileycat")]
         Cat = 116,
+        
+        Scared = 117,
+
+        [Pack("smileyghoul")]
+        Ghoul = 118,
+
+        [Pack("smileymummy")]
+        Mummy = 119,
+
+        [Pack("smileybat")]
+        Bat = 120,
+
+        [Pack("smileyeyeball")]
+        Eyeball = 121,
     }
 }

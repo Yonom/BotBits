@@ -370,5 +370,14 @@ namespace BotBits
                 Blue = (Id)686,
                 Greeb = (Id)687;
         }
+
+        public static class Halloween2015
+        {
+            [Pack("brickhalloween2015")]
+            public const Id
+                MossyBrick = (Id)694,
+                Siding = (Id)695,
+                Rooftop = (Id)696;
+        }
     }
 }

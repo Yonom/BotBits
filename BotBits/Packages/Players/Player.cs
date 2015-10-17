@@ -26,6 +26,8 @@ namespace BotBits
 
         private readonly Dictionary<Effect, ActiveEffect> _effects = new Dictionary<Effect, ActiveEffect>();
         private readonly HashSet<int> _switches = new HashSet<int>();
+        private readonly HashSet<Point> _goldCoins = new HashSet<Point>();
+        private readonly HashSet<Point> _blueCoins = new HashSet<Point>();
 
         [CanBeNull]
         private readonly BotBitsClient _botBits;
@@ -389,18 +391,18 @@ namespace BotBits
         }
 
         [Pure]
-        public bool HasSwitchPressed(int id)
+        public bool HasPressedSwitch(int id)
         {
-            lock (this._effects)
+            lock (this._switches)
             {
-                return this._switches.Add(id);
+                return this._switches.Contains(id);
             }
         }
 
         [Pure]
         public int[] GetSwitches()
         {
-            lock (this._effects)
+            lock (this._switches)
             {
                 return this._switches.ToArray();
             }
@@ -408,7 +410,7 @@ namespace BotBits
 
         internal void AddSwitch(int id)
         {
-            lock (this._effects)
+            lock (this._switches)
             {
                 this._switches.Add(id);
             }
@@ -416,7 +418,7 @@ namespace BotBits
 
         internal void RemoveSwitch(int id)
         {
-            lock (this._effects)
+            lock (this._switches)
             {
                 this._switches.Remove(id);
             }
@@ -454,6 +456,74 @@ namespace BotBits
             lock (this._effects)
             {
                 this._effects.Remove(effect);
+            }
+        }
+
+        [Pure]
+        public bool HasGoldCoin(Point loc)
+        {
+            lock (this._goldCoins)
+            {
+                return this._goldCoins.Contains(loc);
+            }
+        }
+
+        [Pure]
+        public Point[] GetGoldCoins()
+        {
+            lock (this._goldCoins)
+            {
+                return this._goldCoins.ToArray();
+            }
+        }
+
+        internal void AddGoldCoin(Point loc)
+        {
+            lock (this._goldCoins)
+            {
+                this._goldCoins.Add(loc);
+            }
+        }
+
+        internal void RemoveGoldCoin(Point loc)
+        {
+            lock (this._goldCoins)
+            {
+                this._goldCoins.Remove(loc);
+            }
+        }
+
+        [Pure]
+        public bool HasBlueCoin(Point loc)
+        {
+            lock (this._blueCoins)
+            {
+                return this._blueCoins.Contains(loc);
+            }
+        }
+
+        [Pure]
+        public Point[] GetBlueCoins()
+        {
+            lock (this._blueCoins)
+            {
+                return this._blueCoins.ToArray();
+            }
+        }
+
+        internal void AddBlueCoin(Point loc)
+        {
+            lock (this._blueCoins)
+            {
+                this._blueCoins.Add(loc);
+            }
+        }
+
+        internal void RemoveBlueCoin(Point loc)
+        {
+            lock (this._blueCoins)
+            {
+                this._blueCoins.Remove(loc);
             }
         }
 

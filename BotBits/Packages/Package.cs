@@ -11,7 +11,7 @@ namespace BotBits
     public abstract class Package<T> : IPackage where T : Package<T>, new()
     {
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public BotBitsClient BotBits { get; private set; }
+        protected BotBitsClient BotBits { get; private set; }
 
         protected Package()
         {

@@ -32,6 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\BotBits.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -94,6 +95,8 @@
     <Compile Include="Packages\MessageHandler\Events\JoinCompleteEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\RestoreProgressEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MutedEvent.cs" />
+    <Compile Include="Packages\Players\Events\BlueCoinEvent.cs" />
+    <Compile Include="Packages\Players\Events\GoldCoinEvent.cs" />
     <Compile Include="Packages\Scheduler\Scheduler.cs" />
     <Compile Include="Internal\StringUtils.cs" />
     <Compile Include="Internal\TaskExtensions.cs" />

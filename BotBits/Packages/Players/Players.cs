@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using BotBits.Events;
+using BotBits.SendMessages;
 
 namespace BotBits
 {
@@ -173,8 +174,46 @@ namespace BotBits
             Player p = e.Player;
             p.GoldCoins = e.GoldCoins;
             p.BlueCoins = e.BlueCoins;
+
+            var x = (int)e.X;
+            var y = (int)e.Y;
+            var blocks = Blocks.Of(this.BotBits);
+            if (!blocks.Area.Contains(new Point(x, y))) return;
+            var block = blocks.Foreground[x, y].Block.Id;
+
+            switch (block)
+            {
+                case Foreground.Coin.Gold:
+                    p.AddGoldCoin(new Point(x, y));
+                    new GoldCoinEvent(p, e.GoldCoins, x, y)
+                        .RaiseIn(this.BotBits);
+                    break;
+                case Foreground.Coin.Blue:
+                    p.AddBlueCoin(new Point(x, y));
+                    new BlueCoinEvent(p, e.BlueCoins, x, y)
+                        .RaiseIn(this.BotBits);
+                    break;
+            }
         }
-        
+
+        [EventListener]
+        private void OnForeground(ForegroundPlaceEvent e)
+        {
+            if (e.Old.Block.Id == Foreground.Coin.Gold)
+            {
+                foreach (var player in this)
+                {
+                    player.RemoveGoldCoin(new Point(e.X, e.Y));
+                }
+            }
+            else if (e.Old.Block.Id == Foreground.Coin.Blue)
+            {
+                foreach (var player in this)
+                {
+                    player.RemoveBlueCoin(new Point(e.X, e.Y));
+                }
+            }
+        }
 
         [EventListener]
         private void OnSmiley(SmileyEvent e)
@@ -218,7 +257,20 @@ namespace BotBits
                 new PurpleSwitchEvent(p, ps, true)
                     .RaiseIn(this.BotBits);
             }
-            // TODO: coins
+
+            foreach (var loc in e.GoldCoinPoints)
+            {
+                p.AddGoldCoin(loc);
+                new GoldCoinEvent(p, p.GoldCoins, loc.X, loc.Y)
+                    .RaiseIn(this.BotBits);
+            }
+
+            foreach (var loc in e.BlueCoinPoints)
+            {
+                p.AddBlueCoin(loc);
+                new BlueCoinEvent(p, p.BlueCoins, loc.X, loc.Y)
+                    .RaiseIn(this.BotBits);
+            }
         }
 
         [EventListener(EventPriority.Low)]

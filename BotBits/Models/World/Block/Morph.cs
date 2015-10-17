@@ -217,6 +217,13 @@ namespace BotBits
                 Orange = (Id)3;
         }
 
+        public static class Light
+        {
+            public const Id
+                On = 0,
+                Off = (Id)1;
+        }
+
         public static BotBits.Team ToTeam(this Id morph)
         {
             return (BotBits.Team)morph;
