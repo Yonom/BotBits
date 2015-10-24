@@ -35,7 +35,7 @@ namespace BotBits
                         tcs.TrySetException(ex);
                     }
                 }
-            });
+            }, TaskScheduler.Default);
 
             return tcs.Task;
         }
@@ -67,7 +67,7 @@ namespace BotBits
                         tcs.TrySetException(ex);
                     }
                 }
-            });
+            }, TaskScheduler.Default);
 
             return tcs.Task;
         }
@@ -94,7 +94,7 @@ namespace BotBits
                         tcs.TrySetException(ex);
                     }
                 }
-            });
+            }, TaskScheduler.Default);
 
             return tcs.Task;
         }
@@ -136,7 +136,7 @@ namespace BotBits
                         tcs.TrySetException(ex);
                     }
                 }
-            });
+            }, TaskScheduler.Default);
 
             return tcs.Task;
         }
@@ -164,7 +164,7 @@ namespace BotBits
                         tcs.TrySetException(ex);
                     }
                 }
-            });
+            }, TaskScheduler.Default);
 
             return tcs.Task;
         }
@@ -196,7 +196,7 @@ namespace BotBits
                         tcs.TrySetException(ex);
                     }
                 }
-            });
+            }, TaskScheduler.Default);
 
             return tcs.Task;
         }
@@ -223,7 +223,7 @@ namespace BotBits
                         tcs.TrySetException(ex);
                     }
                 }
-            });
+            }, TaskScheduler.Default);
 
             return tcs.Task;
         }
@@ -265,7 +265,7 @@ namespace BotBits
                         tcs.TrySetException(ex);
                     }
                 }
-            });
+            }, TaskScheduler.Default);
 
             return tcs.Task;
         }
@@ -282,7 +282,7 @@ namespace BotBits
                 if (t.IsCanceled || !t.IsFaulted || exceptionHandler == null) return;
                 var innerException = t.Exception.Flatten().InnerExceptions.FirstOrDefault();
                 exceptionHandler(innerException ?? t.Exception);
-            });
+            }, TaskScheduler.Default);
         }
     }
 
