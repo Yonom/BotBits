@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BotBits.Nito.Async
 {
@@ -141,25 +140,19 @@ namespace BotBits.Nito.Async
             Flags = SecurityPermissionFlag.ControlEvidence | SecurityPermissionFlag.ControlPolicy)]
         public void Run()
         {
-            // Set the synchronization context
-            SynchronizationContext.SetSynchronizationContext(new ActionDispatcherSynchronizationContext(this));
-            var task = new Task(() =>
+            try
             {
-                try
+                // Set the synchronization context
+                SynchronizationContext.SetSynchronizationContext(new ActionDispatcherSynchronizationContext(this));
+                while (true)
                 {
-                    while (true)
-                    {
-                        // Dequeue and run an action
-                        this.DequeueAction()();
-                    }
+                    // Dequeue and run an action
+                    this.DequeueAction()();
                 }
-                catch (ExitException)
-                {
-                }
-            });
-
-            task.RunSynchronously(TaskScheduler.FromCurrentSynchronizationContext());
-            task.Wait();
+            }
+            catch (ExitException)
+            {
+            }
         }
 
         /// <summary>
