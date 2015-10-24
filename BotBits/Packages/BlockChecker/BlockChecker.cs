@@ -67,13 +67,13 @@ namespace BotBits
         }
 
         [EventListener]
-        private void OnForeground(ForegroundPlaceEvent e)
+        private void On(ForegroundPlaceEvent e)
         {
             this.Repair<ForegroundPlaceEvent, ForegroundBlock>(Layer.Foreground, e);
         }
 
         [EventListener]
-        private void OnBackground(BackgroundPlaceEvent e)
+        private void On(BackgroundPlaceEvent e)
         {
             this.Repair<BackgroundPlaceEvent, BackgroundBlock>(Layer.Background, e);
         }

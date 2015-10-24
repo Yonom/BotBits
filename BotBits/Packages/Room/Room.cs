@@ -193,26 +193,26 @@ namespace BotBits
         }
 
         [EventListener]
-        private void OnHideKey(HideKeyEvent e)
+        private void On(HideKeyEvent e)
         {
             this._enabledKeys.Remove(e.Key);
         }
 
         [EventListener]
-        private void OnShowKey(ShowKeyEvent e)
+        private void On(ShowKeyEvent e)
         {
             this._enabledKeys.Add(e.Key);
         }
 
         [EventListener]
-        private void OnReleased(WorldReleasedEvent e)
+        private void On(WorldReleasedEvent e)
         {
             this.WorldStatus = WorldStatus.Released;
             this.AccessRight = this.AccessRight == AccessRight.Owner ? AccessRight.Owner : AccessRight.None;
         }
 
         [EventListener]
-        private void OnInit(InitEvent e)
+        private void On(InitEvent e)
         {
             this.Owner = e.Owner;
             this.WorldName = e.WorldName;
@@ -237,7 +237,7 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.Low)]
-        private void OnInitLow(InitEvent e)
+        private void OnLow(InitEvent e)
         {
             if (e.IsOwner)
             {
@@ -253,25 +253,25 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.Low)]
-        private void OnAccess(AccessEvent e)
+        private void On(AccessEvent e)
         {
             this.CanEdit = true;
         }
 
         [EventListener(EventPriority.Low)]
-        private void OnLostAccess(LoseAccessEvent e)
+        private void On(LoseAccessEvent e)
         {
             this.CanEdit = false;
         }
 
         [EventListener(EventPriority.Low)]
-        private void OnJoinComplete(JoinCompleteEvent e)
+        private void On(JoinCompleteEvent e)
         {
             this.JoinComplete = true;
         }
 
         [EventListener(EventPriority.Low)]
-        private void OnUpdateMeta(UpdateMetaEvent e)
+        private void On(UpdateMetaEvent e)
         {
             this.WorldName = e.WorldName;
             this.Plays = e.Plays;
@@ -284,44 +284,44 @@ namespace BotBits
         }
 
         [EventListener]
-        private void OnBackgroundColor(BackgroundColorEvent e)
+        private void On(BackgroundColorEvent e)
         {
             this.BackgroundColor = e.BackgroundColor;
         }
 
         [EventListener]
-        private void OnAddedToCrew(AddedToCrewEvent e)
+        private void On(AddedToCrewEvent e)
         {
             this.CrewId = e.CrewId;
             this.CrewName = e.CrewName;
         }
 
         [EventListener]
-        private void OnRoomVisible(RoomVisibleEvent e)
+        private void On(RoomVisibleEvent e)
         {
             this.Visible = e.Visible;
         }
 
         [EventListener]
-        private void OnHideLobby(HideLobbyEvent e)
+        private void On(HideLobbyEvent e)
         {
             this.HideLobby = e.Hidden;
         }
 
         [EventListener]
-        private void OnAllowSpectating(AllowSpectatingEvent e)
+        private void On(AllowSpectatingEvent e)
         {
             this.AllowSpectating = e.Allow;
         }
 
         [EventListener]
-        private void OnRoomDescription(RoomDescriptionEvent e)
+        private void On(RoomDescriptionEvent e)
         {
             this.Description = e.Description;
         }
 
         [EventListener]
-        private void OnEffectsLimit(EffectLimitsEvent e)
+        private void On(EffectLimitsEvent e)
         {
             this.ZombieLimit = e.ZombieLimit;
             this.CurseLimit = e.CurseLimit;

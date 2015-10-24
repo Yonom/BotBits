@@ -16,38 +16,38 @@ namespace BotBits
         }
 
         [EventListener]
-        private void OnInit(InitEvent e)
+        private void On(InitEvent e)
         {
             this.Liked = e.Liked;
             this.Favorited = e.Favorited;
         }
 
         [EventListener]
-        private void OnLiked(LikedEvent e)
+        private void On(LikedEvent e)
         {
             this.Liked = true;
         }
 
         [EventListener]
-        private void OnUnliked(UnlikedEvent e)
+        private void On(UnlikedEvent e)
         {
             this.Liked = false;
         }
 
         [EventListener]
-        private void OnFavorited(FavoritedEvent e)
+        private void On(FavoritedEvent e)
         {
             this.Favorited = true;
         }
 
         [EventListener]
-        private void OnUnfavorited(UnfavoritedEvent e)
+        private void On(UnfavoritedEvent e)
         {
             this.Favorited = false;
         }
 
         [EventListener]
-        private void OnCompletedLevel(CompletedLevelEvent e)
+        private void On(CompletedLevelEvent e)
         {
             this.CompletedLevel = true;
         }

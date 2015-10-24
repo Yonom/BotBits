@@ -27,21 +27,21 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.Lowest)]
-        private void OnConnect(ConnectEvent e)
+        private void On(ConnectEvent e)
         {
             new InitSendMessage()
                 .SendIn(this.BotBits);
         }
 
         [EventListener(EventPriority.Lowest)]
-        private void OnInit(InitEvent e)
+        private void On(InitEvent e)
         {
             new Init2SendMessage()
                 .SendIn(this.BotBits);
         }
 
         [EventListener(EventPriority.Low)]
-        private void OnMessage(PlayerIOMessageEvent e)
+        private void On(PlayerIOMessageEvent e)
         {
             Type handler;
             if (this._messageRegister.TryGetHandler(e.Message.Type, out handler))

@@ -146,14 +146,14 @@ namespace BotBits
 
 
         [EventListener(GlobalPriority.AfterMost)]
-        private void OnQueueChat(QueueChatEvent e)
+        private void On(QueueChatEvent e)
         {
             if (!e.Cancelled)
                 this.QueueChat(e.Message);
         }
 
         [EventListener]
-        private void OnChat(ChatEvent e)
+        private void On(ChatEvent e)
         {
             if (e.Player == Players.Of(this.BotBits).OwnPlayer)
             {
@@ -164,7 +164,7 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.Low)]
-        private void OnWrite(WriteEvent e)
+        private void On(WriteEvent e)
         {
             const string pmPrefix = "* ";
             const string pmSuffix = " > you";
