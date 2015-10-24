@@ -413,6 +413,8 @@ namespace BotBits
                 {
                     p.GoldCoins = default(int);
                     p.BlueCoins = default(int);
+                    p.ClearGoldCoins();
+                    p.ClearBlueCoins();
                 }
 
                 new RespawnEvent(p, tele.X, tele.Y, tele.Deaths, e.ResetCoins, causedByDeath)

@@ -477,6 +477,15 @@ namespace BotBits
             }
         }
 
+        [Pure]
+        public int GetGoldCoinsCount()
+        {
+            lock (this._goldCoins)
+            {
+                return this._goldCoins.Count;
+            }
+        }
+
         internal void AddGoldCoin(Point loc)
         {
             lock (this._goldCoins)
@@ -492,6 +501,15 @@ namespace BotBits
                 this._goldCoins.Remove(loc);
             }
         }
+
+        public void ClearGoldCoins()
+        {
+            lock (this._goldCoins)
+            {
+                this._goldCoins.Clear();
+            }
+        }
+
 
         [Pure]
         public bool HasBlueCoin(Point loc)
@@ -511,6 +529,15 @@ namespace BotBits
             }
         }
 
+        [Pure]
+        public int GetBlueCoinsCount()
+        {
+            lock (this._blueCoins)
+            {
+                return this._blueCoins.Count;
+            }
+        }
+
         internal void AddBlueCoin(Point loc)
         {
             lock (this._blueCoins)
@@ -527,6 +554,13 @@ namespace BotBits
             }
         }
 
+        public void ClearBlueCoins()
+        {
+            lock (this._blueCoins)
+            {
+                this._blueCoins.Clear();
+            }
+        }
 
         public override void Set<T>(string id, T value)
         {
