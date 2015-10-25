@@ -203,14 +203,14 @@ namespace BotBits
         ///     Gets the goal. (Only on goal blocks)
         /// </summary>
         /// <value>
-        ///     The coins to collect.
+        ///     The goal.
         /// </value>
         /// <exception cref="System.InvalidOperationException">This property can only be accessed on goal blocks.</exception>
         public uint Goal
         {
             get
             {
-                if (this.Type != ForegroundType.Goal)
+                if (this.Type != ForegroundType.Goal && this.Type != ForegroundType.ToggleGoal)
                     throw new InvalidOperationException("This property can only be accessed on goal blocks.");
 
                 return (uint)this._args;

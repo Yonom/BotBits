@@ -16,9 +16,9 @@ namespace BotBits
             blocks.Place(x, y, new ForegroundBlock(block));
         }
 
-        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, int coinsToCollect)
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, int goal)
         {
-            blocks.Place(x, y, new ForegroundBlock(block, coinsToCollect));
+            blocks.Place(x, y, new ForegroundBlock(block, goal));
         }
 
         public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, uint args)
@@ -83,9 +83,9 @@ namespace BotBits
             blocks.Set(new ForegroundBlock(block));
         }
 
-        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, int coinsToCollect)
+        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, int goal)
         {
-            blocks.Set(new ForegroundBlock(block, coinsToCollect));
+            blocks.Set(new ForegroundBlock(block, goal));
         }
 
         public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, uint args)
@@ -137,9 +137,9 @@ namespace BotBits
             blocks.Set(new ForegroundBlock(block));
         }
 
-        public static void Set(this BlocksItem blocks, Foreground.Id block, int coinsToCollect)
+        public static void Set(this BlocksItem blocks, Foreground.Id block, int goal)
         {
-            blocks.Set(new ForegroundBlock(block, coinsToCollect));
+            blocks.Set(new ForegroundBlock(block, goal));
         }
 
         public static void Set(this BlocksItem blocks, Foreground.Id block, uint args)
