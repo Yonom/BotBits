@@ -50,6 +50,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\DisposingEvent.cs" />
     <Compile Include="Helpers\PlayerData\PlayerAchivements.cs" />
     <Compile Include="Helpers\PlayerData\PlayerData.cs" />
     <Compile Include="Helpers\VersionCache.cs" />

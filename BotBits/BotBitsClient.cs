@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Threading;
+using BotBits.Events;
 using JetBrains.Annotations;
 
 namespace BotBits
@@ -11,6 +12,8 @@ namespace BotBits
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly PackageLoader _packageLoader;
+
+        private int _disposed;
 
         public BotBitsClient() : this(BotServices.GetScheduler())
         {
@@ -22,11 +25,16 @@ namespace BotBits
             this.Extensions = new List<Type>();
 
             DefaultExtension.LoadInto(this, handle);
+            Scheduler.Of(this).InitScheduler(false);
         }
 
         public void Dispose()
         {
-            this._packageLoader.Dispose();
+            if (Interlocked.Exchange(ref this._disposed, 1) == 0)
+            {
+                new DisposingEvent().RaiseIn(this);
+                this._packageLoader.Dispose();
+            }
         }
 
         [UsedImplicitly]
