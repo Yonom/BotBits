@@ -34,6 +34,7 @@ namespace BotBits
             {
                 new DisposingEvent().RaiseIn(this);
                 this._packageLoader.Dispose();
+                new DisposedEvent().RaiseIn(this);
             }
         }
 
