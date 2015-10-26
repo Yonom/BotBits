@@ -9,6 +9,50 @@ namespace BotBits
     public static class ChatExtensions
     {
         /// <summary>
+        /// Gives or takes god mode access to the specified player (/givegod &lt;username&gt; &lt;canGod&gt;).
+        /// </summary>
+        /// <param name="chat">The chat.</param>
+        /// <param name="username">The username.</param>
+        /// <param name="canGod">if set to <c>true</c> the player can god.</param>
+        public static void GiveGod(this IChat chat, string username, bool canGod)
+        {
+            chat.Say("/givegod {0} {1}", username, canGod);
+        }
+
+        /// <summary>
+        /// Sets the team of the given player (/setteam &lt;username&gt; &lt;team&gt;).
+        /// </summary>
+        /// <param name="chat">The chat.</param>
+        /// <param name="username">The username.</param>
+        /// <param name="team">The team.</param>
+        public static void SetTeam(this IChat chat, string username, Team team)
+        {
+            chat.Say("/setteam {0} {1}", username, team);
+        }
+
+        /// <summary>
+        /// Clears the effects a player has  (/cleareffects &lt;username&gt;).
+        /// </summary>
+        /// <param name="chat">The chat.</param>
+        /// <param name="username">The username.</param>
+        public static void ClearEffects(this IChat chat, string username)
+        {
+            chat.Say("/cleareffects {0}", username);
+        }
+
+        /// <summary>
+        /// Forces the player out / into god mode (/forcefly &lt;username&gt; &lt;flying&gt;).
+        /// </summary>
+        /// <param name="chat">The chat.</param>
+        /// <param name="username">The username.</param>
+        /// <param name="flying">if set to <c>true</c> the player will be forced into flying.</param>
+        public static void ForceFly(this IChat chat, string username, bool flying)
+        {
+            chat.Say("/forcefly {0} {1}", username, flying);
+        }
+
+
+        /// <summary>
         /// Gives edit to the specified username  (/giveedit &lt;username&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
@@ -184,16 +228,6 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Changes the visibility of the room (/visible &lt;visible&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="visible">if set to <c>true</c>, the room will be joinable by anyone.</param>
-        public static void ChangeVisibility(this IChat chat, bool visible)
-        {
-            chat.Say("/visible {0}", visible);
-        }
-
-        /// <summary>
         ///     Loads the level to the most recent saved version (/loadlevel).
         /// </summary>
         public static void LoadLevel(this IChat chat)
@@ -291,16 +325,6 @@ namespace BotBits
         {
             chat.PrivateMessage(target, String.Format(message, args));
         }
-        
-        /// <summary>
-        /// Hides the level from the lobby (/hidelobby &lt;hidden&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="hidden">if set to <c>true</c>, the level will be hidden in the lobby.</param>
-        public static void HideLobby(this IChat chat, bool hidden)
-        {
-            chat.Say("/hidelobby {0}", hidden);
-        }
 
         /// <summary>
         /// Says the specified message.
@@ -311,7 +335,7 @@ namespace BotBits
         [StringFormatMethod("msg")]
         public static void Say(this IChat chat, string msg, params object[] args)
         {
-            chat.Say(String.Format(msg, args));
+            chat.Say(msg, args);
         }
 
         /// <summary>

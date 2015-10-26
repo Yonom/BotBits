@@ -97,5 +97,25 @@ namespace BotBits
         {
             Chat.Of(player.BotBits).Teleport(player.Username, x, y);
         }
+
+        public static void ForceFly(this Player player, bool flying)
+        {
+            Chat.Of(player.BotBits).ForceFly(player.Username, flying);
+        }
+
+        public static void GiveGod(this Player player, bool canGod)
+        {
+            Chat.Of(player.BotBits).GiveGod(player.Username, canGod);
+        }
+
+        public static void ClearEffects(this Player player)
+        {
+            Chat.Of(player.BotBits).ClearEffects(player.Username);
+        }
+
+        public static void SetTeam(this Player player, Team team)
+        {
+            Chat.Of(player.BotBits).SetTeam(player.Username, team);
+        }
     }
 }
