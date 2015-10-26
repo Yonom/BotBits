@@ -335,7 +335,8 @@ namespace BotBits
         [StringFormatMethod("msg")]
         public static void Say(this IChat chat, string msg, params object[] args)
         {
-            chat.Say(msg, args);
+            // ReSharper disable once RedundantStringFormatCall
+            chat.Say(String.Format(msg, args));
         }
 
         /// <summary>
