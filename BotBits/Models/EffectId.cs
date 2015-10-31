@@ -8,6 +8,7 @@
         Protection = 3,
         Curse = 4,
         Zombie = 5,
-        Team = 6
+        //Team = 6,
+        LowGravity = 7,
     }
 }

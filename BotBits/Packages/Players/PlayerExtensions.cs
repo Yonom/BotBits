@@ -36,14 +36,14 @@ namespace BotBits
             Chat.Of(player.BotBits).RemoveEdit(player.Username);
         }
 
-        public static void GodOn(this Player player)
+        public static void GiveGod(this Player player)
         {
-            Chat.Of(player.BotBits).GodOn(player.Username);
+            Chat.Of(player.BotBits).GiveGod(player.Username);
         }
 
-        public static void GodOff(this Player player)
+        public static void RemoveGod(this Player player)
         {
-            Chat.Of(player.BotBits).GodOff(player.Username);
+            Chat.Of(player.BotBits).RemoveGod(player.Username);
         }
 
         public static void Kill(this Player player)
@@ -102,12 +102,7 @@ namespace BotBits
         {
             Chat.Of(player.BotBits).ForceFly(player.Username, flying);
         }
-
-        public static void GiveGod(this Player player, bool canGod)
-        {
-            Chat.Of(player.BotBits).GiveGod(player.Username, canGod);
-        }
-
+        
         public static void ClearEffects(this Player player)
         {
             Chat.Of(player.BotBits).ClearEffects(player.Username);

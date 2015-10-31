@@ -9,17 +9,6 @@ namespace BotBits
     public static class ChatExtensions
     {
         /// <summary>
-        /// Gives or takes god mode access to the specified player (/givegod &lt;username&gt; &lt;canGod&gt;).
-        /// </summary>
-        /// <param name="chat">The chat.</param>
-        /// <param name="username">The username.</param>
-        /// <param name="canGod">if set to <c>true</c> the player can god.</param>
-        public static void GiveGod(this IChat chat, string username, bool canGod)
-        {
-            chat.Say("/givegod {0} {1}", username, canGod);
-        }
-
-        /// <summary>
         /// Sets the team of the given player (/setteam &lt;username&gt; &lt;team&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
@@ -173,23 +162,23 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Enables god mode of the specified username (/godon &lt;username&gt;).
+        /// Enables god mode of the specified username (/givegod &lt;username&gt;).
         /// </summary>
-        /// <param name="chat">Chat.</param>
-        /// <param name="username">Username.</param>
-        public static void GodOn(this IChat chat, string username)
+        /// <param name="chat">The chat.</param>
+        /// <param name="username">The username.</param>
+        public static void GiveGod(this IChat chat, string username)
         {
-            chat.Say("/godon {0}", username);
+            chat.Say("/givegod {0}", username);
         }
 
         /// <summary>
-        /// Disables god mode of the specified username (/godoff &lt;username&gt;).
+        /// Disables god mode of the specified username (/removegod &lt;username&gt;).
         /// </summary>
-        /// <param name="chat">Chat.</param>
-        /// <param name="username">Username.</param>
-        public static void GodOff(this IChat chat, string username)
+        /// <param name="chat">The chat.</param>
+        /// <param name="username">The username.</param>
+        public static void RemoveGod(this IChat chat, string username)
         {
-            chat.Say("/godoff {0}", username);
+            chat.Say("/removegod {0}", username);
         }
 
         /// <summary>
