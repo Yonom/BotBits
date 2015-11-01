@@ -17,8 +17,12 @@
     <ProjectGuid>b1149227-8717-4962-a462-5625f8b32408</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
-    <NuProjPath Condition=" '$(NuProjPath)' == '' ">$(MSBuildExtensionsPath)\NuProj\</NuProjPath>
+    <NuProjPath Condition=" '$(NuProjPath)' == '' ">..\packages\NuProj.0.10.4-beta-gf7fc34e7d8\tools\</NuProjPath>
   </PropertyGroup>
+  <!--<PropertyGroup>
+    <NuProjPath Condition=" '$(NuProjPath)' == '' ">$(MSBuildExtensionsPath)\NuProj\</NuProjPath>
+  </PropertyGroup>-->
+  
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>BotBits</Id>

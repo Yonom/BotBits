@@ -13,7 +13,7 @@ namespace BotBits.Nito
     /// </summary>
     /// <typeparam name="T">The type of elements contained in the deque.</typeparam>
     [DebuggerDisplay("Count = {Count}, Capacity = {Capacity}")]
-    [DebuggerTypeProxy(typeof (Deque<A>.DebugView))]
+    [DebuggerTypeProxy(typeof (Deque<>.DebugView))]
     internal sealed class Deque<T> : IList<T>, IList
     {
         /// <summary>
