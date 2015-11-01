@@ -3,7 +3,7 @@
 An Everybody Edits framework designed for performance and reliability.
 
 ## Installation
-Download from NuGet (link above)
+Download from NuGet (https://www.nuget.org/packages/BotBits)
 
 ## Usage
 Just create a new BotBitsClient instance, and you are good to go!
