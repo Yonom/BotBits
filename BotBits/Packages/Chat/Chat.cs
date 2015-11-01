@@ -15,7 +15,7 @@ namespace BotBits
     {
         private class ChatChannel
         {
-            public ConcurrentQueue<string> Queue = new ConcurrentQueue<string>();
+            public readonly ConcurrentQueue<string> Queue = new ConcurrentQueue<string>();
             public string LastChat = String.Empty;
             public int RepeatCount;
             public string LastSent = String.Empty;
@@ -47,7 +47,7 @@ namespace BotBits
 
         private void DoSendTick()
         {
-            foreach (var channel in _channels.Values.ToArray())
+            foreach (var channel in this._channels.Values.ToArray())
             {
                 if (this._warning && channel.LastReceived != channel.LastSent)
                 {
@@ -77,10 +77,14 @@ namespace BotBits
 
         private void QueueChat(string msg)
         {
-            var channel = GetChannel(msg);
+            var channel = this.GetChannel(msg);
             this.Enqueue(msg, channel);
 
-            // Init Timer
+            this.InitTimer();
+        }
+
+        private void InitTimer()
+        {
             if (!this._mySendTimer.Enabled)
             {
                 this.DoSendTick();
@@ -179,7 +183,8 @@ namespace BotBits
             else if (e.Title == "SYSTEM" &&
                      e.Text == "You are trying to chat too fast, spamming the chat is not nice!")
             {
-                _warning = true;
+                this._warning = true;
+                this.InitTimer();
             }
         }
 
