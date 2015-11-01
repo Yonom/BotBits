@@ -1,2 +1,2 @@
 language: csharp
-solution: BotBits.sln
+solution: BotBits/BotBits.csproj
