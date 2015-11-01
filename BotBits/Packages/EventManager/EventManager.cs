@@ -14,7 +14,7 @@ namespace BotBits
 
         public EventHandle<T> GetEvent<T>() where T : Event<T>
         {
-            return (EventHandle<T>)this._eventHandler.GetOrAdd(typeof(T), t => new EventHandle<T>(this.BotBits));
+            return (EventHandle<T>) this._eventHandler.GetOrAdd(typeof (T), t => new EventHandle<T>(this.BotBits));
         }
     }
 }

@@ -98,7 +98,7 @@ namespace BotBits
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is Rectangle && this.Equals((Rectangle)obj);
+            return obj is Rectangle && this.Equals((Rectangle) obj);
         }
 
         public override int GetHashCode()
@@ -106,9 +106,9 @@ namespace BotBits
             unchecked
             {
                 var hashCode = this.X;
-                hashCode = (hashCode * 397) ^ this.Y;
-                hashCode = (hashCode * 397) ^ this.Width;
-                hashCode = (hashCode * 397) ^ this.Height;
+                hashCode = (hashCode*397) ^ this.Y;
+                hashCode = (hashCode*397) ^ this.Width;
+                hashCode = (hashCode*397) ^ this.Height;
                 return hashCode;
             }
         }
@@ -187,8 +187,8 @@ namespace BotBits
         {
             this.X -= width;
             this.Y -= height;
-            this.Width += 2 * width;
-            this.Height += 2 * height;
+            this.Width += 2*width;
+            this.Height += 2*height;
         }
     }
 }

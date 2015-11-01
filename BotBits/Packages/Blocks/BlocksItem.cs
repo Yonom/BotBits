@@ -1,51 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BotBits
+﻿namespace BotBits
 {
     public struct BlocksItem
     {
         private readonly Blocks _blocks;
-        private readonly int _x;
-        private readonly int _y;
 
-        public int X
-        {
-            get { return this._x; }
-        }
+        public int X { get; }
 
-        public int Y
-        {
-            get { return this._y; }
-        }
+        public int Y { get; }
 
         public BlockData<ForegroundBlock> Foreground
         {
-            get { return _blocks.Foreground[this._x, this._y]; }
+            get { return this._blocks.Foreground[this.X, this.Y]; }
         }
 
         public BlockData<BackgroundBlock> Background
         {
-            get { return _blocks.Background[this._x, this._y]; }
+            get { return this._blocks.Background[this.X, this.Y]; }
         }
 
         public BlocksItem(Blocks blocks, int x, int y)
         {
             this._blocks = blocks;
-            this._x = x;
-            this._y = y;
+            this.X = x;
+            this.Y = y;
         }
 
         public void Set(ForegroundBlock block)
         {
-            this._blocks.Place(this._x, this._y, block);
+            this._blocks.Place(this.X, this.Y, block);
         }
 
         public void Set(BackgroundBlock block)
         {
-            this._blocks.Place(this._x, this._y, block);
+            this._blocks.Place(this.X, this.Y, block);
         }
     }
 }

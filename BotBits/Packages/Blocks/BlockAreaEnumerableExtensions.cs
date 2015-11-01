@@ -6,7 +6,7 @@ namespace BotBits
     {
         public static BlockAreaEnumerable In(this IBlockAreaEnumerable blockArea, Rectangle area)
         {
-            return new BlockAreaEnumerable(blockArea.Blocks, 
+            return new BlockAreaEnumerable(blockArea.Blocks,
                 Rectangle.Intersect(area, blockArea.Area));
         }
 

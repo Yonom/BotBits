@@ -27,7 +27,7 @@ namespace BotBits.Events
                 if (!Players.Of(client).Contains(userId)) continue;
                 var player = Players.Of(client)[userId];
                 var x = message.GetInteger(i + 1u);
-                var y =  message.GetInteger(i + 2u);
+                var y = message.GetInteger(i + 2u);
                 var deaths = message.GetInteger(i + 3u);
 
                 this.Data.Add(new RespawnData(player, x, y, deaths));

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BotBits
+﻿namespace BotBits
 {
     public interface IWorld : IWorld<ForegroundBlock, BackgroundBlock>
     {
-        
     }
 
     public interface IWorld<TForeground, TBackground> where TForeground : struct where TBackground : struct

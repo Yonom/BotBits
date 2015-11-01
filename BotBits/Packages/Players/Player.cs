@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace BotBits
@@ -11,7 +10,20 @@ namespace BotBits
     [DebuggerDisplay("Username = {Username}, Smiley = {Smiley}")]
     public sealed class Player : MetadataCollection, IEquatable<Player>
     {
-        public static readonly Player Nobody = new Player(null, -1) {Username = String.Empty};
+        public static readonly Player Nobody = new Player(null, -1) {Username = string.Empty};
+        private readonly HashSet<Point> _blueCoins = new HashSet<Point>();
+
+        [CanBeNull] private readonly BotBitsClient _botBits;
+
+        private readonly Dictionary<Effect, ActiveEffect> _effects = new Dictionary<Effect, ActiveEffect>();
+        private readonly HashSet<Point> _goldCoins = new HashSet<Point>();
+        private readonly HashSet<int> _switches = new HashSet<int>();
+
+        internal Player([CanBeNull] BotBitsClient botBits, int userId)
+        {
+            this._botBits = botBits;
+            this.UserId = userId;
+        }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public BotBitsClient BotBits
@@ -24,20 +36,6 @@ namespace BotBits
             }
         }
 
-        private readonly Dictionary<Effect, ActiveEffect> _effects = new Dictionary<Effect, ActiveEffect>();
-        private readonly HashSet<int> _switches = new HashSet<int>();
-        private readonly HashSet<Point> _goldCoins = new HashSet<Point>();
-        private readonly HashSet<Point> _blueCoins = new HashSet<Point>();
-
-        [CanBeNull]
-        private readonly BotBitsClient _botBits;
-
-        internal Player([CanBeNull] BotBitsClient botBits, int userId)
-        {
-            this._botBits = botBits;
-            this.UserId = userId;
-        }
-        
         /// <summary>
         ///     Gets the player's username.
         /// </summary>
@@ -52,7 +50,7 @@ namespace BotBits
         /// <value>
         ///     The player's user identifier.
         /// </value>
-        public int UserId { get; private set; }
+        public int UserId { get; }
 
         /// <summary>
         ///     Gets a value indicating whether this player has god mode enabled.
@@ -103,10 +101,10 @@ namespace BotBits
         public bool Connected { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the user identifier unique to this user's account.
+        ///     Gets or sets the user identifier unique to this user's account.
         /// </summary>
         /// <value>
-        /// The user identifier.
+        ///     The user identifier.
         /// </value>
         public string ConnectUserId { get; set; }
 
@@ -125,20 +123,20 @@ namespace BotBits
         ///     The player's smiley.
         /// </value>
         public Smiley Smiley { get; internal set; }
-        
+
         /// <summary>
-        /// Gets the aura that apperars around this user when they go in god mode.
+        ///     Gets the aura that apperars around this user when they go in god mode.
         /// </summary>
         /// <value>
-        /// The aura.
+        ///     The aura.
         /// </value>
         public Aura Aura { get; internal set; }
 
         /// <summary>
-        /// Gets the badge this player has selected.
+        ///     Gets the badge this player has selected.
         /// </summary>
         /// <value>
-        /// The badge.
+        ///     The badge.
         /// </value>
         public Badge Badge { get; internal set; }
 
@@ -231,10 +229,10 @@ namespace BotBits
         public bool SpaceDown { get; internal set; }
 
         /// <summary>
-        /// Gets a value indicating whether has just pressed spacebar.
+        ///     Gets a value indicating whether has just pressed spacebar.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if space was just pressed; otherwise, <c>false</c>.
+        ///     <c>true</c> if space was just pressed; otherwise, <c>false</c>.
         /// </value>
         public bool SpaceJustDown { get; internal set; }
 
@@ -245,12 +243,12 @@ namespace BotBits
         ///     <c>true</c> if this player has a silver crown; otherwise, <c>false</c>.
         /// </value>
         public bool HasSilverCrown { get; internal set; }
-        
+
         /// <summary>
-        /// Gets the team this user is in.
+        ///     Gets the team this user is in.
         /// </summary>
         /// <value>
-        /// The team.
+        ///     The team.
         /// </value>
         public Team Team { get; internal set; }
 
@@ -266,18 +264,18 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Gets the color of this user's name when he/she chats.
+        ///     Gets the color of this user's name when he/she chats.
         /// </summary>
         /// <value>
-        /// The color of the chat.
+        ///     The color of the chat.
         /// </value>
         public uint ChatColor { get; internal set; }
 
         /// <summary>
-        /// Gets a value indicating whether this player is a crew member.
+        ///     Gets a value indicating whether this player is a crew member.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if the player is a crew member; otherwise, <c>false</c>.
+        ///     <c>true</c> if the player is a crew member; otherwise, <c>false</c>.
         /// </value>
         public bool CrewMember { get; internal set; }
 
@@ -316,10 +314,10 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="Player"/> is the room owner.
+        ///     Gets a value indicating whether this <see cref="Player" /> is the room owner.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if owner; otherwise, <c>false</c>.
+        ///     <c>true</c> if owner; otherwise, <c>false</c>.
         /// </value>
         public bool Owner
         {
@@ -372,7 +370,7 @@ namespace BotBits
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj is Player && this.Equals((Player)obj);
+            return obj is Player && this.Equals((Player) obj);
         }
 
         public override int GetHashCode()
@@ -574,23 +572,28 @@ namespace BotBits
     public class ActiveEffect
     {
         private readonly DateTime _expireTime;
-        public Effect Effect { get; private set; }
-        public bool Expires { get; private set; }
-        public TimeSpan Duration { get; private set; }
-        public TimeSpan TimeLeft { get
-        {
-            if (!this.Expires)
-                throw new NotSupportedException("Cannot call TimeLeft on an effect that does not expire.");
-            return DateTime.UtcNow.Subtract(this._expireTime); } 
-        }
 
         internal ActiveEffect(Effect effect, bool expires, TimeSpan timeLeft, TimeSpan duration)
         {
             this.Effect = effect;
             this.Expires = expires;
             this.Duration = duration;
-            
+
             if (this.Expires) this._expireTime = DateTime.UtcNow.Add(timeLeft);
+        }
+
+        public Effect Effect { get; }
+        public bool Expires { get; }
+        public TimeSpan Duration { get; private set; }
+
+        public TimeSpan TimeLeft
+        {
+            get
+            {
+                if (!this.Expires)
+                    throw new NotSupportedException("Cannot call TimeLeft on an effect that does not expire.");
+                return DateTime.UtcNow.Subtract(this._expireTime);
+            }
         }
     }
 }

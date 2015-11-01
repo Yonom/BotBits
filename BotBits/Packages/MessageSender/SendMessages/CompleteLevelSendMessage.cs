@@ -7,9 +7,6 @@ namespace BotBits.SendMessages
     /// </summary>
     public sealed class CompleteLevelSendMessage : SendMessage<CompleteLevelSendMessage>
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-
         public CompleteLevelSendMessage()
         {
         }
@@ -19,6 +16,9 @@ namespace BotBits.SendMessages
             this.X = x;
             this.Y = y;
         }
+
+        public int X { get; set; }
+        public int Y { get; set; }
 
         /// <summary>
         ///     Gets the PlayerIO message representing the data in this <see cref="SendMessage{T}" />.

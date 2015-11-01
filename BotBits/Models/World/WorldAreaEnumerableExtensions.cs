@@ -4,7 +4,8 @@ namespace BotBits
 {
     public static class WorldAreaEnumerableExtensions
     {
-        public static WorldAreaEnumerable<TForeground, TBackground> In<TForeground, TBackground>(this IWorldAreaEnumerable<TForeground, TBackground> blockArea, Rectangle area)
+        public static WorldAreaEnumerable<TForeground, TBackground> In<TForeground, TBackground>(
+            this IWorldAreaEnumerable<TForeground, TBackground> blockArea, Rectangle area)
             where TForeground : struct
             where TBackground : struct
         {
@@ -12,14 +13,16 @@ namespace BotBits
                 Rectangle.Intersect(area, blockArea.Area));
         }
 
-        public static WorldAreaEnumerable<TForeground, TBackground> In<TForeground, TBackground>(this IWorldAreaEnumerable<TForeground, TBackground> blockArea, Point p1, Point p2)
+        public static WorldAreaEnumerable<TForeground, TBackground> In<TForeground, TBackground>(
+            this IWorldAreaEnumerable<TForeground, TBackground> blockArea, Point p1, Point p2)
             where TForeground : struct
             where TBackground : struct
         {
             return blockArea.In(new Rectangle(p1, p2));
         }
 
-        public static WorldAreaEnumerable<TForeground, TBackground> In<TForeground, TBackground>(this IWorldAreaEnumerable<TForeground, TBackground> blockArea, int x, int y, int width, int height)
+        public static WorldAreaEnumerable<TForeground, TBackground> In<TForeground, TBackground>(
+            this IWorldAreaEnumerable<TForeground, TBackground> blockArea, int x, int y, int width, int height)
             where TForeground : struct
             where TBackground : struct
         {
@@ -27,11 +30,11 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Creates a copy of the given world.
+        ///     Creates a copy of the given world.
         /// </summary>
         /// <param name="worldArea">The block area.</param>
         /// <returns></returns>
-        public static World CreateCopy(this IWorldAreaEnumerable<ForegroundBlock, BackgroundBlock> worldArea) 
+        public static World CreateCopy(this IWorldAreaEnumerable<ForegroundBlock, BackgroundBlock> worldArea)
         {
             var area = worldArea.Area;
             var world = new World(area.Width, area.Height);
@@ -44,8 +47,10 @@ namespace BotBits
             return world;
         }
 
-        public static void SetWorld<TForeground, TBackground>(this IWorldAreaEnumerable<TForeground, TBackground> worldArea, IWorldAreaEnumerable<TForeground, TBackground> worldArea2) 
-            where TForeground : struct 
+        public static void SetWorld<TForeground, TBackground>(
+            this IWorldAreaEnumerable<TForeground, TBackground> worldArea,
+            IWorldAreaEnumerable<TForeground, TBackground> worldArea2)
+            where TForeground : struct
             where TBackground : struct
         {
             var area = worldArea.Area;

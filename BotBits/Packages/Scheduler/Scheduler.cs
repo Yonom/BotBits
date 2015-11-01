@@ -12,6 +12,11 @@ namespace BotBits
         {
         }
 
+        public void Dispose()
+        {
+            this._schedulerHandle.Dispose();
+        }
+
         public void Schedule(Action task)
         {
             this.InitScheduler(true);
@@ -38,7 +43,7 @@ namespace BotBits
                     ? BotServices.GetOrCreateScheduler()
                     : BotServices.GetScheduler();
 
-                if (!CompareSetScheduler(scheduler))
+                if (!this.CompareSetScheduler(scheduler))
                     scheduler.Dispose();
             }
         }
@@ -46,11 +51,6 @@ namespace BotBits
         private bool CompareSetScheduler(ISchedulerHandle handle)
         {
             return Interlocked.CompareExchange(ref this._schedulerHandle, handle, null) == null;
-        }
-
-        public void Dispose()
-        {
-            this._schedulerHandle.Dispose();
         }
     }
 }

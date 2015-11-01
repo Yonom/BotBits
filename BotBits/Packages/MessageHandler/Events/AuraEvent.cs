@@ -8,7 +8,7 @@ namespace BotBits.Events
         internal AuraEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Aura = (Aura)message.GetInt(1);
+            this.Aura = (Aura) message.GetInt(1);
         }
 
         public Aura Aura { get; set; }

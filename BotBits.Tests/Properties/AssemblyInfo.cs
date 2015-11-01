@@ -41,5 +41,4 @@ using System.Runtime.InteropServices;
 
 public class NewClass
 {
-    
 }

@@ -4,14 +4,14 @@ namespace BotBits
 {
     public class PlayerData
     {
-        public PlayerObject PlayerObject { get; private set; }
-        public ShopData ShopData { get; private set; }
-
         public PlayerData(PlayerObject playerObject, ShopData shopData)
         {
             this.PlayerObject = playerObject;
             this.ShopData = shopData;
         }
+
+        public PlayerObject PlayerObject { get; }
+        public ShopData ShopData { get; }
 
         public bool HasSmiley(Smiley smiley)
         {
@@ -27,8 +27,8 @@ namespace BotBits
         {
             if (pack == null) return true;
 
-            return this.ShopData.GetCount(pack.Package) > 0 && 
-                (!pack.BuildersClubOnly || this.PlayerObject.ClubMember);
+            return this.ShopData.GetCount(pack.Package) > 0 &&
+                   (!pack.BuildersClubOnly || this.PlayerObject.ClubMember);
         }
 
 
@@ -60,7 +60,7 @@ namespace BotBits
                 default:
                     if (this.PlayerObject.ClubMember) return true;
                     if (pack.BuildersClubOnly) return false;
-                check:
+                    check:
                     return this.ShopData.GetCount(pack.Package) > 0;
             }
         }

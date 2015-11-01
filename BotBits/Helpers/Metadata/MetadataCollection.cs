@@ -12,7 +12,7 @@ namespace BotBits
 
         private void OnMetadataChanged(MetadataChangedEventArgs e)
         {
-            EventHandler<MetadataChangedEventArgs> handler = this.MetadataChanged;
+            var handler = this.MetadataChanged;
             if (handler != null) handler(this, e);
         }
 
@@ -37,13 +37,13 @@ namespace BotBits
 
             metadata = default(TMetadata);
             if (metadataObj != null)
-                metadata = (TMetadata)metadataObj;
+                metadata = (TMetadata) metadataObj;
         }
 
         private bool SetMetadata<TMetaData>(string metadataId, TMetaData value)
         {
             object oldObj = default(TMetaData);
-            var newObj = (TMetaData)this._metadatas.AddOrUpdate(metadataId, value, (k, v) =>
+            var newObj = (TMetaData) this._metadatas.AddOrUpdate(metadataId, value, (k, v) =>
             {
                 oldObj = v;
                 return value;

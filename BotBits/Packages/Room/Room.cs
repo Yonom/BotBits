@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using BotBits.Events;
 using BotBits.SendMessages;
+using JetBrains.Annotations;
 
 namespace BotBits
 {
@@ -11,6 +11,12 @@ namespace BotBits
         private readonly HashSet<Key> _enabledKeys = new HashSet<Key>();
         private AccessRight _accessRight;
         private bool _canEdit;
+
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
+        public Room()
+        {
+        }
+
         public string WorldName { get; private set; }
         public string Owner { get; private set; }
         public int Plays { get; private set; }
@@ -35,14 +41,15 @@ namespace BotBits
         public bool CanEdit
         {
             get { return this._canEdit; }
-            private set {             
+            private set
+            {
                 if (this.CanEdit != value)
                 {
                     this._canEdit = value;
                     new EditRightChangedEvent(this._canEdit)
                         .RaiseIn(this.BotBits);
                 }
-            } 
+            }
         }
 
         public AccessRight AccessRight
@@ -57,11 +64,6 @@ namespace BotBits
                         .RaiseIn(this.BotBits);
                 }
             }
-        }
-
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
-        public Room()
-        {
         }
 
         [Pure]
@@ -163,7 +165,8 @@ namespace BotBits
         public void SetStatus(WorldStatus status)
         {
             if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change world status."); // TODO update messages
+                throw new InvalidOperationException("Only owners are allowed to change world status.");
+                    // TODO update messages
 
             new SetStatusSendMessage(status)
                 .SendIn(this.BotBits);
@@ -180,6 +183,7 @@ namespace BotBits
             new AddToCrewSendMessage()
                 .SendIn(this.BotBits);
         }
+
         public void RejectAddToCrew()
         {
             new RejectAddToCrewSendMessage()

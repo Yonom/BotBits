@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BotBits
+﻿namespace BotBits
 {
     public sealed class PlayerIOGame : IPlayerIOGame<LoginClient>
     {
@@ -13,7 +8,7 @@ namespace BotBits
             this.GameId = gameId;
         }
 
-        public string GameId { get; private set; }
-        public IConnectionManager<LoginClient> ConnectionManager { get; private set; }
+        public string GameId { get; }
+        public IConnectionManager<LoginClient> ConnectionManager { get; }
     }
 }

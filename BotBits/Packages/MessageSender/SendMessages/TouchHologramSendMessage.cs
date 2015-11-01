@@ -5,7 +5,7 @@ namespace BotBits.SendMessages
     public sealed class TouchHologramSendMessage : SendMessage<TouchHologramSendMessage>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TouchHologramSendMessage"/> class.
+        ///     Initializes a new instance of the <see cref="TouchHologramSendMessage" /> class.
         /// </summary>
         /// <param name="x">The x-coordinate.</param>
         /// <param name="y">The y-coordinate.</param>

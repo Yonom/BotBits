@@ -5,19 +5,19 @@ namespace BotBits
 {
     public class BlockAreaEnumerable : IBlockAreaEnumerable
     {
-        public Blocks Blocks { get; private set; }
-        public Rectangle Area { get; private set; }
-
         public BlockAreaEnumerable(Blocks blocks, Rectangle area)
         {
             this.Blocks = blocks;
             this.Area = area;
         }
 
+        public Blocks Blocks { get; }
+        public Rectangle Area { get; }
+
         public IEnumerator<BlocksItem> GetEnumerator()
         {
-            for (int y = this.Area.Top; y <= this.Area.Bottom; y++)
-                for (int x = this.Area.Left; x <= this.Area.Right; x++)
+            for (var y = this.Area.Top; y <= this.Area.Bottom; y++)
+                for (var x = this.Area.Left; x <= this.Area.Right; x++)
                     yield return new BlocksItem(
                         this.Blocks, x, y);
         }

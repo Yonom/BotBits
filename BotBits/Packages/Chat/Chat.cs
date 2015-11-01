@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
 using System.Timers;
 using BotBits.Events;
@@ -13,26 +10,25 @@ namespace BotBits
 {
     public sealed class Chat : EventListenerPackage<Chat>, IDisposable, IChat
     {
-        private class ChatChannel
-        {
-            public readonly ConcurrentQueue<string> Queue = new ConcurrentQueue<string>();
-            public string LastChat = String.Empty;
-            public int RepeatCount;
-            public string LastSent = String.Empty;
-            public string LastReceived = String.Empty;
-        }
+        private const int MaxMessageLength = 140;
 
         private readonly ConcurrentDictionary<string, ChatChannel> _channels
             = new ConcurrentDictionary<string, ChatChannel>();
-        private const int MaxMessageLength = 140;
+
         private readonly Timer _mySendTimer;
         private bool _warning;
 
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Chat()
         {
-            this._mySendTimer = new Timer(600); 
+            this._mySendTimer = new Timer(600);
             this._mySendTimer.Elapsed += this.SendTimer_Elapsed;
+        }
+
+        public void Say(string msg)
+        {
+            new QueueChatEvent(msg)
+                .RaiseIn(this.BotBits);
         }
 
         void IDisposable.Dispose()
@@ -98,7 +94,7 @@ namespace BotBits
             string channel = null;
             if (msg.StartsWith("/pm ", StringComparison.OrdinalIgnoreCase))
                 channel = msg.Split(' ').Skip(1).FirstOrDefault();
-            return channel ?? String.Empty;
+            return channel ?? string.Empty;
         }
 
         [EventListener(EventPriority.Lowest)]
@@ -116,19 +112,19 @@ namespace BotBits
                 e.Cancelled = true;
                 return;
             }
-            
+
             // Queue the message and chop it into 140 char parts
-            var prefix = String.Empty;
+            var prefix = string.Empty;
             var message = e.Message;
             if (pm)
             {
                 var args = e.Message.Split(' ');
-                prefix = String.Join(" ", args.Take(2)) + " ";
-                message = String.Join(" ", args.Skip(2));
+                prefix = string.Join(" ", args.Take(2)) + " ";
+                message = string.Join(" ", args.Skip(2));
             }
 
             // Dont send the same thing more than 3 times
-            var channel = GetChannel(e.Message);
+            var channel = this.GetChannel(e.Message);
             var maxLength = MaxMessageLength - prefix.Length;
             while (this.CheckHistory(this.Truncate(message, maxLength), channel))
             {
@@ -188,12 +184,6 @@ namespace BotBits
             }
         }
 
-        public void Say(string msg)
-        {
-            new QueueChatEvent(msg)
-                .RaiseIn(this.BotBits);
-        }
-        
         private void Enqueue(string str, string channel)
         {
             this.GetChatChannel(channel).Queue.Enqueue(str);
@@ -237,6 +227,15 @@ namespace BotBits
         private ChatChannel GetChatChannel(string channel)
         {
             return this._channels.GetOrAdd(channel, c => new ChatChannel());
+        }
+
+        private class ChatChannel
+        {
+            public readonly ConcurrentQueue<string> Queue = new ConcurrentQueue<string>();
+            public string LastChat = string.Empty;
+            public string LastReceived = string.Empty;
+            public string LastSent = string.Empty;
+            public int RepeatCount;
         }
     }
 }

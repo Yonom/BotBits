@@ -8,7 +8,7 @@ namespace BotBits.Events
         internal TeamEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Team = (Team)message.GetInt(1);
+            this.Team = (Team) message.GetInt(1);
         }
 
         public Team Team { get; set; }

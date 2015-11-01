@@ -123,7 +123,6 @@ namespace BotBits
                 Yellow = (Id) 558,
                 RedWhiteStripe = (Id) 563,
                 Blue = (Id) 607;
-
         }
 
         public static class Prison
@@ -362,22 +361,20 @@ namespace BotBits
 
         public static class Domestic
         {
-            [Pack("brickdomestic")]
-            public const Id
-                Yellow = (Id)683,
-                Brown = (Id)684,
-                Red = (Id)685,
-                Blue = (Id)686,
-                Greeb = (Id)687;
+            [Pack("brickdomestic")] public const Id
+                Yellow = (Id) 683,
+                Brown = (Id) 684,
+                Red = (Id) 685,
+                Blue = (Id) 686,
+                Greeb = (Id) 687;
         }
 
         public static class Halloween2015
         {
-            [Pack("brickhalloween2015")]
-            public const Id
-                MossyBrick = (Id)694,
-                Siding = (Id)695,
-                Rooftop = (Id)696;
+            [Pack("brickhalloween2015")] public const Id
+                MossyBrick = (Id) 694,
+                Siding = (Id) 695,
+                Rooftop = (Id) 696;
         }
     }
 }

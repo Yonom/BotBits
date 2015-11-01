@@ -7,11 +7,17 @@ using BotBits.SendMessages;
 
 namespace BotBits
 {
-    public sealed class Blocks : EventListenerPackage<Blocks>,  IBlockAreaEnumerable,
+    public sealed class Blocks : EventListenerPackage<Blocks>, IBlockAreaEnumerable,
         IWorld<BlockData<ForegroundBlock>, BlockData<BackgroundBlock>>
     {
         private BlockDataWorld _blockDataWorld;
         private ReadOnlyBlocksWorld _readOnlyBlocksWorld;
+
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
+        public Blocks()
+        {
+            this.World = new BlockDataWorld(0, 0);
+        }
 
         private BlockDataWorld World
         {
@@ -23,14 +29,24 @@ namespace BotBits
             }
         }
 
-        public BlocksItem At(Point point)
+        public IEnumerator<BlocksItem> GetEnumerator()
         {
-            return this.At(point.X, point.Y);
+            return this.In(this.Area).GetEnumerator();
         }
 
-        public BlocksItem At(int x, int y)
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return new BlocksItem(this, x, y);
+            return this.GetEnumerator();
+        }
+
+        Blocks IBlockAreaEnumerable.Blocks
+        {
+            get { return this; }
+        }
+
+        public Rectangle Area
+        {
+            get { return new Rectangle(0, 0, this.Width, this.Height); }
         }
 
         public int Height
@@ -53,21 +69,25 @@ namespace BotBits
             get { return this._readOnlyBlocksWorld.Background; }
         }
 
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
-        public Blocks()
+        public BlocksItem At(Point point)
         {
-            this.World = new BlockDataWorld(0, 0);
+            return this.At(point.X, point.Y);
         }
-        
+
+        public BlocksItem At(int x, int y)
+        {
+            return new BlocksItem(this, x, y);
+        }
+
         public void Place(int x, int y, BackgroundBlock block)
         {
-            new PlaceSendMessage(Layer.Background, x, y, (int)block.Id)
+            new PlaceSendMessage(Layer.Background, x, y, (int) block.Id)
                 .SendIn(this.BotBits);
         }
 
         public void Place(int x, int y, ForegroundBlock block)
         {
-            new PlaceSendMessage(Layer.Foreground, x, y, (int)block.Id, block.GetArgs())
+            new PlaceSendMessage(Layer.Foreground, x, y, (int) block.Id, block.GetArgs())
                 .SendIn(this.BotBits);
         }
 
@@ -106,11 +126,11 @@ namespace BotBits
             switch (e.Layer)
             {
                 case Layer.Foreground:
-                    this.RaiseBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Player);
+                    this.RaiseBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Player);
                     break;
 
                 case Layer.Background:
-                    this.RaiseBackground(e.X, e.Y, new BackgroundBlock((Background.Id)e.Id), e.Player);
+                    this.RaiseBackground(e.X, e.Y, new BackgroundBlock((Background.Id) e.Id), e.Player);
                     break;
             }
         }
@@ -118,43 +138,43 @@ namespace BotBits
         [EventListener(EventPriority.Low)]
         private void On(PortalPlaceEvent e)
         {
-            this.RaisePortalBlock(e.X, e.Y, (Foreground.Id)e.Id, e.PortalId, e.PortalTarget, e.PortalRotation, e.Player);
+            this.RaisePortalBlock(e.X, e.Y, (Foreground.Id) e.Id, e.PortalId, e.PortalTarget, e.PortalRotation, e.Player);
         }
 
         [EventListener(EventPriority.Low)]
         private void On(CoinDoorPlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.CoinsToOpen, e.Player);
+            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id) e.Id, e.CoinsToOpen, e.Player);
         }
 
         [EventListener(EventPriority.Low)]
         private void On(SoundPlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.SoundId, e.Player);
+            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id) e.Id, e.SoundId, e.Player);
         }
 
         [EventListener(EventPriority.Low)]
         private void On(MorphablePlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Rotation, e.Player);
+            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Rotation, e.Player);
         }
 
         [EventListener(EventPriority.Low)]
         private void On(WorldPortalPlaceEvent e)
         {
-            this.RaiseStringBlock(e.X, e.Y, (Foreground.Id)e.Id, e.WorldPortalTarget, e.Player);
+            this.RaiseStringBlock(e.X, e.Y, (Foreground.Id) e.Id, e.WorldPortalTarget, e.Player);
         }
 
         [EventListener(EventPriority.Low)]
         private void On(LabelPlaceEvent e)
         {
-            this.RaiseLabelBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.TextColor, e.Player);
+            this.RaiseLabelBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Text, e.TextColor, e.Player);
         }
 
         [EventListener(EventPriority.Low)]
         private void On(SignPlaceEvent e)
         {
-            this.RaiseStringBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.Player);
+            this.RaiseStringBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Text, e.Player);
         }
 
         private void RaiseBlock(int x, int y, Foreground.Id block, Player player)
@@ -177,7 +197,7 @@ namespace BotBits
             this.RaiseForeground(x, y, new ForegroundBlock(block, text, textColor), player);
         }
 
-        private void RaisePortalBlock(int x, int y, Foreground.Id block, 
+        private void RaisePortalBlock(int x, int y, Foreground.Id block,
             uint portalId, uint portalTarget, Morph.Id portalRotation, Player player)
         {
             this.RaiseForeground(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation), player);
@@ -203,19 +223,6 @@ namespace BotBits
                 .RaiseIn(this.BotBits);
         }
 
-        public IEnumerator<BlocksItem> GetEnumerator()
-        {
-            return this.In(this.Area).GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
-
-        Blocks IBlockAreaEnumerable.Blocks { get { return this; } }
-        public Rectangle Area { get { return new Rectangle(0, 0, this.Width, this.Height); } }
-
         public IWorld GetWorld()
         {
             return new ProxyWorld(this);
@@ -230,8 +237,15 @@ namespace BotBits
                 this._innerWorld = innerWorld;
             }
 
-            public int Width { get { return this._innerWorld.Width; } }
-            public int Height { get { return this._innerWorld.Height; } }
+            public int Width
+            {
+                get { return this._innerWorld.Width; }
+            }
+
+            public int Height
+            {
+                get { return this._innerWorld.Height; }
+            }
 
             public IBlockLayer<ForegroundBlock> Foreground
             {

@@ -10,7 +10,7 @@ namespace BotBits.Tests.Events
         public void BindTest()
         {
             var botBits = new BotBitsClient();
-            var callback = new EventRaiseHandler<TestEvent>(delegate {});
+            var callback = new EventRaiseHandler<TestEvent>(delegate { });
 
             TestEvent
                 .Of(botBits)
@@ -150,7 +150,9 @@ namespace BotBits.Tests.Events
 
                 Assert.Fail();
             }
-            catch (InvalidOperationException) { } // Expected
+            catch (InvalidOperationException)
+            {
+            } // Expected
         }
 
         [TestMethod]
@@ -179,7 +181,5 @@ namespace BotBits.Tests.Events
 
             new TestEvent().RaiseIn(botBits);
         }
-
-        
     }
 }

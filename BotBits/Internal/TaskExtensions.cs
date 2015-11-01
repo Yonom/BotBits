@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BotBits
@@ -37,7 +35,7 @@ namespace BotBits
             var tcs = new TaskCompletionSource<AsyncVoid>();
             task.ContinueWith(t =>
             {
-                if (t.IsFaulted) 
+                if (t.IsFaulted)
                     tcs.TrySetException(t.Exception.Flatten().InnerExceptions.FirstOrDefault() ?? t.Exception);
                 else if (t.IsCanceled) tcs.TrySetCanceled();
                 else tcs.TrySetResult(default(AsyncVoid));
@@ -50,7 +48,7 @@ namespace BotBits
             var tcs = new TaskCompletionSource<T>();
             task.ContinueWith(t =>
             {
-                if (t.IsFaulted) 
+                if (t.IsFaulted)
                     tcs.TrySetException(t.Exception.Flatten().InnerExceptions.FirstOrDefault() ?? t.Exception);
                 else if (t.IsCanceled) tcs.TrySetCanceled();
                 else tcs.TrySetResult(t.Result);

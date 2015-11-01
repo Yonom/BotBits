@@ -115,14 +115,14 @@ namespace BotBits
             where TForeground : struct
             where TBackground : struct
         {
-            int maxX = world.Width - 1;
-            int maxY = world.Height - 1;
-            for (int y = 0; y <= maxY; y++)
+            var maxX = world.Width - 1;
+            var maxY = world.Height - 1;
+            for (var y = 0; y <= maxY; y++)
             {
                 world.Foreground[0, y] = borderBlock;
                 world.Foreground[maxX, y] = borderBlock;
             }
-            for (int x = 0; x <= maxX; x++)
+            for (var x = 0; x <= maxX; x++)
             {
                 world.Foreground[x, 0] = borderBlock;
                 world.Foreground[x, maxY] = borderBlock;
@@ -213,10 +213,10 @@ namespace BotBits
 
         internal static IEnumerable<Point> GetPos(byte[] byteArrayX, byte[] byteArrayY)
         {
-            for (int i = 0; i <= byteArrayX.Length - 1; i += 2)
+            for (var i = 0; i <= byteArrayX.Length - 1; i += 2)
             {
-                int x = byteArrayX[i]*256 + byteArrayX[i + 1];
-                int y = byteArrayY[i]*256 + byteArrayY[i + 1];
+                var x = byteArrayX[i]*256 + byteArrayX[i + 1];
+                var y = byteArrayY[i]*256 + byteArrayY[i + 1];
 
                 yield return new Point(x, y);
             }
@@ -224,7 +224,7 @@ namespace BotBits
 
         internal static IEnumerable<Point> GetShortPos(byte[] byteArrayX, byte[] byteArrayY)
         {
-            for (int i = 0; i <= byteArrayX.Length - 1; i++)
+            for (var i = 0; i <= byteArrayX.Length - 1; i++)
             {
                 int x = byteArrayX[i];
                 int y = byteArrayY[i];

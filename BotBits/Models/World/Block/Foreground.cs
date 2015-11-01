@@ -1,4 +1,5 @@
 using BotBits.Shop;
+
 // ReSharper disable MemberHidesStaticFromOuterClass
 
 namespace BotBits
@@ -391,7 +392,6 @@ namespace BotBits
         {
             [Pack("brickwater")] public const Id
                 Waves = (Id) 300;
-
         }
 
         public static class Tool
@@ -407,7 +407,6 @@ namespace BotBits
 
             [Pack("brickcheckpoint", BlocksPerPack = 1)] public const Id
                 Checkpoint = (Id) 360;
-
         }
 
         public static class WildWest
@@ -447,7 +446,6 @@ namespace BotBits
                 Pink = (Id) 133,
                 Green = (Id) 134,
                 Orange = (Id) 135;
-
         }
 
         public static class Sand
@@ -465,7 +463,6 @@ namespace BotBits
                 DuneOrange = (Id) 304,
                 DuneTan = (Id) 305,
                 DuneBrown = (Id) 306;
-
         }
 
         public static class Cloud
@@ -520,11 +517,9 @@ namespace BotBits
                 CastleWindow = (Id) 160,
                 Anvil = (Id) 162,
                 Barrel = (Id) 163,
-
                 CastleSupport = (Id) 325,
                 Tombstone = (Id) 326,
                 Shield = (Id) 330,
-
                 ClosedDoor = (Id) 437;
 
 
@@ -630,7 +625,6 @@ namespace BotBits
                 PillarTop = (Id) 382,
                 PillarMiddle = (Id) 383,
                 PillarBottom = (Id) 384;
-
         }
 
         public static class Farm
@@ -641,7 +635,6 @@ namespace BotBits
                 Plants = (Id) 387,
                 FenceLeftEnded = (Id) 388,
                 FenceRightEnded = (Id) 389;
-
         }
 
         public static class Autumn2014
@@ -734,7 +727,6 @@ namespace BotBits
                 Blue = (Id) 246,
                 Red = (Id) 247,
                 Green = (Id) 248;
-
         }
 
         public static class Christmas2010
@@ -840,7 +832,6 @@ namespace BotBits
                 Grass = (Id) 371,
                 Log = (Id) 372,
                 Radioactive = (Id) 373;
-
         }
 
         public static class Christmas2012
@@ -966,33 +957,31 @@ namespace BotBits
                 Lamp = (Id) 446;
 
             [Pack("brickdomestic", ForegroundType = ForegroundType.Morphable)] public const Id
-                BeigeHalfBlock = (Id)1041,
-                WoodHalfBlock = (Id)1042,
-                WhiteHalfBlock = (Id)1043,
-                LightBulb = (Id)447,
-                Pipe = (Id)448,
-                Painting = (Id)449,
-                Vase = (Id)450,
-                Television = (Id)451,
-                Window = (Id)452;
+                BeigeHalfBlock = (Id) 1041,
+                WoodHalfBlock = (Id) 1042,
+                WhiteHalfBlock = (Id) 1043,
+                LightBulb = (Id) 447,
+                Pipe = (Id) 448,
+                Painting = (Id) 449,
+                Vase = (Id) 450,
+                Television = (Id) 451,
+                Window = (Id) 452;
         }
 
         public static class Halloween2015
         {
-            [Pack("brickhalloween2015")]
-            public const Id
-                MossyBrick = (Id)1047,
-                Siding = (Id)1048,
-                Rooftop = (Id)1049,
-                OneWay = (Id)1050,
-                DeadShrub = (Id)454,
-                IronFence = (Id)455;
+            [Pack("brickhalloween2015")] public const Id
+                MossyBrick = (Id) 1047,
+                Siding = (Id) 1048,
+                Rooftop = (Id) 1049,
+                OneWay = (Id) 1050,
+                DeadShrub = (Id) 454,
+                IronFence = (Id) 455;
 
-            [Pack("brickhalloween2015", ForegroundType = ForegroundType.Morphable)]
-            public const Id
-                Window = (Id)456,
-                WoodHalfBlock = (Id)457,
-                Lantern = (Id)458;
+            [Pack("brickhalloween2015", ForegroundType = ForegroundType.Morphable)] public const Id
+                Window = (Id) 456,
+                WoodHalfBlock = (Id) 457,
+                Lantern = (Id) 458;
         }
     }
 }

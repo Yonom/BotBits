@@ -1,5 +1,3 @@
-using System.Linq;
-using JetBrains.Annotations;
 using PlayerIOClient;
 
 namespace BotBits.SendMessages
@@ -9,9 +7,6 @@ namespace BotBits.SendMessages
     /// </summary>
     public sealed class PurpleSwitchSendMessage : SendMessage<PurpleSwitchSendMessage>
     {
-        public int SwitchId { get; set; }
-        public int Enabled { get; set; }
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlaceSendMessage" /> class.
         /// </summary>
@@ -20,6 +15,9 @@ namespace BotBits.SendMessages
             this.SwitchId = switchId;
             this.Enabled = enabled;
         }
+
+        public int SwitchId { get; set; }
+        public int Enabled { get; set; }
 
 
         /// <summary>

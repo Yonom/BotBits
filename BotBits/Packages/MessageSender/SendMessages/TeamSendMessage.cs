@@ -5,7 +5,7 @@ namespace BotBits.SendMessages
     public sealed class TeamSendMessage : SendMessage<TeamSendMessage>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TeamSendMessage" /> class.
+        ///     Initializes a new instance of the <see cref="TeamSendMessage" /> class.
         /// </summary>
         /// <param name="team">The team.</param>
         /// <param name="y">The y.</param>
@@ -18,36 +18,36 @@ namespace BotBits.SendMessages
         }
 
         /// <summary>
+        ///     Gets or sets the team.
+        /// </summary>
+        /// <value>
+        ///     The team.
+        /// </value>
+        public Team Team { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the y.
+        /// </summary>
+        /// <value>
+        ///     The y.
+        /// </value>
+        public int Y { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the x.
+        /// </summary>
+        /// <value>
+        ///     The x.
+        /// </value>
+        public int X { get; set; }
+
+        /// <summary>
         ///     Gets the PlayerIO message representing the data in this <see cref="SendMessage{T}" />.
         /// </summary>
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("team", this.X, this.Y, (int)this.Team);
+            return Message.Create("team", this.X, this.Y, (int) this.Team);
         }
-
-        /// <summary>
-        /// Gets or sets the team.
-        /// </summary>
-        /// <value>
-        /// The team.
-        /// </value>
-        public Team Team { get; set; }
-
-        /// <summary>
-        /// Gets or sets the y.
-        /// </summary>
-        /// <value>
-        /// The y.
-        /// </value>
-        public int Y { get; set; }
-
-        /// <summary>
-        /// Gets or sets the x.
-        /// </summary>
-        /// <value>
-        /// The x.
-        /// </value>
-        public int X { get; set; }
     }
 }

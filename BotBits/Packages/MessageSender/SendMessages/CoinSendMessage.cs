@@ -1,4 +1,3 @@
-using System;
 using PlayerIOClient;
 
 namespace BotBits.SendMessages
@@ -9,7 +8,7 @@ namespace BotBits.SendMessages
     public sealed class CoinSendMessage : SendMessage<CoinSendMessage>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CoinSendMessage"/> class.
+        ///     Initializes a new instance of the <see cref="CoinSendMessage" /> class.
         /// </summary>
         /// <param name="coins">The gold coins count.</param>
         /// <param name="blueCoins">The blue coins count.</param>

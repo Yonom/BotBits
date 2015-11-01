@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using PlayerIOClient;
 
@@ -15,7 +13,7 @@ namespace BotBits
             var vaultTask = client.PayVault.RefreshAsync()
                 .Then(task => shopData = new ShopData(client.PayVault.Items));
 
-             var playerObjectTask = client.BigDB.LoadMyPlayerObjectAsync()
+            var playerObjectTask = client.BigDB.LoadMyPlayerObjectAsync()
                 .Then(task => playerObject = new PlayerObject(task.Result));
 
             return vaultTask

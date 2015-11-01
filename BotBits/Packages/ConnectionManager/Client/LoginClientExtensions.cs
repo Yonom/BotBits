@@ -44,7 +44,7 @@ namespace BotBits
         private static string GenerateUniqueRoomId(string str)
         {
             return StringUtils.DecimalToArbitrarySystem(
-                (((int)new Random().NextDouble() * 1000 >> 0) + DateTime.UtcNow.Millisecond), 36)
+                (((int) new Random().NextDouble()*1000 >> 0) + DateTime.UtcNow.Millisecond), 36)
                    + " " + str;
         }
 
@@ -60,7 +60,7 @@ namespace BotBits
             return client.Then(task => task.Result.JoinRoomAsync(roomId)).ToSafeTask();
         }
 
-        public static Task CreateJoinRoomAsync(this Task<LoginClient> client, string roomId) 
+        public static Task CreateJoinRoomAsync(this Task<LoginClient> client, string roomId)
         {
             return client.Then(task => task.Result.CreateJoinRoomAsync(roomId)).ToSafeTask();
         }

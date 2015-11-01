@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using BotBits.Events;
 using BotBits.SendMessages;
-using PlayerIOClient;
 
 namespace BotBits
 {
@@ -17,11 +15,11 @@ namespace BotBits
         {
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
-                var attr = (ReceiveEventAttribute)type.GetCustomAttributes(
-                    typeof(ReceiveEventAttribute), true).FirstOrDefault();
+                var attr = (ReceiveEventAttribute) type.GetCustomAttributes(
+                    typeof (ReceiveEventAttribute), true).FirstOrDefault();
                 if (attr != null)
                 {
-                    _messageRegister.RegisterMessage(attr.Type, type);
+                    this._messageRegister.RegisterMessage(attr.Type, type);
                 }
             }
         }
@@ -50,8 +48,8 @@ namespace BotBits
                 try
                 {
                     const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
-                    instance = (IEvent)Activator.CreateInstance(handler, flags, null,
-                        new object[] { this.BotBits, e.Message }, null);
+                    instance = (IEvent) Activator.CreateInstance(handler, flags, null,
+                        new object[] {this.BotBits, e.Message}, null);
                 }
                 catch (Exception ex)
                 {
@@ -68,12 +66,10 @@ namespace BotBits
             }
             else
             {
-                new UnknownMessageEvent(this.BotBits, e.Message, 
+                new UnknownMessageEvent(this.BotBits, e.Message,
                     new UnknownMessageTypeException("The received message type is not supported."))
                     .RaiseIn(this.BotBits);
             }
         }
-
-        
     }
 }

@@ -2,35 +2,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using BotBits.Events;
-using BotBits.SendMessages;
+using JetBrains.Annotations;
 
 namespace BotBits
 {
     public sealed class Players : EventListenerPackage<Players>, IEnumerable<Player>
     {
         private readonly Dictionary<int, Player> _players = new Dictionary<int, Player>();
-        private Player _crownPlayer = Player.Nobody;
-        private Player _ownPlayer = Player.Nobody;
 
-        public Player OwnPlayer
+        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
+        public Players()
         {
-            get { return this._ownPlayer; }
-            private set { this._ownPlayer = value; }
         }
 
-        public Player CrownPlayer
-        {
-            get { return this._crownPlayer; }
-            private set { this._crownPlayer = value; }
-        }
+        public Player OwnPlayer { get; private set; } = Player.Nobody;
+
+        public Player CrownPlayer { get; private set; } = Player.Nobody;
 
         public int Count
         {
             get
             {
-                lock (this._players) 
+                lock (this._players)
                     return this._players.Count;
             }
         }
@@ -47,14 +41,9 @@ namespace BotBits
             }
         }
 
-        [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
-        public Players()
-        {
-        }
-
         public IEnumerator<Player> GetEnumerator()
         {
-            return ((IEnumerable<Player>)this.GetPlayers()).GetEnumerator();
+            return ((IEnumerable<Player>) this.GetPlayers()).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -127,7 +116,7 @@ namespace BotBits
         [EventListener]
         private void On(JoinEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.Connected = true;
             p.Username = e.Username;
             p.ConnectUserId = e.ConnectUserId;
@@ -171,12 +160,12 @@ namespace BotBits
         [EventListener]
         private void On(CoinEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.GoldCoins = e.GoldCoins;
             p.BlueCoins = e.BlueCoins;
 
-            var x = (int)e.X;
-            var y = (int)e.Y;
+            var x = (int) e.X;
+            var y = (int) e.Y;
             var blocks = Blocks.Of(this.BotBits);
             if (!blocks.Area.Contains(new Point(x, y))) return;
             var block = blocks.Foreground[x, y].Block.Id;
@@ -218,14 +207,14 @@ namespace BotBits
         [EventListener]
         private void On(SmileyEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.Smiley = e.Smiley;
         }
 
         [EventListener]
         private void On(MoveEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.Horizontal = e.Horizontal;
             p.Vertical = e.Vertical;
             p.ModifierX = e.ModifierX;
@@ -242,7 +231,7 @@ namespace BotBits
         [EventListener]
         private void On(RestoreProgressEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.X = e.X;
             p.Y = e.Y;
             p.SpeedX = e.SpeedX;
@@ -250,7 +239,7 @@ namespace BotBits
             p.GoldCoins = e.GoldCoins;
             p.BlueCoins = e.BlueCoins;
             p.Deaths = e.Deaths;
-            
+
             foreach (var ps in e.PurpleSwitches)
             {
                 p.AddSwitch(ps);
@@ -276,7 +265,7 @@ namespace BotBits
         [EventListener(EventPriority.Low)]
         private void On(GodModeEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.GodMode = e.God;
 
             if (!p.ModMode && !p.AdminMode)
@@ -289,9 +278,9 @@ namespace BotBits
         [EventListener(EventPriority.Low)]
         private void On(AdminModeEvent e)
         {
-            Player p = e.Player;
-            p.AdminMode = e.Admin; 
-            
+            var p = e.Player;
+            p.AdminMode = e.Admin;
+
             if (!p.ModMode && !p.GodMode)
             {
                 new FlyEvent(p, p.Flying)
@@ -302,7 +291,7 @@ namespace BotBits
         [EventListener(EventPriority.Low)]
         private void On(ModModeEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.ModMode = e.Mod;
 
             if (!p.GodMode && !p.AdminMode)
@@ -315,14 +304,14 @@ namespace BotBits
         [EventListener]
         private void On(SilverCrownEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.HasSilverCrown = true;
         }
 
         [EventListener]
         private void On(EffectEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
 
             if (e.Enabled)
             {
@@ -338,21 +327,21 @@ namespace BotBits
         [EventListener]
         private void On(AuraEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.Aura = e.Aura;
         }
 
         [EventListener]
         private void On(TeamEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.Team = e.Team;
         }
 
         [EventListener]
         private void On(AllowToggleGodEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.HasGodRights = e.AllowToggle;
             p.GodMode &= e.AllowToggle;
         }
@@ -360,14 +349,14 @@ namespace BotBits
         [EventListener]
         private void On(EditRightsEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.HasEditRights = e.AllowEdit;
         }
 
         [EventListener]
         private void On(PurpleSwitchInitEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             foreach (var ps in e.PurpleSwitches)
             {
                 p.AddSwitch(ps);
@@ -379,7 +368,7 @@ namespace BotBits
         [EventListener(EventPriority.Low)]
         private void On(PurpleSwitchUpdateEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             var enabled = e.Enabled != 0;
             if (enabled)
                 p.AddSwitch(e.SwitchId);
@@ -393,7 +382,7 @@ namespace BotBits
         [EventListener]
         private void On(TeleportEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.X = e.X;
             p.Y = e.Y;
         }
@@ -403,7 +392,7 @@ namespace BotBits
         {
             foreach (var tele in e.Data)
             {
-                Player p = tele.Player;
+                var p = tele.Player;
                 var causedByDeath = p.Deaths < tele.Deaths;
                 p.X = tele.X;
                 p.Y = tele.Y;
@@ -425,7 +414,7 @@ namespace BotBits
         [EventListener]
         private void On(MutedEvent e)
         {
-            Player p = e.Player;
+            var p = e.Player;
             p.Muted = e.Muted;
         }
     }

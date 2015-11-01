@@ -26,10 +26,10 @@ namespace BotBits.Events
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether space was just pressed.
+        ///     Gets or sets a value indicating whether space was just pressed.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if space was pressed; otherwise, <c>false</c>.
+        ///     <c>true</c> if space was pressed; otherwise, <c>false</c>.
         /// </value>
         public bool SpaceJustDown { get; set; }
 

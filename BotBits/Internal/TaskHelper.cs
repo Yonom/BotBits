@@ -201,7 +201,8 @@ namespace BotBits
             return tcs.Task;
         }
 
-        public static Task<TNextResult> Then<TResult, TNextResult>(this Task<TResult> task, Func<Task<TResult>, TNextResult> next)
+        public static Task<TNextResult> Then<TResult, TNextResult>(this Task<TResult> task,
+            Func<Task<TResult>, TNextResult> next)
         {
             if (task == null) throw new ArgumentNullException("task");
             if (next == null) throw new ArgumentNullException("next");
@@ -228,7 +229,8 @@ namespace BotBits
             return tcs.Task;
         }
 
-        public static Task<TNextResult> Then<TResult, TNextResult>(this Task<TResult> task, Func<Task<TResult>, Task<TNextResult>> next)
+        public static Task<TNextResult> Then<TResult, TNextResult>(this Task<TResult> task,
+            Func<Task<TResult>, Task<TNextResult>> next)
         {
             if (task == null) throw new ArgumentNullException("task");
             if (next == null) throw new ArgumentNullException("next");
@@ -271,7 +273,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Analogous to the finally block in a try/finally
+        ///     Analogous to the finally block in a try/finally
         /// </summary>
         public static void Finally(this Task task, Action<Exception> exceptionHandler, Action finalAction = null)
         {

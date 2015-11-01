@@ -8,12 +8,12 @@ namespace BotBits.Events
     /// </summary>
     public sealed class UnknownMessageEvent : ReceiveEvent<UnknownMessageEvent>
     {
-        public Exception Reason { get; private set; }
-
         internal UnknownMessageEvent(BotBitsClient client, Message message, Exception reason)
             : base(client, message)
         {
             this.Reason = reason;
         }
+
+        public Exception Reason { get; private set; }
     }
 }

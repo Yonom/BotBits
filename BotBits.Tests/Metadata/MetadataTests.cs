@@ -17,7 +17,7 @@ namespace BotBits.Tests.Metadata
             {
                 if (args.Key != id)
                     Assert.Fail("Key not same.");
-                if ((string)args.NewValue != value)
+                if ((string) args.NewValue != value)
                     Assert.Fail("NewValue not same.");
                 if (args.OldValue != null)
                     Assert.Fail("OldValue not null.");

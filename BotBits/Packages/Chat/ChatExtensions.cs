@@ -1,15 +1,14 @@
-﻿using System;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace BotBits
 {
     /// <summary>
-    /// ChatExtensions contains functions to execute commands in game.
+    ///     ChatExtensions contains functions to execute commands in game.
     /// </summary>
     public static class ChatExtensions
     {
         /// <summary>
-        /// Sets the team of the given player (/setteam &lt;username&gt; &lt;team&gt;).
+        ///     Sets the team of the given player (/setteam &lt;username&gt; &lt;team&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -20,7 +19,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Clears the effects a player has  (/cleareffects &lt;username&gt;).
+        ///     Clears the effects a player has  (/cleareffects &lt;username&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -30,7 +29,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Forces the player out / into god mode (/forcefly &lt;username&gt; &lt;flying&gt;).
+        ///     Forces the player out / into god mode (/forcefly &lt;username&gt; &lt;flying&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -42,7 +41,7 @@ namespace BotBits
 
 
         /// <summary>
-        /// Gives edit to the specified username  (/giveedit &lt;username&gt;).
+        ///     Gives edit to the specified username  (/giveedit &lt;username&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -52,7 +51,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Removes edit from the specified username (/removeedit &lt;username&gt;).
+        ///     Removes edit from the specified username (/removeedit &lt;username&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -62,7 +61,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Teleports the specified username.
+        ///     Teleports the specified username.
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -72,7 +71,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Teleports the specified username. (/teleport &lt;username&gt; &lt;x&gt; &lt;y&gt;).
+        ///     Teleports the specified username. (/teleport &lt;username&gt; &lt;x&gt; &lt;y&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -84,7 +83,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Kicks the specified username (/kick &lt;username&gt;).
+        ///     Kicks the specified username (/kick &lt;username&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -94,7 +93,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Kicks the specified username (/kick &lt;username&gt; &lt;reason&gt;).
+        ///     Kicks the specified username (/kick &lt;username&gt; &lt;reason&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -113,7 +112,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Kills the specified username. (/kill &lt;username&gt;).
+        ///     Kills the specified username. (/kill &lt;username&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -131,7 +130,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Mutes the specified username. (/mute &lt;username&gt;).
+        ///     Mutes the specified username. (/mute &lt;username&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -141,7 +140,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Unmutes the specified username. (/unmute &lt;username&gt;).
+        ///     Unmutes the specified username. (/unmute &lt;username&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -151,7 +150,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Reports the specified user with the given reason (/reportabuse &lt;username&gt; &lt;reason&gt;).
+        ///     Reports the specified user with the given reason (/reportabuse &lt;username&gt; &lt;reason&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -162,7 +161,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Enables god mode of the specified username (/givegod &lt;username&gt;).
+        ///     Enables god mode of the specified username (/givegod &lt;username&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -172,7 +171,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Disables god mode of the specified username (/removegod &lt;username&gt;).
+        ///     Disables god mode of the specified username (/removegod &lt;username&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -182,7 +181,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Gives the crown to the specified username (/givecrown &lt;username&gt;).
+        ///     Gives the crown to the specified username (/givecrown &lt;username&gt;).
         /// </summary>
         /// <param name="chat">Chat.</param>
         /// <param name="username">Username.</param>
@@ -192,7 +191,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Removes the crown from it's owner (/removecrown).
+        ///     Removes the crown from it's owner (/removecrown).
         /// </summary>
         /// <param name="chat">Chat.</param>
         public static void RemoveCrown(this IChat chat)
@@ -225,7 +224,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Sets the color of the background (/bgcolor &lt;color&gt;).
+        ///     Sets the color of the background (/bgcolor &lt;color&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="color">The color.</param>
@@ -235,7 +234,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Sets the color of the background (/bgcolor #rrggbb).
+        ///     Sets the color of the background (/bgcolor #rrggbb).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="r">The red portion of the color.</param>
@@ -247,7 +246,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Lists the portals (/listportals).
+        ///     Lists the portals (/listportals).
         /// </summary>
         public static void ListPortals(this IChat chat)
         {
@@ -255,7 +254,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Clears the map (/clear)
+        ///     Clears the map (/clear)
         /// </summary>
         public static void Clear(this IChat chat)
         {
@@ -263,7 +262,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Gets the block placer (/getblockplacer).
+        ///     Gets the block placer (/getblockplacer).
         /// </summary>
         public static void GetBlockPlacer(this IChat chat)
         {
@@ -271,7 +270,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Gets the position of the bot (/getpos).
+        ///     Gets the position of the bot (/getpos).
         /// </summary>
         public static void GetPosition(this IChat chat)
         {
@@ -279,7 +278,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Sends a private message (/pm &lt;target&gt; &lt;message&gt;)
+        ///     Sends a private message (/pm &lt;target&gt; &lt;message&gt;)
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="target">The target.</param>
@@ -291,7 +290,7 @@ namespace BotBits
 
 
         /// <summary>
-        /// Sends a private message (/pm &lt;target&gt; &lt;message&gt;)
+        ///     Sends a private message (/pm &lt;target&gt; &lt;message&gt;)
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="target">The target.</param>
@@ -303,7 +302,7 @@ namespace BotBits
 
 
         /// <summary>
-        /// Sends a private message (/pm &lt;target&gt; &lt;message&gt;)
+        ///     Sends a private message (/pm &lt;target&gt; &lt;message&gt;)
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="target">The target.</param>
@@ -312,11 +311,11 @@ namespace BotBits
         [StringFormatMethod("args")]
         public static void PrivateMessage(this IChat chat, string target, string message, params object[] args)
         {
-            chat.PrivateMessage(target, String.Format(message, args));
+            chat.PrivateMessage(target, string.Format(message, args));
         }
 
         /// <summary>
-        /// Says the specified message.
+        ///     Says the specified message.
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="msg">The message.</param>
@@ -325,11 +324,11 @@ namespace BotBits
         public static void Say(this IChat chat, string msg, params object[] args)
         {
             // ReSharper disable once RedundantStringFormatCall
-            chat.Say(String.Format(msg, args));
+            chat.Say(string.Format(msg, args));
         }
 
         /// <summary>
-        /// Kicks the specified username (/kick &lt;username&gt; &lt;reason&gt;).
+        ///     Kicks the specified username (/kick &lt;username&gt; &lt;reason&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -338,11 +337,11 @@ namespace BotBits
         [StringFormatMethod("reason")]
         public static void Kick(this IChat chat, string username, string reason, params object[] args)
         {
-            chat.Kick(username, String.Format(reason, args));
+            chat.Kick(username, string.Format(reason, args));
         }
 
         /// <summary>
-        /// Reports the specified user with the given reason (/reportabuse &lt;username&gt; &lt;reason&gt;).
+        ///     Reports the specified user with the given reason (/reportabuse &lt;username&gt; &lt;reason&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -351,11 +350,11 @@ namespace BotBits
         [StringFormatMethod("reason")]
         public static void ReportAbuse(this IChat chat, string username, string reason, params object[] args)
         {
-            chat.ReportAbuse(username, String.Format(reason, args));
+            chat.ReportAbuse(username, string.Format(reason, args));
         }
 
         /// <summary>
-        /// Teleports the specified username (/teleport &lt;username&gt; &lt;point.X+1&gt; &lt;point.Y+1&gt;).
+        ///     Teleports the specified username (/teleport &lt;username&gt; &lt;point.X+1&gt; &lt;point.Y+1&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -366,7 +365,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Removes the background color (/bgcolor none).
+        ///     Removes the background color (/bgcolor none).
         /// </summary>
         /// <param name="chat">The chat.</param>
         public static void RemoveBackgroundColor(this Chat chat)

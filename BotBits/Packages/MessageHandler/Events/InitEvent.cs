@@ -1,4 +1,3 @@
-using System;
 using PlayerIOClient;
 
 namespace BotBits.Events
@@ -24,8 +23,8 @@ namespace BotBits.Events
             this.Likes = message.GetInt(4);
             this.EncryptedToken = message.GetString(5);
             // 6: UserId
-            this.Smiley = (Smiley)message.GetInt(7);
-            this.Aura = (Aura)message.GetInt(8);
+            this.Smiley = (Smiley) message.GetInt(7);
+            this.Aura = (Aura) message.GetInt(8);
             this.SpawnX = message.GetDouble(9);
             this.SpawnY = message.GetDouble(10);
             this.ChatColor = message.GetUInt(11);
@@ -48,7 +47,7 @@ namespace BotBits.Events
             this.CrewId = message.GetString(28);
             this.CrewName = message.GetString(29);
             this.CanChangeWorldOptions = message.GetBoolean(30);
-            this.WorldStatus = (WorldStatus)message.GetInt(31);
+            this.WorldStatus = (WorldStatus) message.GetInt(31);
             this.Badge = message.GetBadge(32);
             this.CrewMember = message.GetBoolean(33);
         }
@@ -88,18 +87,18 @@ namespace BotBits.Events
         public Smiley Smiley { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="InitEvent"/> is visible.
+        ///     Gets or sets a value indicating whether this <see cref="InitEvent" /> is visible.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if visible; otherwise, <c>false</c>.
+        ///     <c>true</c> if visible; otherwise, <c>false</c>.
         /// </value>
         public bool Visible { get; set; }
 
         /// <summary>
-        /// Gets or sets the color of the background.
+        ///     Gets or sets the color of the background.
         /// </summary>
         /// <value>
-        /// The color of the background.
+        ///     The color of the background.
         /// </value>
         public uint BackgroundColor { get; set; }
 

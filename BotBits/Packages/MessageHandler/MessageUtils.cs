@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using BotBits.Events;
 using BotBits.SendMessages;
 using PlayerIOClient;
 
@@ -23,7 +22,7 @@ namespace BotBits
         {
             Badge badge;
             var badgeStr = message.GetString(index);
-            if (String.IsNullOrEmpty(badgeStr)) badge = Badge.None;
+            if (string.IsNullOrEmpty(badgeStr)) badge = Badge.None;
             else Enum.TryParse(badgeStr, true, out badge);
             return badge;
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
 using BotBits.Nito.Async;
 
 namespace BotBits
@@ -23,7 +22,7 @@ namespace BotBits
             this._dispatcher.QueueExit();
         }
 
-        public SynchronizationContext SynchronizationContext { get; private set; }
+        public SynchronizationContext SynchronizationContext { get; }
 
         public static ActionDispatcherSchedulerHandle StartOnNewThread()
         {

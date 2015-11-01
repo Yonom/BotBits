@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using Timer = System.Threading.Timer;
+using System.Threading;
 
 namespace BotBits
 {
@@ -20,7 +20,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Occurs when [elapsed].
+        ///     Occurs when [elapsed].
         /// </summary>
         public event Action<int> Elapsed;
 
@@ -32,7 +32,7 @@ namespace BotBits
 
         private void TimerCallback(object state)
         {
-            var ticks = (int)Math.Floor(this._sw.ElapsedMilliseconds * .0965);
+            var ticks = (int) Math.Floor(this._sw.ElapsedMilliseconds*.0965);
             this.OnElapsed(ticks);
         }
     }

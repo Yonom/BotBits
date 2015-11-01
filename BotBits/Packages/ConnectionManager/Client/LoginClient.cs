@@ -9,15 +9,9 @@ namespace BotBits
 {
     public class LoginClient : ILoginClient
     {
-        [NotNull]
-        private readonly IConnectionManager _connectionManager;
-
         private readonly Task<PlayerData> _argsAsync;
 
-        public string ConnectUserId
-        {
-            get { return this.Client.ConnectUserId; }
-        }
+        [NotNull] private readonly IConnectionManager _connectionManager;
 
         internal LoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client)
             : this(connectionManager, client, ConnectionUtils.GetConnectionArgsAsync(client))
@@ -35,8 +29,13 @@ namespace BotBits
             this._argsAsync = argsAsync;
         }
 
+        public string ConnectUserId
+        {
+            get { return this.Client.ConnectUserId; }
+        }
+
         [NotNull]
-        public Client Client { get; private set; }
+        public Client Client { get; }
 
         public virtual Task<LobbyItem[]> GetLobbyAsync()
         {
@@ -100,14 +99,15 @@ namespace BotBits
         private const string EverybodyEdits = "Everybodyedits";
         private const string Beta = "Beta";
 
-        public int Version { get; private set; }
-
         internal VersionLoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client,
             Task<PlayerData> argsAsync, int version)
             : base(connectionManager, client, argsAsync)
         {
             this.Version = version;
         }
+
+        public int Version { get; }
+
         public override Task<LobbyItem[]> GetLobbyAsync()
         {
             var normals = this.Client.GetLobbyRoomsAsync(this, EverybodyEdits + this.Version);
@@ -122,10 +122,11 @@ namespace BotBits
             if (!roomId.StartsWith("OW"))
                 throw new ArgumentException("RoomId is not valid.", "roomId");
 
-            var roomData = new Dictionary<string, string> { { "name", name } };
+            var roomData = new Dictionary<string, string> {{"name", name}};
 
             return this.Client.Multiplayer
-                .CreateJoinRoomAsync(roomId, EverybodyEdits + this.Version, true, roomData, new Dictionary<string, string>())
+                .CreateJoinRoomAsync(roomId, EverybodyEdits + this.Version, true, roomData,
+                    new Dictionary<string, string>())
                 .Then(task => this.InitConnection(roomId, task.Result))
                 .ToSafeTask();
         }

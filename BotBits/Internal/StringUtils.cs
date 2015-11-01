@@ -2,11 +2,11 @@
 
 namespace BotBits
 {
-    class StringUtils
+    internal class StringUtils
     {
         /// <summary>
-        /// Converts the given decimal number to the numeral system with the
-        /// specified radix (in the range [2, 36]).
+        ///     Converts the given decimal number to the numeral system with the
+        ///     specified radix (in the range [2, 36]).
         /// </summary>
         /// <param name="decimalNumber">The number to convert.</param>
         /// <param name="radix">The radix of the destination numeral system (in the range [2, 36]).</param>
@@ -22,18 +22,18 @@ namespace BotBits
             if (decimalNumber == 0)
                 return "0";
 
-            int index = bitsInLong - 1;
-            long currentNumber = Math.Abs(decimalNumber);
+            var index = bitsInLong - 1;
+            var currentNumber = Math.Abs(decimalNumber);
             var charArray = new char[bitsInLong];
 
             while (currentNumber != 0)
             {
-                int remainder = (int)(currentNumber % radix);
+                var remainder = (int) (currentNumber%radix);
                 charArray[index--] = digits[remainder];
-                currentNumber = currentNumber / radix;
+                currentNumber = currentNumber/radix;
             }
 
-            var result = new String(charArray, index + 1, bitsInLong - index - 1);
+            var result = new string(charArray, index + 1, bitsInLong - index - 1);
             if (decimalNumber < 0)
             {
                 result = "-" + result;
@@ -44,10 +44,10 @@ namespace BotBits
 
         public static string Rot13(string input)
         {
-            char[] array = input.ToCharArray();
-            for (int i = 0; i < array.Length; i++)
+            var array = input.ToCharArray();
+            for (var i = 0; i < array.Length; i++)
             {
-                var number = (int)array[i];
+                var number = (int) array[i];
 
                 if (number >= 'a' && number <= 'z')
                 {
@@ -71,7 +71,7 @@ namespace BotBits
                         number += 13;
                     }
                 }
-                array[i] = (char)number;
+                array[i] = (char) number;
             }
             return new string(array);
         }

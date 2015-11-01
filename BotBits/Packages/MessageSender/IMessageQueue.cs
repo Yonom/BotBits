@@ -1,9 +1,4 @@
-﻿using System;
-using BotBits.Events;
-using BotBits.SendMessages;
-using PlayerIOClient;
-
-namespace BotBits
+﻿namespace BotBits
 {
     internal interface IMessageQueue
     {

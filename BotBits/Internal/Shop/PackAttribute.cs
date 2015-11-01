@@ -1,25 +1,19 @@
 ﻿using System;
-using System.Threading;
 
 namespace BotBits.Shop
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class)]
     public sealed class PackAttribute : Attribute
     {
-        private readonly string _package;
-
-        public string Package
+        public PackAttribute(string package)
         {
-            get { return this._package; }
+            this.Package = package;
         }
+
+        public string Package { get; }
 
         public int BlocksPerPack { get; set; }
         public ForegroundType ForegroundType { get; set; }
         public bool BuildersClubOnly { get; set; }
-
-        public PackAttribute(string package)
-        {
-            this._package = package;
-        }
     }
 }

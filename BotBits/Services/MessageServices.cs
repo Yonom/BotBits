@@ -5,42 +5,39 @@ namespace BotBits
 {
     public static class MessageServices
     {
-        [ThreadStatic]
-        private static bool _skipQueues;
+        [ThreadStatic] private static bool _skipQueues;
+
+        [ThreadStatic] private static bool _noChecks;
+
+        [ThreadStatic] private static bool _instantSend;
 
         /// <summary>
-        /// Gets a value indicating whether SendMessages raised on this thread skip queues.
+        ///     Gets a value indicating whether SendMessages raised on this thread skip queues.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if skip queues is enabled; otherwise, <c>false</c>.
+        ///     <c>true</c> if skip queues is enabled; otherwise, <c>false</c>.
         /// </value>
         public static bool SkipQueues
         {
             get { return _skipQueues; }
         }
 
-        [ThreadStatic]
-        private static bool _noChecks;
-
         /// <summary>
-        /// Gets a value indicating whether SendMessages raised on this thread are sent without any redundancy checks.
+        ///     Gets a value indicating whether SendMessages raised on this thread are sent without any redundancy checks.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if force send is enabled; otherwise, <c>false</c>.
+        ///     <c>true</c> if force send is enabled; otherwise, <c>false</c>.
         /// </value>
         public static bool NoChecks
         {
             get { return _noChecks; }
         }
 
-        [ThreadStatic]
-        private static bool _instantSend;
-
         /// <summary>
-        /// Gets a value indicating whether SendMessages raised on this thread are sent without entering any queues.
+        ///     Gets a value indicating whether SendMessages raised on this thread are sent without entering any queues.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if instant send is enabled; otherwise, <c>false</c>.
+        ///     <c>true</c> if instant send is enabled; otherwise, <c>false</c>.
         /// </value>
         public static bool InstantSend
         {
@@ -48,7 +45,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Enables the skip queue feature for SendMessages that are sent using the given callback.
+        ///     Enables the skip queue feature for SendMessages that are sent using the given callback.
         /// </summary>
         /// <param name="task">The task.</param>
         public static void EnableSkipsQueue([InstantHandle] Action task)
@@ -60,7 +57,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Enables the force send feature for SendMessages that are sent using the given callback.
+        ///     Enables the force send feature for SendMessages that are sent using the given callback.
         /// </summary>
         /// <param name="task">The task.</param>
         public static void EnableNoChecks([InstantHandle] Action task)
@@ -72,7 +69,7 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Enables the instant send feature for SendMessages that are sent using the given callback.
+        ///     Enables the instant send feature for SendMessages that are sent using the given callback.
         /// </summary>
         /// <param name="task">The task.</param>
         public static void EnableInstantSend([InstantHandle] Action task)

@@ -5,38 +5,33 @@ using PlayerIOClient;
 
 namespace BotBits
 {
-    public sealed class ConnectionManager : Package<ConnectionManager>, IDisposable, 
+    public sealed class ConnectionManager : Package<ConnectionManager>, IDisposable,
         IPlayerIOGame<LoginClient>, IConnectionManager<LoginClient>
     {
         private PlayerIOConnectionAdapter _adapter;
         private IConnection _connection;
-        public IConnection Connection
-        {
-            get { return this._connection; }
-        }
 
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public ConnectionManager()
         {
         }
 
+        public IConnection Connection
+        {
+            get { return this._connection; }
+        }
+
         /// <summary>
-        /// Gets the player data.
+        ///     Gets the player data.
         /// </summary>
         /// <value>
-        /// The player data.
+        ///     The player data.
         /// </value>
         public PlayerData PlayerData { get; private set; }
 
         public string RoomId { get; private set; }
 
         public string ConnectUserId { get; private set; }
-
-        void IDisposable.Dispose()
-        {
-            if (this._adapter != null)
-                this._adapter.Dispose();
-        }
 
         void IConnectionManager.AttachConnection(Connection connection, ConnectionArgs args)
         {
@@ -56,11 +51,6 @@ namespace BotBits
         public LoginClient WithClient(Client client)
         {
             return new LoginClient(this, client);
-        }
-
-        public PlayerIOGame WithGameId(string gameId)
-        {
-            return new PlayerIOGame(this, gameId);
         }
 
         public void SetConnection(IConnection connection, ConnectionArgs args)
@@ -84,8 +74,29 @@ namespace BotBits
             this.Connection.OnDisconnect += this.Connection_OnDisconnect;
             if (!this.Connection.Connected)
             {
-                this.HandleDisconnect(String.Empty);
+                this.HandleDisconnect(string.Empty);
             }
+        }
+
+        void IDisposable.Dispose()
+        {
+            if (this._adapter != null)
+                this._adapter.Dispose();
+        }
+
+        public string GameId
+        {
+            get { return "everybody-edits-su9rn58o40itdbnw69plyw"; }
+        }
+
+        IConnectionManager<LoginClient> IPlayerIOGame<LoginClient>.ConnectionManager
+        {
+            get { return this; }
+        }
+
+        public PlayerIOGame WithGameId(string gameId)
+        {
+            return new PlayerIOGame(this, gameId);
         }
 
         private void Connection_OnMessage(object sender, Message e)
@@ -96,7 +107,7 @@ namespace BotBits
 
         private void Connection_OnDisconnect(object sender, string message)
         {
-            Scheduler.Of(this.BotBits).Schedule(() => 
+            Scheduler.Of(this.BotBits).Schedule(() =>
                 this.HandleDisconnect(message));
         }
 
@@ -111,8 +122,5 @@ namespace BotBits
             new DisconnectEvent(message)
                 .RaiseIn(this.BotBits);
         }
-
-        public string GameId { get { return "everybody-edits-su9rn58o40itdbnw69plyw"; } }
-        IConnectionManager<LoginClient> IPlayerIOGame<LoginClient>.ConnectionManager { get { return this; } }
     }
 }

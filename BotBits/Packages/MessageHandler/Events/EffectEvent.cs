@@ -9,7 +9,7 @@ namespace BotBits.Events
         internal EffectEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Effect = (Effect)message.GetInt(1);
+            this.Effect = (Effect) message.GetInt(1);
             this.Enabled = message.GetBoolean(2);
 
             if (message.Count < 5) return;
@@ -21,7 +21,10 @@ namespace BotBits.Events
 
         public TimeSpan TimeLeft { get; set; }
 
-        public bool Expires { get { return this.Duration.Ticks != 0; } }
+        public bool Expires
+        {
+            get { return this.Duration.Ticks != 0; }
+        }
 
         public bool Enabled { get; set; }
 

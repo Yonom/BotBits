@@ -14,8 +14,8 @@ namespace BotBits
             this._blocks = new T[width, height];
         }
 
-        public int Width { get; private set; }
-        public int Height { get; private set; }
+        public int Width { get; }
+        public int Height { get; }
 
         public T this[int x, int y]
         {
@@ -31,8 +31,8 @@ namespace BotBits
 
         public IEnumerator<LayerItem<T>> GetEnumerator()
         {
-            for (int y = 0; y < this.Height; y++)
-                for (int x = 0; x < this.Width; x++)
+            for (var y = 0; y < this.Height; y++)
+                for (var x = 0; x < this.Width; x++)
                     yield return new LayerItem<T>(
                         new Point(x, y), this._blocks[x, y]);
         }

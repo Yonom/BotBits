@@ -6,7 +6,7 @@ namespace BotBits.Events
     public sealed class SignPlaceEvent : PlayerEvent<SignPlaceEvent>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SignPlaceEvent"/> class.
+        ///     Initializes a new instance of the <see cref="SignPlaceEvent" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
@@ -18,12 +18,12 @@ namespace BotBits.Events
             this.Id = message.GetInteger(2);
             this.Text = message.GetString(3);
         }
-        
+
         /// <summary>
-        /// Gets or sets the text.
+        ///     Gets or sets the text.
         /// </summary>
         /// <value>
-        /// The text.
+        ///     The text.
         /// </value>
         public string Text { get; set; }
 

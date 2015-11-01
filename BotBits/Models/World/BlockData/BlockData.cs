@@ -1,38 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BotBits
+﻿namespace BotBits
 {
     public struct BlockData<T> where T : struct
     {
         private readonly Player _placer;
-        private readonly T _block;
 
         public BlockData(Player placer, T block)
         {
-            _placer = placer;
-            _block = block;
+            this._placer = placer;
+            this.Block = block;
         }
 
         public BlockData(T block)
         {
-            _placer = Player.Nobody;
-            _block = block;
+            this._placer = Player.Nobody;
+            this.Block = block;
         }
 
         public Player Placer
         {
-            get
-            {
-                return this._placer ?? Player.Nobody;
-            }
+            get { return this._placer ?? Player.Nobody; }
         }
 
-        public T Block
-        {
-            get { return this._block; }
-        }
+        public T Block { get; }
     }
 }

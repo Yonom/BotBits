@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BotBits
 {
     public static class BlockExtensions
     {
         #region Place
+
         public static void Place(this Blocks blocks, int x, int y, Background.Id block)
         {
             blocks.Place(x, y, new BackgroundBlock(block));
@@ -52,11 +52,12 @@ namespace BotBits
         {
             blocks.Place(x, y, new ForegroundBlock(block, morph));
         }
-        
+
         public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, bool enabled)
         {
             blocks.Place(x, y, new ForegroundBlock(block, enabled));
         }
+
         #endregion
 
         #region BlocksItem IEnumerable
@@ -124,9 +125,11 @@ namespace BotBits
         {
             blocks.Set(new ForegroundBlock(block, enabled));
         }
+
         #endregion
 
         #region Place IBlockSettable
+
         public static void Set(this BlocksItem blocks, Background.Id block)
         {
             blocks.Set(new BackgroundBlock(block));
@@ -173,6 +176,7 @@ namespace BotBits
         {
             blocks.Set(new ForegroundBlock(block, enabled));
         }
+
         #endregion
     }
 }

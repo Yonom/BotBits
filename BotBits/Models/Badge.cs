@@ -5,28 +5,34 @@
         Unknown = 0,
 
         None,
+
         /// <summary>
-        /// Adventure League
+        ///     Adventure League
         /// </summary>
         ADV,
+
         /// <summary>
-        /// Endurance
+        ///     Endurance
         /// </summary>
         END,
+
         /// <summary>
-        /// Fractured Fingers
+        ///     Fractured Fingers
         /// </summary>
         FFS,
+
         /// <summary>
-        /// Puzzle Pack 1
+        ///     Puzzle Pack 1
         /// </summary>
         PP1,
+
         /// <summary>
-        /// Ancient Ruins
+        ///     Ancient Ruins
         /// </summary>
         RNS,
+
         /// <summary>
-        /// Tutorials
+        ///     Tutorials
         /// </summary>
         TTR
     }

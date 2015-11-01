@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using JetBrains.Annotations;
 
 namespace BotBits
 {
     public abstract class LoaderBase<T> : Package<T> where T : LoaderBase<T>, new()
     {
-        public virtual void Load([NotNull]object obj)
+        public virtual void Load([NotNull] object obj)
         {
             if (obj is Type)
                 throw new InvalidOperationException("Cannot load Types! Did you mean to use LoadModule?");
@@ -20,7 +19,7 @@ namespace BotBits
 
         public virtual void LoadStatic<TType>()
         {
-            var type = typeof(TType);
+            var type = typeof (TType);
             var methods = type.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
             this.LoadEventhandlers(null, methods);
         }

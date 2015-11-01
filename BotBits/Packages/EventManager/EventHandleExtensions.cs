@@ -24,7 +24,7 @@ namespace BotBits
 
             return tcs.Task;
         }
-        
+
         public static Task<T> WaitOneAsync<T>(
             this EventHandle<T> eventHandle,
             CancellationToken ct,
@@ -41,7 +41,8 @@ namespace BotBits
             EventPriority priority = default(EventPriority))
             where T : Event<T>
         {
-            return WaitOneAsyncInternal(Assembly.GetCallingAssembly(), eventHandle, ct, default(GlobalPriority), priority);
+            return WaitOneAsyncInternal(Assembly.GetCallingAssembly(), eventHandle, ct, default(GlobalPriority),
+                priority);
         }
 
         public static Task<T> WaitOneAsync<T>(
@@ -50,15 +51,17 @@ namespace BotBits
             EventPriority priority = default(EventPriority))
             where T : Event<T>
         {
-            return WaitOneAsyncInternal(Assembly.GetCallingAssembly(), eventHandle, CancellationToken.None, globalPriority, priority);
+            return WaitOneAsyncInternal(Assembly.GetCallingAssembly(), eventHandle, CancellationToken.None,
+                globalPriority, priority);
         }
 
         public static Task<T> WaitOneAsync<T>(
-            this EventHandle<T> eventHandle, 
+            this EventHandle<T> eventHandle,
             EventPriority priority = default(EventPriority))
             where T : Event<T>
         {
-            return WaitOneAsyncInternal(Assembly.GetCallingAssembly(), eventHandle, CancellationToken.None, default(GlobalPriority), priority);
+            return WaitOneAsyncInternal(Assembly.GetCallingAssembly(), eventHandle, CancellationToken.None,
+                default(GlobalPriority), priority);
         }
     }
 }

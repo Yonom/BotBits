@@ -1,30 +1,14 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using BotBits.Nito;
 using BotBits.SendMessages;
+using JetBrains.Annotations;
 
 namespace BotBits
 {
     public class MessageQueue<T> : IMessageQueue where T : SendMessage<T>
     {
-        public event EventHandler<SendEventArgs<T>> Send;
-
-        protected virtual void OnSend(SendEventArgs<T> e)
-        {
-            var handler = this.Send;
-            if (handler != null) handler(this, e);
-        }
-
-        public event EventHandler<SendingEventArgs<T>> Sending;
-
-        protected virtual void OnSending(SendingEventArgs<T> e)
-        {
-            var handler = this.Sending;
-            if (handler != null) handler(this, e);
-        }
-
         private readonly ManualResetEvent _finishEvent = new ManualResetEvent(true);
         private readonly Deque<T> _queue = new Deque<T>();
         private int _lastTicks;
@@ -39,7 +23,7 @@ namespace BotBits
                 }
             }
         }
-        
+
         void IMessageQueue.SendTicks(int ticks, IConnection connection)
         {
             var c = ticks - 4; // Max number of messages sent at once
@@ -53,6 +37,22 @@ namespace BotBits
                     this._lastTicks--;
                 }
             }
+        }
+
+        public event EventHandler<SendEventArgs<T>> Send;
+
+        protected virtual void OnSend(SendEventArgs<T> e)
+        {
+            var handler = this.Send;
+            if (handler != null) handler(this, e);
+        }
+
+        public event EventHandler<SendingEventArgs<T>> Sending;
+
+        protected virtual void OnSending(SendingEventArgs<T> e)
+        {
+            var handler = this.Sending;
+            if (handler != null) handler(this, e);
         }
 
         [CanBeNull]
@@ -112,7 +112,7 @@ namespace BotBits
 
         public Task FinishQueueAsync()
         {
-           return this._finishEvent.AsTask();
+            return this._finishEvent.AsTask();
         }
     }
 }

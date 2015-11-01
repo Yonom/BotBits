@@ -1,13 +1,10 @@
-﻿using System;
-using System.Threading;
-using BotBits.Events;
-using PlayerIOClient;
+﻿using System.Threading;
 
 namespace BotBits.Demo
 {
     internal class Program
     {
-        private static BotBitsClient bot = new BotBitsClient();
+        private static readonly BotBitsClient bot = new BotBitsClient();
 
         private static void Main()
         {

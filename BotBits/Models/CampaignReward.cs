@@ -14,10 +14,10 @@ namespace BotBits
             }
         }
 
-        public string Reward { get; private set; }
+        public string Reward { get; }
         public int Quantity { get; private set; }
 
-        public CampaignReward(string reward, int quantity) 
+        public CampaignReward(string reward, int quantity)
             : this()
         {
             this.Reward = reward;

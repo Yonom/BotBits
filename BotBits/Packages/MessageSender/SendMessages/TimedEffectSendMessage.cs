@@ -6,7 +6,7 @@ namespace BotBits.SendMessages
     public sealed class TimedEffectSendMessage : SendMessage<TimedEffectSendMessage>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TimedEffectSendMessage" /> class.
+        ///     Initializes a new instance of the <see cref="TimedEffectSendMessage" /> class.
         /// </summary>
         /// <param name="effect">The effect.</param>
         /// <param name="duration">The duration.</param>
@@ -15,10 +15,42 @@ namespace BotBits.SendMessages
         public TimedEffectSendMessage(Effect effect, TimeSpan duration, int y, int x)
         {
             this.Effect = effect;
-            this.Duration = (int)duration.TotalSeconds;
+            this.Duration = (int) duration.TotalSeconds;
             this.Y = y;
             this.X = x;
         }
+
+        /// <summary>
+        ///     Gets or sets the effect.
+        /// </summary>
+        /// <value>
+        ///     The effect.
+        /// </value>
+        public Effect Effect { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the duration.
+        /// </summary>
+        /// <value>
+        ///     The duration.
+        /// </value>
+        public int Duration { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the y.
+        /// </summary>
+        /// <value>
+        ///     The y.
+        /// </value>
+        public int Y { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the x.
+        /// </summary>
+        /// <value>
+        ///     The x.
+        /// </value>
+        public int X { get; set; }
 
         /// <summary>
         ///     Gets the PlayerIO message representing the data in this <see cref="SendMessage{T}" />.
@@ -26,39 +58,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("timedeffect", this.X, this.Y, (int)this.Effect, this.Duration);
+            return Message.Create("timedeffect", this.X, this.Y, (int) this.Effect, this.Duration);
         }
-
-        /// <summary>
-        /// Gets or sets the effect.
-        /// </summary>
-        /// <value>
-        /// The effect.
-        /// </value>
-        public Effect Effect { get; set; }
-
-        /// <summary>
-        /// Gets or sets the duration.
-        /// </summary>
-        /// <value>
-        /// The duration.
-        /// </value>
-        public int Duration { get; set; }
-
-        /// <summary>
-        /// Gets or sets the y.
-        /// </summary>
-        /// <value>
-        /// The y.
-        /// </value>
-        public int Y { get; set; }
-
-        /// <summary>
-        /// Gets or sets the x.
-        /// </summary>
-        /// <value>
-        /// The x.
-        /// </value>
-        public int X { get; set; }
     }
 }

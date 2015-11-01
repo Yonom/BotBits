@@ -34,7 +34,7 @@ namespace BotBits
         ///     The yellow door/gate
         /// </summary>
         Yellow,
-        
+
         /// <summary>
         ///     The timed door/gate
         /// </summary>

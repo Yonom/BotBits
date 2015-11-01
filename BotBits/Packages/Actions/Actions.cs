@@ -6,14 +6,14 @@ namespace BotBits
 {
     public sealed class Actions : EventListenerPackage<Actions>
     {
-        public bool Liked { get; private set; }
-        public bool Favorited { get; private set; }
-        public bool CompletedLevel { get; private set; }
-
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Actions()
         {
         }
+
+        public bool Liked { get; private set; }
+        public bool Favorited { get; private set; }
+        public bool CompletedLevel { get; private set; }
 
         [EventListener]
         private void On(InitEvent e)
@@ -94,14 +94,15 @@ namespace BotBits
         }
 
         public void Move(
-            int x, int y, 
-            double speedX, double speedY, 
+            int x, int y,
+            double speedX, double speedY,
             double modifierX, double modifierY,
-            double horizontal, double vertical, 
+            double horizontal, double vertical,
             bool spaceDown, bool spaceJustDown,
             int tickId)
         {
-            new MoveSendMessage(x, y, speedX, speedY, modifierX, modifierY, horizontal, vertical, spaceDown, spaceJustDown, tickId)
+            new MoveSendMessage(x, y, speedX, speedY, modifierX, modifierY, horizontal, vertical, spaceDown,
+                spaceJustDown, tickId)
                 .SendIn(this.BotBits);
         }
 
@@ -110,7 +111,7 @@ namespace BotBits
             new GetCrownSendMessage(x, y)
                 .SendIn(this.BotBits);
         }
-        
+
         public void GetCoin(int coins, int blueCoins, uint x, uint y)
         {
             new CoinSendMessage(coins, blueCoins, x, y)
@@ -231,7 +232,7 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void ToggleModMode() 
+        public void ToggleModMode()
         {
             new ModModeSendMessage()
                 .SendIn(this.BotBits);

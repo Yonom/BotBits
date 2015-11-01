@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BotBits.Tests.Events
 {
@@ -40,13 +38,11 @@ namespace BotBits.Tests.Events
         [EventListener]
         private void OnTest(TestEvent e)
         {
-
         }
 
         [EventListener]
         private static void OnStaticTest(TestEvent e)
         {
-
         }
     }
 }

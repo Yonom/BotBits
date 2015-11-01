@@ -6,9 +6,10 @@ namespace BotBits
 {
     internal sealed class MessageSender : Package<MessageSender>, IDisposable
     {
-        private SendTimer _myTimer;
         private readonly ConcurrentDictionary<Type, IMessageQueue> _queues =
             new ConcurrentDictionary<Type, IMessageQueue>();
+
+        private SendTimer _myTimer;
 
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public MessageSender()
@@ -16,15 +17,15 @@ namespace BotBits
             this.InitializeFinish += this.MessageSender_InitializeFinish;
         }
 
-        void MessageSender_InitializeFinish(object sender, EventArgs e)
-        {
-            this._myTimer = new SendTimer();
-            this._myTimer.Elapsed += this.Send;
-        }
-
         void IDisposable.Dispose()
         {
             this._myTimer.Dispose();
+        }
+
+        private void MessageSender_InitializeFinish(object sender, EventArgs e)
+        {
+            this._myTimer = new SendTimer();
+            this._myTimer.Elapsed += this.Send;
         }
 
         private void Send(int ticks)
@@ -40,7 +41,7 @@ namespace BotBits
 
         internal MessageQueue<T> GetQueue<T>() where T : SendMessage<T>
         {
-            return (MessageQueue<T>)this._queues.GetOrAdd(typeof(T), t => new MessageQueue<T>());
+            return (MessageQueue<T>) this._queues.GetOrAdd(typeof (T), t => new MessageQueue<T>());
         }
     }
 }

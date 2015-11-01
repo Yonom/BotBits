@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using BotBits.Events;
 using BotBits.Shop;
 
 namespace BotBits
@@ -36,12 +35,12 @@ namespace BotBits
 
         public static PackAttribute GetPackage(Foreground.Id id)
         {
-            return GetPackageInternal((int)id);
-        } 
+            return GetPackageInternal((int) id);
+        }
 
         public static PackAttribute GetPackage(Background.Id id)
         {
-            return GetPackageInternal((int)id);
+            return GetPackageInternal((int) id);
         }
 
         public static PackAttribute GetPackage(Aura id)
@@ -49,14 +48,14 @@ namespace BotBits
             PackAttribute pack;
             _auraPacks.TryGetValue(id, out pack);
             return pack;
-        } 
+        }
 
         public static PackAttribute GetPackage(Smiley id)
         {
             PackAttribute pack;
             _smileyPacks.TryGetValue(id, out pack);
             return pack;
-        } 
+        }
 
         internal static PackAttribute GetPackageInternal(int id)
         {

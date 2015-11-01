@@ -1,7 +1,7 @@
 namespace BotBits
 {
     /// <summary>
-    /// Represents the types a <see cref="Foreground" /> can be.
+    ///     Represents the types a <see cref="Foreground" /> can be.
     /// </summary>
     public enum ForegroundType : byte
     {
@@ -11,12 +11,12 @@ namespace BotBits
         Normal,
 
         /// <summary>
-        ///      A toggle block
+        ///     A toggle block
         /// </summary>
         Toggle,
 
         /// <summary>
-        ///      A goal block that can be toggled
+        ///     A goal block that can be toggled
         /// </summary>
         ToggleGoal,
 

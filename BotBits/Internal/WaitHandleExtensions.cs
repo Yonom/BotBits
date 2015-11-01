@@ -16,16 +16,13 @@ namespace BotBits
             var tcs = new TaskCompletionSource<object>();
             var registration = ThreadPool.RegisterWaitForSingleObject(handle, (state, timedOut) =>
             {
-                var localTcs = (TaskCompletionSource<object>)state;
+                var localTcs = (TaskCompletionSource<object>) state;
                 if (timedOut)
                     localTcs.TrySetCanceled();
                 else
                     localTcs.TrySetResult(null);
-            }, tcs, timeout,  true);
-            tcs.Task.ContinueWith(t =>
-            {
-                registration.Unregister(null);
-            }, TaskScheduler.Default);
+            }, tcs, timeout, true);
+            tcs.Task.ContinueWith(t => { registration.Unregister(null); }, TaskScheduler.Default);
             return tcs.Task;
         }
     }

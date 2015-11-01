@@ -17,7 +17,7 @@ namespace BotBits.SendMessages
         /// <param name="y">The y-coordinate.</param>
         /// <param name="id">The block id.</param>
         /// <param name="args">The block arguments</param>
-        public PlaceSendMessage(Layer layer, int x, int y, int id, [NotNull]params object[] args)
+        public PlaceSendMessage(Layer layer, int x, int y, int id, [NotNull] params object[] args)
         {
             this.Layer = layer;
             this.X = x;
@@ -72,7 +72,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            object[] msgArgs = new object[] {(int)this.Layer, this.X, this.Y, this.Id}.Concat(this.Args).ToArray();
+            var msgArgs = new object[] {(int) this.Layer, this.X, this.Y, this.Id}.Concat(this.Args).ToArray();
             return Message.Create(this.RoomToken, msgArgs);
         }
     }

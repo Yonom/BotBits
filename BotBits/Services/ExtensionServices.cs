@@ -6,7 +6,7 @@ namespace BotBits
     public static class ExtensionServices
     {
         public static Type[] GetExtensions(BotBitsClient client)
-        { 
+        {
             lock (client.Extensions)
                 return client.Extensions.ToArray();
         }

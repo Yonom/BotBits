@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BotBits
+﻿namespace BotBits
 {
     public enum WorldType
-    { 
+    {
         Unknown = -1,
         Small = 0,
         Medium = 1,

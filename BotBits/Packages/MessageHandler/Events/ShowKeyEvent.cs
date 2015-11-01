@@ -14,7 +14,7 @@ namespace BotBits.Events
         internal ShowKeyEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Key = (Key)Enum.Parse(typeof(Key), message.GetString(0), true);
+            this.Key = (Key) Enum.Parse(typeof (Key), message.GetString(0), true);
         }
 
         /// <summary>

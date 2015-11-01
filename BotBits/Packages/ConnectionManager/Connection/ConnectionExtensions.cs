@@ -1,12 +1,11 @@
-﻿using System.Threading.Tasks;
-using PlayerIOClient;
+﻿using PlayerIOClient;
 
 namespace BotBits
 {
     public static class ConnectionExtensions
     {
         /// <summary>
-        /// Send a message to the connected client without first having to construct a Message object.
+        ///     Send a message to the connected client without first having to construct a Message object.
         /// </summary>
         /// <param name="connection">The connection.</param>
         /// <param name="type">The type of message to send</param>
@@ -17,15 +16,15 @@ namespace BotBits
         }
 
         /// <summary>
-        /// Add a message handler to the OnMessage event
+        ///     Add a message handler to the OnMessage event
         /// </summary>
         public static void AddOnMessage(this IConnection connection, MessageReceivedEventHandler handler)
         {
             connection.OnMessage += handler;
         }
-        
+
         /// <summary>
-        /// Add a disconnect handler to the OnDisconnect event
+        ///     Add a disconnect handler to the OnDisconnect event
         /// </summary>
         public static void AddOnDisconnect(this IConnection connection, DisconnectEventHandler handler)
         {

@@ -6,10 +6,11 @@ namespace BotBits.Events
     public sealed class PurpleSwitchUpdateEvent : PlayerEvent<PurpleSwitchUpdateEvent>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PurpleSwitchUpdateEvent" /> class.
+        ///     Initializes a new instance of the <see cref="PurpleSwitchUpdateEvent" /> class.
         /// </summary>
         /// <param name="client"></param>
-        /// <param name="message">The EE message.</param>D
+        /// <param name="message">The EE message.</param>
+        /// D
         internal PurpleSwitchUpdateEvent(BotBitsClient client, Message message)
             : base(client, message)
         {

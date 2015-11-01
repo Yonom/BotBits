@@ -17,14 +17,14 @@ namespace BotBits.Events
             this.Y = message.GetInteger(1);
             this.Id = message.GetInteger(2);
             this.Rotation = message.GetUInt(3);
-            this.Layer = (Layer)message.GetUInt(4);
+            this.Layer = (Layer) message.GetUInt(4);
         }
 
         /// <summary>
-        /// Gets or sets the layer.
+        ///     Gets or sets the layer.
         /// </summary>
         /// <value>
-        /// The layer.
+        ///     The layer.
         /// </value>
         public Layer Layer { get; set; }
 

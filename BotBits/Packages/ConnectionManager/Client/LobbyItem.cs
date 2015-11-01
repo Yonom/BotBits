@@ -8,14 +8,6 @@ namespace BotBits
     public sealed class LobbyItem
     {
         private readonly ILoginClient _client;
-        public int Online { get; private set; }
-        public string Id { get; private set; }
-        public string Name { get; private set; }
-        public int Plays { get; private set; }
-        public int Woots { get; private set; }
-        public bool Owned { get; private set; }
-        public bool HasCode { get; private set; }
-        public bool Featured { get; private set; }
 
         public LobbyItem(ILoginClient client, RoomInfo roomInfo)
         {
@@ -49,6 +41,15 @@ namespace BotBits
                 }
             }
         }
+
+        public int Online { get; private set; }
+        public string Id { get; }
+        public string Name { get; }
+        public int Plays { get; private set; }
+        public int Woots { get; private set; }
+        public bool Owned { get; private set; }
+        public bool HasCode { get; private set; }
+        public bool Featured { get; private set; }
 
         public void JoinRoom()
         {

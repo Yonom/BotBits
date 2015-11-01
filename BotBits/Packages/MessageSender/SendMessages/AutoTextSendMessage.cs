@@ -30,7 +30,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("autosay", (int)this.Text);
+            return Message.Create("autosay", (int) this.Text);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using JetBrains.Annotations;
 
@@ -11,7 +10,7 @@ namespace BotBits
 
         protected Event()
         {
-            var a = typeof(T);
+            var a = typeof (T);
             if (a != this.GetType())
                 throw new InvalidOperationException("Events must inherit Event<T> of their own type!");
             if (!a.IsSealed)
@@ -23,7 +22,7 @@ namespace BotBits
             if (Interlocked.Exchange(ref this._isRaised, 1) == 1)
                 throw new InvalidOperationException("This event can only be raised once.");
 
-            Of(client).Raise((T)this);
+            Of(client).Raise((T) this);
         }
 
         [Pure]

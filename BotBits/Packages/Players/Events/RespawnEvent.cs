@@ -13,8 +13,8 @@
         }
 
         public Player Player { get; private set; }
-        public double X { get; private set; }
-        public double Y { get; private set; }
+        public double X { get; }
+        public double Y { get; }
         public int Deaths { get; set; }
         public bool ResetCoins { get; private set; }
         public bool CausedByDeath { get; set; }

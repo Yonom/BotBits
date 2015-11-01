@@ -14,8 +14,14 @@ namespace BotBits
             // Get world data
             var p = 0u;
             var data = new Stack<object>();
-            while (m[p] as string != "ws") { ++p; }
-            while (m[p] as string != "we") { data.Push(m[++p]); }
+            while (m[p] as string != "ws")
+            {
+                ++p;
+            }
+            while (m[p] as string != "we")
+            {
+                data.Push(m[++p]);
+            }
 
             // Parse world data
             var chunks = new List<DataChunk>();
@@ -25,10 +31,10 @@ namespace BotBits
                 while (!(data.Peek() is byte[]))
                     args.Push(data.Pop());
 
-                var ys = (byte[])data.Pop();
-                var xs = (byte[])data.Pop();
-                var layer = (int)data.Pop();
-                var type = (uint)data.Pop();
+                var ys = (byte[]) data.Pop();
+                var xs = (byte[]) data.Pop();
+                var layer = (int) data.Pop();
+                var type = (uint) data.Pop();
 
                 chunks.Add(new DataChunk(layer, type, xs, ys, args.ToArray()));
             }
@@ -39,11 +45,6 @@ namespace BotBits
 
     public class DataChunk
     {
-        public int Layer { get; set; }
-        public uint Type { get; set; }
-        public Point[] Locations { get; set; }
-        public object[] Args { get; set; }
-
         public DataChunk(int layer, uint type, byte[] xs, byte[] ys, object[] args)
         {
             this.Layer = layer;
@@ -51,6 +52,11 @@ namespace BotBits
             this.Args = args;
             this.Locations = GetLocations(xs, ys);
         }
+
+        public int Layer { get; set; }
+        public uint Type { get; set; }
+        public Point[] Locations { get; set; }
+        public object[] Args { get; set; }
 
         private static Point[] GetLocations(byte[] xs, byte[] ys)
         {

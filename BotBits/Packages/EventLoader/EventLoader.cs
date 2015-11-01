@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
 
@@ -9,7 +7,7 @@ namespace BotBits
     public sealed class EventLoader : LoaderBase<EventLoader>
     {
         private static readonly MethodInfo _bindMethod =
-            typeof(EventLoader).GetMethod("Bind", BindingFlags.NonPublic | BindingFlags.Instance);
+            typeof (EventLoader).GetMethod("Bind", BindingFlags.NonPublic | BindingFlags.Instance);
 
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public EventLoader()
@@ -24,21 +22,21 @@ namespace BotBits
 
         protected override bool ShouldLoad(MethodInfo methodInfo)
         {
-            return methodInfo.IsDefined(typeof(EventListenerAttribute), true);
+            return methodInfo.IsDefined(typeof (EventListenerAttribute), true);
         }
 
         protected override Action GetBinder(object baseObj, MethodInfo eventHandler)
         {
-            ParameterInfo[] parameters = eventHandler.GetParameters();
+            var parameters = eventHandler.GetParameters();
             if (parameters.Length != 1)
                 throw GetEventEx(eventHandler, "EventListeners must have one argument of type Event.");
 
-            Type e = parameters[0].ParameterType;
+            var e = parameters[0].ParameterType;
             if (!Utils.IsEvent(e))
                 throw GetEventEx(eventHandler, "The argument must be an event.");
 
-            MethodInfo genericBind = _bindMethod.MakeGenericMethod(e);
-            return () => genericBind.Invoke(this, new[] { baseObj, eventHandler });
+            var genericBind = _bindMethod.MakeGenericMethod(e);
+            return () => genericBind.Invoke(this, new[] {baseObj, eventHandler});
         }
 
         [UsedImplicitly]
@@ -47,11 +45,11 @@ namespace BotBits
         {
             var attribute =
                 (EventListenerAttribute)
-                    eventHandler.GetCustomAttributes(typeof(EventListenerAttribute), true)[0];
+                    eventHandler.GetCustomAttributes(typeof (EventListenerAttribute), true)[0];
 
             var handler =
                 (EventRaiseHandler<TEvent>)
-                    Delegate.CreateDelegate(typeof(EventRaiseHandler<TEvent>), baseObj, eventHandler);
+                    Delegate.CreateDelegate(typeof (EventRaiseHandler<TEvent>), baseObj, eventHandler);
 
             Event<TEvent>
                 .Of(this.BotBits)
@@ -61,7 +59,7 @@ namespace BotBits
         private static Exception GetEventEx(MethodInfo handler, string reason)
         {
             return
-                new TypeLoadException(String.Format("Unable to assign the method {0}.{1} to an event listener. {2}",
+                new TypeLoadException(string.Format("Unable to assign the method {0}.{1} to an event listener. {2}",
                     handler.DeclaringType.FullName, handler.Name, reason));
         }
     }

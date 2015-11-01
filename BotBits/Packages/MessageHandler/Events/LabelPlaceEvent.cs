@@ -21,10 +21,10 @@ namespace BotBits.Events
         }
 
         /// <summary>
-        /// Gets or sets the color of the text.
+        ///     Gets or sets the color of the text.
         /// </summary>
         /// <value>
-        /// The color of the text.
+        ///     The color of the text.
         /// </value>
         public string TextColor { get; set; }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace BotBits
 {
@@ -14,7 +13,7 @@ namespace BotBits
         {
             Chat.Of(player.BotBits).Kick(player.Username, reason);
         }
-        
+
         [StringFormatMethod("args")]
         public static void Kick(this Player player, string reason, params object[] args)
         {
@@ -102,7 +101,7 @@ namespace BotBits
         {
             Chat.Of(player.BotBits).ForceFly(player.Username, flying);
         }
-        
+
         public static void ClearEffects(this Player player)
         {
             Chat.Of(player.BotBits).ClearEffects(player.Username);

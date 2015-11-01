@@ -7,56 +7,16 @@ namespace BotBits
 {
     public sealed class EventHandle<T> where T : Event<T>
     {
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public BotBitsClient BotBits { get; private set; }
-
-        private class EventHandlerCollection :
-            SortedDictionary<GlobalPriority,
-                SortedDictionary<int,
-                    SortedDictionary<EventPriority,
-                        IList<EventRaiseHandler<T>>>>>
-        {
-            public void Add(GlobalPriority globalPriority, int extensionId, EventPriority priority, EventRaiseHandler<T> callback)
-            {
-                SortedDictionary<int,
-                    SortedDictionary<EventPriority,
-                        IList<EventRaiseHandler<T>>>> extensions;
-                if (!this.TryGetValue(globalPriority, out extensions))
-                {
-                    extensions = new SortedDictionary<int, SortedDictionary<EventPriority, IList<EventRaiseHandler<T>>>>();
-                    this.Add(globalPriority, extensions);
-                }
-
-                SortedDictionary<EventPriority, IList<EventRaiseHandler<T>>> priorities;
-                if (!extensions.TryGetValue(extensionId, out priorities))
-                {
-                    priorities = new SortedDictionary<EventPriority, IList<EventRaiseHandler<T>>>();
-                    extensions.Add(extensionId, priorities);
-                }
-
-                IList<EventRaiseHandler<T>> value;
-                if (!priorities.TryGetValue(priority, out value))
-                {
-                    value = new List<EventRaiseHandler<T>>();
-                    priorities.Add(priority, value);
-                }
-
-                value.Add(callback);
-            }
-
-            public bool Remove(EventRaiseHandler<T> callback)
-            {
-                return this.Values.Any(ex => ex.Values.Any(pr => pr.Values.Any(p => p.Remove(callback))));
-            }
-
-            public IEnumerable<EventRaiseHandler<T>> Handlers
-            {
-                get { return this.Values.SelectMany(ex => ex.Values.SelectMany(pr => pr.Values.SelectMany(l => l))); }
-            } 
-        }
-
         private readonly EventHandlerCollection _eventHandlers =
             new EventHandlerCollection();
+
+        internal EventHandle(BotBitsClient botBits)
+        {
+            this.BotBits = botBits;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public BotBitsClient BotBits { get; }
 
         public int Count
         {
@@ -67,11 +27,6 @@ namespace BotBits
                     return this._eventHandlers.Values.Sum(ex => ex.Values.Sum(pr => pr.Values.Sum(l => l.Count)));
                 }
             }
-        }
-
-        internal EventHandle(BotBitsClient botBits)
-        {
-            this.BotBits = botBits;
         }
 
         public void UnbindAll()
@@ -103,13 +58,15 @@ namespace BotBits
             this.Bind(callback, GlobalPriority.Normal, priority);
         }
 
-        public void Bind(EventRaiseHandler<T> callback, GlobalPriority globalPriority, EventPriority priority = EventPriority.Normal)
+        public void Bind(EventRaiseHandler<T> callback, GlobalPriority globalPriority,
+            EventPriority priority = EventPriority.Normal)
         {
             var assembly = callback.Method.DeclaringType.Assembly;
-            BindInternal(assembly, callback, globalPriority, priority);
+            this.BindInternal(assembly, callback, globalPriority, priority);
         }
 
-        internal void BindInternal(Assembly assembly, EventRaiseHandler<T> callback, GlobalPriority globalPriority, EventPriority priority)
+        internal void BindInternal(Assembly assembly, EventRaiseHandler<T> callback, GlobalPriority globalPriority,
+            EventPriority priority)
         {
             lock (this._eventHandlers)
             {
@@ -129,6 +86,53 @@ namespace BotBits
             foreach (var handler in handlers)
             {
                 handler(e);
+            }
+        }
+
+        private class EventHandlerCollection :
+            SortedDictionary<GlobalPriority,
+                SortedDictionary<int,
+                    SortedDictionary<EventPriority,
+                        IList<EventRaiseHandler<T>>>>>
+        {
+            public IEnumerable<EventRaiseHandler<T>> Handlers
+            {
+                get { return this.Values.SelectMany(ex => ex.Values.SelectMany(pr => pr.Values.SelectMany(l => l))); }
+            }
+
+            public void Add(GlobalPriority globalPriority, int extensionId, EventPriority priority,
+                EventRaiseHandler<T> callback)
+            {
+                SortedDictionary<int,
+                    SortedDictionary<EventPriority,
+                        IList<EventRaiseHandler<T>>>> extensions;
+                if (!this.TryGetValue(globalPriority, out extensions))
+                {
+                    extensions =
+                        new SortedDictionary<int, SortedDictionary<EventPriority, IList<EventRaiseHandler<T>>>>();
+                    this.Add(globalPriority, extensions);
+                }
+
+                SortedDictionary<EventPriority, IList<EventRaiseHandler<T>>> priorities;
+                if (!extensions.TryGetValue(extensionId, out priorities))
+                {
+                    priorities = new SortedDictionary<EventPriority, IList<EventRaiseHandler<T>>>();
+                    extensions.Add(extensionId, priorities);
+                }
+
+                IList<EventRaiseHandler<T>> value;
+                if (!priorities.TryGetValue(priority, out value))
+                {
+                    value = new List<EventRaiseHandler<T>>();
+                    priorities.Add(priority, value);
+                }
+
+                value.Add(callback);
+            }
+
+            public bool Remove(EventRaiseHandler<T> callback)
+            {
+                return this.Values.Any(ex => ex.Values.Any(pr => pr.Values.Any(p => p.Remove(callback))));
             }
         }
     }

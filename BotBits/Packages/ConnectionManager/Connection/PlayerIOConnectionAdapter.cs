@@ -14,7 +14,7 @@ namespace BotBits
 
         public void Disconnect()
         {
-           this._connection.Disconnect();
+            this._connection.Disconnect();
         }
 
         public void Send(Message message)

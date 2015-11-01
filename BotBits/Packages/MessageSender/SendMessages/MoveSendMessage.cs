@@ -8,7 +8,7 @@ namespace BotBits.SendMessages
     public sealed class MoveSendMessage : SendMessage<MoveSendMessage>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MoveSendMessage" /> class.
+        ///     Initializes a new instance of the <see cref="MoveSendMessage" /> class.
         /// </summary>
         /// <param name="x">The x-coordinate of the position.</param>
         /// <param name="y">The y-coordinate of the position.</param>
@@ -36,12 +36,12 @@ namespace BotBits.SendMessages
             this.SpaceJustDown = spaceJustDown;
             this.TickId = tickId;
         }
-        
+
         /// <summary>
-        /// Gets or sets the gravity multiplier.
+        ///     Gets or sets the gravity multiplier.
         /// </summary>
         /// <value>
-        /// The gravity multiplier.
+        ///     The gravity multiplier.
         /// </value>
         private double GravityMultiplier { get; set; }
 
@@ -54,18 +54,18 @@ namespace BotBits.SendMessages
         public bool SpaceDown { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether space was just pressed.
+        ///     Gets or sets a value indicating whether space was just pressed.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if space was just pressed; otherwise, <c>false</c>.
+        ///     <c>true</c> if space was just pressed; otherwise, <c>false</c>.
         /// </value>
         public bool SpaceJustDown { get; set; }
 
         /// <summary>
-        /// Gets or sets the physics tick number.
+        ///     Gets or sets the physics tick number.
         /// </summary>
         /// <value>
-        /// The physics tick number.
+        ///     The physics tick number.
         /// </value>
         public int TickId { get; set; }
 

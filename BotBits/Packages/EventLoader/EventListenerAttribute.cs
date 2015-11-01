@@ -9,9 +9,6 @@ namespace BotBits
     [AttributeUsage(AttributeTargets.Method), MeansImplicitUse]
     public sealed class EventListenerAttribute : Attribute
     {
-        private readonly EventPriority _priority;
-        private readonly GlobalPriority _globalPriority;
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="EventListenerAttribute" /> class.
         /// </summary>
@@ -25,18 +22,18 @@ namespace BotBits
         /// <param name="priority">The priority of this event handler.</param>
         public EventListenerAttribute(EventPriority priority)
         {
-            this._priority = priority;
+            this.Priority = priority;
         }
 
         public EventListenerAttribute(GlobalPriority globalPriority)
         {
-            this._globalPriority = globalPriority;
+            this.GlobalPriority = globalPriority;
         }
 
         public EventListenerAttribute(GlobalPriority globalPriority, EventPriority priority)
             : this(priority)
         {
-            this._globalPriority = globalPriority;
+            this.GlobalPriority = globalPriority;
         }
 
         /// <summary>
@@ -45,14 +42,8 @@ namespace BotBits
         /// <value>
         ///     The priority of this event handler.
         /// </value>
-        public EventPriority Priority
-        {
-            get { return this._priority; }
-        }
+        public EventPriority Priority { get; }
 
-        public GlobalPriority GlobalPriority
-        {
-            get { return this._globalPriority; }
-        }
+        public GlobalPriority GlobalPriority { get; }
     }
 }

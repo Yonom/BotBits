@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using System.Threading.Tasks;
 
 namespace BotBits
 {
@@ -14,6 +13,6 @@ namespace BotBits
         {
         }
 
-        public SynchronizationContext SynchronizationContext { get; private set; }
+        public SynchronizationContext SynchronizationContext { get; }
     }
 }

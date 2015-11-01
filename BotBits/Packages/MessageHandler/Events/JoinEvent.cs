@@ -1,4 +1,3 @@
-using System;
 using PlayerIOClient;
 
 namespace BotBits.Events
@@ -16,7 +15,7 @@ namespace BotBits.Events
         {
             this.Username = message.GetString(1);
             this.ConnectUserId = message.GetString(2);
-            this.Smiley = (Smiley)message.GetInteger(3);
+            this.Smiley = (Smiley) message.GetInteger(3);
             this.X = message.GetDouble(4);
             this.Y = message.GetDouble(5);
             this.God = message.GetBoolean(6);
@@ -28,8 +27,8 @@ namespace BotBits.Events
             this.Friend = message.GetBoolean(12);
             this.ClubMember = message.GetBoolean(13);
             this.Mod = message.GetBoolean(14);
-            this.Team = (Team)message.GetInt(15);
-            this.Aura = (Aura)message.GetInt(16);
+            this.Team = (Team) message.GetInt(15);
+            this.Aura = (Aura) message.GetInt(16);
             this.ChatColor = message.GetUInt(17);
             this.Badge = message.GetBadge(18);
             this.CrewMember = message.GetBoolean(19);
@@ -44,26 +43,26 @@ namespace BotBits.Events
         public string ConnectUserId { get; set; }
 
         /// <summary>
-        /// Gets or sets the aura.
+        ///     Gets or sets the aura.
         /// </summary>
         /// <value>
-        /// The aura.
+        ///     The aura.
         /// </value>
         public Aura Aura { get; set; }
 
         /// <summary>
-        /// Gets or sets the team.
+        ///     Gets or sets the team.
         /// </summary>
         /// <value>
-        /// The team.
+        ///     The team.
         /// </value>
         public Team Team { get; set; }
 
         /// <summary>
-        /// Gets or sets the color of the chat.
+        ///     Gets or sets the color of the chat.
         /// </summary>
         /// <value>
-        /// The color of the chat.
+        ///     The color of the chat.
         /// </value>
         public uint ChatColor { get; set; }
 

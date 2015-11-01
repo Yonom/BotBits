@@ -4,7 +4,7 @@ using PlayerIOClient;
 
 namespace BotBits
 {
-    class PlayerAchivements
+    internal class PlayerAchivements
     {
         private readonly Achievement[] _achievements;
 

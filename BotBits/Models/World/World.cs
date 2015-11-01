@@ -6,16 +6,16 @@ namespace BotBits
 {
     public class World : World<ForegroundBlock, BackgroundBlock>, IWorld
     {
-        public World(int width, int height) 
+        public World(int width, int height)
             : base(width, height)
         {
         }
     }
 
     [DebuggerDisplay("Width = {Width}, Height = {Height}")]
-    public abstract class World<TForeground, TBackground> 
-        : IWorld<TForeground, TBackground> , IWorldAreaEnumerable<TForeground, TBackground> 
-        where TForeground : struct 
+    public abstract class World<TForeground, TBackground>
+        : IWorld<TForeground, TBackground>, IWorldAreaEnumerable<TForeground, TBackground>
+        where TForeground : struct
         where TBackground : struct
     {
         protected World(int width, int height)
@@ -25,19 +25,9 @@ namespace BotBits
             this.Foreground = new BlockLayer<TForeground>(width, height);
             this.Background = new BlockLayer<TBackground>(width, height);
         }
-        
-        public WorldItem<TForeground, TBackground> At(Point point)
-        {
-            return this.At(point.X, point.Y);
-        }
 
-        public WorldItem<TForeground, TBackground> At(int x, int y)
-        {
-            return new WorldItem<TForeground, TBackground>(this, x, y);
-        }
-
-        public BlockLayer<TBackground> Background { get; private set; }
-        public BlockLayer<TForeground> Foreground { get; private set; }
+        public BlockLayer<TBackground> Background { get; }
+        public BlockLayer<TForeground> Foreground { get; }
 
         IBlockLayer<TBackground> IWorld<TForeground, TBackground>.Background
         {
@@ -49,8 +39,8 @@ namespace BotBits
             get { return this.Foreground; }
         }
 
-        public int Height { get; private set; }
-        public int Width { get; private set; }
+        public int Height { get; }
+        public int Width { get; }
 
         public IEnumerator<WorldItem<TForeground, TBackground>> GetEnumerator()
         {
@@ -67,6 +57,19 @@ namespace BotBits
             get { return this; }
         }
 
-        public Rectangle Area { get { return new Rectangle(0, 0, this.Width, this.Height); } }
+        public Rectangle Area
+        {
+            get { return new Rectangle(0, 0, this.Width, this.Height); }
+        }
+
+        public WorldItem<TForeground, TBackground> At(Point point)
+        {
+            return this.At(point.X, point.Y);
+        }
+
+        public WorldItem<TForeground, TBackground> At(int x, int y)
+        {
+            return new WorldItem<TForeground, TBackground>(this, x, y);
+        }
     }
 }

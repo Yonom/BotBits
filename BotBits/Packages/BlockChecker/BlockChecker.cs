@@ -10,18 +10,25 @@ namespace BotBits
 {
     public sealed class BlockChecker : EventListenerPackage<BlockChecker>, IDisposable
     {
-        private readonly Deque<CheckHandle> _sentBlocks = new Deque<CheckHandle>(100);
-        private readonly AutoResetEvent _timeoutResetEvent = new AutoResetEvent(true);
         private readonly ManualResetEvent _finishResetEvent = new ManualResetEvent(true);
-        private readonly Dictionary<Point3D, CheckHandle> _sentLocations = new Dictionary<Point3D, CheckHandle>(100);
         private readonly RegisteredWaitHandle _registration;
+        private readonly Deque<CheckHandle> _sentBlocks = new Deque<CheckHandle>(100);
+        private readonly Dictionary<Point3D, CheckHandle> _sentLocations = new Dictionary<Point3D, CheckHandle>(100);
+        private readonly AutoResetEvent _timeoutResetEvent = new AutoResetEvent(true);
         private MessageQueue<PlaceSendMessage> _messageQueue;
-            
+
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public BlockChecker()
         {
             this.InitializeFinish += this.BlockChecker_InitializeFinish;
             this._registration = this.RegisterSendTimeout();
+        }
+
+        void IDisposable.Dispose()
+        {
+            this._registration.Unregister(null);
+            this._timeoutResetEvent.Dispose();
+            this._finishResetEvent.Dispose();
         }
 
         private void BlockChecker_InitializeFinish(object sender, EventArgs e)
@@ -44,13 +51,6 @@ namespace BotBits
                     this.RepairMissed();
                 }
             }, null, 500, false);
-        }
-
-        void IDisposable.Dispose()
-        {
-            this._registration.Unregister(null);
-            this._timeoutResetEvent.Dispose();
-            this._finishResetEvent.Dispose();
         }
 
         public Task FinishChecksAsync()
@@ -106,7 +106,7 @@ namespace BotBits
                 }
             }
         }
-        
+
         private void RepairMissed(Point3D? point = null)
         {
             while (this._sentBlocks.Count > 0)
@@ -127,10 +127,7 @@ namespace BotBits
 
         private void SendMissed(CheckHandle handle)
         {
-            MessageServices.EnableSkipsQueue(() =>
-            {
-                handle.Message.SendIn(this.BotBits);
-            });
+            MessageServices.EnableSkipsQueue(() => { handle.Message.SendIn(this.BotBits); });
         }
 
         private void OnSendingPlace(object sender, SendingEventArgs<PlaceSendMessage> e)
@@ -195,14 +192,14 @@ namespace BotBits
 
         private sealed class CheckHandle
         {
-            public int OverwrittenSends { get; set; }
-            public PlaceSendMessage Message { get; private set; }
-
             public CheckHandle(PlaceSendMessage message, int overwrittenSends)
             {
                 this.Message = message;
                 this.OverwrittenSends = overwrittenSends;
             }
+
+            public int OverwrittenSends { get; set; }
+            public PlaceSendMessage Message { get; }
         }
     }
 }

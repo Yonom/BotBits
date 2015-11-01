@@ -23,7 +23,7 @@ namespace BotBits.Events
         /// </summary>
         /// <value>The player io message.</value>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public Message PlayerIOMessage { get; private set; }
+        public Message PlayerIOMessage { get; }
 
         /// <summary>
         ///     Returns a <see cref="System.String" /> that represents this instance.

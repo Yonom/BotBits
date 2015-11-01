@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
-using BotBits.Events;
-using BotBits.Nito.Async;
-using BotBits.SendMessages;
 
 namespace BotBits
 {
@@ -23,7 +17,7 @@ namespace BotBits
             try
             {
 // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-                givenType.IsAssignableFrom(typeof(Event<>).MakeGenericType(givenType));
+                givenType.IsAssignableFrom(typeof (Event<>).MakeGenericType(givenType));
                 return true;
             }
             catch (Exception)
@@ -32,16 +26,17 @@ namespace BotBits
             }
         }
 
-    public static IEnumerable<MethodInfo> GetMethods(Type type)
-    {
-        IEnumerable<MethodInfo> methods = type.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-
-        if (type.BaseType?.BaseType != null)
+        public static IEnumerable<MethodInfo> GetMethods(Type type)
         {
-            methods = methods.Concat(GetMethods(type.BaseType));
-        }
+            IEnumerable<MethodInfo> methods =
+                type.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
 
-        return methods;
-    }
+            if (type.BaseType?.BaseType != null)
+            {
+                methods = methods.Concat(GetMethods(type.BaseType));
+            }
+
+            return methods;
+        }
     }
 }

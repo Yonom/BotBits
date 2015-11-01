@@ -8,22 +8,22 @@ namespace BotBits
     {
         public bool Equals(ForegroundBlock other)
         {
-            return Equals(this._args, other._args) && this._id == other._id && this._type == other._type;
+            return Equals(this._args, other._args) && this.Id == other.Id && this.Type == other.Type;
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is ForegroundBlock && Equals((ForegroundBlock)obj);
+            return obj is ForegroundBlock && this.Equals((ForegroundBlock) obj);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                int hashCode = (this._args != null ? this._args.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (int)this._id;
-                hashCode = (hashCode * 397) ^ (int)this._type;
+                var hashCode = (this._args != null ? this._args.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (int) this.Id;
+                hashCode = (hashCode*397) ^ (int) this.Type;
                 return hashCode;
             }
         }
@@ -39,72 +39,70 @@ namespace BotBits
         }
 
         private readonly object _args;
-        private readonly Foreground.Id _id;
-        private readonly ForegroundType _type;
 
         public ForegroundBlock(Foreground.Id id)
         {
-            ForegroundType type = WorldUtils.GetForegroundType(id);
+            var type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.None)
                 throw new ArgumentException("The given block is missing required arguments.", "id");
 
             this._args = null;
-            this._type = ForegroundType.Normal;
-            this._id = id;
+            this.Type = ForegroundType.Normal;
+            this.Id = id;
         }
 
 
         public ForegroundBlock(Foreground.Id id, uint args)
         {
-            ForegroundType type = WorldUtils.GetForegroundType(id);
+            var type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Number)
                 throw new ArgumentException("Invalid arguments for the specified block.", "id");
 
             this._args = args;
-            this._type = type;
-            this._id = id;
+            this.Type = type;
+            this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, string text)
         {
-            ForegroundType type = WorldUtils.GetForegroundType(id);
+            var type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.String)
                 throw new ArgumentException("Invalid arguments for the specified block.", "id");
 
             this._args = text;
-            this._type = type;
-            this._id = id;
+            this.Type = type;
+            this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, string text, string textColor)
         {
-            ForegroundType type = WorldUtils.GetForegroundType(id);
+            var type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Label)
                 throw new ArgumentException("Invalid arguments for the specified block.", "id");
 
             this._args = new LabelArgs(text, textColor);
-            this._type = type;
-            this._id = id;
+            this.Type = type;
+            this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, uint portalId, uint portalTarget, Morph.Id portalRotation)
         {
-            ForegroundType type = WorldUtils.GetForegroundType(id);
+            var type = WorldUtils.GetForegroundType(id);
             if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Portal)
                 throw new ArgumentException("The given block is not a portal.", "id");
 
             this._args = new PortalArgs(portalId, portalTarget, portalRotation);
-            this._type = ForegroundType.Portal;
-            this._id = id;
+            this.Type = ForegroundType.Portal;
+            this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, int portalId, int portalTarget, Morph.Id portalRotation)
-            : this(id, (uint)portalId, (uint)portalTarget, portalRotation)
+            : this(id, (uint) portalId, (uint) portalTarget, portalRotation)
         {
         }
 
         public ForegroundBlock(Foreground.Id id, int goal)
-            : this(id, (uint)goal)
+            : this(id, (uint) goal)
         {
         }
 
@@ -114,7 +112,7 @@ namespace BotBits
         }
 
         public ForegroundBlock(Foreground.Id id, Morph.Id morph)
-            : this(id, (uint)morph)
+            : this(id, (uint) morph)
         {
         }
 
@@ -124,10 +122,7 @@ namespace BotBits
         /// <value>
         ///     The block.
         /// </value>
-        public Foreground.Id Id
-        {
-            get { return this._id; }
-        }
+        public Foreground.Id Id { get; }
 
         /// <summary>
         ///     Gets the type.
@@ -135,10 +130,7 @@ namespace BotBits
         /// <value>
         ///     The type.
         /// </value>
-        public ForegroundType Type
-        {
-            get { return this._type; }
-        }
+        public ForegroundType Type { get; }
 
         /// <summary>
         ///     Gets the Text. (Only on label or text blocks)
@@ -154,11 +146,12 @@ namespace BotBits
                 switch (this.Type)
                 {
                     case ForegroundType.Text:
-                        return (string)this._args;
+                        return (string) this._args;
                     case ForegroundType.Label:
                         return this.GetLabelArgs().Text;
                     default:
-                        throw new InvalidOperationException("This property can only be accessed on label or text blocks.");
+                        throw new InvalidOperationException(
+                            "This property can only be accessed on label or text blocks.");
                 }
             }
         }
@@ -195,7 +188,7 @@ namespace BotBits
                 if (this.Type != ForegroundType.Toggle && this.Type != ForegroundType.ToggleGoal)
                     throw new InvalidOperationException("This property can only be accessed on toggle blocks.");
 
-                return (uint)this._args != 0;
+                return (uint) this._args != 0;
             }
         }
 
@@ -213,7 +206,7 @@ namespace BotBits
                 if (this.Type != ForegroundType.Goal && this.Type != ForegroundType.ToggleGoal)
                     throw new InvalidOperationException("This property can only be accessed on goal blocks.");
 
-                return (uint)this._args;
+                return (uint) this._args;
             }
         }
 
@@ -267,7 +260,7 @@ namespace BotBits
                 if (this.Type != ForegroundType.WorldPortal)
                     throw new InvalidOperationException("This property can only be accessed on WorldPortal blocks.");
 
-                return (string)this._args;
+                return (string) this._args;
             }
         }
 
@@ -289,31 +282,42 @@ namespace BotBits
                     case ForegroundType.Morphable:
                     case ForegroundType.Note:
                     case ForegroundType.Team:
-                        return (Morph.Id)(uint)this._args;
+                        return (Morph.Id) (uint) this._args;
                     default:
                         throw new InvalidOperationException("This property can only be accessed on morphable blocks.");
                 }
-
             }
         }
 
         private PortalArgs GetPortalArgs()
         {
-            return (PortalArgs)this._args;
+            return (PortalArgs) this._args;
         }
 
         private LabelArgs GetLabelArgs()
         {
-            return (LabelArgs)this._args;
+            return (LabelArgs) this._args;
         }
 
         private class PortalArgs : IEquatable<PortalArgs>
         {
+            public PortalArgs(uint portalId, uint portalTarget, Morph.Id portalRotation)
+            {
+                this.PortalId = portalId;
+                this.PortalTarget = portalTarget;
+                this.PortalRotation = portalRotation;
+            }
+
+            public uint PortalId { get; }
+            public uint PortalTarget { get; }
+            public Morph.Id PortalRotation { get; }
+
             public bool Equals(PortalArgs other)
             {
                 if (ReferenceEquals(null, other)) return false;
                 if (ReferenceEquals(this, other)) return true;
-                return this.PortalId == other.PortalId && this.PortalTarget == other.PortalTarget && this.PortalRotation == other.PortalRotation;
+                return this.PortalId == other.PortalId && this.PortalTarget == other.PortalTarget &&
+                       this.PortalRotation == other.PortalRotation;
             }
 
             public override bool Equals(object obj)
@@ -321,16 +325,16 @@ namespace BotBits
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
                 if (obj.GetType() != this.GetType()) return false;
-                return Equals((PortalArgs)obj);
+                return this.Equals((PortalArgs) obj);
             }
 
             public override int GetHashCode()
             {
                 unchecked
                 {
-                    int hashCode = (int)this.PortalId;
-                    hashCode = (hashCode * 397) ^ (int)this.PortalTarget;
-                    hashCode = (hashCode * 397) ^ (int)this.PortalRotation;
+                    var hashCode = (int) this.PortalId;
+                    hashCode = (hashCode*397) ^ (int) this.PortalTarget;
+                    hashCode = (hashCode*397) ^ (int) this.PortalRotation;
                     return hashCode;
                 }
             }
@@ -344,21 +348,19 @@ namespace BotBits
             {
                 return !Equals(left, right);
             }
-
-            public PortalArgs(uint portalId, uint portalTarget, Morph.Id portalRotation)
-            {
-                this.PortalId = portalId;
-                this.PortalTarget = portalTarget;
-                this.PortalRotation = portalRotation;
-            }
-
-            public uint PortalId { get; private set; }
-            public uint PortalTarget { get; private set; }
-            public Morph.Id PortalRotation { get; private set; }
         }
 
         private class LabelArgs : IEquatable<LabelArgs>
         {
+            public LabelArgs(string text, string textColor)
+            {
+                this.Text = text;
+                this.TextColor = textColor;
+            }
+
+            public string Text { get; }
+            public string TextColor { get; }
+
             public bool Equals(LabelArgs other)
             {
                 if (ReferenceEquals(null, other)) return false;
@@ -371,14 +373,15 @@ namespace BotBits
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
                 if (obj.GetType() != this.GetType()) return false;
-                return Equals((LabelArgs)obj);
+                return this.Equals((LabelArgs) obj);
             }
 
             public override int GetHashCode()
             {
                 unchecked
                 {
-                    return ((this.Text != null ? this.Text.GetHashCode() : 0) * 397) ^ (this.TextColor != null ? this.TextColor.GetHashCode() : 0);
+                    return ((this.Text != null ? this.Text.GetHashCode() : 0)*397) ^
+                           (this.TextColor != null ? this.TextColor.GetHashCode() : 0);
                 }
             }
 
@@ -391,15 +394,6 @@ namespace BotBits
             {
                 return !Equals(left, right);
             }
-
-            public string Text { get; private set; }
-            public string TextColor { get; private set; }
-
-            public LabelArgs(string text, string textColor)
-            {
-                this.Text = text;
-                this.TextColor = textColor;
-            }
         }
 
         public object[] GetArgs()
@@ -409,11 +403,11 @@ namespace BotBits
                 case ForegroundType.Normal:
                     return new object[0];
                 case ForegroundType.Portal:
-                    return new object[] { (uint)this.Morph, this.PortalId, this.PortalTarget };
+                    return new object[] {(uint) this.Morph, this.PortalId, this.PortalTarget};
                 case ForegroundType.Label:
-                    return new object[] { this.Text, this.TextColor };
+                    return new object[] {this.Text, this.TextColor};
                 default:
-                    return new[] { this._args };
+                    return new[] {this._args};
             }
         }
     }

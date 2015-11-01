@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BotBits
+﻿namespace BotBits
 {
     public class ConnectionArgs
     {
-        public PlayerData PlayerData { get; private set; }
-        public string ConnectUserId { get; private set; }
-        public string RoomId { get; private set; }
-
         public ConnectionArgs(string connectUserId, string roomId, PlayerData playerData)
         {
             this.ConnectUserId = connectUserId;
@@ -20,7 +11,10 @@ namespace BotBits
 
         public ConnectionArgs()
         {
-
         }
+
+        public PlayerData PlayerData { get; private set; }
+        public string ConnectUserId { get; private set; }
+        public string RoomId { get; private set; }
     }
 }
