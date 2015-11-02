@@ -128,7 +128,7 @@ namespace BotBits
             MessageServices.EnableSkipsQueue(() => { handle.Message.SendIn(this.BotBits); });
         }
 
-        [EventListener]
+        [EventListener(GlobalPriority.AfterMost)]
         private void OnSendingPlace(SendingEvent<PlaceSendMessage> e)
         {
             var b = e.Message;
@@ -145,7 +145,7 @@ namespace BotBits
             }
         }
 
-        [EventListener]
+        [EventListener(GlobalPriority.AfterMost)]
         private void OnSendPlace(SendEvent<PlaceSendMessage> e)
         {
             var b = e.Message;
