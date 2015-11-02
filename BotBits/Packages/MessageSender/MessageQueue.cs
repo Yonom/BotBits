@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using BotBits.Events;
 using BotBits.Nito;
 using BotBits.SendMessages;
 using JetBrains.Annotations;
@@ -24,7 +25,7 @@ namespace BotBits
             }
         }
 
-        void IMessageQueue.SendTicks(int ticks, IConnection connection)
+        void IMessageQueue.SendTicks(int ticks, BotBitsClient client)
         {
             var c = ticks - 4; // Max number of messages sent at once
 
@@ -32,27 +33,11 @@ namespace BotBits
             {
                 var msg = this.Dequeue();
                 if (msg == null) return;
-                if (!this.SendMessage(msg, connection))
+                if (!this.SendMessage(msg, client))
                 {
                     this._lastTicks--;
                 }
             }
-        }
-
-        public event EventHandler<SendEventArgs<T>> Send;
-
-        protected virtual void OnSend(SendEventArgs<T> e)
-        {
-            var handler = this.Send;
-            if (handler != null) handler(this, e);
-        }
-
-        public event EventHandler<SendingEventArgs<T>> Sending;
-
-        protected virtual void OnSending(SendingEventArgs<T> e)
-        {
-            var handler = this.Sending;
-            if (handler != null) handler(this, e);
         }
 
         [CanBeNull]
@@ -85,20 +70,20 @@ namespace BotBits
             }
         }
 
-        internal bool SendMessage(T msg, IConnection connection)
+        internal bool SendMessage(T msg, BotBitsClient client)
         {
-            var e = new SendingEventArgs<T>(msg);
-            this.OnSending(e);
-            if (!e.Cancelled)
-            {
-                var e2 = new SendEventArgs<T>(msg);
-                this.OnSend(e2);
+            var e = new SendingEvent<T>(msg);
+            e.RaiseIn(client);
+            if (e.Cancelled) return false;
 
-                e.Message.Send(connection);
 
-                return true;
-            }
-            return false;
+            var con = ConnectionManager.Of(client).Connection;
+            if (con == null) return false;
+
+            var e2 = new SendEvent<T>(msg);
+            e2.RaiseIn(client);
+            e.Message.Send(con);
+            return true;
         }
 
         public void ClearQueue()

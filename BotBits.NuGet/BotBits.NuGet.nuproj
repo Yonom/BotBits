@@ -22,11 +22,10 @@
   <!--<PropertyGroup>
     <NuProjPath Condition=" '$(NuProjPath)' == '' ">$(MSBuildExtensionsPath)\NuProj\</NuProjPath>
   </PropertyGroup>-->
-  
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>BotBits</Id>
-    <Version>1.6.10</Version>
+    <Version>1.6.11</Version>
     <Title>BotBits</Title>
     <Authors>Younom</Authors>
     <Owners>Younom</Owners>

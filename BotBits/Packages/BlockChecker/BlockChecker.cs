@@ -34,8 +34,6 @@ namespace BotBits
         private void BlockChecker_InitializeFinish(object sender, EventArgs e)
         {
             this._messageQueue = PlaceSendMessage.Of(this.BotBits);
-            this._messageQueue.Sending += this.OnSendingPlace;
-            this._messageQueue.Send += this.OnSendPlace;
         }
 
         private RegisteredWaitHandle RegisterSendTimeout()
@@ -130,7 +128,8 @@ namespace BotBits
             MessageServices.EnableSkipsQueue(() => { handle.Message.SendIn(this.BotBits); });
         }
 
-        private void OnSendingPlace(object sender, SendingEventArgs<PlaceSendMessage> e)
+        [EventListener]
+        private void OnSendingPlace(SendingEvent<PlaceSendMessage> e)
         {
             var b = e.Message;
             var p = b.GetPoint3D();
@@ -146,7 +145,8 @@ namespace BotBits
             }
         }
 
-        private void OnSendPlace(object sender, SendEventArgs<PlaceSendMessage> e)
+        [EventListener]
+        private void OnSendPlace(SendEvent<PlaceSendMessage> e)
         {
             var b = e.Message;
             var p = b.GetPoint3D();

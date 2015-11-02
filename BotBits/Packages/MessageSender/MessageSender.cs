@@ -30,12 +30,9 @@ namespace BotBits
 
         private void Send(int ticks)
         {
-            var con = ConnectionManager.Of(this.BotBits).Connection;
-            if (con == null) return;
-
             foreach (var e in this._queues.Values)
             {
-                e.SendTicks(ticks, con);
+                e.SendTicks(ticks, this.BotBits);
             }
         }
 
