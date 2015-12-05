@@ -90,7 +90,7 @@
     <Compile Include="Packages\ConnectionManager\ConnectionUtils.cs" />
     <Compile Include="Packages\ConnectionManager\IPlayerIOGame.cs" />
     <Compile Include="Models\Aura.cs" />
-    <Compile Include="Models\EffectId.cs" />
+    <Compile Include="Models\Effect.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\WorldType.cs" />
     <Compile Include="Internal\PlayerIOAsync.cs" />

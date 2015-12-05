@@ -27,7 +27,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create(this.RoomToken + "a", this.Aura);
+            return Message.Create(this.RoomToken + "a", (int)this.Aura);
         }
     }
 }

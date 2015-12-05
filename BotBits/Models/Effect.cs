@@ -9,6 +9,7 @@
         Curse = 4,
         Zombie = 5,
         //Team = 6,
-        LowGravity = 7
+        LowGravity = 7,
+        Fire = 8,
     }
 }
