@@ -4,6 +4,7 @@
     {
         None,
         Number,
+        SignedNumber,
         String,
         Portal,
         Label

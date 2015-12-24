@@ -55,10 +55,17 @@ namespace BotBits
         public ForegroundBlock(Foreground.Id id, uint args)
         {
             var type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Number)
-                throw new ArgumentException("Invalid arguments for the specified block.", "id");
-
-            this._args = args;
+            switch (WorldUtils.GetBlockArgsType(type))
+            {
+                case BlockArgsType.Number:
+                    this._args = args;
+                    break;
+                case BlockArgsType.SignedNumber:
+                    this._args = (int) args;
+                    break;
+                default:
+                    throw new ArgumentException("Invalid arguments for the specified block.", "id");
+            }
             this.Type = type;
             this.Id = id;
         }
@@ -280,9 +287,13 @@ namespace BotBits
                     case ForegroundType.Portal:
                         return this.GetPortalArgs().PortalRotation;
                     case ForegroundType.Morphable:
-                    case ForegroundType.Note:
                     case ForegroundType.Team:
                         return (Morph.Id) (uint) this._args;
+
+
+                    case ForegroundType.Note:
+                        return (Morph.Id) (int) this._args;
+
                     default:
                         throw new InvalidOperationException("This property can only be accessed on morphable blocks.");
                 }

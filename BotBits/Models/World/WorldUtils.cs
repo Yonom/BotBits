@@ -92,8 +92,10 @@ namespace BotBits
                 case ForegroundType.ToggleGoal:
                 case ForegroundType.Morphable:
                 case ForegroundType.Team:
-                case ForegroundType.Note:
                     return BlockArgsType.Number;
+
+                case ForegroundType.Note:
+                    return BlockArgsType.SignedNumber;
 
                 case ForegroundType.Text:
                 case ForegroundType.WorldPortal:

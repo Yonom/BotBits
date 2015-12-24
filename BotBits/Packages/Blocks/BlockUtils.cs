@@ -39,6 +39,11 @@ namespace BotBits
                                 foregroundBlock = new ForegroundBlock((Foreground.Id) block, i);
                                 break;
 
+                            case BlockArgsType.SignedNumber:
+                                var si = (int)data.Args[0];
+                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, si);
+                                break;
+
                             case BlockArgsType.String:
                                 var str = (string) data.Args[0];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id) block, str);

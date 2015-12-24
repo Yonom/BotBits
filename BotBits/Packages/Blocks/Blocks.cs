@@ -148,15 +148,15 @@ namespace BotBits
         }
 
         [EventListener(EventPriority.Low)]
-        private void On(SoundPlaceEvent e)
-        {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id) e.Id, e.SoundId, e.Player);
-        }
-
-        [EventListener(EventPriority.Low)]
         private void On(MorphablePlaceEvent e)
         {
             this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Rotation, e.Player);
+        }
+
+        [EventListener(EventPriority.Low)]
+        private void On(SoundPlaceEvent e)
+        {
+            this.RaiseSignedNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.SoundId, e.Player);
         }
 
         [EventListener(EventPriority.Low)]
@@ -183,6 +183,11 @@ namespace BotBits
         }
 
         private void RaiseNumberBlock(int x, int y, Foreground.Id block, uint args, Player player)
+        {
+            this.RaiseForeground(x, y, new ForegroundBlock(block, args), player);
+        }
+
+        private void RaiseSignedNumberBlock(int x, int y, Foreground.Id block, int args, Player player)
         {
             this.RaiseForeground(x, y, new ForegroundBlock(block, args), player);
         }

@@ -1,4 +1,7 @@
-﻿using System.Threading;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using BotBits.Events;
 
 namespace BotBits.Demo
 {
