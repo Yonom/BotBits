@@ -1,19 +1,15 @@
-﻿// <copyright file="ActionDispatcherSynchronizationContext.cs" company="Nito Programs">
-//     Copyright (c) 2009 Nito Programs.
-// </copyright>
-
-using System.Threading;
+﻿using System.Threading;
 
 namespace BotBits.Nito.Async
 {
-    internal sealed class ActionDispatcherSynchronizationContext : SynchronizationContext
+    public sealed class BotBitsSynchronizationContext : SynchronizationContext
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ActionDispatcherSynchronizationContext" /> class by using the
-        ///     specified <see cref="ActionDispatcherSynchronizationContext.ActionDispatcher" />.
+        ///     Initializes a new instance of the <see cref="BotBitsSynchronizationContext" /> class by using the
+        ///     specified <see cref="BotBitsSynchronizationContext.ActionDispatcher" />.
         /// </summary>
         /// <param name="actionDispatcher">The action queue to associate with this <see cref="BotBits" />.</param>
-        public ActionDispatcherSynchronizationContext(ActionDispatcher actionDispatcher)
+        internal BotBitsSynchronizationContext(ActionDispatcher actionDispatcher)
         {
             this.ActionDispatcher = actionDispatcher;
         }
@@ -24,13 +20,13 @@ namespace BotBits.Nito.Async
         internal ActionDispatcher ActionDispatcher { get; set; }
 
         /// <summary>
-        ///     Creates a copy of this <see cref="ActionDispatcherSynchronizationContext" />.
+        ///     Creates a copy of this <see cref="BotBitsSynchronizationContext" />.
         /// </summary>
         /// <returns>The copy of this synchronization context.</returns>
         /// <threadsafety>This method may be called by any thread at any time.</threadsafety>
         public override SynchronizationContext CreateCopy()
         {
-            return new ActionDispatcherSynchronizationContext(this.ActionDispatcher);
+            return new BotBitsSynchronizationContext(this.ActionDispatcher);
         }
 
         /// <summary>

@@ -9,40 +9,6 @@ using System.Threading;
 
 namespace BotBits.Nito.Async
 {
-    /// <summary>
-    ///     A thread-safe queue of actions. Provides an event-based message loop when <see cref="Run" />, along with a
-    ///     synchronization context for the executed actions.
-    /// </summary>
-    /// <remarks>
-    ///     <para>Actions are executed in the order they are queued.</para>
-    ///     <para>Each action executes within an <see cref="ActionDispatcherSynchronizationContext" />.</para>
-    /// </remarks>
-    /// <threadsafety>
-    ///     This class is used for thread synchronization, so see the notes on each member for thread safety
-    ///     information.
-    /// </threadsafety>
-    /// <example>
-    ///     The following code sample demonstrates how to use an ActionDispatcher to convert a Console application's main
-    ///     thread into an event-driven thread:
-    ///     <code source="..\..\Source\Examples\DocumentationExamples\ActionDispatcher\WithTimer.cs" />
-    ///     The code example above produces this output:
-    ///     <code lang="None" title="Output">
-    /// In main thread (thread ID 1)
-    /// Elapsed running in thread pool thread (thread ID 4)
-    /// Hello from main thread (thread ID 1)
-    /// Elapsed running in thread pool thread (thread ID 4)
-    /// </code>
-    ///     The following code sample demonstrates how the event-based loop provided by ActionDispatcher is sufficient to own
-    ///     event-based asynchronous pattern types like the BackgroundWorker:
-    ///     <code source="..\..\Source\Examples\DocumentationExamples\ActionDispatcher\WithBackgroundWorker.cs" />
-    ///     The code example above produces this output:
-    ///     <code lang="None" title="Output">
-    /// Main console thread ID is 1 and is not a threadpool thread
-    /// ActionDispatcher thread ID is 1 and is not a threadpool thread
-    /// BackgroundWorker thread ID is 3 and is a threadpool thread
-    /// BGW event thread ID is 1 and is not a threadpool thread
-    /// </code>
-    /// </example>
     internal sealed class ActionDispatcher : IDisposable
     {
         /// <summary>
@@ -82,7 +48,7 @@ namespace BotBits.Nito.Async
         {
             get
             {
-                var context = SynchronizationContext.Current as ActionDispatcherSynchronizationContext;
+                var context = SynchronizationContext.Current as BotBitsSynchronizationContext;
                 if (context == null)
                 {
                     return null;
@@ -143,7 +109,7 @@ namespace BotBits.Nito.Async
             try
             {
                 // Set the synchronization context
-                SynchronizationContext.SetSynchronizationContext(new ActionDispatcherSynchronizationContext(this));
+                SynchronizationContext.SetSynchronizationContext(new BotBitsSynchronizationContext(this));
                 while (true)
                 {
                     // Dequeue and run an action
