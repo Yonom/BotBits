@@ -146,8 +146,8 @@ namespace BotBits
         public static class Stone
         {
             [Pack("brickstone")] public const Id
-                Grey = (Id) 561,
-                HalfGrey = (Id) 562,
+                Gray = (Id) 561,
+                HalfGray = (Id) 562,
                 Teal = (Id) 688,
                 HalfTeal = (Id) 689,
                 Brown = (Id) 690,
