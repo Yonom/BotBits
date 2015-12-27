@@ -102,6 +102,7 @@
     <Compile Include="Packages\MessageHandler\Events\RestoreProgressEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MutedEvent.cs" />
     <Compile Include="Packages\MessageSender\Events\SendEvent.cs" />
+    <Compile Include="Packages\Players\ActiveEffect.cs" />
     <Compile Include="Packages\Players\Events\BlueCoinEvent.cs" />
     <Compile Include="Packages\Players\Events\GoldCoinEvent.cs" />
     <Compile Include="Packages\Scheduler\Scheduler.cs" />
