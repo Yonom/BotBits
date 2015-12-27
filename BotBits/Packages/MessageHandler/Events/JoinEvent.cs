@@ -28,7 +28,7 @@ namespace BotBits.Events
             this.ClubMember = message.GetBoolean(13);
             this.Mod = message.GetBoolean(14);
             this.Team = (Team) message.GetInt(15);
-            this.Aura = (Aura) message.GetInt(16);
+            this.AuraShape = (AuraShape) message.GetInt(16);
             this.ChatColor = message.GetUInt(17);
             this.Badge = message.GetBadge(18);
             this.CrewMember = message.GetBoolean(19);
@@ -48,7 +48,7 @@ namespace BotBits.Events
         /// <value>
         ///     The aura.
         /// </value>
-        public Aura Aura { get; set; }
+        public AuraShape AuraShape { get; set; }
 
         /// <summary>
         ///     Gets or sets the team.

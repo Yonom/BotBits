@@ -24,7 +24,7 @@ namespace BotBits.Events
             this.EncryptedToken = message.GetString(5);
             // 6: UserId
             this.Smiley = (Smiley) message.GetInt(7);
-            this.Aura = (Aura) message.GetInt(8);
+            this.AuraShape = (AuraShape) message.GetInt(8);
             this.SpawnX = message.GetDouble(9);
             this.SpawnY = message.GetDouble(10);
             this.ChatColor = message.GetUInt(11);
@@ -82,7 +82,7 @@ namespace BotBits.Events
 
         public bool HideLobby { get; set; }
 
-        public Aura Aura { get; set; }
+        public AuraShape AuraShape { get; set; }
 
         public Smiley Smiley { get; set; }
 

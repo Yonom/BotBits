@@ -59,6 +59,7 @@
     <Compile Include="Helpers\VersionCache.cs" />
     <Compile Include="Internal\InitParse.cs" />
     <Compile Include="Internal\Nito\Async\BotBitsSynchronizationContext.cs" />
+    <Compile Include="Models\AuraShape.cs" />
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\CampaignDifficulty.cs" />
     <Compile Include="Models\CampaignReward.cs" />
@@ -90,7 +91,7 @@
     <Compile Include="Packages\ConnectionManager\PlayerIOGameExtensions.cs" />
     <Compile Include="Packages\ConnectionManager\ConnectionUtils.cs" />
     <Compile Include="Packages\ConnectionManager\IPlayerIOGame.cs" />
-    <Compile Include="Models\Aura.cs" />
+    <Compile Include="Models\AuraColor.cs" />
     <Compile Include="Models\Effect.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\WorldType.cs" />

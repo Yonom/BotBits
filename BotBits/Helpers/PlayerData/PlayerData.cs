@@ -18,9 +18,14 @@ namespace BotBits
             return this.HasPack(ItemServices.GetPackage(smiley));
         }
 
-        public bool HasAura(Aura aura)
+        public bool HasAuraColor(AuraColor auraColor)
         {
-            return this.HasPack(ItemServices.GetPackage(aura));
+            return this.HasPack(ItemServices.GetPackage(auraColor));
+        }
+
+        public bool HasAuraShape(AuraShape auraShape)
+        {
+            return this.HasPack(ItemServices.GetPackage(auraShape));
         }
 
         private bool HasPack(PackAttribute pack)
