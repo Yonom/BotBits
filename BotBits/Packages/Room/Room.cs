@@ -37,6 +37,8 @@ namespace BotBits
         public string CrewId { get; private set; }
         public bool Campaign { get; private set; }
         public WorldStatus WorldStatus { get; private set; }
+        public bool MinimapEnabled { get; private set; }
+        public bool LobbyPreviewEnabled { get; private set; }
 
         public bool CanEdit
         {
@@ -132,6 +134,24 @@ namespace BotBits
                 throw new InvalidOperationException("Only owners are allowed to change spectator settings.");
 
             new SetAllowSpectatingSendMessage(allow)
+                .SendIn(this.BotBits);
+        }
+
+        public void SetMinimapEnabled(bool enabled)
+        {
+            if (this.AccessRight < AccessRight.WorldOptions)
+                throw new InvalidOperationException("Only owners are allowed to change minimap settings.");
+
+            new SetMinimapEnabledSendMessage(enabled)
+                .SendIn(this.BotBits);
+        }
+
+        public void SetLobbyPreviewEnabled(bool enabled)
+        {
+            if (this.AccessRight < AccessRight.WorldOptions)
+                throw new InvalidOperationException("Only owners are allowed to change lobby preview settings.");
+
+            new SetLobbyPreviewEnabledSendMessage(enabled)
                 .SendIn(this.BotBits);
         }
 
@@ -235,8 +255,10 @@ namespace BotBits
             this.CurseLimit = e.CurseLimit;
             this.CrewId = e.CrewId;
             this.CrewName = e.CrewId;
-            this.WorldStatus = e.WorldStatus;
             this.CanEdit = e.CanEdit;
+            this.WorldStatus = e.WorldStatus;
+            this.MinimapEnabled = e.MinimapEnabled;
+            this.LobbyPreviewEnabled = e.LobbyPreviewEnabled;
             this.InitComplete = true;
         }
 
@@ -329,6 +351,18 @@ namespace BotBits
         {
             this.ZombieLimit = e.ZombieLimit;
             this.CurseLimit = e.CurseLimit;
+        }
+
+        [EventListener]
+        private void On(MinimapEnabledEvent e)
+        {
+            this.MinimapEnabled = e.Enabled;
+        }
+
+        [EventListener]
+        private void On(LobbyPreviewEnabledEvent e)
+        {
+            this.LobbyPreviewEnabled = e.Enabled;
         }
     }
 }

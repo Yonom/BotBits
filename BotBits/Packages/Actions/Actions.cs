@@ -69,6 +69,12 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
+        public void ChangeBadge(Badge badge)
+        {
+            new BadgeSendMessage(badge)
+                .SendIn(this.BotBits);
+        }
+
         public void ChangeSmiley(Smiley smiley)
         {
             if (this.HasSmiley(smiley)) // Server kicks people if they do not own a smiley
@@ -134,6 +140,12 @@ namespace BotBits
         public void TouchPlayer(int userId, Effect effect)
         {
             new TouchUserSendMessage(userId, effect)
+                .SendIn(this.BotBits);
+        }
+
+        public void Reset(int x, int y)
+        {
+            new ResetSendMessage(x, y)
                 .SendIn(this.BotBits);
         }
 

@@ -212,6 +212,13 @@ namespace BotBits
         }
 
         [EventListener]
+        private void On(BadgeEvent e)
+        {
+            var p = e.Player;
+            p.Badge = e.Badge;
+        }
+
+        [EventListener]
         private void On(MoveEvent e)
         {
             var p = e.Player;

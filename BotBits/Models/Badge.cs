@@ -1,5 +1,8 @@
 ﻿namespace BotBits
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum Badge
     {
         Unknown = 0,
@@ -34,6 +37,21 @@
         /// <summary>
         ///     Tutorials
         /// </summary>
-        TTR
+        TTR,
+
+        /// <summary>
+        ///     Tunnel Rats
+        /// </summary>
+        TNR,
+
+        /// <summary>
+        ///     Halloween
+        /// </summary>
+        HLW,
+
+        /// <summary>
+        ///     Colorful
+        /// </summary>
+        CLR,
     }
 }

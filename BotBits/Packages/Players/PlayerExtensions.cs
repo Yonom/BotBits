@@ -111,5 +111,10 @@ namespace BotBits
         {
             Chat.Of(player.BotBits).SetTeam(player.Username, team);
         }
+
+        public static void Reset(this Player player)
+        {
+            Chat.Of(player.BotBits).Reset(player.Username);
+        }
     }
 }

@@ -50,7 +50,13 @@ namespace BotBits.Events
             this.WorldStatus = (WorldStatus) message.GetInt(31);
             this.Badge = message.GetBadge(32);
             this.CrewMember = message.GetBoolean(33);
+            this.MinimapEnabled = message.GetBoolean(34);
+            this.LobbyPreviewEnabled = message.GetBoolean(35);
         }
+
+        public bool LobbyPreviewEnabled { get; set; }
+
+        public bool MinimapEnabled { get; set; }
 
         public bool CrewMember { get; set; }
 
