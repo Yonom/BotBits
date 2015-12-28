@@ -20,8 +20,7 @@ namespace BotBits
                 {
                     case Layer.Background:
                         var bgWorldBlock = new BackgroundBlock((Background.Id)block);
-                        foreach (var pos in data.Locations)
-                            world.Background[pos.X, pos.Y] = new BlockData<BackgroundBlock>(bgWorldBlock);
+                        foreach (var pos in data.Locations) world.Background[pos.X, pos.Y] = new BlockData<BackgroundBlock>(bgWorldBlock);
                         break;
 
                     case Layer.Foreground:
@@ -36,7 +35,7 @@ namespace BotBits
                                 break;
 
                             case BlockArgsType.Number:
-                                var i = block == 77 || block == 83 ? (uint) (int) data.Args[0] : (uint) data.Args[0];
+                                var i = (uint)data.Args[0];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, i);
                                 break;
 
@@ -64,12 +63,12 @@ namespace BotBits
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, text, textcolor);
                                 break;
 
-                            default: throw new NotSupportedException("Invalid block.");
+                            default:
+                                throw new NotSupportedException("Invalid block.");
                         }
 
                         var fg = new BlockData<ForegroundBlock>(foregroundBlock);
-                        foreach (var pos in data.Locations)
-                            world.Foreground[pos.X, pos.Y] = fg;
+                        foreach (var pos in data.Locations) world.Foreground[pos.X, pos.Y] = fg;
                         break;
                 }
             }
