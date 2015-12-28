@@ -116,6 +116,10 @@ namespace BotBits
         public ForegroundBlock(Foreground.Id id, bool enabled)
             : this(id, enabled ? 1 : 0)
         {
+            if (this.Type == ForegroundType.ToggleGoal && enabled)
+            {
+                throw new ArgumentException("The given block only supports \"false\" or a number.", "enabled");
+            } 
         }
 
         public ForegroundBlock(Foreground.Id id, Morph.Id morph)

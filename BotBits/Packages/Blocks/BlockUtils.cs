@@ -41,7 +41,7 @@ namespace BotBits
                                 break;
 
                             case BlockArgsType.SignedNumber:
-                                var si = (int)data.Args[0];
+                                var si = Convert.ToInt32(data.Args[0]); //(int)data.Args[0]; // TODO: Replace after fix
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, si);
                                 break;
 

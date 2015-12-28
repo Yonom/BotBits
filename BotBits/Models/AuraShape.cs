@@ -5,8 +5,10 @@ namespace BotBits
     public enum AuraShape
     {
         Default = 0,
+
         [Pack("aurashapepinwheel")]
         PinWheel = 1,
+
         [Pack("aurashapetorus")]
         Torus = 2,
     }

@@ -301,7 +301,7 @@ namespace BotBits
                 Gray = (Id) 637;
         }
 
-        public static class Sparta
+        public static class Marble
         {
             [Pack("bricksparta")] public const Id
                 Gray = (Id) 638,
@@ -346,7 +346,9 @@ namespace BotBits
                 Blue = (Id) 605,
                 Orange = (Id) 673,
                 Green = (Id) 674,
-                Red = (Id) 675;
+                Red = (Id) 675,
+                Yellow = (Id)697,
+                Cyan = (Id)698;
         }
 
         public static class Environment
@@ -366,7 +368,7 @@ namespace BotBits
                 Brown = (Id) 684,
                 Red = (Id) 685,
                 Blue = (Id) 686,
-                Greeb = (Id) 687;
+                Green = (Id) 687;
         }
 
         public static class Halloween2015
@@ -375,6 +377,23 @@ namespace BotBits
                 MossyBrick = (Id) 694,
                 Siding = (Id) 695,
                 Rooftop = (Id) 696;
+        }
+
+        public static class Desert
+        {
+            [Pack("brickdesert")]
+            public const Id
+                Pattern1 = (Id)699,
+                Pattern2 = (Id)700,
+                Pattern3 = (Id)701;
+        }
+
+        public static class Arctic
+        {
+            [Pack("brickarctic")]
+            public const Id
+                Ice = (Id)702,
+                Snow = (Id)703;
         }
     }
 }

@@ -204,7 +204,7 @@ namespace BotBits
 
         private static bool IsBorderPlaceable(Foreground.Id id)
         {
-            if (id == Foreground.Special.FullyBlack)
+            if (id == Foreground.Secret.Black)
                 return true;
 
             var block = ItemServices.GetGroup((int) id);

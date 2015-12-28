@@ -289,5 +289,22 @@
                 On = 0,
                 Off = (Id) 1;
         }
+
+        public static class Jump
+        {
+            public const Id
+                Disabled = 0,
+                Single = (Id)1,
+                Double = (Id)2;
+        }
+
+        public static class NewYear2015
+        {
+            public const Id
+                Green = 0,
+                Orange = (Id)1,
+                Red = (Id)2,
+                Purple = (Id)3;
+        }
     }
 }
