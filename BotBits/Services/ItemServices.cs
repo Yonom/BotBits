@@ -9,7 +9,8 @@ namespace BotBits
     public static class ItemServices
     {
         private static readonly Dictionary<Smiley, PackAttribute> _smileyPacks = new Dictionary<Smiley, PackAttribute>();
-        private static readonly Dictionary<Aura, PackAttribute> _auraPacks = new Dictionary<Aura, PackAttribute>();
+        private static readonly Dictionary<AuraColor, PackAttribute> _auraColorPacks = new Dictionary<AuraColor, PackAttribute>();
+        private static readonly Dictionary<AuraShape, PackAttribute> _auraShapePacks = new Dictionary<AuraShape, PackAttribute>();
         private static readonly Dictionary<int, PackAttribute> _blockPacks = new Dictionary<int, PackAttribute>();
         private static readonly Dictionary<int, Type> _blockGroups = new Dictionary<int, Type>();
 
@@ -18,7 +19,8 @@ namespace BotBits
             LoadPacks(typeof (Background));
             LoadPacks(typeof (Foreground));
             LoadEnum(_smileyPacks);
-            LoadEnum(_auraPacks);
+            LoadEnum(_auraColorPacks);
+            LoadEnum(_auraShapePacks);
         }
 
         public static KeyValuePair<int, Type>[] GetGroups()
@@ -33,20 +35,17 @@ namespace BotBits
             return type;
         }
 
-        public static PackAttribute GetPackage(Foreground.Id id)
-        {
-            return GetPackageInternal((int) id);
-        }
-
-        public static PackAttribute GetPackage(Background.Id id)
-        {
-            return GetPackageInternal((int) id);
-        }
-
-        public static PackAttribute GetPackage(Aura id)
+        public static PackAttribute GetPackage(AuraShape id)
         {
             PackAttribute pack;
-            _auraPacks.TryGetValue(id, out pack);
+            _auraShapePacks.TryGetValue(id, out pack);
+            return pack;
+        }
+
+        public static PackAttribute GetPackage(AuraColor id)
+        {
+            PackAttribute pack;
+            _auraColorPacks.TryGetValue(id, out pack);
             return pack;
         }
 
@@ -55,6 +54,16 @@ namespace BotBits
             PackAttribute pack;
             _smileyPacks.TryGetValue(id, out pack);
             return pack;
+        }
+
+        public static PackAttribute GetPackage(Foreground.Id id)
+        {
+            return GetPackageInternal((int)id);
+        }
+
+        public static PackAttribute GetPackage(Background.Id id)
+        {
+            return GetPackageInternal((int)id);
         }
 
         internal static PackAttribute GetPackageInternal(int id)

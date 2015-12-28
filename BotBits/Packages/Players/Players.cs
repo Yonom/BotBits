@@ -105,7 +105,7 @@ namespace BotBits
             this.OwnPlayer.Username = e.Username;
             this.OwnPlayer.ConnectUserId = ConnectionManager.Of(this.BotBits).ConnectUserId;
             this.OwnPlayer.Smiley = e.Smiley;
-            this.OwnPlayer.Aura = e.Aura;
+            this.OwnPlayer.AuraShape = e.AuraShape;
             this.OwnPlayer.Badge = e.Badge;
             this.OwnPlayer.ChatColor = e.ChatColor;
             this.OwnPlayer.X = e.SpawnX;
@@ -121,7 +121,7 @@ namespace BotBits
             p.Username = e.Username;
             p.ConnectUserId = e.ConnectUserId;
             p.Smiley = e.Smiley;
-            p.Aura = e.Aura;
+            p.AuraShape = e.AuraShape;
             p.Badge = e.Badge;
             p.HasChat = e.HasChat;
             p.GodMode = e.God;
@@ -209,6 +209,13 @@ namespace BotBits
         {
             var p = e.Player;
             p.Smiley = e.Smiley;
+        }
+
+        [EventListener]
+        private void On(BadgeEvent e)
+        {
+            var p = e.Player;
+            p.Badge = e.Badge;
         }
 
         [EventListener]
@@ -328,7 +335,8 @@ namespace BotBits
         private void On(AuraEvent e)
         {
             var p = e.Player;
-            p.Aura = e.Aura;
+            p.AuraShape = e.AuraShape;
+            p.AuraColor = e.AuraColor;
         }
 
         [EventListener]

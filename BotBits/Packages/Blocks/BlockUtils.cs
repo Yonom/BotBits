@@ -1,5 +1,6 @@
 ﻿using System;
 using PlayerIOClient;
+using Yonom.EE;
 
 namespace BotBits
 {
@@ -37,6 +38,11 @@ namespace BotBits
                             case BlockArgsType.Number:
                                 var i = block == 77 || block == 83 ? (uint) (int) data.Args[0] : (uint) data.Args[0];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, i);
+                                break;
+
+                            case BlockArgsType.SignedNumber:
+                                var si = Convert.ToInt32(data.Args[0]); //(int)data.Args[0]; // TODO: Replace after fix
+                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, si);
                                 break;
 
                             case BlockArgsType.String:

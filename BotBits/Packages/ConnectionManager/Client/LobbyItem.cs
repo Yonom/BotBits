@@ -26,30 +26,54 @@ namespace BotBits
                     case "plays":
                         this.Plays = int.Parse(data.Value);
                         break;
-                    case "woots":
-                        this.Woots = int.Parse(data.Value);
+                    case "Likes":
+                        this.Likes = int.Parse(data.Value);
                         break;
-                    case "owned":
-                        this.Owned = bool.Parse(data.Value);
+                    case "Favorites":
+                        this.Favorites = int.Parse(data.Value);
+                        break;
+                    case "description":
+                        this.Description = data.Value;
+                        break;
+                        
+                    case "openworld":
+                        this.OpenWorld = bool.Parse(data.Value);
                         break;
                     case "needskey":
-                        this.HasCode = (data.Value == "yep");
+                        this.NeedsKey = (data.Value == "yep");
+                        break;
+
+                    case "beta":
+                        this.Beta = int.Parse(data.Value);
                         break;
                     case "IsFeatured":
                         this.Featured = bool.Parse(data.Value);
+                        break;
+                    case "IsCampaign":
+                        this.Campaign = bool.Parse(data.Value);
+                        break;
+
+                    case "LobbyPreviewEnabled":
+                        this.LobbyPreviewEnabled = bool.Parse(data.Value);
                         break;
                 }
             }
         }
 
-        public int Online { get; private set; }
+        public bool OpenWorld { get; }
+        public bool LobbyPreviewEnabled { get; }
+        public string Description { get; }
+        public bool Campaign { get; }
+
+        public int Beta { get; }
+        public int Online { get; }
         public string Id { get; }
         public string Name { get; }
-        public int Plays { get; private set; }
-        public int Woots { get; private set; }
-        public bool Owned { get; private set; }
-        public bool HasCode { get; private set; }
-        public bool Featured { get; private set; }
+        public int Plays { get; }
+        public int Likes { get; }
+        public bool NeedsKey { get; }
+        public bool Featured { get; }
+        public int Favorites { get; }
 
         public void JoinRoom()
         {

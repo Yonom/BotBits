@@ -24,7 +24,7 @@ namespace BotBits.Events
             this.EncryptedToken = message.GetString(5);
             // 6: UserId
             this.Smiley = (Smiley) message.GetInt(7);
-            this.Aura = (Aura) message.GetInt(8);
+            this.AuraShape = (AuraShape) message.GetInt(8);
             this.SpawnX = message.GetDouble(9);
             this.SpawnY = message.GetDouble(10);
             this.ChatColor = message.GetUInt(11);
@@ -50,7 +50,13 @@ namespace BotBits.Events
             this.WorldStatus = (WorldStatus) message.GetInt(31);
             this.Badge = message.GetBadge(32);
             this.CrewMember = message.GetBoolean(33);
+            this.MinimapEnabled = message.GetBoolean(34);
+            this.LobbyPreviewEnabled = message.GetBoolean(35);
         }
+
+        public bool LobbyPreviewEnabled { get; set; }
+
+        public bool MinimapEnabled { get; set; }
 
         public bool CrewMember { get; set; }
 
@@ -82,7 +88,7 @@ namespace BotBits.Events
 
         public bool HideLobby { get; set; }
 
-        public Aura Aura { get; set; }
+        public AuraShape AuraShape { get; set; }
 
         public Smiley Smiley { get; set; }
 

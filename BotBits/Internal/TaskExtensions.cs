@@ -26,7 +26,9 @@ namespace BotBits
             }
             catch (AggregateException ex)
             {
-                throw ex.InnerExceptions.FirstOrDefault() ?? ex;
+                var inner = ex.InnerExceptions.FirstOrDefault();
+                if (inner == null) throw;
+                throw inner;
             }
         }
 
