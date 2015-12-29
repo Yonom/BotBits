@@ -39,7 +39,7 @@ namespace BotBits
         [Pure]
         public static Task<T> AsGuestAsync<T>(this IPlayerIOGame<T> playerIOGame)
         {
-            return ConnectionUtils.GuestLoginAsync(playerIOGame.GameId)
+            return LoginUtils.GuestLoginAsync(playerIOGame.GameId)
                 .Then(task => playerIOGame.ConnectionManager.WithClient(task.Result))
                 .ToSafeTask();
         }
@@ -71,7 +71,7 @@ namespace BotBits
         [Pure]
         public static Task<T> WithArmorGamesAsync<T>(this IPlayerIOGame<T> playerIOGame, string userId, string token)
         {
-            return ConnectionUtils.ArmorGamesRoomLoginAsync(playerIOGame.GameId, userId, token)
+            return LoginUtils.ArmorGamesRoomLoginAsync(playerIOGame.GameId, userId, token)
                 .Then(task => playerIOGame.ConnectionManager.WithClient(task.Result))
                 .ToSafeTask();
         }

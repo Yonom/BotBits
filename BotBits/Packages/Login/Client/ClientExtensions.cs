@@ -4,7 +4,7 @@ using PlayerIOClient;
 
 namespace BotBits
 {
-    public static class ClientUtils
+    internal static class ClientExtensions
     {
         public static Task<LobbyItem[]> GetLobbyRoomsAsync(this Client client, ILoginClient loginClient, string roomType)
         {

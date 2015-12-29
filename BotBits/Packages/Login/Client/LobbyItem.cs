@@ -13,7 +13,6 @@ namespace BotBits
         {
             this._client = client;
 
-
             this.Id = roomInfo.Id;
             this.Online = roomInfo.OnlineUsers;
             foreach (var data in roomInfo.RoomData)
