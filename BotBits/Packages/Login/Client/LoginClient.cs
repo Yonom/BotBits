@@ -18,8 +18,7 @@ namespace BotBits
         {
         }
 
-        internal LoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client,
-            Task<PlayerData> argsAsync)
+        internal LoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client, Task<PlayerData> argsAsync)
         {
             if (connectionManager == null) throw new ArgumentNullException("connectionManager");
             if (client == null) throw new ArgumentNullException("client");
@@ -88,8 +87,7 @@ namespace BotBits
         protected Task InitConnection(string roomId, Connection conn)
         {
             return this._argsAsync
-                .Then(task => this._connectionManager.AttachConnection(conn,
-                    new ConnectionArgs(this.ConnectUserId, roomId, task.Result)))
+                .Then(task => this._connectionManager.SetConnection(conn, new ConnectionArgs(this.ConnectUserId, roomId, task.Result)))
                 .ToSafeTask();
         }
     }
@@ -99,8 +97,7 @@ namespace BotBits
         private const string EverybodyEdits = "Everybodyedits";
         private const string Beta = "Beta";
 
-        internal VersionLoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client,
-            Task<PlayerData> argsAsync, int version)
+        internal VersionLoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client, Task<PlayerData> argsAsync, int version)
             : base(connectionManager, client, argsAsync)
         {
             this.Version = version;

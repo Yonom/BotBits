@@ -2,13 +2,13 @@
 {
     public sealed class PlayerIOGame : IPlayerIOGame<LoginClient>
     {
-        public PlayerIOGame(IConnectionManager<LoginClient> connectionManager, string gameId)
+        public PlayerIOGame(ILogin<LoginClient> connectionManager, string gameId)
         {
             this.ConnectionManager = connectionManager;
             this.GameId = gameId;
         }
 
         public string GameId { get; }
-        public IConnectionManager<LoginClient> ConnectionManager { get; }
+        public ILogin<LoginClient> ConnectionManager { get; }
     }
 }

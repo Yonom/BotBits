@@ -5,8 +5,7 @@ using PlayerIOClient;
 
 namespace BotBits
 {
-    public sealed class ConnectionManager : Package<ConnectionManager>, IDisposable,
-        IPlayerIOGame<LoginClient>, IConnectionManager<LoginClient>
+    public sealed class ConnectionManager : Package<ConnectionManager>, IConnectionManager, IDisposable
     {
         private PlayerIOConnectionAdapter _adapter;
         private IConnection _connection;
@@ -21,19 +20,13 @@ namespace BotBits
             get { return this._connection; }
         }
 
-        /// <summary>
-        ///     Gets the player data.
-        /// </summary>
-        /// <value>
-        ///     The player data.
-        /// </value>
         public PlayerData PlayerData { get; private set; }
 
         public string RoomId { get; private set; }
 
         public string ConnectUserId { get; private set; }
 
-        void IConnectionManager.AttachConnection(Connection connection, ConnectionArgs args)
+        public void SetConnection(Connection connection, ConnectionArgs args)
         {
             var adapter = new PlayerIOConnectionAdapter(connection);
             try
@@ -46,11 +39,6 @@ namespace BotBits
                 adapter.Dispose();
                 throw;
             }
-        }
-
-        public LoginClient WithClient(Client client)
-        {
-            return new LoginClient(this, client);
         }
 
         public void SetConnection(IConnection connection, ConnectionArgs args)
@@ -82,21 +70,6 @@ namespace BotBits
         {
             if (this._adapter != null)
                 this._adapter.Dispose();
-        }
-
-        public string GameId
-        {
-            get { return "everybody-edits-su9rn58o40itdbnw69plyw"; }
-        }
-
-        IConnectionManager<LoginClient> IPlayerIOGame<LoginClient>.ConnectionManager
-        {
-            get { return this; }
-        }
-
-        public PlayerIOGame WithGameId(string gameId)
-        {
-            return new PlayerIOGame(this, gameId);
         }
 
         private void Connection_OnMessage(object sender, Message e)
