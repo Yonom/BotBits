@@ -50,7 +50,7 @@ namespace BotBits
                                 break;
 
                             case BlockArgsType.Portal:
-                                var portalRotation = (Morph.Id)data.Args[0];
+                                var portalRotation = (Morph.Id)(uint)data.Args[0];
                                 var portalId = (uint)data.Args[1];
                                 var portalTarget = (uint)data.Args[2];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, portalId, portalTarget,
