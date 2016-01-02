@@ -131,7 +131,7 @@ Blocks that get dropped are automatically resent, so you don't have to worry abo
 
 Let's place a block:
 ```csharp
-Blocks.Of(bot).Place(1, 1, Foreground.Portal.Normal);
+Blocks.Of(bot).Place(1, 1, Foreground.Basic.Gray);
 ```
 
 Let's fill the whole world with that block:
