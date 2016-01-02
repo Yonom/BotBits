@@ -12,11 +12,10 @@ BotBitsClient bot = new BotBitsClient();
 ```
 
 ## Connecting to EE
-Using the ConnectionManager class, you can login. Email, Guest, Facebook, Kongregate and Armorgames are supported login methods.
+Using the Login class, you can login. Email, Guest, Facebook, Kongregate and Armorgames are supported login methods.
 ```csharp
-ConnectionManager
-    .Of(bot)
-    .EmailLogin("email", "pass")
+Login.Of(bot)
+    .WithEmail("email", "pass")
     .CreateJoinRoom("roomId");
 ```
 Please note that BotBits automatically sends "init" and "init2" messages.
@@ -24,14 +23,12 @@ Please note that BotBits automatically sends "init" and "init2" messages.
 ## Receiving Messages
 You can load event listeners (which will be called automatically when a message is received) using the EventLoader class.
 ```csharp
-EventLoader
-    .Of(bot)
+EventLoader.Of(bot)
     .LoadStatic<Program>();
 
 // Or for non-static handlers
 
-EventLoader
-    .Of(bot)
+EventLoader.Of(bot)
     .Load(this);
 ```
 
