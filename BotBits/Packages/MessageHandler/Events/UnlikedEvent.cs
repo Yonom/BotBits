@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when you successfully un-like the world.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("unliked")]
     public sealed class UnlikedEvent : ReceiveEvent<UnlikedEvent>
     {

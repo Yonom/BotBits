@@ -2,6 +2,10 @@
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs as a response to the "time" message.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("time")]
     public sealed class TimeEvent : ReceiveEvent<TimeEvent>
     {
@@ -13,8 +17,8 @@ namespace BotBits.Events
         internal TimeEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Data = message.GetDouble(0);
-            this.Time = message.GetDouble(0);
+            Data = message.GetDouble(0);
+            Time = message.GetDouble(0);
         }
 
         public double Time { get; set; }

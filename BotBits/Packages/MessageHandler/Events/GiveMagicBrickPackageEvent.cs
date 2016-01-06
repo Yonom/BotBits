@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when you are given magic brick package.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("givemagicbrickpackage")]
     public sealed class GiveMagicBrickPackageEvent : ReceiveEvent<GiveMagicBrickPackageEvent>
     {
@@ -13,9 +17,13 @@ namespace BotBits.Events
         internal GiveMagicBrickPackageEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.MagicPack = message.GetString(0);
+            MagicPack = message.GetString(0);
         }
 
+        /// <summary>
+        ///     Gets or sets the magic pack identifier.
+        /// </summary>
+        /// <value>The magic pack.</value>
         public string MagicPack { get; set; }
     }
 }

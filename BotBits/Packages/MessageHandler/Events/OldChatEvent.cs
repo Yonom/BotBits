@@ -2,6 +2,11 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs shortly after join.
+    ///     Contains information about chat message from before you joined world.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("say_old")]
     public sealed class OldChatEvent : ReceiveEvent<OldChatEvent>
     {
@@ -13,9 +18,9 @@ namespace BotBits.Events
         internal OldChatEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Username = message.GetString(0);
-            this.Text = message.GetString(1);
-            this.Friend = message.GetBoolean(2);
+            Username = message.GetString(0);
+            Text = message.GetString(1);
+            Friend = message.GetBoolean(2);
         }
 
         /// <summary>

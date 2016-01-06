@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a player toggles god mode.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("god")]
     public sealed class GodModeEvent : PlayerEvent<GodModeEvent>
     {
@@ -13,7 +17,7 @@ namespace BotBits.Events
         internal GodModeEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.God = message.GetBoolean(1);
+            God = message.GetBoolean(1);
         }
 
         /// <summary>

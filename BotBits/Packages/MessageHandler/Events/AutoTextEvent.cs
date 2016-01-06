@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a player uses auto-text.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("autotext")]
     public sealed class AutoTextEvent : PlayerEvent<AutoTextEvent>
     {
@@ -13,7 +17,7 @@ namespace BotBits.Events
         internal AutoTextEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.AutoText = message.GetString(1);
+            AutoText = message.GetString(1);
         }
 
         /// <summary>

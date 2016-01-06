@@ -5,6 +5,7 @@ namespace BotBits.Events
     /// <summary>
     ///     Occurs when the player initially joins the room. Contains world information such as title and world content.
     /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("init")]
     public sealed class InitEvent : PlayerEvent<InitEvent>
     {

@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a portal is placed in the world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("pt")]
     public sealed class PortalPlaceEvent : PlayerEvent<PortalPlaceEvent>
     {
@@ -13,12 +17,12 @@ namespace BotBits.Events
         internal PortalPlaceEvent(BotBitsClient client, Message message)
             : base(client, message, 6)
         {
-            this.X = message.GetInteger(0);
-            this.Y = message.GetInteger(1);
-            this.Id = message.GetInteger(2);
-            this.PortalRotation = (Morph.Id) message.GetUInt(3);
-            this.PortalId = message.GetUInt(4);
-            this.PortalTarget = message.GetUInt(5);
+            X = message.GetInteger(0);
+            Y = message.GetInteger(1);
+            Id = message.GetInteger(2);
+            PortalRotation = (Morph.Id) message.GetUInt(3);
+            PortalId = message.GetUInt(4);
+            PortalTarget = message.GetUInt(5);
         }
 
         /// <summary>

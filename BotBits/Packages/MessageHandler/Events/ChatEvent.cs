@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a player sends a chat message.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("say")]
     public sealed class ChatEvent : PlayerEvent<ChatEvent>
     {
@@ -13,7 +17,7 @@ namespace BotBits.Events
         internal ChatEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Text = message.GetString(1);
+            Text = message.GetString(1);
         }
 
         /// <summary>

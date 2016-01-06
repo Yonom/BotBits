@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a player collects a coin.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("c")]
     public sealed class CoinEvent : PlayerEvent<CoinEvent>
     {
@@ -13,14 +17,22 @@ namespace BotBits.Events
         internal CoinEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.GoldCoins = message.GetInteger(1);
-            this.BlueCoins = message.GetInteger(2);
-            this.X = message.GetUInt(3);
-            this.Y = message.GetUInt(4);
+            GoldCoins = message.GetInteger(1);
+            BlueCoins = message.GetInteger(2);
+            X = message.GetUInt(3);
+            Y = message.GetUInt(4);
         }
 
+        /// <summary>
+        ///     Gets or sets the y coordinate of the collected coin.
+        /// </summary>
+        /// <value>The y coordinate.</value>
         public uint Y { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the x coordinate of the collected coin.
+        /// </summary>
+        /// <value>The x coordinate.</value>
         public uint X { get; set; }
 
         /// <summary>

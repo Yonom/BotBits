@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a coin door is placed in the world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("bc")]
     public sealed class CoinDoorPlaceEvent : PlayerEvent<CoinDoorPlaceEvent>
     {
@@ -13,10 +17,10 @@ namespace BotBits.Events
         internal CoinDoorPlaceEvent(BotBitsClient client, Message message)
             : base(client, message, 4)
         {
-            this.X = message.GetInteger(0);
-            this.Y = message.GetInteger(1);
-            this.Id = message.GetInteger(2);
-            this.CoinsToOpen = message.GetUInt(3);
+            X = message.GetInteger(0);
+            Y = message.GetInteger(1);
+            Id = message.GetInteger(2);
+            CoinsToOpen = message.GetUInt(3);
         }
 
         /// <summary>

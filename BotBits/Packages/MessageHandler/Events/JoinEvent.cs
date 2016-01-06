@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when someone joins world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("add")]
     public sealed class JoinEvent : PlayerEvent<JoinEvent>
     {
@@ -13,33 +17,49 @@ namespace BotBits.Events
         internal JoinEvent(BotBitsClient client, Message message)
             : base(client, message, create: true)
         {
-            this.Username = message.GetString(1);
-            this.ConnectUserId = message.GetString(2);
-            this.Smiley = (Smiley) message.GetInteger(3);
-            this.X = message.GetDouble(4);
-            this.Y = message.GetDouble(5);
-            this.God = message.GetBoolean(6);
-            this.Admin = message.GetBoolean(7);
-            this.HasChat = message.GetBoolean(8);
-            this.Coins = message.GetInteger(9);
-            this.BlueCoins = message.GetInteger(10);
-            this.Deaths = message.GetInteger(11);
-            this.Friend = message.GetBoolean(12);
-            this.ClubMember = message.GetBoolean(13);
-            this.Mod = message.GetBoolean(14);
-            this.Team = (Team) message.GetInt(15);
-            this.AuraShape = (AuraShape) message.GetInt(16);
-            this.ChatColor = message.GetUInt(17);
-            this.Badge = message.GetBadge(18);
-            this.CrewMember = message.GetBoolean(19);
+            Username = message.GetString(1);
+            ConnectUserId = message.GetString(2);
+            Smiley = (Smiley) message.GetInteger(3);
+            X = message.GetDouble(4);
+            Y = message.GetDouble(5);
+            God = message.GetBoolean(6);
+            Admin = message.GetBoolean(7);
+            HasChat = message.GetBoolean(8);
+            Coins = message.GetInteger(9);
+            BlueCoins = message.GetInteger(10);
+            Deaths = message.GetInteger(11);
+            Friend = message.GetBoolean(12);
+            ClubMember = message.GetBoolean(13);
+            Mod = message.GetBoolean(14);
+            Team = (Team) message.GetInt(15);
+            AuraShape = (AuraShape) message.GetInt(16);
+            ChatColor = message.GetUInt(17);
+            Badge = message.GetBadge(18);
+            CrewMember = message.GetBoolean(19);
         }
 
+        /// <summary>
+        ///     Gets or sets the amount of deaths.
+        /// </summary>
+        /// <value>The deaths.</value>
         public int Deaths { get; set; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether player is crew member.
+        /// </summary>
+        /// <value><c>true</c> if player is crew member; otherwise, <c>false</c>.</value>
         public bool CrewMember { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the badge.
+        /// </summary>
+        /// <value>The badge.</value>
         public Badge Badge { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the connect user identifier.
+        /// </summary>
+        /// <value>The connect user identifier.</value>
         public string ConnectUserId { get; set; }
 
         /// <summary>
@@ -150,7 +170,7 @@ namespace BotBits.Events
         /// <value>The block x.</value>
         public int BlockX
         {
-            get { return WorldUtils.PosToBlock(this.X); }
+            get { return WorldUtils.PosToBlock(X); }
         }
 
         /// <summary>
@@ -159,7 +179,7 @@ namespace BotBits.Events
         /// <value>The block y.</value>
         public int BlockY
         {
-            get { return WorldUtils.PosToBlock(this.Y); }
+            get { return WorldUtils.PosToBlock(Y); }
         }
     }
 }

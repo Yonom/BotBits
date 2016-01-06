@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs after join. Contains information about initial switch states.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("psi")]
     public sealed class PurpleSwitchInitEvent : PlayerEvent<PurpleSwitchInitEvent>
     {
@@ -13,9 +17,13 @@ namespace BotBits.Events
         internal PurpleSwitchInitEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.PurpleSwitches = MessageUtils.GetSwitches(message.GetByteArray(1));
+            PurpleSwitches = MessageUtils.GetSwitches(message.GetByteArray(1));
         }
 
+        /// <summary>
+        ///     Gets or sets the purple switch states.
+        /// </summary>
+        /// <value>The purple switch states.</value>
         public int[] PurpleSwitches { get; set; }
     }
 }

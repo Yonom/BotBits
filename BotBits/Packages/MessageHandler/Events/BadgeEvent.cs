@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a player changes badge.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("badgeChange")]
     public sealed class BadgeEvent : PlayerEvent<BadgeEvent>
     {
@@ -13,7 +17,7 @@ namespace BotBits.Events
         internal BadgeEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Badge = message.GetBadge(1);
+            Badge = message.GetBadge(1);
         }
 
         /// <summary>

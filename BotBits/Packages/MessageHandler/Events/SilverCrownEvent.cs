@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when someone receives silver crown.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("ks")]
     public sealed class SilverCrownEvent : PlayerEvent<SilverCrownEvent>
     {

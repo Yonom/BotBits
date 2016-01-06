@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when player is killed due to expired effect or /kill, /killall commands.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("kill")]
     public sealed class KillEvent : PlayerEvent<KillEvent>
     {
