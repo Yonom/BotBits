@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class GodMode Send Event
+    ///     Sent to toggle god mode.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class GodModeSendMessage : SendMessage<GodModeSendMessage>
     {
         /// <summary>

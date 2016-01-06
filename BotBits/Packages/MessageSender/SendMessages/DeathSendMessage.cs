@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Death Send Event
+    ///     Sent to die.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class DeathSendMessage : SendMessage<DeathSendMessage>
     {
         //No arguments

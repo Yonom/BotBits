@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Access Send Event.
+    ///     Sent to attempt to get edit rights by using <see cref="EditKey" />.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class AccessSendMessage : SendMessage<AccessSendMessage>
     {
         public AccessSendMessage(string editKey)

@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Press Red Key Send Event
+    ///     Sent to activate red key.
     /// </summary>
+    /// <seealso cref="RoomTokenSendMessage{T}" />
     public sealed class RedKeySendMessage : RoomTokenSendMessage<RedKeySendMessage>
     {
         public RedKeySendMessage()

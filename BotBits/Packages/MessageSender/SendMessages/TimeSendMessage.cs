@@ -3,8 +3,9 @@
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Access Send Event.
+    ///     Sent to request time response.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class TimeSendMessage : SendMessage<TimeSendMessage>
     {
         public TimeSendMessage(double data)

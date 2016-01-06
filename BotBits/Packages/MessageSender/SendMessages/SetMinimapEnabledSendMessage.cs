@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to disable or enable minimap
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class SetMinimapEnabledSendMessage : SendMessage<SetMinimapEnabledSendMessage>
     {
         /// <summary>

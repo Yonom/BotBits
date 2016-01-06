@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to change zombie limit.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class SetZombieLimitSendMessage : SendMessage<SetZombieLimitSendMessage>
     {
         /// <summary>

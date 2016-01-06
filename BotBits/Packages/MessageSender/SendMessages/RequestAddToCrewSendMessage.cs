@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to request add to crew.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class RequestAddToCrewSendMessage : SendMessage<RequestAddToCrewSendMessage>
     {
         /// <summary>

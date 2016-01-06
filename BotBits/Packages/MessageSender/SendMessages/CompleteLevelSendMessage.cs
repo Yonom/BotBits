@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Complete Level Send Event
+    ///     Sent to complete world.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class CompleteLevelSendMessage : SendMessage<CompleteLevelSendMessage>
     {
         public CompleteLevelSendMessage()

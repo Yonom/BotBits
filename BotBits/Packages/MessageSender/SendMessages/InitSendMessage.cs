@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Init Send Event
+    ///     Sent to request initialization message.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class InitSendMessage : SendMessage<InitSendMessage>
     {
         /// <summary>

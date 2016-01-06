@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Clear World Send Event
+    ///     Sent to clear the world.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class ClearSendMessage : SendMessage<ClearSendMessage>
     {
         //No arguments

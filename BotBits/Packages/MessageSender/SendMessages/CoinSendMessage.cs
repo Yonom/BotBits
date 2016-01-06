@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Coin Send Event
+    ///     Sent to collect coin.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class CoinSendMessage : SendMessage<CoinSendMessage>
     {
         /// <summary>

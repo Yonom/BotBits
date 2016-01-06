@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to change hide lobby world setting.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class SetHideLobbySendMessage : SendMessage<SetRoomVisibleSendMessage>
     {
         /// <summary>

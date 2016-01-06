@@ -112,6 +112,7 @@
     <Compile Include="Packages\MessageSender\SendMessages\SetLobbyPreviewEnabledSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetMinimapEnabledSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SmileySendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\TouchCakeSendMessage.cs" />
     <Compile Include="Packages\Players\ActiveEffect.cs" />
     <Compile Include="Packages\Players\Events\BlueCoinEvent.cs" />
     <Compile Include="Packages\Players\Events\GoldCoinEvent.cs" />

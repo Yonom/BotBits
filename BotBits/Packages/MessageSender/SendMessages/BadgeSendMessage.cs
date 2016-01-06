@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Smiley Send Event
+    ///     Sent to change badge.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class BadgeSendMessage : SendMessage<BadgeSendMessage>
     {
         /// <summary>

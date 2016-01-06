@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Auto Say Send Event
+    ///     Sent to use auto-say  message.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class AutoTextSendMessage : SendMessage<AutoTextSendMessage>
     {
         /// <summary>

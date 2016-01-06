@@ -6,7 +6,7 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Send Event
+    ///     Base for send messages.
     /// </summary>
     public abstract class SendMessage<T> where T : SendMessage<T>
     {
