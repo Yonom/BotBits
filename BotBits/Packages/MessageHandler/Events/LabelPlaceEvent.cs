@@ -17,11 +17,11 @@ namespace BotBits.Events
         internal LabelPlaceEvent(BotBitsClient client, Message message)
             : base(client, message, 5)
         {
-            X = message.GetInteger(0);
-            Y = message.GetInteger(1);
-            Id = message.GetInteger(2);
-            Text = message.GetString(3);
-            TextColor = message.GetString(4);
+            this.X = message.GetInteger(0);
+            this.Y = message.GetInteger(1);
+            this.Id = message.GetInteger(2);
+            this.Text = message.GetString(3);
+            this.TextColor = message.GetString(4);
         }
 
         /// <summary>

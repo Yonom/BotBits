@@ -12,7 +12,7 @@ namespace BotBits.Events
         internal RoomDescriptionEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Description = message.GetString(0);
+            this.Description = message.GetString(0);
         }
 
         /// <summary>

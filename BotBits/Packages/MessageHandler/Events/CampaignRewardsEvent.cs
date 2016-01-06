@@ -19,26 +19,26 @@ namespace BotBits.Events
             : base(client, message)
         {
             var i = 0u;
-            ShowBadge = message.GetBoolean(i++);
+            this.ShowBadge = message.GetBoolean(i++);
 
-            if (ShowBadge)
+            if (this.ShowBadge)
             {
-                BadgeTitle = message.GetString(i++);
-                BadgeDescription = message.GetString(i++);
-                BadgeImageUrl = message.GetString(i++);
+                this.BadgeTitle = message.GetString(i++);
+                this.BadgeDescription = message.GetString(i++);
+                this.BadgeImageUrl = message.GetString(i++);
             }
             else
             {
-                NextWorldImageUrl = message.GetString(i++);
+                this.NextWorldImageUrl = message.GetString(i++);
             }
 
-            Rewards = new List<CampaignReward>();
+            this.Rewards = new List<CampaignReward>();
             for (; i < message.Count;)
             {
                 var reward = message.GetString(i++);
                 var quantity = message.GetInt(i++);
 
-                Rewards.Add(new CampaignReward(reward, quantity));
+                this.Rewards.Add(new CampaignReward(reward, quantity));
             }
         }
 

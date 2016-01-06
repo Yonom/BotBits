@@ -12,7 +12,7 @@ namespace BotBits.Events
         internal AllowSpectatingEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Allow = message.GetBoolean(0);
+            this.Allow = message.GetBoolean(0);
         }
 
         /// <summary>

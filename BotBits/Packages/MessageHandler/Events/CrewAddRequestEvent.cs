@@ -17,8 +17,8 @@ namespace BotBits.Events
         internal CrewAddRequestEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Requester = message.GetString(0);
-            CrewName = message.GetString(1);
+            this.Requester = message.GetString(0);
+            this.CrewName = message.GetString(1);
         }
 
         /// <summary>

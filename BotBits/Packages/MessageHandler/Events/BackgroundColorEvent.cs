@@ -12,7 +12,7 @@ namespace BotBits.Events
         internal BackgroundColorEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            BackgroundColor = message.GetUInt(0);
+            this.BackgroundColor = message.GetUInt(0);
         }
 
         /// <summary>

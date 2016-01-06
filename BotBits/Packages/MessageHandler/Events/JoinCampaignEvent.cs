@@ -18,14 +18,14 @@ namespace BotBits.Events
         internal JoinCampaignEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Campaign = message.GetString(0);
-            Status = (CampaignStatus) message.GetInt(1);
+            this.Campaign = message.GetString(0);
+            this.Status = (CampaignStatus) message.GetInt(1);
 
-            if (Status != CampaignStatus.Locked)
+            if (this.Status != CampaignStatus.Locked)
             {
-                Difficulty = (CampaignDifficulty) message.GetInt(2);
-                Tier = message.GetInt(3);
-                MaxTiers = message.GetInt(4);
+                this.Difficulty = (CampaignDifficulty) message.GetInt(2);
+                this.Tier = message.GetInt(3);
+                this.MaxTiers = message.GetInt(4);
             }
         }
 

@@ -17,10 +17,10 @@ namespace BotBits.Events
         internal ClearEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            RoomWidth = message.GetInteger(0);
-            RoomHeight = message.GetInteger(1);
-            BorderBlock = (Foreground.Id) message.GetInteger(2);
-            FillBlock = (Foreground.Id) message.GetInteger(3);
+            this.RoomWidth = message.GetInteger(0);
+            this.RoomHeight = message.GetInteger(1);
+            this.BorderBlock = (Foreground.Id) message.GetInteger(2);
+            this.FillBlock = (Foreground.Id) message.GetInteger(3);
         }
 
         /// <summary>

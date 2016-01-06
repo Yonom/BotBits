@@ -18,22 +18,22 @@ namespace BotBits.Events
         internal RestoreProgressEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            X = message.GetDouble(1);
-            Y = message.GetDouble(2);
-            GoldCoins = message.GetInteger(3);
-            BlueCoins = message.GetInteger(4);
+            this.X = message.GetDouble(1);
+            this.Y = message.GetDouble(2);
+            this.GoldCoins = message.GetInteger(3);
+            this.BlueCoins = message.GetInteger(4);
             var goldCoinPosXs = message.GetByteArray(5);
             var goldCoinPosYs = message.GetByteArray(6);
-            GoldCoinPoints = WorldUtils.GetPos(goldCoinPosXs, goldCoinPosYs).ToArray();
+            this.GoldCoinPoints = WorldUtils.GetPos(goldCoinPosXs, goldCoinPosYs).ToArray();
             var blueCoinPosXs = message.GetByteArray(7);
             var blueCoinPosYs = message.GetByteArray(8);
-            BlueCoinPoints = WorldUtils.GetPos(blueCoinPosXs, blueCoinPosYs).ToArray();
-            Deaths = message.GetInteger(9);
-            CheckpointX = message.GetInteger(10);
-            CheckpointY = message.GetInteger(11);
-            PurpleSwitches = MessageUtils.GetSwitches(message.GetByteArray(12));
-            SpeedX = message.GetDouble(13);
-            SpeedX = message.GetDouble(14);
+            this.BlueCoinPoints = WorldUtils.GetPos(blueCoinPosXs, blueCoinPosYs).ToArray();
+            this.Deaths = message.GetInteger(9);
+            this.CheckpointX = message.GetInteger(10);
+            this.CheckpointY = message.GetInteger(11);
+            this.PurpleSwitches = MessageUtils.GetSwitches(message.GetByteArray(12));
+            this.SpeedX = message.GetDouble(13);
+            this.SpeedX = message.GetDouble(14);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace BotBits.Events
         /// <value>The block x.</value>
         public int BlockX
         {
-            get { return WorldUtils.PosToBlock(X); }
+            get { return WorldUtils.PosToBlock(this.X); }
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace BotBits.Events
         /// <value>The block y.</value>
         public int BlockY
         {
-            get { return WorldUtils.PosToBlock(Y); }
+            get { return WorldUtils.PosToBlock(this.Y); }
         }
 
         /// <summary>

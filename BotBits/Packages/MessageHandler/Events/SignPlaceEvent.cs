@@ -17,10 +17,10 @@ namespace BotBits.Events
         internal SignPlaceEvent(BotBitsClient client, Message message)
             : base(client, message, 4)
         {
-            X = message.GetInteger(0);
-            Y = message.GetInteger(1);
-            Id = message.GetInteger(2);
-            Text = message.GetString(3);
+            this.X = message.GetInteger(0);
+            this.Y = message.GetInteger(1);
+            this.Id = message.GetInteger(2);
+            this.Text = message.GetString(3);
         }
 
         /// <summary>

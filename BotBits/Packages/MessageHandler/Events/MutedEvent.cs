@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal MutedEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Muted = message.GetBoolean(1);
+            this.Muted = message.GetBoolean(1);
         }
 
         /// <summary>

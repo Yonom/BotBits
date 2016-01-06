@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal GiveMagicBrickPackageEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            MagicPack = message.GetString(0);
+            this.MagicPack = message.GetString(0);
         }
 
         /// <summary>

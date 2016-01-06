@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal AutoTextEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            AutoText = message.GetString(1);
+            this.AutoText = message.GetString(1);
         }
 
         /// <summary>

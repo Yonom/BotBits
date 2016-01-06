@@ -18,7 +18,7 @@ namespace BotBits.Events
         internal EditRightsEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            AllowEdit = message.GetBoolean(1);
+            this.AllowEdit = message.GetBoolean(1);
         }
 
         /// <summary>

@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal CrewAddRequestFailedEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Reason = message.GetString(0);
+            this.Reason = message.GetString(0);
         }
 
         /// <summary>

@@ -12,8 +12,8 @@ namespace BotBits.Events
         internal AuraEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            AuraShape = (AuraShape) message.GetInt(1);
-            AuraColor = (AuraColor) message.GetInt(2);
+            this.AuraShape = (AuraShape) message.GetInt(1);
+            this.AuraColor = (AuraColor) message.GetInt(2);
         }
 
         /// <summary>

@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal PurpleSwitchInitEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            PurpleSwitches = MessageUtils.GetSwitches(message.GetByteArray(1));
+            this.PurpleSwitches = MessageUtils.GetSwitches(message.GetByteArray(1));
         }
 
         /// <summary>

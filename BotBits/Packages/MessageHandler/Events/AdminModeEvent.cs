@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal AdminModeEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Admin = message.GetBoolean(1);
+            this.Admin = message.GetBoolean(1);
         }
 
         /// <summary>

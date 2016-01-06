@@ -13,13 +13,13 @@ namespace BotBits.Events
         internal EffectEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Effect = (Effect) message.GetInt(1);
-            Enabled = message.GetBoolean(2);
+            this.Effect = (Effect) message.GetInt(1);
+            this.Enabled = message.GetBoolean(2);
 
             if (message.Count < 4) return;
-            TimeLeft = TimeSpan.FromSeconds(message.GetDouble(3));
+            this.TimeLeft = TimeSpan.FromSeconds(message.GetDouble(3));
             if (message.Count < 5) return;
-            Duration = TimeSpan.FromSeconds(message.GetInt(4));
+            this.Duration = TimeSpan.FromSeconds(message.GetInt(4));
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace BotBits.Events
         /// <value><c>true</c> if effect can expire; otherwise, <c>false</c>.</value>
         public bool Expires
         {
-            get { return Duration.Ticks != 0; }
+            get { return this.Duration.Ticks != 0; }
         }
 
         /// <summary>

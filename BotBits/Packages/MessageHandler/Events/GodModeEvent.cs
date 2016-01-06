@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal GodModeEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            God = message.GetBoolean(1);
+            this.God = message.GetBoolean(1);
         }
 
         /// <summary>

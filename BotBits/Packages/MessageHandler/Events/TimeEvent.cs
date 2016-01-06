@@ -17,8 +17,8 @@ namespace BotBits.Events
         internal TimeEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Data = message.GetDouble(0);
-            Time = message.GetDouble(0);
+            this.Data = message.GetDouble(0);
+            this.Time = message.GetDouble(0);
         }
 
         public double Time { get; set; }

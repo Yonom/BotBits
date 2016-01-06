@@ -17,8 +17,8 @@ namespace BotBits.Events
         internal CrownEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            if (Player == null)
-                Player = Player.Nobody;
+            if (this.Player == null)
+                this.Player = Player.Nobody;
         }
     }
 }

@@ -18,9 +18,9 @@ namespace BotBits.Events
         internal OldChatEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Username = message.GetString(0);
-            Text = message.GetString(1);
-            Friend = message.GetBoolean(2);
+            this.Username = message.GetString(0);
+            this.Text = message.GetString(1);
+            this.Friend = message.GetBoolean(2);
         }
 
         /// <summary>

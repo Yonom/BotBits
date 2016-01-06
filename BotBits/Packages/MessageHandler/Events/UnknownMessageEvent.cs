@@ -12,7 +12,7 @@ namespace BotBits.Events
         internal UnknownMessageEvent(BotBitsClient client, Message message, Exception reason)
             : base(client, message)
         {
-            Reason = reason;
+            this.Reason = reason;
         }
 
         /// <summary>

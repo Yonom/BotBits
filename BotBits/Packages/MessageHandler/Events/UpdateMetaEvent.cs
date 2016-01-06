@@ -17,11 +17,11 @@ namespace BotBits.Events
         internal UpdateMetaEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            OwnerUsername = message.GetString(0);
-            WorldName = message.GetString(1);
-            Plays = message.GetInteger(2);
-            Favorites = message.GetInteger(3);
-            Likes = message.GetInteger(4);
+            this.OwnerUsername = message.GetString(0);
+            this.WorldName = message.GetString(1);
+            this.Plays = message.GetInteger(2);
+            this.Favorites = message.GetInteger(3);
+            this.Likes = message.GetInteger(4);
         }
 
         /// <summary>

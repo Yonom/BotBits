@@ -12,7 +12,7 @@ namespace BotBits.Events
         internal HideLobbyEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Hidden = message.GetBoolean(0);
+            this.Hidden = message.GetBoolean(0);
         }
 
         /// <summary>

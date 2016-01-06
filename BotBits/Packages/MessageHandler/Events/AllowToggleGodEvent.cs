@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal AllowToggleGodEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            AllowToggle = message.GetBoolean(1);
+            this.AllowToggle = message.GetBoolean(1);
         }
 
         /// <summary>

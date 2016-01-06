@@ -24,28 +24,28 @@ namespace BotBits.Events
             {
                 if (create)
                 {
-                    _player = Players.Of(client).TryAddPlayer(message.GetInt(userId));
+                    this._player = Players.Of(client).TryAddPlayer(message.GetInt(userId));
                 }
                 else
                 {
-                    Players.Of(client).TryGetPlayer(message.GetInt(userId), out _player);
+                    Players.Of(client).TryGetPlayer(message.GetInt(userId), out this._player);
                 }
             }
             else
             {
-                _player = Player.Nobody;
+                this._player = Player.Nobody;
             }
         }
 
         public Player Player
         {
-            get { return _player; }
-            protected set { _player = value; }
+            get { return this._player; }
+            protected set { this._player = value; }
         }
 
         public bool Cancelled
         {
-            get { return Player == null; }
+            get { return this.Player == null; }
         }
     }
 }

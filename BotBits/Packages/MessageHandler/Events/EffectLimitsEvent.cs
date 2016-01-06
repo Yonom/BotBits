@@ -17,8 +17,8 @@ namespace BotBits.Events
         internal EffectLimitsEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            CurseLimit = message.GetInt(0);
-            ZombieLimit = message.GetInt(1);
+            this.CurseLimit = message.GetInt(0);
+            this.ZombieLimit = message.GetInt(1);
         }
 
         /// <summary>

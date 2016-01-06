@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal ChatEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Text = message.GetString(1);
+            this.Text = message.GetString(1);
         }
 
         /// <summary>

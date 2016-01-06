@@ -18,8 +18,8 @@ namespace BotBits.Events
         internal Info2Event(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Title = message.GetString(0);
-            Text = message.GetString(1);
+            this.Title = message.GetString(0);
+            this.Text = message.GetString(1);
         }
 
         /// <summary>

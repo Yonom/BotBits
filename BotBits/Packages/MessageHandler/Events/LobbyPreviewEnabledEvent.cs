@@ -12,7 +12,7 @@ namespace BotBits.Events
         internal LobbyPreviewEnabledEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Enabled = message.GetBoolean(0);
+            this.Enabled = message.GetBoolean(0);
         }
 
         /// <summary>

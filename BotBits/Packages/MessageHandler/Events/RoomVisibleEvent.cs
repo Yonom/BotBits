@@ -12,7 +12,7 @@ namespace BotBits.Events
         internal RoomVisibleEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Visible = message.GetBoolean(0);
+            this.Visible = message.GetBoolean(0);
         }
 
         /// <summary>

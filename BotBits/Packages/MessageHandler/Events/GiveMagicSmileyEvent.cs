@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal GiveMagicSmileyEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            MagicSmiley = message.GetString(0);
+            this.MagicSmiley = message.GetString(0);
         }
 
         /// <summary>

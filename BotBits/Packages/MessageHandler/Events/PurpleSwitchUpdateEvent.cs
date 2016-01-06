@@ -18,8 +18,8 @@ namespace BotBits.Events
         internal PurpleSwitchUpdateEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            SwitchId = message.GetInt(1);
-            Enabled = message.GetInt(2);
+            this.SwitchId = message.GetInt(1);
+            this.Enabled = message.GetInt(2);
         }
 
         /// <summary>

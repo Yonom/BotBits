@@ -17,16 +17,16 @@ namespace BotBits.Events
         internal MoveEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            X = message.GetDouble(1);
-            Y = message.GetDouble(2);
-            SpeedX = message.GetDouble(3);
-            SpeedY = message.GetDouble(4);
-            ModifierX = message.GetDouble(5);
-            ModifierY = message.GetDouble(6);
-            Horizontal = message.GetDouble(7);
-            Vertical = message.GetDouble(8);
-            SpaceDown = message.GetBoolean(9);
-            SpaceJustDown = message.GetBoolean(10);
+            this.X = message.GetDouble(1);
+            this.Y = message.GetDouble(2);
+            this.SpeedX = message.GetDouble(3);
+            this.SpeedY = message.GetDouble(4);
+            this.ModifierX = message.GetDouble(5);
+            this.ModifierY = message.GetDouble(6);
+            this.Horizontal = message.GetDouble(7);
+            this.Vertical = message.GetDouble(8);
+            this.SpaceDown = message.GetBoolean(9);
+            this.SpaceJustDown = message.GetBoolean(10);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace BotBits.Events
         /// <value>The block x.</value>
         public int BlockX
         {
-            get { return WorldUtils.PosToBlock(X); }
+            get { return WorldUtils.PosToBlock(this.X); }
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace BotBits.Events
         /// <value>The block y.</value>
         public int BlockY
         {
-            get { return WorldUtils.PosToBlock(Y); }
+            get { return WorldUtils.PosToBlock(this.Y); }
         }
 
         /// <summary>

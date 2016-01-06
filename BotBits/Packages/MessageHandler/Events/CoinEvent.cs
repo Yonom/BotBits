@@ -17,10 +17,10 @@ namespace BotBits.Events
         internal CoinEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            GoldCoins = message.GetInteger(1);
-            BlueCoins = message.GetInteger(2);
-            X = message.GetUInt(3);
-            Y = message.GetUInt(4);
+            this.GoldCoins = message.GetInteger(1);
+            this.BlueCoins = message.GetInteger(2);
+            this.X = message.GetUInt(3);
+            this.Y = message.GetUInt(4);
         }
 
         /// <summary>

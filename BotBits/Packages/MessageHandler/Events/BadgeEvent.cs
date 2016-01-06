@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal BadgeEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Badge = message.GetBadge(1);
+            this.Badge = message.GetBadge(1);
         }
 
         /// <summary>

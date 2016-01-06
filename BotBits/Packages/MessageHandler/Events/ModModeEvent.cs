@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal ModModeEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            Mod = message.GetBoolean(1);
+            this.Mod = message.GetBoolean(1);
         }
 
         /// <summary>
