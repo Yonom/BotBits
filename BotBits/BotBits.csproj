@@ -116,6 +116,7 @@
     <Compile Include="Packages\Players\ActiveEffect.cs" />
     <Compile Include="Packages\Players\Events\BlueCoinEvent.cs" />
     <Compile Include="Packages\Players\Events\GoldCoinEvent.cs" />
+    <Compile Include="Packages\Room\Events\EditRightChangedEvent.cs" />
     <Compile Include="Packages\Scheduler\Scheduler.cs" />
     <Compile Include="Internal\StringUtils.cs" />
     <Compile Include="Internal\TaskExtensions.cs" />

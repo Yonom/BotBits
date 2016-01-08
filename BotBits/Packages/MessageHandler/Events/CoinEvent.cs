@@ -3,7 +3,7 @@ using PlayerIOClient;
 namespace BotBits.Events
 {
     /// <summary>
-    ///     Occurs when a player collects a coin.
+    ///     Occurs when a player's gold or blue coin count changes.
     /// </summary>
     /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("c")]
