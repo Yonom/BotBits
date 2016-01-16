@@ -29,10 +29,13 @@ namespace BotBits.Events
             this.Mod = message.GetBoolean(14);
             this.Team = (Team) message.GetInt(15);
             this.AuraShape = (AuraShape) message.GetInt(16);
-            this.ChatColor = message.GetUInt(17);
-            this.Badge = message.GetBadge(18);
-            this.CrewMember = message.GetBoolean(19);
+            this.AuraColor = (AuraColor) message.GetInt(17);
+            this.ChatColor = message.GetUInt(18);
+            this.Badge = message.GetBadge(19);
+            this.CrewMember = message.GetBoolean(20);
         }
+
+        public AuraColor AuraColor { get; set; }
 
         public int Deaths { get; set; }
 

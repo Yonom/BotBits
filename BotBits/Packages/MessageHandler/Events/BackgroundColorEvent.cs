@@ -8,9 +8,11 @@ namespace BotBits.Events
         internal BackgroundColorEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.BackgroundColor = message.GetUInt(0);
+            this.Enabled = message.GetBoolean(0);
+            this.BackgroundColor = message.GetUInt(1);
         }
 
         public uint BackgroundColor { get; set; }
+        public bool Enabled { get; set; }
     }
 }

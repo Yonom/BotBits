@@ -106,6 +106,7 @@ namespace BotBits
             this.OwnPlayer.ConnectUserId = ConnectionManager.Of(this.BotBits).ConnectUserId;
             this.OwnPlayer.Smiley = e.Smiley;
             this.OwnPlayer.AuraShape = e.AuraShape;
+            this.OwnPlayer.AuraColor = e.AuraColor;
             this.OwnPlayer.Badge = e.Badge;
             this.OwnPlayer.ChatColor = e.ChatColor;
             this.OwnPlayer.X = e.SpawnX;
@@ -122,6 +123,7 @@ namespace BotBits
             p.ConnectUserId = e.ConnectUserId;
             p.Smiley = e.Smiley;
             p.AuraShape = e.AuraShape;
+            p.AuraColor = e.AuraColor;
             p.Badge = e.Badge;
             p.HasChat = e.HasChat;
             p.GodMode = e.God;

@@ -25,34 +25,37 @@ namespace BotBits.Events
             // 6: UserId
             this.Smiley = (Smiley) message.GetInt(7);
             this.AuraShape = (AuraShape) message.GetInt(8);
-            this.SpawnX = message.GetDouble(9);
-            this.SpawnY = message.GetDouble(10);
-            this.ChatColor = message.GetUInt(11);
-            this.Username = message.GetString(12);
-            this.CanEdit = message.GetBoolean(13);
-            this.IsOwner = message.GetBoolean(14);
-            this.Favorited = message.GetBoolean(15);
-            this.Liked = message.GetBoolean(16);
-            this.WorldWidth = message.GetInt(17);
-            this.WorldHeight = message.GetInt(18);
-            this.GravityMultiplier = message.GetDouble(19);
-            this.BackgroundColor = message.GetUInt(20);
-            this.Visible = message.GetBoolean(21);
-            this.HideLobby = message.GetBoolean(22);
-            this.AllowSpectating = message.GetBoolean(23);
-            this.RoomDescription = message.GetString(24);
-            this.CurseLimit = message.GetInt(25);
-            this.ZombieLimit = message.GetInt(26);
-            this.Campaign = message.GetBoolean(27);
-            this.CrewId = message.GetString(28);
-            this.CrewName = message.GetString(29);
-            this.CanChangeWorldOptions = message.GetBoolean(30);
-            this.WorldStatus = (WorldStatus) message.GetInt(31);
-            this.Badge = message.GetBadge(32);
-            this.CrewMember = message.GetBoolean(33);
-            this.MinimapEnabled = message.GetBoolean(34);
-            this.LobbyPreviewEnabled = message.GetBoolean(35);
+            this.AuraColor = (AuraColor)message.GetInt(9);
+            this.SpawnX = message.GetDouble(10);
+            this.SpawnY = message.GetDouble(11);
+            this.ChatColor = message.GetUInt(12);
+            this.Username = message.GetString(13);
+            this.CanEdit = message.GetBoolean(14);
+            this.IsOwner = message.GetBoolean(15);
+            this.Favorited = message.GetBoolean(16);
+            this.Liked = message.GetBoolean(17);
+            this.WorldWidth = message.GetInt(18);
+            this.WorldHeight = message.GetInt(19);
+            this.GravityMultiplier = message.GetDouble(20);
+            this.BackgroundColor = message.GetUInt(21);
+            this.Visible = message.GetBoolean(22);
+            this.HideLobby = message.GetBoolean(23);
+            this.AllowSpectating = message.GetBoolean(24);
+            this.RoomDescription = message.GetString(25);
+            this.CurseLimit = message.GetInt(26);
+            this.ZombieLimit = message.GetInt(27);
+            this.Campaign = message.GetBoolean(28);
+            this.CrewId = message.GetString(29);
+            this.CrewName = message.GetString(30);
+            this.CanChangeWorldOptions = message.GetBoolean(31);
+            this.WorldStatus = (WorldStatus) message.GetInt(32);
+            this.Badge = message.GetBadge(33);
+            this.CrewMember = message.GetBoolean(34);
+            this.MinimapEnabled = message.GetBoolean(35);
+            this.LobbyPreviewEnabled = message.GetBoolean(36);
         }
+
+        public AuraColor AuraColor { get; set; }
 
         public bool LobbyPreviewEnabled { get; set; }
 

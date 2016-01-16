@@ -53,5 +53,10 @@
         ///     Colorful
         /// </summary>
         CLR,
+
+        /// <summary>
+        ///     Winter
+        /// </summary>
+        WTR,
     }
 }

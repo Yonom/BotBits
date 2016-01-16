@@ -364,6 +364,11 @@ namespace BotBits
         Hooded = 123,
 
         [Pack("smileyearmuffs")]
-        Earmuffs = 124
+        Earmuffs = 124,
+
+        [Pack("smileypenguin")]
+        Penguin = 125,
+
+
     }
 }
