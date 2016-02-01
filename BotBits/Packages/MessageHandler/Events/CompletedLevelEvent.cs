@@ -2,6 +2,12 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when completing a world by touching win trophy.
+    ///     NOTE: If player received campaign rewards,
+    ///     <see cref="CampaignRewardsEvent" /> is received instead of this event.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("completedLevel")]
     public sealed class CompletedLevelEvent : ReceiveEvent<CompletedLevelEvent>
     {

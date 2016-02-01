@@ -5,8 +5,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Block Send Event
+    ///     Sent to place block.
     /// </summary>
+    /// <seealso cref="RoomTokenSendMessage{T}" />
     public sealed class PlaceSendMessage : RoomTokenSendMessage<PlaceSendMessage>
     {
         /// <summary>

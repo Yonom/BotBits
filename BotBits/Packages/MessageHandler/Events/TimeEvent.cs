@@ -2,6 +2,10 @@
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs as a response to the "time" message.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("time")]
     public sealed class TimeEvent : ReceiveEvent<TimeEvent>
     {

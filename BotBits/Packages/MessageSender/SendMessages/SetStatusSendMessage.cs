@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to change crew world status.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class SetStatusSendMessage : SendMessage<SetStatusSendMessage>
     {
         /// <summary>

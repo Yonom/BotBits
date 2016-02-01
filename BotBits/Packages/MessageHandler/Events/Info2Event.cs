@@ -6,6 +6,7 @@ namespace BotBits.Events
     ///     Occurs when the server sends information pertaining to low-level functions like (a) you were kicked or (b) the room
     ///     is full or (c) rate limit exceeded.
     /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("info2")]
     public sealed class Info2Event : ReceiveEvent<Info2Event>
     {

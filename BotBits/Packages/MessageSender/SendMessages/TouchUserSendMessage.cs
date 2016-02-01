@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Touch User Send Event
+    ///     Sent to touch other player transferring effects.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class TouchUserSendMessage : SendMessage<TouchUserSendMessage>
     {
         /// <summary>

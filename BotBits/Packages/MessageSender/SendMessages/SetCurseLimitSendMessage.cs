@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to change curse limit.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class SetCurseLimitSendMessage : SendMessage<SetCurseLimitSendMessage>
     {
         /// <summary>

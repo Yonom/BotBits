@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when someone joins world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("add")]
     public sealed class JoinEvent : PlayerEvent<JoinEvent>
     {
@@ -37,12 +41,28 @@ namespace BotBits.Events
 
         public AuraColor AuraColor { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the amount of deaths.
+        /// </summary>
+        /// <value>The deaths.</value>
         public int Deaths { get; set; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether player is crew member.
+        /// </summary>
+        /// <value><c>true</c> if player is crew member; otherwise, <c>false</c>.</value>
         public bool CrewMember { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the badge.
+        /// </summary>
+        /// <value>The badge.</value>
         public Badge Badge { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the connect user identifier.
+        /// </summary>
+        /// <value>The connect user identifier.</value>
         public string ConnectUserId { get; set; }
 
         /// <summary>

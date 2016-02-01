@@ -3,6 +3,11 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to activate timed effect.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
+    [Obsolete("This message was merged with 'effect' send message.")]
     public sealed class TimedEffectSendMessage : SendMessage<TimedEffectSendMessage>
     {
         /// <summary>

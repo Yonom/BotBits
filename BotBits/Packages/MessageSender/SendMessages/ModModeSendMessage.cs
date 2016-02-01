@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Mod Mode Send Event
+    ///     Sent to toggle moderator mode.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class ModModeSendMessage : SendMessage<ModModeSendMessage>
     {
         //No arguments

@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Smiley Send Event
+    ///     Sent to change smiley.
     /// </summary>
+    /// <seealso cref="RoomTokenSendMessage{T}" />
     public sealed class SmileySendMessage : RoomTokenSendMessage<SmileySendMessage>
     {
         /// <summary>

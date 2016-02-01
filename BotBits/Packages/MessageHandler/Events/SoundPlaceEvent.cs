@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a sound block is placed in the world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("bs")]
     public sealed class SoundPlaceEvent : PlayerEvent<SoundPlaceEvent>
     {

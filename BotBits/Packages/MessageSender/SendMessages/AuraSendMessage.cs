@@ -2,10 +2,14 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to change aura shape and/or color.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class AuraSendMessage : SendMessage<AuraSendMessage>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AuraSendMessage" /> class.
+        ///     Initializes a new instance of the <see cref="AuraSendMessage" /> class.
         /// </summary>
         /// <param name="auraShape">The aura shape.</param>
         /// <param name="auraColor">The aura.</param>
@@ -37,7 +41,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("aura", (int)this.AuraShape, (int)this.AuraColor);
+            return Message.Create("aura", (int) this.AuraShape, (int) this.AuraColor);
         }
     }
 }

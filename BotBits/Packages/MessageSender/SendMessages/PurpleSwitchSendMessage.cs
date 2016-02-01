@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Block Send Event
+    ///     Sent to change purple switch state.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class PurpleSwitchSendMessage : SendMessage<PurpleSwitchSendMessage>
     {
         /// <summary>

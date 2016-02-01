@@ -4,8 +4,9 @@ using PlayerIOClient;
 namespace BotBits.Events
 {
     /// <summary>
-    ///     Occurs when an EE message is recieved.
+    ///     Occurs when an EE message is received.
     /// </summary>
+    /// <seealso cref="Event{T}" />
     public abstract class ReceiveEvent<T> : Event<T> where T : ReceiveEvent<T>
     {
         /// <summary>

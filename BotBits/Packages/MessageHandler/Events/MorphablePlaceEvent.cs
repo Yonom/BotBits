@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when someone places morphable block.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("br")]
     public sealed class MorphablePlaceEvent : PlayerEvent<MorphablePlaceEvent>
     {

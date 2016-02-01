@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when world metadata is updated.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("updatemeta")]
     public sealed class UpdateMetaEvent : ReceiveEvent<UpdateMetaEvent>
     {

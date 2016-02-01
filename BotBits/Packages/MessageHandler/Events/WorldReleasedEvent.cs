@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when crew world is getting released.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("worldRelease")]
     public sealed class WorldReleasedEvent : ReceiveEvent<WorldReleasedEvent>
     {

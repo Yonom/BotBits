@@ -4,6 +4,10 @@ namespace BotBits.Events
 {
     // NOTE: Internal to avoid confusion with Foreground/Background place
 
+    /// <summary>
+    ///     Occurs when a block is placed in the world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("b")]
     internal sealed class BlockPlaceEvent : PlayerEvent<BlockPlaceEvent>
     {

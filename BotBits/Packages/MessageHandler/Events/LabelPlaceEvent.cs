@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when someone places label block.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("lb")]
     public sealed class LabelPlaceEvent : PlayerEvent<LabelPlaceEvent>
     {

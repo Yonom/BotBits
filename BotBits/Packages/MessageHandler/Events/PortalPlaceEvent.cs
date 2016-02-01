@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a portal is placed in the world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("pt")]
     public sealed class PortalPlaceEvent : PlayerEvent<PortalPlaceEvent>
     {

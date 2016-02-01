@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to activate an effect.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class EffectSendMessage : SendMessage<EffectSendMessage>
     {
         /// <summary>

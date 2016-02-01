@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when world is reverted to last save using /loadlevel command.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("reset")]
     public sealed class LoadLevelEvent : ReceiveEvent<LoadLevelEvent>
     {

@@ -6,6 +6,7 @@ namespace BotBits.Events
     /// <summary>
     ///     Occurs when mutliple players are teleported. This event gets raised for respawns of any kind, including death.
     /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("tele")]
     public sealed class MultiRespawnEvent : ReceiveEvent<MultiRespawnEvent>
     {

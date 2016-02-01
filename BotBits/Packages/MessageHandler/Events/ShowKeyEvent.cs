@@ -3,6 +3,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when key deactivates or timed door change their state.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("show")]
     public sealed class ShowKeyEvent : ReceiveEvent<ShowKeyEvent>
     {

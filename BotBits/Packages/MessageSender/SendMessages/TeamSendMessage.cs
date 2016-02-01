@@ -2,6 +2,10 @@
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to change team.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class TeamSendMessage : SendMessage<TeamSendMessage>
     {
         /// <summary>

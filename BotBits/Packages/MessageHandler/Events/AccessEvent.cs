@@ -2,11 +2,13 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when you are given edit rights in the world.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("access")]
     public sealed class AccessEvent : ReceiveEvent<AccessEvent>
     {
-        //No arguments
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="AccessEvent" /> class.
         /// </summary>

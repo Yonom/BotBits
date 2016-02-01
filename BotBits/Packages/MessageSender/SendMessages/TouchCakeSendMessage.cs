@@ -3,17 +3,17 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Sent to reset progress.
+    ///     Sent to touch a cake.
     /// </summary>
     /// <seealso cref="SendMessage{T}" />
-    public sealed class ResetSendMessage : SendMessage<ResetSendMessage>
+    public sealed class TouchCakeSendMessage : SendMessage<TouchCakeSendMessage>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="BotBits.SendMessages.ResetSendMessage" /> class.
+        ///     Initializes a new instance of the <see cref="TouchCakeSendMessage" /> class.
         /// </summary>
         /// <param name="x">The x-coordinate.</param>
         /// <param name="y">The y-coordinate.</param>
-        public ResetSendMessage(int x, int y)
+        public TouchCakeSendMessage(int x, int y)
         {
             this.X = x;
             this.Y = y;
@@ -41,7 +41,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("reset", this.X, this.Y);
+            return Message.Create("caketouch", this.X, this.Y);
         }
     }
 }

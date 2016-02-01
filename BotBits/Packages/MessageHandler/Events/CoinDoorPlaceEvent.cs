@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a coin door is placed in the world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("bc")]
     public sealed class CoinDoorPlaceEvent : PlayerEvent<CoinDoorPlaceEvent>
     {

@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to change world description.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class SetRoomDescriptionSendMessage : SendMessage<SetRoomDescriptionSendMessage>
     {
         /// <summary>

@@ -3,6 +3,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when your campaign progress is restored.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("restoreProgress")]
     public sealed class RestoreProgressEvent : PlayerEvent<RestoreProgressEvent>
     {
@@ -32,20 +36,52 @@ namespace BotBits.Events
             this.SpeedX = message.GetDouble(14);
         }
 
+        /// <summary>
+        ///     Gets or sets the blue coin positions.
+        /// </summary>
+        /// <value>The blue coin positions.</value>
         public Point[] BlueCoinPoints { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the gold coin positions.
+        /// </summary>
+        /// <value>The gold coin positions.</value>
         public Point[] GoldCoinPoints { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the purple switches.
+        /// </summary>
+        /// <value>The purple switches.</value>
         public int[] PurpleSwitches { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the checkpoint y coordinate.
+        /// </summary>
+        /// <value>The checkpoint y coordinate.</value>
         public int CheckpointY { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the checkpoint x coordinate.
+        /// </summary>
+        /// <value>The checkpoint x coordinate.</value>
         public int CheckpointX { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the amount deaths.
+        /// </summary>
+        /// <value>The deaths.</value>
         public int Deaths { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the amount of collected blue coins.
+        /// </summary>
+        /// <value>The blue coins.</value>
         public int BlueCoins { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the amount of collected gold coins.
+        /// </summary>
+        /// <value>The gold coins.</value>
         public int GoldCoins { get; set; }
 
         /// <summary>

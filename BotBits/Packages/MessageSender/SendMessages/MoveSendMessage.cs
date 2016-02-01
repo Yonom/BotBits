@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Move Send Event
+    ///     Sent to move.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class MoveSendMessage : SendMessage<MoveSendMessage>
     {
         /// <summary>

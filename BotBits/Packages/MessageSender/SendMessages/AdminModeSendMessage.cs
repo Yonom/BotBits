@@ -3,8 +3,9 @@
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Admin Mode Send Event
+    ///     Sent to toggle administrator mode.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class AdminModeSendMessage : SendMessage<AdminModeSendMessage>
     {
         /// <summary>
