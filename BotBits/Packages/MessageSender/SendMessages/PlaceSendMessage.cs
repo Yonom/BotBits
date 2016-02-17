@@ -8,7 +8,7 @@ namespace BotBits.SendMessages
     ///     Sent to place block.
     /// </summary>
     /// <seealso cref="RoomTokenSendMessage{T}" />
-    public sealed class PlaceSendMessage : RoomTokenSendMessage<PlaceSendMessage>
+    public sealed class PlaceSendMessage : SendMessage<PlaceSendMessage>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlaceSendMessage" /> class.
@@ -74,7 +74,7 @@ namespace BotBits.SendMessages
         protected override Message GetMessage()
         {
             var msgArgs = new object[] {(int) this.Layer, this.X, this.Y, this.Id}.Concat(this.Args).ToArray();
-            return Message.Create(this.RoomToken, msgArgs);
+            return Message.Create("b", msgArgs);
         }
     }
 }

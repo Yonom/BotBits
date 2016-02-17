@@ -11,12 +11,9 @@ namespace BotBits.Demo
 
         private static void Main()
         {
-            EventLoader.Of(bot)
-                .LoadStatic<Program>();
+            EventLoader.Of(bot).LoadStatic<Program>();
 
-            Login.Of(bot)
-                .AsGuest()
-                .CreateJoinRoom("PW01");
+            Login.Of(bot).AsGuest().CreateJoinRoom("PW01");
 
             Thread.Sleep(Timeout.Infinite);
         }

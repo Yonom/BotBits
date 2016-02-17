@@ -5,8 +5,8 @@ namespace BotBits.SendMessages
     /// <summary>
     ///     Sent to activate magenta key.
     /// </summary>
-    /// <seealso cref="RoomTokenSendMessage{T}" />
-    public sealed class MagentaKeySendMessage : RoomTokenSendMessage<MagentaKeySendMessage>
+    /// 
+    public sealed class MagentaKeySendMessage : SendMessage<MagentaKeySendMessage>
     {
         public MagentaKeySendMessage()
         {
@@ -27,7 +27,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create(this.RoomToken + "m", this.X, this.Y);
+            return Message.Create("pressKey", this.X, this.Y, "magenta");
         }
     }
 }

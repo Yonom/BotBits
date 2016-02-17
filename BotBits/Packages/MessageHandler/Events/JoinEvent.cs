@@ -19,7 +19,7 @@ namespace BotBits.Events
         {
             this.Username = message.GetString(1);
             this.ConnectUserId = message.GetString(2);
-            this.Smiley = (Smiley) message.GetInteger(3);
+            this.Smiley = (Smiley)message.GetInteger(3);
             this.X = message.GetDouble(4);
             this.Y = message.GetDouble(5);
             this.God = message.GetBoolean(6);
@@ -30,16 +30,18 @@ namespace BotBits.Events
             this.Deaths = message.GetInteger(11);
             this.Friend = message.GetBoolean(12);
             this.ClubMember = message.GetBoolean(13);
-            // 14: Gold border
+            //  Gold Smiley Border  (14)
             this.Mod = message.GetBoolean(15);
-            this.Team = (Team) message.GetInt(16);
-            this.AuraShape = (AuraShape) message.GetInt(17);
-            this.AuraColor = (AuraColor) message.GetInt(18);
+            this.Team = (Team)message.GetInt(16);
+            this.AuraShape = (AuraShape)message.GetInt(17);
+            this.AuraColor = (AuraColor)message.GetInt(18);
             this.ChatColor = message.GetUInt(19);
             this.Badge = message.GetBadge(20);
             this.CrewMember = message.GetBoolean(21);
         }
 
+        public bool CanEdit { get; set; }
+        
         public AuraColor AuraColor { get; set; }
 
         /// <summary>
@@ -172,18 +174,12 @@ namespace BotBits.Events
         ///     Gets the block x.
         /// </summary>
         /// <value>The block x.</value>
-        public int BlockX
-        {
-            get { return WorldUtils.PosToBlock(this.X); }
-        }
+        public int BlockX { get { return WorldUtils.PosToBlock(this.X); } }
 
         /// <summary>
         ///     Gets the block y.
         /// </summary>
         /// <value>The block y.</value>
-        public int BlockY
-        {
-            get { return WorldUtils.PosToBlock(this.Y); }
-        }
+        public int BlockY { get { return WorldUtils.PosToBlock(this.Y); } }
     }
 }

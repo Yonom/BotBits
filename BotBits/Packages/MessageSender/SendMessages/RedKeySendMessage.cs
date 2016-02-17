@@ -5,8 +5,8 @@ namespace BotBits.SendMessages
     /// <summary>
     ///     Sent to activate red key.
     /// </summary>
-    /// <seealso cref="RoomTokenSendMessage{T}" />
-    public sealed class RedKeySendMessage : RoomTokenSendMessage<RedKeySendMessage>
+    /// 
+    public sealed class RedKeySendMessage : SendMessage<RedKeySendMessage>
     {
         public RedKeySendMessage()
         {
@@ -27,7 +27,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create(this.RoomToken + "r", this.X, this.Y);
+            return Message.Create("pressKey", this.X, this.Y, "red");
         }
     }
 }
