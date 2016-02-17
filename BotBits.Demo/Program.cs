@@ -1,4 +1,7 @@
-﻿using System.Threading;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using BotBits.Events;
 
 namespace BotBits.Demo
 {
@@ -8,13 +11,11 @@ namespace BotBits.Demo
 
         private static void Main()
         {
-            EventLoader
-                .Of(bot)
+            EventLoader.Of(bot)
                 .LoadStatic<Program>();
 
-            ConnectionManager
-                .Of(bot)
-                .GuestLogin()
+            Login.Of(bot)
+                .AsGuest()
                 .CreateJoinRoom("PW01");
 
             Thread.Sleep(Timeout.Infinite);

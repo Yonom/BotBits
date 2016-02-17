@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Kill World Send Event
+    ///     Sent to kill world.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class KillRoomSendMessage : SendMessage<KillRoomSendMessage>
     {
         //No arguments

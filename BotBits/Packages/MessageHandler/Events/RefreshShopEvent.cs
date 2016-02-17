@@ -1,7 +1,11 @@
+using System;
 using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    [Obsolete(
+        "This functionality is not available in the game. There are no guarantees about the availability of this API in future versions of BotBits."
+        )]
     [ReceiveEvent("refreshshop")]
     public sealed class RefreshShopEvent : ReceiveEvent<RefreshShopEvent>
     {

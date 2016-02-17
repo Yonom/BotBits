@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to un-like the world.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class UnlikeSendMessage : SendMessage<UnlikeSendMessage>
     {
         //No arguments

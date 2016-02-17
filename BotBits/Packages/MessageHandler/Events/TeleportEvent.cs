@@ -5,6 +5,7 @@ namespace BotBits.Events
     /// <summary>
     ///     Occurs when a player is teleported to another location.
     /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("teleport")]
     public sealed class TeleportEvent : PlayerEvent<TeleportEvent>
     {

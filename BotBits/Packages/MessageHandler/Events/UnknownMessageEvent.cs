@@ -4,8 +4,9 @@ using PlayerIOClient;
 namespace BotBits.Events
 {
     /// <summary>
-    ///     Raised when a received PlayerIOMessage could not be handled by BotBits.
+    ///     Occurs when a received PlayerIOMessage could not be handled by BotBits.
     /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     public sealed class UnknownMessageEvent : ReceiveEvent<UnknownMessageEvent>
     {
         internal UnknownMessageEvent(BotBitsClient client, Message message, Exception reason)
@@ -14,6 +15,10 @@ namespace BotBits.Events
             this.Reason = reason;
         }
 
+        /// <summary>
+        ///     Gets the reason of the error.
+        /// </summary>
+        /// <value>The reason.</value>
         public Exception Reason { get; private set; }
     }
 }

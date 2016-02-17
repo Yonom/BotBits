@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when moderator toggles moderator mode.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("mod")]
     public sealed class ModModeEvent : PlayerEvent<ModModeEvent>
     {
@@ -16,6 +20,10 @@ namespace BotBits.Events
             this.Mod = message.GetBoolean(1);
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether moderator is in moderator mode.
+        /// </summary>
+        /// <value><c>true</c> if mod; otherwise, <c>false</c>.</value>
         public bool Mod { get; set; }
     }
 }

@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when you successfully favorited the world.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("favorited")]
     public sealed class FavoritedEvent : ReceiveEvent<FavoritedEvent>
     {

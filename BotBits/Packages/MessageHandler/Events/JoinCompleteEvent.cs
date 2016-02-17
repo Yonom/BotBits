@@ -2,6 +2,10 @@
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when joining world is completed.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("init2")]
     public sealed class JoinCompleteEvent : ReceiveEvent<JoinCompleteEvent>
     {

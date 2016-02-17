@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Checkpoint Send Event
+    ///     Sent to change checkpoint position.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class CheckpointSendMessage : SendMessage<CheckpointSendMessage>
     {
         /// <summary>

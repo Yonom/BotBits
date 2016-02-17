@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when an attempt to request adding world to crew didn't succeed.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("crewAddRequestFailed")]
     public sealed class CrewAddRequestFailedEvent : ReceiveEvent<CrewAddRequestFailedEvent>
     {
@@ -16,6 +20,10 @@ namespace BotBits.Events
             this.Reason = message.GetString(0);
         }
 
+        /// <summary>
+        ///     Gets or sets the reason of the failure.
+        /// </summary>
+        /// <value>The reason.</value>
         public string Reason { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using PlayerIOClient;
+using Yonom.EE;
 
 namespace BotBits
 {
@@ -19,8 +20,7 @@ namespace BotBits
                 {
                     case Layer.Background:
                         var bgWorldBlock = new BackgroundBlock((Background.Id)block);
-                        foreach (var pos in data.Locations)
-                            world.Background[pos.X, pos.Y] = new BlockData<BackgroundBlock>(bgWorldBlock);
+                        foreach (var pos in data.Locations) world.Background[pos.X, pos.Y] = new BlockData<BackgroundBlock>(bgWorldBlock);
                         break;
 
                     case Layer.Foreground:
@@ -35,8 +35,13 @@ namespace BotBits
                                 break;
 
                             case BlockArgsType.Number:
-                                var i = block == 77 || block == 83 ? (uint) (int) data.Args[0] : (uint) data.Args[0];
+                                var i = (uint)data.Args[0];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, i);
+                                break;
+
+                            case BlockArgsType.SignedNumber:
+                                var si = Convert.ToInt32(data.Args[0]); //(int)data.Args[0]; // TODO: Replace after fix
+                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, si);
                                 break;
 
                             case BlockArgsType.String:
@@ -45,7 +50,7 @@ namespace BotBits
                                 break;
 
                             case BlockArgsType.Portal:
-                                var portalRotation = (Morph.Id)data.Args[0];
+                                var portalRotation = (Morph.Id)(uint)data.Args[0];
                                 var portalId = (uint)data.Args[1];
                                 var portalTarget = (uint)data.Args[2];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, portalId, portalTarget,
@@ -58,12 +63,12 @@ namespace BotBits
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, text, textcolor);
                                 break;
 
-                            default: throw new NotSupportedException("Invalid block.");
+                            default:
+                                throw new NotSupportedException("Invalid block.");
                         }
 
                         var fg = new BlockData<ForegroundBlock>(foregroundBlock);
-                        foreach (var pos in data.Locations)
-                            world.Foreground[pos.X, pos.Y] = fg;
+                        foreach (var pos in data.Locations) world.Foreground[pos.X, pos.Y] = fg;
                         break;
                 }
             }

@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Save World Send Event
+    ///     Sent to save the world.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class SaveSendMessage : SendMessage<SaveSendMessage>
     {
         //No arguments

@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when you lose edit rights.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("lostaccess")]
     public sealed class LoseAccessEvent : ReceiveEvent<LoseAccessEvent>
     {

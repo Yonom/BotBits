@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a sound block is placed in the world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("bs")]
     public sealed class SoundPlaceEvent : PlayerEvent<SoundPlaceEvent>
     {
@@ -16,14 +20,14 @@ namespace BotBits.Events
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);
             this.Id = message.GetInteger(2);
-            this.SoundId = message.GetUInt(3);
+            this.SoundId = message.GetInt(3);
         }
 
         /// <summary>
         ///     Gets or sets the sound identifier.
         /// </summary>
         /// <value>The sound identifier.</value>
-        public uint SoundId { get; set; }
+        public int SoundId { get; set; }
 
         /// <summary>
         ///     Gets or sets the block id.

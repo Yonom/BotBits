@@ -7,6 +7,12 @@ namespace BotBits.Events
         bool Cancelled { get; }
     }
 
+    /// <summary>
+    ///     Base for the player events. Used when message is about specific player.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <seealso cref="BotBits.Events.ReceiveEvent{T}" />
+    /// <seealso cref="BotBits.Events.ICancellable" />
     public abstract class PlayerEvent<T> : ReceiveEvent<T>, ICancellable where T : PlayerEvent<T>
     {
         private Player _player;

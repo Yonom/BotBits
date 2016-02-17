@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to change world accessibility.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class SetRoomVisibleSendMessage : SendMessage<SetRoomVisibleSendMessage>
     {
         /// <summary>

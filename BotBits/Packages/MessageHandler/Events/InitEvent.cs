@@ -5,6 +5,7 @@ namespace BotBits.Events
     /// <summary>
     ///     Occurs when the player initially joins the room. Contains world information such as title and world content.
     /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("init")]
     public sealed class InitEvent : PlayerEvent<InitEvent>
     {
@@ -24,33 +25,43 @@ namespace BotBits.Events
             this.EncryptedToken = message.GetString(5);
             // 6: UserId
             this.Smiley = (Smiley) message.GetInt(7);
-            this.Aura = (Aura) message.GetInt(8);
-            this.SpawnX = message.GetDouble(9);
-            this.SpawnY = message.GetDouble(10);
-            this.ChatColor = message.GetUInt(11);
-            this.Username = message.GetString(12);
-            this.CanEdit = message.GetBoolean(13);
-            this.IsOwner = message.GetBoolean(14);
-            this.Favorited = message.GetBoolean(15);
-            this.Liked = message.GetBoolean(16);
-            this.WorldWidth = message.GetInt(17);
-            this.WorldHeight = message.GetInt(18);
-            this.GravityMultiplier = message.GetDouble(19);
-            this.BackgroundColor = message.GetUInt(20);
-            this.Visible = message.GetBoolean(21);
-            this.HideLobby = message.GetBoolean(22);
-            this.AllowSpectating = message.GetBoolean(23);
-            this.RoomDescription = message.GetString(24);
-            this.CurseLimit = message.GetInt(25);
-            this.ZombieLimit = message.GetInt(26);
-            this.Campaign = message.GetBoolean(27);
-            this.CrewId = message.GetString(28);
-            this.CrewName = message.GetString(29);
-            this.CanChangeWorldOptions = message.GetBoolean(30);
-            this.WorldStatus = (WorldStatus) message.GetInt(31);
-            this.Badge = message.GetBadge(32);
-            this.CrewMember = message.GetBoolean(33);
+            this.AuraShape = (AuraShape) message.GetInt(8);
+            this.AuraColor = (AuraColor)message.GetInt(9);
+            // 9: Gold border
+            this.SpawnX = message.GetDouble(11);
+            this.SpawnY = message.GetDouble(12);
+            this.ChatColor = message.GetUInt(13);
+            this.Username = message.GetString(14);
+            this.CanEdit = message.GetBoolean(15);
+            this.IsOwner = message.GetBoolean(16);
+            this.Favorited = message.GetBoolean(17);
+            this.Liked = message.GetBoolean(18);
+            this.WorldWidth = message.GetInt(19);
+            this.WorldHeight = message.GetInt(20);
+            this.GravityMultiplier = message.GetDouble(21);
+            this.BackgroundColor = message.GetUInt(22);
+            this.Visible = message.GetBoolean(23);
+            this.HideLobby = message.GetBoolean(24);
+            this.AllowSpectating = message.GetBoolean(25);
+            this.RoomDescription = message.GetString(26);
+            this.CurseLimit = message.GetInt(27);
+            this.ZombieLimit = message.GetInt(28);
+            this.Campaign = message.GetBoolean(29);
+            this.CrewId = message.GetString(30);
+            this.CrewName = message.GetString(31);
+            this.CanChangeWorldOptions = message.GetBoolean(32);
+            this.WorldStatus = (WorldStatus) message.GetInt(33);
+            this.Badge = message.GetBadge(34);
+            this.CrewMember = message.GetBoolean(35);
+            this.MinimapEnabled = message.GetBoolean(36);
+            this.LobbyPreviewEnabled = message.GetBoolean(37);
         }
+
+        public AuraColor AuraColor { get; set; }
+
+        public bool LobbyPreviewEnabled { get; set; }
+
+        public bool MinimapEnabled { get; set; }
 
         public bool CrewMember { get; set; }
 
@@ -82,7 +93,7 @@ namespace BotBits.Events
 
         public bool HideLobby { get; set; }
 
-        public Aura Aura { get; set; }
+        public AuraShape AuraShape { get; set; }
 
         public Smiley Smiley { get; set; }
 

@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Touch Cake Send Event
+    ///     Sent to touch a cake.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class TouchCakeSendMessage : SendMessage<TouchCakeSendMessage>
     {
         /// <summary>

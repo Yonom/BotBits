@@ -69,17 +69,23 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void ChangeSmiley(Smiley newSmiley)
+        public void ChangeBadge(Badge badge)
         {
-            if (this.HasSmiley(newSmiley)) // Server kicks people if they do not own a smiley
-                new SmileySendMessage(newSmiley)
+            new BadgeSendMessage(badge)
+                .SendIn(this.BotBits);
+        }
+
+        public void ChangeSmiley(Smiley smiley)
+        {
+            if (this.HasSmiley(smiley)) // Server kicks people if they do not own a smiley
+                new SmileySendMessage(smiley)
                     .SendIn(this.BotBits);
         }
 
-        public void ChangeAura(Aura newAura)
+        public void ChangeAura(AuraShape auraShape, AuraColor auraColor)
         {
-            if (this.HasAura(newAura)) // Server kicks people if they do not own an aura
-                new AuraSendMessage(newAura)
+            if (this.HasAura(auraShape, auraColor)) // Server kicks people if they do not own an aura
+                new AuraSendMessage(auraShape, auraColor)
                     .SendIn(this.BotBits);
         }
 
@@ -88,9 +94,10 @@ namespace BotBits
             return ConnectionManager.Of(this.BotBits).PlayerData.HasSmiley(smiley);
         }
 
-        private bool HasAura(Aura aura)
+        private bool HasAura(AuraShape auraShape, AuraColor auraColor)
         {
-            return ConnectionManager.Of(this.BotBits).PlayerData.HasAura(aura);
+            return ConnectionManager.Of(this.BotBits).PlayerData.HasAuraShape(auraShape) &&
+                ConnectionManager.Of(this.BotBits).PlayerData.HasAuraColor(auraColor);
         }
 
         public void Move(
@@ -133,6 +140,12 @@ namespace BotBits
         public void TouchPlayer(int userId, Effect effect)
         {
             new TouchUserSendMessage(userId, effect)
+                .SendIn(this.BotBits);
+        }
+
+        public void Reset(int x, int y)
+        {
+            new ResetSendMessage(x, y)
                 .SendIn(this.BotBits);
         }
 

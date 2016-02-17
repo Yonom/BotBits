@@ -1,8 +1,9 @@
 ﻿namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Interface Encrypted Send Event
+    ///     Base class for messages that require room token.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public abstract class RoomTokenSendMessage<T> : SendMessage<T> where T : RoomTokenSendMessage<T>
     {
         internal RoomTokenSendMessage()

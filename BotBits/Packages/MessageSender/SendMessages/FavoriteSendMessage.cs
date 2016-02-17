@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to favorite world.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class FavoriteSendMessage : SendMessage<FavoriteSendMessage>
     {
         //No arguments

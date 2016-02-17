@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when someone leaves the world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("left")]
     public sealed class LeaveEvent : PlayerEvent<LeaveEvent>
     {

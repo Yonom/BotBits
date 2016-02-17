@@ -11,8 +11,7 @@ namespace BotBits.Shop
         }
 
         public string Package { get; }
-
-        public int BlocksPerPack { get; set; }
+        
         public ForegroundType ForegroundType { get; set; }
         public bool BuildersClubOnly { get; set; }
     }

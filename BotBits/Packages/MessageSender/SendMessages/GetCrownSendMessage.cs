@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Get Crown Send Event
+    ///     Sent to collect gold crown.
     /// </summary>
+    /// <seealso cref="RoomTokenSendMessage{T}" />
     public sealed class GetCrownSendMessage : RoomTokenSendMessage<GetCrownSendMessage>
     {
         public GetCrownSendMessage()

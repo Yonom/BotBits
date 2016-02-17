@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using PlayerIOClient;
+using BotBits;
 
-namespace BotBits
+namespace Yonom.EE
 {
     public static class InitParse
     {
         public static DataChunk[] Parse(Message m)
         {
-            if (m == null) throw new ArgumentNullException("m");
-            if (m.Type != "init" && m.Type != "reset") throw new ArgumentException("Invalid message type.", "m");
+            if (m == null)
+                throw new ArgumentNullException("m");
+            if (m.Type != "init" && m.Type != "reset")
+                throw new ArgumentException("Invalid message type.", "m");
 
             // Get world data
             var p = 0u;
             var data = new Stack<object>();
-            while (m[p] as string != "ws")
-            {
-                ++p;
-            }
+            while (m[p++] as string != "ws")
+            { }
             while (m[p] as string != "we")
-            {
-                data.Push(m[++p]);
-            }
+            { data.Push(m[p++]); }
 
             // Parse world data
             var chunks = new List<DataChunk>();
@@ -31,10 +30,10 @@ namespace BotBits
                 while (!(data.Peek() is byte[]))
                     args.Push(data.Pop());
 
-                var ys = (byte[]) data.Pop();
-                var xs = (byte[]) data.Pop();
-                var layer = (int) data.Pop();
-                var type = (uint) data.Pop();
+                var ys = (byte[])data.Pop();
+                var xs = (byte[])data.Pop();
+                var layer = (int)data.Pop();
+                var type = (uint)data.Pop();
 
                 chunks.Add(new DataChunk(layer, type, xs, ys, args.ToArray()));
             }
@@ -45,6 +44,11 @@ namespace BotBits
 
     public class DataChunk
     {
+        public int Layer { get; set; }
+        public uint Type { get; set; }
+        public Point[] Locations { get; set; }
+        public object[] Args { get; set; }
+
         public DataChunk(int layer, uint type, byte[] xs, byte[] ys, object[] args)
         {
             this.Layer = layer;
@@ -52,11 +56,6 @@ namespace BotBits
             this.Args = args;
             this.Locations = GetLocations(xs, ys);
         }
-
-        public int Layer { get; set; }
-        public uint Type { get; set; }
-        public Point[] Locations { get; set; }
-        public object[] Args { get; set; }
 
         private static Point[] GetLocations(byte[] xs, byte[] ys)
         {
@@ -68,4 +67,17 @@ namespace BotBits
             return points.ToArray();
         }
     }
+
+    // TODO: Uncomment this if using Console Application
+    //public struct Point
+    //{
+    //    public int X { get; set; }
+    //    public int Y { get; set; }
+
+    //    public Point(int x, int y) : this()
+    //    {
+    //        this.X = x;
+    //        this.Y = y;
+    //    }
+    //}
 }

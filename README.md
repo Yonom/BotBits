@@ -12,11 +12,10 @@ BotBitsClient bot = new BotBitsClient();
 ```
 
 ## Connecting to EE
-Using the ConnectionManager class, you can login. Email, Guest, Facebook, Kongregate and Armorgames are supported login methods.
+Using the Login class, you can login. Email, Guest, Facebook, Kongregate and Armorgames are supported login methods.
 ```csharp
-ConnectionManager
-    .Of(bot)
-    .EmailLogin("email", "pass")
+Login.Of(bot)
+    .WithEmail("email", "pass")
     .CreateJoinRoom("roomId");
 ```
 Please note that BotBits automatically sends "init" and "init2" messages.
@@ -24,14 +23,12 @@ Please note that BotBits automatically sends "init" and "init2" messages.
 ## Receiving Messages
 You can load event listeners (which will be called automatically when a message is received) using the EventLoader class.
 ```csharp
-EventLoader
-    .Of(bot)
+EventLoader.Of(bot)
     .LoadStatic<Program>();
 
 // Or for non-static handlers
 
-EventLoader
-    .Of(bot)
+EventLoader.Of(bot)
     .Load(this);
 ```
 
@@ -45,8 +42,8 @@ static void On(JoinCompleteEvent e)
 ```
 There are many other events in the `BotBits.Events` namespace: `InitEvent`, `JoinEvent`, `LeaveEvent`, `CoinEvent`, `ForegroundPlaceEvent`, `BackgroundPlaceEvent`, and so on...
 
-## Doing stuff
-Lots of things your player can do, are in the `Actions` class:
+## Interacting with the game
+Lots of things your player can do are in the `Actions` class:
 ```csharp
 Actions.Of(bot).GodMode(true);
 Actions.Of(bot).Move(10 * 16, 10 * 16); // Move to 10x10
@@ -85,12 +82,14 @@ You can also store your own variables:
 var player = Players.Of(bot).FromUsername("processor").FirstOrDefault();
 if (player != null) 
 {
-    player.Set("IsNoob", true); // variables can have any type (int, bool, string, custom type, ...)
-    
-    if (player.Get<bool>("IsNoob"))
-    {
-        player.Kick("Sorry but you are too noob to play this level!");
-    }
+    player.Set("IsBanned", true); // variables can have any type (int, bool, string, custom type, ...)
+}
+```
+And retrieve them later:
+```csharp
+if (player.Get<bool>("IsBanned"))
+{
+    player.Kick("Sorry but you are too not allowed to play this level!");
 }
 ```
 
@@ -134,7 +133,7 @@ Blocks that get dropped are automatically resent, so you don't have to worry abo
 
 Let's place a block:
 ```csharp
-Blocks.Of(bot).Place(1, 1, Foreground.Portal.Normal);
+Blocks.Of(bot).Place(1, 1, Foreground.Basic.Gray);
 ```
 
 Let's fill the whole world with that block:
@@ -159,7 +158,7 @@ Blocks.Of(bot).In(10, 10, 10, 10).Where((x, i) => i % 2 == 0).Set(Foreground.Bas
 
 The possibilities are endless!
 
-Oh! Special blocks are supported too:
+Oh and special blocks are supported too:
 ```csharp
 Blocks.Of(bot).Place(x, y, Foregrounds.Portal.Normal, 0, 1, Morph.Portal.Left);
 Blocks.Of(bot).Place(x, y, Foregrounds.Portal.World, "PW01");
@@ -172,7 +171,7 @@ Blocks.Of(bot).Place(x, y, Foregrounds.SciFi.BlueSlope, Morph.SciFiSlope.InSouth
 Take a look at this [custom ban list](http://botbits.yonom.org/examples/bans), [snake bot](http://botbits.yonom.org/examples/snakebot) or a [speed run bot](https://gist.github.com/Yonom/75e5c83937ea8a167d9d).
 
 ## Extensions
-Anyone can make extensions to make BotBits more awesome!
+Anyone can code extensions to make BotBits more awesome!
 
 Here are some existing extensions:
 

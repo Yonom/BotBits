@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to change dis/allow spectating in the world.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class SetAllowSpectatingSendMessage : SendMessage<SetAllowSpectatingSendMessage>
     {
         /// <summary>

@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.SendMessages
 {
+    /// <summary>
+    ///     Sent to touch a hologram.
+    /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class TouchHologramSendMessage : SendMessage<TouchHologramSendMessage>
     {
         /// <summary>

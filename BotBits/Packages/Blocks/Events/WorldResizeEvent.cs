@@ -3,6 +3,7 @@
     /// <summary>
     ///     Occurs when the world size changes.
     /// </summary>
+    /// <seealso cref="Event{T}" />
     public sealed class WorldResizeEvent : Event<WorldResizeEvent>
     {
         internal WorldResizeEvent(int newWidth, int newHeight)

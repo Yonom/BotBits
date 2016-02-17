@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when someone joins world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("add")]
     public sealed class JoinEvent : PlayerEvent<JoinEvent>
     {
@@ -26,20 +30,40 @@ namespace BotBits.Events
             this.Deaths = message.GetInteger(11);
             this.Friend = message.GetBoolean(12);
             this.ClubMember = message.GetBoolean(13);
-            this.Mod = message.GetBoolean(14);
-            this.Team = (Team) message.GetInt(15);
-            this.Aura = (Aura) message.GetInt(16);
-            this.ChatColor = message.GetUInt(17);
-            this.Badge = message.GetBadge(18);
-            this.CrewMember = message.GetBoolean(19);
+            // 14: Gold border
+            this.Mod = message.GetBoolean(15);
+            this.Team = (Team) message.GetInt(16);
+            this.AuraShape = (AuraShape) message.GetInt(17);
+            this.AuraColor = (AuraColor) message.GetInt(18);
+            this.ChatColor = message.GetUInt(19);
+            this.Badge = message.GetBadge(20);
+            this.CrewMember = message.GetBoolean(21);
         }
 
+        public AuraColor AuraColor { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the amount of deaths.
+        /// </summary>
+        /// <value>The deaths.</value>
         public int Deaths { get; set; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether player is crew member.
+        /// </summary>
+        /// <value><c>true</c> if player is crew member; otherwise, <c>false</c>.</value>
         public bool CrewMember { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the badge.
+        /// </summary>
+        /// <value>The badge.</value>
         public Badge Badge { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the connect user identifier.
+        /// </summary>
+        /// <value>The connect user identifier.</value>
         public string ConnectUserId { get; set; }
 
         /// <summary>
@@ -48,7 +72,7 @@ namespace BotBits.Events
         /// <value>
         ///     The aura.
         /// </value>
-        public Aura Aura { get; set; }
+        public AuraShape AuraShape { get; set; }
 
         /// <summary>
         ///     Gets or sets the team.

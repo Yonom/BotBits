@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Change World Name Send Event
+    ///     Sent to change world name.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class RoomNameSendMessage : SendMessage<RoomNameSendMessage>
     {
         /// <summary>

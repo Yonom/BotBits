@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace BotBits
 {
-    internal class SendTimer : IDisposable
+    internal sealed class SendTimer : IDisposable
     {
         private readonly Timer _myTimer;
         private readonly Stopwatch _sw = Stopwatch.StartNew();
@@ -24,7 +24,7 @@ namespace BotBits
         /// </summary>
         public event Action<int> Elapsed;
 
-        protected virtual void OnElapsed(int obj)
+        private void OnElapsed(int obj)
         {
             var handler = this.Elapsed;
             if (handler != null) handler(obj);

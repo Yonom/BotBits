@@ -2,6 +2,10 @@
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a sign block is placed in the world.
+    /// </summary>
+    /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("ts")]
     public sealed class SignPlaceEvent : PlayerEvent<SignPlaceEvent>
     {

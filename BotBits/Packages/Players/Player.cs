@@ -125,12 +125,20 @@ namespace BotBits
         public Smiley Smiley { get; internal set; }
 
         /// <summary>
-        ///     Gets the aura that apperars around this user when they go in god mode.
+        ///     Gets the aura color that apperars around this user when they go in god mode.
         /// </summary>
         /// <value>
-        ///     The aura.
+        ///     The aura color.
         /// </value>
-        public Aura Aura { get; internal set; }
+        public AuraColor AuraColor { get; internal set; }
+
+        /// <summary>
+        ///     Gets the aura shape that apperars around this user when they go in god mode.
+        /// </summary>
+        /// <value>
+        ///     The aura shape.
+        /// </value>
+        public AuraShape AuraShape { get; internal set; }
 
         /// <summary>
         ///     Gets the badge this player has selected.
@@ -566,34 +574,6 @@ namespace BotBits
                 throw new NotSupportedException("Cannot set metadata on Player.Nobody.");
 
             base.Set(id, value);
-        }
-    }
-
-    public class ActiveEffect
-    {
-        private readonly DateTime _expireTime;
-
-        internal ActiveEffect(Effect effect, bool expires, TimeSpan timeLeft, TimeSpan duration)
-        {
-            this.Effect = effect;
-            this.Expires = expires;
-            this.Duration = duration;
-
-            if (this.Expires) this._expireTime = DateTime.UtcNow.Add(timeLeft);
-        }
-
-        public Effect Effect { get; }
-        public bool Expires { get; }
-        public TimeSpan Duration { get; private set; }
-
-        public TimeSpan TimeLeft
-        {
-            get
-            {
-                if (!this.Expires)
-                    throw new NotSupportedException("Cannot call TimeLeft on an effect that does not expire.");
-                return DateTime.UtcNow.Subtract(this._expireTime);
-            }
         }
     }
 }

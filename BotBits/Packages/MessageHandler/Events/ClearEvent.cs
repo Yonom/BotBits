@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when a world is cleared.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("clear")]
     public sealed class ClearEvent : ReceiveEvent<ClearEvent>
     {

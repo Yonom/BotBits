@@ -4,7 +4,7 @@ using PlayerIOClient;
 
 namespace BotBits
 {
-    internal static class ConnectionUtils
+    internal static class LoginUtils
     {
         public static Task<PlayerData> GetConnectionArgsAsync(Client client)
         {

@@ -122,11 +122,11 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Kills all the users in the world (/killemall).
+        ///     Kills all the users in the world (/killall).
         /// </summary>
         public static void KillAll(this IChat chat)
         {
-            chat.Say("/killemall");
+            chat.Say("/killall");
         }
 
         /// <summary>
@@ -200,11 +200,19 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Resets all the users' positions (/reset).
+        ///     Resets the users' position (/reset &lt;username&gt;).
         /// </summary>
-        public static void Reset(this IChat chat)
+        public static void Reset(this IChat chat, string username)
         {
-            chat.Say("/reset");
+            chat.Say("/reset {0}", username);
+        }
+
+        /// <summary>
+        ///     Resets all the users' positions (/resetall).
+        /// </summary>
+        public static void ResetAll(this IChat chat)
+        {
+            chat.Say("/resetall");
         }
 
         /// <summary>

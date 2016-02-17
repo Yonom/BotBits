@@ -2,6 +2,10 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
+    /// <summary>
+    ///     Occurs when you are given magic smiley.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
     [ReceiveEvent("givemagicsmiley")]
     public sealed class GiveMagicSmileyEvent : ReceiveEvent<GiveMagicSmileyEvent>
     {
@@ -16,6 +20,10 @@ namespace BotBits.Events
             this.MagicSmiley = message.GetString(0);
         }
 
+        /// <summary>
+        ///     Gets or sets the magic smiley identifier.
+        /// </summary>
+        /// <value>The magic smiley.</value>
         public string MagicSmiley { get; set; }
     }
 }

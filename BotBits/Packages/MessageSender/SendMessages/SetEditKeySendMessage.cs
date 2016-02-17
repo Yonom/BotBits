@@ -3,8 +3,9 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Class Change World Edit Key Send Event
+    ///     Sent to change edit key.
     /// </summary>
+    /// <seealso cref="SendMessage{T}" />
     public sealed class SetEditKeySendMessage : SendMessage<SetEditKeySendMessage>
     {
         /// <summary>

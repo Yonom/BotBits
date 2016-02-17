@@ -2,7 +2,11 @@ using PlayerIOClient;
 
 namespace BotBits.Events
 {
-    [ReceiveEvent("Banned")]
+    /// <summary>
+    ///     Occurs when trying to join a world with a banned account.
+    /// </summary>
+    /// <seealso cref="ReceiveEvent{T}" />
+    [ReceiveEvent("banned")]
     public sealed class BannedEvent : ReceiveEvent<BannedEvent>
     {
         /// <summary>
