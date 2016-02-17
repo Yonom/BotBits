@@ -219,13 +219,13 @@ namespace BotBits
         [EventListener]
         private void On(HideKeyEvent e)
         {
-            this._enabledKeys.Remove(e.Key);
+            this._enabledKeys.Add(e.Key);
         }
 
         [EventListener]
         private void On(ShowKeyEvent e)
         {
-            this._enabledKeys.Add(e.Key);
+            this._enabledKeys.Remove(e.Key);
         }
 
         [EventListener]
