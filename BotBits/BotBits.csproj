@@ -307,7 +307,6 @@
     <Compile Include="Packages\MessageSender\SendMessages\GetCrownSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\GodModeSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\AdminModeSendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\RoomTokenSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\Init2SendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\InitSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\KillRoomSendMessage.cs" />

@@ -5,8 +5,8 @@ namespace BotBits.SendMessages
     /// <summary>
     ///     Sent to change smiley.
     /// </summary>
-    /// <seealso cref="RoomTokenSendMessage{T}" />
-    public sealed class SmileySendMessage : RoomTokenSendMessage<SmileySendMessage>
+    /// 
+    public sealed class SmileySendMessage : SendMessage<SmileySendMessage>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="SmileySendMessage" /> class.
@@ -31,7 +31,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create(this.RoomToken + "f", (int) this.Smiley);
+            return Message.Create("smiley", (int) this.Smiley);
         }
     }
 }
