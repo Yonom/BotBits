@@ -15,7 +15,7 @@ namespace BotBits.Events
         /// <param name="message">The EE message.</param>
         /// <param name="client"></param>
         internal InitEvent(BotBitsClient client, Message message)
-            : base(client, message, 6, true)
+            : base(client, message, 5, true)
         {
             this.Owner = message.GetString(0);
             this.WorldName = message.GetString(1);
