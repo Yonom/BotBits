@@ -204,9 +204,6 @@
     <Compile Include="Packages\MessageHandler\Events\SignPlaceEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\PlayerEvent.cs" />
     <Compile Include="Packages\MessageHandler\ReceiveEventAttribute.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\CyanKeySendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\MagentaKeySendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\YellowKeySendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TouchHologramSendMessage.cs" />
     <Compile Include="Packages\Players\Events\FlyEvent.cs" />
     <Compile Include="Packages\Players\PlayerExtensions.cs" />
@@ -312,9 +309,7 @@
     <Compile Include="Packages\MessageSender\SendMessages\KillRoomSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\ModModeSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\MoveSendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\BlueKeySendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\GreenKeySendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\RedKeySendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\KeySendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SaveSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\ChatSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SendMessage.cs" />

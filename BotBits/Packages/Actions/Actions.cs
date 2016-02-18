@@ -143,6 +143,12 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
+        public void PressKey(Key key, int x, int y)
+        {
+            new KeySendMessage(key, x, y)
+                .SendIn(this.BotBits);
+        }
+
         public void Reset(int x, int y)
         {
             new ResetSendMessage(x, y)
@@ -249,45 +255,6 @@ namespace BotBits
         {
             new ModModeSendMessage()
                 .SendIn(this.BotBits);
-        }
-
-        public void PressKey(Key key, int x, int y)
-        {
-            switch (key)
-            {
-                case Key.Blue:
-                    new BlueKeySendMessage(x, y)
-                        .SendIn(this.BotBits);
-                    break;
-
-                case Key.Green:
-                    new GreenKeySendMessage(x, y)
-                        .SendIn(this.BotBits);
-                    break;
-
-                case Key.Red:
-                    new RedKeySendMessage(x, y)
-                        .SendIn(this.BotBits);
-                    break;
-
-                case Key.Cyan:
-                    new CyanKeySendMessage(x, y)
-                        .SendIn(this.BotBits);
-                    break;
-
-                case Key.Magenta:
-                    new MagentaKeySendMessage(x, y)
-                        .SendIn(this.BotBits);
-                    break;
-
-                case Key.Yellow:
-                    new YellowKeySendMessage(x, y)
-                        .SendIn(this.BotBits);
-                    break;
-
-                default:
-                    throw new NotSupportedException("The given key could not be sent.");
-            }
         }
     }
 }
