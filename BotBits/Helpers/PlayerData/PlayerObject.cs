@@ -16,8 +16,8 @@ namespace BotBits
         {
             get
             {
-                return this._databaseObject.Contains("club_expire") &&
-                       this._databaseObject.GetDateTime("club_expire") > DateTime.Now;
+                return this._databaseObject.Contains("gold_expire") &&
+                       this._databaseObject.GetDateTime("gold_expire") > DateTime.Now;
             }
         }
 

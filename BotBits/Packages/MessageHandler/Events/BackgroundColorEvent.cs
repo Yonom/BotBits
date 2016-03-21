@@ -12,8 +12,7 @@ namespace BotBits.Events
         internal BackgroundColorEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Enabled = message.GetBoolean(0);
-            this.BackgroundColor = message.GetUInt(1);
+            this.BackgroundColor = message.GetUInt(0);
         }
 
         /// <summary>
@@ -21,6 +20,5 @@ namespace BotBits.Events
         /// </summary>
         /// <value>The color of the background.</value>
         public uint BackgroundColor { get; set; }
-        public bool Enabled { get; set; }
     }
 }

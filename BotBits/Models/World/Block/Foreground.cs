@@ -104,12 +104,21 @@ namespace BotBits
                 Yellow = (Id)1010;
         }
 
+<<<<<<< HEAD
         public static class Goldmember
+=======
+        public static class Gold
+>>>>>>> refs/heads/v207
         {
-            [Pack("-", BuildersClubOnly = true)]
+            [Pack("-", GoldMemberOnly = true)]
             public const Id
                 Door = (Id)200,
-                Gate = (Id)201;
+                Gate = (Id)201,
+                Basic = (Id)1065,
+                Brick = (Id)1066,
+                Panel = (Id)1067,
+                Ornate = (Id)1068,
+                OneWay = (Id)1069;
         }
 
         public static class Team
@@ -742,7 +751,7 @@ namespace BotBits
             public const Id
                 Effect = (Id)422;
 
-            [Pack("brickzombiedoor")] // TODO: effect zombie also gives you 10
+            [Pack("brickzombiedoor")]
             public const Id
                 Door = (Id)207;
 
@@ -943,14 +952,14 @@ namespace BotBits
 
         public static class Sign
         {
-            [Pack("bricksign", ForegroundType = ForegroundType.Text)]
+            [Pack("bricksign", ForegroundType = ForegroundType.Sign)]
             public const Id
                 Block = (Id)385;
         }
 
         public static class Admin
         {
-            [Pack("admin", ForegroundType = ForegroundType.Label)]
+            [Pack("-", AdminOnly = true, ForegroundType = ForegroundType.Label)]
             public const Id
                 Text = (Id)1000;
         }

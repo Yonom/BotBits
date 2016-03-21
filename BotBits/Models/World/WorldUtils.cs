@@ -60,14 +60,15 @@ namespace BotBits
                     return new ForegroundBlock(foreground,
                         obj.GetString("target"));
 
-                case ForegroundType.Text:
-                    return new ForegroundBlock(foreground,
-                        obj.GetString("text", "No text found."));
-
                 case ForegroundType.Label:
                     return new ForegroundBlock(foreground,
                         obj.GetString("text", "no text found"),
                         obj.GetString("text_color", "#FFFFFF"));
+                    
+                case ForegroundType.Sign:
+                    return new ForegroundBlock(foreground,
+                        obj.GetString("text", "No text found."),
+                        (Morph.Id)obj.GetUInt("signtype", 0));
 
                 default:
                     throw new NotSupportedException("Encountered an unsupported block!");
@@ -97,7 +98,6 @@ namespace BotBits
                 case ForegroundType.Note:
                     return BlockArgsType.SignedNumber;
 
-                case ForegroundType.Text:
                 case ForegroundType.WorldPortal:
                     return BlockArgsType.String;
 
@@ -106,6 +106,9 @@ namespace BotBits
 
                 case ForegroundType.Label:
                     return BlockArgsType.Label;
+
+                case ForegroundType.Sign:
+                    return BlockArgsType.Sign;
 
                 default:
                     throw new ArgumentException("Invalid BlockType.", "type");

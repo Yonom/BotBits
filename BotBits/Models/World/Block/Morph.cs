@@ -306,5 +306,14 @@
                 Red = (Id)2,
                 Purple = (Id)3;
         }
+
+        public static class Sign
+        {
+            public const Id
+                Wood = 0,
+                Iron = (Id)1,
+                Bronze = (Id)2,
+                Gold = (Id)3;
+        }
     }
 }
