@@ -23,10 +23,7 @@ namespace BotBits
                 InvisibleLeft = (Id)411,
                 InvisibleUp = (Id)412,
                 InvisibleRight = (Id)413,
-                InvisibleDot = (Id)414;
-
-            [Pack("brickslowdot")]
-            public const Id
+                InvisibleDot = (Id)414,
                 SlowDot = (Id)459,
                 InvisibleSlowDot = (Id)460;
         }
@@ -191,11 +188,7 @@ namespace BotBits
             public const Id
                 Unpassable = (Id)50,
                 InvisibleUnpassable = (Id)136,
-                Passable = (Id)243;
-
-
-            [Pack("brickblackblock")]
-            public const Id
+                Passable = (Id)243,
                 Black = (Id)44;
         }
 
@@ -449,15 +442,12 @@ namespace BotBits
         public static class Tool
         {
             public const Id
-                Crown = (Id)5;
+                Crown = (Id)5,
+                Spawnpoint = (Id)255;
 
             [Pack("brickcomplete")]
             public const Id
                 Trophy = (Id)121;
-
-            [Pack("brickspawn")]
-            public const Id
-                Spawnpoint = (Id)255;
 
             [Pack("brickcheckpoint")]
             public const Id
@@ -650,7 +640,6 @@ namespace BotBits
 
         public static class Checker
         {
-            [Pack("brickchecker")]
             public const Id
                 Gray = (Id)186,
                 DarkBlue = (Id)187,
@@ -842,7 +831,6 @@ namespace BotBits
 
         public static class Window
         {
-            [Pack("brickwindow")]
             public const Id
                 Clear = (Id)262,
                 Green = (Id)263,

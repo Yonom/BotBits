@@ -44,7 +44,7 @@ namespace BotBits
 
         public static class Checker
         {
-            [Pack("brickbgchecker")] public const Id
+            public const Id
                 Gray = (Id) 513,
                 Blue = (Id) 514,
                 Purple = (Id) 515,
@@ -247,7 +247,7 @@ namespace BotBits
 
         public static class Normal
         {
-            [Pack("brickbgnormal")] public const Id
+            public const Id
                 Gray = (Id) 610,
                 Blue = (Id) 611,
                 Purple = (Id) 612,
