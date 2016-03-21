@@ -174,7 +174,7 @@ namespace BotBits
         [EventListener(EventPriority.Low)]
         private void On(SignPlaceEvent e)
         {
-            this.RaiseStringBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Text, e.Player);
+            this.RaiseSignBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Text, e.SignColor, e.Player);
         }
 
         private void RaiseBlock(int x, int y, Foreground.Id block, Player player)
@@ -201,7 +201,12 @@ namespace BotBits
         {
             this.RaiseForeground(x, y, new ForegroundBlock(block, text, textColor), player);
         }
-
+        
+        private void RaiseSignBlock(int x, int y, Foreground.Id block, string text, Morph.Id signColor, Player player)
+        {
+            this.RaiseForeground(x, y, new ForegroundBlock(block, text, signColor), player);
+        }
+        
         private void RaisePortalBlock(int x, int y, Foreground.Id block,
             uint portalId, uint portalTarget, Morph.Id portalRotation, Player player)
         {

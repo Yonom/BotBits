@@ -36,6 +36,11 @@ namespace BotBits
             blocks.Place(x, y, new ForegroundBlock(block, text, textColor));
         }
 
+        public static void Place(this Blocks blocks, int x, int y, Foreground.Id block, string text, Morph.Id signColor)
+        {
+            blocks.Place(x, y, new ForegroundBlock(block, text, signColor));
+        }
+
         public static void Place(this Blocks blocks, int x, int y, Foreground.Id block,
             int portalId, int portalTarget, Morph.Id portalRotation)
         {
@@ -104,6 +109,11 @@ namespace BotBits
             blocks.Set(new ForegroundBlock(block, text, textColor));
         }
 
+        public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block, string text, Morph.Id signColor)
+        {
+            blocks.Set(new ForegroundBlock(block, text, signColor));
+        }
+
         public static void Set(this IEnumerable<BlocksItem> blocks, Foreground.Id block,
             int portalId, int portalTarget, Morph.Id portalRotation)
         {
@@ -153,6 +163,16 @@ namespace BotBits
         public static void Set(this BlocksItem blocks, Foreground.Id block, string args)
         {
             blocks.Set(new ForegroundBlock(block, args));
+        }
+
+        public static void Set(this BlocksItem blocks, Foreground.Id block, string text, string textColor)
+        {
+            blocks.Set(new ForegroundBlock(block, text, textColor));
+        }
+
+        public static void Set(this BlocksItem blocks, Foreground.Id block, string text, Morph.Id signColor)
+        {
+            blocks.Set(new ForegroundBlock(block, text, signColor));
         }
 
         public static void Set(this BlocksItem blocks, Foreground.Id block,

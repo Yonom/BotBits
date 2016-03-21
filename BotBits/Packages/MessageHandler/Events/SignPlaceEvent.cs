@@ -21,7 +21,16 @@ namespace BotBits.Events
             this.Y = message.GetInteger(1);
             this.Id = message.GetInteger(2);
             this.Text = message.GetString(3);
+            this.SignColor = (Morph.Id) message.GetUInt(4);
         }
+
+        /// <summary>
+        /// Gets or sets the color of the sign.
+        /// </summary>
+        /// <value>
+        /// The color of the sign.
+        /// </value>
+        public Morph.Id SignColor { get; set; }
 
         /// <summary>
         ///     Gets or sets the text.
