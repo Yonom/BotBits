@@ -104,11 +104,7 @@ namespace BotBits
                 Yellow = (Id)1010;
         }
 
-<<<<<<< HEAD
-        public static class Goldmember
-=======
         public static class Gold
->>>>>>> refs/heads/v207
         {
             [Pack("-", GoldMemberOnly = true)]
             public const Id
