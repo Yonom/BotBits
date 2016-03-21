@@ -92,6 +92,17 @@ namespace BotBits
             this.Id = id;
         }
 
+        public ForegroundBlock(Foreground.Id id, string text, Morph.Id signColor)
+        {
+            var type = WorldUtils.GetForegroundType(id);
+            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Sign)
+                throw new ArgumentException("Invalid arguments for the specified block.", "id");
+
+            this._args = new SignArgs(text, signColor);
+            this.Type = type;
+            this.Id = id;
+        }
+
         public ForegroundBlock(Foreground.Id id, uint portalId, uint portalTarget, Morph.Id portalRotation)
         {
             var type = WorldUtils.GetForegroundType(id);
@@ -144,34 +155,37 @@ namespace BotBits
         public ForegroundType Type { get; }
 
         /// <summary>
-        ///     Gets the Text. (Only on label or text blocks)
+        ///     Gets the Text. (Only on label / world portal / sign blocks)
         /// </summary>
         /// <value>
         ///     The text.
         /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on label or text blocks.</exception>
+        /// <exception cref="System.InvalidOperationException">This property can only be accessed on label, world portal and sign blocks.</exception>
         public string Text
         {
             get
             {
                 switch (this.Type)
                 {
-                    case ForegroundType.Text:
-                        return (string) this._args;
+                    case ForegroundType.WorldPortal:
+                        return (string)this._args;
                     case ForegroundType.Label:
                         return this.GetLabelArgs().Text;
+                    case ForegroundType.Sign:
+                        return this.GetSignArgs().Text;
+
                     default:
                         throw new InvalidOperationException(
-                            "This property can only be accessed on label or text blocks.");
+                            "This property can only be accessed on label, world portal and sign blocks.");
                 }
             }
         }
 
         /// <summary>
-        ///     Gets the Text. (Only on label blocks)
+        ///     Gets the color. (Only on label blocks)
         /// </summary>
         /// <value>
-        ///     The text.
+        ///     The color.
         /// </value>
         /// <exception cref="System.InvalidOperationException">This property can only be accessed on label blocks.</exception>
         public string TextColor
@@ -222,6 +236,38 @@ namespace BotBits
         }
 
         /// <summary>
+        ///     Gets the morph. (Only on morphable blocks)
+        /// </summary>
+        /// <value>
+        ///     The morph.
+        /// </value>
+        /// <exception cref="System.InvalidOperationException">This property can only be accessed on morphable blocks.</exception>
+        public Morph.Id Morph
+        {
+            get
+            {
+                switch (this.Type)
+                {
+                    case ForegroundType.Portal:
+                        return this.GetPortalArgs().PortalRotation;
+                    case ForegroundType.Morphable:
+                    case ForegroundType.Team:
+                        return (Morph.Id)(uint)this._args;
+
+
+                    case ForegroundType.Note:
+                        return (Morph.Id)(int)this._args;
+
+                    case ForegroundType.Sign:
+                        return this.GetSignArgs().SignColor;
+
+                    default:
+                        throw new InvalidOperationException("This property can only be accessed on morphable blocks.");
+                }
+            }
+        }
+
+        /// <summary>
         ///     Gets the portal identifier.  (Only on portal blocks)
         /// </summary>
         /// <value>
@@ -257,53 +303,6 @@ namespace BotBits
             }
         }
 
-        /// <summary>
-        ///     Gets the world portal target.  (Only on world portal blocks)
-        /// </summary>
-        /// <value>
-        ///     The portal target.
-        /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on WorldPortal blocks.</exception>
-        public string WorldPortalTarget
-        {
-            get
-            {
-                if (this.Type != ForegroundType.WorldPortal)
-                    throw new InvalidOperationException("This property can only be accessed on WorldPortal blocks.");
-
-                return (string) this._args;
-            }
-        }
-
-        /// <summary>
-        ///     Gets the morph. (Only on morphable blocks)
-        /// </summary>
-        /// <value>
-        ///     The morph.
-        /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on morphable blocks.</exception>
-        public Morph.Id Morph
-        {
-            get
-            {
-                switch (this.Type)
-                {
-                    case ForegroundType.Portal:
-                        return this.GetPortalArgs().PortalRotation;
-                    case ForegroundType.Morphable:
-                    case ForegroundType.Team:
-                        return (Morph.Id) (uint) this._args;
-
-
-                    case ForegroundType.Note:
-                        return (Morph.Id) (int) this._args;
-
-                    default:
-                        throw new InvalidOperationException("This property can only be accessed on morphable blocks.");
-                }
-            }
-        }
-
         private PortalArgs GetPortalArgs()
         {
             return (PortalArgs) this._args;
@@ -312,6 +311,11 @@ namespace BotBits
         private LabelArgs GetLabelArgs()
         {
             return (LabelArgs) this._args;
+        }
+
+        private SignArgs GetSignArgs()
+        {
+            return (SignArgs) this._args;
         }
 
         private class PortalArgs : IEquatable<PortalArgs>
@@ -411,6 +415,56 @@ namespace BotBits
             }
         }
 
+        private class SignArgs : IEquatable<SignArgs>
+        {
+            public SignArgs(string text, Morph.Id signColor)
+            {
+                this.Text = text;
+                this.SignColor = signColor;
+            }
+
+            public string Text { get; }
+            public Morph.Id SignColor { get; }
+
+            public bool Equals(SignArgs other)
+            {
+                if (ReferenceEquals(null, other))
+                    return false;
+                if (ReferenceEquals(this, other))
+                    return true;
+                return string.Equals(this.Text, other.Text) && string.Equals(this.SignColor, other.SignColor);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj))
+                    return false;
+                if (ReferenceEquals(this, obj))
+                    return true;
+                if (obj.GetType() != this.GetType())
+                    return false;
+                return this.Equals((SignArgs)obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    return ((this.Text != null ? this.Text.GetHashCode() : 0) * 397) ^ (int)this.SignColor;
+                }
+            }
+
+            public static bool operator ==(SignArgs left, SignArgs right)
+            {
+                return Equals(left, right);
+            }
+
+            public static bool operator !=(SignArgs left, SignArgs right)
+            {
+                return !Equals(left, right);
+            }
+        }
+
         public object[] GetArgs()
         {
             switch (this.Type)
@@ -421,6 +475,8 @@ namespace BotBits
                     return new object[] {(uint) this.Morph, this.PortalId, this.PortalTarget};
                 case ForegroundType.Label:
                     return new object[] {this.Text, this.TextColor};
+                case ForegroundType.Sign:
+                    return new object[] { this.Text, (uint)this.Morph };
                 default:
                     return new[] {this._args};
             }

@@ -41,9 +41,9 @@ namespace BotBits
         Label,
 
         /// <summary>
-        ///     A world portal block
+        ///     A sign
         /// </summary>
-        Text,
+        Sign,
 
         /// <summary>
         ///     A piano/drum block

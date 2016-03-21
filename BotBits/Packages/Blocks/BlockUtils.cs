@@ -24,44 +24,63 @@ namespace BotBits
                         break;
 
                     case Layer.Foreground:
-                        ForegroundBlock foregroundBlock;
-                        var blockArgsType =
-                            WorldUtils.GetBlockArgsType(WorldUtils.GetForegroundType((Foreground.Id)block));
+                        var blockArgsType = WorldUtils.GetBlockArgsType(WorldUtils.GetForegroundType((Foreground.Id)block));
 
+                        ForegroundBlock foregroundBlock;
                         switch (blockArgsType)
                         {
                             case BlockArgsType.None:
+                            {
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block);
                                 break;
+                            }
 
                             case BlockArgsType.Number:
+                            {
                                 var i = (uint)data.Args[0];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, i);
                                 break;
+                            }
 
                             case BlockArgsType.SignedNumber:
-                                var si = Convert.ToInt32(data.Args[0]); //(int)data.Args[0]; // TODO: Replace after fix
+                            {
+                                var si = (int)data.Args[0];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, si);
                                 break;
+                            }
 
                             case BlockArgsType.String:
+                            {
                                 var str = (string)data.Args[0];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, str);
                                 break;
+                            }
 
                             case BlockArgsType.Portal:
+                            {
                                 var portalRotation = (Morph.Id)(uint)data.Args[0];
                                 var portalId = (uint)data.Args[1];
                                 var portalTarget = (uint)data.Args[2];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, portalId, portalTarget,
                                     portalRotation);
                                 break;
+                            }
 
                             case BlockArgsType.Label:
+                            {
                                 var text = (string)data.Args[0];
                                 var textcolor = (string)data.Args[1];
                                 foregroundBlock = new ForegroundBlock((Foreground.Id)block, text, textcolor);
                                 break;
+                            }
+
+                            case BlockArgsType.Sign:
+                            {
+                                var text = (string)data.Args[0];
+                                var color = (Morph.Id)(uint)data.Args[1];
+                                foregroundBlock = new ForegroundBlock((Foreground.Id)block, text, color);
+                                break;
+                            }
 
                             default:
                                 throw new NotSupportedException("Invalid block.");

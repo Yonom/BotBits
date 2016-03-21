@@ -25,6 +25,12 @@ namespace BotBits
         Orange = 6,
 
         [Pack("auracyan")]
-        Cyan = 7
+        Cyan = 7,
+
+        [Pack("-", GoldMemberOnly = true)]
+        Gold = 8,
+
+        [Pack("aurapink")]
+        Pink = 9
     }
 }

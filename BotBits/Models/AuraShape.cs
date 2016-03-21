@@ -11,5 +11,8 @@ namespace BotBits
 
         [Pack("aurashapetorus")]
         Torus = 2,
+
+        [Pack("-", GoldMemberOnly = true)]
+        Gold
     }
 }

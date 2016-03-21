@@ -7,6 +7,7 @@
         SignedNumber,
         String,
         Portal,
-        Label
+        Label,
+        Sign
     }
 }

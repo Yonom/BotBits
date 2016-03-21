@@ -172,17 +172,16 @@ namespace BotBits
 
         private bool ShouldSend(PlaceSendMessage b, Point3D p)
         {
-            if (b.SendCount > 15) return false;
+            if (b.SendCount > 10) return false;
             if (b.NoChecks) return true;
             if (!Room.Of(this.BotBits).CanEdit) return false;
-
-            // TODO: Count blocks
+            
             var playerData = ConnectionManager.Of(this.BotBits).PlayerData;
             var blocks = Blocks.Of(this.BotBits);
             var isAdministrator = playerData.PlayerObject.IsAdministrator;
 
             if (!WorldUtils.IsPlaceable(b, blocks, !isAdministrator)) return false;
-            if (!playerData.HasBlock(b.Id, 0)) return false;
+            if (!playerData.HasBlock(b.Id)) return false;
 
             CheckHandle handle;
             return !(this._sentLocations.TryGetValue(p, out handle)

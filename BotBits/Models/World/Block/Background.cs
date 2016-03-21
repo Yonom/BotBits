@@ -1,6 +1,7 @@
 ﻿using BotBits.Shop;
 
 // ReSharper disable InconsistentNaming
+// ReSharper disable MemberHidesStaticFromOuterClass
 
 namespace BotBits
 {
@@ -394,6 +395,17 @@ namespace BotBits
             public const Id
                 Ice = (Id)702,
                 Snow = (Id)703;
+        }
+
+        // 6 Unused block ids
+
+        public static class Gold
+        {
+            [Pack("-", GoldMemberOnly = true)]
+            public const Id
+                Basic = (Id)709,
+                Brick = (Id)710,
+                Panel = (Id)711;
         }
     }
 }
