@@ -180,7 +180,7 @@ Here are some existing extensions:
 - [BotBits.Permissions](https://github.com/Yonom/BotBits.Permissions): Give players permissions and restrict commands to certain permissions.
 - [BotBits.DefaultCommands](https://github.com/Yonom/BotBits.DefaultCommands): A set of often needed commands (like !kick, !giveedit, ...)
 - [BotCake](https://github.com/Yonom/BotCake): Removes the need of writing ".Of(bot)"! (Only supports console apps right now)
-- [BotBits.Old](https://github.com/Yonom/BotBits.Old): Write bots of http://old.everybodyedits.com/!
+- [BotBits.Old](https://github.com/Yonom/BotBits.Old): Write bots for http://old.everybodyedits.com/!
 - [BotBitsExt.Physics](https://github.com/Tunous/BotBitsExt.Physics): Physics simulation for bots.
 - [BotBitsExt.Afk](https://github.com/Tunous/BotBitsExt.Afk): An afk extension for BotBits.
 - [BotBitsExt.Rounds](https://github.com/Tunous/BotBitsExt.Rounds): A BotBits extension that allows you to integrate automatic rounds management with your bots.
