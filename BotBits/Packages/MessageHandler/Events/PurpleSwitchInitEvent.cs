@@ -1,3 +1,4 @@
+using System.Linq;
 using PlayerIOClient;
 
 namespace BotBits.Events
@@ -17,7 +18,7 @@ namespace BotBits.Events
         internal PurpleSwitchInitEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.PurpleSwitches = MessageUtils.GetSwitches(message.GetByteArray(1));
+            this.PurpleSwitches = message.GetByteArray(1).Select(i => (int)i).ToArray();
         }
 
         /// <summary>

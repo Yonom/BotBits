@@ -369,6 +369,23 @@ namespace BotBits
         [Pack("smileypenguin")]
         Penguin = 125,
 
+        [Pack("-", GoldMembershipItem = true)]
+        GoldSmiley,
+
+        [Pack("-", GoldMembershipItem = true)]
+        GoldNinja,
+
+        [Pack("-", GoldMembershipItem = true)]
+        GoldRobot,
+
+        [Pack("-", GoldMembershipItem = true)]
+        GoldTopHat,
+
+        [Pack("smileyunsure")]
+        SmileySick,
+
+        [Pack("smileygoofy")]
+        SmileyGoofy
 
     }
 }

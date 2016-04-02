@@ -13,7 +13,7 @@ namespace BotBits.Shop
         public string Package { get; }
         
         public ForegroundType ForegroundType { get; set; }
-        public bool GoldMemberOnly { get; set; }
+        public bool GoldMembershipItem { get; set; }
         public bool AdminOnly { get; set; }
     }
 }

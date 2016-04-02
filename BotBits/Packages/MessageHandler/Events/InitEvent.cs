@@ -1,3 +1,4 @@
+using System.Linq;
 using PlayerIOClient;
 
 namespace BotBits.Events
@@ -54,7 +55,10 @@ namespace BotBits.Events
             this.CrewMember = message.GetBoolean(34);
             this.MinimapEnabled = message.GetBoolean(35);
             this.LobbyPreviewEnabled = message.GetBoolean(36);
+            this.OrangeSwitches = message.GetByteArray(37).Select(i => (int)i).ToArray();
         }
+
+        public int[] OrangeSwitches { get; set; }
 
         public AuraColor AuraColor { get; set; }
 

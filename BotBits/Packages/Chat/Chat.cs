@@ -163,7 +163,7 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(WriteEvent e)
         {
             const string pmPrefix = "* ";

@@ -104,7 +104,13 @@ namespace BotBits
                 .RaiseIn(this.BotBits);
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
+        private void On(LoadLevelEvent e)
+        {
+            this.World = BlockUtils.GetWorld(e.PlayerIOMessage, this.Width, this.Height);
+        }
+
+        [EventListener]
         private void On(ClearEvent e)
         {
             this.World = BlockUtils.GetClearedWorld(e.RoomWidth, e.RoomHeight, e.BorderBlock);
@@ -113,12 +119,6 @@ namespace BotBits
         }
 
         [EventListener]
-        private void On(LoadLevelEvent e)
-        {
-            this.World = BlockUtils.GetWorld(e.PlayerIOMessage, this.Width, this.Height);
-        }
-
-        [EventListener(EventPriority.Low)]
         private void On(BlockPlaceEvent e)
         {
             if (this.Height <= e.Y || this.Width <= e.X) return;
@@ -135,43 +135,43 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(PortalPlaceEvent e)
         {
             this.RaisePortalBlock(e.X, e.Y, (Foreground.Id) e.Id, e.PortalId, e.PortalTarget, e.PortalRotation, e.Player);
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(CoinDoorPlaceEvent e)
         {
             this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id) e.Id, e.CoinsToOpen, e.Player);
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(MorphablePlaceEvent e)
         {
             this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Rotation, e.Player);
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(SoundPlaceEvent e)
         {
             this.RaiseSignedNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.SoundId, e.Player);
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(WorldPortalPlaceEvent e)
         {
             this.RaiseStringBlock(e.X, e.Y, (Foreground.Id) e.Id, e.WorldPortalTarget, e.Player);
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(LabelPlaceEvent e)
         {
             this.RaiseLabelBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Text, e.TextColor, e.Player);
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(SignPlaceEvent e)
         {
             this.RaiseSignBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Text, e.SignColor, e.Player);

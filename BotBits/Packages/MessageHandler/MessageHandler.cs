@@ -24,21 +24,21 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.Lowest)]
+        [EventListener]
         private void On(ConnectEvent e)
         {
             new InitSendMessage()
                 .SendIn(this.BotBits);
         }
 
-        [EventListener(EventPriority.Lowest)]
+        [EventListener]
         private void On(InitEvent e)
         {
             new Init2SendMessage()
                 .SendIn(this.BotBits);
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(PlayerIOMessageEvent e)
         {
             Type handler;

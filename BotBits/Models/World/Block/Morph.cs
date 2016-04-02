@@ -29,6 +29,23 @@
                 Down = (Id) 3;
         }
 
+        public static class FairyOneWay
+        {
+            public const Id
+                Left = 0,
+                Down = (Id)1,
+                Right = (Id)2,
+                Up = (Id)3;
+        }
+
+        public static class Flowers
+        {
+            public const Id
+                Pink = 0,
+                Blue = (Id)1,
+                Orange = (Id)2;
+        }
+
         public static class HalfBlock
         {
             public const Id

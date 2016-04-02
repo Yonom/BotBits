@@ -32,7 +32,7 @@ namespace BotBits
         {
             if (pack == null) return true;
             if (pack.AdminOnly) return this.PlayerObject.IsAdministrator;
-            if (pack.GoldMemberOnly) return this.PlayerObject.ClubMember;
+            if (pack.GoldMembershipItem) return this.PlayerObject.ClubMember;
             return this.ShopData.GetCount(pack.Package) > 0;
         }
         

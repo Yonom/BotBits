@@ -67,6 +67,7 @@
     <Compile Include="Models\CampaignStatus.cs" />
     <Compile Include="Models\PlayerPoint.cs" />
     <Compile Include="Models\RespawnData.cs" />
+    <Compile Include="Models\SwitchType.cs" />
     <Compile Include="Models\WorldStatus.cs" />
     <Compile Include="Models\World\IWorldAreaEnumerable.cs" />
     <Compile Include="Models\World\WorldAreaEnumerable.cs" />
@@ -105,11 +106,13 @@
     <Compile Include="Packages\MessageHandler\Events\LobbyPreviewEnabledEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\JoinCompleteEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MinimapEnabledEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\SmileyGoldBorderEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\RestoreProgressEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MutedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\SmileyEvent.cs" />
     <Compile Include="Packages\MessageSender\Events\SendEvent.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetLobbyPreviewEnabledSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\SmileyGoldBorderSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetMinimapEnabledSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SmileySendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TouchCakeSendMessage.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="Packages\Players\Events\BlueCoinEvent.cs" />
     <Compile Include="Packages\Players\Events\GoldCoinEvent.cs" />
     <Compile Include="Packages\Room\Events\EditRightChangedEvent.cs" />
+    <Compile Include="Packages\Room\Events\OrangeSwitchEvent.cs" />
     <Compile Include="Packages\Scheduler\Scheduler.cs" />
     <Compile Include="Internal\StringUtils.cs" />
     <Compile Include="Internal\TaskExtensions.cs" />
@@ -143,7 +147,7 @@
     <Compile Include="Packages\MessageHandler\Events\LikedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MagicEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\PurpleSwitchInitEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\PurpleSwitchUpdateEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\SwitchUpdateEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\RoomDescriptionEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\TeamEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\TimeEvent.cs" />

@@ -103,7 +103,7 @@ namespace BotBits
 
         public static class Gold
         {
-            [Pack("-", GoldMemberOnly = true)]
+            [Pack("-", GoldMembershipItem = true)]
             public const Id
                 Door = (Id)200,
                 Gate = (Id)201,
@@ -1135,6 +1135,28 @@ namespace BotBits
             public const Id
                 Balloon = (Id)464,
                 Streamer = (Id)465;
+        }
+
+        public static class Fairytale
+        {
+            [Pack("brickfairytale")]
+            public const Id
+                Pebbles = (Id)1070,
+                Tree = (Id)1071,
+                Moss = (Id)1072,
+                Cloud = (Id)1073,
+                MushroomBlock = (Id)1074,
+                Vine = (Id)469,
+                Mushroom = (Id)470,
+                WaterDrop = (Id)471;
+
+            [Pack("bricknewyear2015", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                OneWayOrange = (Id)1075,
+                OneWayGreen = (Id)1076,
+                OneWayBlue = (Id)1077,
+                OneWayPink = (Id)1078,
+                Flowers = (Id)472;
         }
     }
 }

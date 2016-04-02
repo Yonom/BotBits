@@ -397,11 +397,21 @@ namespace BotBits
                 Snow = (Id)703;
         }
 
-        // 6 Unused block ids
+        public static class Fairytale
+        {
+            [Pack("brickfairytale")]
+            public const Id
+                Orange = (Id)704,
+                Green = (Id)705,
+                Blue = (Id)706,
+                Pink = (Id)707;
+        }
+
+        // 2 unused block ids
 
         public static class Gold
         {
-            [Pack("-", GoldMemberOnly = true)]
+            [Pack("-", GoldMembershipItem = true)]
             public const Id
                 Basic = (Id)709,
                 Brick = (Id)710,

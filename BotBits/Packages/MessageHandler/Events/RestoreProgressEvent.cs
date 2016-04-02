@@ -31,7 +31,7 @@ namespace BotBits.Events
             this.Deaths = message.GetInteger(9);
             this.CheckpointX = message.GetInteger(10);
             this.CheckpointY = message.GetInteger(11);
-            this.PurpleSwitches = MessageUtils.GetSwitches(message.GetByteArray(12));
+            this.PurpleSwitches = message.GetByteArray(12).Select(i => (int)i).ToArray();
             this.SpeedX = message.GetDouble(13);
             this.SpeedX = message.GetDouble(14);
         }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BotBits.Events;
+using BotBits.Models;
 using JetBrains.Annotations;
 
 namespace BotBits
@@ -271,7 +272,7 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(GodModeEvent e)
         {
             var p = e.Player;
@@ -284,7 +285,7 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(AdminModeEvent e)
         {
             var p = e.Player;
@@ -297,7 +298,7 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(ModModeEvent e)
         {
             var p = e.Player;
@@ -375,17 +376,18 @@ namespace BotBits
             }
         }
 
-        [EventListener(EventPriority.Low)]
-        private void On(PurpleSwitchUpdateEvent e)
+        [EventListener]
+        private void On(SwitchUpdateEvent e)
         {
-            var p = e.Player;
-            var enabled = e.Enabled != 0;
-            if (enabled)
-                p.AddSwitch(e.SwitchId);
-            else
-                p.RemoveSwitch(e.SwitchId);
+            if (e.SwitchType != SwitchType.Purple) return;
 
-            new PurpleSwitchEvent(p, e.SwitchId, enabled)
+            var p = e.Player;
+            if (e.Enabled)
+                p.AddSwitch(e.Id);
+            else
+                p.RemoveSwitch(e.Id);
+
+            new PurpleSwitchEvent(p, e.Id, e.Enabled)
                 .RaiseIn(this.BotBits);
         }
 
@@ -397,7 +399,7 @@ namespace BotBits
             p.Y = e.Y;
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(MultiRespawnEvent e)
         {
             foreach (var tele in e.Data)

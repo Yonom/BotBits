@@ -1,5 +1,6 @@
 ﻿using System;
 using BotBits.Events;
+using BotBits.Models;
 using BotBits.SendMessages;
 
 namespace BotBits
@@ -119,15 +120,15 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void GetCoin(int coins, int blueCoins, uint x, uint y)
+        public void GetCoin(int coins, int blueCoins, int x, int y)
         {
             new CoinSendMessage(coins, blueCoins, x, y)
                 .SendIn(this.BotBits);
         }
 
-        public void PressPurpleSwitch(int switchId, int enabled)
+        public void PressPurpleSwitch(SwitchType switchType, int switchId, int enabled, int x, int y)
         {
-            new PurpleSwitchSendMessage(switchId, enabled)
+            new PurpleSwitchSendMessage(switchType, switchId, enabled, x, y)
                 .SendIn(this.BotBits);
         }
 

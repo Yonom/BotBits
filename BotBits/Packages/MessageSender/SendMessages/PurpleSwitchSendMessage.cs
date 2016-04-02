@@ -1,3 +1,4 @@
+using BotBits.Models;
 using PlayerIOClient;
 
 namespace BotBits.SendMessages
@@ -11,13 +12,19 @@ namespace BotBits.SendMessages
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlaceSendMessage" /> class.
         /// </summary>
-        public PurpleSwitchSendMessage(int switchId, int enabled)
+        public PurpleSwitchSendMessage(SwitchType switchType, int id, int enabled, int x, int y)
         {
-            this.SwitchId = switchId;
+            this.X = x;
+            this.Y = y;
+            this.SwitchType = switchType;
+            this.Id = id;
             this.Enabled = enabled;
         }
 
-        public int SwitchId { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public SwitchType SwitchType { get; set; }
+        public int Id { get; set; }
         public int Enabled { get; set; }
 
 
@@ -27,7 +34,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("ps", this.SwitchId, this.Enabled);
+            return Message.Create("ps", this.X, this.Y, (int)this.SwitchType, this.Id, this.Enabled);
         }
     }
 }

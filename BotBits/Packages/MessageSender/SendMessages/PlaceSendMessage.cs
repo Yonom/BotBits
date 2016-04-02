@@ -7,7 +7,7 @@ namespace BotBits.SendMessages
     /// <summary>
     ///     Sent to place block.
     /// </summary>
-    /// <seealso cref="RoomTokenSendMessage{T}" />
+    /// <seealso cref="SendMessage{T}" />
     public sealed class PlaceSendMessage : SendMessage<PlaceSendMessage>
     {
         /// <summary>

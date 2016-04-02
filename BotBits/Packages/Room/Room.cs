@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BotBits.Events;
+using BotBits.Models;
 using BotBits.SendMessages;
 using JetBrains.Annotations;
 
@@ -9,6 +11,7 @@ namespace BotBits
     public sealed class Room : EventListenerPackage<Room>
     {
         private readonly HashSet<Key> _enabledKeys = new HashSet<Key>();
+        private readonly HashSet<int> _switches = new HashSet<int>();
         private AccessRight _accessRight;
         private bool _canEdit;
 
@@ -71,6 +74,40 @@ namespace BotBits
         public bool IsKeyPressed(Key key)
         {
             return this._enabledKeys.Contains(key);
+        }
+
+        [Pure]
+        public bool IsSwitchPressed(int id)
+        {
+            lock (this._switches)
+            {
+                return this._switches.Contains(id);
+            }
+        }
+
+        [Pure]
+        public int[] GetSwitches()
+        {
+            lock (this._switches)
+            {
+                return this._switches.ToArray();
+            }
+        }
+
+        internal void AddSwitch(int id)
+        {
+            lock (this._switches)
+            {
+                this._switches.Add(id);
+            }
+        }
+
+        internal void RemoveSwitch(int id)
+        {
+            lock (this._switches)
+            {
+                this._switches.Remove(id);
+            }
         }
 
         public void SetEditKey(string newKey)
@@ -274,27 +311,49 @@ namespace BotBits
 
             new MetaChangedEvent(e.Owner, e.Plays, e.Favorites, e.Likes, e.WorldName)
                 .RaiseIn(this.BotBits);
+
+            foreach (var os in e.OrangeSwitches)
+            {
+                this.AddSwitch(os);
+                new OrangeSwitchEvent(os, true)
+                    .RaiseIn(this.BotBits);
+            }
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
+        private void On(SwitchUpdateEvent e)
+        {
+            if (e.SwitchType != SwitchType.Orange)
+                return;
+            
+            if (e.Enabled)
+                this.AddSwitch(e.Id);
+            else
+                this.RemoveSwitch(e.Id);
+
+            new OrangeSwitchEvent(e.Id, e.Enabled)
+                .RaiseIn(this.BotBits);
+        }
+
+        [EventListener]
         private void On(AccessEvent e)
         {
             this.CanEdit = true;
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(LoseAccessEvent e)
         {
             this.CanEdit = false;
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(JoinCompleteEvent e)
         {
             this.JoinComplete = true;
         }
 
-        [EventListener(EventPriority.Low)]
+        [EventListener]
         private void On(UpdateMetaEvent e)
         {
             this.WorldName = e.WorldName;
