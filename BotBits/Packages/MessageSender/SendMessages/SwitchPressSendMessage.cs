@@ -7,12 +7,12 @@ namespace BotBits.SendMessages
     ///     Sent to change purple switch state.
     /// </summary>
     /// <seealso cref="SendMessage{T}" />
-    public sealed class PurpleSwitchSendMessage : SendMessage<PurpleSwitchSendMessage>
+    public sealed class SwitchPressSendMessage : SendMessage<SwitchPressSendMessage>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlaceSendMessage" /> class.
         /// </summary>
-        public PurpleSwitchSendMessage(SwitchType switchType, int id, int enabled, int x, int y)
+        public SwitchPressSendMessage(SwitchType switchType, int id, bool enabled, int x, int y)
         {
             this.X = x;
             this.Y = y;
@@ -25,7 +25,7 @@ namespace BotBits.SendMessages
         public int Y { get; set; }
         public SwitchType SwitchType { get; set; }
         public int Id { get; set; }
-        public int Enabled { get; set; }
+        public bool Enabled { get; set; }
 
 
         /// <summary>

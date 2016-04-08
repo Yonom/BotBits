@@ -44,7 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PlayerIOClient, Version=2.3.6.0, Culture=neutral, PublicKeyToken=c7f7b730653f6a44, processorArchitecture=MSIL">
-      <HintPath>..\packages\PlayerIOClient-Signed.3.2.369\lib\PlayerIOClient.dll</HintPath>
+      <HintPath>..\packages\PlayerIOClient-Signed.3.2.483\lib\PlayerIOClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -161,7 +161,7 @@
     <Compile Include="Packages\MessageSender\SendMessages\EffectSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\FavoriteSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\LikeSendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\PurpleSwitchSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\SwitchPressSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\RejectAddToCrewSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\RequestAddToCrewSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetCurseLimitSendMessage.cs" />
@@ -297,15 +297,15 @@
     <Compile Include="Packages\MessageSender\SendMessages\AccessSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\AutoTextSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\PlaceSendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\BadgeSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\BadgeChangeSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetEditKeySendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\RoomNameSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\NameSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\CheckpointSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\ClearSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\CoinSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\CompleteLevelSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\DeathSendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\GetCrownSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\CrownSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\GodModeSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\AdminModeSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\Init2SendMessage.cs" />
@@ -313,7 +313,7 @@
     <Compile Include="Packages\MessageSender\SendMessages\KillRoomSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\ModModeSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\MoveSendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\KeySendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\KeyPressSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SaveSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\ChatSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SendMessage.cs" />

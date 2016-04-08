@@ -6,13 +6,13 @@ namespace BotBits.SendMessages
     ///     Sent to collect gold crown.
     /// </summary>
     /// 
-    public sealed class GetCrownSendMessage : SendMessage<GetCrownSendMessage>
+    public sealed class CrownSendMessage : SendMessage<CrownSendMessage>
     {
-        public GetCrownSendMessage()
+        public CrownSendMessage()
         {
         }
 
-        public GetCrownSendMessage(int x, int y)
+        public CrownSendMessage(int x, int y)
         {
             this.X = x;
             this.Y = y;

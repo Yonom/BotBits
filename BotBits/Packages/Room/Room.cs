@@ -12,8 +12,7 @@ namespace BotBits
     {
         private readonly HashSet<Key> _enabledKeys = new HashSet<Key>();
         private readonly HashSet<int> _switches = new HashSet<int>();
-        private AccessRight _accessRight;
-        private bool _canEdit;
+
 
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Room()
@@ -41,34 +40,6 @@ namespace BotBits
         public WorldStatus WorldStatus { get; private set; }
         public bool MinimapEnabled { get; private set; }
         public bool LobbyPreviewEnabled { get; private set; }
-
-        public bool CanEdit
-        {
-            get { return this._canEdit; }
-            private set
-            {
-                if (this.CanEdit != value)
-                {
-                    this._canEdit = value;
-                    new EditRightChangedEvent(this._canEdit)
-                        .RaiseIn(this.BotBits);
-                }
-            }
-        }
-
-        public AccessRight AccessRight
-        {
-            get { return this._accessRight; }
-            private set
-            {
-                if (this.AccessRight != value)
-                {
-                    this._accessRight = value;
-                    new AccessRightChangedEvent(this._accessRight)
-                        .RaiseIn(this.BotBits);
-                }
-            }
-        }
 
         [Pure]
         public bool IsKeyPressed(Key key)
@@ -112,118 +83,78 @@ namespace BotBits
 
         public void SetEditKey(string newKey)
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change key.");
-
             new SetEditKeySendMessage(newKey)
                 .SendIn(this.BotBits);
         }
 
         public void Clear()
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to clear room.");
-
             new ClearSendMessage()
                 .SendIn(this.BotBits);
         }
 
         public void Save()
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to save.");
-
             new SaveSendMessage()
                 .SendIn(this.BotBits);
         }
 
         public void SetName(string newName)
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change room name.");
-
-            new RoomNameSendMessage(newName)
+            new NameSendMessage(newName)
                 .SendIn(this.BotBits);
         }
 
         public void SetRoomVisible(bool visible)
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change room visiblity.");
-
             new SetRoomVisibleSendMessage(visible)
                 .SendIn(this.BotBits);
         }
 
         public void SetHideLobby(bool hidden)
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change room visibility.");
-
             new SetHideLobbySendMessage(hidden)
                 .SendIn(this.BotBits);
         }
 
         public void SetAllowSpectating(bool allow)
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change spectator settings.");
-
             new SetAllowSpectatingSendMessage(allow)
                 .SendIn(this.BotBits);
         }
 
         public void SetMinimapEnabled(bool enabled)
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change minimap settings.");
-
             new SetMinimapEnabledSendMessage(enabled)
                 .SendIn(this.BotBits);
         }
 
         public void SetLobbyPreviewEnabled(bool enabled)
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change lobby preview settings.");
-
             new SetLobbyPreviewEnabledSendMessage(enabled)
                 .SendIn(this.BotBits);
         }
 
         public void SetRoomDescription(string description)
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change room description.");
-
             new SetRoomDescriptionSendMessage(description)
                 .SendIn(this.BotBits);
         }
 
         public void SetCurseLimit(int limit)
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change curse limit.");
-
             new SetCurseLimitSendMessage(limit)
                 .SendIn(this.BotBits);
         }
 
         public void SetZombieLimit(int limit)
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change zombie limit.");
-
             new SetZombieLimitSendMessage(limit)
                 .SendIn(this.BotBits);
         }
 
         public void SetStatus(WorldStatus status)
         {
-            if (this.AccessRight < AccessRight.WorldOptions)
-                throw new InvalidOperationException("Only owners are allowed to change world status.");
-                    // TODO update messages
-
             new SetStatusSendMessage(status)
                 .SendIn(this.BotBits);
         }
@@ -268,7 +199,6 @@ namespace BotBits
         private void On(WorldReleasedEvent e)
         {
             this.WorldStatus = WorldStatus.Released;
-            this.AccessRight = this.AccessRight == AccessRight.Owner ? AccessRight.Owner : AccessRight.None;
         }
 
         [EventListener]
@@ -290,7 +220,6 @@ namespace BotBits
             this.CurseLimit = e.CurseLimit;
             this.CrewId = e.CrewId;
             this.CrewName = e.CrewId;
-            this.CanEdit = e.CanEdit;
             this.WorldStatus = e.WorldStatus;
             this.MinimapEnabled = e.MinimapEnabled;
             this.LobbyPreviewEnabled = e.LobbyPreviewEnabled;
@@ -300,15 +229,6 @@ namespace BotBits
         [EventListener(EventPriority.Low)]
         private void OnLow(InitEvent e)
         {
-            if (e.IsOwner)
-            {
-                this.AccessRight = AccessRight.Owner;
-            }
-            else if (e.CanChangeWorldOptions)
-            {
-                this.AccessRight = AccessRight.WorldOptions;
-            }
-
             new MetaChangedEvent(e.Owner, e.Plays, e.Favorites, e.Likes, e.WorldName)
                 .RaiseIn(this.BotBits);
 
@@ -333,18 +253,6 @@ namespace BotBits
 
             new OrangeSwitchEvent(e.Id, e.Enabled)
                 .RaiseIn(this.BotBits);
-        }
-
-        [EventListener]
-        private void On(AccessEvent e)
-        {
-            this.CanEdit = true;
-        }
-
-        [EventListener]
-        private void On(LoseAccessEvent e)
-        {
-            this.CanEdit = false;
         }
 
         [EventListener]

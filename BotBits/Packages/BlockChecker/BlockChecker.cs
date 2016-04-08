@@ -174,7 +174,7 @@ namespace BotBits
         {
             if (b.SendCount > 10) return false;
             if (b.NoChecks) return true;
-            if (!Room.Of(this.BotBits).CanEdit) return false;
+            if (!Actions.Of(this.BotBits).CanEdit) return false;
             
             var playerData = ConnectionManager.Of(this.BotBits).PlayerData;
             var blocks = Blocks.Of(this.BotBits);

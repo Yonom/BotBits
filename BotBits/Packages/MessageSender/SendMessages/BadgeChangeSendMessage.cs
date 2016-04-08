@@ -6,21 +6,21 @@ namespace BotBits.SendMessages
     ///     Sent to change badge.
     /// </summary>
     /// <seealso cref="SendMessage{T}" />
-    public sealed class BadgeSendMessage : SendMessage<BadgeSendMessage>
+    public sealed class BadgeChangeSendMessage : SendMessage<BadgeChangeSendMessage>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="BadgeSendMessage" /> class.
+        ///     Initializes a new instance of the <see cref="BadgeChangeSendMessage" /> class.
         /// </summary>
         /// <param name="badge">The badge.</param>
-        public BadgeSendMessage(Badge badge) : this(badge.ToString())
+        public BadgeChangeSendMessage(Badge badge) : this(badge.ToString())
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BadgeSendMessage"/> class.
+        /// Initializes a new instance of the <see cref="BadgeChangeSendMessage"/> class.
         /// </summary>
         /// <param name="badgeId">The badge identifier.</param>
-        public BadgeSendMessage(string badgeId)
+        public BadgeChangeSendMessage(string badgeId)
         {
             this.Badge = badgeId;
         }

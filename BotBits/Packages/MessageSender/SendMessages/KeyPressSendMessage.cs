@@ -6,23 +6,23 @@ namespace BotBits.SendMessages
     /// <summary>
     ///     Sent to activate blue key.
     /// </summary>
-    public sealed class KeySendMessage : SendMessage<KeySendMessage>
+    public sealed class KeyPressSendMessage : SendMessage<KeyPressSendMessage>
     {
-        public KeySendMessage(Key key) : this(key.ToString().ToLower())
+        public KeyPressSendMessage(Key key) : this(key.ToString().ToLower())
         {
         }
 
-        public KeySendMessage(string key)
+        public KeyPressSendMessage(string key)
         {
             this.Key = key;
         }
 
-        public KeySendMessage(Key key, int x, int y) : this(key.ToString().ToLower(), x, y)
+        public KeyPressSendMessage(Key key, int x, int y) : this(key.ToString().ToLower(), x, y)
         {
             if (key == BotBits.Key.TimeDoor) throw new InvalidOperationException("TimeDoors are not a pressable key type.");
         }
 
-        public KeySendMessage(string key, int x, int y) : this(key)
+        public KeyPressSendMessage(string key, int x, int y) : this(key)
         {
             this.X = x;
             this.Y = y;

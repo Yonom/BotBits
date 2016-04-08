@@ -7,20 +7,77 @@ namespace BotBits
 {
     public sealed class Actions : EventListenerPackage<Actions>
     {
+        private AccessRight _accessRight;
+        private bool _canEdit;
+
+        public bool Liked { get; private set; }
+        public bool Favorited { get; private set; }
+        public bool CompletedLevel { get; private set; }
+
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Actions()
         {
         }
 
-        public bool Liked { get; private set; }
-        public bool Favorited { get; private set; }
-        public bool CompletedLevel { get; private set; }
+        public bool CanEdit
+        {
+            get { return this._canEdit; }
+            private set
+            {
+                if (this.CanEdit != value)
+                {
+                    this._canEdit = value;
+                    new EditRightChangedEvent(this._canEdit)
+                        .RaiseIn(this.BotBits);
+                }
+            }
+        }
+
+        public AccessRight AccessRight
+        {
+            get { return this._accessRight; }
+            private set
+            {
+                if (this.AccessRight != value)
+                {
+                    this._accessRight = value;
+                    new AccessRightChangedEvent(this._accessRight)
+                        .RaiseIn(this.BotBits);
+                }
+            }
+        }
 
         [EventListener]
         private void On(InitEvent e)
         {
             this.Liked = e.Liked;
             this.Favorited = e.Favorited;
+            this.CanEdit = e.CanEdit;
+        }
+
+        [EventListener(EventPriority.Low)]
+        private void OnLow(InitEvent e)
+        {
+            if (e.IsOwner)
+            {
+                this.AccessRight = AccessRight.Owner;
+            }
+            else if (e.CanChangeWorldOptions)
+            {
+                this.AccessRight = AccessRight.WorldOptions;
+            }
+        }
+
+        [EventListener]
+        private void On(AccessEvent e)
+        {
+            this.CanEdit = true;
+        }
+
+        [EventListener]
+        private void On(LoseAccessEvent e)
+        {
+            this.CanEdit = false;
         }
 
         [EventListener]
@@ -53,6 +110,12 @@ namespace BotBits
             this.CompletedLevel = true;
         }
 
+        [EventListener(EventPriority.Low)]
+        private void On(WorldReleasedEvent e)
+        {
+            this.AccessRight = this.AccessRight == AccessRight.Owner ? AccessRight.Owner : AccessRight.None;
+        }
+
         public void Access(string roomKey)
         {
             new AccessSendMessage(roomKey)
@@ -72,7 +135,7 @@ namespace BotBits
 
         public void ChangeBadge(Badge badge)
         {
-            new BadgeSendMessage(badge)
+            new BadgeChangeSendMessage(badge)
                 .SendIn(this.BotBits);
         }
 
@@ -116,7 +179,7 @@ namespace BotBits
 
         public void GetCrown(int x, int y)
         {
-            new GetCrownSendMessage(x, y)
+            new CrownSendMessage(x, y)
                 .SendIn(this.BotBits);
         }
 
@@ -126,9 +189,9 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void PressPurpleSwitch(SwitchType switchType, int switchId, int enabled, int x, int y)
+        public void PressSwitch(SwitchType switchType, int switchId, bool enabled, int x, int y)
         {
-            new PurpleSwitchSendMessage(switchType, switchId, enabled, x, y)
+            new SwitchPressSendMessage(switchType, switchId, enabled, x, y)
                 .SendIn(this.BotBits);
         }
 
@@ -146,7 +209,7 @@ namespace BotBits
 
         public void PressKey(Key key, int x, int y)
         {
-            new KeySendMessage(key, x, y)
+            new KeyPressSendMessage(key, x, y)
                 .SendIn(this.BotBits);
         }
 
