@@ -17,6 +17,11 @@
             actions.PressKey(key, 0, 0);
         }
 
+        public static void MoveToBlock(this Actions actions, int x, int y)
+        {
+            actions.Move(x * 16, y * 16);
+        }
+
         public static void Move(this Actions actions, int x, int y)
         {
             actions.Move(x, y, 0, 0, 0, 0, 0, 0);
