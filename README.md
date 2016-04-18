@@ -1,4 +1,4 @@
-# BotBits  ![Version](https://img.shields.io/nuget/v/BotBits.svg?style=flat-square&label=version) [![Build Status](https://img.shields.io/travis/Yonom/BotBits.svg?style=flat-square)](https://travis-ci.org/Yonom/BotBits)  [![Issues](https://img.shields.io/github/issues/Yonom/BotBits.svg?style=flat-square)](https://github.com/Yonom/BotBits/issues)
+# BotBits  [![Version](https://img.shields.io/nuget/v/BotBits.svg?style=flat-square&label=version)](https://www.nuget.org/packages/BotBits/] [![Build Status](https://img.shields.io/travis/Yonom/BotBits.svg?style=flat-square)](https://travis-ci.org/Yonom/BotBits)  [![Issues](https://img.shields.io/github/issues/Yonom/BotBits.svg?style=flat-square)](https://github.com/Yonom/BotBits/issues)
 
 An Everybody Edits framework designed for performance and reliability.
 
