@@ -756,7 +756,20 @@ namespace BotBits
         {
             [Pack("brickhwtrophy")]
             public const Id
-                Trophy = (Id)223;
+                HalloweenTrophy = (Id)223;
+
+            [Pack("brickspringtrophybronze")]
+            public const Id
+                BronzeSpringTrophy = (Id)478;
+
+            [Pack("brickspringtrophysilver")]
+            public const Id
+                SilverSpringTrophy = (Id)479;
+
+            [Pack("brickspringtrophygold")]
+            public const Id
+                GoldSpringTrophy = (Id)480;
+
         }
 
         public static class Spring2011
@@ -1150,13 +1163,29 @@ namespace BotBits
                 Mushroom = (Id)470,
                 WaterDrop = (Id)471;
 
-            [Pack("bricknewyear2015", ForegroundType = ForegroundType.Morphable)]
+            [Pack("brickfairytale", ForegroundType = ForegroundType.Morphable)]
             public const Id
                 OneWayOrange = (Id)1075,
                 OneWayGreen = (Id)1076,
                 OneWayBlue = (Id)1077,
                 OneWayPink = (Id)1078,
                 Flowers = (Id)472;
+        }
+
+        public static class Spring2016
+        {
+            [Pack("brickspring2016")]
+            public const Id
+                Dirt = (Id)1081,
+                Hedge = (Id)1082,
+                LeftSlope = (Id)473,
+                RightSlope = (Id)474;
+
+            [Pack("brickspring2016", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                Daisy = (Id)475,
+                Tulip = (Id)476,
+                Daffodil = (Id)477;
         }
     }
 }

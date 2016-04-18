@@ -59,6 +59,7 @@
     <Compile Include="Helpers\VersionCache.cs" />
     <Compile Include="Internal\InitParse.cs" />
     <Compile Include="Internal\Nito\Async\BotBitsSynchronizationContext.cs" />
+    <Compile Include="Internal\VarintHelper.cs" />
     <Compile Include="Models\AuraShape.cs" />
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\CampaignDifficulty.cs" />
@@ -106,7 +107,7 @@
     <Compile Include="Packages\MessageHandler\Events\LobbyPreviewEnabledEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\JoinCompleteEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MinimapEnabledEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\SmileyGoldBorderEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\GoldBorderEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\RestoreProgressEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MutedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\SmileyEvent.cs" />

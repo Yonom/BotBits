@@ -30,7 +30,7 @@ namespace BotBits.Events
             this.Deaths = message.GetInteger(11);
             this.Friend = message.GetBoolean(12);
             this.ClubMember = message.GetBoolean(13);
-            //  Gold Smiley Border  (14)
+            this.GoldBorder = message.GetBoolean(14);
             this.Mod = message.GetBoolean(15);
             this.Team = (Team)message.GetInt(16);
             this.AuraShape = (AuraShape)message.GetInt(17);
@@ -39,6 +39,8 @@ namespace BotBits.Events
             this.Badge = message.GetBadge(20);
             this.CrewMember = message.GetBoolean(21);
         }
+
+        public bool GoldBorder { get; set; }
 
         public bool CanEdit { get; set; }
         

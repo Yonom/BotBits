@@ -113,6 +113,7 @@ namespace BotBits
             this.OwnPlayer.X = e.SpawnX;
             this.OwnPlayer.Y = e.SpawnY;
             this.OwnPlayer.CrewMember = e.CrewMember;
+            this.OwnPlayer.GoldBorder = true;
         }
 
         [EventListener]
@@ -140,6 +141,7 @@ namespace BotBits
             p.ChatColor = e.ChatColor;
             p.Team = e.Team;
             p.CrewMember = e.CrewMember;
+            p.GoldBorder = e.GoldBorder;
         }
 
         [EventListener]
@@ -428,6 +430,13 @@ namespace BotBits
         {
             var p = e.Player;
             p.Muted = e.Muted;
+        }
+
+        [EventListener]
+        private void On(GoldBorderEvent e)
+        {
+            var p = e.Player;
+            p.GoldBorder = e.GoldBorder;
         }
     }
 }

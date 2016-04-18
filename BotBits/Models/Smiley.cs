@@ -391,6 +391,12 @@ namespace BotBits
         Goofy = 132,
 
         [Pack("smileyraindrop")]
-        Raindrop = 133
+        Raindrop = 133,
+
+        [Pack("smileybee")]
+        Bee = 134,
+
+        [Pack("smileybutterfly")]
+        Butterfly = 135
     }
 }

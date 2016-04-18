@@ -27,7 +27,7 @@ namespace BotBits.Events
             this.Smiley = (Smiley) message.GetInt(6);
             this.AuraShape = (AuraShape) message.GetInt(7);
             this.AuraColor = (AuraColor)message.GetInt(8);
-            // 9: Gold border
+            this.GoldBorder = message.GetBoolean(9);
             this.SpawnX = message.GetDouble(10);
             this.SpawnY = message.GetDouble(11);
             this.ChatColor = message.GetUInt(12);
@@ -55,8 +55,10 @@ namespace BotBits.Events
             this.CrewMember = message.GetBoolean(34);
             this.MinimapEnabled = message.GetBoolean(35);
             this.LobbyPreviewEnabled = message.GetBoolean(36);
-            this.OrangeSwitches = message.GetByteArray(37).Select(i => (int)i).ToArray();
+            this.OrangeSwitches = VarintHelper.ToInt32Array(message.GetByteArray(37));
         }
+
+        public bool GoldBorder { get; set; }
 
         public int[] OrangeSwitches { get; set; }
 

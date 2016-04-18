@@ -332,5 +332,29 @@
                 Bronze = (Id)2,
                 Gold = (Id)3;
         }
+
+        public static class Daisy
+        {
+            public const Id
+                Violet = 0,
+                White = (Id)1,
+                Blue = (Id)2;
+        }
+
+        public static class Tulip
+        {
+            public const Id
+                Pink = 0,
+                Red = (Id)1,
+                Yellow = (Id)2;
+        }
+
+        public static class Daffodil
+        {
+            public const Id
+                Orange = 0,
+                Yellow = (Id)1,
+                White = (Id)2;
+        }
     }
 }

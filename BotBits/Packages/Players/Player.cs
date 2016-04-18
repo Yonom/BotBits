@@ -362,6 +362,8 @@ namespace BotBits
 
         public bool Muted { get; set; }
 
+        public bool GoldBorder { get; set; }
+
         public bool CanToggleGod
         {
             get { return this.HasGodRights || this.HasEditRights; }
