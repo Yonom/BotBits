@@ -7,7 +7,7 @@ namespace BotBits.Events
     /// </summary>
     /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("smileyGoldBorder")]
-    public sealed class GoldBorderEvent : PlayerEvent<MutedEvent>
+    public sealed class GoldBorderEvent : PlayerEvent<GoldBorderEvent>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MutedEvent" /> class.
