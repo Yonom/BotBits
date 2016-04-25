@@ -9,7 +9,7 @@ namespace BotBits
             return new LoginClient(ConnectionManager.Of(this.BotBits), client);
         }
 
-        ILogin<LoginClient> IPlayerIOGame<LoginClient>.ConnectionManager
+        ILogin<LoginClient> IPlayerIOGame<LoginClient>.Login
         {
             get { return this; }
         }
