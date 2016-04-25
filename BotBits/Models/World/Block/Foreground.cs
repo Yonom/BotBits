@@ -1159,9 +1159,9 @@ namespace BotBits
                 Moss = (Id)1072,
                 Cloud = (Id)1073,
                 MushroomBlock = (Id)1074,
-                Vine = (Id)469,
-                Mushroom = (Id)470,
-                WaterDrop = (Id)471;
+                Vine = (Id)468,
+                Mushroom = (Id)469,
+                WaterDrop = (Id)470;
 
             [Pack("brickfairytale", ForegroundType = ForegroundType.Morphable)]
             public const Id
@@ -1169,7 +1169,7 @@ namespace BotBits
                 OneWayGreen = (Id)1076,
                 OneWayBlue = (Id)1077,
                 OneWayPink = (Id)1078,
-                Flowers = (Id)472;
+                Flowers = (Id)471;
         }
 
         public static class Spring2016
