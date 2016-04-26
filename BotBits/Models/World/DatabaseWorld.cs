@@ -185,7 +185,7 @@ namespace BotBits
                 if (layerNum == 0)
                 {
                     var foreground = (Foreground.Id) type;
-                    var block = WorldUtils.GetDatabaseBlock(ct, foreground);
+                    var block = WorldUtils.GetForegroundFromDatabase(ct, foreground);
                     foreach (var loc in points)
                     {
                         this.Foreground[loc.X, loc.Y] = block;

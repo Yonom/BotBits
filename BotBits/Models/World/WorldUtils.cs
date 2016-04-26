@@ -26,7 +26,7 @@ namespace BotBits
             return WorldType.Unknown;
         }
 
-        public static ForegroundBlock GetDatabaseBlock(DatabaseObject obj, Foreground.Id foreground)
+        public static ForegroundBlock GetForegroundFromDatabase(DatabaseObject obj, Foreground.Id foreground)
         {
             var foregroundType = GetForegroundType(foreground);
 
@@ -36,18 +36,18 @@ namespace BotBits
                     return new ForegroundBlock(foreground);
 
                 case ForegroundType.Note:
-                    return new ForegroundBlock(foreground,
+                    return new ForegroundBlock(foreground, 
                         obj.GetUInt("id", 0));
 
                 case ForegroundType.Goal:
                 case ForegroundType.Toggle:
                 case ForegroundType.ToggleGoal:
                 case ForegroundType.Team:
-                    return new ForegroundBlock(foreground,
+                    return new ForegroundBlock(foreground, 
                         obj.GetUInt("goal", 0));
 
                 case ForegroundType.Morphable:
-                    return new ForegroundBlock(foreground,
+                    return new ForegroundBlock(foreground, 
                         obj.GetUInt("rotation", 0));
 
                 case ForegroundType.Portal:
@@ -72,6 +72,62 @@ namespace BotBits
 
                 default:
                     throw new NotSupportedException("Encountered an unsupported block!");
+            }
+        }
+
+        public static ForegroundBlock GetForegroundFromArgs(Foreground.Id block, object[] args)
+        {
+            var foregroundType = GetBlockArgsType(GetForegroundType(block));
+
+            switch (foregroundType)
+            {
+                case BlockArgsType.None:
+                    {
+                        return new ForegroundBlock(block);
+                    }
+
+                case BlockArgsType.Number:
+                    {
+                        var i = (uint)args[0];
+                        return new ForegroundBlock(block, i);
+                    }
+
+                case BlockArgsType.SignedNumber:
+                    {
+                        var si = (int)args[0];
+                        return new ForegroundBlock(block, si);
+                    }
+
+                case BlockArgsType.String:
+                    {
+                        var str = (string)args[0];
+                        return new ForegroundBlock(block, str);
+                    }
+
+                case BlockArgsType.Portal:
+                    {
+                        var portalRotation = (Morph.Id)(uint)args[0];
+                        var portalId = (uint)args[1];
+                        var portalTarget = (uint)args[2];
+                        return new ForegroundBlock(block, portalId, portalTarget, portalRotation);
+                    }
+
+                case BlockArgsType.Label:
+                    {
+                        var text = (string)args[0];
+                        var textcolor = (string)args[1];
+                        return new ForegroundBlock(block, text, textcolor);
+                    }
+
+                case BlockArgsType.Sign:
+                    {
+                        var text = (string)args[0];
+                        var color = (Morph.Id)(uint)args[1];
+                        return new ForegroundBlock(block, text, color);
+                    }
+
+                default:
+                    throw new NotSupportedException("Invalid block.");
             }
         }
 
