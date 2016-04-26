@@ -88,41 +88,41 @@ namespace BotBits
 
                 case BlockArgsType.Number:
                     {
-                        var i = (uint)args[0];
+                        var i = Convert.ToUInt32(args[0]);
                         return new ForegroundBlock(block, i);
                     }
 
                 case BlockArgsType.SignedNumber:
                     {
-                        var si = (int)args[0];
+                        var si = Convert.ToInt32(args[0]);
                         return new ForegroundBlock(block, si);
                     }
 
                 case BlockArgsType.String:
                     {
-                        var str = (string)args[0];
+                        var str = Convert.ToString(args[0]);
                         return new ForegroundBlock(block, str);
                     }
 
                 case BlockArgsType.Portal:
                     {
-                        var portalRotation = (Morph.Id)(uint)args[0];
-                        var portalId = (uint)args[1];
-                        var portalTarget = (uint)args[2];
+                        var portalRotation = (Morph.Id)Convert.ToUInt32(args[0]);
+                        var portalId = Convert.ToUInt32(args[1]);
+                        var portalTarget = Convert.ToUInt32(args[2]);
                         return new ForegroundBlock(block, portalId, portalTarget, portalRotation);
                     }
 
                 case BlockArgsType.Label:
                     {
-                        var text = (string)args[0];
-                        var textcolor = (string)args[1];
+                        var text = Convert.ToString(args[0]);
+                        var textcolor = Convert.ToString(args[1]);
                         return new ForegroundBlock(block, text, textcolor);
                     }
 
                 case BlockArgsType.Sign:
                     {
-                        var text = (string)args[0];
-                        var color = (Morph.Id)(uint)args[1];
+                        var text = Convert.ToString(args[0]);
+                        var color = (Morph.Id)Convert.ToUInt32(args[1]);
                         return new ForegroundBlock(block, text, color);
                     }
 
