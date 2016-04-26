@@ -20,9 +20,10 @@ namespace BotBits.Events
         {
             this.Data = new List<RespawnData>();
 
-            this.ResetCoins = message.GetBoolean(0);
+            this.ResetPlayers = message.GetBoolean(0);
+            this.ResetLevel = message.GetBoolean(1);
 
-            for (uint i = 1; i <= message.Count - 1u; i += 4)
+            for (uint i = 2; i <= message.Count - 1u; i += 4)
             {
                 var userId = message.GetInteger(i);
                 if (!Players.Of(client).Contains(userId)) continue;
@@ -35,6 +36,8 @@ namespace BotBits.Events
             }
         }
 
+        public bool ResetLevel { get; set; }
+
         /// <summary>
         ///     Gets or sets the coordinates.
         /// </summary>
@@ -42,9 +45,9 @@ namespace BotBits.Events
         public List<RespawnData> Data { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether the coins need to be reset.
+        ///     Gets or sets a value indicating whether the players need to be reset.
         /// </summary>
-        /// <value><c>true</c> if the coins need to be reset; otherwise, <c>false</c>.</value>
-        public bool ResetCoins { get; set; }
+        /// <value><c>true</c> if the players need to be reset; otherwise, <c>false</c>.</value>
+        public bool ResetPlayers { get; set; }
     }
 }

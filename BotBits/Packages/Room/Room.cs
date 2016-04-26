@@ -81,6 +81,14 @@ namespace BotBits
             }
         }
 
+        internal void ResetSwitches()
+        {
+            lock (this._switches)
+            {
+                this._switches.Clear();
+            }
+        }
+
         public void SetEditKey(string newKey)
         {
             new SetEditKeySendMessage(newKey)
@@ -328,6 +336,13 @@ namespace BotBits
         private void On(LobbyPreviewEnabledEvent e)
         {
             this.LobbyPreviewEnabled = e.Enabled;
+        }
+
+        [EventListener]
+        private void On(MultiRespawnEvent e)
+        {
+            if (!e.ResetLevel) return;
+            this.ResetSwitches();
         }
     }
 }

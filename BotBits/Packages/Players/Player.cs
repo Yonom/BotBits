@@ -431,6 +431,14 @@ namespace BotBits
                 this._switches.Remove(id);
             }
         }
+        
+        internal void ResetSwitches()
+        {
+            lock (this._switches)
+            {
+                this._switches.Clear();
+            }
+        }
 
 
         [Pure]

@@ -412,15 +412,18 @@ namespace BotBits
                 p.Y = tele.Y;
                 p.Deaths = tele.Deaths;
 
-                if (e.ResetCoins)
+                if (e.ResetPlayers)
                 {
-                    p.GoldCoins = default(int);
-                    p.BlueCoins = default(int);
+                    if (p.HasCrown) this.CrownPlayer = Player.Nobody;
+                    p.HasSilverCrown = false;
                     p.ClearGoldCoins();
                     p.ClearBlueCoins();
+                    p.GoldCoins = default(int);
+                    p.BlueCoins = default(int);
+                    p.ResetSwitches();
                 }
 
-                new RespawnEvent(p, tele.X, tele.Y, tele.Deaths, e.ResetCoins, causedByDeath)
+                new RespawnEvent(p, tele.X, tele.Y, tele.Deaths, e.ResetPlayers, causedByDeath)
                     .RaiseIn(this.BotBits);
             }
         }
