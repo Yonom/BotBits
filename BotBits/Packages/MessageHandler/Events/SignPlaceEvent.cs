@@ -15,7 +15,7 @@ namespace BotBits.Events
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
         internal SignPlaceEvent(BotBitsClient client, Message message)
-            : base(client, message, 4)
+            : base(client, message, 5)
         {
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);
