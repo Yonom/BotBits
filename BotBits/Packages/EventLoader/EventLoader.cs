@@ -78,9 +78,9 @@ namespace BotBits
             var handler = (EventRaiseHandler<TEvent>)
                 Delegate.CreateDelegate(typeof(EventRaiseHandler<TEvent>), baseObj, eventHandler);
 
-            if (!Event<TEvent>
+            Event<TEvent>
                 .Of(this.BotBits)
-                .Unbind(handler)) throw new Exception();
+                .Unbind(handler);
         }
 
         private static Exception GetEventEx(MethodInfo handler, string reason)
