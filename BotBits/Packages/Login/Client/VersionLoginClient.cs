@@ -31,7 +31,7 @@ namespace BotBits
 
         public override Task CreateOpenWorldAsync(string roomId, string name)
         {
-            if (!roomId.StartsWith("OW")) throw new ArgumentException("RoomId is not valid.", "roomId");
+            if (!roomId.StartsWith("OW")) throw new ArgumentException("RoomId is not valid.", nameof(roomId));
 
             var roomData = new Dictionary<string, string> { { "name", name } };
 

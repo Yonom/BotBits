@@ -1,4 +1,5 @@
-﻿namespace BotBits
+﻿// ReSharper disable InconsistentNaming
+namespace BotBits
 {
     /// <summary>
     /// </summary>

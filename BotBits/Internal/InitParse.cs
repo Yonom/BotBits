@@ -9,8 +9,8 @@ namespace Yonom.EE
     {
         public static DataChunk[] Parse(Message m)
         {
-            if (m == null) throw new ArgumentNullException("m");
-            if (m.Type != "init" && m.Type != "reset") throw new ArgumentException("Invalid message type.", "m");
+            if (m == null) throw new ArgumentNullException(nameof(m));
+            if (m.Type != "init" && m.Type != "reset") throw new ArgumentException("Invalid message type.", nameof(m));
 
             // Get world data
             var p = 0u;

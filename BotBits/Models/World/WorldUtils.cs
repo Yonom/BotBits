@@ -167,7 +167,7 @@ namespace BotBits
                     return BlockArgsType.Sign;
 
                 default:
-                    throw new ArgumentException("Invalid BlockType.", "type");
+                    throw new ArgumentException("Invalid BlockType.", nameof(type));
             }
         }
 

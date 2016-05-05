@@ -40,7 +40,7 @@ namespace BotBits
         [Pure]
         public static T Of([NotNull] BotBitsClient client)
         {
-            if (client == null) throw new ArgumentNullException("client");
+            if (client == null) throw new ArgumentNullException(nameof(client));
 
             return client.Packages.Get<T>();
         }

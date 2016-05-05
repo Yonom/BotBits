@@ -40,7 +40,7 @@ namespace BotBits
 
         public void SetConnection(IConnection connection, ConnectionArgs args)
         {
-            if (connection == null) throw new ArgumentNullException("connection");
+            if (connection == null) throw new ArgumentNullException(nameof(connection));
 
             if (Interlocked.CompareExchange(ref this._connection, connection, null) != null)
             {

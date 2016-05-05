@@ -19,8 +19,8 @@ namespace BotBits
 
         internal LoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client, Task<PlayerData> argsAsync)
         {
-            if (connectionManager == null) throw new ArgumentNullException("connectionManager");
-            if (client == null) throw new ArgumentNullException("client");
+            if (connectionManager == null) throw new ArgumentNullException(nameof(connectionManager));
+            if (client == null) throw new ArgumentNullException(nameof(client));
             this._connectionManager = connectionManager;
             this.Client = client;
 

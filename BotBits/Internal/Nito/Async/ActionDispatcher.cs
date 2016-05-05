@@ -49,12 +49,7 @@ namespace BotBits.Nito.Async
             get
             {
                 var context = SynchronizationContext.Current as BotBitsSynchronizationContext;
-                if (context == null)
-                {
-                    return null;
-                }
-
-                return context.ActionDispatcher;
+                return context?.ActionDispatcher;
             }
         }
 

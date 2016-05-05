@@ -37,7 +37,7 @@ namespace BotBits.Nito
         /// <param name="capacity">The initial capacity. Must be greater than <c>0</c>.</param>
         public Deque(int capacity)
         {
-            if (capacity < 1) throw new ArgumentOutOfRangeException("capacity", "Capacity must be greater than 0.");
+            if (capacity < 1) throw new ArgumentOutOfRangeException(nameof(capacity), "Capacity must be greater than 0.");
             this._buffer = new T[capacity];
         }
 
@@ -96,7 +96,7 @@ namespace BotBits.Nito
 
             set
             {
-                if (value < 1) throw new ArgumentOutOfRangeException("value", "Capacity must be greater than 0.");
+                if (value < 1) throw new ArgumentOutOfRangeException(nameof(value), "Capacity must be greater than 0.");
 
                 if (value < this.Count) throw new InvalidOperationException("Capacity cannot be set to a value less than Count");
 
@@ -649,7 +649,7 @@ namespace BotBits.Nito
         /// </exception>
         void ICollection<T>.CopyTo(T[] array, int arrayIndex)
         {
-            if (array == null) throw new ArgumentNullException("array", "Array is null");
+            if (array == null) throw new ArgumentNullException(nameof(array), "Array is null");
 
             var count = this.Count;
             CheckRangeArguments(array.Length, arrayIndex, count);
@@ -734,26 +734,26 @@ namespace BotBits.Nito
 
         int IList.Add(object value)
         {
-            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", nameof(value));
             this.AddToBack((T)value);
             return this.Count - 1;
         }
 
         bool IList.Contains(object value)
         {
-            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", nameof(value));
             return this.Contains((T)value);
         }
 
         int IList.IndexOf(object value)
         {
-            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", nameof(value));
             return this.IndexOf((T)value);
         }
 
         void IList.Insert(int index, object value)
         {
-            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", nameof(value));
             this.Insert(index, (T)value);
         }
 
@@ -763,7 +763,7 @@ namespace BotBits.Nito
 
         void IList.Remove(object value)
         {
-            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", nameof(value));
             this.Remove((T)value);
         }
 
@@ -773,14 +773,14 @@ namespace BotBits.Nito
 
             set
             {
-                if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+                if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", nameof(value));
                 this[index] = (T)value;
             }
         }
 
         void ICollection.CopyTo(Array array, int index)
         {
-            if (array == null) throw new ArgumentNullException("array", "Destination array cannot be null.");
+            if (array == null) throw new ArgumentNullException(nameof(array), "Destination array cannot be null.");
             CheckRangeArguments(array.Length, index, this.Count);
 
             for (var i = 0; i != this.Count; ++i)
@@ -818,7 +818,7 @@ namespace BotBits.Nito
         {
             if (index < 0 || index > sourceLength)
             {
-                throw new ArgumentOutOfRangeException("index",
+                throw new ArgumentOutOfRangeException(nameof(index),
                     "Invalid new index " + index + " for source length " + sourceLength);
             }
         }
@@ -837,7 +837,7 @@ namespace BotBits.Nito
         {
             if (index < 0 || index >= sourceLength)
             {
-                throw new ArgumentOutOfRangeException("index",
+                throw new ArgumentOutOfRangeException(nameof(index),
                     "Invalid existing index " + index + " for source length " + sourceLength);
             }
         }
@@ -858,12 +858,12 @@ namespace BotBits.Nito
         {
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException("offset", "Invalid offset " + offset);
+                throw new ArgumentOutOfRangeException(nameof(offset), "Invalid offset " + offset);
             }
 
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException("count", "Invalid count " + count);
+                throw new ArgumentOutOfRangeException(nameof(count), "Invalid count " + count);
             }
 
             if (sourceLength - offset < count)

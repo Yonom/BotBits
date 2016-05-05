@@ -43,7 +43,7 @@ namespace BotBits
         public ForegroundBlock(Foreground.Id id)
         {
             var type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.None) throw new ArgumentException("The given block is missing required arguments.", "id");
+            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.None) throw new ArgumentException("The given block is missing required arguments.", nameof(id));
 
             this._args = null;
             this.Type = ForegroundType.Normal;
@@ -63,7 +63,7 @@ namespace BotBits
                     this._args = (int)args;
                     break;
                 default:
-                    throw new ArgumentException("Invalid arguments for the specified block.", "id");
+                    throw new ArgumentException("Invalid arguments for the specified block.", nameof(id));
             }
             this.Type = type;
             this.Id = id;
@@ -72,7 +72,7 @@ namespace BotBits
         public ForegroundBlock(Foreground.Id id, string text)
         {
             var type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.String) throw new ArgumentException("Invalid arguments for the specified block.", "id");
+            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.String) throw new ArgumentException("Invalid arguments for the specified block.", nameof(id));
 
             this._args = text;
             this.Type = type;
@@ -82,7 +82,7 @@ namespace BotBits
         public ForegroundBlock(Foreground.Id id, string text, string textColor)
         {
             var type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Label) throw new ArgumentException("Invalid arguments for the specified block.", "id");
+            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Label) throw new ArgumentException("Invalid arguments for the specified block.", nameof(id));
 
             this._args = new LabelArgs(text, textColor);
             this.Type = type;
@@ -92,7 +92,7 @@ namespace BotBits
         public ForegroundBlock(Foreground.Id id, string text, Morph.Id signColor)
         {
             var type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Sign) throw new ArgumentException("Invalid arguments for the specified block.", "id");
+            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Sign) throw new ArgumentException("Invalid arguments for the specified block.", nameof(id));
 
             this._args = new SignArgs(text, signColor);
             this.Type = type;
@@ -102,7 +102,7 @@ namespace BotBits
         public ForegroundBlock(Foreground.Id id, uint portalId, uint portalTarget, Morph.Id portalRotation)
         {
             var type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Portal) throw new ArgumentException("The given block is not a portal.", "id");
+            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Portal) throw new ArgumentException("The given block is not a portal.", nameof(id));
 
             this._args = new PortalArgs(portalId, portalTarget, portalRotation);
             this.Type = ForegroundType.Portal;
@@ -124,7 +124,7 @@ namespace BotBits
         {
             if (this.Type == ForegroundType.ToggleGoal && enabled)
             {
-                throw new ArgumentException("The given block only supports \"false\" or a number.", "enabled");
+                throw new ArgumentException("The given block only supports \"false\" or a number.", nameof(enabled));
             }
         }
 
