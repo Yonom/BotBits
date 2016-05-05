@@ -174,7 +174,6 @@
     <Compile Include="Packages\MessageSender\SendMessages\SetHideLobbySendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetRoomDescriptionSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetRoomVisibleSendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\TimedEffectSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TimeSendMessage.cs" />
     <Compile Include="Helpers\PlayerData\PlayerObject.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\UnfavoriteSendMessage.cs" />
