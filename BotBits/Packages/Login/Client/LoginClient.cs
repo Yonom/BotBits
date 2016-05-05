@@ -27,10 +27,7 @@ namespace BotBits
             this._argsAsync = argsAsync;
         }
 
-        public string ConnectUserId
-        {
-            get { return this.Client.ConnectUserId; }
-        }
+        public string ConnectUserId => this.Client.ConnectUserId;
 
         [NotNull]
         public Client Client { get; }

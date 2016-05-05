@@ -199,18 +199,12 @@ namespace BotBits.Events
         ///     Gets the block x.
         /// </summary>
         /// <value>The block x.</value>
-        public int SpawnBlockX
-        {
-            get { return WorldUtils.PosToBlock(this.SpawnX); }
-        }
+        public int SpawnBlockX => WorldUtils.PosToBlock(this.SpawnX);
 
         /// <summary>
         ///     Gets the block y.
         /// </summary>
         /// <value>The block y.</value>
-        public int SpawnBlockY
-        {
-            get { return WorldUtils.PosToBlock(this.SpawnY); }
-        }
+        public int SpawnBlockY => WorldUtils.PosToBlock(this.SpawnY);
     }
 }

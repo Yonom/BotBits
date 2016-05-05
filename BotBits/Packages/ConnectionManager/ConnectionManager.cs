@@ -15,10 +15,7 @@ namespace BotBits
         {
         }
 
-        public IConnection Connection
-        {
-            get { return this._connection; }
-        }
+        public IConnection Connection => this._connection;
 
         public PlayerData PlayerData { get; private set; }
 

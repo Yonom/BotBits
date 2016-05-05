@@ -16,10 +16,7 @@
             this.Block = block;
         }
 
-        public Player Placer
-        {
-            get { return this._placer ?? Player.Nobody; }
-        }
+        public Player Placer => this._placer ?? Player.Nobody;
 
         public T Block { get; }
     }

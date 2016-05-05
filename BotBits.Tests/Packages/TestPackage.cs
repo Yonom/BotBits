@@ -6,10 +6,7 @@ namespace BotBits.Tests.Packages
     {
         public bool IsDisposed { get; private set; }
 
-        public new BotBitsClient BotBits
-        {
-            get { return base.BotBits; }
-        }
+        public new BotBitsClient BotBits => base.BotBits;
 
         public void Dispose()
         {

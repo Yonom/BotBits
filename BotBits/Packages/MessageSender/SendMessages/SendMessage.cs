@@ -50,10 +50,7 @@ namespace BotBits.SendMessages
         /// <value>
         ///     The send count.
         /// </value>
-        public int SendCount
-        {
-            get { return this._sendCount; }
-        }
+        public int SendCount => this._sendCount;
 
         /// <summary>
         ///     Gets the PlayerIO message representing the data in this <see cref="SendMessage{T}" />.

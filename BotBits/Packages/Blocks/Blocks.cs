@@ -39,35 +39,17 @@ namespace BotBits
             return this.GetEnumerator();
         }
 
-        Blocks IBlockAreaEnumerable.Blocks
-        {
-            get { return this; }
-        }
+        Blocks IBlockAreaEnumerable.Blocks => this;
 
-        public Rectangle Area
-        {
-            get { return new Rectangle(0, 0, this.Width, this.Height); }
-        }
+        public Rectangle Area => new Rectangle(0, 0, this.Width, this.Height);
 
-        public int Height
-        {
-            get { return this._blockDataWorld.Height; }
-        }
+        public int Height => this._blockDataWorld.Height;
 
-        public int Width
-        {
-            get { return this._blockDataWorld.Width; }
-        }
+        public int Width => this._blockDataWorld.Width;
 
-        public IBlockLayer<BlockData<ForegroundBlock>> Foreground
-        {
-            get { return this._readOnlyBlocksWorld.Foreground; }
-        }
+        public IBlockLayer<BlockData<ForegroundBlock>> Foreground => this._readOnlyBlocksWorld.Foreground;
 
-        public IBlockLayer<BlockData<BackgroundBlock>> Background
-        {
-            get { return this._readOnlyBlocksWorld.Background; }
-        }
+        public IBlockLayer<BlockData<BackgroundBlock>> Background => this._readOnlyBlocksWorld.Background;
 
         public BlocksItem At(Point point)
         {
@@ -247,25 +229,13 @@ namespace BotBits
                 this._innerWorld = innerWorld;
             }
 
-            public int Width
-            {
-                get { return this._innerWorld.Width; }
-            }
+            public int Width => this._innerWorld.Width;
 
-            public int Height
-            {
-                get { return this._innerWorld.Height; }
-            }
+            public int Height => this._innerWorld.Height;
 
-            public IBlockLayer<ForegroundBlock> Foreground
-            {
-                get { return new ProxyLayer<ForegroundBlock>(this._innerWorld.Foreground); }
-            }
+            public IBlockLayer<ForegroundBlock> Foreground => new ProxyLayer<ForegroundBlock>(this._innerWorld.Foreground);
 
-            public IBlockLayer<BackgroundBlock> Background
-            {
-                get { return new ProxyLayer<BackgroundBlock>(this._innerWorld.Background); }
-            }
+            public IBlockLayer<BackgroundBlock> Background => new ProxyLayer<BackgroundBlock>(this._innerWorld.Background);
         }
 
         private class ProxyLayer<T> : IBlockLayer<T> where T : struct
@@ -277,25 +247,13 @@ namespace BotBits
                 this._innerLayer = innerLayer;
             }
 
-            public T this[Point p]
-            {
-                get { return this._innerLayer[p].Block; }
-            }
+            public T this[Point p] => this._innerLayer[p].Block;
 
-            public T this[int x, int y]
-            {
-                get { return this._innerLayer[x, y].Block; }
-            }
+            public T this[int x, int y] => this._innerLayer[x, y].Block;
 
-            public int Height
-            {
-                get { return this._innerLayer.Height; }
-            }
+            public int Height => this._innerLayer.Height;
 
-            public int Width
-            {
-                get { return this._innerLayer.Width; }
-            }
+            public int Width => this._innerLayer.Width;
 
             public IEnumerator<LayerItem<T>> GetEnumerator()
             {

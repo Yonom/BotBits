@@ -28,10 +28,7 @@ namespace BotBits
         }
 
         [UsedImplicitly]
-        internal PackageLoader Packages
-        {
-            get { return this._packageLoader; }
-        }
+        internal PackageLoader Packages => this._packageLoader;
 
         internal List<Type> Extensions { get; private set; }
 

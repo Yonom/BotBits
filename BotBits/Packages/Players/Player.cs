@@ -266,10 +266,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if this player has a crown; otherwise, <c>false</c>.
         /// </value>
-        public bool HasCrown
-        {
-            get { return this.BotBits != null && Players.Of(this.BotBits).CrownPlayer == this; }
-        }
+        public bool HasCrown => this.BotBits != null && Players.Of(this.BotBits).CrownPlayer == this;
 
         /// <summary>
         ///     Gets the color of this user's name when he/she chats.
@@ -293,10 +290,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if this player is flying using god mode, admin mode or moderator mode; otherwise, <c>false</c>.
         /// </value>
-        public bool Flying
-        {
-            get { return this.GodMode || this.AdminMode || this.ModMode; }
-        }
+        public bool Flying => this.GodMode || this.AdminMode || this.ModMode;
 
         /// <summary>
         ///     Gets a value indicating whether this player is a guest.
@@ -304,10 +298,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if this player is a guest; otherwise, <c>false</c>.
         /// </value>
-        public bool IsGuest
-        {
-            get { return PlayerUtils.IsGuest(this.Username); }
-        }
+        public bool IsGuest => PlayerUtils.IsGuest(this.Username);
 
         /// <summary>
         ///     Gets the player's chat name.
@@ -316,10 +307,7 @@ namespace BotBits
         ///     The player's chat name.
         /// </value>
         [CanBeNull]
-        public string ChatName
-        {
-            get { return PlayerUtils.GetChatName(this.Username); }
-        }
+        public string ChatName => PlayerUtils.GetChatName(this.Username);
 
         /// <summary>
         ///     Gets a value indicating whether this <see cref="Player" /> is the room owner.
@@ -327,10 +315,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if owner; otherwise, <c>false</c>.
         /// </value>
-        public bool Owner
-        {
-            get { return this.Username.Equals(Room.Of(this.BotBits).Owner, StringComparison.OrdinalIgnoreCase); }
-        }
+        public bool Owner => this.Username.Equals(Room.Of(this.BotBits).Owner, StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
         ///     Gets the x-coordinate of the block that the player is located on.
@@ -338,10 +323,7 @@ namespace BotBits
         /// <value>
         ///     The x-coordinate of the block that the player is located on.
         /// </value>
-        public int BlockX
-        {
-            get { return WorldUtils.PosToBlock(this.X); }
-        }
+        public int BlockX => WorldUtils.PosToBlock(this.X);
 
         /// <summary>
         ///     Gets the y-coordinate of the block that the player is located on.
@@ -349,10 +331,7 @@ namespace BotBits
         /// <value>
         ///     The y-coordinate of the block that the player is located on.
         /// </value>
-        public int BlockY
-        {
-            get { return WorldUtils.PosToBlock(this.Y); }
-        }
+        public int BlockY => WorldUtils.PosToBlock(this.Y);
 
         public bool HasGodRights { get; internal set; }
 
@@ -364,10 +343,7 @@ namespace BotBits
 
         public bool GoldBorder { get; set; }
 
-        public bool CanToggleGod
-        {
-            get { return this.HasGodRights || this.HasEditRights; }
-        }
+        public bool CanToggleGod => this.HasGodRights || this.HasEditRights;
 
         public bool Equals(Player other)
         {

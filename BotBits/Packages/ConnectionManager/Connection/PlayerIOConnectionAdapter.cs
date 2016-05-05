@@ -22,10 +22,7 @@ namespace BotBits
             this._connection.Send(message);
         }
 
-        public bool Connected
-        {
-            get { return this._connection.Connected; }
-        }
+        public bool Connected => this._connection.Connected;
 
         public event MessageReceivedEventHandler OnMessage
         {

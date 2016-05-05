@@ -43,9 +43,6 @@ namespace BotBits.Events
             protected set { this._player = value; }
         }
 
-        public bool Cancelled
-        {
-            get { return this.Player == null; }
-        }
+        public bool Cancelled => this.Player == null;
     }
 }

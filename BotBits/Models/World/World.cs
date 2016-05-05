@@ -29,15 +29,9 @@ namespace BotBits
         public BlockLayer<TBackground> Background { get; }
         public BlockLayer<TForeground> Foreground { get; }
 
-        IBlockLayer<TBackground> IWorld<TForeground, TBackground>.Background
-        {
-            get { return this.Background; }
-        }
+        IBlockLayer<TBackground> IWorld<TForeground, TBackground>.Background => this.Background;
 
-        IBlockLayer<TForeground> IWorld<TForeground, TBackground>.Foreground
-        {
-            get { return this.Foreground; }
-        }
+        IBlockLayer<TForeground> IWorld<TForeground, TBackground>.Foreground => this.Foreground;
 
         public int Height { get; }
         public int Width { get; }
@@ -52,15 +46,9 @@ namespace BotBits
             return this.GetEnumerator();
         }
 
-        World<TForeground, TBackground> IWorldAreaEnumerable<TForeground, TBackground>.World
-        {
-            get { return this; }
-        }
+        World<TForeground, TBackground> IWorldAreaEnumerable<TForeground, TBackground>.World => this;
 
-        public Rectangle Area
-        {
-            get { return new Rectangle(0, 0, this.Width, this.Height); }
-        }
+        public Rectangle Area => new Rectangle(0, 0, this.Width, this.Height);
 
         public WorldItem<TForeground, TBackground> At(Point point)
         {

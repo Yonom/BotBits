@@ -25,19 +25,13 @@ namespace BotBits.Events
         ///     Gets the block x.
         /// </summary>
         /// <value>The block x.</value>
-        public int BlockX
-        {
-            get { return this.X + 8 >> 4; }
-        }
+        public int BlockX => this.X + 8 >> 4;
 
         /// <summary>
         ///     Gets the block y.
         /// </summary>
         /// <value>The block y.</value>
-        public int BlockY
-        {
-            get { return this.Y + 8 >> 4; }
-        }
+        public int BlockY => this.Y + 8 >> 4;
 
         /// <summary>
         ///     Gets or sets the user coordinate x.

@@ -9,15 +9,9 @@ namespace BotBits
             return new LoginClient(ConnectionManager.Of(this.BotBits), client);
         }
 
-        ILogin<LoginClient> IPlayerIOGame<LoginClient>.Login
-        {
-            get { return this; }
-        }
+        ILogin<LoginClient> IPlayerIOGame<LoginClient>.Login => this;
 
-        public string GameId
-        {
-            get { return "everybody-edits-su9rn58o40itdbnw69plyw"; }
-        }
+        public string GameId => "everybody-edits-su9rn58o40itdbnw69plyw";
 
         public PlayerIOGame WithGameId(string gameId)
         {

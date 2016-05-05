@@ -72,31 +72,18 @@ namespace BotBits.Nito
         /// <summary>
         ///     Gets a value indicating whether this instance is empty.
         /// </summary>
-        private bool IsEmpty
-        {
-            get { return this.Count == 0; }
-        }
+        private bool IsEmpty => this.Count == 0;
 
         /// <summary>
         ///     Gets a value indicating whether this instance is at full capacity.
         /// </summary>
-        private bool IsFull
-        {
-            get { return this.Count == this.Capacity; }
-        }
+        private bool IsFull => this.Count == this.Capacity;
 
         /// <summary>
         ///     Gets a value indicating whether the buffer is "split" (meaning the beginning of the view is at a later index in
         ///     <see cref="_buffer" /> than the end).
         /// </summary>
-        private bool IsSplit
-        {
-            get
-            {
-                // Overflow-safe version of "(offset + Count) > Capacity"
-                return this._offset > (this.Capacity - this.Count);
-            }
-        }
+        private bool IsSplit => this._offset > (this.Capacity - this.Count);
 
         /// <summary>
         ///     Gets or sets the capacity for this deque. This value must always be greater than zero, and this property cannot be
@@ -541,10 +528,7 @@ namespace BotBits.Nito
         ///     Gets a value indicating whether this list is read-only. This implementation always returns <c>false</c>.
         /// </summary>
         /// <returns>true if this list is read-only; otherwise, false.</returns>
-        bool ICollection<T>.IsReadOnly
-        {
-            get { return false; }
-        }
+        bool ICollection<T>.IsReadOnly => false;
 
         /// <summary>
         ///     Gets or sets the item at the specified index.
@@ -773,15 +757,9 @@ namespace BotBits.Nito
             this.Insert(index, (T)value);
         }
 
-        bool IList.IsFixedSize
-        {
-            get { return false; }
-        }
+        bool IList.IsFixedSize => false;
 
-        bool IList.IsReadOnly
-        {
-            get { return false; }
-        }
+        bool IList.IsReadOnly => false;
 
         void IList.Remove(object value)
         {
@@ -818,15 +796,9 @@ namespace BotBits.Nito
             }
         }
 
-        bool ICollection.IsSynchronized
-        {
-            get { return false; }
-        }
+        bool ICollection.IsSynchronized => false;
 
-        object ICollection.SyncRoot
-        {
-            get { return this; }
-        }
+        object ICollection.SyncRoot => this;
 
         #endregion
 

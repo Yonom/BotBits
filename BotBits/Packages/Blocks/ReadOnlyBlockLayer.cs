@@ -12,25 +12,13 @@ namespace BotBits
             this._blockLayer = blockLayer;
         }
 
-        public int Height
-        {
-            get { return this._blockLayer.Height; }
-        }
+        public int Height => this._blockLayer.Height;
 
-        public int Width
-        {
-            get { return this._blockLayer.Width; }
-        }
+        public int Width => this._blockLayer.Width;
 
-        public T this[int x, int y]
-        {
-            get { return this._blockLayer[x, y]; }
-        }
+        public T this[int x, int y] => this._blockLayer[x, y];
 
-        public T this[Point p]
-        {
-            get { return this._blockLayer[p.X, p.Y]; }
-        }
+        public T this[Point p] => this._blockLayer[p.X, p.Y];
 
         public IEnumerator<LayerItem<T>> GetEnumerator()
         {

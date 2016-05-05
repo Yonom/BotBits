@@ -20,10 +20,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if skip queues is enabled; otherwise, <c>false</c>.
         /// </value>
-        public static bool SkipQueues
-        {
-            get { return _skipQueues; }
-        }
+        public static bool SkipQueues => _skipQueues;
 
         /// <summary>
         ///     Gets a value indicating whether SendMessages raised on this thread are sent without any redundancy checks.
@@ -31,10 +28,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if force send is enabled; otherwise, <c>false</c>.
         /// </value>
-        public static bool NoChecks
-        {
-            get { return _noChecks; }
-        }
+        public static bool NoChecks => _noChecks;
 
         /// <summary>
         ///     Gets a value indicating whether SendMessages raised on this thread are sent without entering any queues.
@@ -42,10 +36,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if instant send is enabled; otherwise, <c>false</c>.
         /// </value>
-        public static bool InstantSend
-        {
-            get { return _instantSend; }
-        }
+        public static bool InstantSend => _instantSend;
 
         /// <summary>
         ///     Enables the skip queue feature for SendMessages that are sent using the given callback.

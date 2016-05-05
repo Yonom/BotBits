@@ -38,10 +38,7 @@ namespace BotBits.Events
         ///     Gets a value indicating whether effect can expire
         /// </summary>
         /// <value><c>true</c> if effect can expire; otherwise, <c>false</c>.</value>
-        public bool Expires
-        {
-            get { return this.Duration.Ticks != 0; }
-        }
+        public bool Expires => this.Duration.Ticks != 0;
 
         /// <summary>
         ///     Gets or sets a value indicating whether effect is enabled.

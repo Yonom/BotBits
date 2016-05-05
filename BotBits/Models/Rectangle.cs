@@ -38,28 +38,16 @@ namespace BotBits
         public int Height { get; set; }
 
         [Browsable(false)]
-        public int Left
-        {
-            get { return this.X; }
-        }
+        public int Left => this.X;
 
         [Browsable(false)]
-        public int Top
-        {
-            get { return this.Y; }
-        }
+        public int Top => this.Y;
 
         [Browsable(false)]
-        public int Right
-        {
-            get { return this.X + this.Width - 1; }
-        }
+        public int Right => this.X + this.Width - 1;
 
         [Browsable(false)]
-        public int Bottom
-        {
-            get { return this.Y + this.Height - 1; }
-        }
+        public int Bottom => this.Y + this.Height - 1;
 
         public bool Equals(Rectangle other)
         {

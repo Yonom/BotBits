@@ -13,20 +13,11 @@ namespace BotBits
 
         public DatabaseObject DatabaseObject { get; }
 
-        public string Id
-        {
-            get { return this.DatabaseObject.Key; }
-        }
+        public string Id => this.DatabaseObject.Key;
 
-        public string Name
-        {
-            get { return this.DatabaseObject.GetString("name", "Untitled World"); }
-        }
+        public string Name => this.DatabaseObject.GetString("name", "Untitled World");
 
-        public string Owner
-        {
-            get { return this.DatabaseObject.GetString("owner", string.Empty); }
-        }
+        public string Owner => this.DatabaseObject.GetString("owner", string.Empty);
 
         public WorldType Type
         {
@@ -38,124 +29,51 @@ namespace BotBits
             }
         }
 
-        public int Plays
-        {
-            get { return this.DatabaseObject.GetInt("plays", 0); }
-        }
+        public int Plays => this.DatabaseObject.GetInt("plays", 0);
 
-        public int CurseLimit
-        {
-            get { return this.DatabaseObject.GetInt("curseLimit", 0); }
-        }
+        public int CurseLimit => this.DatabaseObject.GetInt("curseLimit", 0);
 
-        public int ZombieLimit
-        {
-            get { return this.DatabaseObject.GetInt("zombieLimit", 0); }
-        }
+        public int ZombieLimit => this.DatabaseObject.GetInt("zombieLimit", 0);
 
-        public uint BackgroundColor
-        {
-            get { return this.DatabaseObject.GetUInt("backgroundColor", 0); }
-        }
+        public uint BackgroundColor => this.DatabaseObject.GetUInt("backgroundColor", 0);
 
-        public Foreground.Id BorderType
-        {
-            get { return (Foreground.Id)this.DatabaseObject.GetUInt("BorderType", this.Type == WorldType.MoonLarge ? 182u : 9u); }
-        }
+        public Foreground.Id BorderType => (Foreground.Id)this.DatabaseObject.GetUInt("BorderType", this.Type == WorldType.MoonLarge ? 182u : 9u);
 
-        public int Favorites
-        {
-            get { return this.DatabaseObject.GetInt("Favorites", 0); }
-        }
+        public int Favorites => this.DatabaseObject.GetInt("Favorites", 0);
 
-        public int Likes
-        {
-            get { return this.DatabaseObject.GetInt("Likes", 0); }
-        }
+        public int Likes => this.DatabaseObject.GetInt("Likes", 0);
 
-        public bool Visible
-        {
-            get { return this.DatabaseObject.GetBool("visible", true); }
-        }
+        public bool Visible => this.DatabaseObject.GetBool("visible", true);
 
-        public bool HideLobby
-        {
-            get { return this.DatabaseObject.GetBool("hidelobby", false); }
-        }
+        public bool HideLobby => this.DatabaseObject.GetBool("hidelobby", false);
 
-        public bool IsFeatured
-        {
-            get { return this.DatabaseObject.GetBool("IsFeatured", false); }
-        }
+        public bool IsFeatured => this.DatabaseObject.GetBool("IsFeatured", false);
 
-        public bool MinimapEnabled
-        {
-            get { return this.DatabaseObject.GetBool("MinimapEnabled", false); }
-        }
+        public bool MinimapEnabled => this.DatabaseObject.GetBool("MinimapEnabled", false);
 
-        public bool LobbyPreviewEnabled
-        {
-            get { return this.DatabaseObject.GetBool("LobbyPreviewEnabled", false); }
-        }
+        public bool LobbyPreviewEnabled => this.DatabaseObject.GetBool("LobbyPreviewEnabled", false);
 
-        public double GravityMultiplier
-        {
-            get { return this.DatabaseObject.GetDouble("Gravity", this.Type == WorldType.MoonLarge ? 0.16 : 1); }
-        }
+        public double GravityMultiplier => this.DatabaseObject.GetDouble("Gravity", this.Type == WorldType.MoonLarge ? 0.16 : 1);
 
-        public bool AllowSpectating
-        {
-            get { return this.DatabaseObject.GetBool("allowSpectating", true); }
-        }
+        public bool AllowSpectating => this.DatabaseObject.GetBool("allowSpectating", true);
 
-        public string WorldDescription
-        {
-            get { return this.DatabaseObject.GetString("worldDescription", ""); }
-        }
+        public string WorldDescription => this.DatabaseObject.GetString("worldDescription", "");
 
-        public string Campaign
-        {
-            get { return this.DatabaseObject.GetString("Campaign", ""); }
-        }
+        public string Campaign => this.DatabaseObject.GetString("Campaign", "");
 
-        public bool IsPartOfCampaign
-        {
-            get { return this.Campaign != ""; }
-        }
+        public bool IsPartOfCampaign => this.Campaign != "";
 
-        public string Crew
-        {
-            get { return this.DatabaseObject.GetString("Crew", ""); }
-        }
+        public string Crew => this.DatabaseObject.GetString("Crew", "");
 
-        public bool IsPartOfCrew
-        {
-            get { return this.Crew != ""; }
-        }
+        public bool IsPartOfCrew => this.Crew != "";
 
-        public bool IsCrewLogo
-        {
-            get
-            {
-                return this.DatabaseObject.GetBool("IsCrewLogo", false);
-                ;
-            }
-        }
+        public bool IsCrewLogo => this.DatabaseObject.GetBool("IsCrewLogo", false);
 
-        public WorldStatus WorldStatus
-        {
-            get
-            {
-                return this.IsPartOfCrew
-                    ? (WorldStatus)this.DatabaseObject.GetInt("Status", 1)
-                    : WorldStatus.NonCrew;
-            }
-        }
+        public WorldStatus WorldStatus => this.IsPartOfCrew
+            ? (WorldStatus)this.DatabaseObject.GetInt("Status", 1)
+            : WorldStatus.NonCrew;
 
-        public bool CrewVisibleInLobby
-        {
-            get { return !this.IsCrewLogo && this.WorldStatus != WorldStatus.WIP; }
-        }
+        public bool CrewVisibleInLobby => !this.IsCrewLogo && this.WorldStatus != WorldStatus.WIP;
 
         public static DatabaseWorld FromDatabaseObject(DatabaseObject obj)
         {

@@ -176,18 +176,12 @@ namespace BotBits.Events
         ///     Gets the block x.
         /// </summary>
         /// <value>The block x.</value>
-        public int BlockX
-        {
-            get { return WorldUtils.PosToBlock(this.X); }
-        }
+        public int BlockX => WorldUtils.PosToBlock(this.X);
 
         /// <summary>
         ///     Gets the block y.
         /// </summary>
         /// <value>The block y.</value>
-        public int BlockY
-        {
-            get { return WorldUtils.PosToBlock(this.Y); }
-        }
+        public int BlockY => WorldUtils.PosToBlock(this.Y);
     }
 }
