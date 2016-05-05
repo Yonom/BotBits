@@ -14,12 +14,12 @@ namespace BotBits
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is BackgroundBlock && this.Equals((BackgroundBlock) obj);
+            return obj is BackgroundBlock && this.Equals((BackgroundBlock)obj);
         }
 
         public override int GetHashCode()
         {
-            return (int) this.Id;
+            return (int)this.Id;
         }
 
         public static bool operator ==(BackgroundBlock left, BackgroundBlock right)

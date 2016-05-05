@@ -41,8 +41,8 @@ namespace BotBits
                 "secure",
                 new Dictionary<string, string>
                 {
-                    {"userId", userId},
-                    {"authToken", token}
+                    { "userId", userId },
+                    { "authToken", token }
                 },
                 null);
         }

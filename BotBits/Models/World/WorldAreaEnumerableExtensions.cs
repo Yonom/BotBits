@@ -54,8 +54,7 @@ namespace BotBits
             where TBackground : struct
         {
             var area = worldArea.Area;
-            if (worldArea2.Area.Width > area.Width || worldArea2.Area.Height > area.Height)
-                throw new ArgumentException("The world is too big for this area.", "worldArea2");
+            if (worldArea2.Area.Width > area.Width || worldArea2.Area.Height > area.Height) throw new ArgumentException("The world is too big for this area.", "worldArea2");
 
             for (var y = area.Top; y < area.Top + worldArea2.Area.Height; y++)
                 for (var x = area.Left; x < area.Left + worldArea2.Area.Width; x++)

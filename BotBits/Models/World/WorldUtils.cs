@@ -36,25 +36,25 @@ namespace BotBits
                     return new ForegroundBlock(foreground);
 
                 case ForegroundType.Note:
-                    return new ForegroundBlock(foreground, 
+                    return new ForegroundBlock(foreground,
                         obj.GetUInt("id", 0));
 
                 case ForegroundType.Goal:
                 case ForegroundType.Toggle:
                 case ForegroundType.ToggleGoal:
                 case ForegroundType.Team:
-                    return new ForegroundBlock(foreground, 
+                    return new ForegroundBlock(foreground,
                         obj.GetUInt("goal", 0));
 
                 case ForegroundType.Morphable:
-                    return new ForegroundBlock(foreground, 
+                    return new ForegroundBlock(foreground,
                         obj.GetUInt("rotation", 0));
 
                 case ForegroundType.Portal:
                     return new ForegroundBlock(foreground,
                         obj.GetUInt("id", 0),
                         obj.GetUInt("target", 0),
-                        (Morph.Id) obj.GetUInt("rotation", 0));
+                        (Morph.Id)obj.GetUInt("rotation", 0));
 
                 case ForegroundType.WorldPortal:
                     return new ForegroundBlock(foreground,
@@ -64,7 +64,7 @@ namespace BotBits
                     return new ForegroundBlock(foreground,
                         obj.GetString("text", "no text found"),
                         obj.GetString("text_color", "#FFFFFF"));
-                    
+
                 case ForegroundType.Sign:
                     return new ForegroundBlock(foreground,
                         obj.GetString("text", "No text found."),
@@ -82,49 +82,49 @@ namespace BotBits
             switch (foregroundType)
             {
                 case BlockArgsType.None:
-                    {
-                        return new ForegroundBlock(block);
-                    }
+                {
+                    return new ForegroundBlock(block);
+                }
 
                 case BlockArgsType.Number:
-                    {
-                        var i = Convert.ToUInt32(args[0]);
-                        return new ForegroundBlock(block, i);
-                    }
+                {
+                    var i = Convert.ToUInt32(args[0]);
+                    return new ForegroundBlock(block, i);
+                }
 
                 case BlockArgsType.SignedNumber:
-                    {
-                        var si = Convert.ToInt32(args[0]);
-                        return new ForegroundBlock(block, si);
-                    }
+                {
+                    var si = Convert.ToInt32(args[0]);
+                    return new ForegroundBlock(block, si);
+                }
 
                 case BlockArgsType.String:
-                    {
-                        var str = Convert.ToString(args[0]);
-                        return new ForegroundBlock(block, str);
-                    }
+                {
+                    var str = Convert.ToString(args[0]);
+                    return new ForegroundBlock(block, str);
+                }
 
                 case BlockArgsType.Portal:
-                    {
-                        var portalRotation = (Morph.Id)Convert.ToUInt32(args[0]);
-                        var portalId = Convert.ToUInt32(args[1]);
-                        var portalTarget = Convert.ToUInt32(args[2]);
-                        return new ForegroundBlock(block, portalId, portalTarget, portalRotation);
-                    }
+                {
+                    var portalRotation = (Morph.Id)Convert.ToUInt32(args[0]);
+                    var portalId = Convert.ToUInt32(args[1]);
+                    var portalTarget = Convert.ToUInt32(args[2]);
+                    return new ForegroundBlock(block, portalId, portalTarget, portalRotation);
+                }
 
                 case BlockArgsType.Label:
-                    {
-                        var text = Convert.ToString(args[0]);
-                        var textcolor = Convert.ToString(args[1]);
-                        return new ForegroundBlock(block, text, textcolor);
-                    }
+                {
+                    var text = Convert.ToString(args[0]);
+                    var textcolor = Convert.ToString(args[1]);
+                    return new ForegroundBlock(block, text, textcolor);
+                }
 
                 case BlockArgsType.Sign:
-                    {
-                        var text = Convert.ToString(args[0]);
-                        var color = (Morph.Id)Convert.ToUInt32(args[1]);
-                        return new ForegroundBlock(block, text, color);
-                    }
+                {
+                    var text = Convert.ToString(args[0]);
+                    var color = (Morph.Id)Convert.ToUInt32(args[1]);
+                    return new ForegroundBlock(block, text, color);
+                }
 
                 default:
                     throw new NotSupportedException("Invalid block.");
@@ -133,7 +133,7 @@ namespace BotBits
 
         public static ForegroundType GetForegroundType(Foreground.Id id)
         {
-            var package = ItemServices.GetPackageInternal((int) id);
+            var package = ItemServices.GetPackageInternal((int)id);
             return package != null ? package.ForegroundType : ForegroundType.Normal;
         }
 
@@ -192,7 +192,7 @@ namespace BotBits
 
         public static int PosToBlock(double pos)
         {
-            return (int) pos + 8 >> 4;
+            return (int)pos + 8 >> 4;
         }
 
         public static bool IsAlreadyPlaced(PlaceSendMessage sent, Blocks world)
@@ -201,11 +201,11 @@ namespace BotBits
             {
                 case Layer.Foreground:
                     var fg = world.Foreground[sent.X, sent.Y];
-                    return sent.Id == (int) fg.Block.Id &&
+                    return sent.Id == (int)fg.Block.Id &&
                            sent.Args.SequenceEqual(fg.Block.GetArgs());
                 case Layer.Background:
                     var bg = world.Background[sent.X, sent.Y];
-                    return sent.Id == (int) bg.Block.Id;
+                    return sent.Id == (int)bg.Block.Id;
                 default:
                     throw new NotSupportedException("Unknown layer.");
             }
@@ -216,11 +216,9 @@ namespace BotBits
             where TBlock : struct
         {
             var bg = received as BackgroundPlaceEvent;
-            if (bg != null)
-                return AreSame(sent, bg);
+            if (bg != null) return AreSame(sent, bg);
             var fg = received as ForegroundPlaceEvent;
-            if (fg != null)
-                return AreSame(sent, fg);
+            if (fg != null) return AreSame(sent, fg);
 
             throw new NotSupportedException("Unknown PlaceEvent.");
         }
@@ -228,13 +226,13 @@ namespace BotBits
 
         internal static bool AreSame(PlaceSendMessage sent, ForegroundPlaceEvent received)
         {
-            return sent.Id == (int) received.New.Block.Id &&
+            return sent.Id == (int)received.New.Block.Id &&
                    sent.Args.SequenceEqual(received.New.Block.GetArgs());
         }
 
         internal static bool AreSame(PlaceSendMessage sent, BackgroundPlaceEvent received)
         {
-            return sent.Id == (int) received.New.Block.Id;
+            return sent.Id == (int)received.New.Block.Id;
         }
 
         internal static bool AreSame(PlaceSendMessage b1, PlaceSendMessage b2)
@@ -252,10 +250,9 @@ namespace BotBits
             if (!respectBorder) return true;
             if (p.X == 0 || p.Y == 0 || p.X == world.Width - 1 || p.Y == world.Height - 1) // If on border
             {
-                if (p.Layer == Layer.Background)
-                    return false;
+                if (p.Layer == Layer.Background) return false;
 
-                return IsBorderPlaceable((Foreground.Id) p.Id);
+                return IsBorderPlaceable((Foreground.Id)p.Id);
             }
 
             return true;
@@ -263,21 +260,20 @@ namespace BotBits
 
         private static bool IsBorderPlaceable(Foreground.Id id)
         {
-            if (id == Foreground.Secret.Black)
-                return true;
+            if (id == Foreground.Secret.Black) return true;
 
-            var block = ItemServices.GetGroup((int) id);
-            return block == typeof (Foreground.Basic) ||
-                   block == typeof (Foreground.Beta) ||
-                   block == typeof (Foreground.Brick);
+            var block = ItemServices.GetGroup((int)id);
+            return block == typeof(Foreground.Basic) ||
+                   block == typeof(Foreground.Beta) ||
+                   block == typeof(Foreground.Brick);
         }
 
         internal static IEnumerable<Point> GetPos(byte[] byteArrayX, byte[] byteArrayY)
         {
             for (var i = 0; i <= byteArrayX.Length - 1; i += 2)
             {
-                var x = byteArrayX[i]*256 + byteArrayX[i + 1];
-                var y = byteArrayY[i]*256 + byteArrayY[i + 1];
+                var x = byteArrayX[i] * 256 + byteArrayX[i + 1];
+                var y = byteArrayY[i] * 256 + byteArrayY[i + 1];
 
                 yield return new Point(x, y);
             }

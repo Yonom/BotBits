@@ -7,7 +7,7 @@ namespace BotBits
     public sealed class EventLoader : LoaderBase<EventLoader>
     {
         private static readonly MethodInfo _bindMethod =
-            typeof (EventLoader).GetMethod("Bind", BindingFlags.NonPublic | BindingFlags.Instance);
+            typeof(EventLoader).GetMethod("Bind", BindingFlags.NonPublic | BindingFlags.Instance);
 
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public EventLoader()
@@ -22,21 +22,19 @@ namespace BotBits
 
         protected override bool ShouldLoad(MethodInfo methodInfo)
         {
-            return methodInfo.IsDefined(typeof (EventListenerAttribute), true);
+            return methodInfo.IsDefined(typeof(EventListenerAttribute), true);
         }
 
         protected override Action GetBinder(object baseObj, MethodInfo eventHandler)
         {
             var parameters = eventHandler.GetParameters();
-            if (parameters.Length != 1)
-                throw GetEventEx(eventHandler, "EventListeners must have one argument of type Event.");
+            if (parameters.Length != 1) throw GetEventEx(eventHandler, "EventListeners must have one argument of type Event.");
 
             var e = parameters[0].ParameterType;
-            if (!Utils.IsEvent(e))
-                throw GetEventEx(eventHandler, "The argument must be an event.");
+            if (!Utils.IsEvent(e)) throw GetEventEx(eventHandler, "The argument must be an event.");
 
             var genericBind = _bindMethod.MakeGenericMethod(e);
-            return () => genericBind.Invoke(this, new[] {baseObj, eventHandler});
+            return () => genericBind.Invoke(this, new[] { baseObj, eventHandler });
         }
 
         [UsedImplicitly]
@@ -45,11 +43,11 @@ namespace BotBits
         {
             var attribute =
                 (EventListenerAttribute)
-                    eventHandler.GetCustomAttributes(typeof (EventListenerAttribute), true)[0];
+                    eventHandler.GetCustomAttributes(typeof(EventListenerAttribute), true)[0];
 
             var handler =
                 (EventRaiseHandler<TEvent>)
-                    Delegate.CreateDelegate(typeof (EventRaiseHandler<TEvent>), baseObj, eventHandler);
+                    Delegate.CreateDelegate(typeof(EventRaiseHandler<TEvent>), baseObj, eventHandler);
 
             Event<TEvent>
                 .Of(this.BotBits)

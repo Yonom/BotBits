@@ -31,7 +31,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("setStatus", (int) this.Status);
+            return Message.Create("setStatus", (int)this.Status);
         }
     }
 }

@@ -1,4 +1,3 @@
-using System.Linq;
 using PlayerIOClient;
 
 namespace BotBits.Events

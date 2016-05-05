@@ -61,7 +61,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("effect", this.X, this.Y, (int) this.Effect, this.Activate);
+            return Message.Create("effect", this.X, this.Y, (int)this.Effect, this.Activate);
         }
     }
 }

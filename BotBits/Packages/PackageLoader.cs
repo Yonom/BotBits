@@ -10,14 +10,16 @@ using JetBrains.Annotations;
 
 namespace BotBits
 {
-    [DebuggerTypeProxy(typeof (DebugView))]
+    [DebuggerTypeProxy(typeof(DebugView))]
     internal sealed class PackageLoader : IDisposable
     {
         private readonly BotBitsClient _client;
         private readonly List<CompositionContainer> _containers = new List<CompositionContainer>();
         private readonly ConcurrentDictionary<Type, IPackage> _packages = new ConcurrentDictionary<Type, IPackage>();
 
-        [ImportMany] [UsedImplicitly(ImplicitUseKindFlags.Access)] private IPackage[] _importedPackages;
+        [ImportMany]
+        [UsedImplicitly(ImplicitUseKindFlags.Access)]
+        private IPackage[] _importedPackages;
 
         public PackageLoader(BotBitsClient client)
         {
@@ -66,11 +68,10 @@ namespace BotBits
 
         public T Get<T>() where T : Package<T>, new()
         {
-            var t = typeof (T);
+            var t = typeof(T);
             IPackage value;
 
-            if (this._packages.TryGetValue(t, out value))
-                return (T) value;
+            if (this._packages.TryGetValue(t, out value)) return (T)value;
             throw new NotSupportedException(
                 string.Format("The package {0} has not been loaded into BotBits.", t.FullName));
         }
@@ -82,8 +83,7 @@ namespace BotBits
                 l.Setup(this._client);
                 this._packages.TryAdd(l.GetType(), l);
             }
-            if (initialize != null)
-                initialize();
+            if (initialize != null) initialize();
             foreach (var l in packages)
             {
                 l.SignalInitializeFinish();
@@ -123,10 +123,12 @@ namespace BotBits
             [DebuggerDisplay("{_package}", Name = "{_type.Name,nq}")]
             private class PackageView
             {
-                [DebuggerBrowsable(DebuggerBrowsableState.RootHidden), UsedImplicitly] private readonly IPackage
+                [DebuggerBrowsable(DebuggerBrowsableState.RootHidden), UsedImplicitly]
+                private readonly IPackage
                     _package;
 
-                [DebuggerBrowsable(DebuggerBrowsableState.Never), UsedImplicitly] private readonly Type _type;
+                [DebuggerBrowsable(DebuggerBrowsableState.Never), UsedImplicitly]
+                private readonly Type _type;
 
                 public PackageView(Type type, IPackage package)
                 {

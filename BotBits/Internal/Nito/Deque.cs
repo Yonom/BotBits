@@ -13,7 +13,7 @@ namespace BotBits.Nito
     /// </summary>
     /// <typeparam name="T">The type of elements contained in the deque.</typeparam>
     [DebuggerDisplay("Count = {Count}, Capacity = {Capacity}")]
-    [DebuggerTypeProxy(typeof (Deque<>.DebugView))]
+    [DebuggerTypeProxy(typeof(Deque<>.DebugView))]
     internal sealed class Deque<T> : IList<T>, IList
     {
         /// <summary>
@@ -37,8 +37,7 @@ namespace BotBits.Nito
         /// <param name="capacity">The initial capacity. Must be greater than <c>0</c>.</param>
         public Deque(int capacity)
         {
-            if (capacity < 1)
-                throw new ArgumentOutOfRangeException("capacity", "Capacity must be greater than 0.");
+            if (capacity < 1) throw new ArgumentOutOfRangeException("capacity", "Capacity must be greater than 0.");
             this._buffer = new T[capacity];
         }
 
@@ -110,14 +109,11 @@ namespace BotBits.Nito
 
             set
             {
-                if (value < 1)
-                    throw new ArgumentOutOfRangeException("value", "Capacity must be greater than 0.");
+                if (value < 1) throw new ArgumentOutOfRangeException("value", "Capacity must be greater than 0.");
 
-                if (value < this.Count)
-                    throw new InvalidOperationException("Capacity cannot be set to a value less than Count");
+                if (value < this.Count) throw new InvalidOperationException("Capacity cannot be set to a value less than Count");
 
-                if (value == this._buffer.Length)
-                    return;
+                if (value == this._buffer.Length) return;
 
                 // Create the new buffer and copy our existing range.
                 var newBuffer = new T[value];
@@ -162,7 +158,7 @@ namespace BotBits.Nito
         /// <returns>The buffer index.</returns>
         private int DequeIndexToBufferIndex(int index)
         {
-            return (index + this._offset)%this.Capacity;
+            return (index + this._offset) % this.Capacity;
         }
 
         /// <summary>
@@ -208,7 +204,7 @@ namespace BotBits.Nito
                 return;
             }
 
-            this.DoInsertRange(index, new[] {item}, 1);
+            this.DoInsertRange(index, new[] { item }, 1);
         }
 
         /// <summary>
@@ -255,8 +251,7 @@ namespace BotBits.Nito
         private int PreDecrement(int value)
         {
             this._offset -= value;
-            if (this._offset < 0)
-                this._offset += this.Capacity;
+            if (this._offset < 0) this._offset += this.Capacity;
             return this._offset;
         }
 
@@ -314,7 +309,7 @@ namespace BotBits.Nito
         private void DoInsertRange(int index, IEnumerable<T> collection, int collectionCount)
         {
             // Make room in the existing list
-            if (index < this.Count/2)
+            if (index < this.Count / 2)
             {
                 // Inserting into the first half of the list
 
@@ -378,7 +373,7 @@ namespace BotBits.Nito
                 return;
             }
 
-            if ((index + (collectionCount/2)) < this.Count/2)
+            if ((index + (collectionCount / 2)) < this.Count / 2)
             {
                 // Removing from first half of list
 
@@ -416,7 +411,7 @@ namespace BotBits.Nito
         {
             if (this.IsFull)
             {
-                this.Capacity = this.Capacity*2;
+                this.Capacity = this.Capacity * 2;
             }
         }
 
@@ -501,8 +496,7 @@ namespace BotBits.Nito
         /// <exception cref="InvalidOperationException">The deque is empty.</exception>
         public T RemoveFromBack()
         {
-            if (this.IsEmpty)
-                throw new InvalidOperationException("The deque is empty.");
+            if (this.IsEmpty) throw new InvalidOperationException("The deque is empty.");
 
             return this.DoRemoveFromBack();
         }
@@ -514,8 +508,7 @@ namespace BotBits.Nito
         /// <exception cref="InvalidOperationException">The deque is empty.</exception>
         public T RemoveFromFront()
         {
-            if (this.IsEmpty)
-                throw new InvalidOperationException("The deque is empty.");
+            if (this.IsEmpty) throw new InvalidOperationException("The deque is empty.");
 
             return this.DoRemoveFromFront();
         }
@@ -536,7 +529,7 @@ namespace BotBits.Nito
                 get
                 {
                     var array = new T[this._deque.Count];
-                    ((ICollection<T>) this._deque).CopyTo(array, 0);
+                    ((ICollection<T>)this._deque).CopyTo(array, 0);
                     return array;
                 }
             }
@@ -618,8 +611,7 @@ namespace BotBits.Nito
             var ret = 0;
             foreach (var sourceItem in this)
             {
-                if (comparer.Equals(item, sourceItem))
-                    return ret;
+                if (comparer.Equals(item, sourceItem)) return ret;
                 ++ret;
             }
 
@@ -673,8 +665,7 @@ namespace BotBits.Nito
         /// </exception>
         void ICollection<T>.CopyTo(T[] array, int arrayIndex)
         {
-            if (array == null)
-                throw new ArgumentNullException("array", "Array is null");
+            if (array == null) throw new ArgumentNullException("array", "Array is null");
 
             var count = this.Count;
             CheckRangeArguments(array.Length, arrayIndex, count);
@@ -698,8 +689,7 @@ namespace BotBits.Nito
         public bool Remove(T item)
         {
             var index = this.IndexOf(item);
-            if (index == -1)
-                return false;
+            if (index == -1) return false;
 
             this.DoRemoveAt(index);
             return true;
@@ -749,13 +739,10 @@ namespace BotBits.Nito
 
             if (item == null)
             {
-                var type = typeof (T);
-                if (type.IsClass && !type.IsPointer)
-                    return true; // classes, arrays, and delegates
-                if (type.IsInterface)
-                    return true; // interfaces
-                if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (Nullable<>))
-                    return true; // nullable value types
+                var type = typeof(T);
+                if (type.IsClass && !type.IsPointer) return true; // classes, arrays, and delegates
+                if (type.IsInterface) return true; // interfaces
+                if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)) return true; // nullable value types
             }
 
             return false;
@@ -763,31 +750,27 @@ namespace BotBits.Nito
 
         int IList.Add(object value)
         {
-            if (!this.ObjectIsT(value))
-                throw new ArgumentException("Item is not of the correct type.", "value");
-            this.AddToBack((T) value);
+            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+            this.AddToBack((T)value);
             return this.Count - 1;
         }
 
         bool IList.Contains(object value)
         {
-            if (!this.ObjectIsT(value))
-                throw new ArgumentException("Item is not of the correct type.", "value");
-            return this.Contains((T) value);
+            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+            return this.Contains((T)value);
         }
 
         int IList.IndexOf(object value)
         {
-            if (!this.ObjectIsT(value))
-                throw new ArgumentException("Item is not of the correct type.", "value");
-            return this.IndexOf((T) value);
+            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+            return this.IndexOf((T)value);
         }
 
         void IList.Insert(int index, object value)
         {
-            if (!this.ObjectIsT(value))
-                throw new ArgumentException("Item is not of the correct type.", "value");
-            this.Insert(index, (T) value);
+            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+            this.Insert(index, (T)value);
         }
 
         bool IList.IsFixedSize
@@ -802,9 +785,8 @@ namespace BotBits.Nito
 
         void IList.Remove(object value)
         {
-            if (!this.ObjectIsT(value))
-                throw new ArgumentException("Item is not of the correct type.", "value");
-            this.Remove((T) value);
+            if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+            this.Remove((T)value);
         }
 
         object IList.this[int index]
@@ -813,16 +795,14 @@ namespace BotBits.Nito
 
             set
             {
-                if (!this.ObjectIsT(value))
-                    throw new ArgumentException("Item is not of the correct type.", "value");
-                this[index] = (T) value;
+                if (!this.ObjectIsT(value)) throw new ArgumentException("Item is not of the correct type.", "value");
+                this[index] = (T)value;
             }
         }
 
         void ICollection.CopyTo(Array array, int index)
         {
-            if (array == null)
-                throw new ArgumentNullException("array", "Destination array cannot be null.");
+            if (array == null) throw new ArgumentNullException("array", "Destination array cannot be null.");
             CheckRangeArguments(array.Length, index, this.Count);
 
             for (var i = 0; i != this.Count; ++i)

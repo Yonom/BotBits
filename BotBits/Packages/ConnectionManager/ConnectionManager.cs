@@ -43,8 +43,7 @@ namespace BotBits
 
         public void SetConnection(IConnection connection, ConnectionArgs args)
         {
-            if (connection == null)
-                throw new ArgumentNullException("connection");
+            if (connection == null) throw new ArgumentNullException("connection");
 
             if (Interlocked.CompareExchange(ref this._connection, connection, null) != null)
             {
@@ -68,8 +67,7 @@ namespace BotBits
 
         void IDisposable.Dispose()
         {
-            if (this._adapter != null)
-                this._adapter.Dispose();
+            if (this._adapter != null) this._adapter.Dispose();
         }
 
         private void Connection_OnMessage(object sender, Message e)

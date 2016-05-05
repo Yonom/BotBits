@@ -38,7 +38,7 @@ namespace BotBits
 
         internal MessageQueue<T> GetQueue<T>() where T : SendMessage<T>
         {
-            return (MessageQueue<T>) this._queues.GetOrAdd(typeof (T), t => new MessageQueue<T>());
+            return (MessageQueue<T>)this._queues.GetOrAdd(typeof(T), t => new MessageQueue<T>());
         }
     }
 }

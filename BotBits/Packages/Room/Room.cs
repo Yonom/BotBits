@@ -251,13 +251,10 @@ namespace BotBits
         [EventListener]
         private void On(SwitchUpdateEvent e)
         {
-            if (e.SwitchType != SwitchType.Orange)
-                return;
-            
-            if (e.Enabled)
-                this.AddSwitch(e.Id);
-            else
-                this.RemoveSwitch(e.Id);
+            if (e.SwitchType != SwitchType.Orange) return;
+
+            if (e.Enabled) this.AddSwitch(e.Id);
+            else this.RemoveSwitch(e.Id);
 
             new OrangeSwitchEvent(e.Id, e.Enabled)
                 .RaiseIn(this.BotBits);

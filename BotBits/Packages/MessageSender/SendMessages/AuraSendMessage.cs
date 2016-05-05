@@ -41,7 +41,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("aura", (int) this.AuraShape, (int) this.AuraColor);
+            return Message.Create("aura", (int)this.AuraShape, (int)this.AuraColor);
         }
     }
 }

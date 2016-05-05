@@ -51,7 +51,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("team", this.X, this.Y, (int) this.Team);
+            return Message.Create("team", this.X, this.Y, (int)this.Team);
         }
     }
 }

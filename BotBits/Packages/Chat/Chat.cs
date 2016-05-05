@@ -92,8 +92,7 @@ namespace BotBits
         private string GetChannel(string msg)
         {
             string channel = null;
-            if (msg.StartsWith("/pm ", StringComparison.OrdinalIgnoreCase))
-                channel = msg.Split(' ').Skip(1).FirstOrDefault();
+            if (msg.StartsWith("/pm ", StringComparison.OrdinalIgnoreCase)) channel = msg.Split(' ').Skip(1).FirstOrDefault();
             return channel ?? string.Empty;
         }
 
@@ -148,8 +147,7 @@ namespace BotBits
         [EventListener(GlobalPriority.AfterMost)]
         private void OnAfterMost(QueueChatEvent e)
         {
-            if (!e.Cancelled)
-                this.QueueChat(e.Message);
+            if (!e.Cancelled) this.QueueChat(e.Message);
         }
 
         [EventListener]
@@ -158,8 +156,7 @@ namespace BotBits
             if (e.Player == Players.Of(this.BotBits).OwnPlayer)
             {
                 var channel = this.GetChatChannel("");
-                if (channel.LastSent == e.Text)
-                    channel.LastReceived = e.Text;
+                if (channel.LastSent == e.Text) channel.LastReceived = e.Text;
             }
         }
 

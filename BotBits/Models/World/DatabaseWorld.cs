@@ -32,10 +32,9 @@ namespace BotBits
         {
             get
             {
-                if (!this.DatabaseObject.Contains("type"))
-                    this.DatabaseObject.Set("type", (int) WorldUtils.GetLegacyWorldType(this.Width, this.Height));
+                if (!this.DatabaseObject.Contains("type")) this.DatabaseObject.Set("type", (int)WorldUtils.GetLegacyWorldType(this.Width, this.Height));
 
-                return (WorldType) this.DatabaseObject.GetInt("type");
+                return (WorldType)this.DatabaseObject.GetInt("type");
             }
         }
 
@@ -136,7 +135,11 @@ namespace BotBits
 
         public bool IsCrewLogo
         {
-            get { return this.DatabaseObject.GetBool("IsCrewLogo", false); ; }
+            get
+            {
+                return this.DatabaseObject.GetBool("IsCrewLogo", false);
+                ;
+            }
         }
 
         public WorldStatus WorldStatus
@@ -173,7 +176,7 @@ namespace BotBits
             foreach (DatabaseObject ct in worlddata)
             {
                 if (ct.Count == 0) continue;
-                var type = (uint) ct.GetValue("type");
+                var type = (uint)ct.GetValue("type");
                 var layerNum = ct.GetInt("layer", 0);
                 var xs = ct.GetBytes("x", new byte[0]);
                 var ys = ct.GetBytes("y", new byte[0]);
@@ -184,7 +187,7 @@ namespace BotBits
 
                 if (layerNum == 0)
                 {
-                    var foreground = (Foreground.Id) type;
+                    var foreground = (Foreground.Id)type;
                     var block = WorldUtils.GetForegroundFromDatabase(ct, foreground);
                     foreach (var loc in points)
                     {
@@ -193,7 +196,7 @@ namespace BotBits
                 }
                 else
                 {
-                    var background = (Background.Id) type;
+                    var background = (Background.Id)type;
                     var block = new BackgroundBlock(background);
                     foreach (var loc in points)
                     {

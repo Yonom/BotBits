@@ -59,8 +59,7 @@ namespace BotBits
         private void UpdateFinish()
         {
             if (this._sentBlocks.Count == 0 &&
-                this._messageQueue.Count == 0)
-                this._finishResetEvent.Set();
+                this._messageQueue.Count == 0) this._finishResetEvent.Set();
         }
 
         [EventListener]
@@ -114,8 +113,7 @@ namespace BotBits
                 this._sentLocations.Remove(currentPoint);
 
                 // If we arrived at the block we received, exit the checks
-                if (currentPoint == point)
-                    break;
+                if (currentPoint == point) break;
 
                 this.SendMissed(current);
             }
@@ -175,7 +173,7 @@ namespace BotBits
             if (b.SendCount > 10) return false;
             if (b.NoChecks) return true;
             if (!Actions.Of(this.BotBits).CanEdit) return false;
-            
+
             var playerData = ConnectionManager.Of(this.BotBits).PlayerData;
             var blocks = Blocks.Of(this.BotBits);
             var isAdministrator = playerData.PlayerObject.IsAdministrator;

@@ -19,11 +19,11 @@ namespace BotBits.Events
             : base(client, message)
         {
             this.Campaign = message.GetString(0);
-            this.Status = (CampaignStatus) message.GetInt(1);
+            this.Status = (CampaignStatus)message.GetInt(1);
 
             if (this.Status != CampaignStatus.Locked)
             {
-                this.Difficulty = (CampaignDifficulty) message.GetInt(2);
+                this.Difficulty = (CampaignDifficulty)message.GetInt(2);
                 this.Tier = message.GetInt(3);
                 this.MaxTiers = message.GetInt(4);
             }

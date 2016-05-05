@@ -10,14 +10,14 @@ namespace BotBits
         private AccessRight _accessRight;
         private bool _canEdit;
 
-        public bool Liked { get; private set; }
-        public bool Favorited { get; private set; }
-        public bool CompletedLevel { get; private set; }
-
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Actions()
         {
         }
+
+        public bool Liked { get; private set; }
+        public bool Favorited { get; private set; }
+        public bool CompletedLevel { get; private set; }
 
         public bool CanEdit
         {
@@ -161,7 +161,7 @@ namespace BotBits
         private bool HasAura(AuraShape auraShape, AuraColor auraColor)
         {
             return ConnectionManager.Of(this.BotBits).PlayerData.HasAuraShape(auraShape) &&
-                ConnectionManager.Of(this.BotBits).PlayerData.HasAuraColor(auraColor);
+                   ConnectionManager.Of(this.BotBits).PlayerData.HasAuraColor(auraColor);
         }
 
         public void Move(

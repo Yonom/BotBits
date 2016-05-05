@@ -31,8 +31,7 @@ namespace BotBits
         internal void SetScheduler(ISchedulerHandle handle)
         {
             var old = Interlocked.Exchange(ref this._schedulerHandle, handle);
-            if (old != null)
-                old.Dispose();
+            if (old != null) old.Dispose();
         }
 
         internal void InitScheduler(bool create)
@@ -43,8 +42,7 @@ namespace BotBits
                     ? BotServices.GetOrCreateScheduler()
                     : BotServices.GetScheduler();
 
-                if (!this.CompareSetScheduler(scheduler))
-                    scheduler.Dispose();
+                if (!this.CompareSetScheduler(scheduler)) scheduler.Dispose();
             }
         }
 

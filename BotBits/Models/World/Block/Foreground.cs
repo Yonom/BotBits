@@ -769,7 +769,6 @@ namespace BotBits
             [Pack("brickspringtrophygold")]
             public const Id
                 GoldSpringTrophy = (Id)480;
-
         }
 
         public static class Spring2011

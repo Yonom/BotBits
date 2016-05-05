@@ -9,7 +9,8 @@ namespace BotBits
     {
         private readonly Task<PlayerData> _argsAsync;
 
-        [NotNull] private readonly IConnectionManager _connectionManager;
+        [NotNull]
+        private readonly IConnectionManager _connectionManager;
 
         internal LoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client)
             : this(connectionManager, client, LoginUtils.GetConnectionArgsAsync(client))

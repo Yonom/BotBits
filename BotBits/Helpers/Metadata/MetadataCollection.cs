@@ -36,20 +36,18 @@ namespace BotBits
             this._metadatas.TryGetValue(metadataId, out metadataObj);
 
             metadata = default(TMetadata);
-            if (metadataObj != null)
-                metadata = (TMetadata) metadataObj;
+            if (metadataObj != null) metadata = (TMetadata)metadataObj;
         }
 
         private bool SetMetadata<TMetaData>(string metadataId, TMetaData value)
         {
             object oldObj = default(TMetaData);
-            var newObj = (TMetaData) this._metadatas.AddOrUpdate(metadataId, value, (k, v) =>
+            var newObj = (TMetaData)this._metadatas.AddOrUpdate(metadataId, value, (k, v) =>
             {
                 oldObj = v;
                 return value;
             });
-            if (!EqualityComparer<TMetaData>.Default.Equals(newObj, value))
-                return false; // There was another insert at the same time
+            if (!EqualityComparer<TMetaData>.Default.Equals(newObj, value)) return false; // There was another insert at the same time
 
             this.OnMetadataChanged(new MetadataChangedEventArgs(metadataId, oldObj, newObj));
             return true;

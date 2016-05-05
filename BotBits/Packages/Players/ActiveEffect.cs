@@ -18,7 +18,8 @@ namespace BotBits
                 this._expireTime = DateTime.UtcNow.Add(timeLeft);
             }
         }
-        public Effect Effect  { get; }
+
+        public Effect Effect { get; }
         public bool Expires { get; }
         public TimeSpan Duration { get; }
         public int Value { get; set; }
@@ -27,8 +28,7 @@ namespace BotBits
         {
             get
             {
-                if (!this.Expires)
-                    throw new NotSupportedException("Cannot call TimeLeft on an effect that does not expire.");
+                if (!this.Expires) throw new NotSupportedException("Cannot call TimeLeft on an effect that does not expire.");
                 return DateTime.UtcNow.Subtract(this._expireTime);
             }
         }

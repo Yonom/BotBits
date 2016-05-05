@@ -1,4 +1,3 @@
-using System.Linq;
 using PlayerIOClient;
 
 namespace BotBits.Events
@@ -24,8 +23,8 @@ namespace BotBits.Events
             this.Favorites = message.GetInt(3);
             this.Likes = message.GetInt(4);
             // 5: UserId
-            this.Smiley = (Smiley) message.GetInt(6);
-            this.AuraShape = (AuraShape) message.GetInt(7);
+            this.Smiley = (Smiley)message.GetInt(6);
+            this.AuraShape = (AuraShape)message.GetInt(7);
             this.AuraColor = (AuraColor)message.GetInt(8);
             this.GoldBorder = message.GetBoolean(9);
             this.SpawnX = message.GetDouble(10);
@@ -50,7 +49,7 @@ namespace BotBits.Events
             this.CrewId = message.GetString(29);
             this.CrewName = message.GetString(30);
             this.CanChangeWorldOptions = message.GetBoolean(31);
-            this.WorldStatus = (WorldStatus) message.GetInt(32);
+            this.WorldStatus = (WorldStatus)message.GetInt(32);
             this.Badge = message.GetBadge(33);
             this.CrewMember = message.GetBoolean(34);
             this.MinimapEnabled = message.GetBoolean(35);

@@ -19,7 +19,7 @@ namespace BotBits.Events
         internal BlockPlaceEvent(BotBitsClient client, Message message)
             : base(client, message, 4)
         {
-            this.Layer = (Layer) message.GetInteger(0);
+            this.Layer = (Layer)message.GetInteger(0);
             this.X = message.GetInteger(1);
             this.Y = message.GetInteger(2);
             this.Id = message.GetInteger(3);

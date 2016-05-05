@@ -16,8 +16,8 @@ namespace BotBits
 
         static ItemServices()
         {
-            LoadPacks(typeof (Background));
-            LoadPacks(typeof (Foreground));
+            LoadPacks(typeof(Background));
+            LoadPacks(typeof(Foreground));
             LoadEnum(_smileyPacks);
             LoadEnum(_auraColorPacks);
             LoadEnum(_auraShapePacks);
@@ -77,12 +77,11 @@ namespace BotBits
         {
             foreach (var field in type.GetFields(BindingFlags.Static | BindingFlags.Public))
             {
-                var value = (ushort) field.GetValue(null);
+                var value = (ushort)field.GetValue(null);
                 _blockGroups[value] = type;
 
                 var pack = GetPack(field);
-                if (pack != null)
-                    _blockPacks.Add(value, pack);
+                if (pack != null) _blockPacks.Add(value, pack);
             }
 
             foreach (var i in type.GetNestedTypes())
@@ -94,20 +93,20 @@ namespace BotBits
 
         private static void LoadEnum<T>(Dictionary<T, PackAttribute> collection)
         {
-            foreach (var field in typeof (T).GetFields(BindingFlags.Static | BindingFlags.Public))
+            foreach (var field in typeof(T).GetFields(BindingFlags.Static | BindingFlags.Public))
             {
                 var pack = GetPack(field);
                 if (pack != null)
                 {
-                    collection.Add((T) field.GetValue(null), pack);
+                    collection.Add((T)field.GetValue(null), pack);
                 }
             }
         }
 
         private static PackAttribute GetPack(ICustomAttributeProvider provider)
         {
-            return (PackAttribute) provider
-                .GetCustomAttributes(typeof (PackAttribute), false)
+            return (PackAttribute)provider
+                .GetCustomAttributes(typeof(PackAttribute), false)
                 .FirstOrDefault();
         }
     }

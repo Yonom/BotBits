@@ -20,7 +20,7 @@ namespace BotBits
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is PlayerPoint && this.Equals((PlayerPoint) obj);
+            return obj is PlayerPoint && this.Equals((PlayerPoint)obj);
         }
 
         public override int GetHashCode()
@@ -28,8 +28,8 @@ namespace BotBits
             unchecked
             {
                 var hashCode = (this.Player != null ? this.Player.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ this.X;
-                hashCode = (hashCode*397) ^ this.Y;
+                hashCode = (hashCode * 397) ^ this.X;
+                hashCode = (hashCode * 397) ^ this.Y;
                 return hashCode;
             }
         }

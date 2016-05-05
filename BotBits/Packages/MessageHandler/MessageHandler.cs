@@ -15,8 +15,8 @@ namespace BotBits
         {
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
-                var attr = (ReceiveEventAttribute) type.GetCustomAttributes(
-                    typeof (ReceiveEventAttribute), true).FirstOrDefault();
+                var attr = (ReceiveEventAttribute)type.GetCustomAttributes(
+                    typeof(ReceiveEventAttribute), true).FirstOrDefault();
                 if (attr != null)
                 {
                     this._messageRegister.RegisterMessage(attr.Type, type);
@@ -48,8 +48,8 @@ namespace BotBits
                 try
                 {
                     const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
-                    instance = (IEvent) Activator.CreateInstance(handler, flags, null,
-                        new object[] {this.BotBits, e.Message}, null);
+                    instance = (IEvent)Activator.CreateInstance(handler, flags, null,
+                        new object[] { this.BotBits, e.Message }, null);
                 }
                 catch (Exception ex)
                 {
@@ -59,8 +59,7 @@ namespace BotBits
                 }
 
                 var playerEvent = instance as ICancellable;
-                if (playerEvent != null && playerEvent.Cancelled)
-                    return;
+                if (playerEvent != null && playerEvent.Cancelled) return;
 
                 instance.RaiseIn(this.BotBits);
             }

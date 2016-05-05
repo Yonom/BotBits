@@ -5,11 +5,14 @@ namespace BotBits
 {
     public static class MessageServices
     {
-        [ThreadStatic] private static bool _skipQueues;
+        [ThreadStatic]
+        private static bool _skipQueues;
 
-        [ThreadStatic] private static bool _noChecks;
+        [ThreadStatic]
+        private static bool _noChecks;
 
-        [ThreadStatic] private static bool _instantSend;
+        [ThreadStatic]
+        private static bool _instantSend;
 
         /// <summary>
         ///     Gets a value indicating whether SendMessages raised on this thread skip queues.

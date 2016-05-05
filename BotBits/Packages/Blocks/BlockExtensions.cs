@@ -69,14 +69,12 @@ namespace BotBits
 
         public static void Set(this IEnumerable<BlocksItem> blocks, ForegroundBlock block)
         {
-            foreach (var item in blocks)
-                item.Set(block);
+            foreach (var item in blocks) item.Set(block);
         }
 
         public static void Set(this IEnumerable<BlocksItem> blocks, BackgroundBlock block)
         {
-            foreach (var item in blocks)
-                item.Set(block);
+            foreach (var item in blocks) item.Set(block);
         }
 
         public static void Set(this IEnumerable<BlocksItem> blocks, Background.Id block)

@@ -45,13 +45,11 @@ namespace BotBits
         {
             lock (this._queue)
             {
-                if (this._queue.Count == 0)
-                    return null;
+                if (this._queue.Count == 0) return null;
 
                 var first = this._queue.RemoveFromFront();
 
-                if (this._queue.Count == 0)
-                    this._finishEvent.Set();
+                if (this._queue.Count == 0) this._finishEvent.Set();
 
                 return first;
             }
@@ -61,10 +59,8 @@ namespace BotBits
         {
             lock (this._queue)
             {
-                if (sendMessage.SkipsQueue)
-                    this._queue.AddToFront(sendMessage);
-                else
-                    this._queue.AddToBack(sendMessage);
+                if (sendMessage.SkipsQueue) this._queue.AddToFront(sendMessage);
+                else this._queue.AddToBack(sendMessage);
 
                 this._finishEvent.Reset();
             }

@@ -36,8 +36,7 @@ namespace BotBits
         public static void UploadWorld(this IBlockAreaEnumerable blockArea, IWorld world)
         {
             var area = blockArea.Area;
-            if (world.Width > area.Width || world.Height > area.Height)
-                throw new ArgumentException("The world is too big for this area.", "world");
+            if (world.Width > area.Width || world.Height > area.Height) throw new ArgumentException("The world is too big for this area.", "world");
 
             for (var y = area.Top; y < area.Top + world.Height; y++)
                 for (var x = area.Left; x < area.Left + world.Width; x++)

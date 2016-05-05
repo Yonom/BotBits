@@ -18,10 +18,8 @@ namespace BotBits
 
         protected static bool LoadInto(BotBitsClient client, object args)
         {
-            var type = typeof (T);
-            if (!type.IsSealed)
-
-                throw new InvalidOperationException("Extension classes must be marked as sealed!");
+            var type = typeof(T);
+            if (!type.IsSealed) throw new InvalidOperationException("Extension classes must be marked as sealed!");
 
             lock (client.Extensions)
             {
@@ -32,7 +30,7 @@ namespace BotBits
             var assembly = Assembly.GetAssembly(type);
             using (var catalog = new AssemblyCatalog(assembly))
             {
-                var obj = (T) FormatterServices.GetUninitializedObject(type);
+                var obj = (T)FormatterServices.GetUninitializedObject(type);
                 client.Packages.AddPackages(catalog, () => obj.Initialize(client, args));
             }
 
@@ -41,7 +39,7 @@ namespace BotBits
 
         public static bool IsLoadedInto(BotBitsClient client)
         {
-            return client.Extensions.Contains(typeof (T));
+            return client.Extensions.Contains(typeof(T));
         }
     }
 }

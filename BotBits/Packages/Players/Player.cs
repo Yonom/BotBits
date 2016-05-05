@@ -10,10 +10,11 @@ namespace BotBits
     [DebuggerDisplay("Username = {Username}, Smiley = {Smiley}")]
     public sealed class Player : MetadataCollection, IEquatable<Player>
     {
-        public static readonly Player Nobody = new Player(null, -1) {Username = string.Empty};
+        public static readonly Player Nobody = new Player(null, -1) { Username = string.Empty };
         private readonly HashSet<Point> _blueCoins = new HashSet<Point>();
 
-        [CanBeNull] private readonly BotBitsClient _botBits;
+        [CanBeNull]
+        private readonly BotBitsClient _botBits;
 
         private readonly Dictionary<Effect, ActiveEffect> _effects = new Dictionary<Effect, ActiveEffect>();
         private readonly HashSet<Point> _goldCoins = new HashSet<Point>();
@@ -30,8 +31,7 @@ namespace BotBits
         {
             get
             {
-                if (this == Nobody)
-                    throw new NotSupportedException("Cannot access BotBits on Player.Nobody.");
+                if (this == Nobody) throw new NotSupportedException("Cannot access BotBits on Player.Nobody.");
                 return this._botBits;
             }
         }
@@ -380,7 +380,7 @@ namespace BotBits
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj is Player && this.Equals((Player) obj);
+            return obj is Player && this.Equals((Player)obj);
         }
 
         public override int GetHashCode()
@@ -431,7 +431,7 @@ namespace BotBits
                 this._switches.Remove(id);
             }
         }
-        
+
         internal void ResetSwitches()
         {
             lock (this._switches)
@@ -580,8 +580,7 @@ namespace BotBits
 
         public override void Set<T>(string id, T value)
         {
-            if (this == Nobody)
-                throw new NotSupportedException("Cannot set metadata on Player.Nobody.");
+            if (this == Nobody) throw new NotSupportedException("Cannot set metadata on Player.Nobody.");
 
             base.Set(id, value);
         }

@@ -35,7 +35,7 @@ namespace BotBits
             if (pack.GoldMembershipItem) return this.PlayerObject.ClubMember;
             return this.ShopData.GetCount(pack.Package) > 0;
         }
-        
+
         public bool HasBlock(int id)
         {
             return this.HasPack(ItemServices.GetPackageInternal(id));

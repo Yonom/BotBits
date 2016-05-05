@@ -25,10 +25,10 @@ namespace BotBits.Events
         }
 
         /// <summary>
-        /// Gets or sets the type.
+        ///     Gets or sets the type.
         /// </summary>
         /// <value>
-        /// The type.
+        ///     The type.
         /// </value>
         public SwitchType SwitchType { get; set; }
 

@@ -41,7 +41,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("touch", this.UserId, (int) this.Effect);
+            return Message.Create("touch", this.UserId, (int)this.Effect);
         }
     }
 }

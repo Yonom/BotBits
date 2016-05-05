@@ -9,7 +9,8 @@ namespace BotBits
 {
     public class BotBitsClient
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)] private readonly PackageLoader _packageLoader;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private readonly PackageLoader _packageLoader;
 
         private int _disposed;
 

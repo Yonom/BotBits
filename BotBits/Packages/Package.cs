@@ -6,16 +6,14 @@ using JetBrains.Annotations;
 namespace BotBits
 {
     [EditorBrowsable(EditorBrowsableState.Advanced)]
-    [InheritedExport(typeof (IPackage))]
+    [InheritedExport(typeof(IPackage))]
     public abstract class Package<T> : IPackage where T : Package<T>, new()
     {
         protected Package()
         {
-            var type = typeof (T);
-            if (type != this.GetType())
-                throw new InvalidOperationException("Packages must inherit Package<T> of their own type!");
-            if (!type.IsSealed)
-                throw new InvalidOperationException("Packages must be marked as sealed.");
+            var type = typeof(T);
+            if (type != this.GetType()) throw new InvalidOperationException("Packages must inherit Package<T> of their own type!");
+            if (!type.IsSealed) throw new InvalidOperationException("Packages must be marked as sealed.");
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -42,8 +40,7 @@ namespace BotBits
         [Pure]
         public static T Of([NotNull] BotBitsClient client)
         {
-            if (client == null)
-                throw new ArgumentNullException("client");
+            if (client == null) throw new ArgumentNullException("client");
 
             return client.Packages.Get<T>();
         }

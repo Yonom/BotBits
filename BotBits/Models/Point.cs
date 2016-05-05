@@ -24,14 +24,14 @@ namespace BotBits
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is Point && this.Equals((Point) obj);
+            return obj is Point && this.Equals((Point)obj);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return (this.X*397) ^ this.Y;
+                return (this.X * 397) ^ this.Y;
             }
         }
 

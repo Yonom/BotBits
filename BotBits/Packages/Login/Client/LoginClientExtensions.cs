@@ -44,7 +44,7 @@ namespace BotBits
         private static string GenerateUniqueRoomId(string str)
         {
             return StringUtils.DecimalToArbitrarySystem(
-                (((int) new Random().NextDouble()*1000 >> 0) + DateTime.UtcNow.Millisecond), 36)
+                (((int)new Random().NextDouble() * 1000 >> 0) + DateTime.UtcNow.Millisecond), 36)
                    + " " + str;
         }
 

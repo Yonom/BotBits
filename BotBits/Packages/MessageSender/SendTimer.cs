@@ -32,7 +32,7 @@ namespace BotBits
 
         private void TimerCallback(object state)
         {
-            var ticks = (int) Math.Floor(this._sw.ElapsedMilliseconds*.0965);
+            var ticks = (int)Math.Floor(this._sw.ElapsedMilliseconds * .0965);
             this.OnElapsed(ticks);
         }
     }

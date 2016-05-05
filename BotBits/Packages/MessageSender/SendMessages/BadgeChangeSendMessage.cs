@@ -17,7 +17,7 @@ namespace BotBits.SendMessages
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BadgeChangeSendMessage"/> class.
+        ///     Initializes a new instance of the <see cref="BadgeChangeSendMessage" /> class.
         /// </summary>
         /// <param name="badgeId">The badge identifier.</param>
         public BadgeChangeSendMessage(string badgeId)

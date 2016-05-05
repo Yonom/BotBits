@@ -1,7 +1,6 @@
 ﻿namespace BotBits
 {
     /// <summary>
-    /// 
     /// </summary>
     public enum Badge
     {
@@ -57,6 +56,6 @@
         /// <summary>
         ///     Winter
         /// </summary>
-        WTR,
+        WTR
     }
 }

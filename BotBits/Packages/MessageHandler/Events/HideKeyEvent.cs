@@ -18,7 +18,7 @@ namespace BotBits.Events
         internal HideKeyEvent(BotBitsClient client, Message message)
             : base(client, message, 1)
         {
-            this.Key = (Key) Enum.Parse(typeof (Key), message.GetString(0), true);
+            this.Key = (Key)Enum.Parse(typeof(Key), message.GetString(0), true);
         }
 
         /// <summary>

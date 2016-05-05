@@ -17,7 +17,7 @@ namespace BotBits.Events
         internal SmileyEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Smiley = (Smiley) message.GetInteger(1);
+            this.Smiley = (Smiley)message.GetInteger(1);
         }
 
         /// <summary>

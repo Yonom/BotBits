@@ -25,16 +25,15 @@ namespace BotBits
             var normals = this.Client.GetLobbyRoomsAsync(this, EverybodyEdits + this.Version);
             var betas = this.Client.GetLobbyRoomsAsync(this, Beta + this.Version);
             return Task.Factory
-                .ContinueWhenAll(new[] {normals, betas}, items => items.SelectMany(i => i.Result).ToArray())
+                .ContinueWhenAll(new[] { normals, betas }, items => items.SelectMany(i => i.Result).ToArray())
                 .ToSafeTask();
         }
 
         public override Task CreateOpenWorldAsync(string roomId, string name)
         {
-            if (!roomId.StartsWith("OW"))
-                throw new ArgumentException("RoomId is not valid.", "roomId");
+            if (!roomId.StartsWith("OW")) throw new ArgumentException("RoomId is not valid.", "roomId");
 
-            var roomData = new Dictionary<string, string> {{"name", name}};
+            var roomData = new Dictionary<string, string> { { "name", name } };
 
             return this.Client.Multiplayer
                 .CreateJoinRoomAsync(roomId, EverybodyEdits + this.Version, true, roomData,

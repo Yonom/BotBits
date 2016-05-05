@@ -19,8 +19,8 @@ namespace BotBits.Events
         {
             this.RoomWidth = message.GetInteger(0);
             this.RoomHeight = message.GetInteger(1);
-            this.BorderBlock = (Foreground.Id) message.GetInteger(2);
-            this.FillBlock = (Foreground.Id) message.GetInteger(3);
+            this.BorderBlock = (Foreground.Id)message.GetInteger(2);
+            this.FillBlock = (Foreground.Id)message.GetInteger(3);
         }
 
         /// <summary>

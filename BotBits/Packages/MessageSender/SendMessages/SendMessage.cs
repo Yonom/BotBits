@@ -14,11 +14,9 @@ namespace BotBits.SendMessages
 
         internal SendMessage()
         {
-            var a = typeof (T);
-            if (a != this.GetType())
-                throw new InvalidOperationException("SendMessages must inherit SendMessage<T> of their own type!");
-            if (!a.IsSealed)
-                throw new InvalidOperationException("SendMessages must be marked as sealed.");
+            var a = typeof(T);
+            if (a != this.GetType()) throw new InvalidOperationException("SendMessages must inherit SendMessage<T> of their own type!");
+            if (!a.IsSealed) throw new InvalidOperationException("SendMessages must be marked as sealed.");
         }
 
         /// <summary>
@@ -77,11 +75,11 @@ namespace BotBits.SendMessages
 
             if (this.InstantSend)
             {
-                Of(client).SendMessage((T) this, client);
+                Of(client).SendMessage((T)this, client);
             }
             else
             {
-                Of(client).Enqueue((T) this);
+                Of(client).Enqueue((T)this);
             }
         }
 

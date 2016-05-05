@@ -11,7 +11,7 @@
         {
             actions.CompleteLevel(0, 0);
         }
-        
+
         public static void PressKey(this Actions actions, Key key)
         {
             actions.PressKey(key, 0, 0);

@@ -31,16 +31,16 @@ namespace BotBits
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is Point3D && this.Equals((Point3D) obj);
+            return obj is Point3D && this.Equals((Point3D)obj);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                var hashCode = (int) this.Layer;
-                hashCode = (hashCode*397) ^ this.X;
-                hashCode = (hashCode*397) ^ this.Y;
+                var hashCode = (int)this.Layer;
+                hashCode = (hashCode * 397) ^ this.X;
+                hashCode = (hashCode * 397) ^ this.Y;
                 return hashCode;
             }
         }

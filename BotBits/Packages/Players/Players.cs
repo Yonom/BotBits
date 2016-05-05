@@ -23,28 +23,22 @@ namespace BotBits
 
         public int Count
         {
-            get
-            {
-                lock (this._players)
-                    return this._players.Count;
-            }
+            get { lock (this._players) return this._players.Count; }
         }
 
         public Player this[int userId]
         {
             get
             {
-                if (userId == Player.Nobody.UserId)
-                    return Player.Nobody;
+                if (userId == Player.Nobody.UserId) return Player.Nobody;
 
-                lock (this._players)
-                    return this._players[userId];
+                lock (this._players) return this._players[userId];
             }
         }
 
         public IEnumerator<Player> GetEnumerator()
         {
-            return ((IEnumerable<Player>) this.GetPlayers()).GetEnumerator();
+            return ((IEnumerable<Player>)this.GetPlayers()).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -55,15 +49,13 @@ namespace BotBits
         [Pure]
         public bool Contains(int userId)
         {
-            lock (this._players)
-                return this._players.ContainsKey(userId);
+            lock (this._players) return this._players.ContainsKey(userId);
         }
 
         [Pure]
         public Player[] GetPlayers()
         {
-            lock (this._players)
-                return this._players.Values.Where(p => p.Connected).ToArray();
+            lock (this._players) return this._players.Values.Where(p => p.Connected).ToArray();
         }
 
         [Pure]
@@ -83,8 +75,7 @@ namespace BotBits
                 return true;
             }
 
-            lock (this._players)
-                return this._players.TryGetValue(userId, out player);
+            lock (this._players) return this._players.TryGetValue(userId, out player);
         }
 
         internal Player TryAddPlayer(int userId)
@@ -169,8 +160,8 @@ namespace BotBits
             p.GoldCoins = e.GoldCoins;
             p.BlueCoins = e.BlueCoins;
 
-            var x = (int) e.X;
-            var y = (int) e.Y;
+            var x = (int)e.X;
+            var y = (int)e.Y;
             var blocks = Blocks.Of(this.BotBits);
             if (!blocks.Area.Contains(new Point(x, y))) return;
             var block = blocks.Foreground[x, y].Block.Id;
@@ -384,10 +375,8 @@ namespace BotBits
             if (e.SwitchType != SwitchType.Purple) return;
 
             var p = e.Player;
-            if (e.Enabled)
-                p.AddSwitch(e.Id);
-            else
-                p.RemoveSwitch(e.Id);
+            if (e.Enabled) p.AddSwitch(e.Id);
+            else p.RemoveSwitch(e.Id);
 
             new PurpleSwitchEvent(p, e.Id, e.Enabled)
                 .RaiseIn(this.BotBits);

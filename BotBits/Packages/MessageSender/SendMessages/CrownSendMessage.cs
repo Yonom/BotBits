@@ -5,7 +5,6 @@ namespace BotBits.SendMessages
     /// <summary>
     ///     Sent to collect gold crown.
     /// </summary>
-    /// 
     public sealed class CrownSendMessage : SendMessage<CrownSendMessage>
     {
         public CrownSendMessage()

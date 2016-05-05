@@ -20,7 +20,7 @@ namespace BotBits.Events
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);
             this.Id = message.GetInteger(2);
-            this.PortalRotation = (Morph.Id) message.GetUInt(3);
+            this.PortalRotation = (Morph.Id)message.GetUInt(3);
             this.PortalId = message.GetUInt(4);
             this.PortalTarget = message.GetUInt(5);
         }

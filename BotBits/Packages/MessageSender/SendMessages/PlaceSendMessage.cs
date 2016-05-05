@@ -73,7 +73,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            var msgArgs = new object[] {(int) this.Layer, this.X, this.Y, this.Id}.Concat(this.Args).ToArray();
+            var msgArgs = new object[] { (int)this.Layer, this.X, this.Y, this.Id }.Concat(this.Args).ToArray();
             return Message.Create("b", msgArgs);
         }
     }

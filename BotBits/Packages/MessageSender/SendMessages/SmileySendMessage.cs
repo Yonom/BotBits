@@ -5,7 +5,6 @@ namespace BotBits.SendMessages
     /// <summary>
     ///     Sent to change smiley.
     /// </summary>
-    /// 
     public sealed class SmileySendMessage : SendMessage<SmileySendMessage>
     {
         /// <summary>
@@ -31,7 +30,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("smiley", (int) this.Smiley);
+            return Message.Create("smiley", (int)this.Smiley);
         }
     }
 }

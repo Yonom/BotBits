@@ -20,7 +20,7 @@ namespace BotBits.SendMessages
         public TimedEffectSendMessage(Effect effect, TimeSpan duration, int y, int x)
         {
             this.Effect = effect;
-            this.Duration = (int) duration.TotalSeconds;
+            this.Duration = (int)duration.TotalSeconds;
             this.Y = y;
             this.X = x;
         }
@@ -63,7 +63,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("timedeffect", this.X, this.Y, (int) this.Effect, this.Duration);
+            return Message.Create("timedeffect", this.X, this.Y, (int)this.Effect, this.Duration);
         }
     }
 }

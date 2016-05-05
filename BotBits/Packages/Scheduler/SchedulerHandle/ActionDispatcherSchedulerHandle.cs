@@ -11,8 +11,7 @@ namespace BotBits
         public ActionDispatcherSchedulerHandle()
         {
             this._dispatcher = ActionDispatcher.Current;
-            if (this._dispatcher == null)
-                throw new InvalidOperationException("No dispatcher running on the current thread.");
+            if (this._dispatcher == null) throw new InvalidOperationException("No dispatcher running on the current thread.");
 
             this.SynchronizationContext = SynchronizationContext.Current;
         }
@@ -34,7 +33,7 @@ namespace BotBits
                 {
                     res = new ActionDispatcherSchedulerHandle();
                     resetEvent.Set();
-                })) {IsBackground = true}.Start();
+                })) { IsBackground = true }.Start();
                 resetEvent.WaitOne();
             }
             return res;

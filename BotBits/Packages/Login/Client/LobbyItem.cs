@@ -34,7 +34,7 @@ namespace BotBits
                     case "description":
                         this.Description = data.Value;
                         break;
-                        
+
                     case "openworld":
                         this.OpenWorld = bool.Parse(data.Value);
                         break;

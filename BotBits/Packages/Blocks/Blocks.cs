@@ -81,13 +81,13 @@ namespace BotBits
 
         public void Place(int x, int y, BackgroundBlock block)
         {
-            new PlaceSendMessage(Layer.Background, x, y, (int) block.Id)
+            new PlaceSendMessage(Layer.Background, x, y, (int)block.Id)
                 .SendIn(this.BotBits);
         }
 
         public void Place(int x, int y, ForegroundBlock block)
         {
-            new PlaceSendMessage(Layer.Foreground, x, y, (int) block.Id, block.GetArgs())
+            new PlaceSendMessage(Layer.Foreground, x, y, (int)block.Id, block.GetArgs())
                 .SendIn(this.BotBits);
         }
 
@@ -126,11 +126,11 @@ namespace BotBits
             switch (e.Layer)
             {
                 case Layer.Foreground:
-                    this.RaiseBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Player);
+                    this.RaiseBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Player);
                     break;
 
                 case Layer.Background:
-                    this.RaiseBackground(e.X, e.Y, new BackgroundBlock((Background.Id) e.Id), e.Player);
+                    this.RaiseBackground(e.X, e.Y, new BackgroundBlock((Background.Id)e.Id), e.Player);
                     break;
             }
         }
@@ -138,19 +138,19 @@ namespace BotBits
         [EventListener]
         private void On(PortalPlaceEvent e)
         {
-            this.RaisePortalBlock(e.X, e.Y, (Foreground.Id) e.Id, e.PortalId, e.PortalTarget, e.PortalRotation, e.Player);
+            this.RaisePortalBlock(e.X, e.Y, (Foreground.Id)e.Id, e.PortalId, e.PortalTarget, e.PortalRotation, e.Player);
         }
 
         [EventListener]
         private void On(CoinDoorPlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id) e.Id, e.CoinsToOpen, e.Player);
+            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.CoinsToOpen, e.Player);
         }
 
         [EventListener]
         private void On(MorphablePlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Rotation, e.Player);
+            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Rotation, e.Player);
         }
 
         [EventListener]
@@ -162,19 +162,19 @@ namespace BotBits
         [EventListener]
         private void On(WorldPortalPlaceEvent e)
         {
-            this.RaiseStringBlock(e.X, e.Y, (Foreground.Id) e.Id, e.WorldPortalTarget, e.Player);
+            this.RaiseStringBlock(e.X, e.Y, (Foreground.Id)e.Id, e.WorldPortalTarget, e.Player);
         }
 
         [EventListener]
         private void On(LabelPlaceEvent e)
         {
-            this.RaiseLabelBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Text, e.TextColor, e.Player);
+            this.RaiseLabelBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.TextColor, e.Player);
         }
 
         [EventListener]
         private void On(SignPlaceEvent e)
         {
-            this.RaiseSignBlock(e.X, e.Y, (Foreground.Id) e.Id, e.Text, e.SignColor, e.Player);
+            this.RaiseSignBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.SignColor, e.Player);
         }
 
         private void RaiseBlock(int x, int y, Foreground.Id block, Player player)
@@ -201,12 +201,12 @@ namespace BotBits
         {
             this.RaiseForeground(x, y, new ForegroundBlock(block, text, textColor), player);
         }
-        
+
         private void RaiseSignBlock(int x, int y, Foreground.Id block, string text, Morph.Id signColor, Player player)
         {
             this.RaiseForeground(x, y, new ForegroundBlock(block, text, signColor), player);
         }
-        
+
         private void RaisePortalBlock(int x, int y, Foreground.Id block,
             uint portalId, uint portalTarget, Morph.Id portalRotation, Player player)
         {
