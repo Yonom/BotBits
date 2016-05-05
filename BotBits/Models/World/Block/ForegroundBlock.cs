@@ -6,55 +6,29 @@ namespace BotBits
     [DebuggerDisplay("Id = {Id}")]
     public struct ForegroundBlock : IEquatable<ForegroundBlock>
     {
-        public bool Equals(ForegroundBlock other)
-        {
-            return Equals(this._args, other._args) && this.Id == other.Id && this.Type == other.Type;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            return obj is ForegroundBlock && this.Equals((ForegroundBlock)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = this._args?.GetHashCode() ?? 0;
-                hashCode = (hashCode * 397) ^ (int)this.Id;
-                hashCode = (hashCode * 397) ^ (int)this.Type;
-                return hashCode;
-            }
-        }
-
-        public static bool operator ==(ForegroundBlock left, ForegroundBlock right)
-        {
-            return left.Equals(right);
-        }
-
-        public static bool operator !=(ForegroundBlock left, ForegroundBlock right)
-        {
-            return !left.Equals(right);
-        }
-
         private readonly object _args;
-
-        public ForegroundBlock(Foreground.Id id)
+        
+        private ForegroundBlock(Foreground.Id id, BlockArgsType requiredArgsType)
         {
             var type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.None) throw new ArgumentException("The given block is missing required arguments.", nameof(id));
+            var argsType = WorldUtils.GetBlockArgsType(type);
+            if (argsType != requiredArgsType)
+                throw WorldUtils.GetMissingArgsErrorMessage(argsType, nameof(id));
 
-            this._args = null;
-            this.Type = ForegroundType.Normal;
             this.Id = id;
+            this.Type = type;
+            this._args = null;
         }
 
+        public ForegroundBlock(Foreground.Id id) : this(id, BlockArgsType.None)
+        {
+        }
 
         public ForegroundBlock(Foreground.Id id, uint args)
         {
             var type = WorldUtils.GetForegroundType(id);
-            switch (WorldUtils.GetBlockArgsType(type))
+            var argsType = WorldUtils.GetBlockArgsType(type);
+            switch (argsType)
             {
                 case BlockArgsType.Number:
                     this._args = args;
@@ -63,60 +37,38 @@ namespace BotBits
                     this._args = (int)args;
                     break;
                 default:
-                    throw new ArgumentException("Invalid arguments for the specified block.", nameof(id));
+                    throw WorldUtils.GetMissingArgsErrorMessage(argsType, nameof(id));
             }
+
             this.Type = type;
             this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, string text)
+            : this(id, BlockArgsType.String)
         {
-            var type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.String) throw new ArgumentException("Invalid arguments for the specified block.", nameof(id));
-
             this._args = text;
-            this.Type = type;
-            this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, string text, string textColor)
+            : this(id, BlockArgsType.Label)
         {
-            var type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Label) throw new ArgumentException("Invalid arguments for the specified block.", nameof(id));
-
             this._args = new LabelArgs(text, textColor);
-            this.Type = type;
             this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, string text, Morph.Id signColor)
+            : this(id, BlockArgsType.Sign)
         {
-            var type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Sign) throw new ArgumentException("Invalid arguments for the specified block.", nameof(id));
-
             this._args = new SignArgs(text, signColor);
-            this.Type = type;
             this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, uint portalId, uint portalTarget, Morph.Id portalRotation)
+            : this(id, BlockArgsType.Portal)
         {
-            var type = WorldUtils.GetForegroundType(id);
-            if (WorldUtils.GetBlockArgsType(type) != BlockArgsType.Portal) throw new ArgumentException("The given block is not a portal.", nameof(id));
-
             this._args = new PortalArgs(portalId, portalTarget, portalRotation);
-            this.Type = ForegroundType.Portal;
             this.Id = id;
-        }
-
-        public ForegroundBlock(Foreground.Id id, int portalId, int portalTarget, Morph.Id portalRotation)
-            : this(id, (uint)portalId, (uint)portalTarget, portalRotation)
-        {
-        }
-
-        public ForegroundBlock(Foreground.Id id, int goal)
-            : this(id, (uint)goal)
-        {
         }
 
         public ForegroundBlock(Foreground.Id id, bool enabled)
@@ -128,8 +80,18 @@ namespace BotBits
             }
         }
 
+        public ForegroundBlock(Foreground.Id id, int goal)
+            : this(id, (uint)goal)
+        {
+        }
+
         public ForegroundBlock(Foreground.Id id, Morph.Id morph)
             : this(id, (uint)morph)
+        {
+        }
+
+        public ForegroundBlock(Foreground.Id id, int portalId, int portalTarget, Morph.Id portalRotation)
+            : this(id, (uint)portalId, (uint)portalTarget, portalRotation)
         {
         }
 
@@ -468,6 +430,39 @@ namespace BotBits
                 default:
                     return new[] { this._args };
             }
+        }
+
+        public bool Equals(ForegroundBlock other)
+        {
+            return Equals(this._args, other._args) && this.Id == other.Id && this.Type == other.Type;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+                return false;
+            return obj is ForegroundBlock && this.Equals((ForegroundBlock)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = this._args?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (int)this.Id;
+                hashCode = (hashCode * 397) ^ (int)this.Type;
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(ForegroundBlock left, ForegroundBlock right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(ForegroundBlock left, ForegroundBlock right)
+        {
+            return !left.Equals(right);
         }
     }
 }

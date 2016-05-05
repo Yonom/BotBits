@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BotBits.Events;
 using BotBits.SendMessages;
+using JetBrains.Annotations;
 using PlayerIOClient;
 
 namespace BotBits
@@ -75,6 +76,40 @@ namespace BotBits
             }
         }
 
+        public static BlockArgsType GetBlockArgsType(ForegroundType type)
+        {
+            switch (type)
+            {
+                case ForegroundType.Normal:
+                    return BlockArgsType.None;
+
+                case ForegroundType.Goal:
+                case ForegroundType.Toggle:
+                case ForegroundType.ToggleGoal:
+                case ForegroundType.Morphable:
+                case ForegroundType.Team:
+                    return BlockArgsType.Number;
+
+                case ForegroundType.Note:
+                    return BlockArgsType.SignedNumber;
+
+                case ForegroundType.WorldPortal:
+                    return BlockArgsType.String;
+
+                case ForegroundType.Portal:
+                    return BlockArgsType.Portal;
+
+                case ForegroundType.Label:
+                    return BlockArgsType.Label;
+
+                case ForegroundType.Sign:
+                    return BlockArgsType.Sign;
+
+                default:
+                    throw new ArgumentException("Invalid BlockType.", nameof(type));
+            }
+        }
+
         public static ForegroundBlock GetForegroundFromArgs(Foreground.Id block, object[] args)
         {
             var foregroundType = GetBlockArgsType(GetForegroundType(block));
@@ -131,44 +166,32 @@ namespace BotBits
             }
         }
 
+        internal static ArgumentException GetMissingArgsErrorMessage(BlockArgsType type, [InvokerParameterName] string paramName)
+        {
+            switch (type)
+            {
+                case BlockArgsType.None:
+                    return new ArgumentException("That block doesn't accept any extra parameters!", paramName);
+                case BlockArgsType.Number:
+                case BlockArgsType.SignedNumber:
+                    return new ArgumentException("That block needs a number as its parameter.", paramName);
+                case BlockArgsType.String:
+                    return new ArgumentException("That block needs a string as its parameter.", paramName);
+                case BlockArgsType.Sign:
+                    return new ArgumentException("Sign blocks need a string followed by a sign morph (Morph.Sign).", paramName);
+                case BlockArgsType.Portal:
+                    return new ArgumentException("Portal blocks require three parameters in the following order: id (int) target (int) rotation (Morph.Portal).", paramName);
+                case BlockArgsType.Label:
+                    return new ArgumentException("Label blocks require two parameters in the following order: text (string) hex color (string).", paramName);
+                default:
+                    return new ArgumentException("Invalid arguments for the given block!", paramName);
+            }
+        }
+
         public static ForegroundType GetForegroundType(Foreground.Id id)
         {
             var package = ItemServices.GetPackageInternal((int)id);
             return package?.ForegroundType ?? ForegroundType.Normal;
-        }
-
-        public static BlockArgsType GetBlockArgsType(ForegroundType type)
-        {
-            switch (type)
-            {
-                case ForegroundType.Normal:
-                    return BlockArgsType.None;
-
-                case ForegroundType.Goal:
-                case ForegroundType.Toggle:
-                case ForegroundType.ToggleGoal:
-                case ForegroundType.Morphable:
-                case ForegroundType.Team:
-                    return BlockArgsType.Number;
-
-                case ForegroundType.Note:
-                    return BlockArgsType.SignedNumber;
-
-                case ForegroundType.WorldPortal:
-                    return BlockArgsType.String;
-
-                case ForegroundType.Portal:
-                    return BlockArgsType.Portal;
-
-                case ForegroundType.Label:
-                    return BlockArgsType.Label;
-
-                case ForegroundType.Sign:
-                    return BlockArgsType.Sign;
-
-                default:
-                    throw new ArgumentException("Invalid BlockType.", nameof(type));
-            }
         }
 
         public static void DrawBorder<TForeground, TBackground>
