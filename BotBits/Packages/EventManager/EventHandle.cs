@@ -94,7 +94,7 @@ namespace BotBits
             SortedDictionary<GlobalPriority,
                 SortedDictionary<int,
                     SortedDictionary<EventPriority,
-                        IList<EventRaiseHandler<T>>>>>
+                        List<EventRaiseHandler<T>>>>>
         {
             public IEnumerable<EventRaiseHandler<T>> Handlers
             {
@@ -103,25 +103,25 @@ namespace BotBits
 
             public void Add(GlobalPriority globalPriority, int extensionId, EventPriority priority,
                 EventRaiseHandler<T> callback)
-            {
+            { 
                 SortedDictionary<int,
                     SortedDictionary<EventPriority,
-                        IList<EventRaiseHandler<T>>>> extensions;
+                        List<EventRaiseHandler<T>>>> extensions;
                 if (!this.TryGetValue(globalPriority, out extensions))
                 {
                     extensions =
-                        new SortedDictionary<int, SortedDictionary<EventPriority, IList<EventRaiseHandler<T>>>>();
+                        new SortedDictionary<int, SortedDictionary<EventPriority, List<EventRaiseHandler<T>>>>();
                     this.Add(globalPriority, extensions);
                 }
 
-                SortedDictionary<EventPriority, IList<EventRaiseHandler<T>>> priorities;
+                SortedDictionary<EventPriority, List<EventRaiseHandler<T>>> priorities;
                 if (!extensions.TryGetValue(extensionId, out priorities))
                 {
-                    priorities = new SortedDictionary<EventPriority, IList<EventRaiseHandler<T>>>();
+                    priorities = new SortedDictionary<EventPriority, List<EventRaiseHandler<T>>>();
                     extensions.Add(extensionId, priorities);
                 }
 
-                IList<EventRaiseHandler<T>> value;
+                List<EventRaiseHandler<T>> value;
                 if (!priorities.TryGetValue(priority, out value))
                 {
                     value = new List<EventRaiseHandler<T>>();

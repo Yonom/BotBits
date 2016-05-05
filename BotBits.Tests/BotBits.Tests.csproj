@@ -40,7 +40,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -78,9 +79,6 @@
     <Folder Include="MessageReceive\" />
     <Folder Include="MessageSend\" />
     <Folder Include="World\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Key.snk" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
