@@ -1,4 +1,4 @@
-﻿namespace BotBits.Models
+﻿namespace BotBits
 {
     public enum SwitchType
     {

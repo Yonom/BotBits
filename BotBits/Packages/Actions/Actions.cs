@@ -1,6 +1,5 @@
 ﻿using System;
 using BotBits.Events;
-using BotBits.Models;
 using BotBits.SendMessages;
 
 namespace BotBits

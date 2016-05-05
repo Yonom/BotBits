@@ -1,4 +1,3 @@
-using BotBits.Models;
 using PlayerIOClient;
 
 namespace BotBits.Events
