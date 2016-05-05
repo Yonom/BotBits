@@ -37,10 +37,11 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PlayerIOClient, Version=2.3.6.0, Culture=neutral, PublicKeyToken=c7f7b730653f6a44, processorArchitecture=MSIL">
@@ -52,8 +53,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\DisposedEvent.cs" />
-    <Compile Include="Events\DisposingEvent.cs" />
+    <Compile Include="Client\Events\DisposedEvent.cs" />
+    <Compile Include="Client\Events\DisposingEvent.cs" />
     <Compile Include="Helpers\PlayerData\PlayerAchivements.cs" />
     <Compile Include="Helpers\PlayerData\PlayerData.cs" />
     <Compile Include="Helpers\VersionCache.cs" />
@@ -249,7 +250,7 @@
     <Compile Include="Packages\Room\Events\AccessRightChangedEvent.cs" />
     <Compile Include="Packages\Room\Events\MetaChangedEvent.cs" />
     <Compile Include="Packages\Room\Room.cs" />
-    <Compile Include="BotBitsClient.cs" />
+    <Compile Include="Client\BotBitsClient.cs" />
     <Compile Include="Packages\MessageHandler\MessageHandler.cs" />
     <Compile Include="Packages\ConnectionManager\Events\ConnectEvent.cs" />
     <Compile Include="Packages\ConnectionManager\Events\DisconnectEvent.cs" />
@@ -345,7 +346,6 @@
     <Compile Include="Models\World\World.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Key.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

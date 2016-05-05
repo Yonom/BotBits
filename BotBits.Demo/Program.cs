@@ -17,11 +17,5 @@ namespace BotBits.Demo
 
             Thread.Sleep(Timeout.Infinite);
         }
-
-        [EventListener]
-        static void On(SignPlaceEvent e)
-        {
-            Console.WriteLine("sign placed");
-        }
     }
 }
