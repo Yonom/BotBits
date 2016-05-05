@@ -97,8 +97,8 @@ namespace BotBits
             return channel ?? string.Empty;
         }
 
-        [EventListener(EventPriority.Lowest)]
-        private void OnQueueChatEx(QueueChatEvent e)
+        [EventListener]
+        private void On(QueueChatEvent e)
         {
             // Trim chars
             e.Message = this.TrimChars(e.Message);
@@ -136,7 +136,7 @@ namespace BotBits
                 new QueueChatEvent(prefix + this.Truncate(message, maxLength))
                     .RaiseIn(this.BotBits);
 
-                this.OnQueueChatEx(new QueueChatEvent(prefix + message.Substring(maxLength)));
+                this.On(new QueueChatEvent(prefix + message.Substring(maxLength)));
             }
             else
             {
@@ -146,7 +146,7 @@ namespace BotBits
 
 
         [EventListener(GlobalPriority.AfterMost)]
-        private void On(QueueChatEvent e)
+        private void OnAfterMost(QueueChatEvent e)
         {
             if (!e.Cancelled)
                 this.QueueChat(e.Message);

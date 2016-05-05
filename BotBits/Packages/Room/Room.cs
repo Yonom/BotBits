@@ -237,15 +237,15 @@ namespace BotBits
         [EventListener(EventPriority.Low)]
         private void OnLow(InitEvent e)
         {
-            new MetaChangedEvent(e.Owner, e.Plays, e.Favorites, e.Likes, e.WorldName)
-                .RaiseIn(this.BotBits);
-
             foreach (var os in e.OrangeSwitches)
             {
                 this.AddSwitch(os);
                 new OrangeSwitchEvent(os, true)
                     .RaiseIn(this.BotBits);
             }
+
+            new MetaChangedEvent(e.Owner, e.Plays, e.Favorites, e.Likes, e.WorldName)
+                .RaiseIn(this.BotBits);
         }
 
         [EventListener]
