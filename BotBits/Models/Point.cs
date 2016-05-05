@@ -3,6 +3,7 @@ using System.Diagnostics;
 
 namespace BotBits
 {
+    // ReSharper disable NonReadonlyMemberInGetHashCode
     [DebuggerDisplay("X = {X}, Y = {Y}")]
     public struct Point : IEquatable<Point>
     {

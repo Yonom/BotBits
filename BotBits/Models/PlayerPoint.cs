@@ -2,6 +2,7 @@
 
 namespace BotBits
 {
+    // ReSharper disable NonReadonlyMemberInGetHashCode
     public struct PlayerPoint : IEquatable<PlayerPoint>
     {
         public PlayerPoint(Player player, int x, int y)

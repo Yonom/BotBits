@@ -96,12 +96,12 @@ namespace BotBits
                 if (ct.Count == 0) continue;
                 var type = (uint)ct.GetValue("type");
                 var layerNum = ct.GetInt("layer", 0);
-                var xs = ct.GetBytes("x", new byte[0]);
-                var ys = ct.GetBytes("y", new byte[0]);
-                var x1s = ct.GetBytes("x1", new byte[0]);
-                var y1s = ct.GetBytes("y1", new byte[0]);
-                var points = WorldUtils.GetShortPos(x1s, y1s)
-                    .Concat(WorldUtils.GetPos(xs, ys));
+                var xArr = ct.GetBytes("x", new byte[0]);
+                var yArr = ct.GetBytes("y", new byte[0]);
+                var x1Arr = ct.GetBytes("x1", new byte[0]);
+                var y1Arr = ct.GetBytes("y1", new byte[0]);
+                var points = WorldUtils.GetShortPos(x1Arr, y1Arr)
+                    .Concat(WorldUtils.GetPos(xArr, yArr));
 
                 if (layerNum == 0)
                 {

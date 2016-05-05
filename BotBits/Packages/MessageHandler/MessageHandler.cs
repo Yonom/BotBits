@@ -19,7 +19,10 @@ namespace BotBits
                     typeof(ReceiveEventAttribute), true).FirstOrDefault();
                 if (attr != null)
                 {
-                    this._messageRegister.RegisterMessage(attr.Type, type);
+                    if (!this._messageRegister.RegisterMessage(attr.Type, type))
+                    {
+                        throw new InvalidOperationException($"Unable to bind message type {attr.Type} to {type.Name}.");
+                    }
                 }
             }
         }

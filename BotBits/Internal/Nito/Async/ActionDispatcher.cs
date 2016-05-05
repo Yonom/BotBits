@@ -175,6 +175,7 @@ namespace BotBits.Nito.Async
         private Action DequeueAction()
         {
             // Wait for an action to arrive
+            // ReSharper disable once InconsistentlySynchronizedField
             this._actionQueueNotEmptyEvent.WaitOne();
 
             Action ret;

@@ -64,7 +64,7 @@ namespace BotBits
 
         void IDisposable.Dispose()
         {
-            if (this._adapter != null) this._adapter.Dispose();
+            this._adapter?.Dispose();
         }
 
         private void Connection_OnMessage(object sender, Message e)

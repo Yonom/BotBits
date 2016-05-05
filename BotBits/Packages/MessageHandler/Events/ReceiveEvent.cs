@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using JetBrains.Annotations;
 using PlayerIOClient;
 
 namespace BotBits.Events
@@ -14,6 +15,7 @@ namespace BotBits.Events
         /// </summary>
         /// <param name="client"></param>
         /// <param name="message">The message.</param>
+        [UsedImplicitly]
         internal ReceiveEvent(BotBitsClient client, Message message)
         {
             this.PlayerIOMessage = message;

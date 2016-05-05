@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BotBits;
 using PlayerIOClient;
 
+// ReSharper disable once CheckNamespace
 namespace Yonom.EE
 {
     public static class InitParse

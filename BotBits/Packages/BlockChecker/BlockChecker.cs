@@ -53,6 +53,7 @@ namespace BotBits
 
         public Task FinishChecksAsync()
         {
+            // ReSharper disable once InconsistentlySynchronizedField
             return this._finishResetEvent.AsTask();
         }
 

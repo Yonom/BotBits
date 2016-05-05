@@ -120,6 +120,7 @@
             public const Id
                 VSupport = 0,
                 None = (Id)1,
+                // ReSharper disable once InconsistentNaming
                 TSupport = (Id)2,
                 HorizontalSupport = (Id)3,
                 LeftDiagonalSupport = (Id)4,

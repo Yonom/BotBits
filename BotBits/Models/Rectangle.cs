@@ -6,6 +6,7 @@ using JetBrains.Annotations;
 
 namespace BotBits
 {
+    // ReSharper disable NonReadonlyMemberInGetHashCode
     [DebuggerDisplay("X = {X}, Y = {Y}, Width = {Width}, Height = {Height}")]
     public struct Rectangle : IEquatable<Rectangle>
     {
