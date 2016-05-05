@@ -26,8 +26,7 @@ namespace BotBits
 
         private void OnElapsed(int obj)
         {
-            var handler = this.Elapsed;
-            if (handler != null) handler(obj);
+            this.Elapsed?.Invoke(obj);
         }
 
         private void TimerCallback(object state)

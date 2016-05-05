@@ -134,7 +134,7 @@ namespace BotBits
         public static ForegroundType GetForegroundType(Foreground.Id id)
         {
             var package = ItemServices.GetPackageInternal((int)id);
-            return package != null ? package.ForegroundType : ForegroundType.Normal;
+            return package?.ForegroundType ?? ForegroundType.Normal;
         }
 
         public static BlockArgsType GetBlockArgsType(ForegroundType type)

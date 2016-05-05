@@ -20,7 +20,7 @@ namespace BotBits
 
         public override string ToString()
         {
-            return string.Format("Layer = {0}, X = {1}, Y = {2}", this.Layer, this.X, this.Y);
+            return $"Layer = {this.Layer}, X = {this.X}, Y = {this.Y}";
         }
 
         public bool Equals(Point3D other)

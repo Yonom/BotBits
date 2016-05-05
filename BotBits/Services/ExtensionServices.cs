@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using JetBrains.Annotations;
 
 namespace BotBits
 {
@@ -10,7 +11,7 @@ namespace BotBits
             lock (client.Extensions) return client.Extensions.ToArray();
         }
 
-        internal static int? GetExtensionId(BotBitsClient client, Assembly assembly)
+        internal static int? GetExtensionId(BotBitsClient client, [CanBeNull] Assembly assembly)
         {
             var exts = GetExtensions(client);
             for (var i = 0; i < exts.Length; i++)

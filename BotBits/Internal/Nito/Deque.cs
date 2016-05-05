@@ -49,7 +49,7 @@ namespace BotBits.Nito
         public Deque(IEnumerable<T> collection)
         {
             var enumerable = collection as T[] ?? collection.ToArray();
-            var count = enumerable.Count();
+            var count = enumerable.Length;
             if (count > 0)
             {
                 this._buffer = new T[count];
@@ -434,7 +434,7 @@ namespace BotBits.Nito
         public void InsertRange(int index, IEnumerable<T> collection)
         {
             var enumerable = collection as T[] ?? collection.ToArray();
-            var collectionCount = enumerable.Count();
+            var collectionCount = enumerable.Length;
             CheckNewIndexArgument(this.Count, index);
 
             // Overflow-safe check for "this.Count + collectionCount > this.Capacity"
@@ -510,6 +510,7 @@ namespace BotBits.Nito
                 this._deque = deque;
             }
 
+            // ReSharper disable once UnusedMember.Local
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public T[] Items
             {

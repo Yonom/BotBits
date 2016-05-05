@@ -56,9 +56,7 @@ namespace BotBits
 
         private static Exception GetEventEx(MethodInfo handler, string reason)
         {
-            return
-                new TypeLoadException(string.Format("Unable to assign the method {0}.{1} to an event listener. {2}",
-                    handler.DeclaringType.FullName, handler.Name, reason));
+            return new TypeLoadException($"Unable to assign the method {handler.DeclaringType?.FullName}.{handler.Name} to an event listener. {reason}");
         }
     }
 }

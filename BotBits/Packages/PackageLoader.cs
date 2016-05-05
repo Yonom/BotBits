@@ -72,8 +72,7 @@ namespace BotBits
             IPackage value;
 
             if (this._packages.TryGetValue(t, out value)) return (T)value;
-            throw new NotSupportedException(
-                string.Format("The package {0} has not been loaded into BotBits.", t.FullName));
+            throw new NotSupportedException($"The package {t.FullName} has not been loaded into BotBits.");
         }
 
         private void LoadPackages(IPackage[] packages, [CanBeNull] Action initialize)
@@ -83,7 +82,7 @@ namespace BotBits
                 l.Setup(this._client);
                 this._packages.TryAdd(l.GetType(), l);
             }
-            if (initialize != null) initialize();
+            initialize?.Invoke();
             foreach (var l in packages)
             {
                 l.SignalInitializeFinish();

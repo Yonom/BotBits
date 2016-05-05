@@ -27,7 +27,7 @@ namespace BotBits
         {
             unchecked
             {
-                var hashCode = (this.Player != null ? this.Player.GetHashCode() : 0);
+                var hashCode = this.Player?.GetHashCode() ?? 0;
                 hashCode = (hashCode * 397) ^ this.X;
                 hashCode = (hashCode * 397) ^ this.Y;
                 return hashCode;

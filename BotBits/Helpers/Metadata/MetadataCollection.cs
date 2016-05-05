@@ -12,8 +12,7 @@ namespace BotBits
 
         private void OnMetadataChanged(MetadataChangedEventArgs e)
         {
-            var handler = this.MetadataChanged;
-            if (handler != null) handler(this, e);
+            this.MetadataChanged?.Invoke(this, e);
         }
 
         public virtual T Get<T>(string id)

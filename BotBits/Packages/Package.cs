@@ -33,8 +33,7 @@ namespace BotBits
 
         private void OnInitializeFinish()
         {
-            var handler = this.InitializeFinish;
-            if (handler != null) handler(this, EventArgs.Empty);
+            this.InitializeFinish?.Invoke(this, EventArgs.Empty);
         }
 
         [Pure]

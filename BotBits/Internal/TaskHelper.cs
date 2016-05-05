@@ -279,10 +279,10 @@ namespace BotBits
         {
             task.ContinueWith(t =>
             {
-                if (finalAction != null) finalAction();
+                finalAction?.Invoke();
 
                 if (t.IsCanceled || !t.IsFaulted || exceptionHandler == null) return;
-                var innerException = t.Exception.Flatten().InnerExceptions.FirstOrDefault();
+                var innerException = t.Exception?.Flatten().InnerExceptions.FirstOrDefault();
                 exceptionHandler(innerException ?? t.Exception);
             }, TaskScheduler.Default);
         }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using JetBrains.Annotations;
 
 namespace BotBits
 {
@@ -61,11 +62,11 @@ namespace BotBits
         public void Bind(EventRaiseHandler<T> callback, GlobalPriority globalPriority,
             EventPriority priority = EventPriority.Normal)
         {
-            var assembly = callback.Method.DeclaringType.Assembly;
+            var assembly = callback.Method.DeclaringType?.Assembly;
             this.BindInternal(assembly, callback, globalPriority, priority);
         }
 
-        internal void BindInternal(Assembly assembly, EventRaiseHandler<T> callback, GlobalPriority globalPriority,
+        internal void BindInternal([CanBeNull] Assembly assembly, EventRaiseHandler<T> callback, GlobalPriority globalPriority,
             EventPriority priority)
         {
             lock (this._eventHandlers)

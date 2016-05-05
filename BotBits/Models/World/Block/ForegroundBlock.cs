@@ -21,7 +21,7 @@ namespace BotBits
         {
             unchecked
             {
-                var hashCode = (this._args != null ? this._args.GetHashCode() : 0);
+                var hashCode = this._args?.GetHashCode() ?? 0;
                 hashCode = (hashCode * 397) ^ (int)this.Id;
                 hashCode = (hashCode * 397) ^ (int)this.Type;
                 return hashCode;
@@ -392,8 +392,8 @@ namespace BotBits
             {
                 unchecked
                 {
-                    return ((this.Text != null ? this.Text.GetHashCode() : 0) * 397) ^
-                           (this.TextColor != null ? this.TextColor.GetHashCode() : 0);
+                    return ((this.Text?.GetHashCode() ?? 0) * 397) ^
+                           (this.TextColor?.GetHashCode() ?? 0);
                 }
             }
 
@@ -438,7 +438,7 @@ namespace BotBits
             {
                 unchecked
                 {
-                    return ((this.Text != null ? this.Text.GetHashCode() : 0) * 397) ^ (int)this.SignColor;
+                    return ((this.Text?.GetHashCode() ?? 0) * 397) ^ (int)this.SignColor;
                 }
             }
 
