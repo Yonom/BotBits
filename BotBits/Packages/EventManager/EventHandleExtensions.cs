@@ -15,11 +15,10 @@ namespace BotBits
             where T : Event<T>
         {
             var tcs = new TaskCompletionSource<T>();
-            ct.Register(() =>
-                tcs.TrySetCanceled(), false);
+            ct.Register(() => tcs.TrySetCanceled(), false);
 
             var raiseHandler = new EventRaiseHandler<T>(t => tcs.TrySetResult(t));
-            eventHandle.BindInternal(assembly, raiseHandler, globalPriority, priority); // TODO
+            eventHandle.BindInternal(assembly, raiseHandler, globalPriority, priority);
             tcs.Task.ContinueWith(t => eventHandle.Unbind(raiseHandler), CancellationToken.None);
 
             return tcs.Task;
