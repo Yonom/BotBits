@@ -12,13 +12,11 @@ namespace BotBits.SendMessages
         ///     Initializes a new instance of the <see cref="EffectSendMessage" /> class.
         /// </summary>
         /// <param name="effect">The effect.</param>
-        /// <param name="activate">if set to <c>true</c> the effect will be activated.</param>
         /// <param name="y">The y.</param>
         /// <param name="x">The x.</param>
-        public EffectSendMessage(Effect effect, bool activate, int y, int x)
+        public EffectSendMessage(Effect effect, int y, int x)
         {
             this.Effect = effect;
-            this.Activate = activate;
             this.Y = y;
             this.X = x;
         }
@@ -30,14 +28,6 @@ namespace BotBits.SendMessages
         ///     The effect.
         /// </value>
         public Effect Effect { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether this effect is activated.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if activated; otherwise, <c>false</c>.
-        /// </value>
-        public bool Activate { get; set; }
 
         /// <summary>
         ///     Gets or sets the y.
@@ -61,7 +51,7 @@ namespace BotBits.SendMessages
         /// <returns></returns>
         protected override Message GetMessage()
         {
-            return Message.Create("effect", this.X, this.Y, (int)this.Effect, this.Activate);
+            return Message.Create("effect", this.X, this.Y, (int)this.Effect);
         }
     }
 }

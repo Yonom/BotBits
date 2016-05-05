@@ -242,15 +242,9 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void ApplyEffect(Effect effect, bool activate, int x, int y)
+        public void ApplyEffect(Effect effect, int x, int y)
         {
-            new EffectSendMessage(effect, activate, x, y)
-                .SendIn(this.BotBits);
-        }
-
-        public void ApplyTimedEffect(Effect effect, TimeSpan duration, int x, int y)
-        {
-            new TimedEffectSendMessage(effect, duration, x, y)
+            new EffectSendMessage(effect, x, y)
                 .SendIn(this.BotBits);
         }
 
