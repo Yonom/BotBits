@@ -83,7 +83,7 @@ namespace BotBits
         protected Task InitConnection(string roomId, Connection conn)
         {
             return this._argsAsync
-                .Then(task => this._connectionManager.SetConnection(conn, new ConnectionArgs(this.ConnectUserId, roomId, task.Result)))
+                .Then(task => this._connectionManager.AttachConnection(conn, new ConnectionArgs(this.ConnectUserId, roomId, task.Result)))
                 .ToSafeTask();
         }
     }

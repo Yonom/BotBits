@@ -23,7 +23,7 @@ namespace BotBits
 
         public string ConnectUserId { get; private set; }
 
-        public void SetConnection(Connection connection, ConnectionArgs args)
+        public void AttachConnection(Connection connection, ConnectionArgs args)
         {
             var adapter = new PlayerIOConnectionAdapter(connection);
             try
