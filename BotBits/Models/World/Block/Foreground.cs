@@ -392,18 +392,12 @@ namespace BotBits
 
             [Pack("brickcoindoor", ForegroundType = ForegroundType.Goal)]
             public const Id
-                GoldDoor = (Id)43;
-
-            [Pack("brickcoindoor", ForegroundType = ForegroundType.Goal)]
-            public const Id
+                GoldDoor = (Id)43,
                 GoldGate = (Id)165;
 
             [Pack("brickbluecoindoor", ForegroundType = ForegroundType.Goal)]
             public const Id
-                BlueDoor = (Id)213;
-
-            [Pack("brickbluecoindoor", ForegroundType = ForegroundType.Goal)]
-            public const Id
+                BlueDoor = (Id)213,
                 BlueGate = (Id)214;
         }
 
@@ -411,15 +405,15 @@ namespace BotBits
         {
             [Pack("brickswitchpurple", ForegroundType = ForegroundType.Goal)]
             public const Id
-                Purple = (Id)113;
-
-            [Pack("brickswitchpurple", ForegroundType = ForegroundType.Goal)]
-            public const Id
-                PurpleDoor = (Id)184;
-
-            [Pack("brickswitchpurple", ForegroundType = ForegroundType.Goal)]
-            public const Id
+                Purple = (Id)113,
+                PurpleDoor = (Id)184,
                 PurpleGate = (Id)185;
+
+            [Pack("brickswitchorange", ForegroundType = ForegroundType.Goal)]
+            public const Id
+                Orange = (Id)467,
+                OrangeDoor = (Id)1079,
+                OrangeGate = (Id)1080;
         }
 
         public static class Boost

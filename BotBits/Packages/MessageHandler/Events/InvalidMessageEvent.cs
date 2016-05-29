@@ -7,9 +7,9 @@ namespace BotBits.Events
     ///     Occurs when a received PlayerIOMessage could not be handled by BotBits.
     /// </summary>
     /// <seealso cref="ReceiveEvent{T}" />
-    public sealed class UnknownMessageEvent : ReceiveEvent<UnknownMessageEvent>
+    public sealed class InvalidMessageEvent : ReceiveEvent<InvalidMessageEvent>
     {
-        internal UnknownMessageEvent(BotBitsClient client, Message message, Exception reason)
+        internal InvalidMessageEvent(BotBitsClient client, Message message, Exception reason)
             : base(client, message)
         {
             this.Reason = reason;

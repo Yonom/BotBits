@@ -154,7 +154,7 @@
     <Compile Include="Packages\MessageHandler\Events\TeamEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\TimeEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\UnfavoritedEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\UnknownMessageTypeException.cs" />
+    <Compile Include="Packages\MessageHandler\UnknownMessageTypeException.cs" />
     <Compile Include="Packages\MessageHandler\Events\UnlikedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\WorldReleasedEvent.cs" />
     <Compile Include="Packages\MessageHandler\MessageUtils.cs" />
@@ -253,7 +253,7 @@
     <Compile Include="Packages\MessageHandler\MessageHandler.cs" />
     <Compile Include="Packages\ConnectionManager\Events\ConnectEvent.cs" />
     <Compile Include="Packages\ConnectionManager\Events\DisconnectEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\UnknownMessageEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\InvalidMessageEvent.cs" />
     <Compile Include="Packages\ConnectionManager\ConnectionManager.cs" />
     <Compile Include="Packages\Blocks\BlockUtils.cs" />
     <Compile Include="Packages\MessageHandler\Events\AccessEvent.cs" />

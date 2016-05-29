@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using BotBits.Events;
 using BotBits.SendMessages;
 
@@ -42,6 +44,12 @@ namespace BotBits
         }
 
         [EventListener]
+        private void On(InvalidMessageEvent e)
+        {
+            Trace.TraceWarning($"Received invalid message:{e.Reason}\n{e.PlayerIOMessage}");
+        }
+
+        [EventListener]
         private void On(PlayerIOMessageEvent e)
         {
             Type handler;
@@ -56,19 +64,25 @@ namespace BotBits
                 }
                 catch (Exception ex)
                 {
-                    new UnknownMessageEvent(this.BotBits, e.Message, ex)
+                    new InvalidMessageEvent(this.BotBits, e.Message, ex)
                         .RaiseIn(this.BotBits);
                     return;
                 }
 
                 var playerEvent = instance as ICancellable;
-                if (playerEvent != null && playerEvent.Cancelled) return;
+                if (playerEvent != null && playerEvent.Cancelled)
+                {
+                    new InvalidMessageEvent(this.BotBits, e.Message,
+                        new UnknownPlayerException("The player could not be found."))
+                        .RaiseIn(this.BotBits);
+                    return;
+                }
 
                 instance.RaiseIn(this.BotBits);
             }
             else
             {
-                new UnknownMessageEvent(this.BotBits, e.Message,
+                new InvalidMessageEvent(this.BotBits, e.Message,
                     new UnknownMessageTypeException("The received message type is not supported."))
                     .RaiseIn(this.BotBits);
             }
