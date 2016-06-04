@@ -55,8 +55,8 @@
   <ItemGroup>
     <Compile Include="Client\Events\DisposedEvent.cs" />
     <Compile Include="Client\Events\DisposingEvent.cs" />
-    <Compile Include="Helpers\PlayerData\PlayerAchivements.cs" />
-    <Compile Include="Helpers\PlayerData\PlayerData.cs" />
+    <Compile Include="Database\PlayerData\PlayerAchivements.cs" />
+    <Compile Include="Database\PlayerData\PlayerData.cs" />
     <Compile Include="Helpers\VersionCache.cs" />
     <Compile Include="Internal\InitParse.cs" />
     <Compile Include="Internal\Nito\Async\BotBitsSynchronizationContext.cs" />
@@ -177,11 +177,11 @@
     <Compile Include="Packages\MessageSender\SendMessages\SetRoomDescriptionSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetRoomVisibleSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TimeSendMessage.cs" />
-    <Compile Include="Helpers\PlayerData\PlayerObject.cs" />
+    <Compile Include="Database\PlayerData\PlayerObject.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\UnfavoriteSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\UnlikeSendMessage.cs" />
     <Compile Include="Packages\Players\Events\PurpleSwitchEvent.cs" />
-    <Compile Include="Helpers\PlayerData\ShopData.cs" />
+    <Compile Include="Database\PlayerData\ShopData.cs" />
     <Compile Include="Models\World\BlockData\BlockData.cs" />
     <Compile Include="Packages\Chat\ChatExtensions.cs" />
     <Compile Include="Packages\Chat\Events\PrivateMessageEvent.cs" />
@@ -336,7 +336,6 @@
     <Compile Include="Packages\PackageLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internal\Nito\Async\ActionDispatcher.cs" />
-    <Compile Include="Internal\Utils.cs" />
     <Compile Include="Models\World\Block\BackgroundBlock.cs" />
     <Compile Include="Models\World\Block\BlockArgsType.cs" />
     <Compile Include="Models\World\BlockLayer.cs" />
