@@ -6,10 +6,10 @@ namespace BotBits.SendMessages
     ///     Sent to enable or disable the gold smiley border
     /// </summary>
     /// <seealso cref="SendMessage{T}" />
-    public sealed class SmileyGoldBolderSendMessage : SendMessage<SetMinimapEnabledSendMessage>
+    public sealed class SmileyGoldBolderSendMessage : SendMessage<SmileyGoldBolderSendMessage>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SetMinimapEnabledSendMessage" /> class.
+        ///     Initializes a new instance of the <see cref="SmileyGoldBolderSendMessage" /> class.
         /// </summary>
         /// <param name="enabled">if set to <c>true</c>, minimap is enabled.</param>
         public SmileyGoldBolderSendMessage(bool enabled)

@@ -63,6 +63,7 @@
     <Compile Include="Events\EventLoaderTests.cs" />
     <Compile Include="Events\EventTests.cs" />
     <Compile Include="Events\TestEvent.cs" />
+    <Compile Include="MessageSend\SendMessageTests.cs" />
     <Compile Include="Metadata\MetadataTestObject.cs" />
     <Compile Include="Metadata\MetadataTests.cs" />
     <Compile Include="Packages\PackageLoaderTests.cs" />
@@ -77,7 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MessageReceive\" />
-    <Folder Include="MessageSend\" />
     <Folder Include="World\" />
   </ItemGroup>
   <Choose>

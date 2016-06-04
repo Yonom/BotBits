@@ -6,7 +6,7 @@ namespace BotBits.SendMessages
     ///     Sent to change hide lobby world setting.
     /// </summary>
     /// <seealso cref="SendMessage{T}" />
-    public sealed class SetHideLobbySendMessage : SendMessage<SetRoomVisibleSendMessage>
+    public sealed class SetHideLobbySendMessage : SendMessage<SetHideLobbySendMessage>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="SetHideLobbySendMessage" /> class.
