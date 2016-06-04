@@ -67,6 +67,7 @@
     <Compile Include="Models\CampaignReward.cs" />
     <Compile Include="Models\CampaignRewardType.cs" />
     <Compile Include="Models\CampaignStatus.cs" />
+    <Compile Include="Models\Crew.cs" />
     <Compile Include="Models\PlayerPoint.cs" />
     <Compile Include="Models\RespawnData.cs" />
     <Compile Include="Models\SwitchType.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Packages\Login\Client\LobbyItem.cs" />
     <Compile Include="Packages\Login\Client\LoginClient.cs" />
     <Compile Include="Packages\Login\Login.cs" />
+    <Compile Include="Packages\MessageHandler\Events\CanAddToCrewsEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\LobbyPreviewEnabledEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\JoinCompleteEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MinimapEnabledEvent.cs" />
