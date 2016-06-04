@@ -15,6 +15,11 @@ namespace BotBits
         ADV,
 
         /// <summary>
+        ///     Colorful
+        /// </summary>
+        CLR,
+
+        /// <summary>
         ///     Endurance
         /// </summary>
         END,
@@ -24,6 +29,16 @@ namespace BotBits
         /// </summary>
         FFS,
 
+        /// <summary>
+        ///     Halloween
+        /// </summary>
+        HLW,
+
+        /// <summary>
+        ///     Looks Can Deceive
+        /// </summary>
+        LCD,
+        
         /// <summary>
         ///     Puzzle Pack 1
         /// </summary>
@@ -35,9 +50,14 @@ namespace BotBits
         RNS,
 
         /// <summary>
-        ///     Tutorials
+        ///     Spring
         /// </summary>
-        TTR,
+        SPR,
+
+        /// <summary>
+        ///     Story Time
+        /// </summary>
+        STM,
 
         /// <summary>
         ///     Tunnel Rats
@@ -45,14 +65,9 @@ namespace BotBits
         TNR,
 
         /// <summary>
-        ///     Halloween
+        ///     Tutorials
         /// </summary>
-        HLW,
-
-        /// <summary>
-        ///     Colorful
-        /// </summary>
-        CLR,
+        TTR,
 
         /// <summary>
         ///     Winter

@@ -14,10 +14,5 @@ namespace BotBits
             else Enum.TryParse(badgeStr, true, out badge);
             return badge;
         }
-
-        public static Point3D GetPoint3D(this PlaceSendMessage placeSendMessage)
-        {
-            return new Point3D(placeSendMessage.Layer, placeSendMessage.X, placeSendMessage.Y);
-        }
     }
 }

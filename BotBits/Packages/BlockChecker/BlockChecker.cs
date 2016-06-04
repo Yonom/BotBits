@@ -110,7 +110,7 @@ namespace BotBits
             while (this._sentBlocks.Count > 0)
             {
                 var current = this._sentBlocks.RemoveFromFront();
-                var currentPoint = current.Message.GetPoint3D();
+                var currentPoint = GetPoint3D(current.Message);
                 this._sentLocations.Remove(currentPoint);
 
                 // If we arrived at the block we received, exit the checks
@@ -131,7 +131,7 @@ namespace BotBits
         private void OnSendingPlace(SendingEvent<PlaceSendMessage> e)
         {
             var b = e.Message;
-            var p = b.GetPoint3D();
+            var p = GetPoint3D(b);
 
             lock (this._sentBlocks)
             {
@@ -148,7 +148,7 @@ namespace BotBits
         private void OnSendPlace(SendEvent<PlaceSendMessage> e)
         {
             var b = e.Message;
-            var p = b.GetPoint3D();
+            var p = GetPoint3D(b);
 
             lock (this._sentBlocks)
             {
@@ -198,6 +198,11 @@ namespace BotBits
 
             public int OverwrittenSends { get; set; }
             public PlaceSendMessage Message { get; }
+        }
+        
+        private static Point3D GetPoint3D(PlaceSendMessage placeSendMessage)
+        {
+            return new Point3D(placeSendMessage.Layer, placeSendMessage.X, placeSendMessage.Y);
         }
     }
 }
