@@ -247,7 +247,6 @@
     <Compile Include="Packages\Players\Events\RespawnEvent.cs" />
     <Compile Include="Packages\Players\Player.cs" />
     <Compile Include="Packages\Players\Players.cs" />
-    <Compile Include="Packages\Players\PlayerUtils.cs" />
     <Compile Include="Packages\Room\Events\AccessRightChangedEvent.cs" />
     <Compile Include="Packages\Room\Events\MetaChangedEvent.cs" />
     <Compile Include="Packages\Room\Room.cs" />

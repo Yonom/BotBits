@@ -10,7 +10,7 @@ namespace BotBits
     [DebuggerDisplay("Username = {Username}, Smiley = {Smiley}")]
     public sealed class Player : MetadataCollection, IEquatable<Player>
     {
-        public static readonly Player Nobody = new Player(null, -1) { Username = string.Empty };
+        public static readonly Player Nobody = new Player(null, -1) { Username = String.Empty };
         private readonly HashSet<Point> _blueCoins = new HashSet<Point>();
 
         [CanBeNull]
@@ -298,7 +298,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if this player is a guest; otherwise, <c>false</c>.
         /// </value>
-        public bool IsGuest => PlayerUtils.IsGuest(this.Username);
+        public bool Guest => IsGuest(this.Username);
 
         /// <summary>
         ///     Gets the player's chat name.
@@ -307,7 +307,7 @@ namespace BotBits
         ///     The player's chat name.
         /// </value>
         [CanBeNull]
-        public string ChatName => PlayerUtils.GetChatName(this.Username);
+        public string ChatName => GetChatName(this.Username);
 
         /// <summary>
         ///     Gets a value indicating whether this <see cref="Player" /> is the room owner.
@@ -559,6 +559,29 @@ namespace BotBits
             if (this == Nobody) throw new NotSupportedException("Cannot set metadata on Player.Nobody.");
 
             base.Set(id, value);
+        }
+
+        /// <summary>
+        ///     Determines whether the player with the specified username is a guest.
+        /// </summary>
+        /// <param name="username">The player's username.</param>
+        /// <returns></returns>
+        [Pure]
+        public static bool IsGuest(string username)
+        {
+            // Official implementation in SWF, don't blame me
+            return username.Contains("-");
+        }
+
+        /// <summary>
+        ///     Gets the chat name of the specified player.
+        /// </summary>
+        /// <param name="username">The player's username.</param>
+        /// <returns></returns>
+        [Pure]
+        public static string GetChatName(string username)
+        {
+            return username.ToUpperInvariant();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace BotBits
         {
             if (obj is Type) throw new InvalidOperationException("Cannot load Types! Did you mean to use LoadModule?");
 
-            var methods = Utils.GetMethods(obj.GetType());
+            var methods = GetMethods(obj.GetType());
             this.LoadEventhandlers(obj, methods);
         }
 
@@ -49,7 +49,7 @@ namespace BotBits
             if (obj is Type)
                 throw new InvalidOperationException("Cannot load Types! Did you mean to use UnloadModule?");
 
-            var methods = Utils.GetMethods(obj.GetType());
+            var methods = GetMethods(obj.GetType());
             this.UnloadEventhandlers(obj, methods);
         }
 
@@ -82,6 +82,18 @@ namespace BotBits
                 unbinder();
         }
 
+        public static IEnumerable<MethodInfo> GetMethods(Type type)
+        {
+            IEnumerable<MethodInfo> methods =
+                type.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+
+            if (type.BaseType?.BaseType != null)
+            {
+                methods = methods.Concat(GetMethods(type.BaseType));
+            }
+
+            return methods;
+        }
 
         protected abstract bool ShouldLoad(MethodInfo methodInfo);
         protected abstract Action GetBinder(object baseObj, MethodInfo eventHandler);
