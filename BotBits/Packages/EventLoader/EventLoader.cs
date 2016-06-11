@@ -48,7 +48,7 @@ namespace BotBits
                 throw GetEventEx(eventHandler, "EventListeners must have one argument of type Event.");
 
             var e = parameters[0].ParameterType;
-            if (!Utils.IsEvent(e))
+            if (!IsEvent(e))
                 throw GetEventEx(eventHandler, "The argument must be an event.");
 
             return e;
@@ -86,6 +86,20 @@ namespace BotBits
         private static Exception GetEventEx(MethodInfo handler, string reason)
         {
             return new TypeLoadException($"Unable to assign the method {handler.DeclaringType?.FullName}.{handler.Name} to an event listener. {reason}");
+        }
+
+        public static bool IsEvent(Type givenType)
+        {
+            try
+            {
+                // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
+                givenType.IsAssignableFrom(typeof(Event<>).MakeGenericType(givenType));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

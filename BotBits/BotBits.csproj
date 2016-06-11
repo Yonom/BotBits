@@ -256,7 +256,6 @@
     <Compile Include="Packages\ConnectionManager\Events\DisconnectEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\InvalidMessageEvent.cs" />
     <Compile Include="Packages\ConnectionManager\ConnectionManager.cs" />
-    <Compile Include="Packages\Blocks\BlockUtils.cs" />
     <Compile Include="Packages\MessageHandler\Events\AccessEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\JoinEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\AutoTextEvent.cs" />
