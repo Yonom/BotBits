@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using BotBits.Events;
 using BotBits.SendMessages;
@@ -105,7 +106,8 @@ namespace BotBits
         [EventListener]
         private void On(BlockPlaceEvent e)
         {
-            if (this.Height <= e.Y || this.Width <= e.X) return;
+            if (this.Height <= e.Y || this.Width <= e.X)
+                return;
 
             switch (e.Layer)
             {
@@ -163,38 +165,87 @@ namespace BotBits
 
         private void RaiseBlock(int x, int y, Foreground.Id block, Player player)
         {
-            this.RaiseForeground(x, y, new ForegroundBlock(block), player);
+            try
+            {
+                this.RaiseForeground(x, y, new ForegroundBlock(block), player);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceWarning($"Received invalid block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
+            }
         }
 
         private void RaiseNumberBlock(int x, int y, Foreground.Id block, uint args, Player player)
         {
-            this.RaiseForeground(x, y, new ForegroundBlock(block, args), player);
+            try
+            {
+                this.RaiseForeground(x, y, new ForegroundBlock(block, args), player);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceWarning($"Received invalid number block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
+            }
         }
 
         private void RaiseSignedNumberBlock(int x, int y, Foreground.Id block, int args, Player player)
         {
-            this.RaiseForeground(x, y, new ForegroundBlock(block, args), player);
+            try
+            {
+                this.RaiseForeground(x, y, new ForegroundBlock(block, args), player);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceWarning($"Received invalid signed number block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
+            }
         }
 
         private void RaiseStringBlock(int x, int y, Foreground.Id block, string text, Player player)
         {
-            this.RaiseForeground(x, y, new ForegroundBlock(block, text), player);
+            try
+            {
+                this.RaiseForeground(x, y, new ForegroundBlock(block, text), player);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceWarning($"Received invalid string block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
+            }
         }
 
         private void RaiseLabelBlock(int x, int y, Foreground.Id block, string text, string textColor, Player player)
         {
-            this.RaiseForeground(x, y, new ForegroundBlock(block, text, textColor), player);
+            try
+            {
+                this.RaiseForeground(x, y, new ForegroundBlock(block, text, textColor), player);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceWarning($"Received invalid label block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
+            }
         }
 
         private void RaiseSignBlock(int x, int y, Foreground.Id block, string text, Morph.Id signColor, Player player)
         {
-            this.RaiseForeground(x, y, new ForegroundBlock(block, text, signColor), player);
+            try
+            {
+                this.RaiseForeground(x, y, new ForegroundBlock(block, text, signColor), player);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceWarning($"Received invalid sign block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
+            }
         }
 
         private void RaisePortalBlock(int x, int y, Foreground.Id block,
             uint portalId, uint portalTarget, Morph.Id portalRotation, Player player)
         {
-            this.RaiseForeground(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation), player);
+            try
+            {
+                this.RaiseForeground(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation), player);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceWarning($"Received invalid portal block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
+            }
         }
 
         private void RaiseForeground(int x, int y, ForegroundBlock newBlock, Player player)

@@ -109,15 +109,17 @@ namespace BotBits
             foreach (var field in type.GetFields(BindingFlags.Static | BindingFlags.Public))
             {
                 var value = (ushort)field.GetValue(null);
-                _blockGroups.Add(value, type);
-
-                var pack = GetPack(field);
-                if (pack != null)
+                try
                 {
-                    if (!_blockPacks.TryAdd(value, pack))
-                    {
-                        throw new InvalidOperationException("Duplicate block: " + value);
-                    }
+                    if (value != 0)
+                        _blockGroups.Add(value, type);
+
+                    var pack = GetPack(field);
+                    if (pack != null) _blockPacks.TryAdd(value, pack);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException("Duplicate block: " + value, ex);
                 }
             }
 

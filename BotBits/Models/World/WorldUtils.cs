@@ -270,25 +270,14 @@ namespace BotBits
         {
             if (p.X < 0 || p.Y < 0 || p.X >= world.Width || p.Y >= world.Height) return false; // If out of range
 
-            if (!respectBorder) return true;
-            if (p.X == 0 || p.Y == 0 || p.X == world.Width - 1 || p.Y == world.Height - 1) // If on border
+            if (respectBorder)
             {
-                if (p.Layer == Layer.Background) return false;
-
-                return IsBorderPlaceable((Foreground.Id)p.Id);
+                if (p.X == 0 || p.Y == 0 || p.X == world.Width - 1 || p.Y == world.Height - 1) // If on border
+                {
+                    return p.Id != 0;
+                }
             }
-
             return true;
-        }
-
-        private static bool IsBorderPlaceable(Foreground.Id id)
-        {
-            if (id == Foreground.Secret.Black) return true;
-
-            var block = ItemServices.GetGroup((int)id);
-            return block == typeof(Foreground.Basic) ||
-                   block == typeof(Foreground.Beta) ||
-                   block == typeof(Foreground.Brick);
         }
 
         internal static IEnumerable<Point> GetPos(byte[] byteArrayX, byte[] byteArrayY)
