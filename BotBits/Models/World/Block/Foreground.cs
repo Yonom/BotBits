@@ -50,7 +50,8 @@ namespace BotBits
                 Yellow = (Id)13,
                 Green = (Id)14,
                 Cyan = (Id)15,
-                Black = (Id)182;
+                Black = (Id)182,
+                White = (Id)1088;
         }
 
         public static class Brick
@@ -64,7 +65,8 @@ namespace BotBits
                 Green = (Id)19,
                 Red = (Id)20,
                 Tan = (Id)21,
-                Black = (Id)1024;
+                Black = (Id)1024,
+                White = (Id)1090;
         }
 
         public static class Generic
@@ -168,7 +170,8 @@ namespace BotBits
                 Orange = (Id)1020,
                 Yellow = (Id)41,
                 Gray = (Id)42,
-                Black = (Id)1021;
+                Black = (Id)1021,
+                White = (Id)1089;
         }
 
         public static class Factory
@@ -643,7 +646,8 @@ namespace BotBits
                 Green = (Id)191,
                 LightBlue = (Id)192,
                 Orange = (Id)1025,
-                Black = (Id)1026;
+                Black = (Id)1026,
+                White = (Id)1092;
         }
 
         public static class Jungle
@@ -966,7 +970,8 @@ namespace BotBits
                 Blue = (Id)1053,
                 Red = (Id)1054,
                 Green = (Id)1055,
-                Black = (Id)1056;
+                Black = (Id)1056,
+                White = (Id)1091;
         }
 
         public static class Valentines2015
@@ -1179,6 +1184,23 @@ namespace BotBits
                 Daisy = (Id)475,
                 Tulip = (Id)476,
                 Daffodil = (Id)477;
+        }
+
+        public static class Summer2016
+        {
+            [Pack("bricksummer2016")]
+            public const Id
+                Beige = (Id)1083,
+                Purple = (Id)1084,
+                Yellow = (Id)1085,
+                Teal = (Id)1086,
+                OneWay = (Id)1087;
+
+            [Pack("bricksummer2016", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                Flags = (Id)481,
+                Awning = (Id)482,
+                IceCream = (Id)483;
         }
     }
 }

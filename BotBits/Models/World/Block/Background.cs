@@ -25,7 +25,8 @@ namespace BotBits
                 Yellow = (Id)504,
                 Green = (Id)505,
                 Cyan = (Id)506,
-                Black = (Id)645;
+                Black = (Id)645,
+                White = (Id)715;
         }
 
         public static class Brick
@@ -39,7 +40,8 @@ namespace BotBits
                 Green = (Id)510,
                 Red = (Id)511,
                 Tan = (Id)512,
-                Black = (Id)648;
+                Black = (Id)648,
+                White = (Id)716;
         }
 
         public static class Checker
@@ -53,7 +55,8 @@ namespace BotBits
                 Yellow = (Id)517,
                 Green = (Id)518,
                 Cyan = (Id)519,
-                Black = (Id)650;
+                Black = (Id)650,
+                White = (Id)718;
         }
 
         public static class Dark
@@ -68,7 +71,8 @@ namespace BotBits
                 Yellow = (Id)524,
                 Green = (Id)525,
                 Cyan = (Id)526,
-                Black = (Id)652;
+                Black = (Id)652,
+                White = (Id)719;
         }
 
         public static class Pastel
@@ -273,7 +277,8 @@ namespace BotBits
                 Yellow = (Id)614,
                 Green = (Id)615,
                 Cyan = (Id)616,
-                Black = (Id)654;
+                Black = (Id)654,
+                White = (Id)717;
         }
 
         public static class Jungle
@@ -436,9 +441,7 @@ namespace BotBits
                 Blue = (Id)706,
                 Pink = (Id)707;
         }
-
-        // 2 unused block ids
-
+        
         public static class Gold
         {
             [Pack("-", GoldMembershipItem = true)]
@@ -446,6 +449,16 @@ namespace BotBits
                 Basic = (Id)709,
                 Brick = (Id)710,
                 Panel = (Id)711;
+        }
+
+        public static class Summer2016
+        {
+            [Pack("bricksummer2016")]
+            public const Id
+                Beige = (Id)708,
+                Purple = (Id)712,
+                Yellow = (Id)713,
+                Teal = (Id)714;
         }
     }
 }

@@ -357,5 +357,25 @@
                 Yellow = (Id)1,
                 White = (Id)2;
         }
+
+        public static class IceCream
+        {
+            public const Id
+                Mint = 0,
+                Vanilla = (Id)1,
+                Chocolate = (Id)2,
+                Strawberry = (Id)3;
+        }
+
+        public static class Summer2016
+        {
+            public const Id
+                Purple = 0,
+                Red = (Id)1,
+                Orange = (Id)2,
+                Green = (Id)3,
+                Cyan = (Id)4,
+                Blue = (Id)5;
+        }
     }
 }

@@ -397,6 +397,15 @@ namespace BotBits
         Bee = 134,
 
         [Pack("smileybutterfly")]
-        Butterfly = 135
+        Butterfly = 135,
+
+        [Pack("smileyseacaptain")]
+        SeaCaptain = 136,
+
+        [Pack("smileysodaclerk")]
+        SodaClerk = 137,
+
+        [Pack("smileylifeguard")]
+        Lifeguard = 138
     }
 }

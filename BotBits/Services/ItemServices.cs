@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,10 +9,10 @@ namespace BotBits
 {
     public static class ItemServices
     {
-        private static readonly Dictionary<Smiley, PackAttribute> _smileyPacks = new Dictionary<Smiley, PackAttribute>();
-        private static readonly Dictionary<AuraColor, PackAttribute> _auraColorPacks = new Dictionary<AuraColor, PackAttribute>();
-        private static readonly Dictionary<AuraShape, PackAttribute> _auraShapePacks = new Dictionary<AuraShape, PackAttribute>();
-        private static readonly Dictionary<int, PackAttribute> _blockPacks = new Dictionary<int, PackAttribute>();
+        private static readonly ConcurrentDictionary<Smiley, PackAttribute> _smileyPacks = new ConcurrentDictionary<Smiley, PackAttribute>();
+        private static readonly ConcurrentDictionary<AuraColor, PackAttribute> _auraColorPacks = new ConcurrentDictionary<AuraColor, PackAttribute>();
+        private static readonly ConcurrentDictionary<AuraShape, PackAttribute> _auraShapePacks = new ConcurrentDictionary<AuraShape, PackAttribute>();
+        private static readonly ConcurrentDictionary<int, PackAttribute> _blockPacks = new ConcurrentDictionary<int, PackAttribute>();
         private static readonly Dictionary<int, Type> _blockGroups = new Dictionary<int, Type>();
 
         static ItemServices()
@@ -66,6 +67,36 @@ namespace BotBits
             return GetPackageInternal((int)id);
         }
 
+        public static void SetPackage(AuraShape id, PackAttribute package)
+        {
+            _auraShapePacks[id] = package;
+        }
+
+        public static void SetPackage(AuraColor id, PackAttribute package)
+        {
+            _auraColorPacks[id] = package;
+        }
+
+        public static void SetPackage(Smiley id, PackAttribute package)
+        {
+            _smileyPacks [id] = package;
+        }
+
+        public static void SetPackage(Foreground.Id id, PackAttribute package)
+        {
+            SetPackageInternal((int)id, package);
+        }
+
+        public static void  SetPackage(Background.Id id, PackAttribute package)
+        {
+            SetPackageInternal((int)id, package);
+        }
+
+        internal static void SetPackageInternal(int id, PackAttribute package)
+        {
+            _blockPacks[id] = package;
+        }
+
         internal static PackAttribute GetPackageInternal(int id)
         {
             PackAttribute pack;
@@ -78,10 +109,16 @@ namespace BotBits
             foreach (var field in type.GetFields(BindingFlags.Static | BindingFlags.Public))
             {
                 var value = (ushort)field.GetValue(null);
-                _blockGroups[value] = type;
+                _blockGroups.Add(value, type);
 
                 var pack = GetPack(field);
-                if (pack != null) _blockPacks.Add(value, pack);
+                if (pack != null)
+                {
+                    if (!_blockPacks.TryAdd(value, pack))
+                    {
+                        throw new InvalidOperationException("Duplicate block: " + value);
+                    }
+                }
             }
 
             foreach (var i in type.GetNestedTypes())
@@ -91,14 +128,14 @@ namespace BotBits
         }
 
 
-        private static void LoadEnum<T>(Dictionary<T, PackAttribute> collection)
+        private static void LoadEnum<T>(ConcurrentDictionary<T, PackAttribute> collection)
         {
             foreach (var field in typeof(T).GetFields(BindingFlags.Static | BindingFlags.Public))
             {
                 var pack = GetPack(field);
                 if (pack != null)
                 {
-                    collection.Add((T)field.GetValue(null), pack);
+                    collection.TryAdd((T)field.GetValue(null), pack); // always true in case of enums
                 }
             }
         }
