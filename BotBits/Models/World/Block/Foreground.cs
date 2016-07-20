@@ -647,7 +647,7 @@ namespace BotBits
                 LightBlue = (Id)192,
                 Orange = (Id)1025,
                 Black = (Id)1026,
-                White = (Id)1092;
+                White = (Id)1091;
         }
 
         public static class Jungle
@@ -971,7 +971,7 @@ namespace BotBits
                 Red = (Id)1054,
                 Green = (Id)1055,
                 Black = (Id)1056,
-                White = (Id)1091;
+                White = (Id)1092;
         }
 
         public static class Valentines2015
