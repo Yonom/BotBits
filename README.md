@@ -1,6 +1,8 @@
 # BotBits  [![Version](https://img.shields.io/nuget/v/BotBits.svg?style=flat-square&label=version)](https://www.nuget.org/packages/BotBits/) [![Build Status](https://img.shields.io/travis/Yonom/BotBits.svg?style=flat-square)](https://travis-ci.org/Yonom/BotBits)  [![Issues](https://img.shields.io/github/issues/Yonom/BotBits.svg?style=flat-square)](https://github.com/Yonom/BotBits/issues)
 
-An Everybody Edits framework designed for performance and reliability.
+Focus on your ideas, forget PlayerIOClient.
+
+BotBits is the most popular bot library made specifically for Everybody Edits. Maintained by Yonom (Processor).
 
 ## Installation
 Download from NuGet (https://www.nuget.org/packages/BotBits)
