@@ -18,6 +18,14 @@ namespace BotBits
         private readonly Timer _mySendTimer;
         private bool _warning;
 
+        public int Count
+        {
+            get
+            {
+                return this._channels.Sum(c => c.Value.Queue.Count);
+            }
+        }
+
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Chat()
         {
@@ -215,7 +223,7 @@ namespace BotBits
             return text;
         }
 
-        public string Truncate(string input, int length)
+        private string Truncate(string input, int length)
         {
             if (input.Length < length) return input;
             return input.Substring(0, length);
