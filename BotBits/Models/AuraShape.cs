@@ -13,6 +13,9 @@ namespace BotBits
         Torus = 2,
 
         [Pack("-", GoldMembershipItem = true)]
-        Gold
+        Gold = 3,
+
+        [Pack("aurashapespiral")]
+        Spiral = 4
     }
 }

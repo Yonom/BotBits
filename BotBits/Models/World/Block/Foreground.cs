@@ -1202,5 +1202,18 @@ namespace BotBits
                 Awning = (Id)482,
                 IceCream = (Id)483;
         }
+
+        public static class SummerTrophy
+        {
+            [Pack("bricksummertrophybronze")]
+            public const Id
+                Bronze = (Id)484;
+            [Pack("bricksummertrophysilver")]
+            public const Id
+                Silver = (Id)485;
+            [Pack("bricksummertrophygold")]
+            public const Id
+                Gold = (Id)486;
+        }
     }
 }

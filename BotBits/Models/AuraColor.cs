@@ -31,6 +31,13 @@ namespace BotBits
         Gold = 8,
 
         [Pack("aurapink")]
-        Pink = 9
+        Pink = 9,
+
+        [Pack("auraindigo")]
+        Indigo = 10,
+
+        [Pack("auralime")]
+        Lime = 11,
+
     }
 }

@@ -406,6 +406,16 @@ namespace BotBits
         SodaClerk = 137,
 
         [Pack("smileylifeguard")]
-        Lifeguard = 138
+        Lifeguard = 138,
+
+        [Pack("smileylifeguard")]
+        Aviator = 139,
+
+        [Pack("smileysleepy")]
+        Sleepy = 140,
+
+        [Pack("smileyseagull")]
+        Seagull = 141
+
     }
 }
