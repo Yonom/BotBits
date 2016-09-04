@@ -10,7 +10,7 @@ namespace BotBits
 {
     public sealed class Chat : EventListenerPackage<Chat>, IDisposable, IChat
     {
-        private const int MaxMessageLength = 140;
+        public const int MaxLength = 140;
 
         private readonly ConcurrentDictionary<string, ChatChannel> _channels
             = new ConcurrentDictionary<string, ChatChannel>();
@@ -29,12 +29,14 @@ namespace BotBits
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Chat()
         {
-            this._mySendTimer = new Timer(600);
+            this._mySendTimer = new Timer(500);
             this._mySendTimer.Elapsed += this.SendTimer_Elapsed;
         }
 
         public void Say(string msg)
         {
+            // Trim chars
+            msg = this.TrimChars(msg);
             new QueueChatEvent(msg)
                 .RaiseIn(this.BotBits);
         }
@@ -70,6 +72,8 @@ namespace BotBits
                     }
                 }
             }
+
+            this._warning = false;
         }
 
         private void SendChat(string message, ChatChannel channel)
@@ -104,58 +108,44 @@ namespace BotBits
             return channel ?? string.Empty;
         }
 
-        [EventListener]
-        private void On(QueueChatEvent e)
-        {
-            // Trim chars
-            e.Message = this.TrimChars(e.Message);
 
-            // There is no speed limit on commands
-            var pm = e.Message.StartsWith("/pm ", StringComparison.OrdinalIgnoreCase);
-            if (e.Message.StartsWith("/", StringComparison.OrdinalIgnoreCase) && !pm)
+        [EventListener(GlobalPriority.AfterMost)]
+        private void OnAfterMost(QueueChatEvent e)
+        {
+            if (e.Cancelled) return;
+            
+            if (e.IsCommand && !e.IsPrivateMessage)
             {
-                new ChatSendMessage(this.Truncate(e.Message, MaxMessageLength))
+                new ChatSendMessage(this.Truncate(e.Message))
                     .SendIn(this.BotBits);
-                e.Cancelled = true;
                 return;
             }
-
-            // Queue the message and chop it into 140 char parts
+            
             var prefix = string.Empty;
             var message = e.Message;
-            if (pm)
+            if (e.IsPrivateMessage)
             {
                 var args = e.Message.Split(' ');
                 prefix = string.Join(" ", args.Take(2)) + " ";
                 message = string.Join(" ", args.Skip(2));
             }
+            var maxLength = MaxLength - prefix.Length;
 
-            // Dont send the same thing more than 3 times
-            var channel = this.GetChannel(e.Message);
-            var maxLength = MaxMessageLength - prefix.Length;
-            while (this.CheckHistory(this.Truncate(message, maxLength), channel))
+            while (message.Length > 0)
             {
-                message = "." + message;
+                var channel = this.GetChannel(e.Message);
+                var truncated = this.Truncate(message, maxLength);
+                if (this.CheckHistory(truncated, channel))
+                {
+                    var bypass = '.';
+                    if (truncated.All(c => c == bypass)) bypass = ',';
+                    message = bypass + message;
+                    truncated = this.Truncate(message, maxLength);
+                }
+
+                this.QueueChat(prefix + truncated);
+                message = message.Substring(truncated.Length);
             }
-
-            if (message.Length > maxLength)
-            {
-                new QueueChatEvent(prefix + this.Truncate(message, maxLength))
-                    .RaiseIn(this.BotBits);
-
-                this.On(new QueueChatEvent(prefix + message.Substring(maxLength)));
-            }
-            else
-            {
-                e.Message = prefix + message;
-            }
-        }
-
-
-        [EventListener(GlobalPriority.AfterMost)]
-        private void OnAfterMost(QueueChatEvent e)
-        {
-            if (!e.Cancelled) this.QueueChat(e.Message);
         }
 
         [EventListener]
@@ -173,6 +163,7 @@ namespace BotBits
         {
             const string pmPrefix = "* ";
             const string pmSuffix = " > you";
+            const string pmSendPrefix = "* you > ";
             if (e.Title.StartsWith(pmPrefix) && e.Title.EndsWith(pmSuffix))
             {
                 var username = e.Title.Substring(pmPrefix.Length, e.Title.Length - pmPrefix.Length - pmSuffix.Length);
@@ -181,8 +172,17 @@ namespace BotBits
                 new PrivateMessageEvent(username, message)
                     .RaiseIn(this.BotBits);
             }
-            else if (e.Title == "SYSTEM" &&
-                     e.Text == "You are trying to chat too fast, spamming the chat is not nice!")
+            else if (e.Title.StartsWith(pmSendPrefix))
+            {
+                var username = e.Title.Substring(pmSendPrefix.Length);
+                var message = e.Text.Substring(0, e.Text.Length - 1);
+
+                var channel = this.GetChatChannel(username);
+                if (channel.LastSent == message) channel.LastReceived = message;
+
+            }
+            else if (e.Title == "* SYSTEM" &&
+                     e.Text == "You are trying to chat too fast, spamming the chat room is not nice!")
             {
                 this._warning = true;
                 this.InitTimer();
@@ -196,7 +196,7 @@ namespace BotBits
 
         private bool CheckHistory(string str, string channel)
         {
-            str = this.Truncate(str, MaxMessageLength);
+            str = this.Truncate(str);
             return this.GetChatRepeats(str, channel) > 4;
         }
 
@@ -223,7 +223,7 @@ namespace BotBits
             return text;
         }
 
-        private string Truncate(string input, int length)
+        private string Truncate(string input, int length = MaxLength)
         {
             if (input.Length < length) return input;
             return input.Substring(0, length);

@@ -408,7 +408,7 @@ namespace BotBits
         [Pack("smileylifeguard")]
         Lifeguard = 138,
 
-        [Pack("smileylifeguard")]
+        [Pack("smileyaviator")]
         Aviator = 139,
 
         [Pack("smileysleepy")]
