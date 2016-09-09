@@ -29,7 +29,7 @@ namespace BotBits
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Chat()
         {
-            this._mySendTimer = new Timer(500);
+            this._mySendTimer = new Timer(600);
             this._mySendTimer.Elapsed += this.SendTimer_Elapsed;
         }
 
@@ -135,7 +135,8 @@ namespace BotBits
             {
                 var channel = this.GetChannel(e.Message);
                 var truncated = this.Truncate(message, maxLength);
-                if (this.CheckHistory(truncated, channel))
+                if (!Players.Of(this.BotBits).OwnPlayer.Owner &&
+                    this.CheckHistory(truncated, channel))
                 {
                     var bypass = '.';
                     if (truncated.All(c => c == bypass)) bypass = ',';
@@ -175,7 +176,7 @@ namespace BotBits
             else if (e.Title.StartsWith(pmSendPrefix))
             {
                 var username = e.Title.Substring(pmSendPrefix.Length);
-                var message = e.Text.Substring(0, e.Text.Length - 1);
+                var message = e.Text.Substring(0, e.Text.Length - 1); // Bug ingame, space after each private message
 
                 var channel = this.GetChatChannel(username);
                 if (channel.LastSent == message) channel.LastReceived = message;
