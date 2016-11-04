@@ -61,7 +61,6 @@ namespace BotBits
 
         public static class Dark
         {
-            [Pack("brickbgdark")]
             public const Id
                 Gray = (Id)520,
                 Blue = (Id)521,
@@ -77,7 +76,6 @@ namespace BotBits
 
         public static class Pastel
         {
-            [Pack("brickbgpastel")]
             public const Id
                 Yellow = (Id)527,
                 Green = (Id)528,
@@ -199,7 +197,6 @@ namespace BotBits
 
         public static class Water
         {
-            [Pack("brickwater")]
             public const Id
                 Plain = (Id)574,
                 Octopus = (Id)575,
@@ -246,7 +243,6 @@ namespace BotBits
 
         public static class OuterSpace
         {
-            [Pack("brickrocket")]
             public const Id
                 White = (Id)601,
                 Blue = (Id)602,
@@ -283,7 +279,6 @@ namespace BotBits
 
         public static class Jungle
         {
-            [Pack("brickjungle")]
             public const Id
                 Gray = (Id)617,
                 Red = (Id)618,
@@ -349,7 +344,6 @@ namespace BotBits
 
         public static class Clay
         {
-            [Pack("brickclay")]
             public const Id
                 Plain = (Id)594,
                 Brick = (Id)595,
@@ -417,7 +411,6 @@ namespace BotBits
 
         public static class Desert
         {
-            [Pack("brickdesert")]
             public const Id
                 Pattern1 = (Id)699,
                 Pattern2 = (Id)700,
@@ -426,7 +419,6 @@ namespace BotBits
 
         public static class Arctic
         {
-            [Pack("brickarctic")]
             public const Id
                 Ice = (Id)702,
                 Snow = (Id)703;
@@ -460,5 +452,40 @@ namespace BotBits
                 Yellow = (Id)713,
                 Teal = (Id)714;
         }
+
+		public static class Mine
+        {
+            public const Id
+                Rocks = (Id)720;
+        }
+
+		public static class Textile
+        {
+            [Pack("bricktextile")]
+            public const Id
+                Green = (Id)721,
+		Blue = (Id)722,
+		Pink = (Id)723,
+		Yellow = (Id)724,
+		Red = (Id)725;
+        }
+		
+	public static class Halloween2016
+	{
+		[Pack("brickhalloween2016")]
+		public const Id
+			Wood = (Id)726,
+			Leaves = (Id)727;
+	}
+	
+	public static class Construction
+	{
+		public const Id
+			Plywood = (Id)728,
+			Gravel = (Id)729,
+			Cement = (Id)730,
+			BeamHorizontal = (Id)731,
+			BeamVertical = (Id)732;
+	}
     }
 }
