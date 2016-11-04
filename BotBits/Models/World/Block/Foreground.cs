@@ -4,7 +4,7 @@ using BotBits.Shop;
 
 namespace BotBits
 {
-     public static class Foreground
+    public static class Foreground
     {
         public enum Id : ushort
         {
@@ -1111,7 +1111,6 @@ namespace BotBits
 
         public static class Arctic
         {
-            [Pack("-")]
             public const Id
                 Ice = (Id)1059,
                 Snow = (Id)1060,
@@ -1200,58 +1199,57 @@ namespace BotBits
             public const Id
                 Gold = (Id)486;
         }
-		
-		public static class Restaurant
+
+        public static class Restaurant
         {
             [Pack("brickrestaurant")]
             public const Id
                 Hamburger = (Id)487,
-				Hotdog = (Id)488,
-				Sandwich = (Id)489,
-				Soda = (Id)490,
-				Fries = (Id)491;
+                Hotdog = (Id)488,
+                Sandwich = (Id)489,
+                Soda = (Id)490,
+                Fries = (Id)491;
             [Pack("brickrestaurant", ForegroundType = ForegroundType.Morphable)]
             public const Id
                 Glass = (Id)492,
-				Plate = (Id)493,
-				Bowl = (Id)494;
+                Plate = (Id)493,
+                Bowl = (Id)494;
         }
 
-		public static class Mine
+        public static class Mine
         {
             public const Id
                 Rocks = (Id)1093,
-				Stalagmite = (Id)495,
-				Stalagtite = (Id)496,
-				Torch = (Id)498;
+                Stalagmite = (Id)495,
+                Stalagtite = (Id)496,
+                Torch = (Id)498;
             [Pack("brickmine", ForegroundType = ForegroundType.Morphable)]
             public const Id
                 Crystal = (Id)497;
         }
 
-		public static class Halloween2016
-		{
-			[Pack("brickhalloween2016")]
-			public const Id
-				Grass = (Id)1501;
-			[Pack("brickhalloween2016", ForegroundType = ForegroundType.Morphable)]
+        public static class Halloween2016
+        {
+            [Pack("brickhalloween2016")]
             public const Id
-                Branch = (Id)499,
-				Pumpkin = (Id)1500,
-				Eyes = (Id)1502;
-		}
-
-		public static class Construction
-		{
-			public const Id
-				Plywood = (Id)1096,
-				Gravel = (Id)1097,
-				Cement = (Id)1098,
-				BeamHorizontal = (Id)1099,
-				BeamVertical = (Id)1100,
-				Sawhorse = (Id)1503,
-				Cone = (Id)1504,
-				Sign = (Id)1505;
-		}
-	}
+                Grass = (Id)1501;
+            [Pack("brickhalloween2016", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                       Branch = (Id)499,
+                Pumpkin = (Id)1500,
+                Eyes = (Id)1502;
+        }
+        public static class Construction
+        {
+            public const Id
+                Plywood = (Id)1096,
+                Gravel = (Id)1097,
+                Cement = (Id)1098,
+                BeamHorizontal = (Id)1099,
+                BeamVertical = (Id)1100,
+                Sawhorse = (Id)1503,
+                Cone = (Id)1504,
+                Sign = (Id)1505;
+        }
+    }
 }
