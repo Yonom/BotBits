@@ -5,6 +5,10 @@ namespace BotBits.Shop
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class)]
     public sealed class PackAttribute : Attribute
     {
+        public PackAttribute()
+        {
+        }
+
         public PackAttribute(string package)
         {
             this.Package = package;

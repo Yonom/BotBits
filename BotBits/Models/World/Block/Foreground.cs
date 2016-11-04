@@ -389,12 +389,12 @@ namespace BotBits
                 Gold = (Id)100,
                 Blue = (Id)101;
 
-            [Pack("-", ForegroundType = ForegroundType.Goal)]
+            [Pack(ForegroundType = ForegroundType.Goal)]
             public const Id
                 GoldDoor = (Id)43,
                 GoldGate = (Id)165;
 
-            [Pack("-", ForegroundType = ForegroundType.Goal)]
+            [Pack(ForegroundType = ForegroundType.Goal)]
             public const Id
                 BlueDoor = (Id)213,
                 BlueGate = (Id)214;

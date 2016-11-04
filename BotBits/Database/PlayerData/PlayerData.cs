@@ -1,4 +1,5 @@
-﻿using BotBits.Shop;
+﻿using System;
+using BotBits.Shop;
 
 namespace BotBits
 {
@@ -30,7 +31,7 @@ namespace BotBits
 
         private bool HasPack(PackAttribute pack)
         {
-            if (pack == null) return true;
+            if (pack == null || pack.Package == null) return true;
             if (pack.AdminOnly) return this.PlayerObject.IsAdministrator;
             if (pack.GoldMembershipItem) return this.PlayerObject.ClubMember;
             return this.ShopData.GetCount(pack.Package) > 0;
