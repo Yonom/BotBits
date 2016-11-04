@@ -464,28 +464,28 @@ namespace BotBits
             [Pack("bricktextile")]
             public const Id
                 Green = (Id)721,
-				Blue = (Id)722,
-				Pink = (Id)723,
-				Yellow = (Id)724,
-				Red = (Id)725;
+		Blue = (Id)722,
+		Pink = (Id)723,
+		Yellow = (Id)724,
+		Red = (Id)725;
         }
 		
-		public static class Halloween2016
-		{
-			[Pack("brickhalloween2016")]
-			public const Id
-				Wood = (Id)726,
-				Leaves = (Id)727;
-		}
-		
-		public static class Construction
-		{
-			public const Id
-				Plywood = (Id)728,
-				Gravel = (Id)729,
-				Cement = (Id)730,
-				BeamHorizontal = (Id)731,
-				BeamVertical = (Id)732;
-		}
+	public static class Halloween2016
+	{
+		[Pack("brickhalloween2016")]
+		public const Id
+			Wood = (Id)726,
+			Leaves = (Id)727;
+	}
+	
+	public static class Construction
+	{
+		public const Id
+			Plywood = (Id)728,
+			Gravel = (Id)729,
+			Cement = (Id)730,
+			BeamHorizontal = (Id)731,
+			BeamVertical = (Id)732;
+	}
     }
 }
