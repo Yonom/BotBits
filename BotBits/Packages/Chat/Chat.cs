@@ -55,8 +55,9 @@ namespace BotBits
         {
             foreach (var channel in this._channels.Values.ToArray())
             {
-                if (this._warning && channel.LastReceived != channel.LastSent)
+                if (this._warning && channel.LastReceived != channel.LastSent && channel.SendRepeatCount < 3)
                 {
+                    channel.SendRepeatCount++;
                     this.SendChat(channel.LastSent, channel);
                 }
                 else
@@ -78,7 +79,12 @@ namespace BotBits
 
         private void SendChat(string message, ChatChannel channel)
         {
-            channel.LastSent = message;
+            if (channel.LastSent != message)
+            {
+                channel.LastSent = message;
+                channel.SendRepeatCount = 0;
+            }
+
             new ChatSendMessage(channel.LastSent)
                 .SendIn(this.BotBits);
         }
@@ -241,6 +247,7 @@ namespace BotBits
             public string LastChat = string.Empty;
             public string LastReceived = string.Empty;
             public string LastSent = string.Empty;
+            public int SendRepeatCount;
             public int RepeatCount;
         }
     }
