@@ -1,3 +1,4 @@
+using System.CodeDom;
 using BotBits.Shop;
 
 // ReSharper disable MemberHidesStaticFromOuterClass
@@ -434,7 +435,6 @@ namespace BotBits
         public static class Tool
         {
             public const Id
-                Crown = (Id)5,
                 Spawnpoint = (Id)255;
 
             public const Id
@@ -445,6 +445,17 @@ namespace BotBits
 
             public const Id
                 Resetpoint = (Id)466;
+        }
+
+        public static class Crown
+        {
+            public const Id
+                Block = (Id)5;
+
+            [Pack("brickcrowndoor")]
+            public const Id
+                Door = (Id)1094,
+                Gate = (Id)1095;
         }
 
         public static class WildWest
