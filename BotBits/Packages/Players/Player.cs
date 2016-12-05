@@ -315,7 +315,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if owner; otherwise, <c>false</c>.
         /// </value>
-        public bool Owner => this.Username.Equals(Room.Of(this.BotBits).Owner, StringComparison.OrdinalIgnoreCase);
+        public bool Owner => this != Nobody && this.Username.Equals(Room.Of(this.BotBits).Owner, StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
         ///     Gets the x-coordinate of the block that the player is located on.
