@@ -76,6 +76,7 @@
     <Compile Include="Models\World\WorldAreaEnumerable.cs" />
     <Compile Include="Models\World\WorldAreaEnumerableExtensions.cs" />
     <Compile Include="Models\World\WorldItem.cs" />
+    <Compile Include="Models\WriteType.cs" />
     <Compile Include="Packages\Actions\Actions.cs" />
     <Compile Include="Packages\Actions\ActionsExtensions.cs" />
     <Compile Include="Packages\Blocks\BlockAreaEnumerable.cs" />
