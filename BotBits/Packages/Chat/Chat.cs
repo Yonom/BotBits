@@ -50,15 +50,22 @@ namespace BotBits
         {
             this.DoSendTick();
         }
-
+        
         private void DoSendTick()
         {
-            foreach (var channel in this._channels.Values.ToArray())
+            foreach (var kv in this._channels.ToArray())
             {
+                var channel = kv.Value;
+
                 if (this._warning && channel.LastReceived != channel.LastSent && channel.SendRepeatCount < 3)
                 {
                     channel.SendRepeatCount++;
-                    this.SendChat(channel.LastSent, channel);
+
+                    var canSend = 1;
+                    this.SplitBypassSend(channel.LastSent, kv.Key != String.Empty, msg =>
+                    {
+                        if (canSend-- > 0) this.SendChat(channel.LastSent, channel);
+                    });
                 }
                 else
                 {
@@ -85,6 +92,7 @@ namespace BotBits
                 channel.SendRepeatCount = 0;
             }
 
+            Console.WriteLine(message);
             new ChatSendMessage(channel.LastSent)
                 .SendIn(this.BotBits);
         }
@@ -119,40 +127,15 @@ namespace BotBits
         private void OnAfterMost(QueueChatEvent e)
         {
             if (e.Cancelled) return;
-            
+
             if (e.IsCommand && !e.IsPrivateMessage)
             {
                 new ChatSendMessage(this.Truncate(e.Message))
                     .SendIn(this.BotBits);
                 return;
             }
-            
-            var prefix = string.Empty;
-            var message = e.Message;
-            if (e.IsPrivateMessage)
-            {
-                var args = e.Message.Split(' ');
-                prefix = string.Join(" ", args.Take(2)) + " ";
-                message = string.Join(" ", args.Skip(2));
-            }
-            var maxLength = MaxLength - prefix.Length;
 
-            while (message.Length > 0)
-            {
-                var channel = this.GetChannel(e.Message);
-                var truncated = this.Truncate(message, maxLength);
-                if (!Players.Of(this.BotBits).OwnPlayer.Owner &&
-                    this.CheckHistory(truncated, channel))
-                {
-                    var bypass = '.';
-                    if (truncated.All(c => c == bypass)) bypass = ',';
-                    message = bypass + message;
-                    truncated = this.Truncate(message, maxLength);
-                }
-
-                this.QueueChat(prefix + truncated);
-                message = message.Substring(truncated.Length);
-            }
+            this.SplitBypassSend(e.Message, e.IsPrivateMessage, this.QueueChat);
         }
 
         [EventListener]
@@ -168,31 +151,30 @@ namespace BotBits
         [EventListener]
         private void On(WriteEvent e)
         {
-            const string pmPrefix = "* ";
-            const string pmSuffix = " > you";
-            const string pmSendPrefix = "* you > ";
-            if (e.Title.StartsWith(pmPrefix) && e.Title.EndsWith(pmSuffix))
+            if (e.Type == WriteType.ReceivedPrivateMessage)
             {
-                var username = e.Title.Substring(pmPrefix.Length, e.Title.Length - pmPrefix.Length - pmSuffix.Length);
+                var username = e.GetUser();
                 var message = e.Text.Substring(0, e.Text.Length - 1); // Bug ingame, space after each private message
 
                 new PrivateMessageEvent(username, message)
                     .RaiseIn(this.BotBits);
             }
-            else if (e.Title.StartsWith(pmSendPrefix))
+            else if (e.Type == WriteType.SentPrivateMessage)
             {
-                var username = e.Title.Substring(pmSendPrefix.Length);
+                var username = e.GetUser();
                 var message = e.Text.Substring(0, e.Text.Length - 1); // Bug ingame, space after each private message
-
+                
                 var channel = this.GetChatChannel(username);
-                if (channel.LastSent == message) channel.LastReceived = message;
-
+                if (channel.LastSent == $"/pm {username} {message}") channel.LastReceived = $"/pm {username} {message}";
             }
-            else if (e.Title == "* SYSTEM" &&
-                     e.Text == "You are trying to chat too fast, spamming the chat room is not nice!")
+            else if (e.Type == WriteType.ChattingTooFast)
             {
                 this._warning = true;
                 this.InitTimer();
+            }
+            else
+            {
+                Console.WriteLine(e.Text);
             }
         }
 
@@ -204,19 +186,54 @@ namespace BotBits
         private bool CheckHistory(string str, string channel)
         {
             str = this.Truncate(str);
-            return this.GetChatRepeats(str, channel) > 4;
-        }
-
-        public int GetChatRepeats(string chat, string channel)
-        {
             var c = this.GetChatChannel(channel);
-            if (chat != c.LastChat)
+            if (this.GetChatRepeats(str, c) > 4)
             {
                 c.RepeatCount = 0;
-                c.LastChat = chat;
+                return true;
+            }
+            return false;
+        }
+
+        private int GetChatRepeats(string chat, ChatChannel channel)
+        {
+            if (chat != channel.LastChat)
+            {
+                channel.RepeatCount = 0;
+                channel.LastChat = chat;
             }
 
-            return ++c.RepeatCount;
+            return ++channel.RepeatCount;
+        }
+
+        private void SplitBypassSend(string message, bool pm, Action<string> callback)
+        {
+            var channel = this.GetChannel(message);
+            var prefix = string.Empty;
+            if (pm)
+            {
+                var args = message.Split(' ');
+                prefix = string.Join(" ", args.Take(2)) + " ";
+                message = string.Join(" ", args.Skip(2));
+            }
+            var maxLength = MaxLength - prefix.Length;
+
+            while (message.Length > 0)
+            {
+                var truncated = this.Truncate(message, maxLength);
+
+                if (!Players.Of(this.BotBits).OwnPlayer.Owner &&
+                    this.CheckHistory(truncated, channel))
+                {
+                    var bypass = '.';
+                    if (truncated.All(c => c == bypass))
+                        bypass = ',';
+                    message = bypass + message;
+                    truncated = this.Truncate(message, maxLength);
+                }
+                callback(prefix + truncated);
+                message = message.Substring(truncated.Length);
+            }
         }
 
         private string TrimChars(string text)
