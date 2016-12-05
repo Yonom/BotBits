@@ -435,11 +435,11 @@ namespace BotBits
             }
         }
 
-        internal void AddEffect(ActiveEffect effect)
+        internal void SetEffect(ActiveEffect effect)
         {
             lock (this._effects)
             {
-                this._effects.Add(effect.Effect, effect);
+                this._effects[effect.Effect] = effect;
             }
         }
 

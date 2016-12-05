@@ -318,7 +318,7 @@ namespace BotBits
             if (e.Enabled)
             {
                 var effect = new ActiveEffect(e.Effect, e.Expires, e.TimeLeft, e.Duration);
-                p.AddEffect(effect);
+                p.SetEffect(effect);
             }
             else
             {
