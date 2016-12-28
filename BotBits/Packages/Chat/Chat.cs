@@ -145,7 +145,7 @@ namespace BotBits
             if (e.Type == WriteType.ReceivedPrivateMessage)
             {
                 var username = e.GetUser();
-                var message = e.Text.Substring(0, e.Text.Length - 1); // Bug ingame, space after each private message
+                var message = e.Text.TrimEnd(' '); // Bug ingame, space after each private message
 
                 new PrivateMessageEvent(username, message)
                     .RaiseIn(this.BotBits);
@@ -153,7 +153,7 @@ namespace BotBits
             else if (e.Type == WriteType.SentPrivateMessage)
             {
                 var username = e.GetUser();
-                var message = $"/pm {username} {e.Text.Substring(0, e.Text.Length - 1)}"; // Bug ingame, space after each private message
+                var message = $"/pm {username} {e.Text.TrimEnd(' ')}"; // Bug ingame, space after each private message
                 
                 var channel = this.GetChatChannel(username);
                 if (channel.LastSent == message) channel.LastReceived = message;
