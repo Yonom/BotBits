@@ -354,7 +354,7 @@ namespace BotBits
 
         public static class Cave
         {
-            [Pack("brickenvironment")]
+            [Pack("brickcave")]
             public const Id
                 Purple = (Id)655,
                 Cyan = (Id)656,
@@ -380,7 +380,6 @@ namespace BotBits
 
         public static class Environment
         {
-            [Pack("brickenvironment")]
             public const Id
                 Tree = (Id)678,
                 Grass = (Id)679,

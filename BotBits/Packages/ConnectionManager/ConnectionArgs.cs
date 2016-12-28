@@ -12,7 +12,7 @@
         public ConnectionArgs()
         {
         }
-
+        
         public PlayerData PlayerData { get; private set; }
         public string ConnectUserId { get; private set; }
         public string RoomId { get; private set; }

@@ -287,6 +287,13 @@ namespace BotBits
                 exceptionHandler(innerException ?? t.Exception);
             }, TaskScheduler.Default);
         }
+
+        public static Task<T> FromResult<T>(T result)
+        {
+            var tcs = new TaskCompletionSource<T>();
+            tcs.SetResult(result);
+            return tcs.Task;
+        }
     }
 
     internal struct AsyncVoid

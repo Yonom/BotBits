@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using EE.FutureProof;
 using JetBrains.Annotations;
 using PlayerIOClient;
 
@@ -10,21 +11,18 @@ namespace BotBits
         private readonly Task<PlayerData> _argsAsync;
 
         [NotNull]
-        private readonly IConnectionManager _connectionManager;
+        private readonly ConnectionManager _connectionManager;
 
-        internal LoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client)
-            : this(connectionManager, client, LoginUtils.GetConnectionArgsAsync(client))
+        internal LoginClient([NotNull] ConnectionManager connectionManager, [NotNull] Client client)
         {
-        }
-
-        internal LoginClient([NotNull] IConnectionManager connectionManager, [NotNull] Client client, Task<PlayerData> argsAsync)
-        {
-            if (connectionManager == null) throw new ArgumentNullException(nameof(connectionManager));
-            if (client == null) throw new ArgumentNullException(nameof(client));
+            if (connectionManager == null)
+                throw new ArgumentNullException(nameof(connectionManager));
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
             this._connectionManager = connectionManager;
             this.Client = client;
 
-            this._argsAsync = argsAsync;
+            this._argsAsync = LoginUtils.GetConnectionArgsAsync(client);
         }
 
         public string ConnectUserId => this.Client.ConnectUserId;
@@ -32,36 +30,36 @@ namespace BotBits
         [NotNull]
         public Client Client { get; }
 
-        public virtual Task<LobbyItem[]> GetLobbyAsync()
+        public Task<LobbyItem[]> GetLobbyAsync()
         {
             return this.WithAutomaticVersionAsync()
                 .Then(task => task.Result.GetLobbyAsync())
                 .ToSafeTask();
         }
 
-        public virtual Task CreateOpenWorldAsync(string roomId, string name)
+        public Task CreateOpenWorldAsync(string roomId, string name)
         {
             return this.WithAutomaticVersionAsync()
                 .Then(task => task.Result.CreateOpenWorldAsync(roomId, name))
                 .ToSafeTask();
         }
 
-        public virtual Task CreateJoinRoomAsync(string roomId)
+        public Task CreateJoinRoomAsync(string roomId)
         {
             return this.WithAutomaticVersionAsync()
                 .Then(task => task.Result.CreateJoinRoomAsync(roomId))
                 .ToSafeTask();
         }
 
-        public virtual Task JoinRoomAsync(string roomId)
+        public Task JoinRoomAsync(string roomId)
         {
             return this.Client.Multiplayer
                 .JoinRoomAsync(roomId, null)
-                .Then(task => this.InitConnection(roomId, task.Result))
+                .Then(task => this.InitConnection(roomId, null, task.Result))
                 .ToSafeTask();
         }
 
-        public virtual Task<DatabaseWorld> LoadWorldAsync(string roomId)
+        public Task<DatabaseWorld> LoadWorldAsync(string roomId)
         {
             return this.Client.BigDB.LoadAsync("Worlds", roomId)
                 .Then(t => DatabaseWorld.FromDatabaseObject(t.Result))
@@ -70,21 +68,28 @@ namespace BotBits
 
         public VersionLoginClient WithVersion(int version)
         {
-            return new VersionLoginClient(this._connectionManager, this.Client, this._argsAsync, version);
+            return new VersionLoginClient(this, version);
         }
 
-        public virtual Task<VersionLoginClient> WithAutomaticVersionAsync()
+        public Task<VersionLoginClient> WithAutomaticVersionAsync()
         {
             return LoginUtils.GetVersionAsync(this.Client)
                 .Then(task => this.WithVersion(task.Result))
                 .ToSafeTask();
         }
 
-        protected Task InitConnection(string roomId, Connection conn)
+        internal Task InitConnection(string roomId, int? version, Connection conn)
         {
             return this._argsAsync
-                .Then(task => this._connectionManager.AttachConnection(conn, new ConnectionArgs(this.ConnectUserId, roomId, task.Result)))
+                .Then(task => this.Attach(this._connectionManager, conn, 
+                    new ConnectionArgs(this.ConnectUserId, roomId, task.Result), version))
                 .ToSafeTask();
+        }
+
+        protected virtual Task Attach(ConnectionManager connectionManager, Connection connection, ConnectionArgs args, int? version)
+        {
+            connectionManager.AttachConnection(connection, args);
+            return TaskHelper.FromResult(true);
         }
     }
 }
