@@ -11,6 +11,7 @@
             return (BotBits.Team)morph;
         }
 
+        // Directions
         public static class Portal
         {
             public const Id
@@ -29,21 +30,22 @@
                 Down = (Id)3;
         }
 
-        public static class FairyOneWay
+        public static class Spike
         {
             public const Id
                 Left = 0,
-                Down = (Id)1,
+                Up = (Id)1,
                 Right = (Id)2,
-                Up = (Id)3;
+                Down = (Id)3;
         }
 
-        public static class Flowers
+        public static class MonsterTeeth
         {
             public const Id
-                Pink = 0,
-                Blue = (Id)1,
-                Orange = (Id)2;
+                Left = 0,
+                Up = (Id)1,
+                Right = (Id)2,
+                Down = (Id)3;
         }
 
         public static class HalfBlock
@@ -54,49 +56,7 @@
                 Right = (Id)2,
                 Up = (Id)3;
         }
-
-        public static class Spike
-        {
-            public const Id
-                Left = 0,
-                Up = (Id)1,
-                Right = (Id)2,
-                Down = (Id)3;
-        }
-
-        public static class Dojo
-        {
-            public const Id
-                Red = 0,
-                Blue = (Id)1,
-                Green = (Id)2;
-        }
-
-        public static class Medieval
-        {
-            public const Id
-                Red = 0,
-                Blue = (Id)1,
-                Green = (Id)2,
-                Yellow = (Id)3;
-        }
-
-        public static class SciFiSlope
-        {
-            public const Id
-                TopLeft = 0,
-                BottomLeft = (Id)1,
-                BottomRight = (Id)2,
-                TopRight = (Id)3;
-        }
-
-        public static class SciFiStraight
-        {
-            public const Id
-                Vertical = 0,
-                Horizontal = (Id)1;
-        }
-
+        
         public static class Sword
         {
             public const Id
@@ -115,18 +75,183 @@
                 BottomRight = (Id)3;
         }
 
-        public static class Timber
+        public static class SciFiSlope
         {
             public const Id
-                VSupport = 0,
-                None = (Id)1,
-                // ReSharper disable once InconsistentNaming
-                TSupport = (Id)2,
-                HorizontalSupport = (Id)3,
-                LeftDiagonalSupport = (Id)4,
-                RightDiagonalSupport = (Id)5;
+                TopLeft = 0,
+                BottomLeft = (Id)1,
+                BottomRight = (Id)2,
+                TopRight = (Id)3;
         }
 
+
+        public static class DomesticPipe
+        {
+            public const Id
+                TopLeft = 0,
+                BottomLeft = (Id)1,
+                BottomRight = (Id)2,
+                TopRight = (Id)3;
+        }
+        
+        public static class Halloween2016Branch
+        {
+            public const Id
+                TopLeft = 0,
+                BottomLeft = (Id)1,
+                BottomRight = (Id)2,
+                TopRight = (Id)3;
+        }
+
+        // Orientation
+        public static class SciFiStraight
+        {
+            public const Id
+                Vertical = 0,
+                Horizontal = (Id)1;
+        }
+
+
+        // Color
+        public static class Dojo
+        {
+            public const Id
+                Red = 0,
+                Blue = (Id)1,
+                Green = (Id)2;
+        }
+
+        public static class Medieval
+        {
+            public const Id
+                Red = 0,
+                Blue = (Id)1,
+                Green = (Id)2,
+                Yellow = (Id)3;
+        }
+
+        public static class DomesticVase
+        {
+            public const Id
+                Blue = 0,
+                Yellow = (Id)1,
+                Orange = (Id)2,
+                Red = (Id)3;
+        }
+
+        public static class DomesticTelevision
+        {
+            public const Id
+                Yellow = 0,
+                Black = (Id)1,
+                Gray = (Id)2,
+                Blue = (Id)3;
+        }
+
+        public static class DomesticWindow
+        {
+            public const Id
+                Yellow = 0,
+                Gray = (Id)1,
+                Blue = (Id)2,
+                Orange = (Id)3;
+        }
+
+        public static class FairytaleFlowers
+        {
+            public const Id
+                Pink = 0,
+                Blue = (Id)1,
+                Orange = (Id)2;
+        }
+
+        public static class NewYear2015
+        {
+            public const Id
+                Green = 0,
+                Orange = (Id)1,
+                Red = (Id)2,
+                Purple = (Id)3;
+        }
+
+        public static class Spring2016Daisy
+        {
+            public const Id
+                Violet = 0,
+                White = (Id)1,
+                Blue = (Id)2;
+        }
+
+        public static class Spring2016Tulip
+        {
+            public const Id
+                Pink = 0,
+                Red = (Id)1,
+                Yellow = (Id)2;
+        }
+
+        public static class Spring2016Daffodil
+        {
+            public const Id
+                Orange = 0,
+                Yellow = (Id)1,
+                White = (Id)2;
+        }
+
+        public static class Summer2016
+        {
+            public const Id
+                Purple = 0,
+                Red = (Id)1,
+                Yellow = (Id)2,
+                Green = (Id)3,
+                Cyan = (Id)4,
+                Blue = (Id)5;
+        }
+        
+        public static class MineCrystal
+        {
+            public const Id
+                Blue = 0,
+                Red = (Id)1,
+                Yellow = (Id)2,
+                Green = (Id)3,
+                Cyan = (Id)4;
+        }
+
+        public static class Halloween2016Eyes
+        {
+            public const Id
+                Yellow = 0,
+                Red = (Id)1,
+                Purple = (Id)2,
+                Green = (Id)3;
+        }
+
+        public static class Christmas2016
+        {
+            public const Id
+                Purple = 0,
+                Red = (Id)1,
+                Yellow = (Id)2,
+                Green = (Id)3,
+                Cyan = (Id)4,
+                Blue = (Id)5;
+        }
+
+        public static class Team
+        {
+            public const Id
+                None = (Id)BotBits.Team.None,
+                Red = (Id)BotBits.Team.Red,
+                Blue = (Id)BotBits.Team.Blue,
+                Green = (Id)BotBits.Team.Green,
+                Cyan = (Id)BotBits.Team.Cyan,
+                Magenta = (Id)BotBits.Team.Magenta,
+                Yellow = (Id)BotBits.Team.Yellow;
+        }
+
+        // Music
         public static class Piano
         {
             public const Id
@@ -235,94 +360,13 @@
                 Maraca = (Id)9;
         }
 
-        public static class Team
-        {
-            public const Id
-                None = (Id)BotBits.Team.None,
-                Red = (Id)BotBits.Team.Red,
-                Blue = (Id)BotBits.Team.Blue,
-                Green = (Id)BotBits.Team.Green,
-                Cyan = (Id)BotBits.Team.Cyan,
-                Magenta = (Id)BotBits.Team.Magenta,
-                Yellow = (Id)BotBits.Team.Yellow;
-        }
-
-        public static class LightBulb
-        {
-            public const Id
-                StandingOff = 0,
-                HangingOn = (Id)1,
-                HangingOff = (Id)2,
-                SandingOn = (Id)3;
-        }
-
-        public static class Pipe
-        {
-            public const Id
-                TopLeft = 0,
-                BottomLeft = (Id)1,
-                BottomRight = (Id)2,
-                TopRight = (Id)3;
-        }
-
-        public static class Painting
-        {
-            public const Id
-                Cabin = 0,
-                River = (Id)1,
-                Mountain = (Id)2,
-                Sunset = (Id)3;
-        }
-
-        public static class Vase
-        {
-            public const Id
-                Blue = 0,
-                Yellow = (Id)1,
-                Orange = (Id)2,
-                Red = (Id)3;
-        }
-
-        public static class Television
-        {
-            public const Id
-                Yellow = 0,
-                Black = (Id)1,
-                Gray = (Id)2,
-                Blue = (Id)3;
-        }
-
-        public static class Window
-        {
-            public const Id
-                Yellow = 0,
-                Gray = (Id)1,
-                Blue = (Id)2,
-                Orange = (Id)3;
-        }
-
-        public static class Light
-        {
-            public const Id
-                On = 0,
-                Off = (Id)1;
-        }
-
-        public static class Jump
+        // Misc
+        public static class EffectJump
         {
             public const Id
                 Disabled = 0,
                 Single = (Id)1,
                 Double = (Id)2;
-        }
-
-        public static class NewYear2015
-        {
-            public const Id
-                Green = 0,
-                Orange = (Id)1,
-                Red = (Id)2,
-                Purple = (Id)3;
         }
 
         public static class Sign
@@ -334,31 +378,7 @@
                 Gold = (Id)3;
         }
 
-        public static class Daisy
-        {
-            public const Id
-                Violet = 0,
-                White = (Id)1,
-                Blue = (Id)2;
-        }
-
-        public static class Tulip
-        {
-            public const Id
-                Pink = 0,
-                Red = (Id)1,
-                Yellow = (Id)2;
-        }
-
-        public static class Daffodil
-        {
-            public const Id
-                Orange = 0,
-                Yellow = (Id)1,
-                White = (Id)2;
-        }
-
-        public static class IceCream
+        public static class Summer2016IceCream
         {
             public const Id
                 Mint = 0,
@@ -367,15 +387,75 @@
                 Strawberry = (Id)3;
         }
 
-        public static class Summer2016
+        public static class DomesticPainting
         {
             public const Id
-                Purple = 0,
-                Red = (Id)1,
-                Orange = (Id)2,
-                Green = (Id)3,
-                Cyan = (Id)4,
-                Blue = (Id)5;
+                Cabin = 0,
+                River = (Id)1,
+                Mountain = (Id)2,
+                Sunset = (Id)3;
+        }
+
+        public static class DomesticLightBulb
+        {
+            public const Id
+                StandingOff = 0,
+                HangingOn = (Id)1,
+                HangingOff = (Id)2,
+                SandingOn = (Id)3;
+        }
+        
+        public static class MedievalTimber
+        {
+            public const Id
+                VSupport = 0,
+                None = (Id)1,
+                // ReSharper disable once InconsistentNaming
+                TSupport = (Id)2,
+                HorizontalSupport = (Id)3,
+                LeftDiagonalSupport = (Id)4,
+                RightDiagonalSupport = (Id)5;
+        }
+
+        public static class RestaurantGlass
+        {
+            public const Id
+                OrangeJuice = 0,
+                Empty = (Id)1,
+                Water = (Id)2,
+                Milk = (Id)3;
+        }
+
+        public static class RestaurantPlate
+        {
+            public const Id
+                Fish = 0,
+                Empty = (Id)1,
+                Chicken = (Id)2,
+                Ham = (Id)3;
+        }
+
+        public static class Halloween2015
+        {
+            public const Id
+                On = 0,
+                Off = (Id)1;
+        }
+
+        public static class Halloween2016Pumpkin
+        {
+            public const Id
+                On = 0,
+                Off = (Id)1;
+        }
+
+        public static class RestaurantBowl
+        {
+            public const Id
+                IceCream = 0,
+                HangingOn = (Id)1,
+                Salad = (Id)2,
+                Spaghetti = (Id)3;
         }
     }
 }

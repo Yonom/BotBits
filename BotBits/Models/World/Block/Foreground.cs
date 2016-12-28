@@ -1084,9 +1084,9 @@ namespace BotBits
 
             [Pack("brickdomestic", ForegroundType = ForegroundType.Morphable)]
             public const Id
-                BeigeHalfBlock = (Id)1041,
-                WoodHalfBlock = (Id)1042,
-                WhiteHalfBlock = (Id)1043,
+                HalfBlockBeige = (Id)1041,
+                HalfBlockWood = (Id)1042,
+                HalfBlockWhite = (Id)1043,
                 LightBulb = (Id)447,
                 Pipe = (Id)448,
                 Painting = (Id)449,
@@ -1108,8 +1108,8 @@ namespace BotBits
 
             [Pack("brickhalloween2015", ForegroundType = ForegroundType.Morphable)]
             public const Id
-                Window = (Id)456,
-                WoodHalfBlock = (Id)457,
+                ArchedWindow = (Id)456,
+                RoundWindow = (Id)457,
                 Lantern = (Id)458;
         }
 
@@ -1158,10 +1158,10 @@ namespace BotBits
 
             [Pack("brickfairytale", ForegroundType = ForegroundType.Morphable)]
             public const Id
-                OneWayOrange = (Id)1075,
-                OneWayGreen = (Id)1076,
-                OneWayBlue = (Id)1077,
-                OneWayPink = (Id)1078,
+                HalfBlockOrange = (Id)1075,
+                HalfBlockGreen = (Id)1076,
+                HalfBlockBlue = (Id)1077,
+                HalfBlockPink = (Id)1078,
                 Flowers = (Id)471;
         }
 
@@ -1266,6 +1266,26 @@ namespace BotBits
                 Sawhorse = (Id)1503,
                 Cone = (Id)1504,
                 Sign = (Id)1505;
+        }
+
+        public static class Christmas2016
+        {
+            [Pack("brickchristmas2016")]
+            public const Id
+                HalfBlockRed = (Id)1101,
+                HalfBlockGreen = (Id)1102,
+                HalfBlockWhite = (Id)1103,
+                HalfBlockBlue = (Id)1104,
+                HalfBlockYellow = (Id)1105,
+                Bell = (Id)1508,
+                Berries = (Id)1509,
+                Candles = (Id)1510;
+
+            [Pack("brickchristmas2016", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                LightDown = (Id)1507,
+                LightUp = (Id)1506;
+
         }
     }
 }
