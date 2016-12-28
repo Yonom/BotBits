@@ -1220,6 +1220,7 @@ namespace BotBits
                 Sandwich = (Id)489,
                 Soda = (Id)490,
                 Fries = (Id)491;
+
             [Pack("brickrestaurant", ForegroundType = ForegroundType.Morphable)]
             public const Id
                 Glass = (Id)492,
@@ -1229,11 +1230,13 @@ namespace BotBits
 
         public static class Mine
         {
+            [Pack("brickmine")]
             public const Id
                 Rocks = (Id)1093,
                 Stalagmite = (Id)495,
                 Stalagtite = (Id)496,
                 Torch = (Id)498;
+
             [Pack("brickmine", ForegroundType = ForegroundType.Morphable)]
             public const Id
                 Crystal = (Id)497;
@@ -1244,12 +1247,14 @@ namespace BotBits
             [Pack("brickhalloween2016")]
             public const Id
                 Grass = (Id)1501;
+
             [Pack("brickhalloween2016", ForegroundType = ForegroundType.Morphable)]
             public const Id
-                       Branch = (Id)499,
+                Branch = (Id)499,
                 Pumpkin = (Id)1500,
                 Eyes = (Id)1502;
         }
+        
         public static class Construction
         {
             public const Id
