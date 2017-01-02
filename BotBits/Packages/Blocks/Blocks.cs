@@ -112,11 +112,11 @@ namespace BotBits
             switch (e.Layer)
             {
                 case Layer.Foreground:
-                    this.RaiseBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Player);
+                    this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id);
                     break;
 
                 case Layer.Background:
-                    this.RaiseBackground(e.X, e.Y, new BackgroundBlock((Background.Id)e.Id), e.Player);
+                    this.RaiseBackground(e.Player, e.X, e.Y, new BackgroundBlock((Background.Id)e.Id));
                     break;
             }
         }
@@ -124,131 +124,52 @@ namespace BotBits
         [EventListener]
         private void On(PortalPlaceEvent e)
         {
-            this.RaisePortalBlock(e.X, e.Y, (Foreground.Id)e.Id, e.PortalId, e.PortalTarget, e.PortalRotation, e.Player);
+            this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.PortalId, e.PortalTarget, e.PortalRotation);
         }
 
         [EventListener]
         private void On(CoinDoorPlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.CoinsToOpen, e.Player);
+            this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.CoinsToOpen);
         }
 
         [EventListener]
         private void On(MorphablePlaceEvent e)
         {
-            this.RaiseNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Rotation, e.Player);
+            this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.Rotation);
         }
 
         [EventListener]
         private void On(SoundPlaceEvent e)
         {
-            this.RaiseSignedNumberBlock(e.X, e.Y, (Foreground.Id)e.Id, e.SoundId, e.Player);
+            this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.SoundId);
         }
 
         [EventListener]
         private void On(WorldPortalPlaceEvent e)
         {
-            this.RaiseStringBlock(e.X, e.Y, (Foreground.Id)e.Id, e.WorldPortalTarget, e.Player);
+            this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.WorldPortalTarget);
         }
 
         [EventListener]
         private void On(LabelPlaceEvent e)
         {
-            this.RaiseLabelBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.TextColor, e.Player);
+            this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.TextColor);
         }
 
         [EventListener]
         private void On(SignPlaceEvent e)
         {
-            this.RaiseSignBlock(e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.SignColor, e.Player);
+            this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.SignColor);
         }
-
-        private void RaiseBlock(int x, int y, Foreground.Id block, Player player)
+        
+        private void RaiseForegroundData(Player player, int x, int y, Foreground.Id block, params object[] args)
         {
-            try
-            {
-                this.RaiseForeground(x, y, new ForegroundBlock(block), player);
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceWarning($"Received invalid block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
-            }
+            var fgWorldBlock = WorldUtils.GetForegroundFromArgs(block, args);
+            this.RaiseForeground(player, x, y, fgWorldBlock);
         }
-
-        private void RaiseNumberBlock(int x, int y, Foreground.Id block, uint args, Player player)
-        {
-            try
-            {
-                this.RaiseForeground(x, y, new ForegroundBlock(block, args), player);
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceWarning($"Received invalid number block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
-            }
-        }
-
-        private void RaiseSignedNumberBlock(int x, int y, Foreground.Id block, int args, Player player)
-        {
-            try
-            {
-                this.RaiseForeground(x, y, new ForegroundBlock(block, args), player);
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceWarning($"Received invalid signed number block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
-            }
-        }
-
-        private void RaiseStringBlock(int x, int y, Foreground.Id block, string text, Player player)
-        {
-            try
-            {
-                this.RaiseForeground(x, y, new ForegroundBlock(block, text), player);
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceWarning($"Received invalid string block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
-            }
-        }
-
-        private void RaiseLabelBlock(int x, int y, Foreground.Id block, string text, string textColor, Player player)
-        {
-            try
-            {
-                this.RaiseForeground(x, y, new ForegroundBlock(block, text, textColor), player);
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceWarning($"Received invalid label block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
-            }
-        }
-
-        private void RaiseSignBlock(int x, int y, Foreground.Id block, string text, Morph.Id signColor, Player player)
-        {
-            try
-            {
-                this.RaiseForeground(x, y, new ForegroundBlock(block, text, signColor), player);
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceWarning($"Received invalid sign block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
-            }
-        }
-
-        private void RaisePortalBlock(int x, int y, Foreground.Id block,
-            uint portalId, uint portalTarget, Morph.Id portalRotation, Player player)
-        {
-            try
-            {
-                this.RaiseForeground(x, y, new ForegroundBlock(block, portalId, portalTarget, portalRotation), player);
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceWarning($"Received invalid portal block: {x}x{y}:{block} by {player.ChatName}\n{ex}");
-            }
-        }
-
-        private void RaiseForeground(int x, int y, ForegroundBlock newBlock, Player player)
+        
+        private void RaiseForeground(Player player, int x, int y, ForegroundBlock newBlock)
         {
             var oldData = this.World.Foreground[x, y];
             var newData = new BlockData<ForegroundBlock>(player, newBlock);
@@ -258,7 +179,7 @@ namespace BotBits
                 .RaiseIn(this.BotBits);
         }
 
-        private void RaiseBackground(int x, int y, BackgroundBlock newBlock, Player player)
+        private void RaiseBackground(Player player, int x, int y, BackgroundBlock newBlock)
         {
             var oldData = this.World.Background[x, y];
             var newData = new BlockData<BackgroundBlock>(player, newBlock);
