@@ -21,8 +21,21 @@ namespace BotBits
 
             return versionLoader.Then(v =>
             {
-                connectionManager.AttachConnection(connection.FutureProof(CurrentVersion, v.Result), args);
+                if (v.Result == CurrentVersion)
+                {
+                    base.Attach(connectionManager, connection, args, v.Result);
+                }
+                else
+                {
+                    this.FutureProofAttach(connectionManager, connection, args, v.Result);
+                }
             });
+        }
+
+        // This line is separated into a function to prevent uncessarily loading FutureProof into memory. 
+        private void FutureProofAttach(ConnectionManager connectionManager, Connection connection, ConnectionArgs args, int version)
+        {
+            connectionManager.AttachConnection(connection.FutureProof(CurrentVersion, version), args);
         }
     }
 }
