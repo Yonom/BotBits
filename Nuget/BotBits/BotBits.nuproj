@@ -11,17 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BotBits\BotBits.csproj" />
+    <ProjectReference Include="..\..\BotBits\BotBits.csproj" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>b1149227-8717-4962-a462-5625f8b32408</ProjectGuid>
+    <ProjectGuid>82a8aabe-1c19-4e49-bf95-ab6727e87eb1</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
-    <NuProjPath Condition=" '$(NuProjPath)' == '' ">..\packages\NuProj.0.10.4-beta-gf7fc34e7d8\tools\</NuProjPath>
-  </PropertyGroup>
-  <!--<PropertyGroup>
     <NuProjPath Condition=" '$(NuProjPath)' == '' ">$(MSBuildExtensionsPath)\NuProj\</NuProjPath>
-  </PropertyGroup>-->
+  </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>BotBits</Id>
@@ -30,7 +27,7 @@
     <Authors>Younom</Authors>
     <Owners>Younom</Owners>
     <Summary>An Everybody Edits framework designed for performance and reliability. </Summary>
-    <Description>An Everybody Edits framework designed for performance and reliability.</Description>
+    <Description>An Everybody Edits framework designed for performance and reliability. </Description>
     <ReleaseNotes>
     </ReleaseNotes>
     <ProjectUrl>
