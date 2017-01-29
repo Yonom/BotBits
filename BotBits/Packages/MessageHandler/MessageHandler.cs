@@ -11,6 +11,7 @@ namespace BotBits
     internal sealed class MessageHandler : EventListenerPackage<MessageHandler>
     {
         private readonly MessageRegister _messageRegister = new MessageRegister();
+        private InfoEvent _lastInfo;
 
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public MessageHandler()
@@ -41,6 +42,22 @@ namespace BotBits
         {
             new Init2SendMessage()
                 .SendIn(this.BotBits);
+        }
+
+        [EventListener]
+        private void On(InfoEvent e)
+        {
+            this._lastInfo = e;
+        }
+
+        [EventListener]
+        private void On(DisconnectEvent e)
+        {
+            if (!Room.Of(this.BotBits).JoinComplete)
+            {
+                new JoinFailureEvent(this._lastInfo.Title, this._lastInfo.Text)
+                    .RaiseIn(this.BotBits);
+            }
         }
 
         [EventListener]

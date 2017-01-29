@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using PlayerIOClient;
@@ -30,7 +31,7 @@ namespace BotBits
                 .ToSafeTask();
         }
 
-        public Task CreateOpenWorldAsync(string roomId, string name)
+        public Task CreateOpenWorldAsync(string roomId, string name, CancellationToken ct)
         {
             if (!roomId.StartsWith("OW")) throw new ArgumentException("RoomId is not valid.", nameof(roomId));
 
@@ -39,11 +40,11 @@ namespace BotBits
             return this._loginClient.Client.Multiplayer
                 .CreateJoinRoomAsync(roomId, EverybodyEdits + this.Version, true, roomData,
                     new Dictionary<string, string>())
-                .Then(task => this._loginClient.InitConnection(roomId, this.Version, task.Result))
+                .Then(task => this._loginClient.InitConnection(roomId, this.Version, task.Result, ct))
                 .ToSafeTask();
         }
 
-        public Task CreateJoinRoomAsync(string roomId)
+        public Task CreateJoinRoomAsync(string roomId, CancellationToken ct)
         {
             var roomPrefix = roomId.StartsWith("BW", StringComparison.OrdinalIgnoreCase)
                 ? Beta
@@ -51,13 +52,13 @@ namespace BotBits
 
             return this._loginClient.Client.Multiplayer
                 .CreateJoinRoomAsync(roomId, roomPrefix + this.Version, true, null, null)
-                .Then(task => this._loginClient.InitConnection(roomId, this.Version, task.Result))
+                .Then(task => this._loginClient.InitConnection(roomId, this.Version, task.Result, ct))
                 .ToSafeTask();
         }
 
-        public Task JoinRoomAsync(string roomId)
+        public Task JoinRoomAsync(string roomId, CancellationToken ct)
         {
-            return this._loginClient.JoinRoomAsync(roomId);
+            return this._loginClient.JoinRoomAsync(roomId, ct);
         }
 
         public Task<DatabaseWorld> LoadWorldAsync(string roomId)

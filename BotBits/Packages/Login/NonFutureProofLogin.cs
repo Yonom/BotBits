@@ -4,16 +4,16 @@ namespace BotBits
 {
     public sealed class NonFutureProofLogin : IPlayerIOGame<LoginClient>, ILogin<LoginClient>
     {
-        private readonly ConnectionManager _connectionManager;
+        private readonly BotBitsClient _botBitsClient;
 
-        internal NonFutureProofLogin(ConnectionManager connectionManager)
+        internal NonFutureProofLogin(BotBitsClient botBitsClient)
         {
-            this._connectionManager = connectionManager;
+            this._botBitsClient = botBitsClient;
         }
 
         public LoginClient WithClient(Client client)
         {
-            return new LoginClient(this._connectionManager, client);
+            return new LoginClient(this._botBitsClient, client);
         }
 
         ILogin<LoginClient> IPlayerIOGame<LoginClient>.Login => this;

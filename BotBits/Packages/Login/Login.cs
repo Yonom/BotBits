@@ -6,7 +6,7 @@ namespace BotBits
     {
         public LoginClient WithClient(Client client)
         {
-            return new FutureProofLoginClient(ConnectionManager.Of(this.BotBits), client);
+            return new FutureProofLoginClient(this.BotBits, client);
         }
 
         ILogin<LoginClient> IPlayerIOGame<LoginClient>.Login => this;
@@ -20,7 +20,7 @@ namespace BotBits
 
         public NonFutureProofLogin WithoutFutureProof()
         {
-            return new NonFutureProofLogin(ConnectionManager.Of(this.BotBits));
+            return new NonFutureProofLogin(this.BotBits);
         }
     }
 }

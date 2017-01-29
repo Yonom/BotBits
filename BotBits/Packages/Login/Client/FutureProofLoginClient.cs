@@ -7,9 +7,9 @@ namespace BotBits
 {
     public class FutureProofLoginClient : LoginClient
     {
-        private const int CurrentVersion = 218;
+        private const int CurrentVersion = 219;
         
-        public FutureProofLoginClient([NotNull] ConnectionManager connectionManager, [NotNull] Client client) : base(connectionManager, client)
+        public FutureProofLoginClient([NotNull] BotBitsClient  botBitsClient, [NotNull] Client client) : base(botBitsClient, client)
         {
         }
 

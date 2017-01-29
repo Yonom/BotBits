@@ -1,7 +1,6 @@
-using System;
+using System.Threading;
 using System.Threading.Tasks;
-using EE.FutureProof;
-using JetBrains.Annotations;
+using BotBits.Events;
 using PlayerIOClient;
 
 namespace BotBits
@@ -9,17 +8,11 @@ namespace BotBits
     public class LoginClient : ILoginClient
     {
         private readonly Task<PlayerData> _argsAsync;
+        private readonly BotBitsClient _botBitsClient;
 
-        [NotNull]
-        private readonly ConnectionManager _connectionManager;
-
-        internal LoginClient([NotNull] ConnectionManager connectionManager, [NotNull] Client client)
+        internal LoginClient(BotBitsClient botBitsClient, Client client)
         {
-            if (connectionManager == null)
-                throw new ArgumentNullException(nameof(connectionManager));
-            if (client == null)
-                throw new ArgumentNullException(nameof(client));
-            this._connectionManager = connectionManager;
+            this._botBitsClient = botBitsClient;
             this.Client = client;
 
             this._argsAsync = LoginUtils.GetConnectionArgsAsync(client);
@@ -27,7 +20,6 @@ namespace BotBits
 
         public string ConnectUserId => this.Client.ConnectUserId;
 
-        [NotNull]
         public Client Client { get; }
 
         public Task<LobbyItem[]> GetLobbyAsync()
@@ -37,25 +29,25 @@ namespace BotBits
                 .ToSafeTask();
         }
 
-        public Task CreateOpenWorldAsync(string roomId, string name)
+        public Task CreateOpenWorldAsync(string roomId, string name, CancellationToken ct)
         {
             return this.WithAutomaticVersionAsync()
-                .Then(task => task.Result.CreateOpenWorldAsync(roomId, name))
+                .Then(task => task.Result.CreateOpenWorldAsync(roomId, name, ct))
                 .ToSafeTask();
         }
 
-        public Task CreateJoinRoomAsync(string roomId)
+        public Task CreateJoinRoomAsync(string roomId, CancellationToken ct)
         {
             return this.WithAutomaticVersionAsync()
-                .Then(task => task.Result.CreateJoinRoomAsync(roomId))
+                .Then(task => task.Result.CreateJoinRoomAsync(roomId, ct))
                 .ToSafeTask();
         }
 
-        public Task JoinRoomAsync(string roomId)
+        public Task JoinRoomAsync(string roomId, CancellationToken ct)
         {
             return this.Client.Multiplayer
                 .JoinRoomAsync(roomId, null)
-                .Then(task => this.InitConnection(roomId, null, task.Result))
+                .Then(task => this.InitConnection(roomId, null, task.Result, ct))
                 .ToSafeTask();
         }
 
@@ -78,12 +70,43 @@ namespace BotBits
                 .ToSafeTask();
         }
 
-        internal Task InitConnection(string roomId, int? version, Connection conn)
+        internal Task InitConnection(string roomId, int? version, Connection conn, CancellationToken ct)
         {
+            var joinTask = this.CompleteJoinAsync(ct);
             return this._argsAsync
-                .Then(task => this.Attach(this._connectionManager, conn, 
+                .Then(task => this.Attach(ConnectionManager.Of(this._botBitsClient), conn, 
                     new ConnectionArgs(this.ConnectUserId, roomId, task.Result), version))
+                .Then(task => joinTask)
+                .Then(task => { if (task.IsCanceled) ConnectionManager.Of(this._botBitsClient).Connection.Disconnect(); })
                 .ToSafeTask();
+        }
+
+        internal Task CompleteJoinAsync(CancellationToken ct)
+        {
+            var cts = new CancellationTokenSource();
+            var tcs = new TaskCompletionSource<bool>();
+            ct.Register(() =>
+            {
+                cts.Cancel();
+                tcs.TrySetCanceled();
+            });
+            
+            JoinCompleteEvent.Of(this._botBitsClient).WaitOneAsync(cts.Token).ContinueWith(task =>
+            {
+                if (task.IsCanceled) return;
+                cts.Cancel();
+
+                tcs.TrySetResult(true);
+            }, CancellationToken.None);
+            JoinFailureEvent.Of(this._botBitsClient).WaitOneAsync(cts.Token).ContinueWith(task =>
+            {
+                if (task.IsCanceled) return;
+                cts.Cancel();
+
+                tcs.TrySetException(new JoinException(task.Result.Title, task.Result.Reason));
+            }, CancellationToken.None);
+
+            return tcs.Task;
         }
 
         protected virtual Task Attach(ConnectionManager connectionManager, Connection connection, ConnectionArgs args, int? version)

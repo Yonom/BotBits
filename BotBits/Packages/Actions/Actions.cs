@@ -17,6 +17,7 @@ namespace BotBits
         public bool Liked { get; private set; }
         public bool Favorited { get; private set; }
         public bool CompletedLevel { get; private set; }
+        public bool Banned { get; private set; }
 
         public bool CanEdit
         {
@@ -107,6 +108,12 @@ namespace BotBits
         private void On(CompletedLevelEvent e)
         {
             this.CompletedLevel = true;
+        }
+
+        [EventListener]
+        private void On(BannedEvent e)
+        {
+            this.Banned = true;
         }
 
         [EventListener(EventPriority.Low)]
