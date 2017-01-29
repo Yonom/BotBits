@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Timers;
+using System.Threading;
 using BotBits.Events;
 using BotBits.SendMessages;
 
@@ -30,15 +30,7 @@ namespace BotBits
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Chat()
         {
-            this._mySendTimer = new Timer(600);
-            this._mySendTimer.Elapsed += this.SendTimer_Elapsed;
-        }
-
-        public void Say(string msg)
-        {
-            msg = this.TrimChars(msg);
-            new QueueChatEvent(msg)
-                .RaiseIn(this.BotBits);
+            this._mySendTimer = new Timer(o => this.DoSendTick(), null, 0, 20);
         }
 
         void IDisposable.Dispose()
@@ -46,31 +38,118 @@ namespace BotBits
             this._mySendTimer.Dispose();
         }
 
-        private void SendTimer_Elapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        public void Say(string msg)
         {
-            this.DoSendTick();
+            // Strip unallowed characters
+            msg = Regex.Replace(msg, @"[^\x1F-\xFF]|[\x7F]", "").Trim();
+
+            new QueueChatEvent(msg)
+                .RaiseIn(this.BotBits);
         }
-        
+
+        [EventListener(GlobalPriority.AfterMost)]
+        private void OnAfterMost(QueueChatEvent e)
+        {
+            if (e.Cancelled)
+                return;
+
+            if (e.IsCommand && !e.IsPrivateMessage)
+            {
+                new ChatSendMessage(Truncate(e.Message))
+                    .SendIn(this.BotBits);
+            }
+            else
+            {
+                foreach (var msg in this.SplitMessage(e.Message, e.IsPrivateMessage))
+                {
+                    this.QueueChat(msg, e.IsPrivateMessage);
+                }
+            }
+        }
+
+        private IEnumerable<string> SplitMessage(string message, bool pm)
+        {
+            var channel = GetChannel(message, pm);
+            var prefix = string.Empty;
+            if (pm)
+            {
+                var args = message.Split(' ');
+                prefix = string.Join(" ", args.Take(2)) + " ";
+                message = string.Join(" ", args.Skip(2));
+            }
+            var maxLength = MaxLength - prefix.Length;
+
+            while (message.Length > 0)
+            {
+                message = this.BypassMessage(message, channel, maxLength);
+
+                var truncated = Truncate(message, maxLength);
+                message = message.Substring(truncated.Length);
+                yield return prefix + truncated;
+            }
+        }
+
+        private string BypassMessage(string message, string channel, int maxLength)
+        {
+            var truncated = Truncate(message, maxLength);
+
+            if (!Players.Of(this.BotBits).OwnPlayer.Owner &&
+                this.CheckHistory(truncated, channel))
+            {
+                if (truncated.Length < maxLength)
+                {
+                    message = '.' + message;
+                }
+                else
+                {
+                    var bypass = '.';
+                    if (truncated.All(c => c == bypass))
+                        bypass = ',';
+                    message = bypass + message;
+                }
+            }
+
+            return message;
+        }
+
+        private void QueueChat(string msg, bool pm)
+        {
+            var channel = GetChannel(msg, pm);
+            this.Enqueue(msg, channel);
+        }
+
         private void DoSendTick()
         {
             foreach (var kv in this._channels.ToArray())
             {
                 var channel = kv.Value;
-
-                if (this._warning && channel.LastSent != channel.LastReceived)
+                var pm = kv.Key != String.Empty;
+                
+                if (channel.LastSent != channel.LastReceived)
                 {
-                    this.SendChat(this.SplitBypassSend(channel.LastSent, kv.Key != String.Empty).First(), channel);
+                    if (this._warning)
+                    {
+                        this.SendChat(this.SplitMessage(channel.LastSent, pm).First(), channel);
+                    }
+                    else if (pm && Players.Of(this.BotBits).FromUsername(kv.Key).Length <= 0)
+                    {
+                        // player left
+                        channel.LastSent = channel.LastReceived;
+                    }
+                    else if (++channel.DelayCount >= 10)
+                    {
+                        channel.LastSent = channel.LastReceived;
+                    }
+                    // nofix: When disconnected, chat keeps trying to resend
                 }
                 else
                 {
+                    channel.DelayCount = 0;
+
                     string chatMessage;
                     if (channel.Queue.TryDequeue(out chatMessage))
                     {
                         this.SendChat(chatMessage, channel);
-                    }
-                    else
-                    {
-                        this._mySendTimer.Stop();
                     }
                 }
             }
@@ -81,52 +160,9 @@ namespace BotBits
         private void SendChat(string message, ChatChannel channel)
         {
             channel.LastSent = message;
-            new ChatSendMessage(channel.LastSent)
+
+            new ChatSendMessage(message)
                 .SendIn(this.BotBits);
-        }
-
-        private void QueueChat(string msg, bool pm)
-        {
-            var channel = this.GetChannel(msg, pm);
-            this.Enqueue(msg, channel);
-
-            this.InitTimer();
-        }
-
-        private void InitTimer()
-        {
-            if (!this._mySendTimer.Enabled)
-            {
-                this.DoSendTick();
-
-                this._mySendTimer.Start();
-            }
-        }
-
-        private string GetChannel(string msg, bool pm)
-        {
-            string channel = null;
-            if (pm) channel = msg.Split(' ').Skip(1).FirstOrDefault();
-            return channel ?? string.Empty;
-        }
-
-
-        [EventListener(GlobalPriority.AfterMost)]
-        private void OnAfterMost(QueueChatEvent e)
-        {
-            if (e.Cancelled) return;
-
-            if (e.IsCommand && !e.IsPrivateMessage)
-            {
-                new ChatSendMessage(this.Truncate(e.Message))
-                    .SendIn(this.BotBits);
-                return;
-            }
-
-            foreach (var msg in this.SplitBypassSend(e.Message, e.IsPrivateMessage))
-            {
-                this.QueueChat(msg, e.IsPrivateMessage);
-            }
         }
 
         [EventListener]
@@ -161,11 +197,6 @@ namespace BotBits
             else if (e.Type == WriteType.ChattingTooFast)
             {
                 this._warning = true;
-                this.InitTimer();
-            }
-            else
-            {
-                Console.WriteLine(e.Text);
             }
         }
 
@@ -176,70 +207,40 @@ namespace BotBits
 
         private bool CheckHistory(string str, string channel)
         {
-            str = this.Truncate(str);
+            str = Truncate(str);
             var c = this.GetChatChannel(channel);
-            if (this.GetChatRepeats(str, c) > 4)
+
+            lock (this._channels)
             {
-                c.RepeatCount = 0;
-                return true;
+                if (GetChatRepeats(str, c) > 4)
+                {
+                    c.RepeatCount = 0;
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
-        private int GetChatRepeats(string chat, ChatChannel channel)
+        private static string GetChannel(string msg, bool pm)
         {
-            if (chat != channel.LastSent)
+            string channel = null;
+            if (pm)
+                channel = msg.Split(' ').Skip(1).FirstOrDefault();
+            return channel ?? string.Empty;
+        }
+
+        private static int GetChatRepeats(string chat, ChatChannel channel)
+        {
+            if (chat != channel.LastQueued)
             {
                 channel.RepeatCount = 0;
-                channel.LastSent = chat;
+                channel.LastQueued = chat;
             }
 
             return ++channel.RepeatCount;
         }
 
-        private IEnumerable<string> SplitBypassSend(string message, bool pm)
-        {
-            var channel = this.GetChannel(message, pm);
-            var prefix = string.Empty;
-            if (pm)
-            {
-                var args = message.Split(' ');
-                prefix = string.Join(" ", args.Take(2)) + " ";
-                message = string.Join(" ", args.Skip(2));
-            }
-            var maxLength = MaxLength - prefix.Length;
-
-            while (message.Length > 0)
-            {
-                var truncated = this.Truncate(message, maxLength);
-
-                if (!Players.Of(this.BotBits).OwnPlayer.Owner &&
-                    this.CheckHistory(truncated, channel))
-                {
-                    var bypass = '.';
-                    if (truncated.All(c => c == bypass))
-                        bypass = ',';
-                    message = bypass + message;
-                    truncated = this.Truncate(message, maxLength);
-                }
-                message = message.Substring(truncated.Length);
-                
-                yield return prefix + truncated;
-            }
-        }
-
-        private string TrimChars(string text)
-        {
-            //Limit range to 31 - 255
-            text = Regex.Replace(text, @"[^\x1F-\xFF]", "").Trim();
-
-            //Remove del char 127
-            text = Regex.Replace(text, @"[\x7F]", "").Trim();
-
-            return text;
-        }
-
-        private string Truncate(string input, int length = MaxLength)
+        private static string Truncate(string input, int length = MaxLength)
         {
             if (input.Length < length) return input;
             return input.Substring(0, length);
@@ -247,15 +248,17 @@ namespace BotBits
 
         private ChatChannel GetChatChannel(string channel)
         {
-            return this._channels.GetOrAdd(channel, c => new ChatChannel());
+            return this._channels.GetOrAdd(channel.ToUpperInvariant(), c => new ChatChannel());
         }
 
         private class ChatChannel
         {
             public readonly ConcurrentQueue<string> Queue = new ConcurrentQueue<string>();
+            public string LastQueued = string.Empty;
             public string LastSent = string.Empty;
             public string LastReceived = string.Empty;
             public int RepeatCount;
+            public int DelayCount;
         }
     }
 }
