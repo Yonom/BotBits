@@ -1287,5 +1287,22 @@ namespace BotBits
                 LightUp = (Id)1506;
 
         }
+
+        public static class Tile
+        {
+            [Pack("bricktiles")]
+            public const Id
+                White = (Id)1106,
+                Gray = (Id)1107,
+                Black = (Id)1108,
+                Red = (Id)1109,
+                Orange = (Id)1110,
+                Yellow = (Id)1111,
+                Green = (Id)1112,
+                Cyan = (Id)1113,
+                Blue = (Id)1114,
+                Purple = (Id)1115;
+
+        }
     }
 }

@@ -487,5 +487,22 @@ namespace BotBits
                 BeamHorizontal = (Id)731,
                 BeamVertical = (Id)732;
         }
+
+        public static class Tile
+        {
+            [Pack("bricktiles")]
+            public const Id
+                White = (Id)733,
+                Gray = (Id)734,
+                Black = (Id)735,
+                Red = (Id)736,
+                Orange = (Id)737,
+                Yellow = (Id)738,
+                Green = (Id)739,
+                Cyan = (Id)740,
+                Blue = (Id)741,
+                Purple = (Id)742;
+
+        }
     }
 }

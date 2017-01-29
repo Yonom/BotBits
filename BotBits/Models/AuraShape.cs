@@ -16,6 +16,9 @@ namespace BotBits
         Gold = 3,
 
         [Pack("aurashapespiral")]
-        Spiral = 4
+        Spiral = 4,
+
+        [Pack("aurashapestar")]
+        Star = 5
     }
 }

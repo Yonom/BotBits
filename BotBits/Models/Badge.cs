@@ -5,9 +5,9 @@ namespace BotBits
     /// </summary>
     public enum Badge
     {
-        Unknown = 0,
+        None = -1,
 
-        None,
+        Unknown = 0,
 
         /// <summary>
         ///     Adventure League
@@ -18,6 +18,11 @@ namespace BotBits
         ///     Colorful
         /// </summary>
         CLR,
+
+        /// <summary>
+        ///     Christmas
+        /// </summary>
+        CRM,
 
         /// <summary>
         ///     Endurance
@@ -45,9 +50,19 @@ namespace BotBits
         PP1,
 
         /// <summary>
+        ///     Frustration
+        /// </summary>
+        PPF,
+
+        /// <summary>
         ///     Ancient Ruins
         /// </summary>
         RNS,
+
+        /// <summary>
+        ///     Summer
+        /// </summary>
+        SMR,
 
         /// <summary>
         ///     Spring

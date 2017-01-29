@@ -28,6 +28,9 @@ namespace BotBits
 
         public bool HasBadge(Badge badge)
         {
+            if (badge == Badge.None) return true;
+            if (badge == Badge.Unknown) throw new NotSupportedException("Unknown Badge given.");
+
             var ach = badge.ToString();
             return this._achievements
                 .Where(a => a.Id.Equals(ach, StringComparison.OrdinalIgnoreCase))

@@ -415,7 +415,53 @@ namespace BotBits
         Sleepy = 140,
 
         [Pack("smileyseagull")]
-        Seagull = 141
+        Seagull = 141,
+
+        [Pack("smileywerewolf")]
+        Werewolf = 142,
+
+        [Pack("smileyswampcreature")]
+        SwampCreature = 143,
+
+        [Pack("smileyfairy")]
+        Fairy = 144,
+
+        [Pack("smileyfirefighter")]
+        Firefighter = 145,
+
+        [Pack("smileyspy")]
+        Spy = 146,
+
+        [Pack("smileydevilskull")]
+        DevilSkull = 147,
+
+        [Pack("smileyclockwork")]
+        ClockworkRobot = 148,
+
+        [Pack("smileyteddybear")]
+        TeddyBear = 149,
+
+        [Pack("smileychristmassoldier")]
+        ChristmasSoldier = 150,
+
+        [Pack("smileyscrooge")]
+        Scrooge = 151,
+
+        // Missing Id
+
+        [Pack("smileypigtails")]
+        Pigtails = 153,
+
+        [Pack("smileydoctor")]
+        Doctor = 154,
+
+        [Pack("smileyturban")]
+        Turban = 155,
+
+        [Pack("smileyhazmatsuit")]
+        HazmatSuit = 156
+
+
 
     }
 }
