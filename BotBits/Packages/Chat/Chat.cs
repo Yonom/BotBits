@@ -30,7 +30,7 @@ namespace BotBits
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public Chat()
         {
-            this._mySendTimer = new Timer(o => this.DoSendTick(), null, 0, 20);
+            this._mySendTimer = new Timer(o => this.DoSendTick(), null, 0, 600);
         }
 
         void IDisposable.Dispose()
