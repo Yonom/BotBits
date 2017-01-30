@@ -34,7 +34,7 @@ namespace BotBits
             for (var y = 0; y < this.Height; y++)
                 for (var x = 0; x < this.Width; x++)
                     yield return new LayerItem<T>(
-                        new Point(x, y), this._blocks[x, y]);
+                        this._blocks[x, y], x, y);
         }
 
         IEnumerator IEnumerable.GetEnumerator()

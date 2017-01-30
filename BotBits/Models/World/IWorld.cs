@@ -1,15 +1,13 @@
-﻿namespace BotBits
+﻿using System.Collections.Generic;
+
+namespace BotBits
 {
-    public interface IWorld : IWorld<ForegroundBlock, BackgroundBlock>
+    public interface IWorld<TForeground, TBackground> 
+        : IReadOnlyWorld<TForeground, TBackground>
+        where TForeground : struct 
+        where TBackground : struct
     {
-    }
-
-    public interface IWorld<TForeground, TBackground> where TForeground : struct where TBackground : struct
-    {
-        int Width { get; }
-        int Height { get; }
-
-        IBlockLayer<TForeground> Foreground { get; }
-        IBlockLayer<TBackground> Background { get; }
+        new IBlockLayer<TForeground> Foreground { get; }
+        new IBlockLayer<TBackground> Background { get; }
     }
 }

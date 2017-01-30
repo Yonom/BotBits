@@ -4,6 +4,15 @@ namespace BotBits
 {
     public static class WorldAreaEnumerableExtensions
     {
+        public static WorldAreaEnumerable<TForeground, TBackground> ToWorldAreaEnumerable<TForeground, TBackground>(
+            this IWorld<TForeground, TBackground> world)
+            where TForeground : struct
+            where TBackground : struct
+        {
+            return new WorldAreaEnumerable<TForeground, TBackground>(world, new Rectangle(0, 0, world.Width, world.Height));
+        }
+
+
         public static WorldAreaEnumerable<TForeground, TBackground> In<TForeground, TBackground>(
             this IWorldAreaEnumerable<TForeground, TBackground> blockArea, Rectangle area)
             where TForeground : struct
@@ -27,6 +36,22 @@ namespace BotBits
             where TBackground : struct
         {
             return blockArea.In(new Rectangle(x, y, width, height));
+        }
+
+        public static WorldItem<TForeground, TBackground> At<TForeground, TBackground>(
+            this IWorldAreaEnumerable<TForeground, TBackground> blockArea, int x, int y)
+            where TForeground : struct
+            where TBackground : struct
+        {
+            return new WorldItem<TForeground, TBackground>(blockArea.World, x, y);
+        }
+
+        public static WorldItem<TForeground, TBackground> At<TForeground, TBackground>(
+            this IWorldAreaEnumerable<TForeground, TBackground> blockArea, Point point)
+            where TForeground : struct
+            where TBackground : struct
+        {
+            return blockArea.At(point.X, point.Y);
         }
 
         /// <summary>

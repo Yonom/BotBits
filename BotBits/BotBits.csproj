@@ -54,12 +54,14 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Events\DisposedEvent.cs" />
     <Compile Include="Client\Events\DisposingEvent.cs" />
     <Compile Include="Database\PlayerData\PlayerAchivements.cs" />
     <Compile Include="Database\PlayerData\PlayerData.cs" />
+    <Compile Include="Helpers\BlocksSnapshot.cs" />
     <Compile Include="Helpers\VersionCache.cs" />
     <Compile Include="Internal\InitParse.cs" />
     <Compile Include="Internal\Nito\Async\BotBitsSynchronizationContext.cs" />
@@ -75,7 +77,13 @@
     <Compile Include="Models\RespawnData.cs" />
     <Compile Include="Models\SwitchType.cs" />
     <Compile Include="Models\WorldStatus.cs" />
+    <Compile Include="Models\World\ReadOnly\IReadOnlyBlockLayer.cs" />
+    <Compile Include="Models\World\ReadOnly\IReadOnlyWorld.cs" />
+    <Compile Include="Models\World\ReadOnly\IReadOnlyWorldAreaEnumerable.cs" />
     <Compile Include="Models\World\IWorldAreaEnumerable.cs" />
+    <Compile Include="Models\World\ReadOnly\ReadOnlyWorldItem.cs" />
+    <Compile Include="Models\World\ReadOnly\ReadOnlyWorldAreaEnumerable.cs" />
+    <Compile Include="Models\World\ReadOnly\ReadOnlyWorldAreaEnumerableExtensions.cs" />
     <Compile Include="Models\World\WorldAreaEnumerable.cs" />
     <Compile Include="Models\World\WorldAreaEnumerableExtensions.cs" />
     <Compile Include="Models\World\WorldItem.cs" />
@@ -86,7 +94,8 @@
     <Compile Include="Packages\Blocks\BlockAreaEnumerableExtensions.cs" />
     <Compile Include="Packages\Blocks\BlocksItem.cs" />
     <Compile Include="Packages\Blocks\IBlockAreaEnumerable.cs" />
-    <Compile Include="Packages\Blocks\ReadOnlyBlocksWorld.cs" />
+    <Compile Include="Packages\Blocks\ProxyWorld.cs" />
+    <Compile Include="Models\World\ReadOnly\ReadOnlyBlocksWorld.cs" />
     <Compile Include="Packages\Blocks\Events\BackgroundPlaceEvent.cs" />
     <Compile Include="Packages\Blocks\Events\ForegroundPlaceEvent.cs" />
     <Compile Include="Packages\Blocks\Events\PlaceEvent.cs" />
@@ -236,7 +245,6 @@
     <Compile Include="Packages\Blocks\BlockExtensions.cs" />
     <Compile Include="Packages\Blocks\Blocks.cs" />
     <Compile Include="Packages\Blocks\Events\WorldResizeEvent.cs" />
-    <Compile Include="Packages\Blocks\ReadOnlyBlockLayer.cs" />
     <Compile Include="Models\World\BlockData\BlockDataWorld.cs" />
     <Compile Include="Models\Point.cs" />
     <Compile Include="Models\Point3D.cs" />

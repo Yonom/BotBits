@@ -20,6 +20,16 @@ namespace BotBits
             return blockArea.In(new Rectangle(x, y, width, height));
         }
 
+        public static BlocksItem At(this IBlockAreaEnumerable blockArea, int x, int y)
+        {
+            return new BlocksItem(blockArea.Blocks, x, y);
+        }
+
+        public static BlocksItem At(this IBlockAreaEnumerable blockArea, Point point)
+        {
+            return blockArea.At(point.X, point.Y);
+        }
+
         public static World CreateCopy(this IBlockAreaEnumerable blockArea)
         {
             var area = blockArea.Area;
@@ -33,7 +43,7 @@ namespace BotBits
             return world;
         }
 
-        public static void UploadWorld(this IBlockAreaEnumerable blockArea, IWorld world)
+        public static void UploadWorld(this IBlockAreaEnumerable blockArea, IReadOnlyWorld<ForegroundBlock, BackgroundBlock> world)
         {
             var area = blockArea.Area;
             if (world.Width > area.Width || world.Height > area.Height) throw new ArgumentException("The world is too big for this area.", nameof(world));

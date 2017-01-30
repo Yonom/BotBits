@@ -4,10 +4,9 @@
         where TForeground : struct
         where TBackground : struct
     {
-        private readonly World<TForeground, TBackground> _world;
+        private readonly IWorld<TForeground, TBackground> _world;
 
         public int X { get; }
-
         public int Y { get; }
 
         public TForeground Foreground
@@ -22,7 +21,7 @@
             set { this._world.Background[this.X, this.Y] = value; }
         }
 
-        public WorldItem(World<TForeground, TBackground> world, int x, int y)
+        public WorldItem(IWorld<TForeground, TBackground> world, int x, int y)
         {
             this._world = world;
             this.X = x;

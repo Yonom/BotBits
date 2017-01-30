@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using BotBits.Events;
 using BotBits.SendMessages;
 using PlayerIOClient;
@@ -11,7 +10,7 @@ using Yonom.EE;
 namespace BotBits
 {
     public sealed class Blocks : EventListenerPackage<Blocks>, IBlockAreaEnumerable,
-        IWorld<BlockData<ForegroundBlock>, BlockData<BackgroundBlock>>
+        IReadOnlyWorld<BlockData<ForegroundBlock>, BlockData<BackgroundBlock>>
     {
         private BlockDataWorld _blockDataWorld;
         private ReadOnlyBlocksWorld _readOnlyBlocksWorld;
@@ -31,7 +30,6 @@ namespace BotBits
                 this._readOnlyBlocksWorld = new ReadOnlyBlocksWorld(this._blockDataWorld);
             }
         }
-
         public IEnumerator<BlocksItem> GetEnumerator()
         {
             return this.In(this.Area).GetEnumerator();
@@ -50,19 +48,9 @@ namespace BotBits
 
         public int Width => this._blockDataWorld.Width;
 
-        public IBlockLayer<BlockData<ForegroundBlock>> Foreground => this._readOnlyBlocksWorld.Foreground;
+        public IReadOnlyBlockLayer<BlockData<ForegroundBlock>> Foreground => this._readOnlyBlocksWorld.Foreground;
 
-        public IBlockLayer<BlockData<BackgroundBlock>> Background => this._readOnlyBlocksWorld.Background;
-
-        public BlocksItem At(Point point)
-        {
-            return this.At(point.X, point.Y);
-        }
-
-        public BlocksItem At(int x, int y)
-        {
-            return new BlocksItem(this, x, y);
-        }
+        public IReadOnlyBlockLayer<BlockData<BackgroundBlock>> Background => this._readOnlyBlocksWorld.Background;
 
         public void Place(int x, int y, BackgroundBlock block)
         {
@@ -227,57 +215,9 @@ namespace BotBits
             return world;
         }
 
-        public IWorld GetWorld()
+        public ProxyWorld GetProxyWorld()
         {
             return new ProxyWorld(this);
-        }
-
-        private class ProxyWorld : IWorld
-        {
-            private readonly Blocks _innerWorld;
-
-            public ProxyWorld(Blocks innerWorld)
-            {
-                this._innerWorld = innerWorld;
-            }
-
-            public int Width => this._innerWorld.Width;
-
-            public int Height => this._innerWorld.Height;
-
-            public IBlockLayer<ForegroundBlock> Foreground => new ProxyLayer<ForegroundBlock>(this._innerWorld.Foreground);
-
-            public IBlockLayer<BackgroundBlock> Background => new ProxyLayer<BackgroundBlock>(this._innerWorld.Background);
-        }
-
-        private class ProxyLayer<T> : IBlockLayer<T> where T : struct
-        {
-            private readonly IBlockLayer<BlockData<T>> _innerLayer;
-
-            public ProxyLayer(IBlockLayer<BlockData<T>> innerLayer)
-            {
-                this._innerLayer = innerLayer;
-            }
-
-            public T this[Point p] => this._innerLayer[p].Block;
-
-            public T this[int x, int y] => this._innerLayer[x, y].Block;
-
-            public int Height => this._innerLayer.Height;
-
-            public int Width => this._innerLayer.Width;
-
-            public IEnumerator<LayerItem<T>> GetEnumerator()
-            {
-                return this._innerLayer
-                    .Select(item => new LayerItem<T>(item.Location, item.Data.Block))
-                    .GetEnumerator();
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return this.GetEnumerator();
-            }
         }
     }
 }

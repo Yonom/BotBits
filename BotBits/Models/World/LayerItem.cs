@@ -2,14 +2,16 @@
 {
     public struct LayerItem<T> where T : struct
     {
-        public Point Location { get; }
+        public int X { get; }
+        public int Y { get; }
 
         public T Data { get; }
 
-        public LayerItem(Point location, T data)
+        public LayerItem(T data, int x, int y)
         {
-            this.Location = location;
             this.Data = data;
+            this.X = x;
+            this.Y = y;
         }
     }
 }

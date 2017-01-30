@@ -264,7 +264,7 @@ namespace BotBits
         }
 
         public static bool IsPlaceable<TForeground, TBackground>
-            (PlaceSendMessage p, IWorld<TForeground, TBackground> world, bool respectBorder)
+            (PlaceSendMessage p, IReadOnlyWorld<TForeground, TBackground> world, bool respectBorder)
             where TForeground : struct
             where TBackground : struct
         {

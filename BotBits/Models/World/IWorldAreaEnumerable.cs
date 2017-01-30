@@ -6,7 +6,7 @@ namespace BotBits
         where TForeground : struct
         where TBackground : struct
     {
-        World<TForeground, TBackground> World { get; }
+        IWorld<TForeground, TBackground> World { get; }
         Rectangle Area { get; }
     }
 }

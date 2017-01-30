@@ -2,11 +2,9 @@
 
 namespace BotBits
 {
-    public interface IBlockLayer<T> : IEnumerable<LayerItem<T>> where T : struct
+    public interface IBlockLayer<T> : IReadOnlyBlockLayer<T> where T : struct
     {
-        int Height { get; }
-        int Width { get; }
-        T this[int x, int y] { get; }
-        T this[Point p] { get; }
+        new T this[int x, int y] { get; set; }
+        new T this[Point p] { get; set; }
     }
 }
