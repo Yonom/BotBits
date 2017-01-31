@@ -1,6 +1,6 @@
 ﻿namespace BotBits
 {
-    public struct WorldItem<TForeground, TBackground>
+    public struct WorldItem<TForeground, TBackground> : IBlockSettable<TForeground, TBackground>
         where TForeground : struct
         where TBackground : struct
     {
@@ -26,6 +26,16 @@
             this._world = world;
             this.X = x;
             this.Y = y;
+        }
+
+        public void Set(TForeground block)
+        {
+            this.Foreground = block;
+        }
+
+        public void Set(TBackground block)
+        {
+            this.Background = block;
         }
     }
 }
