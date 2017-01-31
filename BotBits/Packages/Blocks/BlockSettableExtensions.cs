@@ -67,59 +67,59 @@ namespace BotBits
 
         #region BlocksItem
 
-        public static void Set<T>(this T blocks, Background.Id block) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void Set(this IBlockSettable<ForegroundBlock, BackgroundBlock> blocks, Background.Id block)
         {
             blocks.Set(new BackgroundBlock(block));
         }
 
-        public static void Set<T>(this T blocks, Foreground.Id block) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void Set(this IBlockSettable<ForegroundBlock, BackgroundBlock> blocks, Foreground.Id block)
         {
             blocks.Set(new ForegroundBlock(block));
         }
 
-        public static void Set<T>(this T blocks, Foreground.Id block, int goal) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void Set(this IBlockSettable<ForegroundBlock, BackgroundBlock> blocks, Foreground.Id block, int goal)
         {
             blocks.Set(new ForegroundBlock(block, goal));
         }
 
-        public static void Set<T>(this T blocks, Foreground.Id block, uint args) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void Set(this IBlockSettable<ForegroundBlock, BackgroundBlock> blocks, Foreground.Id block, uint args)
         {
             blocks.Set(new ForegroundBlock(block, args));
         }
 
-        public static void Set<T>(this T blocks, Foreground.Id block, string args) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void Set(this IBlockSettable<ForegroundBlock, BackgroundBlock> blocks, Foreground.Id block, string args)
         {
             blocks.Set(new ForegroundBlock(block, args));
         }
 
-        public static void Set<T>(this T blocks, Foreground.Id block, string text, string textColor) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void Set(this IBlockSettable<ForegroundBlock, BackgroundBlock> blocks, Foreground.Id block, string text, string textColor)
         {
             blocks.Set(new ForegroundBlock(block, text, textColor));
         }
 
-        public static void Set<T>(this T blocks, Foreground.Id block, string text, Morph.Id signColor) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void Set(this IBlockSettable<ForegroundBlock, BackgroundBlock> blocks, Foreground.Id block, string text, Morph.Id signColor)
         {
             blocks.Set(new ForegroundBlock(block, text, signColor));
         }
 
-        public static void Set<T>(this T blocks, Foreground.Id block,
-            int portalId, int portalTarget, Morph.Id portalRotation) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void Set(this IBlockSettable<ForegroundBlock, BackgroundBlock> blocks, Foreground.Id block,
+            int portalId, int portalTarget, Morph.Id portalRotation)
         {
             blocks.Set(new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
-        public static void Set<T>(this T blocks, Foreground.Id block,
-            uint portalId, uint portalTarget, Morph.Id portalRotation) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void Set(this IBlockSettable<ForegroundBlock, BackgroundBlock> blocks, Foreground.Id block,
+            uint portalId, uint portalTarget, Morph.Id portalRotation)
         {
             blocks.Set(new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
-        public static void Set<T>(this T blocks, Foreground.Id block, Morph.Id morph) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void Set(this IBlockSettable<ForegroundBlock, BackgroundBlock> blocks, Foreground.Id block, Morph.Id morph)
         {
             blocks.Set(new ForegroundBlock(block, morph));
         }
 
-        public static void Set<T>(this T blocks, Foreground.Id block, bool enabled) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void Set(this IBlockSettable<ForegroundBlock, BackgroundBlock> blocks, Foreground.Id block, bool enabled)
         {
             blocks.Set(new ForegroundBlock(block, enabled));
         }
@@ -199,73 +199,73 @@ namespace BotBits
         
         #region IEnumerable Of IEnumerable Of BlocksItem
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, ForegroundBlock block) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, ForegroundBlock block) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
             foreach (var item in blocks)
                 item.Set(block);
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, BackgroundBlock block) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, BackgroundBlock block) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
             foreach (var item in blocks)
                 item.Set(block);
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, Background.Id block) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, Background.Id block) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
-            blocks.Set(new BackgroundBlock(block));
+            blocks.SetMany(new BackgroundBlock(block));
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
-            blocks.Set(new ForegroundBlock(block));
+            blocks.SetMany(new ForegroundBlock(block));
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, int goal) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, int goal) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
-            blocks.Set(new ForegroundBlock(block, goal));
+            blocks.SetMany(new ForegroundBlock(block, goal));
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, uint args) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, uint args) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
-            blocks.Set(new ForegroundBlock(block, args));
+            blocks.SetMany(new ForegroundBlock(block, args));
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, string args) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, string args) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
-            blocks.Set(new ForegroundBlock(block, args));
+            blocks.SetMany(new ForegroundBlock(block, args));
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, string text, string textColor) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, string text, string textColor) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
-            blocks.Set(new ForegroundBlock(block, text, textColor));
+            blocks.SetMany(new ForegroundBlock(block, text, textColor));
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, string text, Morph.Id signColor) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, string text, Morph.Id signColor) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
-            blocks.Set(new ForegroundBlock(block, text, signColor));
+            blocks.SetMany(new ForegroundBlock(block, text, signColor));
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block,
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block,
             int portalId, int portalTarget, Morph.Id portalRotation) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
-            blocks.Set(new ForegroundBlock(block, portalId, portalTarget, portalRotation));
+            blocks.SetMany(new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block,
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block,
             uint portalId, uint portalTarget, Morph.Id portalRotation) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
-            blocks.Set(new ForegroundBlock(block, portalId, portalTarget, portalRotation));
+            blocks.SetMany(new ForegroundBlock(block, portalId, portalTarget, portalRotation));
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, Morph.Id morph) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, Morph.Id morph) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
-            blocks.Set(new ForegroundBlock(block, morph));
+            blocks.SetMany(new ForegroundBlock(block, morph));
         }
 
-        public static void Set<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, bool enabled) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
+        public static void SetMany<T>(this IEnumerable<IEnumerable<T>> blocks, Foreground.Id block, bool enabled) where T : IBlockSettable<ForegroundBlock, BackgroundBlock>
         {
-            blocks.Set(new ForegroundBlock(block, enabled));
+            blocks.SetMany(new ForegroundBlock(block, enabled));
         }
 
         #endregion
