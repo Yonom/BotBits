@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using BotBits.Events;
 using BotBits.SendMessages;
 using PlayerIOClient;
