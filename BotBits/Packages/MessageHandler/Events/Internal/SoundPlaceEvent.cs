@@ -3,31 +3,31 @@ using PlayerIOClient;
 namespace BotBits.Events
 {
     /// <summary>
-    ///     Occurs when a coin door is placed in the world.
+    ///     Occurs when a sound block is placed in the world.
     /// </summary>
     /// <seealso cref="PlayerEvent{T}" />
-    [ReceiveEvent("bc")]
-    public sealed class CoinDoorPlaceEvent : PlayerEvent<CoinDoorPlaceEvent>
+    [ReceiveEvent("bs")]
+    internal sealed class SoundPlaceEvent : PlayerEvent<SoundPlaceEvent>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CoinDoorPlaceEvent" /> class.
+        ///     Initializes a new instance of the <see cref="SoundPlaceEvent" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
-        internal CoinDoorPlaceEvent(BotBitsClient client, Message message)
+        internal SoundPlaceEvent(BotBitsClient client, Message message)
             : base(client, message, 4)
         {
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);
             this.Id = message.GetInteger(2);
-            this.CoinsToOpen = message.GetUInt(3);
+            this.SoundId = message.GetInt(3);
         }
 
         /// <summary>
-        ///     Gets or sets the amount of coins that is needed to open the coin door.
+        ///     Gets or sets the sound identifier.
         /// </summary>
-        /// <value>The coins to open.</value>
-        public uint CoinsToOpen { get; set; }
+        /// <value>The sound identifier.</value>
+        public int SoundId { get; set; }
 
         /// <summary>
         ///     Gets or sets the block id.
@@ -38,13 +38,13 @@ namespace BotBits.Events
         public int Id { get; set; }
 
         /// <summary>
-        ///     Gets or sets the position x of the player.
+        ///     Gets or sets the position x.
         /// </summary>
         /// <value>The position x.</value>
         public int X { get; set; }
 
         /// <summary>
-        ///     Gets or sets the position y of the player.
+        ///     Gets or sets the position y.
         /// </summary>
         /// <value>The position y.</value>
         public int Y { get; set; }

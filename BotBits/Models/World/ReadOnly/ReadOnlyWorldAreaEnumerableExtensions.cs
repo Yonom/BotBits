@@ -42,7 +42,7 @@ namespace BotBits
             where TForeground : struct
             where TBackground : struct
         {
-            return new ReadOnlyWorldItem<TForeground, TBackground>(blockArea.World, x, y);
+            return new ReadOnlyWorldItem<TForeground, TBackground>(blockArea.World, blockArea.Area.X + x, blockArea.Area.Y + y);
         }
 
         public static ReadOnlyWorldItem<TForeground, TBackground> At<TForeground, TBackground>(

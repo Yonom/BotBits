@@ -1,33 +1,44 @@
-using PlayerIOClient;
+﻿using PlayerIOClient;
 
 namespace BotBits.Events
 {
     /// <summary>
-    ///     Occurs when a sound block is placed in the world.
+    ///     Occurs when a sign block is placed in the world.
     /// </summary>
     /// <seealso cref="PlayerEvent{T}" />
-    [ReceiveEvent("bs")]
-    public sealed class SoundPlaceEvent : PlayerEvent<SoundPlaceEvent>
+    [ReceiveEvent("ts")]
+    internal sealed class SignPlaceEvent : PlayerEvent<SignPlaceEvent>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SoundPlaceEvent" /> class.
+        ///     Initializes a new instance of the <see cref="SignPlaceEvent" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
-        internal SoundPlaceEvent(BotBitsClient client, Message message)
-            : base(client, message, 4)
+        internal SignPlaceEvent(BotBitsClient client, Message message)
+            : base(client, message, 5)
         {
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);
             this.Id = message.GetInteger(2);
-            this.SoundId = message.GetInt(3);
+            this.Text = message.GetString(3);
+            this.SignColor = (Morph.Id)message.GetUInt(4);
         }
 
         /// <summary>
-        ///     Gets or sets the sound identifier.
+        ///     Gets or sets the color of the sign.
         /// </summary>
-        /// <value>The sound identifier.</value>
-        public int SoundId { get; set; }
+        /// <value>
+        ///     The color of the sign.
+        /// </value>
+        public Morph.Id SignColor { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the text.
+        /// </summary>
+        /// <value>
+        ///     The text.
+        /// </value>
+        public string Text { get; set; }
 
         /// <summary>
         ///     Gets or sets the block id.

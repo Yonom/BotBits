@@ -1,28 +1,29 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace BotBits
 {
-    public static class BlockAreaEnumerableExtensions
+    public static class BlocksAreaEnumerableExtensions
     {
-        public static BlockAreaEnumerable In(this IBlockAreaEnumerable blockArea, Rectangle area)
+        public static BlocksAreaEnumerable In(this IBlockAreaEnumerable blockArea, Rectangle area)
         {
-            return new BlockAreaEnumerable(blockArea.Blocks,
+            return new BlocksAreaEnumerable(blockArea.Blocks,
                 Rectangle.Intersect(area, blockArea.Area));
         }
 
-        public static BlockAreaEnumerable In(this IBlockAreaEnumerable blockArea, Point p1, Point p2)
+        public static BlocksAreaEnumerable In(this IBlockAreaEnumerable blockArea, Point p1, Point p2)
         {
             return blockArea.In(new Rectangle(p1, p2));
         }
 
-        public static BlockAreaEnumerable In(this IBlockAreaEnumerable blockArea, int x, int y, int width, int height)
+        public static BlocksAreaEnumerable In(this IBlockAreaEnumerable blockArea, int x, int y, int width, int height)
         {
             return blockArea.In(new Rectangle(x, y, width, height));
         }
 
         public static BlocksItem At(this IBlockAreaEnumerable blockArea, int x, int y)
         {
-            return new BlocksItem(blockArea.Blocks, x, y);
+            return new BlocksItem(blockArea.Blocks, blockArea.Area.X + x, blockArea.Area.Y + y);
         }
 
         public static BlocksItem At(this IBlockAreaEnumerable blockArea, Point point)
@@ -41,6 +42,11 @@ namespace BotBits
                     world.Background[x - area.Left, y - area.Top] = blockArea.Blocks.Background[x, y].Block;
                 }
             return world;
+        }
+
+        public static IReadOnlyWorldAreaEnumerable<ForegroundBlock, BackgroundBlock> GetProxyWorldAreaEnumerable(this IBlockAreaEnumerable blockArea)
+        {
+            return blockArea.Blocks.GetProxyWorld().In(blockArea.Area);
         }
 
         public static void UploadWorld(this IBlockAreaEnumerable blockArea, IReadOnlyWorld<ForegroundBlock, BackgroundBlock> world)

@@ -3,40 +3,31 @@ using PlayerIOClient;
 namespace BotBits.Events
 {
     /// <summary>
-    ///     Occurs when someone places morphable block.
+    ///     Occurs when a coin door is placed in the world.
     /// </summary>
     /// <seealso cref="PlayerEvent{T}" />
-    [ReceiveEvent("br")]
-    public sealed class MorphablePlaceEvent : PlayerEvent<MorphablePlaceEvent>
+    [ReceiveEvent("bc")]
+    internal sealed class CoinDoorPlaceEvent : PlayerEvent<CoinDoorPlaceEvent>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MorphablePlaceEvent" /> class.
+        ///     Initializes a new instance of the <see cref="CoinDoorPlaceEvent" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
-        internal MorphablePlaceEvent(BotBitsClient client, Message message)
-            : base(client, message, 5)
+        internal CoinDoorPlaceEvent(BotBitsClient client, Message message)
+            : base(client, message, 4)
         {
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);
             this.Id = message.GetInteger(2);
-            this.Rotation = message.GetUInt(3);
-            this.Layer = (Layer)message.GetUInt(4);
+            this.CoinsToOpen = message.GetUInt(3);
         }
 
         /// <summary>
-        ///     Gets or sets the layer.
+        ///     Gets or sets the amount of coins that is needed to open the coin door.
         /// </summary>
-        /// <value>
-        ///     The layer.
-        /// </value>
-        public Layer Layer { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the rotation.
-        /// </summary>
-        /// <value>The rotation.</value>
-        public uint Rotation { get; set; }
+        /// <value>The coins to open.</value>
+        public uint CoinsToOpen { get; set; }
 
         /// <summary>
         ///     Gets or sets the block id.
@@ -47,13 +38,13 @@ namespace BotBits.Events
         public int Id { get; set; }
 
         /// <summary>
-        ///     Gets or sets the position x.
+        ///     Gets or sets the position x of the player.
         /// </summary>
         /// <value>The position x.</value>
         public int X { get; set; }
 
         /// <summary>
-        ///     Gets or sets the position y.
+        ///     Gets or sets the position y of the player.
         /// </summary>
         /// <value>The position y.</value>
         public int Y { get; set; }

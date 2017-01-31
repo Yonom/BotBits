@@ -54,7 +54,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Events\DisposedEvent.cs" />
@@ -90,10 +89,11 @@
     <Compile Include="Models\WriteType.cs" />
     <Compile Include="Packages\Actions\Actions.cs" />
     <Compile Include="Packages\Actions\ActionsExtensions.cs" />
-    <Compile Include="Packages\Blocks\BlockAreaEnumerable.cs" />
-    <Compile Include="Packages\Blocks\BlockAreaEnumerableExtensions.cs" />
+    <Compile Include="Packages\Blocks\BlocksAreaEnumerable.cs" />
+    <Compile Include="Packages\Blocks\BlocksAreaEnumerableExtensions.cs" />
     <Compile Include="Packages\Blocks\BlocksItem.cs" />
     <Compile Include="Packages\Blocks\IBlockAreaEnumerable.cs" />
+    <Compile Include="Packages\Blocks\IBlockSettable.cs" />
     <Compile Include="Packages\Blocks\ProxyWorld.cs" />
     <Compile Include="Models\World\ReadOnly\ReadOnlyBlocksWorld.cs" />
     <Compile Include="Packages\Blocks\Events\BackgroundPlaceEvent.cs" />
@@ -225,7 +225,7 @@
     <Compile Include="Internal\WaitHandleExtensions.cs" />
     <Compile Include="Packages\MessageHandler\Events\GemEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\RoomVisibleEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\SignPlaceEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\Internal\SignPlaceEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\PlayerEvent.cs" />
     <Compile Include="Packages\MessageHandler\ReceiveEventAttribute.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TouchHologramSendMessage.cs" />
@@ -242,7 +242,7 @@
     <Compile Include="Packages\MessageSender\IMessageQueue.cs" />
     <Compile Include="Packages\MessageSender\MessageQueue.cs" />
     <Compile Include="Packages\MessageSender\MessageSender.cs" />
-    <Compile Include="Packages\Blocks\BlockExtensions.cs" />
+    <Compile Include="Packages\Blocks\BlockSettableExtensions.cs" />
     <Compile Include="Packages\Blocks\Blocks.cs" />
     <Compile Include="Packages\Blocks\Events\WorldResizeEvent.cs" />
     <Compile Include="Models\World\BlockData\BlockDataWorld.cs" />
@@ -276,9 +276,9 @@
     <Compile Include="Packages\MessageHandler\Events\JoinEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\AutoTextEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\BackgroundColorEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\BlockPlaceEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\Internal\BlockPlaceEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\ClearEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\CoinDoorPlaceEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\Internal\CoinDoorPlaceEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\CoinEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\CrownEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\BadgeEvent.cs" />
@@ -289,27 +289,27 @@
     <Compile Include="Packages\MessageHandler\Events\InfoEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\InitEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\KillEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\LabelPlaceEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\Internal\LabelPlaceEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\LeaveEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\LoseAccessEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\ModModeEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MoveEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\PortalPlaceEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\Internal\PortalPlaceEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\ReceiveEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\RefreshShopEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\LoadLevelEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\MorphablePlaceEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\Internal\MorphablePlaceEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\SavedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\OldChatEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\ChatEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\ShowKeyEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\SilverCrownEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\SoundPlaceEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\Internal\SoundPlaceEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MultiRespawnEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\TeleportEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\UpdateMetaEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\UpgradeEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\WorldPortalPlaceEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\Internal\WorldPortalPlaceEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\WriteEvent.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\AccessSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\AutoTextSendMessage.cs" />
@@ -365,9 +365,7 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Packages\Login\Events\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\NuProj.Common.0.10.4-beta\build\NuProj.Common.targets" Condition="Exists('..\packages\NuProj.Common.0.10.4-beta\build\NuProj.Common.targets')" />
   <Import Project="..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets')" />

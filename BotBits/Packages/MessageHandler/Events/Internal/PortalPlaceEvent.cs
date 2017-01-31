@@ -7,7 +7,7 @@ namespace BotBits.Events
     /// </summary>
     /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("pt")]
-    public sealed class PortalPlaceEvent : PlayerEvent<PortalPlaceEvent>
+    internal sealed class PortalPlaceEvent : PlayerEvent<PortalPlaceEvent>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="PortalPlaceEvent" /> class.

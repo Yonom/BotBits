@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace BotBits
 {
-    public class BlockAreaEnumerable : IBlockAreaEnumerable
+    public class BlocksAreaEnumerable : IBlockAreaEnumerable
     {
-        public BlockAreaEnumerable(Blocks blocks, Rectangle area)
+        public BlocksAreaEnumerable(Blocks blocks, Rectangle area)
         {
             this.Blocks = blocks;
             this.Area = area;

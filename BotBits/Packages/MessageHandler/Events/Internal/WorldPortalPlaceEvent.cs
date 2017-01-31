@@ -6,7 +6,7 @@ namespace BotBits.Events
     ///     Occurs when a world portal is placed in the world.
     /// </summary>
     [ReceiveEvent("wp")]
-    public sealed class WorldPortalPlaceEvent : PlayerEvent<WorldPortalPlaceEvent>
+    internal sealed class WorldPortalPlaceEvent : PlayerEvent<WorldPortalPlaceEvent>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="WorldPortalPlaceEvent" /> class.

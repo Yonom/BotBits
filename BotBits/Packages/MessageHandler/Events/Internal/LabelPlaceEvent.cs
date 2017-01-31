@@ -1,43 +1,41 @@
-﻿using PlayerIOClient;
+using PlayerIOClient;
 
 namespace BotBits.Events
 {
     /// <summary>
-    ///     Occurs when a sign block is placed in the world.
+    ///     Occurs when someone places label block.
     /// </summary>
     /// <seealso cref="PlayerEvent{T}" />
-    [ReceiveEvent("ts")]
-    public sealed class SignPlaceEvent : PlayerEvent<SignPlaceEvent>
+    [ReceiveEvent("lb")]
+    internal sealed class LabelPlaceEvent : PlayerEvent<LabelPlaceEvent>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SignPlaceEvent" /> class.
+        ///     Initializes a new instance of the <see cref="LabelPlaceEvent" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
-        internal SignPlaceEvent(BotBitsClient client, Message message)
+        internal LabelPlaceEvent(BotBitsClient client, Message message)
             : base(client, message, 5)
         {
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);
             this.Id = message.GetInteger(2);
             this.Text = message.GetString(3);
-            this.SignColor = (Morph.Id)message.GetUInt(4);
+            this.TextColor = message.GetString(4);
         }
 
         /// <summary>
-        ///     Gets or sets the color of the sign.
+        ///     Gets or sets the color of the text.
         /// </summary>
         /// <value>
-        ///     The color of the sign.
+        ///     The color of the text.
         /// </value>
-        public Morph.Id SignColor { get; set; }
+        public string TextColor { get; set; }
 
         /// <summary>
         ///     Gets or sets the text.
         /// </summary>
-        /// <value>
-        ///     The text.
-        /// </value>
+        /// <value>The text.</value>
         public string Text { get; set; }
 
         /// <summary>
@@ -49,15 +47,15 @@ namespace BotBits.Events
         public int Id { get; set; }
 
         /// <summary>
-        ///     Gets or sets the position x.
+        ///     Gets or sets the coordinate x.
         /// </summary>
-        /// <value>The position x.</value>
+        /// <value>The coordinate x.</value>
         public int X { get; set; }
 
         /// <summary>
-        ///     Gets or sets the position y.
+        ///     Gets or sets the coordinate y.
         /// </summary>
-        /// <value>The position y.</value>
+        /// <value>The coordinate y.</value>
         public int Y { get; set; }
     }
 }

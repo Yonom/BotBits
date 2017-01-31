@@ -43,7 +43,7 @@ namespace BotBits
             where TForeground : struct
             where TBackground : struct
         {
-            return new WorldItem<TForeground, TBackground>(blockArea.World, x, y);
+            return new WorldItem<TForeground, TBackground>(blockArea.World, blockArea.Area.X + x, blockArea.Area.Y + y);
         }
 
         public static WorldItem<TForeground, TBackground> At<TForeground, TBackground>(

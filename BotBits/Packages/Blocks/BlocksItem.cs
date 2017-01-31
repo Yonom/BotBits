@@ -1,6 +1,6 @@
 ﻿namespace BotBits
 {
-    public struct BlocksItem
+    public struct BlocksItem : IBlockSettable<ForegroundBlock, BackgroundBlock>
     {
         private readonly Blocks _blocks;
 
