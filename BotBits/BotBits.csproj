@@ -93,7 +93,7 @@
     <Compile Include="Packages\Blocks\BlocksAreaEnumerableExtensions.cs" />
     <Compile Include="Packages\Blocks\BlocksItem.cs" />
     <Compile Include="Packages\Blocks\IBlockAreaEnumerable.cs" />
-    <Compile Include="Packages\Blocks\IBlockSettable.cs" />
+    <Compile Include="Models\World\IBlockSettable.cs" />
     <Compile Include="Packages\Blocks\ProxyWorld.cs" />
     <Compile Include="Models\World\ReadOnly\ReadOnlyBlocksWorld.cs" />
     <Compile Include="Packages\Blocks\Events\BackgroundPlaceEvent.cs" />
@@ -242,7 +242,7 @@
     <Compile Include="Packages\MessageSender\IMessageQueue.cs" />
     <Compile Include="Packages\MessageSender\MessageQueue.cs" />
     <Compile Include="Packages\MessageSender\MessageSender.cs" />
-    <Compile Include="Packages\Blocks\BlockSettableExtensions.cs" />
+    <Compile Include="Models\World\BlockSettableExtensions.cs" />
     <Compile Include="Packages\Blocks\Blocks.cs" />
     <Compile Include="Packages\Blocks\Events\WorldResizeEvent.cs" />
     <Compile Include="Models\World\BlockData\BlockDataWorld.cs" />
