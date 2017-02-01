@@ -131,6 +131,7 @@
     <Compile Include="Packages\MessageHandler\Events\RestoreProgressEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MutedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\SmileyEvent.cs" />
+    <Compile Include="Packages\MessageHandler\UnknownPlayerException.cs" />
     <Compile Include="Packages\MessageSender\Events\SendEvent.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetLobbyPreviewEnabledSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SmileyGoldBorderSendMessage.cs" />
