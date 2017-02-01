@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace BotBits
 {
-    [StructLayout(LayoutKind.Sequential, Pack = 2)]
     [DebuggerDisplay("Id = {Id}")]
     public struct ForegroundBlock : IEquatable<ForegroundBlock>
     {
-        private readonly Foreground.Id _id;
         private readonly object _args;
 
         private ForegroundBlock(Foreground.Id id, BlockArgsType requiredArgsType)
@@ -18,7 +15,7 @@ namespace BotBits
             if (argsType != requiredArgsType)
                 throw WorldUtils.GetMissingArgsErrorMessage(argsType, nameof(id));
 
-            this._id = id;
+            this.Id = id;
             this._args = null;
         }
 
@@ -31,7 +28,7 @@ namespace BotBits
             var type = WorldUtils.GetForegroundType(id);
             var argsType = WorldUtils.GetBlockArgsType(type);
 
-            this._id = id;
+            this.Id = id;
             switch (argsType)
             {
                 case BlockArgsType.Number:
@@ -55,21 +52,21 @@ namespace BotBits
             : this(id, BlockArgsType.Label)
         {
             this._args = new LabelArgs(text, textColor);
-            this._id = id;
+            this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, string text, Morph.Id signColor)
             : this(id, BlockArgsType.Sign)
         {
             this._args = new SignArgs(text, signColor);
-            this._id = id;
+            this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, uint portalId, uint portalTarget, Morph.Id portalRotation)
             : this(id, BlockArgsType.Portal)
         {
             this._args = new PortalArgs(portalId, portalTarget, portalRotation);
-            this._id = id;
+            this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, bool enabled)
@@ -102,10 +99,7 @@ namespace BotBits
         /// <value>
         ///     The block.
         /// </value>
-        public Foreground.Id Id
-        {
-            get { return this._id; }
-        }
+        public Foreground.Id Id { get; }
 
         /// <summary>
         ///     Gets the type.
