@@ -16,7 +16,6 @@ namespace BotBits
                 throw WorldUtils.GetMissingArgsErrorMessage(argsType, nameof(id));
 
             this.Id = id;
-            this.Type = type;
             this._args = null;
         }
 
@@ -28,6 +27,8 @@ namespace BotBits
         {
             var type = WorldUtils.GetForegroundType(id);
             var argsType = WorldUtils.GetBlockArgsType(type);
+
+            this.Id = id;
             switch (argsType)
             {
                 case BlockArgsType.Number:
@@ -39,9 +40,6 @@ namespace BotBits
                 default:
                     throw WorldUtils.GetMissingArgsErrorMessage(argsType, nameof(id));
             }
-
-            this.Type = type;
-            this.Id = id;
         }
 
         public ForegroundBlock(Foreground.Id id, string text)
@@ -109,7 +107,7 @@ namespace BotBits
         /// <value>
         ///     The type.
         /// </value>
-        public ForegroundType Type { get; }
+        public ForegroundType Type => WorldUtils.GetForegroundType(this.Id);
 
         /// <summary>
         ///     Gets the Text. (Only on label / world portal / sign blocks)
@@ -128,11 +126,11 @@ namespace BotBits
                 switch (this.Type)
                 {
                     case ForegroundType.WorldPortal:
-                        return (string)this._args;
+                        return this.GetStringArgs();
                     case ForegroundType.Label:
-                        return this.GetLabelArgs().Text;
+                        return this.GetLabelArgs()?.Text;
                     case ForegroundType.Sign:
-                        return this.GetSignArgs().Text;
+                        return this.GetSignArgs()?.Text;
 
                     default:
                         throw new InvalidOperationException(
@@ -154,7 +152,7 @@ namespace BotBits
             {
                 if (this.Type != ForegroundType.Label) throw new InvalidOperationException("This property can only be accessed on label blocks.");
 
-                return this.GetLabelArgs().TextColor;
+                return this.GetLabelArgs()?.TextColor;
             }
         }
 
@@ -171,7 +169,7 @@ namespace BotBits
             {
                 if (this.Type != ForegroundType.Toggle && this.Type != ForegroundType.ToggleGoal) throw new InvalidOperationException("This property can only be accessed on toggle blocks.");
 
-                return (uint)this._args != 0;
+                return this.GetUIntArgs() != 0;
             }
         }
 
@@ -188,7 +186,7 @@ namespace BotBits
             {
                 if (this.Type != ForegroundType.Goal && this.Type != ForegroundType.ToggleGoal) throw new InvalidOperationException("This property can only be accessed on goal blocks.");
 
-                return (uint)this._args;
+                return this.GetUIntArgs();
             }
         }
 
@@ -209,14 +207,14 @@ namespace BotBits
                         return this.GetPortalArgs().PortalRotation;
                     case ForegroundType.Morphable:
                     case ForegroundType.Team:
-                        return (Morph.Id)(uint)this._args;
+                        return (Morph.Id)this.GetUIntArgs();
 
 
                     case ForegroundType.Note:
-                        return (Morph.Id)(int)this._args;
+                        return (Morph.Id)this.GetUIntArgs();
 
                     case ForegroundType.Sign:
-                        return this.GetSignArgs().SignColor;
+                        return this.GetSignArgs()?.SignColor ?? default(Morph.Id);
 
                     default:
                         throw new InvalidOperationException("This property can only be accessed on morphable blocks.");
@@ -237,7 +235,7 @@ namespace BotBits
             {
                 if (this.Type != ForegroundType.Portal) throw new InvalidOperationException("This property can only be accessed on Portal blocks.");
 
-                return this.GetPortalArgs().PortalId;
+                return this.GetPortalArgs()?.PortalId ?? default(uint);
             }
         }
 
@@ -254,23 +252,33 @@ namespace BotBits
             {
                 if (this.Type != ForegroundType.Portal) throw new InvalidOperationException("This property can only be accessed on Portal blocks.");
 
-                return this.GetPortalArgs().PortalTarget;
+                return this.GetPortalArgs()?.PortalTarget ?? default(uint);
             }
+        }
+
+        private string GetStringArgs()
+        {
+            return this._args as string;
+        }
+
+        private uint GetUIntArgs()
+        {
+            return this._args as uint? ?? default(uint);
         }
 
         private PortalArgs GetPortalArgs()
         {
-            return (PortalArgs)this._args;
+            return this._args as PortalArgs;
         }
 
         private LabelArgs GetLabelArgs()
         {
-            return (LabelArgs)this._args;
+            return this._args as LabelArgs;
         }
 
         private SignArgs GetSignArgs()
         {
-            return (SignArgs)this._args;
+            return this._args as SignArgs;
         }
 
         private class PortalArgs : IEquatable<PortalArgs>

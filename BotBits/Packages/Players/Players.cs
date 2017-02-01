@@ -374,7 +374,7 @@ namespace BotBits
                 p.X = tele.X;
                 p.Y = tele.Y;
                 p.Deaths = tele.Deaths;
-
+                
                 if (e.ResetPlayers)
                 {
                     if (p.HasCrown) this.CrownPlayer = Player.Nobody;
