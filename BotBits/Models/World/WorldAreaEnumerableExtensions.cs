@@ -1,18 +1,19 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace BotBits
 {
     public static class WorldAreaEnumerableExtensions
     {
-        public static WorldAreaEnumerable<TForeground, TBackground> ToWorldAreaEnumerable<TForeground, TBackground>(
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public static WorldAreaEnumerable<TForeground, TBackground> AsWorldAreaEnumerable<TForeground, TBackground>(
             this IWorld<TForeground, TBackground> world)
             where TForeground : struct
             where TBackground : struct
         {
             return new WorldAreaEnumerable<TForeground, TBackground>(world, new Rectangle(0, 0, world.Width, world.Height));
         }
-
-
+        
         public static WorldAreaEnumerable<TForeground, TBackground> In<TForeground, TBackground>(
             this IWorldAreaEnumerable<TForeground, TBackground> blockArea, Rectangle area)
             where TForeground : struct
@@ -63,8 +64,8 @@ namespace BotBits
         {
             var area = worldArea.Area;
             var world = new World(area.Width, area.Height);
-            for (var x = area.Left; x <= area.Right; x++)
-                for (var y = area.Top; y <= area.Bottom; y++)
+            for (var y = area.Top; y <= area.Bottom; y++)
+                for (var x = area.Left; x <= area.Right; x++)
                 {
                     world.Foreground[x - area.Left, y - area.Top] = worldArea.World.Foreground[x, y];
                     world.Background[x - area.Left, y - area.Top] = worldArea.World.Background[x, y];
