@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using BotBits.Events;
 using BotBits.SendMessages;
 using PlayerIOClient;
@@ -159,9 +160,13 @@ namespace BotBits
         
         private void RaiseForeground(Player player, int x, int y, ForegroundBlock newBlock)
         {
-            var oldData = this.World.Foreground[x, y];
             var newData = new BlockData<ForegroundBlock>(player, newBlock);
-            this.World.Foreground[x, y] = newData;
+            BlockData<ForegroundBlock> oldData;
+            lock (this.World.Foreground)
+            {
+                oldData = this.World.Foreground[x, y];
+                this.World.Foreground[x, y] = newData;
+            }
 
             new ForegroundPlaceEvent(x, y, oldData, newData)
                 .RaiseIn(this.BotBits);
@@ -169,9 +174,13 @@ namespace BotBits
 
         private void RaiseBackground(Player player, int x, int y, BackgroundBlock newBlock)
         {
-            var oldData = this.World.Background[x, y];
             var newData = new BlockData<BackgroundBlock>(player, newBlock);
-            this.World.Background[x, y] = newData;
+            BlockData<BackgroundBlock> oldData;
+            lock (this.World.Foreground)
+            {
+                oldData = this.World.Background[x, y];
+                this.World.Background[x, y] = newData;
+            }
 
             new BackgroundPlaceEvent(x, y, oldData, newData)
                 .RaiseIn(this.BotBits);
