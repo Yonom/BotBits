@@ -22,7 +22,7 @@
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>BotBits</Id>
-    <Version>219.3.7</Version>
+    <Version>220.0.0-alpha2</Version>
     <Title>BotBits</Title>
     <Authors>Younom</Authors>
     <Owners>Younom</Owners>
@@ -34,7 +34,7 @@
     </ProjectUrl>
     <LicenseUrl>
     </LicenseUrl>
-    <Copyright>Copyright © Sepehr Farshid</Copyright>
+    <Copyright>Copyright © Simon Farshid</Copyright>
     <Tags>BotBits EverybodyEdits</Tags>
   </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.targets" />

@@ -11,8 +11,9 @@ namespace BotBits
         private double _sendTimerFrequency;
         private double _offset;
 
-        public SendTimer()
+        public SendTimer(double sendTimerFrequency)
         {
+            this._sendTimerFrequency = sendTimerFrequency;
             this._myTimer = new Timer(this.TimerCallback, null, 0, 15);
         }
 
