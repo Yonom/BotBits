@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using BotBits.Events;
 using BotBits.SendMessages;
 using PlayerIOClient;
@@ -63,6 +64,13 @@ namespace BotBits
         {
             new PlaceSendMessage(Layer.Foreground, x, y, (int)block.Id, block.GetArgs())
                 .SendIn(this.BotBits);
+        }
+        
+        public Task FinishSendAsync()
+        {
+            return PlaceSendMessage.Of(this.BotBits).FinishQueueAsync()
+                .Then(tsk => BlockChecker.Of(this.BotBits).FinishChecksAsync())
+                .ToSafeTask();
         }
 
         [EventListener]
