@@ -191,9 +191,8 @@ namespace BotBits
 
             var playerData = ConnectionManager.Of(this.BotBits).PlayerData;
             var blocks = Blocks.Of(this.BotBits);
-            var isAdministrator = playerData.PlayerObject.IsAdministrator;
 
-            if (!WorldUtils.IsPlaceable(b, blocks, !isAdministrator)) return false;
+            if (!WorldUtils.IsPlaceable(b, blocks)) return false;
             if (!playerData.HasBlock(b.Id)) return false;
 
             CheckHandle handle;

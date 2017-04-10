@@ -264,20 +264,11 @@ namespace BotBits
         }
 
         public static bool IsPlaceable<TForeground, TBackground>
-            (PlaceSendMessage p, IReadOnlyWorld<TForeground, TBackground> world, bool respectBorder)
+            (PlaceSendMessage p, IReadOnlyWorld<TForeground, TBackground> world)
             where TForeground : struct
             where TBackground : struct
         {
-            if (p.X < 0 || p.Y < 0 || p.X >= world.Width || p.Y >= world.Height) return false; // If out of range
-
-            if (respectBorder)
-            {
-                if (p.X == 0 || p.Y == 0 || p.X == world.Width - 1 || p.Y == world.Height - 1) // If on border
-                {
-                    return p.Id != 0;
-                }
-            }
-            return true;
+            return p.X >= 0 && p.Y >= 0 && p.X < world.Width && p.Y < world.Height;
         }
 
         internal static IEnumerable<Point> GetPos(byte[] byteArrayX, byte[] byteArrayY)
