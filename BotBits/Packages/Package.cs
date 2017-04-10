@@ -35,7 +35,7 @@ namespace BotBits
         {
             this.InitializeFinish?.Invoke(this, EventArgs.Empty);
         }
-
+        
         [Pure]
         public static T Of([NotNull] BotBitsClient client)
         {

@@ -17,6 +17,8 @@ namespace BotBits
         private readonly AutoResetEvent _timeoutResetEvent = new AutoResetEvent(true);
         private MessageQueue<PlaceSendMessage> _messageQueue;
 
+        private bool _disabled;
+
         [Obsolete("Invalid to use \"new\" on this class. Use the static .Of(BotBits) method instead.", true)]
         public BlockChecker()
         {
@@ -53,6 +55,7 @@ namespace BotBits
 
         public Task FinishChecksAsync()
         {
+            if (this._disabled) return TaskHelper.FromResult(false);
             // ReSharper disable once InconsistentlySynchronizedField
             return this._finishResetEvent.AsTask();
         }
@@ -61,6 +64,15 @@ namespace BotBits
         {
             if (this._sentBlocks.Count == 0 &&
                 this._messageQueue.Count == 0) this._finishResetEvent.Set();
+        }
+
+        [EventListener]
+        private void On(InitEvent e)
+        {
+            if (e.IsOwner)
+            {
+                this._disabled = true;
+            }
         }
 
         [EventListener]
@@ -124,6 +136,8 @@ namespace BotBits
 
         private void SendMissed(CheckHandle handle)
         {
+            if (this._disabled) return;
+
             MessageServices.EnableSkipsQueue(() => { handle.Message.SendIn(this.BotBits); });
         }
 

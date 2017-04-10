@@ -12,7 +12,7 @@ namespace BotBits
     {
         private readonly ManualResetEvent _finishEvent = new ManualResetEvent(true);
         private readonly Deque<T> _queue = new Deque<T>();
-        private int _lastTicks;
+        private double _lastTicks;
 
         public int Count
         {
@@ -25,14 +25,22 @@ namespace BotBits
             }
         }
 
-        void IMessageQueue.SendTicks(int ticks, BotBitsClient client)
-        {
-            var c = ticks - 4; // Max number of messages sent at once
+  
+        public double TicksPerMessage { get; set; } = 1;
 
-            for (this._lastTicks = Math.Max(c, this._lastTicks); this._lastTicks < ticks; this._lastTicks++)
+        void IMessageQueue.SendTicks(long ticks, BotBitsClient client)
+        {
+            if (this._lastTicks > ticks) return;
+            if (this._lastTicks == 0) this._lastTicks = ticks - 4;
+
+            for (; this._lastTicks < ticks; this._lastTicks += this.TicksPerMessage)
             {
                 var msg = this.Dequeue();
-                if (msg == null) return;
+                if (msg == null)
+                {
+                    this._lastTicks = ticks;
+                    break;
+                }
                 if (!this.SendMessage(msg, client))
                 {
                     this._lastTicks--;

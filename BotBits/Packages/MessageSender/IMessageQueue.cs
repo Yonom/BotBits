@@ -2,6 +2,6 @@
 {
     internal interface IMessageQueue
     {
-        void SendTicks(int ticks, BotBitsClient client);
+        void SendTicks(long ticks, BotBitsClient client);
     }
 }

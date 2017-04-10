@@ -8,6 +8,8 @@ namespace BotBits
     {
         private readonly Timer _myTimer;
         private readonly Stopwatch _sw = Stopwatch.StartNew();
+        private double _sendTimerFrequency;
+        private double _offset;
 
         public SendTimer()
         {
@@ -22,17 +24,32 @@ namespace BotBits
         /// <summary>
         ///     Occurs when [elapsed].
         /// </summary>
-        public event Action<int> Elapsed;
+        public event Action<long> Elapsed;
 
-        private void OnElapsed(int obj)
-        {
-            this.Elapsed?.Invoke(obj);
-        }
 
         private void TimerCallback(object state)
         {
-            var ticks = (int)Math.Floor(this._sw.ElapsedMilliseconds * .0965);
-            this.OnElapsed(ticks);
+            var swTicks = this.GetTicks();
+            if (swTicks > 0)
+            {
+                var ticks = (long)(Math.Floor(swTicks) + this._offset);
+                this.Elapsed?.Invoke(ticks);
+            }
+        }
+
+        private double GetTicks()
+        {
+            return this._sw.ElapsedMilliseconds * 0.001 * this._sendTimerFrequency;
+        }
+
+        public void UpdateFrequency(double sendTimerFrequency)
+        {
+            var offsetDelta = this.GetTicks();
+
+            this._sw.Reset();
+            this._offset += offsetDelta;
+            this._sendTimerFrequency = sendTimerFrequency;
+            this._sw.Start();
         }
     }
 }
