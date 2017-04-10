@@ -1304,5 +1304,17 @@ namespace BotBits
                 Purple = (Id)1115;
 
         }
+
+        public static class StPatricks2017
+        {
+            [Pack("brickstpatricks2017")]
+            public const Id
+                Clover = (Id)1511,
+                PotOfGold = (Id)1512,
+                Horseshoe = (Id)1513,
+                RainbowLeft = (Id)1514,
+                RainbowRight = (Id)1515;
+
+        }
     }
 }

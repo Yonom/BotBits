@@ -446,8 +446,9 @@ namespace BotBits
 
         [Pack("smileyscrooge")]
         Scrooge = 151,
-
-        // Missing Id
+        
+        [Pack("smileyboy")]
+        Boy = 152,
 
         [Pack("smileypigtails")]
         Pigtails = 153,
@@ -459,9 +460,9 @@ namespace BotBits
         Turban = 155,
 
         [Pack("smileyhazmatsuit")]
-        HazmatSuit = 156
+        HazmatSuit = 156,
 
-
-
+        [Pack("smileyleprechaun")]
+        Leprechaun = 157
     }
 }
