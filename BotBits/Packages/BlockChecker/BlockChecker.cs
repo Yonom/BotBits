@@ -98,8 +98,15 @@ namespace BotBits
         [EventListener]
         private void On(SendCancelEvent<PlaceSendMessage> e)
         {
+            this.HandleQueueComplete(e.Message);
+        }
+
+        private void HandleQueueComplete(PlaceSendMessage message)
+        {
+            var key = new Point3D(message.Layer, message.X, message.Y);
             PlaceSendMessage unused;
-            this._queuedItems.TryRemove(new Point3D(e.Message.Layer, e.Message.X, e.Message.Y), out unused);
+            this._queuedItems.TryRemove(key, out unused);
+            if (unused != message) this._queuedItems.TryAdd(key, unused);
         }
 
         private void Repair<T, TBlock>(Layer layer, T e)
@@ -176,8 +183,6 @@ namespace BotBits
         [EventListener(GlobalPriority.AfterMost)]
         private void OnSendPlace(SendEvent<PlaceSendMessage> e)
         {
-            PlaceSendMessage unused;
-            this._queuedItems.TryRemove(new Point3D(e.Message.Layer, e.Message.X, e.Message.Y), out unused);
 
             var b = e.Message;
             var p = GetPoint3D(b);
@@ -199,6 +204,8 @@ namespace BotBits
                 this._sentBlocks.AddToBack(newHandle);
                 this._sentLocations[p] = newHandle;
             }
+
+            this.HandleQueueComplete(e.Message);
         }
 
         private bool ShouldSend(PlaceSendMessage b, Point3D p)
