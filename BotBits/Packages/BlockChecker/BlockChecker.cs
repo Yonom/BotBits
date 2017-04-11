@@ -239,12 +239,12 @@ namespace BotBits
         internal ForegroundBlock? GetExpectedForeground(Point p)
         {
             PlaceSendMessage msg;
-            if (!this._queuedItems.TryGetValue(new Point3D(Layer.Background, p.X, p.Y), out msg))
+            if (!this._queuedItems.TryGetValue(new Point3D(Layer.Foreground, p.X, p.Y), out msg))
             {
                 lock (this._sentBlocks)
                 {
                     CheckHandle handle;
-                    if (!this._sentLocations.TryGetValue(new Point3D(Layer.Background, p.X, p.Y), out handle))
+                    if (!this._sentLocations.TryGetValue(new Point3D(Layer.Foreground, p.X, p.Y), out handle))
                         return null;
                     msg = handle.Message;
                 }

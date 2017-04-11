@@ -219,7 +219,6 @@
     <Compile Include="Models\World\Block\Foreground.cs" />
     <Compile Include="Models\Key.cs" />
     <Compile Include="Models\Layer.cs" />
-    <Compile Include="Models\MagicClass.cs" />
     <Compile Include="Models\Smiley.cs" />
     <Compile Include="Packages\EventLoader\EventListenerAttribute.cs" />
     <Compile Include="Packages\EventLoader\EventLoader.cs" />
