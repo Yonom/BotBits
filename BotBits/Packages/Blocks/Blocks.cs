@@ -239,7 +239,6 @@ namespace BotBits
 
         public ForegroundBlock GetExpectedForeground(Point p)
         {
-
             return BlockChecker.Of(this.BotBits).GetExpectedForeground(p)
                 ?? this.Foreground[p].Block;
         }

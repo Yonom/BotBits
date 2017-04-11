@@ -95,8 +95,6 @@ namespace BotBits
             {
                 this._parent.Place(bg.Key.X, bg.Key.Y, bg.Value);
             }
-
-            this.DiscardAll();
         }
     }
 }

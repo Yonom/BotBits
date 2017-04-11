@@ -149,6 +149,17 @@ namespace BotBits
             chat.Say("/unmute {0}", username);
         }
 
+
+        /// <summary>
+        ///     Forgives the kicked user so they can instantly rejoin. (/forgive &lt;username&gt;).
+        /// </summary>
+        /// <param name="chat">The chat.</param>
+        /// <param name="username">The username.</param>
+        public static void Forgive(this IChat chat, string username)
+        {
+            chat.Say("/forgive {0}", username);
+        }
+
         /// <summary>
         ///     Reports the specified user with the given reason (/reportabuse &lt;username&gt; &lt;reason&gt;).
         /// </summary>
@@ -200,6 +211,40 @@ namespace BotBits
         }
 
         /// <summary>
+        ///     Gives the specified effect to the player (/giveeffect &lt;username&gt; &lt;effect&gt; &lt;parameter&gt;).
+        /// </summary>
+        /// <param name="chat">Chat.</param>
+        /// <param name="username">Username.</param>
+        /// <param name="effect">Effect.</param>
+        public static void GiveEffect(this IChat chat, string username, Effect effect)
+        {
+            chat.Say("/giveeffect {0} {1}", username, effect);
+        }
+
+        /// <summary>
+        ///     Gives the specified effect to the player (/giveeffect &lt;username&gt; &lt;effect&gt; &lt;parameter&gt;).
+        /// </summary>
+        /// <param name="chat">Chat.</param>
+        /// <param name="username">Username.</param>
+        /// <param name="effect">Effect.</param>
+        /// <param name="value"></param>
+        public static void GiveEffect(this IChat chat, string username, Effect effect, int value)
+        {
+            chat.Say("/giveeffect {0} {1} {2}", username, effect, value);
+        }
+
+        /// <summary>
+        ///     Removes the specified effect from its owner (/removeeffect &lt;username&gt; &lt;effect&gt;).
+        /// </summary>
+        /// <param name="chat">Chat.</param>
+        /// <param name="username">Username.</param>
+        /// <param name="effect">Effect.</param>
+        public static void RemoveEffect(this IChat chat, string username, Effect effect)
+        {
+            chat.Say("/removeeffect {0} {1}", username, effect);
+        }
+
+        /// <summary>
         ///     Resets the users' position (/reset &lt;username&gt;).
         /// </summary>
         public static void Reset(this IChat chat, string username)
@@ -213,6 +258,14 @@ namespace BotBits
         public static void ResetAll(this IChat chat)
         {
             chat.Say("/resetall");
+        }
+
+        /// <summary>
+        ///     Resets all orange switches (/resetswitches).
+        /// </summary>
+        public static void ResetSwitches(this IChat chat)
+        {
+            chat.Say("/resetswitches");
         }
 
         /// <summary>

@@ -102,6 +102,21 @@ namespace BotBits
             Chat.Of(player.BotBits).ForceFly(player.Username, flying);
         }
 
+        public static void GiveEffect(this Player player, Effect effect)
+        {
+            Chat.Of(player.BotBits).GiveEffect(player.Username, effect);
+        }
+
+        public static void GiveEffect(this Player player, Effect effect, int value)
+        {
+            Chat.Of(player.BotBits).GiveEffect(player.Username, effect, value);
+        }
+
+        public static void RemoveEffect(this Player player, Effect effect)
+        {
+            Chat.Of(player.BotBits).RemoveEffect(player.Username, effect);
+        }
+
         public static void ClearEffects(this Player player)
         {
             Chat.Of(player.BotBits).ClearEffects(player.Username);
@@ -115,6 +130,11 @@ namespace BotBits
         public static void Reset(this Player player)
         {
             Chat.Of(player.BotBits).Reset(player.Username);
+        }
+
+        public static void Forgive(this Player player)
+        {
+            Chat.Of(player.BotBits).Forgive(player.Username);
         }
     }
 }
