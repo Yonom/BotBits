@@ -76,7 +76,7 @@ namespace BotBits.SendMessages
             }
             else
             {
-                Of(client).Enqueue((T)this);
+                Of(client).Enqueue((T)this, client);
             }
         }
 

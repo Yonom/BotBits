@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace BotBits
         private readonly RegisteredWaitHandle _registration;
         private readonly Deque<CheckHandle> _sentBlocks = new Deque<CheckHandle>(100);
         private readonly Dictionary<Point3D, CheckHandle> _sentLocations = new Dictionary<Point3D, CheckHandle>(100);
+        private readonly ConcurrentDictionary<Point3D, PlaceSendMessage> _queuedItems = new ConcurrentDictionary<Point3D, PlaceSendMessage>();
         private readonly AutoResetEvent _timeoutResetEvent = new AutoResetEvent(true);
         private MessageQueue<PlaceSendMessage> _messageQueue;
 
@@ -85,6 +87,19 @@ namespace BotBits
         private void On(BackgroundPlaceEvent e)
         {
             this.Repair<BackgroundPlaceEvent, BackgroundBlock>(Layer.Background, e);
+        }
+
+        [EventListener]
+        private void On(SendQueueEvent<PlaceSendMessage> e)
+        {
+            this._queuedItems[new Point3D(e.Message.Layer, e.Message.X, e.Message.Y)] = e.Message;
+        }
+
+        [EventListener]
+        private void On(SendCancelEvent<PlaceSendMessage> e)
+        {
+            PlaceSendMessage unused;
+            this._queuedItems.TryRemove(new Point3D(e.Message.Layer, e.Message.X, e.Message.Y), out unused);
         }
 
         private void Repair<T, TBlock>(Layer layer, T e)
@@ -161,6 +176,9 @@ namespace BotBits
         [EventListener(GlobalPriority.AfterMost)]
         private void OnSendPlace(SendEvent<PlaceSendMessage> e)
         {
+            PlaceSendMessage unused;
+            this._queuedItems.TryRemove(new Point3D(e.Message.Layer, e.Message.X, e.Message.Y), out unused);
+
             var b = e.Message;
             var p = GetPoint3D(b);
 
@@ -212,10 +230,41 @@ namespace BotBits
             public int OverwrittenSends { get; set; }
             public PlaceSendMessage Message { get; }
         }
-        
+
         private static Point3D GetPoint3D(PlaceSendMessage placeSendMessage)
         {
             return new Point3D(placeSendMessage.Layer, placeSendMessage.X, placeSendMessage.Y);
+        }
+
+        internal ForegroundBlock? GetExpectedForeground(Point p)
+        {
+            PlaceSendMessage msg;
+            if (!this._queuedItems.TryGetValue(new Point3D(Layer.Background, p.X, p.Y), out msg))
+            {
+                lock (this._sentBlocks)
+                {
+                    CheckHandle handle;
+                    if (!this._sentLocations.TryGetValue(new Point3D(Layer.Background, p.X, p.Y), out handle))
+                        return null;
+                    msg = handle.Message;
+                }
+            }
+            return WorldUtils.GetForegroundFromArgs((Foreground.Id)msg.Id, msg.Args);
+        }
+
+        internal BackgroundBlock? GetExpectedBackground(Point p)
+        {
+            PlaceSendMessage msg;
+            if (!this._queuedItems.TryGetValue(new Point3D(Layer.Background, p.X, p.Y), out msg))
+            {
+                lock (this._sentBlocks)
+                {
+                    CheckHandle handle;
+                    if (!this._sentLocations.TryGetValue(new Point3D(Layer.Background, p.X, p.Y), out handle)) return null;
+                    msg = handle.Message;
+                }
+            }
+            return new BackgroundBlock((Background.Id)msg.Id);
         }
     }
 }

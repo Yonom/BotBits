@@ -159,7 +159,7 @@ namespace BotBits
         {
             this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.SignColor);
         }
-        
+
         private void RaiseForegroundData(Player player, int x, int y, Foreground.Id block, params object[] args)
         {
             var fgWorldBlock = WorldUtils.GetForegroundFromArgs(block, args);
@@ -235,6 +235,19 @@ namespace BotBits
         public ProxyWorld GetProxyWorld()
         {
             return new ProxyWorld(this);
+        }
+
+        public ForegroundBlock GetExpectedForeground(Point p)
+        {
+
+            return BlockChecker.Of(this.BotBits).GetExpectedForeground(p)
+                ?? this.Foreground[p].Block;
+        }
+
+        public BackgroundBlock GetExpectedBackground(Point p)
+        {
+            return BlockChecker.Of(this.BotBits).GetExpectedBackground(p)
+                ?? this.Background[p].Block;
         }
     }
 }

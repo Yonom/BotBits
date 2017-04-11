@@ -29,7 +29,7 @@ namespace BotBits
             where TBackground : struct
         {
             return new ReadOnlyWorldAreaEnumerable<TForeground, TBackground>(blockArea.World,
-                Rectangle.Intersect(area, blockArea.Area));
+                Rectangle.Intersect(area.Offset(blockArea.Area.X, blockArea.Area.Y), blockArea.Area));
         }
 
         public static ReadOnlyWorldAreaEnumerable<TForeground, TBackground> In<TForeground, TBackground>(

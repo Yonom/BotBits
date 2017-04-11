@@ -73,15 +73,14 @@ namespace BotBits
                    ((rect.Y + rect.Height) <= (this.Y + this.Height));
         }
 
-        public void Offset(int x, int y)
+        public Rectangle Offset(int x, int y)
         {
-            this.X += x;
-            this.Y += y;
+            return new Rectangle(this.X + x, this.Y + y, this.Width, this.Height);
         }
 
-        public void Offset(Point pos)
+        public Rectangle Offset(Point pos)
         {
-            this.Offset(pos.X, pos.Y);
+            return this.Offset(pos.X, pos.Y);
         }
 
         public override bool Equals(object obj)
@@ -155,29 +154,9 @@ namespace BotBits
             return Empty;
         }
 
-        public void Intersect(Rectangle rect)
+        public Rectangle Inflate(int width, int height)
         {
-            var result = Intersect(rect, this);
-
-            this.X = result.X;
-            this.Y = result.Y;
-            this.Width = result.Width;
-            this.Height = result.Height;
-        }
-
-        public static Rectangle Inflate(Rectangle rect, int x, int y)
-        {
-            var r = rect;
-            r.Inflate(x, y);
-            return r;
-        }
-
-        public void Inflate(int width, int height)
-        {
-            this.X -= width;
-            this.Y -= height;
-            this.Width += 2 * width;
-            this.Height += 2 * height;
+            return new Rectangle(this.X - width, this.Y - height, this.Width + 2 * width, this.Height + 2 * height);
         }
     }
 }

@@ -60,7 +60,9 @@
     <Compile Include="Client\Events\DisposingEvent.cs" />
     <Compile Include="Database\PlayerData\PlayerAchivements.cs" />
     <Compile Include="Database\PlayerData\PlayerData.cs" />
-    <Compile Include="Helpers\BlocksSnapshot.cs" />
+    <Compile Include="Helpers\Snapshot\BlocksSnapshot.cs" />
+    <Compile Include="Helpers\Snapshot\SnapshotBlockLayer.cs" />
+    <Compile Include="Helpers\Snapshot\SnapshotHistoryItem.cs" />
     <Compile Include="Helpers\VersionCache.cs" />
     <Compile Include="Internal\InitParse.cs" />
     <Compile Include="Internal\Nito\Async\BotBitsSynchronizationContext.cs" />
@@ -132,6 +134,8 @@
     <Compile Include="Packages\MessageHandler\Events\MutedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\SmileyEvent.cs" />
     <Compile Include="Packages\MessageHandler\UnknownPlayerException.cs" />
+    <Compile Include="Packages\MessageSender\Events\SendCancelEvent.cs" />
+    <Compile Include="Packages\MessageSender\Events\SendQueueEvent.cs" />
     <Compile Include="Packages\MessageSender\Events\SendEvent.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetLobbyPreviewEnabledSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SmileyGoldBorderSendMessage.cs" />

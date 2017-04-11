@@ -8,7 +8,7 @@ namespace BotBits
         public static BlocksAreaEnumerable In(this IBlockAreaEnumerable blockArea, Rectangle area)
         {
             return new BlocksAreaEnumerable(blockArea.Blocks,
-                Rectangle.Intersect(area, blockArea.Area));
+                Rectangle.Intersect(area.Offset(blockArea.Area.X, blockArea.Area.Y), blockArea.Area));
         }
 
         public static BlocksAreaEnumerable In(this IBlockAreaEnumerable blockArea, Point p1, Point p2)

@@ -24,7 +24,6 @@ namespace BotBits
                 }
             }
         }
-
   
         public double TicksPerMessage { get; set; } = 1;
 
@@ -44,6 +43,8 @@ namespace BotBits
                 if (!this.SendMessage(msg, client))
                 {
                     this._lastTicks--;
+                    new SendCancelEvent<T>(msg)
+                        .RaiseIn(client);
                 }
             }
         }
@@ -63,8 +64,11 @@ namespace BotBits
             }
         }
 
-        internal void Enqueue(T sendMessage)
+        internal void Enqueue(T sendMessage, BotBitsClient client)
         {
+            new SendQueueEvent<T>(sendMessage)
+                .RaiseIn(client);
+
             lock (this._queue)
             {
                 if (sendMessage.SkipsQueue) this._queue.AddToFront(sendMessage);
@@ -84,8 +88,8 @@ namespace BotBits
             var con = ConnectionManager.Of(client).Connection;
             if (con == null) return false;
 
-            var e2 = new SendEvent<T>(msg);
-            e2.RaiseIn(client);
+            new SendEvent<T>(msg)
+                .RaiseIn(client);
             e.Message.Send(con);
             return true;
         }
