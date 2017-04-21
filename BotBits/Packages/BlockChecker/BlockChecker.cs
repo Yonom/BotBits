@@ -159,7 +159,7 @@ namespace BotBits
         {
             if (this._disabled) return;
 
-            MessageServices.EnableSkipsQueue(() => { handle.Message.SendIn(this.BotBits); });
+            MessageServices.WithSkipsQueue(() => { handle.Message.SendIn(this.BotBits); });
         }
 
         [EventListener(GlobalPriority.AfterMost)]

@@ -17,7 +17,7 @@ namespace BotBits
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        protected BotBitsClient BotBits { get; private set; }
+        public BotBitsClient BotBits { get; private set; }
 
         void IPackage.Setup(BotBitsClient client)
         {

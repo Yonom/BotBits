@@ -65,6 +65,8 @@ namespace BotBits.SendMessages
 
         public virtual void SendIn(BotBitsClient client)
         {
+            DiagnosticServices.SendMessage_SendIn<T>(client);
+
             Interlocked.Increment(ref this._sendCount);
             this.SkipsQueue |= MessageServices.SkipQueues;
             this.NoChecks |= MessageServices.NoChecks;

@@ -114,6 +114,8 @@ namespace BotBits
 
         private void QueueChat(string msg, bool pm)
         {
+            DiagnosticServices.Chat_QueueChat(this.BotBits);
+
             var channel = GetChannel(msg, pm);
             this.Enqueue(msg, channel);
         }

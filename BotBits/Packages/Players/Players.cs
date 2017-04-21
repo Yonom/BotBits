@@ -26,6 +26,8 @@ namespace BotBits
 
         public IEnumerator<Player> GetEnumerator()
         {
+            DiagnosticServices.GetEnumerator<Players>(this.BotBits);
+
             return this._players.Values.Where(p => p.Connected).GetEnumerator();
         }
 

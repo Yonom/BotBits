@@ -69,9 +69,12 @@ namespace BotBits
         internal void BindInternal([CanBeNull] Assembly assembly, EventRaiseHandler<T> callback, GlobalPriority globalPriority,
             EventPriority priority)
         {
+            var extensionId = ExtensionServices.GetExtensionId(this.BotBits, assembly);
+
+            DiagnosticServices.EventHandle_BindInternal<T>(this.BotBits, extensionId.HasValue);
+
             lock (this._eventHandlers)
             {
-                var extensionId = ExtensionServices.GetExtensionId(this.BotBits, assembly);
                 this._eventHandlers.Add(globalPriority, extensionId ?? int.MaxValue, priority, callback);
             }
         }

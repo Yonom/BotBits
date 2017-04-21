@@ -16,6 +16,21 @@ namespace BotBits
         {
         }
 
+        public override void LoadStatic<TType>()
+        {
+            DiagnosticServices.Eventloader_LoadStatic<TType>();
+
+            base.LoadStatic<TType>();
+        }
+
+
+        public override void Load(object obj)
+        {
+            DiagnosticServices.Eventloader_Load(obj.GetType());
+
+            base.Load(obj);
+        }
+
         protected override bool ShouldLoad(MethodInfo methodInfo)
         {
             return methodInfo.IsDefined(typeof(EventListenerAttribute), true);
@@ -25,6 +40,10 @@ namespace BotBits
         {
             var t = this.GetEventType(eventHandler);
             var genericBind = _bindMethod.MakeGenericMethod(t);
+            
+            
+            DiagnosticServices.Eventloader_GetBinder(this.BotBits, t, eventHandler);
+
             return () => genericBind.Invoke(this, new[] { baseObj, eventHandler });
         }
 

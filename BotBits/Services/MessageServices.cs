@@ -42,7 +42,7 @@ namespace BotBits
         ///     Enables the skip queue feature for SendMessages that are sent using the given callback.
         /// </summary>
         /// <param name="task">The task.</param>
-        public static void EnableSkipsQueue([InstantHandle] Action task)
+        public static void WithSkipsQueue([InstantHandle] Action task)
         {
             var oldvalue = _skipQueues;
             _skipQueues = true;
@@ -54,7 +54,7 @@ namespace BotBits
         ///     Enables the force send feature for SendMessages that are sent using the given callback.
         /// </summary>
         /// <param name="task">The task.</param>
-        public static void EnableNoChecks([InstantHandle] Action task)
+        public static void WithNoChecks([InstantHandle] Action task)
         {
             var oldvalue = _noChecks;
             _noChecks = true;
@@ -66,7 +66,7 @@ namespace BotBits
         ///     Enables the instant send feature for SendMessages that are sent using the given callback.
         /// </summary>
         /// <param name="task">The task.</param>
-        public static void EnableInstantSend([InstantHandle] Action task)
+        public static void WithInstantSend([InstantHandle] Action task)
         {
             var oldvalue = _instantSend;
             _instantSend = true;

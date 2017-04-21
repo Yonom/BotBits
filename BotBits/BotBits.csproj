@@ -241,6 +241,9 @@
     <Compile Include="Packages\MessageSender\SendMessages\TouchHologramSendMessage.cs" />
     <Compile Include="Packages\Players\Events\FlyEvent.cs" />
     <Compile Include="Packages\Players\PlayerExtensions.cs" />
+    <Compile Include="Services\Diagnostics\DiagnosticException.cs" />
+    <Compile Include="Services\Diagnostics\DiagnosticIgnoreAttribute.cs" />
+    <Compile Include="Services\Diagnostics\DiagnosticServices.cs" />
     <Compile Include="Services\PlayerIOServices.cs" />
     <Compile Include="Services\ItemServices.cs" />
     <Compile Include="Services\ExtensionServices.cs" />

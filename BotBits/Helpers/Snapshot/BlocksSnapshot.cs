@@ -7,19 +7,19 @@ namespace BotBits
 {
     public class BlocksSnapshot : IWorld<ForegroundBlock, BackgroundBlock>, IWorldAreaEnumerable<ForegroundBlock, BackgroundBlock>
     {
-        private readonly Blocks _parent;
+        private Blocks Blocks { get; }
 
-        public BlocksSnapshot(Blocks parent)
+        public BlocksSnapshot(Blocks blocks)
         {
-            this._parent = parent;
+            this.Blocks = blocks;
             this.Background = new SnapshotBlockLayer<BackgroundBlock>(
-                parent.GetExpectedBackground,  parent.Background);
+                blocks.GetExpectedBackground,  blocks.Background);
             this.Foreground = new SnapshotBlockLayer<ForegroundBlock>(
-                parent.GetExpectedForeground, parent.Foreground);
+                blocks.GetExpectedForeground, blocks.Foreground);
         }
 
-        public int Width => this._parent.Width;
-        public int Height => this._parent.Height;
+        public int Width => this.Blocks.Width;
+        public int Height => this.Blocks.Height;
 
         public SnapshotBlockLayer<BackgroundBlock> Background { get; }
         public SnapshotBlockLayer<ForegroundBlock> Foreground { get; }
@@ -89,11 +89,11 @@ namespace BotBits
 
             foreach (var fg in this.Foreground.GetAndDeleteStagedChanges())
             {
-                this._parent.Place(fg.Key.X, fg.Key.Y, fg.Value);
+                this.Blocks.Place(fg.Key.X, fg.Key.Y, fg.Value);
             }
             foreach (var bg in this.Background.GetAndDeleteStagedChanges())
             {
-                this._parent.Place(bg.Key.X, bg.Key.Y, bg.Value);
+                this.Blocks.Place(bg.Key.X, bg.Key.Y, bg.Value);
             }
         }
     }

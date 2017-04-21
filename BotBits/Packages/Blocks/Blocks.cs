@@ -34,6 +34,8 @@ namespace BotBits
         }
         public IEnumerator<BlocksItem> GetEnumerator()
         {
+            DiagnosticServices.GetEnumerator<Blocks>(this.BotBits);
+
             return this.In(this.Area).GetEnumerator();
         }
 
