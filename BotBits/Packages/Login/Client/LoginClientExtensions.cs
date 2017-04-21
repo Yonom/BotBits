@@ -80,11 +80,6 @@ namespace BotBits
             return client.GetLobbyAsync().GetResultEx();
         }
 
-        public static DatabaseWorld LoadWorld(this ILoginClient client, string roomId)
-        {
-            return client.LoadWorldAsync(roomId).GetResultEx();
-        }
-
         public static VersionLoginClient WithAutomaticVersion(this LoginClient client)
         {
             return client.WithAutomaticVersionAsync().GetResultEx();
@@ -137,11 +132,6 @@ namespace BotBits
             return client.Then(task => task.Result.GetLobbyAsync()).ToSafeTask();
         }
 
-        public static Task<DatabaseWorld> LoadWorldAsync(this Task<LoginClient> client, string roomId)
-        {
-            return client.Then(task => task.Result.LoadWorldAsync(roomId)).ToSafeTask();
-        }
-        
         // helpers
         private static string GenerateUniqueRoomId(string str)
         {

@@ -60,10 +60,5 @@ namespace BotBits
         {
             return this._loginClient.JoinRoomAsync(roomId, ct);
         }
-
-        public Task<DatabaseWorld> LoadWorldAsync(string roomId)
-        {
-            return this._loginClient.LoadWorldAsync(roomId);
-        }
     }
 }

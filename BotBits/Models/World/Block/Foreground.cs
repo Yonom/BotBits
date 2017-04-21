@@ -621,7 +621,6 @@ namespace BotBits
 
         public static class Desert
         {
-            // TODO find better names for Patterns
             public const Id
                 Pattern1 = (Id)177,
                 Pattern2 = (Id)178,

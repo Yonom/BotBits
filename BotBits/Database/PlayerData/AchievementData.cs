@@ -4,11 +4,11 @@ using PlayerIOClient;
 
 namespace BotBits
 {
-    internal class PlayerAchivements
+    public class AchievementData
     {
         private readonly Achievement[] _achievements;
 
-        public PlayerAchivements(Achievement[] achievements)
+        public AchievementData(Achievement[] achievements)
         {
             this._achievements = achievements;
         }

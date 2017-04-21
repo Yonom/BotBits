@@ -41,6 +41,14 @@ namespace BotBits
         }
 
         public static ReadOnlyWorldAreaEnumerable<TForeground, TBackground> In<TForeground, TBackground>(
+            this IReadOnlyWorldAreaEnumerable<TForeground, TBackground> blockArea, Point p, Size s)
+            where TForeground : struct
+            where TBackground : struct
+        {
+            return blockArea.In(new Rectangle(p, s));
+        }
+
+        public static ReadOnlyWorldAreaEnumerable<TForeground, TBackground> In<TForeground, TBackground>(
             this IReadOnlyWorldAreaEnumerable<TForeground, TBackground> blockArea, int x, int y, int width, int height)
             where TForeground : struct
             where TBackground : struct

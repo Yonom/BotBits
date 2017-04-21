@@ -6,7 +6,6 @@ namespace BotBits
     public interface ILoginClient
     {
         Task<LobbyItem[]> GetLobbyAsync();
-        Task<DatabaseWorld> LoadWorldAsync(string roomId);
         Task CreateOpenWorldAsync(string roomId, string name, CancellationToken ct);
         Task CreateJoinRoomAsync(string roomId, CancellationToken ct);
         Task JoinRoomAsync(string roomId, CancellationToken ct);

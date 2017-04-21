@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BotBits.Shop;
 using PlayerIOClient;
 
 namespace BotBits

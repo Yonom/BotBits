@@ -106,7 +106,7 @@ namespace BotBits
             p.Deaths = e.Deaths;
             p.X = e.X;
             p.Y = e.Y;
-            p.ClubMember = e.ClubMember;
+            p.GoldMember = e.GoldMember;
             p.ChatColor = e.ChatColor;
             p.Team = e.Team;
             p.CrewMember = e.CrewMember;

@@ -17,6 +17,8 @@ namespace BotBits
         }
 
         public IConnection Connection => this._connection;
+        
+        public DatabaseHandle Database { get; private set; }
 
         public PlayerData PlayerData { get; private set; }
 
@@ -66,6 +68,7 @@ namespace BotBits
             this.ConnectUserId = args.ConnectUserId;
             this.RoomId = args.RoomId;
             this.PlayerData = args.PlayerData;
+            this.Database = args.Database;
 
             new ConnectEvent()
                 .RaiseIn(this.BotBits);
@@ -74,7 +77,7 @@ namespace BotBits
             this.Connection.OnDisconnect += this.Connection_OnDisconnect;
             if (!this.Connection.Connected)
             {
-                this.HandleDisconnect(string.Empty);
+                this.HandleDisconnect(String.Empty);
             }
         }
 

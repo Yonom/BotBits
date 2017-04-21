@@ -13,6 +13,7 @@ namespace BotBits
         public static WorldType GetLegacyWorldType(int width, int height)
         {
             if (width == 25 && height == 25) return WorldType.Small;
+            if (width == 40 && height == 30) return WorldType.HomeWorld;
             if (width == 50 && height == 50) return WorldType.Medium;
             if (width == 100 && height == 100) return WorldType.Large;
             if (width == 200 && height == 200) return WorldType.Massive;
@@ -23,8 +24,57 @@ namespace BotBits
             if (width == 150 && height == 25) return WorldType.Tutorial;
             if (width == 110 && height == 110) return WorldType.MoonLarge;
             if (width == 300 && height == 300) return WorldType.Huge;
-            if (width == 250 && height == 150) return WorldType.Big;
+            if (width == 200 && height == 400) return WorldType.VerticalGreat;
             return WorldType.Unknown;
+        }
+
+        public static Size GetWorldSize(WorldType type)
+        {
+            switch (type)
+            {
+                case WorldType.Small:
+                    return new Size(25, 25);
+
+                case WorldType.HomeWorld:
+                    return new Size(40, 30);
+
+                case WorldType.Medium:
+                    return new Size(50, 50);
+
+                case WorldType.Large:
+                    return new Size(100, 100);
+
+                case WorldType.Massive:
+                    return new Size(200, 200);
+
+                case WorldType.Wide:
+                    return new Size(400, 50);
+
+                case WorldType.Great:
+                    return new Size(400, 200);
+
+                case WorldType.Tall:
+                    return new Size(100, 400);
+
+                case WorldType.UltraWide:
+                    return new Size(636, 50);
+
+                case WorldType.MoonLarge:
+                    return new Size(110, 110);
+
+                case WorldType.Tutorial:
+                    return new Size(150, 25);
+
+                case WorldType.Huge:
+                    return new Size(300, 300);
+
+                case WorldType.VerticalGreat:
+                    return new Size(200, 400);
+
+
+                default:
+                    throw new NotSupportedException("Unknown world type!");
+            }
         }
 
         public static ForegroundBlock GetForegroundFromDatabase(DatabaseObject obj, Foreground.Id foreground)

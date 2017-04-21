@@ -57,7 +57,6 @@ namespace BotBits
 
         public Task FinishChecksAsync()
         {
-            if (this._disabled) return TaskHelper.FromResult(false);
             // ReSharper disable once InconsistentlySynchronizedField
             return this._finishResetEvent.AsTask();
         }
@@ -210,15 +209,16 @@ namespace BotBits
 
         private bool ShouldSend(PlaceSendMessage b, Point3D p)
         {
-            if (b.SendCount > 10) return false;
             if (b.NoChecks) return true;
+
             if (!Actions.Of(this.BotBits).CanEdit) return false;
+            if (b.SendCount > 10) return false;
 
             var playerData = ConnectionManager.Of(this.BotBits).PlayerData;
-            var blocks = Blocks.Of(this.BotBits);
+            if (!playerData.HasBlockInternal(b.Id)) return false;
 
+            var blocks = Blocks.Of(this.BotBits);
             if (!WorldUtils.IsPlaceable(b, blocks)) return false;
-            if (!playerData.HasBlock(b.Id)) return false;
 
             CheckHandle handle;
             return !(this._sentLocations.TryGetValue(p, out handle)

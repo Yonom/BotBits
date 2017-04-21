@@ -21,6 +21,11 @@ namespace BotBits
             this.Height = height;
         }
 
+        public Rectangle(Point p, Size s)
+            : this(p.X, p.Y, s.Width, s.Height)
+        {
+        }
+
         public Rectangle(Point p1, Point p2)
             : this()
         {

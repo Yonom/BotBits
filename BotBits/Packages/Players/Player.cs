@@ -85,12 +85,12 @@ namespace BotBits
         public bool Friend { get; internal set; }
 
         /// <summary>
-        ///     Gets a value indicating whether this player is a Builder's Club member.
+        ///     Gets a value indicating whether this player is a Gold member.
         /// </summary>
         /// <value>
         ///     <c>true</c> if this player is a Builder's Club member; otherwise, <c>false</c>.
         /// </value>
-        public bool ClubMember { get; internal set; }
+        public bool GoldMember { get; internal set; }
 
         /// <summary>
         ///     Gets a value indicating whether this player is connected.

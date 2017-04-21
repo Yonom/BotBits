@@ -2,19 +2,22 @@
 {
     public class ConnectionArgs
     {
-        public ConnectionArgs(string connectUserId, string roomId, PlayerData playerData)
+        public ConnectionArgs(string connectUserId, string roomId, PlayerData playerData, DatabaseHandle database)
         {
             this.ConnectUserId = connectUserId;
             this.RoomId = roomId;
             this.PlayerData = playerData;
+            this.Database = database;
         }
 
-        public ConnectionArgs()
+        public ConnectionArgs(DatabaseHandle database)
         {
+            this.Database = database;
         }
         
-        public PlayerData PlayerData { get; private set; }
-        public string ConnectUserId { get; private set; }
-        public string RoomId { get; private set; }
+        public PlayerData PlayerData { get; }
+        public string ConnectUserId { get; }
+        public string RoomId { get; }
+        public DatabaseHandle Database { get; }
     }
 }

@@ -16,6 +16,11 @@ namespace BotBits
             return blockArea.In(new Rectangle(p1, p2));
         }
 
+        public static BlocksAreaEnumerable In(this IBlockAreaEnumerable blockArea, Point p, Size s)
+        {
+            return blockArea.In(new Rectangle(p, s));
+        }
+
         public static BlocksAreaEnumerable In(this IBlockAreaEnumerable blockArea, int x, int y, int width, int height)
         {
             return blockArea.In(new Rectangle(x, y, width, height));

@@ -83,7 +83,7 @@ namespace BotBits
                 this.UnstagedChanges.Remove(p);
                 var old = this[p];
                 this._stagedChanges[p] = change;
-                var check = this._stagedChanges[p];
+
                 if (this._history.Count > 0)
                     this._history.Peek().Add(new SnapshotHistoryItem<T>(p, old, change));
             }

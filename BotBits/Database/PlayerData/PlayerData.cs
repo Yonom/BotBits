@@ -1,18 +1,24 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 using BotBits.Shop;
+using PlayerIOClient;
 
 namespace BotBits
 {
     public class PlayerData
     {
+        private PlayerObject PlayerObject { get; }
+
         public PlayerData(PlayerObject playerObject, ShopData shopData)
         {
             this.PlayerObject = playerObject;
             this.ShopData = shopData;
         }
-
-        public PlayerObject PlayerObject { get; }
+        
         public ShopData ShopData { get; }
+        
+        public bool BetaMember => this.ShopData.GetCount("pro") > 0 || this.PlayerObject.OldBetaMember;
 
         public bool HasSmiley(Smiley smiley)
         {
@@ -29,17 +35,27 @@ namespace BotBits
             return this.HasPack(ItemServices.GetPackage(auraShape));
         }
 
-        private bool HasPack(PackAttribute pack)
+        internal bool HasBlockInternal(Foreground.Id id)
         {
-            if (pack == null || pack.Package == null) return true;
-            if (pack.AdminOnly) return this.PlayerObject.IsAdministrator;
-            if (pack.GoldMembershipItem) return this.PlayerObject.ClubMember;
-            return this.ShopData.GetCount(pack.Package) > 0;
+            return this.HasPack(ItemServices.GetPackage(id));
         }
 
-        public bool HasBlock(int id)
+        internal bool HasBlockInternal(Background.Id id)
+        {
+            return this.HasPack(ItemServices.GetPackage(id));
+        }
+
+        internal bool HasBlockInternal(int id)
         {
             return this.HasPack(ItemServices.GetPackageInternal(id));
+        }
+
+        private bool HasPack(PackAttribute pack)
+        {
+            if (pack?.Package == null) return true;
+            if (pack.AdminOnly) return this.PlayerObject.Administrator;
+            if (pack.GoldMembershipItem) return this.PlayerObject.GoldMember;
+            return this.ShopData.GetCount(pack.Package) > 0;
         }
     }
 }

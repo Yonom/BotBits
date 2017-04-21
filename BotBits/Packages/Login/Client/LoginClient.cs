@@ -10,17 +10,27 @@ namespace BotBits
         private readonly Task<PlayerData> _argsAsync;
         private readonly BotBitsClient _botBitsClient;
 
+        public DatabaseHandle Database => new DatabaseHandle(this.Client);
+
         internal LoginClient(BotBitsClient botBitsClient, Client client)
         {
+            PlayerIOServices.DefaultClient = client;
+
             this._botBitsClient = botBitsClient;
             this.Client = client;
-
-            this._argsAsync = LoginUtils.GetConnectionArgsAsync(client);
+            this._argsAsync = this.Database.GetMyPlayerDataAsync();
         }
 
         public string ConnectUserId => this.Client.ConnectUserId;
 
         public Client Client { get; }
+
+        public Task<PlayerData> GetPlayerDataAsync()
+        {
+            return this._argsAsync
+                .Then(handle => handle.Result)
+                .ToSafeTask();
+        }
 
         public Task<LobbyItem[]> GetLobbyAsync()
         {
@@ -51,13 +61,6 @@ namespace BotBits
                 .ToSafeTask();
         }
 
-        public Task<DatabaseWorld> LoadWorldAsync(string roomId)
-        {
-            return this.Client.BigDB.LoadAsync("Worlds", roomId)
-                .Then(t => DatabaseWorld.FromDatabaseObject(t.Result))
-                .ToSafeTask();
-        }
-
         public VersionLoginClient WithVersion(int version)
         {
             return new VersionLoginClient(this, version);
@@ -65,8 +68,8 @@ namespace BotBits
 
         public Task<VersionLoginClient> WithAutomaticVersionAsync()
         {
-            return LoginUtils.GetVersionAsync(this.Client)
-                .Then(task => this.WithVersion(task.Result))
+            return this.Database.GetVersionDataAsync()
+                .Then(task => this.WithVersion(task.Result.Version))
                 .ToSafeTask();
         }
 
@@ -75,7 +78,7 @@ namespace BotBits
             var joinTask = this.CompleteJoinAsync(ct);
             return this._argsAsync
                 .Then(task => this.Attach(ConnectionManager.Of(this._botBitsClient), conn, 
-                    new ConnectionArgs(this.ConnectUserId, roomId, task.Result), version))
+                    new ConnectionArgs(this.ConnectUserId, roomId, task.Result, this.Database), version))
                 .Then(task => joinTask)
                 .Then(task => { if (task.IsCanceled) ConnectionManager.Of(this._botBitsClient).Connection.Disconnect(); })
                 .ToSafeTask();

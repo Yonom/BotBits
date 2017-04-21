@@ -58,7 +58,11 @@
   <ItemGroup>
     <Compile Include="Client\Events\DisposedEvent.cs" />
     <Compile Include="Client\Events\DisposingEvent.cs" />
-    <Compile Include="Database\PlayerData\PlayerAchivements.cs" />
+    <Compile Include="Database\DatabaseHandle.cs" />
+    <Compile Include="Database\PlayerData\AchievementData.cs" />
+    <Compile Include="Database\PlayerData\StaffRoleData.cs" />
+    <Compile Include="Database\PlayerData\VersionData.cs" />
+    <Compile Include="Database\PlayerData\UsernameData.cs" />
     <Compile Include="Database\PlayerData\PlayerData.cs" />
     <Compile Include="Helpers\Snapshot\BlocksSnapshot.cs" />
     <Compile Include="Helpers\Snapshot\SnapshotBlockLayer.cs" />
@@ -75,7 +79,9 @@
     <Compile Include="Models\CampaignStatus.cs" />
     <Compile Include="Models\Crew.cs" />
     <Compile Include="Models\PlayerPoint.cs" />
+    <Compile Include="Models\Size.cs" />
     <Compile Include="Models\RespawnData.cs" />
+    <Compile Include="Models\StaffRole.cs" />
     <Compile Include="Models\SwitchType.cs" />
     <Compile Include="Models\WorldStatus.cs" />
     <Compile Include="Models\World\ReadOnly\IReadOnlyBlockLayer.cs" />
@@ -235,6 +241,7 @@
     <Compile Include="Packages\MessageSender\SendMessages\TouchHologramSendMessage.cs" />
     <Compile Include="Packages\Players\Events\FlyEvent.cs" />
     <Compile Include="Packages\Players\PlayerExtensions.cs" />
+    <Compile Include="Services\PlayerIOServices.cs" />
     <Compile Include="Services\ItemServices.cs" />
     <Compile Include="Services\ExtensionServices.cs" />
     <Compile Include="Services\MessageServices.cs" />

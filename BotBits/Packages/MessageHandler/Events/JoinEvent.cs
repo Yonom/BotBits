@@ -29,7 +29,7 @@ namespace BotBits.Events
             this.BlueCoins = message.GetInteger(10);
             this.Deaths = message.GetInteger(11);
             this.Friend = message.GetBoolean(12);
-            this.ClubMember = message.GetBoolean(13);
+            this.GoldMember = message.GetBoolean(13);
             this.GoldBorder = message.GetBoolean(14);
             this.Mod = message.GetBoolean(15);
             this.Team = (Team)message.GetInt(16);
@@ -128,7 +128,7 @@ namespace BotBits.Events
         ///     Gets or sets whether this player is a club member.
         /// </summary>
         /// <value><c>true</c> if this player is a club member; otherwise, <c>false</c>.</value>
-        public bool ClubMember { get; set; }
+        public bool GoldMember { get; set; }
 
         /// <summary>
         ///     Gets or sets whether this player has activated god mode.
