@@ -6,6 +6,17 @@ namespace BotBits
 {
     internal static class LoginUtils
     {
+        public static Task<PlayerData> GetPlayerDataAsync(DatabaseHandle handle)
+        {
+            var shopTask = handle.GetMyShopDataAsync();
+            var playerObjectTask = handle.GetMyPlayerObjectAsync();
+
+            return shopTask
+                .Then(t => playerObjectTask)
+                .Then(t => new PlayerData(playerObjectTask.Result, shopTask.Result))
+                .ToSafeTask(); ;
+        }
+
         public static Task<Client> GuestLoginAsync(string gameId)
         {
             return PlayerIO.QuickConnect.SimpleConnectAsync(gameId, "guest", "guest", null);

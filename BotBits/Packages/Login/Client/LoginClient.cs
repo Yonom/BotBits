@@ -126,7 +126,7 @@ namespace BotBits
             Scheduler.Of(this._botBitsClient).InitScheduler(false);
 
             if (this._argsAsync == null)
-                this._argsAsync = this.Database.GetMyPlayerDataAsync();
+                this._argsAsync = LoginUtils.GetPlayerDataAsync(this.Database);
         }
     }
 }

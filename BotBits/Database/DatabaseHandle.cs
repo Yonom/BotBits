@@ -128,24 +128,6 @@ namespace BotBits
         {
             return this.GetMyAchievementsAsync().GetResultEx();
         }
-
-        // MyPlayerData
-
-        public Task<PlayerData> GetMyPlayerDataAsync()
-        {
-            var shopTask = this.GetMyShopDataAsync();
-            var playerObjectTask = this.GetMyPlayerObjectAsync();
-
-            return shopTask
-                .Then(t => playerObjectTask)
-                .Then(t => new PlayerData(playerObjectTask.Result, shopTask.Result))
-                .ToSafeTask();
-        }
-
-        public PlayerData GetMyPlayerData()
-        {
-            return this.GetMyPlayerDataAsync().GetResultEx();
-        }
         
         // UsernameData
 
