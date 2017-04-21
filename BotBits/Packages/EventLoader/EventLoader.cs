@@ -16,13 +16,6 @@ namespace BotBits
         {
         }
 
-        public override void Load(object obj)
-        {
-            // TODO pattern break
-            Scheduler.Of(this.BotBits).InitScheduler(false);
-            base.Load(obj);
-        }
-
         protected override bool ShouldLoad(MethodInfo methodInfo)
         {
             return methodInfo.IsDefined(typeof(EventListenerAttribute), true);

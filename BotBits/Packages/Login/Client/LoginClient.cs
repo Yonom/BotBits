@@ -7,7 +7,7 @@ namespace BotBits
 {
     public class LoginClient : ILoginClient
     {
-        private readonly Task<PlayerData> _argsAsync;
+        private Task<PlayerData> _argsAsync;
         private readonly BotBitsClient _botBitsClient;
 
         public DatabaseHandle Database => new DatabaseHandle(this.Client);
@@ -18,7 +18,6 @@ namespace BotBits
 
             this._botBitsClient = botBitsClient;
             this.Client = client;
-            this._argsAsync = this.Database.GetMyPlayerDataAsync();
         }
 
         public string ConnectUserId => this.Client.ConnectUserId;
@@ -27,6 +26,8 @@ namespace BotBits
 
         public Task<PlayerData> GetPlayerDataAsync()
         {
+            this.InitJoin();
+
             return this._argsAsync
                 .Then(handle => handle.Result)
                 .ToSafeTask();
@@ -39,10 +40,10 @@ namespace BotBits
                 .ToSafeTask();
         }
 
-        public Task CreateOpenWorldAsync(string roomId, string name, CancellationToken ct)
+        public Task CreateJoinOpenWorldAsync(string roomId, string name, CancellationToken ct)
         {
             return this.WithAutomaticVersionAsync()
-                .Then(task => task.Result.CreateOpenWorldAsync(roomId, name, ct))
+                .Then(task => task.Result.CreateJoinOpenWorldAsync(roomId, name, ct))
                 .ToSafeTask();
         }
 
@@ -55,6 +56,8 @@ namespace BotBits
 
         public Task JoinRoomAsync(string roomId, CancellationToken ct)
         {
+            this.InitJoin();
+
             return this.Client.Multiplayer
                 .JoinRoomAsync(roomId, null)
                 .Then(task => this.InitConnection(roomId, null, task.Result, ct))
@@ -116,6 +119,14 @@ namespace BotBits
         {
             connectionManager.AttachConnection(connection, args);
             return TaskHelper.FromResult(true);
+        }
+
+        internal void InitJoin()
+        {
+            Scheduler.Of(this._botBitsClient).InitScheduler(false);
+
+            if (this._argsAsync == null)
+                this._argsAsync = this.Database.GetMyPlayerDataAsync();
         }
     }
 }

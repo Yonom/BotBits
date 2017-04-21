@@ -9,7 +9,7 @@ namespace BotBits
         // async ct
         public static Task CreateOpenWorldAsync(this ILoginClient client, string name, CancellationToken ct)
         {
-            return client.CreateOpenWorldAsync("OW" + GenerateUniqueRoomId(name), name, ct);
+            return client.CreateJoinOpenWorldAsync("OW" + GenerateUniqueRoomId(name), name, ct);
         }
 
         // nonasync ct
@@ -25,7 +25,7 @@ namespace BotBits
 
         public static void CreateOpenWorld(this ILoginClient client, string roomId, string name, CancellationToken ct)
         {
-            client.CreateOpenWorldAsync(roomId, name, ct).WaitEx();
+            client.CreateJoinOpenWorldAsync(roomId, name, ct).WaitEx();
         }
 
         public static void CreateOpenWorld(this ILoginClient client, string name, CancellationToken ct)
@@ -46,7 +46,7 @@ namespace BotBits
 
         public static Task CreateOpenWorldAsync(this ILoginClient client, string roomId, string name)
         {
-            return client.CreateOpenWorldAsync(roomId, name, CancellationToken.None);
+            return client.CreateJoinOpenWorldAsync(roomId, name, CancellationToken.None);
         }
         
         public static Task CreateOpenWorldAsync(this ILoginClient client, string name)
@@ -80,56 +80,71 @@ namespace BotBits
             return client.GetLobbyAsync().GetResultEx();
         }
 
+        public static PlayerData GetPlayerData(this ILoginClient client)
+        {
+            return client.GetPlayerDataAsync().GetResultEx();
+        }
+
         public static VersionLoginClient WithAutomaticVersion(this LoginClient client)
         {
             return client.WithAutomaticVersionAsync().GetResultEx();
         }
 
         // task async tc
-        public static Task JoinRoomAsync(this Task<LoginClient> client, string roomId, CancellationToken ct)
+        public static Task JoinRoomAsync<T>(this Task<T> client, string roomId, CancellationToken ct) where T : ILoginClient
         {
             return client.Then(task => task.Result.JoinRoomAsync(roomId, ct)).ToSafeTask();
         }
 
-        public static Task CreateJoinRoomAsync(this Task<LoginClient> client, string roomId, CancellationToken ct)
+        public static Task CreateJoinRoomAsync<T>(this Task<T> client, string roomId, CancellationToken ct) where T : ILoginClient
         {
             return client.Then(task => task.Result.CreateJoinRoomAsync(roomId, ct)).ToSafeTask();
         }
 
-        public static Task CreateOpenWorldAsync(this Task<LoginClient> client, string roomId, string name, CancellationToken ct)
+        public static Task CreateOpenWorldAsync<T>(this Task<T> client, string roomId, string name, CancellationToken ct) where T : ILoginClient
         {
-            return client.Then(task => task.Result.CreateOpenWorldAsync(roomId, name, ct)).ToSafeTask();
+            return client.Then(task => task.Result.CreateJoinOpenWorldAsync(roomId, name, ct)).ToSafeTask();
         }
 
-        public static Task CreateOpenWorldAsync(this Task<LoginClient> client, string name, CancellationToken ct)
+        public static Task CreateOpenWorldAsync<T>(this Task<T> client, string name, CancellationToken ct) where T : ILoginClient
         {
             return client.Then(task => task.Result.CreateOpenWorldAsync(name, ct)).ToSafeTask();
         }
 
         // task async
-        public static Task JoinRoomAsync(this Task<LoginClient> client, string roomId)
+        public static Task JoinRoomAsync<T>(this Task<T> client, string roomId) where T : ILoginClient
         {
             return client.JoinRoomAsync(roomId, CancellationToken.None);
         }
 
-        public static Task CreateJoinRoomAsync(this Task<LoginClient> client, string roomId)
+        public static Task CreateJoinRoomAsync<T>(this Task<T> client, string roomId) where T : ILoginClient
         {
             return client.CreateJoinRoomAsync(roomId, CancellationToken.None);
         }
 
-        public static Task CreateOpenWorldAsync(this Task<LoginClient> client, string roomId, string name)
+        public static Task CreateOpenWorldAsync<T>(this Task<T> client, string roomId, string name) where T : ILoginClient
         {
             return client.CreateOpenWorldAsync(roomId, name, CancellationToken.None);
         }
 
-        public static Task CreateOpenWorldAsync(this Task<LoginClient> client, string name)
+        public static Task CreateOpenWorldAsync<T>(this Task<T> client, string name) where T : ILoginClient
         {
             return client.CreateOpenWorldAsync(name, CancellationToken.None);
         }
 
-        public static Task<LobbyItem[]> GetLobbyAsync(this Task<LoginClient> client)
+        public static Task<LobbyItem[]> GetLobbyAsync<T>(this Task<T> client) where T : ILoginClient
         {
             return client.Then(task => task.Result.GetLobbyAsync()).ToSafeTask();
+        }
+
+        public static Task<PlayerData> GetPlayerDataAsync<T>(this Task<T> client) where T : ILoginClient
+        {
+            return client.Then(task => task.Result.GetPlayerDataAsync()).ToSafeTask();
+        }
+        
+        public static Task<VersionLoginClient> WithAutomaticVersionAsync(this Task<LoginClient> client)
+        {
+            return client.Then(task => task.Result.WithAutomaticVersionAsync()).ToSafeTask();
         }
 
         // helpers

@@ -30,7 +30,7 @@ namespace BotBits
         [UsedImplicitly]
         internal PackageLoader Packages => this._packageLoader;
 
-        internal List<Type> Extensions { get; private set; }
+        internal List<Type> Extensions { get; }
 
         public void Dispose()
         {

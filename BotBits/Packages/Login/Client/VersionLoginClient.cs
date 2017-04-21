@@ -31,9 +31,11 @@ namespace BotBits
                 .ToSafeTask();
         }
 
-        public Task CreateOpenWorldAsync(string roomId, string name, CancellationToken ct)
+        public Task CreateJoinOpenWorldAsync(string roomId, string name, CancellationToken ct)
         {
             if (!roomId.StartsWith("OW")) throw new ArgumentException("RoomId is not valid.", nameof(roomId));
+
+            this._loginClient.InitJoin();
 
             var roomData = new Dictionary<string, string> { { "name", name } };
 
@@ -50,6 +52,8 @@ namespace BotBits
                 ? Beta
                 : EverybodyEdits;
 
+            this._loginClient.InitJoin();
+
             return this._loginClient.Client.Multiplayer
                 .CreateJoinRoomAsync(roomId, roomPrefix + this.Version, true, null, null)
                 .Then(task => this._loginClient.InitConnection(roomId, this.Version, task.Result, ct))
@@ -59,6 +63,11 @@ namespace BotBits
         public Task JoinRoomAsync(string roomId, CancellationToken ct)
         {
             return this._loginClient.JoinRoomAsync(roomId, ct);
+        }
+
+        public Task<PlayerData> GetPlayerDataAsync()
+        {
+            return this._loginClient.GetPlayerDataAsync();
         }
     }
 }
