@@ -79,9 +79,12 @@ namespace BotBits
                 (EventRaiseHandler<TEvent>)
                     Delegate.CreateDelegate(typeof(EventRaiseHandler<TEvent>), baseObj, eventHandler);
 
-            Event<TEvent>
-                .Of(this.BotBits)
-                .Bind(handler, attribute.GlobalPriority, attribute.Priority);
+            DiagnosticServices.WithDiagnosticsDisabled(() =>
+            {
+                Event<TEvent>
+                    .Of(this.BotBits)
+                    .Bind(handler, attribute.GlobalPriority, attribute.Priority);
+            });
         }
 
         [UsedImplicitly]
