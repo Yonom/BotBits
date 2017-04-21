@@ -20,7 +20,7 @@ Login.Of(bot)
     .WithEmail("email", "pass")
     .CreateJoinRoom("roomId");
 ```
-Please note that BotBits automatically sends "init" and "init2" messages.
+Please note that BotBits automatically sends "init" and "init2" messages and waits for their responses to be received before CreateJoinRoom finishes running.
 
 ## Receiving Messages
 You can load event listeners (which will be called automatically when a message is received) using the EventLoader class.
