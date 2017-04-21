@@ -13,6 +13,13 @@ namespace BotBits
             return tcs.Task;
         }
 
+        public static Task RefreshAsync(this Achievements payVault)
+        {
+            var tcs = new TaskCompletionSource<AsyncVoid>();
+            payVault.Refresh(() => tcs.SetResult(default(AsyncVoid)), tcs.SetException);
+            return tcs.Task;
+        }
+
         public static Task<Client> ConnectAsync(string gameId, string connectionId, string userId, string auth,
             string partnerId, string[] playerInsightSegments)
         {
@@ -35,6 +42,20 @@ namespace BotBits
         {
             var tcs = new TaskCompletionSource<DatabaseObject>();
             bigDB.Load(table, key, tcs.SetResult, tcs.SetException);
+            return tcs.Task;
+        }
+
+        public static Task<DatabaseObject> LoadSingleAsync(this BigDB bigDB, string table, string index, params object[] indexValue)
+        {
+            var tcs = new TaskCompletionSource<DatabaseObject>();
+            bigDB.LoadSingle(table, index, indexValue, tcs.SetResult, tcs.SetException);
+            return tcs.Task;
+        }
+
+        public static Task<DatabaseObject[]> LoadKeysAsync(this BigDB bigDB, string table, params string[] keys)
+        {
+            var tcs = new TaskCompletionSource<DatabaseObject[]>();
+            bigDB.LoadKeys(table, keys, tcs.SetResult, tcs.SetException);
             return tcs.Task;
         }
 
