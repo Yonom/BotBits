@@ -32,13 +32,13 @@ namespace BotBits.Events
                 this.NextWorldImageUrl = message.GetString(i++);
             }
 
-            this.Rewards = new List<CampaignReward>();
+            this.Rewards = new List<Reward>();
             for (; i < message.Count;)
             {
                 var reward = message.GetString(i++);
                 var quantity = message.GetInt(i++);
 
-                this.Rewards.Add(new CampaignReward(reward, quantity));
+                this.Rewards.Add(new Reward(reward, quantity));
             }
         }
 
@@ -46,7 +46,7 @@ namespace BotBits.Events
         ///     Gets or sets the rewards.
         /// </summary>
         /// <value>The rewards.</value>
-        public List<CampaignReward> Rewards { get; set; }
+        public List<Reward> Rewards { get; set; }
 
         /// <summary>
         ///     Gets or sets the image URL of next world in campaign.

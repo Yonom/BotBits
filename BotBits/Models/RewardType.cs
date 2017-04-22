@@ -1,6 +1,6 @@
 ﻿namespace BotBits
 {
-    public enum CampaignRewardType
+    public enum RewardType
     {
         Item = 0,
         MaxEnergy,

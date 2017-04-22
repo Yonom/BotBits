@@ -14,7 +14,7 @@ namespace BotBits
 
         public void Dispose()
         {
-            this._schedulerHandle.Dispose();
+            this._schedulerHandle?.Dispose();
         }
 
         public void Schedule(Action task)
