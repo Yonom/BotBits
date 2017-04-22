@@ -52,6 +52,13 @@ namespace BotBits
             return tcs.Task;
         }
 
+        public static Task<DatabaseObject[]> LoadRangeAsync(this BigDB bigDB, string table, string index, object[] indexPath, object start, object stop, int limit)
+        {
+            var tcs = new TaskCompletionSource<DatabaseObject[]>();
+            bigDB.LoadRange(table, index, indexPath, start, stop, limit, tcs.SetResult, tcs.SetException);
+            return tcs.Task;
+        }
+
         public static Task<DatabaseObject[]> LoadKeysAsync(this BigDB bigDB, string table, params string[] keys)
         {
             var tcs = new TaskCompletionSource<DatabaseObject[]>();

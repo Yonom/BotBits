@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace BotBits
 {
-    public class BlocksSnapshot : IWorld<ForegroundBlock, BackgroundBlock>, IWorldAreaEnumerable<ForegroundBlock, BackgroundBlock>
+    public class BlocksSnapshot : IWorld<ForegroundBlock, BackgroundBlock>, 
+        IWorldAreaEnumerable<ForegroundBlock, BackgroundBlock>
     {
         private Blocks Blocks { get; }
 
@@ -64,21 +65,8 @@ namespace BotBits
         {
             this.DiscardAll();
 
-            var fgs = this.Foreground.PopHistory();
-            for (var i = fgs.Count - 1; i >= 0; i--)
-            {
-                var fg = fgs[i];
-                if (this.Foreground[fg.Location] == fg.NewBlock)
-                    this.Foreground[fg.Location] = fg.OldBlock;
-            }
-
-            var bgs = this.Background.PopHistory();
-            for (var i = bgs.Count - 1; i >= 0; i--)
-            {
-                var bg = bgs[i];
-                if (this.Background[bg.Location] == bg.NewBlock)
-                    this.Background[bg.Location] = bg.OldBlock;
-            }
+            this.Foreground.RestoreHistory();
+            this.Background.RestoreHistory();
 
             this.StageAll();
         }

@@ -15,7 +15,7 @@ namespace BotBits
         {
             var versionLoader = version.HasValue
                 ? TaskHelper.FromResult(version.Value)
-                : this.Database.GetVersionDataAsync()
+                : this.Database.GetVersionConfigurationAsync()
                     .Then(task => task.Result.Version);
 
             return versionLoader.Then(v =>

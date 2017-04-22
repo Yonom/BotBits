@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using PlayerIOClient;
 
@@ -94,32 +95,40 @@ namespace BotBits
             foreach (DatabaseObject ct in worlddata)
             {
                 if (ct.Count == 0) continue;
-                var type = (uint)ct.GetValue("type");
-                var layerNum = ct.GetInt("layer", 0);
-                var xArr = ct.GetBytes("x", new byte[0]);
-                var yArr = ct.GetBytes("y", new byte[0]);
-                var x1Arr = ct.GetBytes("x1", new byte[0]);
-                var y1Arr = ct.GetBytes("y1", new byte[0]);
-                var points = WorldUtils.GetShortPos(x1Arr, y1Arr)
-                    .Concat(WorldUtils.GetPos(xArr, yArr));
 
-                if (layerNum == 0)
+                try
                 {
-                    var foreground = (Foreground.Id)type;
-                    var block = WorldUtils.GetForegroundFromDatabase(ct, foreground);
-                    foreach (var loc in points)
+                    var type = Convert.ToUInt32(ct.GetValue("type"));
+                    var layerNum = ct.GetInt("layer", 0);
+                    var xArr = ct.GetBytes("x", new byte[0]);
+                    var yArr = ct.GetBytes("y", new byte[0]);
+                    var x1Arr = ct.GetBytes("x1", new byte[0]);
+                    var y1Arr = ct.GetBytes("y1", new byte[0]);
+                    var points = WorldUtils.GetShortPos(x1Arr, y1Arr)
+                        .Concat(WorldUtils.GetPos(xArr, yArr));
+
+                    if (layerNum == 0)
                     {
-                        this.Foreground[loc.X, loc.Y] = block;
+                        var foreground = (Foreground.Id)type;
+                        var block = WorldUtils.GetForegroundFromDatabase(ct, foreground);
+                        foreach (var loc in points)
+                        {
+                            this.Foreground[loc.X, loc.Y] = block;
+                        }
+                    }
+                    else
+                    {
+                        var background = (Background.Id)type;
+                        var block = new BackgroundBlock(background);
+                        foreach (var loc in points)
+                        {
+                            this.Background[loc.X, loc.Y] = block;
+                        }
                     }
                 }
-                else
+                catch (Exception)
                 {
-                    var background = (Background.Id)type;
-                    var block = new BackgroundBlock(background);
-                    foreach (var loc in points)
-                    {
-                        this.Background[loc.X, loc.Y] = block;
-                    }
+                    
                 }
             }
         }

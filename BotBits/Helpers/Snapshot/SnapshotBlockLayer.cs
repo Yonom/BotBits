@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace BotBits
 {
-    public class SnapshotBlockLayer<T> : IBlockLayer<T> where T : struct
+    public class SnapshotBlockLayer<T> : IBlockLayer<T> where T : struct, IEquatable<T>
     {
         private readonly Func<Point, T> _expectedBlocks;
         private readonly IReadOnlyBlockLayer<BlockData<T>> _innerLayer;
@@ -62,10 +62,21 @@ namespace BotBits
             this._history.Push(new List<SnapshotHistoryItem<T>>());
         }
 
-        internal List<SnapshotHistoryItem<T>> PopHistory()
+        private List<SnapshotHistoryItem<T>> PopHistory()
         {
             if (this._history.Count <= 0) return new List<SnapshotHistoryItem<T>>();
             return this._history.Pop();
+        }
+
+        internal void RestoreHistory()
+        {
+            var bgs = this.PopHistory();
+            for (var i = bgs.Count - 1; i >= 0; i--)
+            {
+                var bg = bgs[i];
+                if (this[bg.Location].Equals(bg.NewBlock))
+                    this[bg.Location] = bg.OldBlock;
+            }
         }
 
         public KeyValuePair<Point, T>[] GetAndDeleteStagedChanges()

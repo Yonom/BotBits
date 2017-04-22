@@ -58,12 +58,17 @@
   <ItemGroup>
     <Compile Include="Client\Events\DisposedEvent.cs" />
     <Compile Include="Client\Events\DisposingEvent.cs" />
-    <Compile Include="Database\DatabaseHandle.cs" />
-    <Compile Include="Database\PlayerData\AchievementData.cs" />
-    <Compile Include="Database\PlayerData\StaffRoleData.cs" />
-    <Compile Include="Database\PlayerData\VersionData.cs" />
-    <Compile Include="Database\PlayerData\UsernameData.cs" />
-    <Compile Include="Database\PlayerData\PlayerData.cs" />
+    <Compile Include="Helpers\Database\DatabaseHandle.cs" />
+    <Compile Include="Helpers\Database\DatabaseObjectWrapper.cs" />
+    <Compile Include="Helpers\Database\DatabaseUtils.cs" />
+    <Compile Include="Helpers\Database\News\NewsItem.cs" />
+    <Compile Include="Helpers\Database\Player\AchievementData.cs" />
+    <Compile Include="Helpers\Database\Config\CampaignConfiguration.cs" />
+    <Compile Include="Helpers\Database\PayVaultItems\ShopItem.cs" />
+    <Compile Include="Helpers\Database\Config\StaffRoleData.cs" />
+    <Compile Include="Helpers\Database\Config\VersionConfiguration.cs" />
+    <Compile Include="Helpers\Database\Username\UsernameData.cs" />
+    <Compile Include="Helpers\Database\Player\PlayerData.cs" />
     <Compile Include="Helpers\Snapshot\BlocksSnapshot.cs" />
     <Compile Include="Helpers\Snapshot\SnapshotBlockLayer.cs" />
     <Compile Include="Helpers\Snapshot\SnapshotHistoryItem.cs" />
@@ -71,6 +76,7 @@
     <Compile Include="Internal\InitParse.cs" />
     <Compile Include="Internal\Nito\Async\BotBitsSynchronizationContext.cs" />
     <Compile Include="Internal\VarintHelper.cs" />
+    <Compile Include="Lobby\RPCConnection.cs" />
     <Compile Include="Models\AuraShape.cs" />
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\CampaignDifficulty.cs" />
@@ -157,7 +163,7 @@
     <Compile Include="Internal\StringUtils.cs" />
     <Compile Include="Internal\TaskExtensions.cs" />
     <Compile Include="Internal\TaskHelper.cs" />
-    <Compile Include="Packages\EventLoader\LoaderBase.cs" />
+    <Compile Include="Helpers\LoaderBase.cs" />
     <Compile Include="Packages\EventManager\GlobalPriority.cs" />
     <Compile Include="Packages\MessageHandler\Events\AddedToCrewEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\AllowSpectatingEvent.cs" />
@@ -205,11 +211,11 @@
     <Compile Include="Packages\MessageSender\SendMessages\SetRoomDescriptionSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetRoomVisibleSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TimeSendMessage.cs" />
-    <Compile Include="Database\PlayerData\PlayerObject.cs" />
+    <Compile Include="Helpers\Database\Player\PlayerObject.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\UnfavoriteSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\UnlikeSendMessage.cs" />
     <Compile Include="Packages\Players\Events\PurpleSwitchEvent.cs" />
-    <Compile Include="Database\PlayerData\ShopData.cs" />
+    <Compile Include="Helpers\Database\Player\ShopData.cs" />
     <Compile Include="Models\World\BlockData\BlockData.cs" />
     <Compile Include="Packages\Chat\ChatExtensions.cs" />
     <Compile Include="Packages\Chat\Events\PrivateMessageEvent.cs" />

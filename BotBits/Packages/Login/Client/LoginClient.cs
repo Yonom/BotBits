@@ -14,8 +14,6 @@ namespace BotBits
 
         internal LoginClient(BotBitsClient botBitsClient, Client client)
         {
-            PlayerIOServices.DefaultClient = client;
-
             this._botBitsClient = botBitsClient;
             this.Client = client;
         }
@@ -71,7 +69,7 @@ namespace BotBits
 
         public Task<VersionLoginClient> WithAutomaticVersionAsync()
         {
-            return this.Database.GetVersionDataAsync()
+            return this.Database.GetVersionConfigurationAsync()
                 .Then(task => this.WithVersion(task.Result.Version))
                 .ToSafeTask();
         }
