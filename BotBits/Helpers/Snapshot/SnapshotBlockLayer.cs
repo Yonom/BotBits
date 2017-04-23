@@ -24,8 +24,8 @@ namespace BotBits
 
         public T this[int x, int y]
         {
-            get { return this[new Point(x, y)]; }
-            set { this[new Point(x, y)] = value; }
+            get => this[new Point(x, y)];
+            set => this[new Point(x, y)] = value;
         }
 
         public T this[Point p]
@@ -34,11 +34,10 @@ namespace BotBits
             {
                 T res;
                 if (!this.UnstagedChanges.TryGetValue(p, out res))
-                    if (!this._stagedChanges.TryGetValue(p, out res))
-                        res = this._expectedBlocks(p);
+                    res = this.GetStaged(p);
                 return res;
             }
-            set { this.UnstagedChanges[p] = value; }
+            set => this.UnstagedChanges[p] = value;
         }
         
         public IEnumerator<LayerItem<T>> GetEnumerator()
@@ -46,12 +45,13 @@ namespace BotBits
             for (var y = 0; y < this.Height; y++)
                 for (var x = 0; x < this.Width; x++)
                 {
-                    T res;
-                    if (!this.UnstagedChanges.TryGetValue(new Point(x, y), out res))
-                        if (!this._stagedChanges.TryGetValue(new Point(x, y), out res))
-                            res = this._expectedBlocks(new Point(x, y));
-                    yield return new LayerItem<T>(res, x, y);
+                    yield return new LayerItem<T>(this[x, y], x, y);
                 }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
 
         internal void PushHistory()
@@ -79,11 +79,10 @@ namespace BotBits
             }
         }
 
-        public KeyValuePair<Point, T>[] GetAndDeleteStagedChanges()
+        public void DeleteStagedChanges(Action<KeyValuePair<Point, T>[]> handler)
         {
-            var changes = this._stagedChanges.ToArray();
+            handler(this._stagedChanges.ToArray());
             this._stagedChanges.Clear();
-            return changes;
         }
 
         public void Stage(Point p)
@@ -91,9 +90,10 @@ namespace BotBits
             T change;
             if (this.UnstagedChanges.TryGetValue(p, out change))
             {
-                this.UnstagedChanges.Remove(p);
-                var old = this[p];
+                var old = this.GetStaged(p);
                 this._stagedChanges[p] = change;
+
+                this.UnstagedChanges.Remove(p);
 
                 if (this._history.Count > 0)
                     this._history.Peek().Add(new SnapshotHistoryItem<T>(p, old, change));
@@ -118,9 +118,12 @@ namespace BotBits
             this.UnstagedChanges.Clear();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        private T GetStaged(Point p)
         {
-            return this.GetEnumerator();
+            T res;
+            if (!this._stagedChanges.TryGetValue(p, out res))
+                res = this._expectedBlocks(p);
+            return res;
         }
     }
 }

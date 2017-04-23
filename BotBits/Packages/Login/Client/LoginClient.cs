@@ -31,10 +31,17 @@ namespace BotBits
                 .ToSafeTask();
         }
 
-        public Task<LobbyItem[]> GetLobbyAsync()
+        public Task<LobbyConnection> GetLobbyConnectionAsync()
         {
             return this.WithAutomaticVersionAsync()
-                .Then(task => task.Result.GetLobbyAsync())
+                .Then(task => task.Result.GetLobbyConnection())
+                .ToSafeTask();
+        }
+
+        public Task<LobbyItem[]> GetLobbyRoomsAsync()
+        {
+            return this.WithAutomaticVersionAsync()
+                .Then(task => task.Result.GetLobbyRoomsAsync())
                 .ToSafeTask();
         }
 

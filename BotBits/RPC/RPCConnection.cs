@@ -37,7 +37,12 @@ namespace BotBits
 
         public Task<Message> MakeRPCCallAsync(Message request)
         {
-            return this.MakeRPCCallAsync(request, CancellationToken.None, request.Type);
+            return this.MakeRPCCallAsync(request, request.Type);
+        }
+
+        public Task<Message> MakeRPCCallAsync(Message request, params string[] expectedResponseTypes)
+        {
+            return this.MakeRPCCallAsync(request, CancellationToken.None, expectedResponseTypes);
         }
 
         public Task<Message> MakeRPCCallAsync(Message request, CancellationToken ct, params string[] expectedResponseTypes)

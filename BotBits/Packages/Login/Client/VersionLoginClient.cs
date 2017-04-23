@@ -22,7 +22,12 @@ namespace BotBits
 
         public int Version { get; }
 
-        public Task<LobbyItem[]> GetLobbyAsync()
+        public LobbyConnection GetLobbyConnection()
+        {
+            return new LobbyConnection(this._loginClient.Client, this.Version);
+        }
+
+        public Task<LobbyItem[]> GetLobbyRoomsAsync()
         {
             var normals = this._loginClient.Client.GetLobbyRoomsAsync(this, EverybodyEdits + this.Version);
             var betas = this._loginClient.Client.GetLobbyRoomsAsync(this, Beta + this.Version);

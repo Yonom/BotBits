@@ -59,9 +59,11 @@ namespace BotBits
 
         private void Send(long ticks)
         {
+            // Timer approximately ticks 64 times a second, do not send more than two timer frames at once.
+            var maxTicks = (long)this._myTimer.Frequency >> 5; 
             foreach (var e in this._queues.Values)
             {
-                e.SendTicks(ticks, this.BotBits);
+                e.SendTicks(ticks, maxTicks, this.BotBits);
             }
         }
 
