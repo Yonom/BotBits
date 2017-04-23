@@ -76,6 +76,7 @@
     <Compile Include="Helpers\Snapshot\SnapshotBlockLayer.cs" />
     <Compile Include="Helpers\Snapshot\SnapshotHistoryItem.cs" />
     <Compile Include="Helpers\VersionCache.cs" />
+    <Compile Include="Internal\ConcurrentDictionaryExtensions.cs" />
     <Compile Include="Internal\InitParse.cs" />
     <Compile Include="Internal\Nito\Async\BotBitsSynchronizationContext.cs" />
     <Compile Include="Internal\VarintHelper.cs" />

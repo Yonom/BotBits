@@ -76,13 +76,14 @@ namespace BotBits
             }
         }
 
-        [EventListener]
+        // Expected API should update before other APIs try to access it
+        [EventListener(EventPriority.High)]
         private void On(ForegroundPlaceEvent e)
         {
             this.Repair<ForegroundPlaceEvent, ForegroundBlock>(Layer.Foreground, e);
         }
 
-        [EventListener]
+        [EventListener(EventPriority.High)]
         private void On(BackgroundPlaceEvent e)
         {
             this.Repair<BackgroundPlaceEvent, BackgroundBlock>(Layer.Background, e);
@@ -97,15 +98,13 @@ namespace BotBits
         [EventListener]
         private void On(SendCancelEvent<PlaceSendMessage> e)
         {
-            this.HandleQueueComplete(e.Message);
+            this.RemoveFromSendQueue(e.Message);
         }
 
-        private void HandleQueueComplete(PlaceSendMessage message)
+        private void RemoveFromSendQueue(PlaceSendMessage message)
         {
             var key = new Point3D(message.Layer, message.X, message.Y);
-            PlaceSendMessage unused;
-            this._queuedItems.TryRemove(key, out unused);
-            if (unused != message) this._queuedItems.TryAdd(key, unused);
+            this._queuedItems.TryRemove(key, message);
         }
 
         private void Repair<T, TBlock>(Layer layer, T e)
@@ -144,12 +143,18 @@ namespace BotBits
             {
                 var current = this._sentBlocks.RemoveFromFront();
                 var currentPoint = GetPoint3D(current.Message);
-                this._sentLocations.Remove(currentPoint);
 
-                // If we arrived at the block we received, exit the checks
-                if (currentPoint == point) break;
+                try
+                {
+                    // If we arrived at the block we received, exit the checks
+                    if (currentPoint == point) break;
 
-                this.SendMissed(current);
+                    this.SendMissed(current);
+                }
+                finally
+                {
+                    this._sentLocations.Remove(currentPoint);
+                }
             }
 
             this.UpdateFinish();
@@ -182,7 +187,6 @@ namespace BotBits
         [EventListener(GlobalPriority.AfterMost)]
         private void OnSendPlace(SendEvent<PlaceSendMessage> e)
         {
-
             var b = e.Message;
             var p = GetPoint3D(b);
 
@@ -204,7 +208,7 @@ namespace BotBits
                 this._sentLocations[p] = newHandle;
             }
 
-            this.HandleQueueComplete(e.Message);
+            this.RemoveFromSendQueue(e.Message);
         }
 
         private bool ShouldSend(PlaceSendMessage b, Point3D p)

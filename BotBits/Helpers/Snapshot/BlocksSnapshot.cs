@@ -67,22 +67,27 @@ namespace BotBits
 
             this.Foreground.RestoreHistory();
             this.Background.RestoreHistory();
-
-            this.StageAll();
         }
 
         public void Sync()
         {
             this.StageAll();
 
-            foreach (var fg in this.Foreground.GetAndDeleteStagedChanges())
+            this.Foreground.DeleteStagedChanges(fgs =>
             {
-                this.Blocks.Place(fg.Key.X, fg.Key.Y, fg.Value);
-            }
-            foreach (var bg in this.Background.GetAndDeleteStagedChanges())
+                foreach (var fg in fgs)
+                {
+                    this.Blocks.Place(fg.Key.X, fg.Key.Y, fg.Value);
+                }
+            });
+
+            this.Background.DeleteStagedChanges(bgs =>
             {
-                this.Blocks.Place(bg.Key.X, bg.Key.Y, bg.Value);
-            }
+                foreach (var bg in bgs)
+                {
+                    this.Blocks.Place(bg.Key.X, bg.Key.Y, bg.Value);
+                }
+            });
         }
     }
 }
