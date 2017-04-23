@@ -27,10 +27,10 @@ namespace BotBits
   
         public double TicksPerMessage { get; set; } = 1;
 
-        void IMessageQueue.SendTicks(long ticks, BotBitsClient client)
+        void IMessageQueue.SendTicks(long ticks, long maxTicks, BotBitsClient client)
         {
             if (this._lastTicks > ticks) return;
-            if (this._lastTicks == 0) this._lastTicks = ticks - 4;
+            this._lastTicks = ticks - (long)Math.Min(maxTicks, ticks - this._lastTicks);
 
             for (; this._lastTicks < ticks; this._lastTicks += this.TicksPerMessage)
             {

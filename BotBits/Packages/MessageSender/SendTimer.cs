@@ -8,12 +8,12 @@ namespace BotBits
     {
         private readonly Timer _myTimer;
         private readonly Stopwatch _sw = Stopwatch.StartNew();
-        private double _sendTimerFrequency;
+        internal double Frequency { get; private set; }
         private double _offset;
 
-        public SendTimer(double sendTimerFrequency)
+        public SendTimer(double frequency)
         {
-            this._sendTimerFrequency = sendTimerFrequency;
+            this.Frequency = frequency;
             this._myTimer = new Timer(this.TimerCallback, null, 0, 15);
         }
 
@@ -40,7 +40,7 @@ namespace BotBits
 
         private double GetTicks()
         {
-            return this._sw.ElapsedMilliseconds * 0.001 * this._sendTimerFrequency;
+            return this._sw.ElapsedMilliseconds * 0.001 * this.Frequency;
         }
 
         public void UpdateFrequency(double sendTimerFrequency)
@@ -49,7 +49,7 @@ namespace BotBits
 
             this._sw.Reset();
             this._offset += offsetDelta;
-            this._sendTimerFrequency = sendTimerFrequency;
+            this.Frequency = sendTimerFrequency;
             this._sw.Start();
         }
     }
