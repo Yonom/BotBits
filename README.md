@@ -8,7 +8,14 @@ BotBits is the most popular bot library made specifically for Everybody Edits. M
 Download from NuGet (https://www.nuget.org/packages/BotBits)
 
 ## Usage
-Just create a new BotBitsClient instance, and you are good to go!
+Step 1: Import BotBits' namespaces
+```csharp
+using BotBits;
+using BotBits.Events;
+using BotBits.SendMessages;
+```
+
+Step 2: Create a new BotBitsClient instance
 ```csharp
 BotBitsClient bot = new BotBitsClient();
 ```
@@ -169,6 +176,11 @@ Blocks.Of(bot).Place(x, y, Foregrounds.OneWay.Pink, Morph.OneWay.Down);
 Blocks.Of(bot).Place(x, y, Foregrounds.SciFi.BlueSlope, Morph.SciFiSlope.InSouthEastPart);
 ```
 
+## Changing the sending speed
+Bots no longer have a block sending limit if they are connected to thier own world. Unfortunately, sending messages too fast still results in you or your players being kicked from the server. By default, BotBits sets this speed to 400 messages per second in your own rooms. The speed can be changed like this: ```MessageSender.Of(bot).SendTimerFrequency = newFrequency;```.
+
+**Important:** For worlds you do not own, the SendTimerFrequency should be kept at 100!
+
 ## Examples
 Take a look at this [custom ban list](http://botbits.yonom.org/examples/bans), [snake bot](http://botbits.yonom.org/examples/snakebot) or a [speed run bot](https://gist.github.com/Yonom/75e5c83937ea8a167d9d).
 
@@ -181,6 +193,7 @@ Here are some existing extensions:
 - [BotBits.ChatExtras](https://github.com/Yonom/BotBits.ChatExtras): Add "\[Bot\]" or "\<Bot\>" prefix to every message!
 - [BotBits.Permissions](https://github.com/Yonom/BotBits.Permissions): Give players permissions and restrict commands to certain permissions.
 - [BotBits.DefaultCommands](https://github.com/Yonom/BotBits.DefaultCommands): A set of often needed commands (like !kick, !giveedit, ...)
+- [BotBits.WorldDictionary](https://github.com/Yonom/BotBits.WorldDictionary): A world format optimized for block lookups.
 - [BotCake](https://github.com/Yonom/BotCake): Removes the need of writing ".Of(bot)"! (Only supports console apps right now)
 - [BotBits.Old](https://github.com/Yonom/BotBits.Old): Write bots for http://old.everybodyedits.com/!
 - [BotBitsExt.Physics](https://github.com/Tunous/BotBitsExt.Physics): Physics simulation for bots.
