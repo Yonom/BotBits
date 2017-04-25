@@ -136,9 +136,15 @@ foreach (var location in Blocks.Of(bot))
 ```
 
 ### Placing blocks
-As you would expect, BotBits automatically slows down the sending speed of block packets so that they are not dropped by the server.  
-EE servers only accept one message every ~10 milliseconds, and BotBits is able to send around 96 blocks per second without dropping any packets (on a very good connection).  
-Blocks that get dropped are automatically resent, so you don't have to worry about that either!
+As you would expect, BotBits automatically slows down the sending speed of block packets so that they are not dropped by the server.
+
+In worlds you do not own, EE servers only accept one message every ~10 milliseconds, and BotBits is able to send around 96 blocks per second without dropping any packets. Blocks that get dropped are automatically resent, so you don't have to worry about that either!
+ 
+In your own world, sending messages too fast results in you or your players being kicked from the server. By default, BotBits sends 400 messages per second. This speed can be changed in MessageSender: 
+```csharp
+MessageSender.Of(bot).SendTimerFrequency = newFrequency;
+```
+**Important:** For worlds you do not own, the SendTimerFrequency should be kept at MessageSender.DefaultSendTimerFrequency!
 
 Let's place a block:
 ```csharp
@@ -175,11 +181,6 @@ Blocks.Of(bot).Place(x, y, Foregrounds.Coin.GoldDoor, 10);
 Blocks.Of(bot).Place(x, y, Foregrounds.OneWay.Pink, Morph.OneWay.Down);
 Blocks.Of(bot).Place(x, y, Foregrounds.SciFi.BlueSlope, Morph.SciFiSlope.InSouthEastPart);
 ```
-
-## Changing the sending speed
-Bots no longer have a block sending limit if they are connected to thier own world. Unfortunately, sending messages too fast still results in you or your players being kicked from the server. By default, BotBits sets this speed to 400 messages per second in your own rooms. The speed can be changed like this: ```MessageSender.Of(bot).SendTimerFrequency = newFrequency;```.
-
-**Important:** For worlds you do not own, the SendTimerFrequency should be kept at 100!
 
 ## Examples
 Take a look at this [custom ban list](http://botbits.yonom.org/examples/bans), [snake bot](http://botbits.yonom.org/examples/snakebot) or a [speed run bot](https://gist.github.com/Yonom/75e5c83937ea8a167d9d).
