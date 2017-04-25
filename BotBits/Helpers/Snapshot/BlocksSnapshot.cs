@@ -67,6 +67,8 @@ namespace BotBits
 
             this.Foreground.RestoreHistory();
             this.Background.RestoreHistory();
+
+            this.StageAll();
         }
 
         public void Sync()

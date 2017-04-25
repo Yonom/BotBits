@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using BotBits.Nito.Async;
 
-// ReSharper disable once CheckNamespace
 namespace BotBits
 {
     public sealed class BotBitsSynchronizationContext : SynchronizationContext

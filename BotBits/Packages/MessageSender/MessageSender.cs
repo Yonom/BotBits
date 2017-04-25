@@ -10,7 +10,7 @@ namespace BotBits
         private readonly ConcurrentDictionary<Type, IMessageQueue> _queues =
             new ConcurrentDictionary<Type, IMessageQueue>();
 
-        private const double DefaultFrequency = 96.5;
+        public const double DefaultSendTimerFrequency = 96.5;
 
         private SendTimer _myTimer;
         private double _sendTimerFrequency;
@@ -30,7 +30,7 @@ namespace BotBits
         private void On(InitEvent e)
         {
             if (this._sendTimerFrequency > 0) return;
-            this.SendTimerFrequency = e.IsOwner ? 500 : DefaultFrequency;
+            this.SendTimerFrequency = e.IsOwner ? 400 : DefaultSendTimerFrequency;
         }
 
         public double SendTimerFrequency
@@ -53,7 +53,7 @@ namespace BotBits
 
         private void MessageSender_InitializeFinish(object sender, EventArgs e)
         {
-            this._myTimer = new SendTimer(DefaultFrequency);
+            this._myTimer = new SendTimer(DefaultSendTimerFrequency);
             this._myTimer.Elapsed += this.Send;
         }
 
