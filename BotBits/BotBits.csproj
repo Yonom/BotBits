@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Client\Events\DisposedEvent.cs" />
     <Compile Include="Client\Events\DisposingEvent.cs" />
+    <Compile Include="Helpers\BotBitsSynchronizationContext.cs" />
     <Compile Include="Helpers\Database\DatabaseHandle.cs" />
     <Compile Include="Helpers\Database\DatabaseObjectWrapper.cs" />
     <Compile Include="Helpers\Database\DatabaseUtils.cs" />
@@ -78,8 +79,8 @@
     <Compile Include="Helpers\VersionCache.cs" />
     <Compile Include="Internal\ConcurrentDictionaryExtensions.cs" />
     <Compile Include="Internal\InitParse.cs" />
-    <Compile Include="Helpers\BotBitsSynchronizationContext.cs" />
     <Compile Include="Internal\VarintHelper.cs" />
+    <Compile Include="Models\PackAttribute.cs" />
     <Compile Include="RPC\DisconnectedException.cs" />
     <Compile Include="RPC\Lobby\CrewMembershipData.cs" />
     <Compile Include="RPC\Lobby\LobbyConnection.cs" />
@@ -248,7 +249,6 @@
     <Compile Include="Packages\BlockChecker\BlockChecker.cs" />
     <Compile Include="Packages\EventManager\IEvent.cs" />
     <Compile Include="Internal\Nito\Deque.cs" />
-    <Compile Include="Models\PackAttribute.cs" />
     <Compile Include="Internal\WaitHandleExtensions.cs" />
     <Compile Include="Packages\MessageHandler\Events\GemEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\RoomVisibleEvent.cs" />
