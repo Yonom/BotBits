@@ -123,7 +123,7 @@ namespace BotBits
         [EventListener]
         private void On(PortalPlaceEvent e)
         {
-            this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.PortalId, e.PortalTarget, e.PortalRotation);
+            this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.PortalRotation, e.PortalId, e.PortalTarget);
         }
 
         [EventListener]

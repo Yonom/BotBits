@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace BotBits
 {
-    [DebuggerDisplay("Id = {Id}")]
+    [DebuggerDisplay("Id = {" + nameof(Id) + "}")]
     public struct ForegroundBlock : IEquatable<ForegroundBlock>
     {
         private readonly object _args;
