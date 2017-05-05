@@ -14,7 +14,17 @@ namespace BotBits
         public SendTimer(double frequency)
         {
             this.Frequency = frequency;
-            this._myTimer = new Timer(this.TimerCallback, null, 0, 15);
+            this._myTimer = new Timer(this.TimerCallback, null, Timeout.Infinite, Timeout.Infinite);
+        }
+
+        public void Start()
+        {
+            this._myTimer.Change(0, 15);
+        }
+
+        public void Stop()
+        {
+            this._myTimer.Change(Timeout.Infinite, Timeout.Infinite);
         }
 
         public void Dispose()

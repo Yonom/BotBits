@@ -25,7 +25,19 @@ namespace BotBits
         {
             this._myTimer.Dispose();
         }
-        
+
+        [EventListener]
+        private void On(ConnectEvent e)
+        {
+            this._myTimer.Start();
+        }
+
+        [EventListener]
+        private void On(DisconnectEvent e)
+        {
+            this._myTimer.Stop();
+        }
+
         [EventListener]
         private void On(InitEvent e)
         {
