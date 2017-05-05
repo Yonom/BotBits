@@ -12,6 +12,7 @@ namespace BotBits
     public static class DiagnosticServices
     {
         private static readonly string _uninitializedFix = $" To fix this issue, wait for {nameof(JoinCompleteEvent)} before accessing the room.";
+        private static readonly string _noEditFix = $" To fix this issue, wait for {nameof(AccessRightChangedEvent)} before placing blocks.";
         private static readonly string _loaderIgnore = " You may disable this warning by adding [DiagnosticIgnore] to the offending EventListener.";
 
         [ThreadStatic]
@@ -23,8 +24,14 @@ namespace BotBits
         {
             var oldvalue = _disabled;
             _disabled = true;
-            task();
-            _disabled = oldvalue;
+            try
+            {
+                task();
+            }
+            finally
+            {
+                _disabled = oldvalue;
+            }
         }
 
         internal static void Eventloader_LoadStatic<T>()
@@ -101,8 +108,11 @@ namespace BotBits
         {
             if (!Enabled) return;
 
-            if (!Room.Of(client).InitComplete && typeof(T) != typeof(InitSendMessage))
+            if (typeof(T) != typeof(InitSendMessage) && !Room.Of(client).InitComplete)
                 throw new DiagnosticException($"You are trying to send messages before {nameof(InitEvent)} is received." + _uninitializedFix);
+
+            if (typeof(T) == typeof(PlaceSendMessage) && !Actions.Of(client).CanEdit)
+                throw new DiagnosticException("You are trying to place blocks without edit access. " + _noEditFix);
         }
 
         internal static void Chat_QueueChat(BotBitsClient client)

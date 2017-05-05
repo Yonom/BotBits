@@ -46,8 +46,15 @@ namespace BotBits
         {
             var oldvalue = _skipQueues;
             _skipQueues = true;
-            task();
-            _skipQueues = oldvalue;
+
+            try
+            {
+                task();
+            }
+            finally
+            {
+                _skipQueues = oldvalue;
+            }
         }
 
         /// <summary>
@@ -58,8 +65,15 @@ namespace BotBits
         {
             var oldvalue = _noChecks;
             _noChecks = true;
-            task();
-            _noChecks = oldvalue;
+
+            try
+            {
+                task();
+            }
+            finally
+            {
+                _noChecks = oldvalue;
+            }
         }
 
         /// <summary>
@@ -70,8 +84,15 @@ namespace BotBits
         {
             var oldvalue = _instantSend;
             _instantSend = true;
-            task();
-            _instantSend = oldvalue;
+
+            try
+            {
+                task();
+            }
+            finally
+            {
+                _instantSend = oldvalue;
+            }
         }
     }
 }

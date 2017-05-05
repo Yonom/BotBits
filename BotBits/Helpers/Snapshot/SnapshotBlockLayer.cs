@@ -87,6 +87,11 @@ namespace BotBits
 
         public void Stage(Point p)
         {
+            this.StageInternal(p, true);
+        }
+
+        internal void StageInternal(Point p, bool addToHistory)
+        {
             T change;
             if (this.UnstagedChanges.TryGetValue(p, out change))
             {
@@ -95,17 +100,22 @@ namespace BotBits
 
                 this.UnstagedChanges.Remove(p);
 
-                if (this._history.Count > 0)
+                if (addToHistory && this._history.Count > 0)
                     this._history.Peek().Add(new SnapshotHistoryItem<T>(p, old, change));
+            }
+        }
+
+        internal void StageAllInternal(bool addToHistory)
+        {
+            while (this.UnstagedChanges.Count > 0)
+            {
+                this.StageInternal(this.UnstagedChanges.Keys.First(), addToHistory);
             }
         }
 
         public void StageAll()
         {
-            while (this.UnstagedChanges.Count > 0)
-            {
-                this.Stage(this.UnstagedChanges.Keys.First());
-            }
+            this.StageAllInternal(true);
         }
 
         public void Discard(Point p)
