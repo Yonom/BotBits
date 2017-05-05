@@ -25,7 +25,7 @@ namespace BotBits
 
         private BlockDataWorld World
         {
-            get { return this._blockDataWorld; }
+            get => this._blockDataWorld;
             set
             {
                 this._blockDataWorld = value;
@@ -239,16 +239,20 @@ namespace BotBits
             return new ProxyWorld(this);
         }
 
-        public ForegroundBlock GetExpectedForeground(Point p)
+        public ExpectedData<ForegroundBlock> GetExpectedForeground(Point p)
         {
-            return BlockChecker.Of(this.BotBits).GetExpectedForeground(p)
-                ?? this.Foreground[p].Block;
+            var expected = BlockChecker.Of(this.BotBits).GetExpectedForeground(p);
+            return expected.HasValue 
+                ? new ExpectedData<ForegroundBlock>(Player.Nobody, expected.Value, true)
+                : new ExpectedData<ForegroundBlock>(this.Foreground[p].Placer, this.Foreground[p].Block, false);
         }
 
-        public BackgroundBlock GetExpectedBackground(Point p)
+        public ExpectedData<BackgroundBlock> GetExpectedBackground(Point p)
         {
-            return BlockChecker.Of(this.BotBits).GetExpectedBackground(p)
-                ?? this.Background[p].Block;
+            var expected = BlockChecker.Of(this.BotBits).GetExpectedBackground(p);
+            return expected.HasValue
+                ? new ExpectedData<BackgroundBlock>(Player.Nobody, expected.Value, true)
+                : new ExpectedData<BackgroundBlock>(this.Foreground[p].Placer, this.Background[p].Block, false);
         }
     }
 }

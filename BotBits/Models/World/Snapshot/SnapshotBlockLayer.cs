@@ -7,13 +7,13 @@ namespace BotBits
 {
     public class SnapshotBlockLayer<T> : IBlockLayer<T> where T : struct, IEquatable<T>
     {
-        private readonly Func<Point, T> _expectedBlocks;
+        private readonly Func<Point, ExpectedData<T>> _expectedBlocks;
         private readonly IReadOnlyBlockLayer<BlockData<T>> _innerLayer;
         private readonly Stack<List<SnapshotHistoryItem<T>>> _history = new Stack<List<SnapshotHistoryItem<T>>>();
         private readonly Dictionary<Point, T> _stagedChanges = new Dictionary<Point, T>();
         public Dictionary<Point, T> UnstagedChanges { get; } = new Dictionary<Point, T>();
 
-        public SnapshotBlockLayer(Func<Point, T> expectedBlocks, IReadOnlyBlockLayer<BlockData<T>> innerLayer)
+        public SnapshotBlockLayer(Func<Point, ExpectedData<T>> expectedBlocks, IReadOnlyBlockLayer<BlockData<T>> innerLayer)
         {
             this._expectedBlocks = expectedBlocks;
             this._innerLayer = innerLayer;
@@ -132,7 +132,7 @@ namespace BotBits
         {
             T res;
             if (!this._stagedChanges.TryGetValue(p, out res))
-                res = this._expectedBlocks(p);
+                res = this._expectedBlocks(p).Block;
             return res;
         }
     }

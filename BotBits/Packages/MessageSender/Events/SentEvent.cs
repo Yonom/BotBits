@@ -7,9 +7,9 @@ namespace BotBits.Events
     ///     Raised when a queued SendMessage is sent.
     /// </summary>
     /// <remarks>This event is not delegated to the scheduler for performance optimizations.</remarks>
-    public sealed class SendCancelEvent<T> : Event<SendCancelEvent<T>> where T : SendMessage<T>
+    public sealed class SentEvent<T> : Event<SentEvent<T>> where T : SendMessage<T>
     {
-        public SendCancelEvent([NotNull] T message)
+        public SentEvent([NotNull] T message)
         {
             this.Message = message;
         }

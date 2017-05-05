@@ -43,7 +43,7 @@ namespace BotBits
                 if (!this.SendMessage(msg, client))
                 {
                     this._lastTicks--;
-                    new SendCancelEvent<T>(msg)
+                    new SendCancelledEvent<T>(msg)
                         .RaiseIn(client);
                 }
             }
@@ -88,7 +88,7 @@ namespace BotBits
             var con = ConnectionManager.Of(client).Connection;
             if (con == null) return false;
 
-            new SendEvent<T>(msg)
+            new SentEvent<T>(msg)
                 .RaiseIn(client);
             e.Message.Send(con);
             return true;

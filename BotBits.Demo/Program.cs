@@ -14,7 +14,6 @@ namespace BotBits.Demo
             EventLoader.Of(bot).LoadStatic<Program>();
 
             Login.Of(bot).AsGuest().CreateJoinRoom("PW01");
-
             Thread.Sleep(Timeout.Infinite);
         }
     }

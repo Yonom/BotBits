@@ -18,7 +18,7 @@ namespace BotBits
 
         ILogin<LoginClient> IPlayerIOGame<LoginClient>.Login => this;
 
-        public string GameId => "everybody-edits-su9rn58o40itdbnw69plyw";
+        public string GameId => PlayerIOServices.GameId;
 
         public PlayerIOGame WithGameId(string gameId)
         {

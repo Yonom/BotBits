@@ -96,7 +96,7 @@ namespace BotBits
         }
 
         [EventListener]
-        private void On(SendCancelEvent<PlaceSendMessage> e)
+        private void On(SendCancelledEvent<PlaceSendMessage> e)
         {
             this.RemoveFromSendQueue(e.Message);
         }
@@ -185,7 +185,7 @@ namespace BotBits
         }
 
         [EventListener(GlobalPriority.AfterMost)]
-        private void OnSendPlace(SendEvent<PlaceSendMessage> e)
+        private void OnSendPlace(SentEvent<PlaceSendMessage> e)
         {
             var b = e.Message;
             var p = GetPoint3D(b);
