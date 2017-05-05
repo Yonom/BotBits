@@ -17,8 +17,15 @@ namespace BotBits
 
         [ThreadStatic]
         private static bool _disabled;
-        
-        public static bool Enabled => Debugger.IsAttached && !_disabled;
+
+        private static bool _globallyDisabled;
+
+        public static bool Enabled => Debugger.IsAttached && !_globallyDisabled && !_disabled;
+
+        public static void DisableGlobally()
+        {
+            _globallyDisabled = true;
+        }
 
         public static void WithDiagnosticsDisabled([InstantHandle] Action task)
         {
