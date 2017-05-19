@@ -83,6 +83,7 @@
     <Compile Include="Internal\InitParse.cs" />
     <Compile Include="Internal\VarintHelper.cs" />
     <Compile Include="Models\PackAttribute.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\TouchGodBlockSendMessage.cs" />
     <Compile Include="RPC\DisconnectedException.cs" />
     <Compile Include="RPC\Lobby\CrewMembershipData.cs" />
     <Compile Include="RPC\Lobby\LobbyConnection.cs" />

@@ -249,6 +249,12 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
+        public void TouchGodBlock(int x, int y)
+        {
+            new TouchGodBlockSendMessage(x, y)
+                .SendIn(this.BotBits);
+        }
+
         public void ApplyEffect(Effect effect, int x, int y)
         {
             new EffectSendMessage(effect, x, y)
