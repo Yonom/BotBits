@@ -4,7 +4,7 @@ namespace BotBits.Events
 {
     /// <summary>
     ///     Occurs when a player receives or loses edit rights.
-    ///     NOTE: You receive this even only if you are owner of the world.
+    ///     NOTE: You receive this event only if you are owner of the world.
     /// </summary>
     /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("editRights")]

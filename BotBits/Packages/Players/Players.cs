@@ -113,6 +113,13 @@ namespace BotBits
             p.Team = e.Team;
             p.CrewMember = e.CrewMember;
             p.GoldBorder = e.GoldBorder;
+            p.HasEditRights = e.HasEditRights;
+
+            // Players joining after us never have god on join!
+            if (Room.Of(this.BotBits).JoinComplete)
+            {
+                p.HasGodRights = false;
+            }
         }
 
         [EventListener]

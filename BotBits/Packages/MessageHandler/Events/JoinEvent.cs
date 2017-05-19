@@ -38,11 +38,16 @@ namespace BotBits.Events
             this.ChatColor = message.GetUInt(19);
             this.Badge = message.GetBadge(20);
             this.CrewMember = message.GetBoolean(21);
+
+            if (message.Count > 22)
+            {
+                this.HasEditRights = message.GetBoolean(22);
+            }
         }
 
         public bool GoldBorder { get; set; }
 
-        public bool CanEdit { get; set; }
+        public bool? HasEditRights { get; set; }
 
         public AuraColor AuraColor { get; set; }
 

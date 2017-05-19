@@ -333,9 +333,9 @@ namespace BotBits
         /// </value>
         public int BlockY => WorldUtils.PosToBlock(this.Y);
 
-        public bool HasGodRights { get; internal set; }
+        public bool? HasGodRights { get; internal set; }
 
-        public bool HasEditRights { get; internal set; }
+        public bool? HasEditRights { get; internal set; }
 
         public int Deaths { get; internal set; }
 
@@ -343,7 +343,7 @@ namespace BotBits
 
         public bool GoldBorder { get; set; }
 
-        public bool CanToggleGod => this.HasGodRights || this.HasEditRights;
+        public bool? CanToggleGod => this.HasGodRights | this.HasEditRights;
 
         public bool Equals(Player other)
         {
