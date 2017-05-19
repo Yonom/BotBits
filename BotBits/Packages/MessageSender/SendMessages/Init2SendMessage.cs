@@ -8,7 +8,9 @@ namespace BotBits.SendMessages
     /// <seealso cref="SendMessage{T}" />
     public sealed class Init2SendMessage : SendMessage<Init2SendMessage>
     {
-        //No arguments
+        internal Init2SendMessage()
+        {
+        }
 
         /// <summary>
         ///     Gets the PlayerIO message representing the data in this <see cref="SendMessage{T}" />.
