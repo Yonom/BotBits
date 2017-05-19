@@ -17,6 +17,11 @@
             actions.PressKey(key, 0, 0);
         }
 
+        public static void PressSwitch(this Actions actions, SwitchType key, int switchId, bool enabled)
+        {
+            actions.PressSwitch(key, switchId, enabled, 0, 0);
+        }
+
         public static void MoveToBlock(this Actions actions, int x, int y)
         {
             actions.Move(x * 16, y * 16);

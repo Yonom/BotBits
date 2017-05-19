@@ -11,13 +11,21 @@ namespace BotBits.SendMessages
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlaceSendMessage" /> class.
         /// </summary>
-        public SwitchPressSendMessage(SwitchType switchType, int id, bool enabled, int x, int y)
+        public SwitchPressSendMessage(SwitchType switchType, int id, bool enabled)
         {
-            this.X = x;
-            this.Y = y;
             this.SwitchType = switchType;
             this.Id = id;
             this.Enabled = enabled;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PlaceSendMessage" /> class.
+        /// </summary>
+        public SwitchPressSendMessage(SwitchType switchType, int id, bool enabled, int x, int y)
+            : this(switchType, id, enabled)
+        {
+            this.X = x;
+            this.Y = y;
         }
 
         public int X { get; set; }
