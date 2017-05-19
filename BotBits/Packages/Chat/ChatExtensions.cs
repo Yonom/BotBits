@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System.Globalization;
+using JetBrains.Annotations;
 
 namespace BotBits
 {
@@ -71,15 +72,29 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Teleports the specified username. (/teleport &lt;username&gt; &lt;x&gt; &lt;y&gt;).
+        ///     Teleports the specified username. (/teleport &lt;username&gt; &lt;blockX&gt; &lt;blockY&gt;).
+        /// </summary>
+        /// <param name="chat">The chat.</param>
+        /// <param name="username">The username.</param>
+        /// <param name="blockX">The block's x.</param>
+        /// <param name="blockY">The block's y.</param>
+        public static void Teleport(this IChat chat, string username, int blockX, int blockY)
+        {
+            chat.Say("/teleport {0} {1} {2}", username, blockX, blockY);
+        }
+
+        /// <summary>
+        ///     Teleports the specified username. (/teleport &lt;username&gt; &lt;x/16&gt; &lt;y/16&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
         /// <param name="x">The x.</param>
         /// <param name="y">The y.</param>
-        public static void Teleport(this IChat chat, string username, int x, int y)
+        public static void TeleportExact(this IChat chat, string username, int x, int y)
         {
-            chat.Say("/teleport {0} {1} {2}", username, x, y);
+            chat.Say("/teleport {0} {1} {2}", username,
+                (x / 16.0).ToString(CultureInfo.InvariantCulture),
+                (y / 16.0).ToString(CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -402,7 +417,7 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Reports the specified user with the given reason (/reportabuse &lt;username&gt; &lt;reason&gt;).
+        ///     Reports the specified user with the given reason. (/reportabuse &lt;username&gt; &lt;reason&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -415,7 +430,7 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Teleports the specified username (/teleport &lt;username&gt; &lt;point.X+1&gt; &lt;point.Y+1&gt;).
+        ///     Teleports the specified username (/teleport &lt;username&gt; &lt;point.X&gt; &lt;point.Y&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>
@@ -423,6 +438,17 @@ namespace BotBits
         public static void Teleport(this IChat chat, string username, Point point)
         {
             chat.Teleport(username, point.X, point.Y);
+        }
+        
+        /// <summary>
+        ///     Teleports the specified username (/teleport &lt;username&gt; &lt;point.X/16&gt; &lt;point.Y/16&gt;).
+        /// </summary>
+        /// <param name="chat">The chat.</param>
+        /// <param name="username">The username.</param>
+        /// <param name="point">The point.</param>
+        public static void TeleportExact(this IChat chat, string username, Point point)
+        {
+            chat.TeleportExact(username, point.X, point.Y);
         }
 
         /// <summary>

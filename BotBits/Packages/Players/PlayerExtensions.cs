@@ -87,14 +87,24 @@ namespace BotBits
             Chat.Of(player.BotBits).Teleport(player.Username);
         }
 
+        public static void Teleport(this Player player, int x, int y)
+        {
+            Chat.Of(player.BotBits).Teleport(player.Username, x, y);
+        }
+
         public static void Teleport(this Player player, Point point)
         {
             Chat.Of(player.BotBits).Teleport(player.Username, point);
         }
 
-        public static void Teleport(this Player player, int x, int y)
+        public static void TeleportExact(this Player player, int x, int y)
         {
-            Chat.Of(player.BotBits).Teleport(player.Username, x, y);
+            Chat.Of(player.BotBits).TeleportExact(player.Username, x, y);
+        }
+
+        public static void TeleportExact(this Player player, Point point)
+        {
+            Chat.Of(player.BotBits).TeleportExact(player.Username, point);
         }
 
         public static void ForceFly(this Player player, bool flying)
