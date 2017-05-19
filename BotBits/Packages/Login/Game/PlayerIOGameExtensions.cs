@@ -7,6 +7,12 @@ namespace BotBits
     public static class PlayerIOGameExtensions
     {
         [Pure]
+        public static T WithPublicConnection<T>(this IPlayerIOGame<T> playerIOGame, string userId)
+        {
+            return WithPublicConnectionAsync(playerIOGame, userId).GetResultEx();
+        }
+
+        [Pure]
         public static T AsGuest<T>(this IPlayerIOGame<T> playerIOGame)
         {
             return AsGuestAsync(playerIOGame).GetResultEx();
@@ -34,6 +40,14 @@ namespace BotBits
         public static T WithArmorGames<T>(this IPlayerIOGame<T> playerIOGame, string userId, string token)
         {
             return WithArmorGamesAsync(playerIOGame, userId, token).GetResultEx();
+        }
+
+        [Pure]
+        public static Task<T> WithPublicConnectionAsync<T>(this IPlayerIOGame<T> playerIOGame, string userId)
+        {
+            return PlayerIOAsync.ConnectAsync(playerIOGame.GameId, "public", userId, null, null, null)
+                .Then(task => playerIOGame.Login.WithClient(task.Result))
+                .ToSafeTask();
         }
 
         [Pure]
