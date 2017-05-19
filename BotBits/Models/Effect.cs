@@ -11,6 +11,7 @@
         //Team = 6,
         LowGravity = 7,
         Fire = 8,
-        MultiJump = 9
+        MultiJump = 9,
+        Gravity = 10
     }
 }

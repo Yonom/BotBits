@@ -345,6 +345,23 @@ namespace BotBits
 
         public bool? CanToggleGod => this.HasGodRights | this.HasEditRights;
 
+        public int AvailableJumps
+        {
+            get
+            {
+                lock (this._effects) return this._effects.TryGetValue(Effect.MultiJump, out ActiveEffect effect) ? effect.Value : 1;
+            }
+        }
+
+        public GravityDirection GravityDirection
+        {
+            get
+            {
+                lock (this._effects) return this._effects.TryGetValue(Effect.Gravity, out ActiveEffect effect) ? (GravityDirection)effect.Value : 0;
+            }
+        }
+
+
         public bool Equals(Player other)
         {
             if (ReferenceEquals(null, other)) return false;

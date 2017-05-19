@@ -73,6 +73,7 @@
     <Compile Include="Database\Config\VersionConfiguration.cs" />
     <Compile Include="Database\Username\UsernameData.cs" />
     <Compile Include="Database\Player\PlayerData.cs" />
+    <Compile Include="Models\GravityDirection.cs" />
     <Compile Include="Models\World\ExpectedData\ExpectedData.cs" />
     <Compile Include="Models\World\Snapshot\BlocksSnapshot.cs" />
     <Compile Include="Models\World\Snapshot\SnapshotBlockLayer.cs" />
