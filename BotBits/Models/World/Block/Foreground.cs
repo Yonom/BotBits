@@ -20,10 +20,12 @@ namespace BotBits
                 Left = (Id)1,
                 Up = (Id)2,
                 Right = (Id)3,
+                Down = (Id)1518,
                 Dot = (Id)4,
                 InvisibleLeft = (Id)411,
                 InvisibleUp = (Id)412,
                 InvisibleRight = (Id)413,
+                InvisibleDown = (Id)1519,
                 InvisibleDot = (Id)414,
                 SlowDot = (Id)459,
                 InvisibleSlowDot = (Id)460;
@@ -270,6 +272,10 @@ namespace BotBits
             [Pack("brickdrums", ForegroundType = ForegroundType.Note)]
             public const Id
                 Drum = (Id)83;
+
+            [Pack("brickguitar", ForegroundType = ForegroundType.Note)]
+            public const Id
+                Guitar = (Id)1520;
         }
 
         public static class Christmas2011
@@ -445,6 +451,10 @@ namespace BotBits
 
             public const Id
                 Resetpoint = (Id)466;
+
+            [Pack("brickgodblock")]
+            public const Id
+                GodBlock = (Id)1516;
         }
 
         public static class Crown
@@ -1032,6 +1042,10 @@ namespace BotBits
             [Pack("brickeffectmultijump", ForegroundType = ForegroundType.Morphable)]
             public const Id
                 MultiJump = (Id)461;
+
+            [Pack("brickeffectgravity", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                Gravity = (Id)1517; 
         }
 
         public static class Liquid
@@ -1284,7 +1298,6 @@ namespace BotBits
             public const Id
                 LightDown = (Id)1507,
                 LightUp = (Id)1506;
-
         }
 
         public static class Tile
@@ -1301,7 +1314,6 @@ namespace BotBits
                 Cyan = (Id)1113,
                 Blue = (Id)1114,
                 Purple = (Id)1115;
-
         }
 
         public static class StPatricks2017
@@ -1313,7 +1325,22 @@ namespace BotBits
                 Horseshoe = (Id)1513,
                 RainbowLeft = (Id)1514,
                 RainbowRight = (Id)1515;
+        }
 
+        public static class HalfBlock
+        {
+            [Pack("brickhalfblocks", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                Black = (Id)1116,
+                Gray = (Id)1117,
+                White = (Id)1118,
+                Blue = (Id)1119,
+                Purple = (Id)1120,
+                Red = (Id)1121,
+                Orange = (Id)1122,
+                Yellow = (Id)1123,
+                Green = (Id)1124,
+                Cyan = (Id)1125;
         }
     }
 }

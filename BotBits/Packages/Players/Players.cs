@@ -97,6 +97,7 @@ namespace BotBits
             p.Smiley = e.Smiley;
             p.AuraShape = e.AuraShape;
             p.AuraColor = e.AuraColor;
+            p.AuraOffset = e.AuraOffset;
             p.Badge = e.Badge;
             p.HasChat = e.HasChat;
             p.GodMode = e.God;
@@ -119,6 +120,14 @@ namespace BotBits
             if (Room.Of(this.BotBits).JoinComplete)
             {
                 p.HasGodRights = false;
+            }
+
+            // Load the purple switcches
+            foreach (var ps in e.PurpleSwitches)
+            {
+                p.AddSwitch(ps);
+                new PurpleSwitchEvent(p, ps, true)
+                    .RaiseIn(this.BotBits);
             }
         }
 
@@ -266,6 +275,7 @@ namespace BotBits
         {
             var p = e.Player;
             p.AdminMode = e.Admin;
+            p.AuraOffset = e.AuraOffset;
 
             if (!p.ModMode && !p.GodMode)
             {
@@ -279,6 +289,7 @@ namespace BotBits
         {
             var p = e.Player;
             p.ModMode = e.Mod;
+            p.AuraOffset = e.AuraOffset;
 
             if (!p.GodMode && !p.AdminMode)
             {
@@ -338,18 +349,6 @@ namespace BotBits
         {
             var p = e.Player;
             p.HasEditRights = e.AllowEdit;
-        }
-
-        [EventListener]
-        private void On(PurpleSwitchInitEvent e)
-        {
-            var p = e.Player;
-            foreach (var ps in e.PurpleSwitches)
-            {
-                p.AddSwitch(ps);
-                new PurpleSwitchEvent(p, ps, true)
-                    .RaiseIn(this.BotBits);
-            }
         }
 
         [EventListener]

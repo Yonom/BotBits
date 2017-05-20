@@ -18,7 +18,10 @@ namespace BotBits.Events
             : base(client, message)
         {
             this.Mod = message.GetBoolean(1);
+            this.AuraOffset = message.GetInt(2);
         }
+
+        public int AuraOffset { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether moderator is in moderator mode.

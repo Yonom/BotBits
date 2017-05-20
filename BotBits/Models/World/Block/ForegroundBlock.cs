@@ -48,10 +48,10 @@ namespace BotBits
             this._args = text;
         }
 
-        public ForegroundBlock(Foreground.Id id, string text, string textColor)
+        public ForegroundBlock(Foreground.Id id, string text, string textColor, uint wrapWidth)
             : this(id, BlockArgsType.Label)
         {
-            this._args = new LabelArgs(text, textColor);
+            this._args = new LabelArgs(text, textColor, wrapWidth);
             this.Id = id;
         }
 
@@ -90,6 +90,11 @@ namespace BotBits
 
         public ForegroundBlock(Foreground.Id id, int portalId, int portalTarget, Morph.Id portalRotation)
             : this(id, (uint)portalId, (uint)portalTarget, portalRotation)
+        {
+        }
+
+        public ForegroundBlock(Foreground.Id id, string text, string textColor, int wrapWidth)
+            : this(id, text, textColor, (uint)wrapWidth)
         {
         }
 
@@ -157,6 +162,22 @@ namespace BotBits
         }
 
         /// <summary>
+        ///     Gets the width of this block.
+        /// </summary>
+        /// <value>
+        ///     The width.
+        /// </value>
+        public uint WrapWidth
+        {
+            get
+            {
+                if (this.Type != ForegroundType.Label) throw new InvalidOperationException("This property can only be accessed on label blocks.");
+
+                return this.GetLabelArgs()?.WrapWidth ?? default(uint);
+            }
+        }
+
+        /// <summary>
         ///     Gets the toggled state. (Only on toggle)
         /// </summary>
         /// <value>
@@ -170,55 +191,6 @@ namespace BotBits
                 if (this.Type != ForegroundType.Toggle && this.Type != ForegroundType.ToggleGoal) throw new InvalidOperationException("This property can only be accessed on toggle blocks.");
 
                 return this.GetUIntArgs() != 0;
-            }
-        }
-
-        /// <summary>
-        ///     Gets the goal. (Only on goal blocks)
-        /// </summary>
-        /// <value>
-        ///     The goal.
-        /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on goal blocks.</exception>
-        public uint Goal
-        {
-            get
-            {
-                if (this.Type != ForegroundType.Goal && this.Type != ForegroundType.ToggleGoal) throw new InvalidOperationException("This property can only be accessed on goal blocks.");
-
-                return this.GetUIntArgs();
-            }
-        }
-
-        /// <summary>
-        ///     Gets the morph. (Only on morphable blocks)
-        /// </summary>
-        /// <value>
-        ///     The morph.
-        /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on morphable blocks.</exception>
-        public Morph.Id Morph
-        {
-            get
-            {
-                switch (this.Type)
-                {
-                    case ForegroundType.Portal:
-                        return this.GetPortalArgs().PortalRotation;
-                    case ForegroundType.Morphable:
-                    case ForegroundType.Team:
-                        return (Morph.Id)this.GetUIntArgs();
-
-
-                    case ForegroundType.Note:
-                        return (Morph.Id)this.GetUIntArgs();
-
-                    case ForegroundType.Sign:
-                        return this.GetSignArgs()?.SignColor ?? default(Morph.Id);
-
-                    default:
-                        throw new InvalidOperationException("This property can only be accessed on morphable blocks.");
-                }
             }
         }
 
@@ -240,19 +212,58 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Gets the portal target.  (Only on portal blocks)
+        ///     Gets the target. (Only on goal or portal blocks)
         /// </summary>
         /// <value>
-        ///     The portal target.
+        ///     The goal.
         /// </value>
-        /// <exception cref="System.InvalidOperationException">This property can only be accessed on Portal blocks.</exception>
-        public uint PortalTarget
+        /// <exception cref="System.InvalidOperationException">This property can only be accessed on goal or portal blocks.</exception>
+        public uint Target
         {
             get
             {
-                if (this.Type != ForegroundType.Portal) throw new InvalidOperationException("This property can only be accessed on Portal blocks.");
+                switch (this.Type)
+                {
+                    case ForegroundType.Goal:
+                    case ForegroundType.ToggleGoal:
+                        return this.GetUIntArgs();
 
-                return this.GetPortalArgs()?.PortalTarget ?? default(uint);
+                    case ForegroundType.Portal:
+                        return this.GetPortalArgs()?.PortalTarget ?? default(uint);
+
+                    default:
+                        throw new InvalidOperationException("This property can only be accessed on goal or portal blocks.");
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Gets the morph. (Only on morphable blocks)
+        /// </summary>
+        /// <value>
+        ///     The morph.
+        /// </value>
+        /// <exception cref="System.InvalidOperationException">This property can only be accessed on morphable blocks.</exception>
+        public Morph.Id Morph
+        {
+            get
+            {
+                switch (this.Type)
+                {
+                    case ForegroundType.Morphable:
+                    case ForegroundType.Team:
+                    case ForegroundType.Note:
+                        return (Morph.Id)this.GetUIntArgs();
+
+                    case ForegroundType.Portal:
+                        return this.GetPortalArgs().PortalRotation;
+
+                    case ForegroundType.Sign:
+                        return this.GetSignArgs()?.SignColor ?? default(Morph.Id);
+
+                    default:
+                        throw new InvalidOperationException("This property can only be accessed on morphable blocks.");
+                }
             }
         }
 
@@ -334,20 +345,23 @@ namespace BotBits
 
         private class LabelArgs : IEquatable<LabelArgs>
         {
-            public LabelArgs(string text, string textColor)
+            public LabelArgs(string text, string textColor, uint wrapWidth)
             {
                 this.Text = text;
                 this.TextColor = textColor;
+                this.WrapWidth = wrapWidth;
             }
 
             public string Text { get; }
             public string TextColor { get; }
+            public uint WrapWidth { get; }
+
 
             public bool Equals(LabelArgs other)
             {
                 if (ReferenceEquals(null, other)) return false;
                 if (ReferenceEquals(this, other)) return true;
-                return string.Equals(this.Text, other.Text) && string.Equals(this.TextColor, other.TextColor);
+                return string.Equals(this.Text, other.Text) && string.Equals(this.TextColor, other.TextColor) && this.WrapWidth == other.WrapWidth;
             }
 
             public override bool Equals(object obj)
@@ -355,15 +369,17 @@ namespace BotBits
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
                 if (obj.GetType() != this.GetType()) return false;
-                return this.Equals((LabelArgs)obj);
+                return Equals((LabelArgs)obj);
             }
 
             public override int GetHashCode()
             {
                 unchecked
                 {
-                    return ((this.Text?.GetHashCode() ?? 0) * 397) ^
-                           (this.TextColor?.GetHashCode() ?? 0);
+                    var hashCode = (this.Text != null ? this.Text.GetHashCode() : 0);
+                    hashCode = (hashCode * 397) ^ (this.TextColor != null ? this.TextColor.GetHashCode() : 0);
+                    hashCode = (hashCode * 397) ^ (int)this.WrapWidth;
+                    return hashCode;
                 }
             }
 
@@ -430,9 +446,9 @@ namespace BotBits
                 case ForegroundType.Normal:
                     return new object[0];
                 case ForegroundType.Portal:
-                    return new object[] { (uint)this.Morph, this.PortalId, this.PortalTarget };
+                    return new object[] { (uint)this.Morph, this.PortalId, this.Target };
                 case ForegroundType.Label:
-                    return new object[] { this.Text, this.TextColor };
+                    return new object[] { this.Text, this.TextColor, this.Target };
                 case ForegroundType.Sign:
                     return new object[] { this.Text, (uint)this.Morph };
                 default:

@@ -9,7 +9,7 @@ namespace BotBits
     public static class PlayerIOServices
     {
         public const string GameId = "everybody-edits-su9rn58o40itdbnw69plyw";
-        public const int BotBitsVersion = 220;
+        public const int BotBitsVersion = 221;
 
         private static Client _defaultClient;
 

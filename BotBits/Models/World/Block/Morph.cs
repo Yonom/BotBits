@@ -61,15 +61,6 @@
                 Right = (Id)2,
                 Up = (Id)3;
         }
-        
-        public static class Sword
-        {
-            public const Id
-                TopLeft = 0,
-                BottomLeft = (Id)1,
-                BottomRight = (Id)2,
-                TopRight = (Id)3;
-        }
 
         public static class Axe
         {
@@ -78,6 +69,15 @@
                 TopLeft = (Id)1,
                 BottomLeft = (Id)2,
                 BottomRight = (Id)3;
+        }
+
+        public static class Sword
+        {
+            public const Id
+                TopLeft = 0,
+                BottomLeft = (Id)1,
+                BottomRight = (Id)2,
+                TopRight = (Id)3;
         }
 
         public static class SciFiSlope
@@ -373,6 +373,11 @@
                 Clap = (Id)7,
                 Cymbal4 = (Id)8,
                 Maraca = (Id)9;
+        }
+
+        public static class Guitar
+        {
+            // TODO add notes
         }
 
         // Misc

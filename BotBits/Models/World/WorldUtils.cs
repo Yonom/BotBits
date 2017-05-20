@@ -114,7 +114,8 @@ namespace BotBits
                 case ForegroundType.Label:
                     return new ForegroundBlock(foreground,
                         obj.GetString("text", "no text found"),
-                        obj.GetString("text_color", "#FFFFFF"));
+                        obj.GetString("text_color", "#FFFFFF"),
+                        obj.GetUInt("wrapWidth", 200));
 
                 case ForegroundType.Sign:
                     return new ForegroundBlock(foreground,
@@ -201,7 +202,8 @@ namespace BotBits
                 {
                     var text = Convert.ToString(args[0]);
                     var textcolor = Convert.ToString(args[1]);
-                    return new ForegroundBlock(block, text, textcolor);
+                    var wrapWidth = Convert.ToUInt32(args[2]);
+                    return new ForegroundBlock(block, text, textcolor, wrapWidth);
                 }
 
                 case BlockArgsType.Sign:

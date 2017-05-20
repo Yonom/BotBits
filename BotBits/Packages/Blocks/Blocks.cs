@@ -153,7 +153,7 @@ namespace BotBits
         [EventListener]
         private void On(LabelPlaceEvent e)
         {
-            this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.TextColor);
+            this.RaiseForegroundData(e.Player, e.X, e.Y, (Foreground.Id)e.Id, e.Text, e.TextColor, e.WrapWidth);
         }
 
         [EventListener]

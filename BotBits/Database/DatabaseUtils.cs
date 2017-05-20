@@ -7,9 +7,10 @@ using PlayerIOClient;
 namespace BotBits
 {
     public static class DatabaseUtils
-    {        /// <summary>
+    {   
+        /// <summary>
         /// Loads DatabaseObjects in an index, batches requests for large indexes
-        /// </summary
+        /// </summary>
         public static Task<List<DatabaseObject>> RecursiveLoadRangeAsync(Client client, string table, string index, object[] indexPath, object start, object stop, int limit, Func<DatabaseObject, object> indexPicker)
         {
             var results = new List<DatabaseObject>();

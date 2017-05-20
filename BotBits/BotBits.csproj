@@ -74,6 +74,7 @@
     <Compile Include="Database\Username\UsernameData.cs" />
     <Compile Include="Database\Player\PlayerData.cs" />
     <Compile Include="Models\Gravity.cs" />
+    <Compile Include="Models\AccessGroup.cs" />
     <Compile Include="Models\World\ExpectedData\ExpectedData.cs" />
     <Compile Include="Models\World\Snapshot\BlocksSnapshot.cs" />
     <Compile Include="Models\World\Snapshot\SnapshotBlockLayer.cs" />
@@ -199,7 +200,6 @@
     <Compile Include="Packages\MessageHandler\Events\JoinCampaignEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\LikedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\MagicEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\PurpleSwitchInitEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\SwitchUpdateEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\RoomDescriptionEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\TeamEvent.cs" />
@@ -445,9 +445,9 @@ foreach (var item in filesToCleanup)
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.2.0.9\build\portable-net+sl+win+wpa+wp\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.9\build\portable-net+sl+win+wpa+wp\Fody.targets'))" />
   </Target>
-  <Import Project="..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets')" />
+  <Import Project="..\packages\Fody.2.0.9\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\packages\Fody.2.0.9\build\portable-net+sl+win+wpa+wp\Fody.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

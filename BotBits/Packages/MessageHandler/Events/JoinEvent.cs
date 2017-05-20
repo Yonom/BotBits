@@ -38,12 +38,16 @@ namespace BotBits.Events
             this.ChatColor = message.GetUInt(19);
             this.Badge = message.GetBadge(20);
             this.CrewMember = message.GetBoolean(21);
+            this.PurpleSwitches = VarintHelper.ToInt32Array(message.GetByteArray(22));
+            this.AuraOffset = message.GetInt(23);
 
-            if (message.Count > 22)
+            if (message.Count > 24)
             {
-                this.HasEditRights = message.GetBoolean(22);
+                this.HasEditRights = message.GetBoolean(24);
             }
         }
+
+        public int AuraOffset { get; set; }
 
         public bool GoldBorder { get; set; }
 
@@ -157,7 +161,7 @@ namespace BotBits.Events
         ///     Gets or sets whether the player has toggled a purple switch.
         /// </summary>
         /// <value><c>true</c> if the player has toggled a purple switch; otherwise, <c>false</c>.</value>
-        public bool PurpleSwitch { get; set; }
+        public int[] PurpleSwitches { get; set; }
 
         /// <summary>
         ///     Gets or sets the username of the player.

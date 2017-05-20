@@ -463,6 +463,18 @@ namespace BotBits
         HazmatSuit = 156,
 
         [Pack("smileyleprechaun")]
-        Leprechaun = 157
+        Leprechaun = 157,
+
+        [Pack("smileyangry")]
+        Angry = 158,
+
+        [Pack("smileysmirk")]
+        Smirk = 159,
+
+        [Pack("smileysweat")]
+        Sweat = 160,
+
+        [Pack("brickguitar")]
+        Guitar = 161 // TODO name
     }
 }
