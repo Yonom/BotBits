@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 
 namespace BotBits
 {
-    public class BotBitsClient
+    public class BotBitsClient : IDisposable
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly PackageLoader _packageLoader;
