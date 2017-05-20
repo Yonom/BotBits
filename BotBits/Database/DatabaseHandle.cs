@@ -268,11 +268,11 @@ namespace BotBits
             return this.GetWorldsByPlaysAsync(minPlays, maxPlays, limit).GetResultEx();
         }
 
-        // --- PayVaultItems ---
+        // --- ShopItems ---
 
         public Task<ShopItem[]> GetShopItemsAsync()
         {
-            return this.Client.BigDB.LoadRangeAsync("PayVaultItems", "PriceCoins", null, int.MinValue, int.MaxValue, 1000)
+            return this.Client.BigDB.LoadRangeAsync("PayVaultItems", "PriceCoins", null, int.MaxValue, int.MinValue, 1000)
                 .Then(task => task.Result.Select(o => new ShopItem(o)).ToArray())
                 .ToSafeTask();
         }
