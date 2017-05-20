@@ -25,6 +25,7 @@ namespace BotBits
             if (width == 110 && height == 110) return WorldType.MoonLarge;
             if (width == 300 && height == 300) return WorldType.Huge;
             if (width == 200 && height == 400) return WorldType.VerticalGreat;
+            if (width == 150 && height == 150) return WorldType.Big;
             return WorldType.Unknown;
         }
 
@@ -70,7 +71,9 @@ namespace BotBits
 
                 case WorldType.VerticalGreat:
                     return new Size(200, 400);
-
+                    
+                case WorldType.Big:
+                    return new Size(150, 150);
 
                 default:
                     throw new NotSupportedException("Unknown world type!");

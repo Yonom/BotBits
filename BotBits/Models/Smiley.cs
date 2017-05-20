@@ -475,6 +475,6 @@ namespace BotBits
         Sweat = 160,
 
         [Pack("brickguitar")]
-        Guitar = 161 // TODO name
+        CountrySinger = 161
     }
 }

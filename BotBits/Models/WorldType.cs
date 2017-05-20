@@ -15,6 +15,7 @@
         Tutorial = 9,
         HomeWorld = 10,
         Huge = 11,
-        VerticalGreat = 12
+        VerticalGreat = 12,
+        Big = 13
     }
 }
