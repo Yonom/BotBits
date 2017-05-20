@@ -353,11 +353,11 @@ namespace BotBits
             }
         }
 
-        public GravityDirection GravityDirection
+        public Gravity Gravity
         {
             get
             {
-                lock (this._effects) return this._effects.TryGetValue(Effect.Gravity, out ActiveEffect effect) ? (GravityDirection)effect.Value : 0;
+                lock (this._effects) return this._effects.TryGetValue(Effect.Gravity, out ActiveEffect effect) ? (Gravity)effect.Value : 0;
             }
         }
 

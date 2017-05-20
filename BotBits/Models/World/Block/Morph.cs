@@ -6,6 +6,11 @@
         {
         }
 
+        public static BotBits.Gravity ToGravity(this Id morph)
+        {
+            return (BotBits.Gravity)morph;
+        }
+
         public static BotBits.Team ToTeam(this Id morph)
         {
             return (BotBits.Team)morph;
@@ -249,6 +254,16 @@
                 Cyan = (Id)BotBits.Team.Cyan,
                 Magenta = (Id)BotBits.Team.Magenta,
                 Yellow = (Id)BotBits.Team.Yellow;
+        }
+
+        public static class Gravity
+        {
+            public const Id
+                Down = (Id)BotBits.Gravity.Down,
+                Left = (Id)BotBits.Gravity.Left,
+                Up = (Id)BotBits.Gravity.Up,
+                Right = (Id)BotBits.Gravity.Right,
+                Dot = (Id)BotBits.Gravity.Dot;
         }
 
         // Music
