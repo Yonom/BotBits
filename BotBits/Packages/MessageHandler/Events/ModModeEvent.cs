@@ -17,16 +17,16 @@ namespace BotBits.Events
         internal ModModeEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Mod = message.GetBoolean(1);
-            this.AuraOffset = message.GetInt(2);
+            this.ModMode = message.GetBoolean(1);
+            this.StaffAuraOffset = message.GetInt(2);
         }
 
-        public int AuraOffset { get; set; }
+        public int StaffAuraOffset { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether moderator is in moderator mode.
         /// </summary>
         /// <value><c>true</c> if mod; otherwise, <c>false</c>.</value>
-        public bool Mod { get; set; }
+        public bool ModMode { get; set; }
     }
 }

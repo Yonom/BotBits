@@ -1039,7 +1039,7 @@ namespace BotBits
             public const Id
                 LowGravity = (Id)453;
 
-            [Pack("brickeffectmultijump", ForegroundType = ForegroundType.Morphable)]
+            [Pack("brickeffectmultijump", ForegroundType = ForegroundType.Goal)]
             public const Id
                 MultiJump = (Id)461;
 

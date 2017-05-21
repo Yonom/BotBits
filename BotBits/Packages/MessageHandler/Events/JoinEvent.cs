@@ -22,8 +22,8 @@ namespace BotBits.Events
             this.Smiley = (Smiley)message.GetInteger(3);
             this.X = message.GetDouble(4);
             this.Y = message.GetDouble(5);
-            this.God = message.GetBoolean(6);
-            this.Admin = message.GetBoolean(7);
+            this.GodMode = message.GetBoolean(6);
+            this.AdminMode = message.GetBoolean(7);
             this.HasChat = message.GetBoolean(8);
             this.Coins = message.GetInteger(9);
             this.BlueCoins = message.GetInteger(10);
@@ -39,7 +39,7 @@ namespace BotBits.Events
             this.Badge = message.GetBadge(20);
             this.CrewMember = message.GetBoolean(21);
             this.PurpleSwitches = VarintHelper.ToInt32Array(message.GetByteArray(22));
-            this.AuraOffset = message.GetInt(23);
+            this.StaffAuraOffset = message.GetInt(23);
 
             if (message.Count > 24)
             {
@@ -47,7 +47,7 @@ namespace BotBits.Events
             }
         }
 
-        public int AuraOffset { get; set; }
+        public int StaffAuraOffset { get; set; }
 
         public bool GoldBorder { get; set; }
 
@@ -107,7 +107,7 @@ namespace BotBits.Events
         ///     Gets or sets whether the user is in admin mode or not.
         /// </summary>
         /// <value><c>true</c> if the player has activated admin mode; otherwise, <c>false</c>.</value>
-        public bool Admin { get; set; }
+        public bool AdminMode { get; set; }
 
         /// <summary>
         ///     Gets or sets the amount of yellow coins the player has.
@@ -143,7 +143,7 @@ namespace BotBits.Events
         ///     Gets or sets whether this player has activated god mode.
         /// </summary>
         /// <value><c>true</c> if this player is in god mode; otherwise, <c>false</c>.</value>
-        public bool God { get; set; }
+        public bool GodMode { get; set; }
 
         /// <summary>
         ///     Gets or sets whether this player is a moderator.

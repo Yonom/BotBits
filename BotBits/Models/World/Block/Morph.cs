@@ -381,14 +381,6 @@
         }
 
         // Misc
-        public static class EffectJump
-        {
-            public const Id
-                Disabled = 0,
-                Single = (Id)1,
-                Double = (Id)2;
-        }
-
         public static class Sign
         {
             public const Id

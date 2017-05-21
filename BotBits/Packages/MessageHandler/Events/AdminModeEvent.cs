@@ -17,16 +17,16 @@ namespace BotBits.Events
         internal AdminModeEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
-            this.Admin = message.GetBoolean(1);
-            this.AuraOffset = message.GetInt(2);
+            this.AdminMode = message.GetBoolean(1);
+            this.StaffAuraOffset = message.GetInt(2);
         }
 
-        public int AuraOffset { get; set; }
+        public int StaffAuraOffset { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this player is in administrator mode.
         /// </summary>
         /// <value><c>true</c> if this player is in administrator mode; otherwise, <c>false</c>.</value>
-        public bool Admin { get; set; }
+        public bool AdminMode { get; set; }
     }
 }

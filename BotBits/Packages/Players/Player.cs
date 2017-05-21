@@ -343,7 +343,7 @@ namespace BotBits
 
         public bool GoldBorder { get; set; }
 
-        public int AuraOffset { get; set; }
+        public int StaffAuraOffset { get; set; }
 
         public bool? CanToggleGod => this.HasGodRights | this.HasEditRights;
 

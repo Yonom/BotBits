@@ -7,14 +7,14 @@ namespace BotBits.Events
     /// </summary>
     /// <seealso cref="PlayerEvent{T}" />
     [ReceiveEvent("toggleGod")]
-    public sealed class AllowToggleGodEvent : PlayerEvent<AllowToggleGodEvent>
+    public sealed class GodRightsEvent : PlayerEvent<GodRightsEvent>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AllowToggleGodEvent" /> class.
+        ///     Initializes a new instance of the <see cref="GodRightsEvent" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
-        internal AllowToggleGodEvent(BotBitsClient client, Message message)
+        internal GodRightsEvent(BotBitsClient client, Message message)
             : base(client, message)
         {
             this.AllowToggle = message.GetBoolean(1);

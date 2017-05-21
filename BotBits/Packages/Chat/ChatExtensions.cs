@@ -260,7 +260,7 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Resets the users' position (/reset &lt;username&gt;).
+        ///     Resets the user (/reset &lt;username&gt;).
         /// </summary>
         public static void Reset(this IChat chat, string username)
         {
@@ -268,7 +268,7 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Resets all the users' positions (/resetall).
+        ///     Resets all users (/resetall).
         /// </summary>
         public static void ResetAll(this IChat chat)
         {
@@ -281,6 +281,14 @@ namespace BotBits
         public static void ResetSwitches(this IChat chat)
         {
             chat.Say("/resetswitches");
+        }
+
+        /// <summary>
+        ///     Respawns the given player (/respawn &lt;username&gt;).
+        /// </summary>
+        public static void Respawn(this IChat chat, string username)
+        {
+            chat.Say("/respawn {0}", username);
         }
 
         /// <summary>
@@ -458,6 +466,35 @@ namespace BotBits
         public static void RemoveBackgroundColor(this Chat chat)
         {
             chat.SetBackgroundColor("none");
+        }
+
+        /// <summary>
+        ///     Mutes everyone (/mute *).
+        /// </summary>
+        /// <param name="chat">The chat.</param>
+        public static void MuteEveryone(this Chat chat)
+        {
+            chat.Mute("*");
+        }
+
+        /// <summary>
+        ///     Unmutes everyone (/unmute *).
+        /// </summary>
+        /// <param name="chat">The chat.</param>
+        public static void UnmuteEveryone(this Chat chat)
+        {
+            chat.Unmute("*");
+        }
+
+        /// <summary>
+        ///     Sets the gravity of the specified username (/giveeffect &lt;username&gt Gravity &lt;gravity/16&gt;).
+        /// </summary>
+        /// <param name="chat">The chat.</param>
+        /// <param name="username">The username.</param>
+        /// <param name="gravity">The gravity.</param>
+        public static void SetGravity(this Chat chat, string username, Gravity gravity)
+        {
+            chat.GiveEffect(username, Effect.Gravity, (int)gravity);
         }
     }
 }

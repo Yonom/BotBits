@@ -142,9 +142,19 @@ namespace BotBits
             Chat.Of(player.BotBits).Reset(player.Username);
         }
 
+        public static void Respawn(this Player player)
+        {
+            Chat.Of(player.BotBits).Respawn(player.Username);
+        }
+
         public static void Forgive(this Player player)
         {
             Chat.Of(player.BotBits).Forgive(player.Username);
+        }
+
+        public static void SetGravity(this Player player, Point point)
+        {
+            Chat.Of(player.BotBits).TeleportExact(player.Username, point);
         }
     }
 }

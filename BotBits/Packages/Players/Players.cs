@@ -97,11 +97,11 @@ namespace BotBits
             p.Smiley = e.Smiley;
             p.AuraShape = e.AuraShape;
             p.AuraColor = e.AuraColor;
-            p.AuraOffset = e.AuraOffset;
+            p.StaffAuraOffset = e.StaffAuraOffset;
             p.Badge = e.Badge;
             p.HasChat = e.HasChat;
-            p.GodMode = e.God;
-            p.AdminMode = e.Admin;
+            p.GodMode = e.GodMode;
+            p.AdminMode = e.AdminMode;
             p.ModMode = e.Mod;
             p.Friend = e.Friend;
             p.GoldCoins = e.Coins;
@@ -261,7 +261,7 @@ namespace BotBits
         private void On(GodModeEvent e)
         {
             var p = e.Player;
-            p.GodMode = e.God;
+            p.GodMode = e.GodMode;
 
             if (!p.ModMode && !p.AdminMode)
             {
@@ -274,8 +274,8 @@ namespace BotBits
         private void On(AdminModeEvent e)
         {
             var p = e.Player;
-            p.AdminMode = e.Admin;
-            p.AuraOffset = e.AuraOffset;
+            p.AdminMode = e.AdminMode;
+            p.StaffAuraOffset = e.StaffAuraOffset;
 
             if (!p.ModMode && !p.GodMode)
             {
@@ -288,8 +288,8 @@ namespace BotBits
         private void On(ModModeEvent e)
         {
             var p = e.Player;
-            p.ModMode = e.Mod;
-            p.AuraOffset = e.AuraOffset;
+            p.ModMode = e.ModMode;
+            p.StaffAuraOffset = e.StaffAuraOffset;
 
             if (!p.GodMode && !p.AdminMode)
             {
@@ -337,7 +337,7 @@ namespace BotBits
         }
 
         [EventListener]
-        private void On(AllowToggleGodEvent e)
+        private void On(GodRightsEvent e)
         {
             var p = e.Player;
             p.HasGodRights = e.AllowToggle;

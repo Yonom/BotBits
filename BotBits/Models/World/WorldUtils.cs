@@ -142,10 +142,8 @@ namespace BotBits
                 case ForegroundType.ToggleGoal:
                 case ForegroundType.Morphable:
                 case ForegroundType.Team:
-                    return BlockArgsType.Number;
-
                 case ForegroundType.Note:
-                    return BlockArgsType.SignedNumber;
+                    return BlockArgsType.Number;
 
                 case ForegroundType.WorldPortal:
                     return BlockArgsType.String;
@@ -179,12 +177,6 @@ namespace BotBits
                 {
                     var i = Convert.ToUInt32(args[0]);
                     return new ForegroundBlock(block, i);
-                }
-
-                case BlockArgsType.SignedNumber:
-                {
-                    var si = Convert.ToInt32(args[0]);
-                    return new ForegroundBlock(block, si);
                 }
 
                 case BlockArgsType.String:
@@ -228,7 +220,6 @@ namespace BotBits
                 case BlockArgsType.None:
                     return new ArgumentException("That block doesn't accept any extra parameters!", paramName);
                 case BlockArgsType.Number:
-                case BlockArgsType.SignedNumber:
                     return new ArgumentException("That block needs a number as its parameter.", paramName);
                 case BlockArgsType.String:
                     return new ArgumentException("That block needs a string as its parameter.", paramName);

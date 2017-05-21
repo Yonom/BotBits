@@ -8,7 +8,7 @@ namespace BotBits
 {
     public class PlayerData
     {
-        private PlayerObject PlayerObject { get; }
+        public PlayerObject PlayerObject { get; }
 
         public PlayerData(PlayerObject playerObject, ShopData shopData)
         {

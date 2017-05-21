@@ -75,6 +75,7 @@
     <Compile Include="Database\Player\PlayerData.cs" />
     <Compile Include="Models\Gravity.cs" />
     <Compile Include="Models\AccessGroup.cs" />
+    <Compile Include="Models\World\Block\MultiJump.cs" />
     <Compile Include="Models\World\ExpectedData\ExpectedData.cs" />
     <Compile Include="Models\World\Snapshot\BlocksSnapshot.cs" />
     <Compile Include="Models\World\Snapshot\SnapshotBlockLayer.cs" />
@@ -183,7 +184,7 @@
     <Compile Include="Packages\EventManager\GlobalPriority.cs" />
     <Compile Include="Packages\MessageHandler\Events\AddedToCrewEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\AllowSpectatingEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\AllowToggleGodEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\GodRightsEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\AuraEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\BannedEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\CampaignRewardsEvent.cs" />

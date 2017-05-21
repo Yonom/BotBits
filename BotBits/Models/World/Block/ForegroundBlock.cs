@@ -10,13 +10,12 @@ namespace BotBits
 
         private ForegroundBlock(Foreground.Id id, BlockArgsType requiredArgsType)
         {
-            var type = WorldUtils.GetForegroundType(id);
-            var argsType = WorldUtils.GetBlockArgsType(type);
-            if (argsType != requiredArgsType)
-                throw WorldUtils.GetMissingArgsErrorMessage(argsType, nameof(id));
-
             this.Id = id;
             this._args = null;
+
+            var argsType = WorldUtils.GetBlockArgsType(this.Type);
+            if (argsType != requiredArgsType)
+                throw WorldUtils.GetMissingArgsErrorMessage(argsType, nameof(id));
         }
 
         public ForegroundBlock(Foreground.Id id) : this(id, BlockArgsType.None)
@@ -24,22 +23,9 @@ namespace BotBits
         }
 
         public ForegroundBlock(Foreground.Id id, uint args)
+            : this(id, BlockArgsType.Number)
         {
-            var type = WorldUtils.GetForegroundType(id);
-            var argsType = WorldUtils.GetBlockArgsType(type);
-
-            this.Id = id;
-            switch (argsType)
-            {
-                case BlockArgsType.Number:
-                    this._args = args;
-                    break;
-                case BlockArgsType.SignedNumber:
-                    this._args = (int)args;
-                    break;
-                default:
-                    throw WorldUtils.GetMissingArgsErrorMessage(argsType, nameof(id));
-            }
+            this._args = args;
         }
 
         public ForegroundBlock(Foreground.Id id, string text)
@@ -441,18 +427,22 @@ namespace BotBits
 
         public object[] GetArgs()
         {
-            switch (this.Type)
+            switch (WorldUtils.GetBlockArgsType(this.Type))
             {
-                case ForegroundType.Normal:
+                case BlockArgsType.None:
                     return new object[0];
-                case ForegroundType.Portal:
+                case BlockArgsType.Number:
+                    return new object[] { (int)this.GetUIntArgs() };
+                case BlockArgsType.Portal:
                     return new object[] { (uint)this.Morph, this.PortalId, this.Target };
-                case ForegroundType.Label:
-                    return new object[] { this.Text, this.TextColor, this.Target };
-                case ForegroundType.Sign:
+                case BlockArgsType.String:
+                    return new object[] { this.Text };
+                case BlockArgsType.Sign:
                     return new object[] { this.Text, (uint)this.Morph };
+                case BlockArgsType.Label:
+                    return new object[] { this.Text, this.TextColor, this.WrapWidth };
                 default:
-                    return new[] { this._args };
+                    throw new NotSupportedException("Unsupported block args type!");
             }
         }
 
