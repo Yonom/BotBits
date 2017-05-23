@@ -290,7 +290,7 @@ namespace BotBits
         /// <value>
         ///     <c>true</c> if this player is flying using god mode, admin mode or moderator mode; otherwise, <c>false</c>.
         /// </value>
-        public bool Flying => this.GodMode || this.AdminMode || this.ModMode;
+        public bool Flying => this.GodMode || this.StaffMode;
 
         /// <summary>
         ///     Gets a value indicating whether this player is a guest.
@@ -333,9 +333,9 @@ namespace BotBits
         /// </value>
         public int BlockY => WorldUtils.PosToBlock(this.Y);
 
-        public bool? HasGodRights { get; internal set; }
+        public bool HasGodRights { get; internal set; }
 
-        public bool? HasEditRights { get; internal set; }
+        public bool HasEditRights { get; internal set; }
 
         public int Deaths { get; internal set; }
 
@@ -343,9 +343,11 @@ namespace BotBits
 
         public bool GoldBorder { get; set; }
 
-        public int StaffAuraOffset { get; set; }
+        public StaffAura StaffAura { get; set; }
 
-        public bool? CanToggleGod => this.HasGodRights | this.HasEditRights;
+        public bool StaffMode => this.AdminMode || this.ModMode;
+
+        public bool CanToggleGod => this.HasGodRights | this.HasEditRights;
 
         public int AvailableJumps
         {

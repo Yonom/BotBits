@@ -45,10 +45,8 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EE.FutureProof">
-      <HintPath>..\packages\EE.FutureProof.1.2.0\lib\net40\EE.FutureProof.dll</HintPath>
-      <Private>True</Private>
-      <ExcludeFromNuPkg>true</ExcludeFromNuPkg>
+    <Reference Include="EE.FutureProof, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EE.FutureProof.2.0.0\lib\net40\EE.FutureProof.dll</HintPath>
     </Reference>
     <Reference Include="PlayerIOClient, Version=2.3.6.0, Culture=neutral, PublicKeyToken=c7f7b730653f6a44, processorArchitecture=MSIL">
       <HintPath>..\packages\PlayerIOClient-Signed.3.2.484\lib\PlayerIOClient.dll</HintPath>
@@ -75,6 +73,7 @@
     <Compile Include="Database\Player\PlayerData.cs" />
     <Compile Include="Models\Gravity.cs" />
     <Compile Include="Models\AccessGroup.cs" />
+    <Compile Include="Models\StaffAura.cs" />
     <Compile Include="Models\World\Block\MultiJump.cs" />
     <Compile Include="Models\World\ExpectedData\ExpectedData.cs" />
     <Compile Include="Models\World\Snapshot\BlocksSnapshot.cs" />
@@ -225,7 +224,7 @@
     <Compile Include="Packages\MessageSender\SendMessages\SetAllowSpectatingSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetHideLobbySendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetRoomDescriptionSendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\SetRoomVisibleSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\SetRoomAccessGroupSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\TimeSendMessage.cs" />
     <Compile Include="Database\Player\PlayerObject.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\UnfavoriteSendMessage.cs" />
@@ -255,7 +254,7 @@
     <Compile Include="Internal\Nito\Deque.cs" />
     <Compile Include="Internal\WaitHandleExtensions.cs" />
     <Compile Include="Packages\MessageHandler\Events\GemEvent.cs" />
-    <Compile Include="Packages\MessageHandler\Events\RoomVisibleEvent.cs" />
+    <Compile Include="Packages\MessageHandler\Events\RoomAccessGroupEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\Internal\SignPlaceEvent.cs" />
     <Compile Include="Packages\MessageHandler\Events\PlayerEvent.cs" />
     <Compile Include="Packages\MessageHandler\ReceiveEventAttribute.cs" />
@@ -351,7 +350,7 @@
     <Compile Include="Packages\MessageSender\SendMessages\PlaceSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\BadgeChangeSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\SetEditKeySendMessage.cs" />
-    <Compile Include="Packages\MessageSender\SendMessages\NameSendMessage.cs" />
+    <Compile Include="Packages\MessageSender\SendMessages\SetNameSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\CheckpointSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\ClearSendMessage.cs" />
     <Compile Include="Packages\MessageSender\SendMessages\CoinSendMessage.cs" />
@@ -447,8 +446,10 @@ foreach (var item in filesToCleanup)
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Fody.2.0.9\build\portable-net+sl+win+wpa+wp\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.9\build\portable-net+sl+win+wpa+wp\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.1.5.0\build\portable-net+sl+win+wpa+wp\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.1.5.0\build\portable-net+sl+win+wpa+wp\Costura.Fody.targets'))" />
   </Target>
   <Import Project="..\packages\Fody.2.0.9\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\packages\Fody.2.0.9\build\portable-net+sl+win+wpa+wp\Fody.targets')" />
+  <Import Project="..\packages\Costura.Fody.1.5.0\build\portable-net+sl+win+wpa+wp\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.1.5.0\build\portable-net+sl+win+wpa+wp\Costura.Fody.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

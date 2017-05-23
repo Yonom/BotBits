@@ -39,19 +39,18 @@ namespace BotBits.Events
             this.Badge = message.GetBadge(20);
             this.CrewMember = message.GetBoolean(21);
             this.PurpleSwitches = VarintHelper.ToInt32Array(message.GetByteArray(22));
-            this.StaffAuraOffset = message.GetInt(23);
-
-            if (message.Count > 24)
-            {
-                this.HasEditRights = message.GetBoolean(24);
-            }
+            this.StaffAura = (StaffAura)message.GetInt(23);
+            this.HasEditRights = message.GetBoolean(24);
+            this.HasGodRights = message.GetBoolean(25);
         }
 
-        public int StaffAuraOffset { get; set; }
+        public StaffAura StaffAura { get; set; }
 
         public bool GoldBorder { get; set; }
 
-        public bool? HasEditRights { get; set; }
+        public bool HasEditRights { get; set; }
+
+        public bool HasGodRights { get; set; }
 
         public AuraColor AuraColor { get; set; }
 

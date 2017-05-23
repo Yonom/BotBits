@@ -18,10 +18,10 @@ namespace BotBits.Events
             : base(client, message)
         {
             this.ModMode = message.GetBoolean(1);
-            this.StaffAuraOffset = message.GetInt(2);
+            this.StaffAura = (StaffAura)message.GetInt(2);
         }
 
-        public int StaffAuraOffset { get; set; }
+        public StaffAura StaffAura { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether moderator is in moderator mode.

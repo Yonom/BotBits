@@ -25,7 +25,7 @@ namespace BotBits
         public int Likes { get; private set; }
         public double GravityMultiplier { get; private set; }
         public uint BackgroundColor { get; private set; }
-        public bool Visible { get; private set; }
+        public AccessGroup AccessGroup { get; private set; }
         public bool InitComplete { get; private set; }
         public bool JoinComplete { get; private set; }
         public bool AllowSpectating { get; private set; }
@@ -108,13 +108,13 @@ namespace BotBits
 
         public void SetName(string newName)
         {
-            new NameSendMessage(newName)
+            new SetNameSendMessage(newName)
                 .SendIn(this.BotBits);
         }
 
-        public void SetRoomVisible(bool visible)
+        public void SetAccessGroup(AccessGroup accessGroup)
         {
-            new SetRoomVisibleSendMessage(visible)
+            new SetRoomAccessGroupSendMessage(accessGroup)
                 .SendIn(this.BotBits);
         }
 
@@ -142,7 +142,7 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void SetRoomDescription(string description)
+        public void SetDescription(string description)
         {
             new SetRoomDescriptionSendMessage(description)
                 .SendIn(this.BotBits);
@@ -219,7 +219,7 @@ namespace BotBits
             this.Favorites = e.Favorites;
             this.Likes = e.Likes;
             this.BackgroundColor = e.BackgroundColor;
-            this.Visible = e.Visible;
+            this.AccessGroup = e.AccessGroup;
             this.HideLobby = e.HideLobby;
             this.AllowSpectating = e.AllowSpectating;
             this.Description = e.RoomDescription;
@@ -292,9 +292,9 @@ namespace BotBits
         }
 
         [EventListener]
-        private void On(RoomVisibleEvent e)
+        private void On(RoomAccessGroupEvent e)
         {
-            this.Visible = e.Visible;
+            this.AccessGroup = e.AccessGroup;
         }
 
         [EventListener]

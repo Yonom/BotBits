@@ -8,7 +8,10 @@ namespace BotBits.SendMessages
     /// <seealso cref="SendMessage{T}" />
     public sealed class ModModeSendMessage : SendMessage<ModModeSendMessage>
     {
-        //No arguments
+        public ModModeSendMessage()
+        {
+            
+        }
 
         /// <summary>
         ///     Gets the PlayerIO message representing the data in this <see cref="SendMessage{T}" />.

@@ -55,7 +55,10 @@ namespace BotBits.Events
             this.MinimapEnabled = message.GetBoolean(35);
             this.LobbyPreviewEnabled = message.GetBoolean(36);
             this.OrangeSwitches = VarintHelper.ToInt32Array(message.GetByteArray(37));
+            this.FriendsOnly = message.GetBoolean(38);
         }
+
+        public bool FriendsOnly { get; set; }
 
         public bool GoldBorder { get; set; }
 
@@ -206,5 +209,15 @@ namespace BotBits.Events
         /// </summary>
         /// <value>The block y.</value>
         public int SpawnBlockY => WorldUtils.PosToBlock(this.SpawnY);
+
+        public AccessGroup AccessGroup
+        {
+            get => this.Visible ? this.FriendsOnly ? AccessGroup.Friends : AccessGroup.Anyone : AccessGroup.Noone;
+            set
+            {
+                this.Visible = value != AccessGroup.Noone;
+                this.FriendsOnly = value == AccessGroup.Friends;
+            }
+        }
     }
 }

@@ -97,7 +97,7 @@ namespace BotBits
             p.Smiley = e.Smiley;
             p.AuraShape = e.AuraShape;
             p.AuraColor = e.AuraColor;
-            p.StaffAuraOffset = e.StaffAuraOffset;
+            p.StaffAura = e.StaffAura;
             p.Badge = e.Badge;
             p.HasChat = e.HasChat;
             p.GodMode = e.GodMode;
@@ -115,12 +115,7 @@ namespace BotBits
             p.CrewMember = e.CrewMember;
             p.GoldBorder = e.GoldBorder;
             p.HasEditRights = e.HasEditRights;
-
-            // Players joining after us never have god on join!
-            if (Room.Of(this.BotBits).JoinComplete)
-            {
-                p.HasGodRights = false;
-            }
+            p.HasGodRights = e.HasGodRights;
 
             // Load the purple switcches
             foreach (var ps in e.PurpleSwitches)
@@ -275,7 +270,13 @@ namespace BotBits
         {
             var p = e.Player;
             p.AdminMode = e.AdminMode;
-            p.StaffAuraOffset = e.StaffAuraOffset;
+            p.StaffAura = e.StaffAura;
+
+            if (!p.ModMode)
+            {
+                new StaffModeEvent(p, p.StaffMode)
+                    .RaiseIn(this.BotBits);
+            }
 
             if (!p.ModMode && !p.GodMode)
             {
@@ -289,7 +290,13 @@ namespace BotBits
         {
             var p = e.Player;
             p.ModMode = e.ModMode;
-            p.StaffAuraOffset = e.StaffAuraOffset;
+            p.StaffAura = e.StaffAura;
+            
+            if (!p.AdminMode)
+            {
+                new StaffModeEvent(p, p.StaffMode)
+                    .RaiseIn(this.BotBits);
+            }
 
             if (!p.GodMode && !p.AdminMode)
             {

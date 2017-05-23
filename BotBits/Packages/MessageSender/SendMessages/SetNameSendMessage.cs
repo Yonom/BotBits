@@ -6,13 +6,13 @@ namespace BotBits.SendMessages
     ///     Sent to change world name.
     /// </summary>
     /// <seealso cref="SendMessage{T}" />
-    public sealed class NameSendMessage : SendMessage<NameSendMessage>
+    public sealed class SetNameSendMessage : SendMessage<SetNameSendMessage>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="NameSendMessage" /> class.
+        ///     Initializes a new instance of the <see cref="SetNameSendMessage" /> class.
         /// </summary>
         /// <param name="roomName">Name of the world.</param>
-        public NameSendMessage(string roomName)
+        public SetNameSendMessage(string roomName)
         {
             this.RoomName = roomName;
         }
