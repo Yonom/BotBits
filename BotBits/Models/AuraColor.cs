@@ -39,5 +39,8 @@ namespace BotBits
         [Pack("auralime")]
         Lime = 11,
 
+        [Pack("aurablack")]
+        Black = 12,
+
     }
 }
