@@ -175,8 +175,16 @@ namespace BotBits
 
                 case BlockArgsType.Number:
                 {
-                    var i = Convert.ToUInt32(args[0]);
-                    return new ForegroundBlock(block, i);
+                    switch (args[0])
+                    {
+                        case int si:
+                            return new ForegroundBlock(block, si);
+                        case uint i:
+                            return new ForegroundBlock(block, i);
+
+                        default:
+                            throw new ArgumentException("Unsupported numeral type.", nameof(args));
+                    }
                 }
 
                 case BlockArgsType.String:
@@ -209,7 +217,7 @@ namespace BotBits
                 }
 
                 default:
-                    throw new NotSupportedException("Invalid block.");
+                    throw new ArgumentException("Invalid block.", nameof(block));
             }
         }
 
