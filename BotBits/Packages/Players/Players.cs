@@ -394,8 +394,8 @@ namespace BotBits
                 {
                     if (p.HasCrown) this.CrownPlayer = Player.Nobody;
                     p.HasSilverCrown = false;
-                    p.ClearGoldCoins();
-                    p.ClearBlueCoins();
+                    p.ClearGoldCoinLocations();
+                    p.ClearBlueCoinLocations();
                     p.GoldCoins = default(int);
                     p.BlueCoins = default(int);
                     p.ResetSwitches();

@@ -108,9 +108,7 @@ namespace BotBits
         {
             try
             {
-                // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-                givenType.IsAssignableFrom(typeof(Event<>).MakeGenericType(givenType));
-                return true;
+                return typeof(Event<>).MakeGenericType(givenType).IsAssignableFrom(givenType);
             }
             catch (Exception)
             {

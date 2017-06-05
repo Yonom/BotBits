@@ -19,7 +19,8 @@ namespace BotBits
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
                 var attr = (ReceiveEventAttribute)type.GetCustomAttributes(
-                    typeof(ReceiveEventAttribute), true).FirstOrDefault();
+                        typeof(ReceiveEventAttribute), true)
+                    .FirstOrDefault();
                 if (attr != null)
                 {
                     if (!this._messageRegister.RegisterMessage(attr.Type, type))
@@ -63,7 +64,7 @@ namespace BotBits
         [EventListener]
         private void On(InvalidMessageEvent e)
         {
-            Trace.TraceWarning($"Received invalid message:{e.Reason}\n{e.PlayerIOMessage}");
+            Trace.TraceWarning($"Received invalid message: {e.Reason}\n{e.PlayerIOMessage}");
         }
 
         [EventListener]
@@ -72,25 +73,15 @@ namespace BotBits
             Type handler;
             if (this._messageRegister.TryGetHandler(e.Message.Type, out handler))
             {
-                IEvent instance;
-                try
-                {
-                    const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
-                    instance = (IEvent)Activator.CreateInstance(handler, flags, null,
-                        new object[] { this.BotBits, e.Message }, null);
-                }
-                catch (Exception ex)
-                {
-                    new InvalidMessageEvent(this.BotBits, e.Message, ex)
-                        .RaiseIn(this.BotBits);
-                    return;
-                }
+                const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
+                var instance = (IEvent)Activator.CreateInstance(handler, flags, null,
+                    new object[] { this.BotBits, e.Message }, null);
 
                 var playerEvent = instance as ICancellable;
                 if (playerEvent != null && playerEvent.Cancelled)
                 {
                     new InvalidMessageEvent(this.BotBits, e.Message,
-                        new UnknownPlayerException("The player could not be found."))
+                            new UnknownPlayerException("The player could not be found."))
                         .RaiseIn(this.BotBits);
                     return;
                 }
@@ -100,7 +91,7 @@ namespace BotBits
             else
             {
                 new InvalidMessageEvent(this.BotBits, e.Message,
-                    new UnknownMessageTypeException("The received message type is not supported."))
+                        new UnknownMessageTypeException("The received message type is not supported."))
                     .RaiseIn(this.BotBits);
             }
         }

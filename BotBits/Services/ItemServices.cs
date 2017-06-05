@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using BotBits.Shop;
@@ -115,9 +116,13 @@ namespace BotBits
                         _blockGroups.Add(value, type);
 
                     var pack = GetPack(field);
-                    if (pack != null) _blockPacks.TryAdd(value, pack);
+                    if (pack != null)
+                    {
+                        var result = _blockPacks.TryAdd(value, pack);
+                        Debug.Assert(result); // _blockGroups.Add must fail if the value is duplicate
+                    }
                 }
-                catch (Exception ex)
+                catch (ArgumentException ex)
                 {
                     throw new InvalidOperationException("Duplicate block: " + value, ex);
                 }
@@ -137,7 +142,8 @@ namespace BotBits
                 var pack = GetPack(field);
                 if (pack != null)
                 {
-                    collection.TryAdd((T)field.GetValue(null), pack); // always true in case of enums
+                    var result = collection.TryAdd((T)field.GetValue(null), pack); 
+                    Debug.Assert(result); // Enums employ a compile time uniqueness check
                 }
             }
         }

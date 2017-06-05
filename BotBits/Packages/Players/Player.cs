@@ -482,7 +482,7 @@ namespace BotBits
         }
 
         [Pure]
-        public Point[] GetGoldCoins()
+        public Point[] GetGoldCoinLocations()
         {
             lock (this._goldCoins)
             {
@@ -491,7 +491,7 @@ namespace BotBits
         }
 
         [Pure]
-        public int GetGoldCoinsCount()
+        public int GetGoldCoinLocationsCount()
         {
             lock (this._goldCoins)
             {
@@ -515,7 +515,7 @@ namespace BotBits
             }
         }
 
-        public void ClearGoldCoins()
+        internal void ClearGoldCoinLocations()
         {
             lock (this._goldCoins)
             {
@@ -534,7 +534,7 @@ namespace BotBits
         }
 
         [Pure]
-        public Point[] GetBlueCoins()
+        public Point[] GetBlueCoinLocations()
         {
             lock (this._blueCoins)
             {
@@ -543,7 +543,7 @@ namespace BotBits
         }
 
         [Pure]
-        public int GetBlueCoinsCount()
+        public int GetBlueCoinLocationsCount()
         {
             lock (this._blueCoins)
             {
@@ -567,7 +567,7 @@ namespace BotBits
             }
         }
 
-        public void ClearBlueCoins()
+        internal void ClearBlueCoinLocations()
         {
             lock (this._blueCoins)
             {
