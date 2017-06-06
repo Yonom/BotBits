@@ -25,16 +25,21 @@ namespace BotBits
             LoadEnum(_auraShapePacks);
         }
 
+        public static Type GetGroup(Foreground.Id id)
+        {
+            if (id == 0) return typeof(Foreground);
+            return GetGroup((int)id);
+        }
+
+        public static Type GetGroup(Background.Id id)
+        {
+            if (id == 0) return typeof(Background);
+            return GetGroup((int)id);
+        }
+
         public static KeyValuePair<int, Type>[] GetGroups()
         {
             return _blockGroups.ToArray();
-        }
-
-        public static Type GetGroup(int id)
-        {
-            Type type;
-            _blockGroups.TryGetValue(id, out type);
-            return type;
         }
 
         public static PackAttribute GetPackage(AuraShape id)
@@ -153,6 +158,13 @@ namespace BotBits
             return (PackAttribute)provider
                 .GetCustomAttributes(typeof(PackAttribute), false)
                 .FirstOrDefault();
+        }
+
+        private static Type GetGroup(int id)
+        {
+            Type type;
+            _blockGroups.TryGetValue(id, out type);
+            return type;
         }
     }
 }
