@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using BotBits.Shop;
 using PlayerIOClient;
 
 namespace BotBits

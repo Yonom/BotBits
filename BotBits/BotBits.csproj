@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="EE.FutureProof, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EE.FutureProof.2.0.0\lib\net40\EE.FutureProof.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PlayerIOClient, Version=2.3.6.0, Culture=neutral, PublicKeyToken=c7f7b730653f6a44, processorArchitecture=MSIL">
       <HintPath>..\packages\PlayerIOClient-Signed.3.2.484\lib\PlayerIOClient.dll</HintPath>
@@ -60,6 +61,12 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
   </ItemGroup>
+  <ItemDefinitionGroup>
+    <Reference>
+      <!-- Prevent all references from being packaged. -->
+      <ExcludeFromNuPkg>true</ExcludeFromNuPkg>
+    </Reference>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <Compile Include="Client\Events\DisposedEvent.cs" />
     <Compile Include="Client\Events\DisposingEvent.cs" />

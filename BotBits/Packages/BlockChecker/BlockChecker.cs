@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using BotBits.Events;
-using BotBits.Nito;
 using BotBits.SendMessages;
+using Nito;
 
 namespace BotBits
 {

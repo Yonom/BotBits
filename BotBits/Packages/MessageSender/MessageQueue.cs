@@ -2,9 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using BotBits.Events;
-using BotBits.Nito;
 using BotBits.SendMessages;
 using JetBrains.Annotations;
+using Nito;
 
 namespace BotBits
 {

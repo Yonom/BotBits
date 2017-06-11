@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace BotBits.Nito
+// ReSharper disable once CheckNamespace
+
+namespace Nito
 {
     /// <summary>
     ///     A double-ended queue (deque), which provides O(1) indexed access, O(1) removals from the front and back, amortized

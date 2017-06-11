@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using BotBits.SendMessages;
-using BotBits.Shop;
 using PlayerIOClient;
 
 namespace BotBits

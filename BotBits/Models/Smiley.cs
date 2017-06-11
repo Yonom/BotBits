@@ -1,5 +1,3 @@
-using BotBits.Shop;
-
 namespace BotBits
 {
     public enum Smiley

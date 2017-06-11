@@ -1,6 +1,4 @@
-﻿using BotBits.Shop;
-
-// ReSharper disable InconsistentNaming
+﻿// ReSharper disable InconsistentNaming
 // ReSharper disable MemberHidesStaticFromOuterClass
 
 namespace BotBits

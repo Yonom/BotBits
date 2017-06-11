@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
 using System.Threading;
+using BotBits;
 
-namespace BotBits.Nito.Async
+// ReSharper disable once CheckNamespace
+namespace Nito.Async
 {
     internal sealed class ActionDispatcher : IDisposable
     {

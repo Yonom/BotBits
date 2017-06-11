@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BotBits.Shop
+namespace BotBits
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class)]
     public sealed class PackAttribute : Attribute

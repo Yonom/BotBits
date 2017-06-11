@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using BotBits.Nito.Async;
+using Nito.Async;
 
 namespace BotBits
 {

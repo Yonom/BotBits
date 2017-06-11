@@ -1,6 +1,4 @@
-﻿using BotBits.Shop;
-
-namespace BotBits
+﻿namespace BotBits
 {
     public enum AuraColor
     {

@@ -1,5 +1,4 @@
 using System.CodeDom;
-using BotBits.Shop;
 
 // ReSharper disable MemberHidesStaticFromOuterClass
 
