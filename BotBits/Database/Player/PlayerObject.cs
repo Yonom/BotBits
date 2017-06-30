@@ -140,6 +140,13 @@ namespace BotBits
             return worlds.Select(w => this.GetWorldDataFromId(w, this.DatabaseObject.GetString(w))).ToArray();
         }
 
+        public string[] GetLikes()
+        {
+            return this.DatabaseObject.GetObject("likes")?.Where(c => c.Value.Equals(true))
+                .Select(c => c.Key)
+                .ToArray();
+        }
+
         public string[] GetFavorites()
         {
             return this.DatabaseObject.GetObject("favorites")?.Properties.ToArray() ?? new string[0];
