@@ -46,13 +46,15 @@ namespace BotBits
 
         public bool Visible => this.DatabaseObject.GetBool("visible", true);
 
+        public bool FriendsOnly => this.DatabaseObject.GetBool("FriendsOnly", false);
+
         public bool HideLobby => this.DatabaseObject.GetBool("hidelobby", false);
 
         public bool IsFeatured => this.DatabaseObject.GetBool("IsFeatured", false);
 
-        public bool MinimapEnabled => this.DatabaseObject.GetBool("MinimapEnabled", false);
+        public bool MinimapEnabled => this.DatabaseObject.GetBool("MinimapEnabled", true);
 
-        public bool LobbyPreviewEnabled => this.DatabaseObject.GetBool("LobbyPreviewEnabled", false);
+        public bool LobbyPreviewEnabled => this.DatabaseObject.GetBool("LobbyPreviewEnabled", true);
 
         public double GravityMultiplier => this.DatabaseObject.GetDouble("Gravity", this.Type == WorldType.MoonLarge ? 0.16 : 1);
 

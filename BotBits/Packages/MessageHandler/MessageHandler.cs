@@ -56,7 +56,7 @@ namespace BotBits
         {
             if (!Room.Of(this.BotBits).JoinComplete)
             {
-                new JoinFailureEvent(this._lastInfo.Title, this._lastInfo.Text)
+                new JoinFailureEvent(this._lastInfo?.Title ?? "Unknown", this._lastInfo?.Text ?? "No error message was received from server.")
                     .RaiseIn(this.BotBits);
             }
         }

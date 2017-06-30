@@ -59,6 +59,7 @@ namespace BotBits
         public Task<PlayerObject> GetMyPlayerObjectAsync()
         {
             return this.Client.BigDB.LoadMyPlayerObjectAsync()
+                .ThrowOnNull()
                 .Then(task => new PlayerObject(task.Result))
                 .ToSafeTask();
         }
@@ -73,6 +74,7 @@ namespace BotBits
         public Task<PlayerObject> GetPlayerObjectAsync(string userId)
         {
             return this.Client.BigDB.LoadAsync("PlayerObjects", userId)
+                .ThrowOnNull()
                 .Then(task => new PlayerObject(task.Result))
                 .ToSafeTask();
         }
@@ -87,6 +89,7 @@ namespace BotBits
         public Task<PlayerObject> GetPlayerObjectByUsernameAsync(string username)
         {
             return this.Client.BigDB.LoadSingleAsync("PlayerObjects", "name", username)
+                .ThrowOnNull()
                 .Then(task => new PlayerObject(task.Result))
                 .ToSafeTask();
         }
@@ -101,6 +104,7 @@ namespace BotBits
         public Task<PlayerObject> GetPlayerObjectByOldUsernameAsync(string oldUsername)
         {
             return this.Client.BigDB.LoadSingleAsync("PlayerObjects", "oldname", oldUsername)
+                .ThrowOnNull()
                 .Then(task => new PlayerObject(task.Result))
                 .ToSafeTask();
         }
@@ -131,6 +135,7 @@ namespace BotBits
         public Task<UsernameData> GetUsernameDataAsync(string username)
         {
             return this.Client.BigDB.LoadAsync("Usernames", username)
+                .ThrowOnNull()
                 .Then(task => new UsernameData(task.Result))
                 .ToSafeTask();
         }
@@ -145,6 +150,7 @@ namespace BotBits
         public Task<UsernameData> GetUsernameDataByUserIdAsync(string userId)
         {
             return this.Client.BigDB.LoadSingleAsync("Usernames", "owner", userId)
+                .ThrowOnNull()
                 .Then(task => new UsernameData(task.Result))
                 .ToSafeTask();
         }
@@ -159,6 +165,7 @@ namespace BotBits
         public Task<UsernameData> GetOldUsernameDataByUserIdAsync(string userId)
         {
             return this.Client.BigDB.LoadSingleAsync("Usernames", "oldowner", userId)
+                .ThrowOnNull()
                 .Then(task => new UsernameData(task.Result))
                 .ToSafeTask();
         }
@@ -189,6 +196,7 @@ namespace BotBits
         public Task<DatabaseWorld> GetWorldAsync(string roomId)
         {
             return this.Client.BigDB.LoadAsync("Worlds", roomId)
+                .ThrowOnNull()
                 .Then(t => DatabaseWorld.FromDatabaseObject(t.Result))
                 .ToSafeTask();
         }
@@ -287,6 +295,7 @@ namespace BotBits
         public Task<NewsItem> GetNewsAsync()
         {
             return this.Client.BigDB.LoadSingleAsync("News", "current", true)
+                .ThrowOnNull()
                 .Then(task => new NewsItem(task.Result))
                 .ToSafeTask();
         }
@@ -303,6 +312,7 @@ namespace BotBits
         public Task<VersionConfiguration> GetVersionConfigurationAsync()
         {
             return this.Client.BigDB.LoadAsync("Config", "config")
+                .ThrowOnNull()
                 .Then(task => new VersionConfiguration(task.Result))
                 .ToSafeTask();
         }
@@ -317,6 +327,7 @@ namespace BotBits
         public Task<CampaignConfiguration> GetCampaignConfigurationAsync()
         {
             return this.Client.BigDB.LoadAsync("Config", "campaigns")
+                .ThrowOnNull()
                 .Then(task => new CampaignConfiguration(task.Result))
                 .ToSafeTask();
         }

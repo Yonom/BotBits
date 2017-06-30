@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 // ReSharper disable PossibleNullReferenceException
@@ -55,6 +56,13 @@ namespace BotBits
                 else tcs.TrySetResult(t.Result);
             });
             return tcs.Task;
+        }
+        
+        public static Task<T> ThrowOnNull<T>(this Task<T> result)
+        {
+            if (result.Result == null)
+                throw new KeyNotFoundException("The specified object was not found.");
+            return result;
         }
     }
 }
