@@ -136,7 +136,7 @@ namespace BotBits
         public WorldData[] GetWorlds()
         {
             var worlds = this.DatabaseObject.Properties.Where(p => p.StartsWith("world"));
-            if (this.DatabaseObject.Contains("betaonlyroom")) worlds = worlds.Concat(new[] { "betaonlyworld" });
+            if (this.DatabaseObject.Contains("betaonlyroom")) worlds = worlds.Concat(new[] { "betaonlyroom" });
             return worlds.Select(w => this.GetWorldDataFromId(w, this.DatabaseObject.GetString(w))).ToArray();
         }
 
