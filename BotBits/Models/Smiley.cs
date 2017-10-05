@@ -473,6 +473,24 @@ namespace BotBits
         Sweat = 160,
 
         [Pack("brickguitar")]
-        CountrySinger = 161
+        CountrySinger = 161,
+        
+        [Pack("smileythor")]
+        Thor = 162,
+        
+        CowGirl = 163,
+        
+        [Pack("smileyraccoon")]
+        Raccoon = 164,
+        
+        [Pack("smileylion")]
+        Lion = 165,
+        
+        [Pack("smileylaiika")]
+        Laika = 166,
+        
+        [Pack("smileyfishbowl")]
+        Fishbowl = 167
+        
     }
 }
