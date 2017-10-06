@@ -1,2 +1,4 @@
 language: csharp
 solution: BotBits/BotBits.csproj
+install:
+  - nuget restore BotBits/BotBits.csproj
