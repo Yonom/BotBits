@@ -1,4 +1,6 @@
 language: csharp
 solution: BotBits/BotBits.csproj
+script:
+- msbuild msbuild-framework
 install:
   - nuget restore BotBits/BotBits.csproj
