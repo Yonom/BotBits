@@ -490,7 +490,16 @@ namespace BotBits
         Laika = 166,
         
         [Pack("smileyfishbowl")]
-        Fishbowl = 167
+        Fishbowl = 167,
+        
+        [Pack("smileyslime")]
+        Slime = 168,
+        
+        [Pack("smileydesigner")]
+        Designer = 169,
+        
+        [Pack("smileyfrozen")]
+        Frozen = 170
         
     }
 }
