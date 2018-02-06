@@ -17,6 +17,9 @@
         Spiral = 4,
 
         [Pack("aurashapestar")]
-        Star = 5
+        Star = 5,
+        
+        [Pack("aurashapesnowflake")]
+        Snowflake = 6
     }
 }
