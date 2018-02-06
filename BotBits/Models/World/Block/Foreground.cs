@@ -1341,5 +1341,29 @@ namespace BotBits
                 Green = (Id)1124,
                 Cyan = (Id)1125;
         }
+        
+        public static class Winter2018
+        {
+            [Pack("brickwinter2018")]
+            public const Id
+            //Blocks
+                Brick = (Id)1136,
+                BlockSnow = (Id)1137,
+                BlockIce = (Id)1138,
+                BlockSlate = (Id)1139,
+            //Decoration
+                SnowPile = (Id)1543,
+                RightCornerSnow = (Id)1544,
+                LeftCornerSnow = (Id)1545,
+                Snowman = (Id)1546,
+                Tree = (Id)1547,
+                LargeSnowflake = (Id)1548,
+                SmallSnowflake = (Id)1549;
+
+            [Pack("brickwinter2018", ForegroundType = ForegroundType.Morphable)]
+            public const Id
+                HalfBlockSnow = (Id)1140,
+                HalfBlockIce = (Id)1141,
+        }
     }
 }
