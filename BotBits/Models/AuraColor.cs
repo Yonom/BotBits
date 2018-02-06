@@ -40,5 +40,8 @@
         [Pack("aurablack")]
         Black = 12,
 
+        [Pack("aurateal")]
+        Mint = 13
+
     }
 }
