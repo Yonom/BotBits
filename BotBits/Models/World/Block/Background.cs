@@ -502,5 +502,16 @@ namespace BotBits
                 Purple = (Id)742;
 
         }
+        
+        public static class Winter2018
+        {
+             [Pack("brickwinter2018")]
+             public const Id
+                 Brick = (Id)757,
+                 Snow = (Id)758,
+                 Ice = (Id)759,
+                 Slate = (Id)760;
+
+        }
     }
 }
