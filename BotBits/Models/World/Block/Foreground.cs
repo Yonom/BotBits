@@ -1363,7 +1363,7 @@ namespace BotBits
             [Pack("brickwinter2018", ForegroundType = ForegroundType.Morphable)]
             public const Id
                 HalfBlockSnow = (Id)1140,
-                HalfBlockIce = (Id)1141,
+                HalfBlockIce = (Id)1141;
         }
     }
 }
