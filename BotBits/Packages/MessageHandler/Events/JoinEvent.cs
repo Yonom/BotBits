@@ -42,8 +42,6 @@ namespace BotBits.Events
             this.HasGodRights = message.GetBoolean(23);
         }
 
-        //public StaffAura StaffAura { get; set; }
-
         public bool GoldBorder { get; set; }
 
         public bool HasEditRights { get; set; }
