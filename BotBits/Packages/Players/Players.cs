@@ -97,12 +97,10 @@ namespace BotBits
             p.Smiley = e.Smiley;
             p.AuraShape = e.AuraShape;
             p.AuraColor = e.AuraColor;
-            p.StaffAura = e.StaffAura;
             p.Badge = e.Badge;
             p.HasChat = e.HasChat;
             p.GodMode = e.GodMode;
             p.AdminMode = e.AdminMode;
-            p.ModMode = e.Mod;
             p.Friend = e.Friend;
             p.GoldCoins = e.Coins;
             p.BlueCoins = e.BlueCoins;
