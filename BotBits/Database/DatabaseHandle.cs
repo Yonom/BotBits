@@ -56,77 +56,77 @@ namespace BotBits
 
         // MyPlayerObject
 
-        public Task<PlayerObject> GetMyPlayerObjectAsync()
-        {
-            return this.Client.BigDB.LoadMyPlayerObjectAsync()
-                .ThrowOnNull()
-                .Then(task => new PlayerObject(task.Result))
-                .ToSafeTask();
-        }
+        //public Task<PlayerObject> GetMyPlayerObjectAsync()
+        //{
+        //    return this.Client.BigDB.LoadMyPlayerObjectAsync()
+        //        .ThrowOnNull()
+        //        .Then(task => new PlayerObject(task.Result))
+        //        .ToSafeTask();
+        //}
 
-        public PlayerObject GetMyPlayerObject()
-        {
-            return this.GetMyPlayerObjectAsync().GetResultEx();
-        }
+        //public PlayerObject GetMyPlayerObject()
+        //{
+        //    return this.GetMyPlayerObjectAsync().GetResultEx();
+        //}
 
         // PlayerObject
 
-        public Task<PlayerObject> GetPlayerObjectAsync(string userId)
-        {
-            return this.Client.BigDB.LoadAsync("PlayerObjects", userId)
-                .ThrowOnNull()
-                .Then(task => new PlayerObject(task.Result))
-                .ToSafeTask();
-        }
+        //public Task<PlayerObject> GetPlayerObjectAsync(string userId)
+        //{
+        //    return this.Client.BigDB.LoadAsync("PlayerObjects", userId)
+        //        .ThrowOnNull()
+        //        .Then(task => new PlayerObject(task.Result))
+        //        .ToSafeTask();
+        //}
 
-        public PlayerObject GetPlayerObject(string userId)
-        {
-            return this.GetPlayerObjectAsync(userId).GetResultEx();
-        }
+        //public PlayerObject GetPlayerObject(string userId)
+        //{
+        //    return this.GetPlayerObjectAsync(userId).GetResultEx();
+        //}
 
         // PlayerObjectByUsername
 
-        public Task<PlayerObject> GetPlayerObjectByUsernameAsync(string username)
-        {
-            return this.Client.BigDB.LoadSingleAsync("PlayerObjects", "name", username)
-                .ThrowOnNull()
-                .Then(task => new PlayerObject(task.Result))
-                .ToSafeTask();
-        }
+        //public Task<PlayerObject> GetPlayerObjectByUsernameAsync(string username)
+        //{
+        //    return this.Client.BigDB.LoadSingleAsync("PlayerObjects", "name", username)
+        //        .ThrowOnNull()
+        //        .Then(task => new PlayerObject(task.Result))
+        //        .ToSafeTask();
+        //}
 
-        public PlayerObject GetPlayerObjectByUsername(string username)
-        {
-            return this.GetPlayerObjectByUsernameAsync(username).GetResultEx();
-        }
+        //public PlayerObject GetPlayerObjectByUsername(string username)
+        //{
+        //    return this.GetPlayerObjectByUsernameAsync(username).GetResultEx();
+        //}
 
         // PlayerObjectByOldUsername
         
-        public Task<PlayerObject> GetPlayerObjectByOldUsernameAsync(string oldUsername)
-        {
-            return this.Client.BigDB.LoadSingleAsync("PlayerObjects", "oldname", oldUsername)
-                .ThrowOnNull()
-                .Then(task => new PlayerObject(task.Result))
-                .ToSafeTask();
-        }
+        //public Task<PlayerObject> GetPlayerObjectByOldUsernameAsync(string oldUsername)
+        //{
+        //    return this.Client.BigDB.LoadSingleAsync("PlayerObjects", "oldname", oldUsername)
+        //        .ThrowOnNull()
+        //        .Then(task => new PlayerObject(task.Result))
+        //        .ToSafeTask();
+        //}
 
-        public PlayerObject GetPlayerObjectByOldUsername(string oldUsername)
-        {
-            return this.GetPlayerObjectByOldUsernameAsync(oldUsername).GetResultEx();
-        }
+        //public PlayerObject GetPlayerObjectByOldUsername(string oldUsername)
+        //{
+        //    return this.GetPlayerObjectByOldUsernameAsync(oldUsername).GetResultEx();
+        //}
 
         // PlayerObjects
 
-        public Task<PlayerObject[]> GetPlayerObjectsAsync(params string[] userids)
-        {
-            return this.Client.BigDB.LoadKeysAsync("PlayerObjects", userids)
-                .Then(task => task.Result.Select(o => new PlayerObject(o)).ToArray())
-                .ToSafeTask();
-        }
+        //public Task<PlayerObject[]> GetPlayerObjectsAsync(params string[] userids)
+        //{
+        //    return this.Client.BigDB.LoadKeysAsync("PlayerObjects", userids)
+        //        .Then(task => task.Result.Select(o => new PlayerObject(o)).ToArray())
+        //        .ToSafeTask();
+        //}
 
-        public PlayerObject[] GetPlayerObjects(params string[] userids)
-        {
-            return this.GetPlayerObjectsAsync(userids).GetResultEx();
-        }
+        //public PlayerObject[] GetPlayerObjects(params string[] userids)
+        //{
+        //    return this.GetPlayerObjectsAsync(userids).GetResultEx();
+        //}
 
         // --- Usernames ---
         

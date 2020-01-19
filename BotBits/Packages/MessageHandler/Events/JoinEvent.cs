@@ -31,21 +31,17 @@ namespace BotBits.Events
             this.Friend = message.GetBoolean(12);
             this.GoldMember = message.GetBoolean(13);
             this.GoldBorder = message.GetBoolean(14);
-            this.Mod = message.GetBoolean(15);
-            this.Team = (Team)message.GetInt(16);
-            this.AuraShape = (AuraShape)message.GetInt(17);
-            this.AuraColor = (AuraColor)message.GetInt(18);
-            this.ChatColor = message.GetUInt(19);
-            this.Badge = message.GetBadge(20);
-            this.CrewMember = message.GetBoolean(21);
-            this.PurpleSwitches = VarintHelper.ToInt32Array(message.GetByteArray(22));
-            this.StaffAura = (StaffAura)message.GetInt(23);
-            this.HasEditRights = message.GetBoolean(24);
-            this.HasGodRights = message.GetBoolean(25);
+            this.Team = (Team)message.GetInt(15);
+            this.AuraShape = (AuraShape)message.GetInt(16);
+            this.AuraColor = (AuraColor)message.GetInt(17);
+            this.ChatColor = message.GetUInt(18);
+            this.Badge = message.GetBadge(19);
+            this.CrewMember = message.GetBoolean(20);
+            this.PurpleSwitches = VarintHelper.ToInt32Array(message.GetByteArray(21));
+            this.HasEditRights = message.GetBoolean(22);
+            this.HasGodRights = message.GetBoolean(23);
         }
-
-        public StaffAura StaffAura { get; set; }
-
+        
         public bool GoldBorder { get; set; }
 
         public bool HasEditRights { get; set; }
@@ -143,13 +139,7 @@ namespace BotBits.Events
         /// </summary>
         /// <value><c>true</c> if this player is in god mode; otherwise, <c>false</c>.</value>
         public bool GodMode { get; set; }
-
-        /// <summary>
-        ///     Gets or sets whether this player is a moderator.
-        /// </summary>
-        /// <value><c>true</c> if this player is a moderator; otherwise, <c>false</c>.</value>
-        public bool Mod { get; set; }
-
+        
         /// <summary>
         ///     Gets or sets whether this player is my friend or not.
         /// </summary>

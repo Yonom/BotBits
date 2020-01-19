@@ -17,7 +17,7 @@ namespace BotBits
         
         public ShopData ShopData { get; }
         
-        public bool BetaMember => this.ShopData.GetCount("pro") > 0 || this.PlayerObject.OldBetaMember;
+        //public bool BetaMember => this.ShopData.GetCount("pro") > 0 || this.PlayerObject.OldBetaMember;
 
         public bool HasSmiley(Smiley smiley)
         {
@@ -52,8 +52,8 @@ namespace BotBits
         private bool HasPack(PackAttribute pack)
         {
             if (pack?.Package == null) return true;
-            if (pack.AdminOnly) return this.PlayerObject.Administrator;
-            if (pack.GoldMembershipItem) return this.PlayerObject.GoldMember;
+            if (pack.AdminOnly) return true; // return this.PlayerObject.Administrator;
+            if (pack.GoldMembershipItem) return true; // return this.PlayerObject.GoldMember;
             return this.ShopData.GetCount(pack.Package) > 0;
         }
     }

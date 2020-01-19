@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("BotBits")]
 [assembly: Guid("fbac626f-42ca-4413-ba36-1263bb636cbf")]
 [assembly: AssemblyDescription("BotBits is a framework to help bot makers make bots faster.")]
-[assembly: AssemblyCopyright("Copyright © Simon Farshid 2017")]
+[assembly: AssemblyCopyright("Copyright © Simon Farshid 2020")]
 [assembly: AssemblyTrademark("BotBits")]
 [assembly: ComVisible(false)]
 [assembly: AssemblyVersion("1.0.0.0")]

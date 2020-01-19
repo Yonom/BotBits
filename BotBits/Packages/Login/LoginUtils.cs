@@ -9,11 +9,10 @@ namespace BotBits
         public static Task<PlayerData> GetPlayerDataAsync(DatabaseHandle handle)
         {
             var shopTask = handle.GetMyShopDataAsync();
-            var playerObjectTask = handle.GetMyPlayerObjectAsync();
-
+            //var playerObjectTask = handle.GetMyPlayerObjectAsync();
+            var playerObject = new PlayerObject();
             return shopTask
-                .Then(t => playerObjectTask)
-                .Then(t => new PlayerData(playerObjectTask.Result, shopTask.Result))
+                .Then(t => new PlayerData(playerObject, t.Result))
                 .ToSafeTask(); ;
         }
 

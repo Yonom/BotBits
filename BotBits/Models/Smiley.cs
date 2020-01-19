@@ -198,7 +198,7 @@ namespace BotBits
         Lol = 68,
 
         [Pack("smileylaika")]
-        Laika = 69,
+        Dog = 69,
 
         [Pack("smileyalien")]
         Alien = 70,
