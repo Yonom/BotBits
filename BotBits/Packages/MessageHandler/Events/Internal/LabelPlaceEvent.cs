@@ -22,7 +22,7 @@ namespace BotBits.Events
             this.Id = message.GetInteger(2);
             this.Text = message.GetString(3);
             this.TextColor = message.GetString(4);
-            this.WrapWidth = message.GetString(5);
+            this.WrapWidth = message.GetUInt(5);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace BotBits.Events
         /// <value>
         ///     The wrap width of the text.
         /// </value>
-        public string WrapWidth { get; set; }
+        public uint WrapWidth { get; set; }
 
         /// <summary>
         ///     Gets or sets the color of the text.
