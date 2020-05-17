@@ -84,7 +84,6 @@
     <Compile Include="Database\Player\PlayerData.cs" />
     <Compile Include="Models\Gravity.cs" />
     <Compile Include="Models\AccessGroup.cs" />
-    <Compile Include="Models\StaffAura.cs" />
     <Compile Include="Models\World\Block\MultiJump.cs" />
     <Compile Include="Models\World\ExpectedData\ExpectedData.cs" />
     <Compile Include="Models\World\Snapshot\BlocksSnapshot.cs" />
