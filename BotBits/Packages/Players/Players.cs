@@ -268,7 +268,6 @@ namespace BotBits
         {
             var p = e.Player;
             p.AdminMode = e.AdminMode;
-            p.StaffAura = e.StaffAura;
 
             if (!p.ModMode)
             {
@@ -288,7 +287,6 @@ namespace BotBits
         {
             var p = e.Player;
             p.ModMode = e.ModMode;
-            p.StaffAura = e.StaffAura;
             
             if (!p.AdminMode)
             {
