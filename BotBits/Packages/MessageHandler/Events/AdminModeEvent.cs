@@ -18,10 +18,7 @@ namespace BotBits.Events
             : base(client, message)
         {
             this.AdminMode = message.GetBoolean(1);
-            this.StaffAura = (StaffAura)message.GetInt(2);
         }
-
-        public StaffAura StaffAura { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this player is in administrator mode.
