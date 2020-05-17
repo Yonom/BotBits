@@ -343,8 +343,6 @@ namespace BotBits
 
         public bool GoldBorder { get; set; }
 
-        public StaffAura StaffAura { get; set; }
-
         public bool StaffMode => this.AdminMode || this.ModMode;
 
         public bool CanToggleGod => this.HasGodRights | this.HasEditRights;
