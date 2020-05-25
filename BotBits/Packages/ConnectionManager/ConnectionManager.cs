@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using BotBits.Events;
-using EE.FutureProof;
 using PlayerIOClient;
 
 namespace BotBits
@@ -29,21 +28,6 @@ namespace BotBits
         public void AttachConnection(Connection connection, ConnectionArgs args)
         {
             var adapter = new PlayerIOConnectionAdapter(connection);
-            try
-            {
-                this.SetConnection(adapter, args);
-                this._adapter = adapter;
-            }
-            catch
-            {
-                adapter.Dispose();
-                throw;
-            }
-        }
-
-        public void AttachConnection(FutureProofConnection connection, ConnectionArgs args)
-        {
-            var adapter = new FutureProofConnectionAdapter(connection);
             try
             {
                 this.SetConnection(adapter, args);

@@ -46,10 +46,6 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EE.FutureProof, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EE.FutureProof.2.0.0\lib\net40\EE.FutureProof.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PlayerIOClient, Version=3.5.0.0, Culture=neutral, PublicKeyToken=c7f7b730653f6a44, processorArchitecture=MSIL">
       <HintPath>..\packages\PlayerIOClient-Signed.3.5.2\lib\PlayerIOClient.dll</HintPath>
     </Reference>
@@ -131,16 +127,13 @@
     <Compile Include="Packages\Blocks\Events\ForegroundPlaceEvent.cs" />
     <Compile Include="Packages\Blocks\Events\PlaceEvent.cs" />
     <Compile Include="Packages\Chat\Events\QueueChatEvent.cs" />
-    <Compile Include="Packages\ConnectionManager\Connection\FutureProofConnectionAdapter.cs" />
     <Compile Include="Packages\ConnectionManager\Events\JoinFailureEvent.cs" />
     <Compile Include="Packages\Login\Client\ClientExtensions.cs" />
     <Compile Include="Packages\ConnectionManager\ConnectionArgs.cs" />
-    <Compile Include="Packages\Login\Client\FutureProofLoginClient.cs" />
     <Compile Include="Packages\Login\Client\ILoginClient.cs" />
     <Compile Include="Packages\Login\JoinException.cs" />
     <Compile Include="Packages\Login\Client\LoginClientExtensions.cs" />
     <Compile Include="Packages\Login\Client\VersionLoginClient.cs" />
-    <Compile Include="Packages\Login\NonFutureProofLogin.cs" />
     <Compile Include="Packages\Login\ILogin.cs" />
     <Compile Include="Packages\Login\Game\PlayerIOGame.cs" />
     <Compile Include="Packages\Login\Game\PlayerIOGameExtensions.cs" />
