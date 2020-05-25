@@ -28,9 +28,6 @@ jobs:
           
           # NuGet package id, used for version detection & defaults to project name
           PACKAGE_NAME: BotBits
-
-          # Regex pattern to extract version info in a capturing group
-          VERSION_STATIC: 262.0.0
           
           # API key to authenticate with NuGet server
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}

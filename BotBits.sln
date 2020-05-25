@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotBits.Demo", "BotBits.Dem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotBits", "BotBits\BotBits.csproj", "{3635DFA8-73F1-4A42-9286-985DBFABCBF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotBits.Tests", "BotBits.Tests\BotBits.Tests.csproj", "{062C42D9-5D25-43E9-A99F-E846EAC1F145}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,9 +20,6 @@ Global
 		{3635DFA8-73F1-4A42-9286-985DBFABCBF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3635DFA8-73F1-4A42-9286-985DBFABCBF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3635DFA8-73F1-4A42-9286-985DBFABCBF3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{062C42D9-5D25-43E9-A99F-E846EAC1F145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{062C42D9-5D25-43E9-A99F-E846EAC1F145}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{062C42D9-5D25-43E9-A99F-E846EAC1F145}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
