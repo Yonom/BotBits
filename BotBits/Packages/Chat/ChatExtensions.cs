@@ -487,7 +487,7 @@ namespace BotBits
         }
 
         /// <summary>
-        ///     Sets the gravity of the specified username (/giveeffect &lt;username&gt Gravity &lt;gravity/16&gt;).
+        ///     Sets the gravity of the specified username (/giveeffect &lt;username&gt; Gravity &lt;gravity/16&gt;).
         /// </summary>
         /// <param name="chat">The chat.</param>
         /// <param name="username">The username.</param>

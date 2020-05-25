@@ -9,7 +9,7 @@
     <copyright>Copyright © Simon Farshid</copyright>
     <tags>BotBits EverybodyEdits</tags>
     <dependencies>
-      <group targetFramework=".NETFramework4.0">
+      <group targetFramework=".NETFramework4.7.1">
       </group>
     </dependencies>
   </metadata>
