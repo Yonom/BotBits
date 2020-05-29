@@ -315,15 +315,9 @@ namespace BotBits
                 .SendIn(this.BotBits);
         }
 
-        public void ToggleAdminMode()
+        public void ToggleStaffMode()
         {
-            new AdminModeSendMessage()
-                .SendIn(this.BotBits);
-        }
-
-        public void ToggleModMode()
-        {
-            new ModModeSendMessage()
+            new StaffModeSendMessage()
                 .SendIn(this.BotBits);
         }
     }

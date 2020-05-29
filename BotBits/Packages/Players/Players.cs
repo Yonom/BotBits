@@ -100,7 +100,7 @@ namespace BotBits
             p.Badge = e.Badge;
             p.HasChat = e.HasChat;
             p.GodMode = e.GodMode;
-            p.StaffMode = e.AdminMode;
+            p.StaffMode = e.StaffMode;
             p.Friend = e.Friend;
             p.GoldCoins = e.Coins;
             p.BlueCoins = e.BlueCoins;
