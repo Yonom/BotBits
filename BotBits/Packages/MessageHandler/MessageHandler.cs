@@ -39,13 +39,6 @@ namespace BotBits
         }
 
         [EventListener]
-        private void On(InitEvent e)
-        {
-            new Init2SendMessage()
-                .SendIn(this.BotBits);
-        }
-
-        [EventListener]
         private void On(InfoEvent e)
         {
             this._lastInfo = e;

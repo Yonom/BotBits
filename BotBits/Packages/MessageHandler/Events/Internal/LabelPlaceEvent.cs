@@ -15,7 +15,7 @@ namespace BotBits.Events
         /// <param name="message">The message.</param>
         /// <param name="client"></param>
         internal LabelPlaceEvent(BotBitsClient client, Message message)
-            : base(client, message, 5)
+            : base(client, message, 6)
         {
             this.X = message.GetInteger(0);
             this.Y = message.GetInteger(1);

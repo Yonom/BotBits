@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotBits.Demo", "BotBits.Demo\BotBits.Demo.csproj", "{7F26DF80-5562-4201-B99F-9796B4FB2E49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotBits", "BotBits\BotBits.csproj", "{3635DFA8-73F1-4A42-9286-985DBFABCBF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotBits", "BotBits\BotBits.csproj", "{3635DFA8-73F1-4A42-9286-985DBFABCBF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

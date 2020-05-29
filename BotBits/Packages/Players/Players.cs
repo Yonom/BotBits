@@ -100,7 +100,7 @@ namespace BotBits
             p.Badge = e.Badge;
             p.HasChat = e.HasChat;
             p.GodMode = e.GodMode;
-            p.AdminMode = e.AdminMode;
+            p.StaffMode = e.AdminMode;
             p.Friend = e.Friend;
             p.GoldCoins = e.Coins;
             p.BlueCoins = e.BlueCoins;
@@ -256,45 +256,21 @@ namespace BotBits
             var p = e.Player;
             p.GodMode = e.GodMode;
 
-            if (!p.ModMode && !p.AdminMode)
+            if (!p.StaffMode)
             {
                 new FlyEvent(p, p.Flying)
                     .RaiseIn(this.BotBits);
             }
         }
 
-        [EventListener]
-        private void On(AdminModeEvent e)
-        {
-            var p = e.Player;
-            p.AdminMode = e.AdminMode;
-
-            if (!p.ModMode)
-            {
-                new StaffModeEvent(p, p.StaffMode)
-                    .RaiseIn(this.BotBits);
-            }
-
-            if (!p.ModMode && !p.GodMode)
-            {
-                new FlyEvent(p, p.Flying)
-                    .RaiseIn(this.BotBits);
-            }
-        }
 
         [EventListener]
-        private void On(ModModeEvent e)
+        private void On(StaffModeEvent e)
         {
             var p = e.Player;
-            p.ModMode = e.ModMode;
-            
-            if (!p.AdminMode)
-            {
-                new StaffModeEvent(p, p.StaffMode)
-                    .RaiseIn(this.BotBits);
-            }
+            p.StaffMode = e.StaffMode;
 
-            if (!p.GodMode && !p.AdminMode)
+            if (!p.GodMode)
             {
                 new FlyEvent(p, p.Flying)
                     .RaiseIn(this.BotBits);
