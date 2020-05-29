@@ -39,6 +39,7 @@ namespace BotBits
         public WorldStatus WorldStatus { get; private set; }
         public bool MinimapEnabled { get; private set; }
         public bool LobbyPreviewEnabled { get; private set; }
+        public string OwnerConnectUserId { get; private set; }
 
         [Pure]
         public bool IsKeyPressed(Key key)
@@ -230,7 +231,12 @@ namespace BotBits
             this.WorldStatus = e.WorldStatus;
             this.MinimapEnabled = e.MinimapEnabled;
             this.LobbyPreviewEnabled = e.LobbyPreviewEnabled;
+            this.OwnerConnectUserId = e.OwnerConnectUserId;
+
             this.InitComplete = true;
+
+            new Init2SendMessage()
+                .SendIn(this.BotBits);
         }
 
         [EventListener(EventPriority.Low)]

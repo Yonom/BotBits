@@ -56,10 +56,13 @@ namespace BotBits.Events
             this.LobbyPreviewEnabled = message.GetBoolean(36);
             this.OrangeSwitches = VarintHelper.ToInt32Array(message.GetByteArray(37));
             this.FriendsOnly = message.GetBoolean(38);
+            this.OwnerConnectUserId = message.GetString(39);
+            this.CanToggleGodMode = message.GetBoolean(40);
         }
 
         public bool FriendsOnly { get; set; }
-
+        public string OwnerConnectUserId { get; set; }
+        public bool CanToggleGodMode { get; }
         public bool GoldBorder { get; set; }
 
         public int[] OrangeSwitches { get; set; }

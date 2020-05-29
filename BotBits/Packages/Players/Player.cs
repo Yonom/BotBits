@@ -61,20 +61,12 @@ namespace BotBits
         public bool GodMode { get; internal set; }
 
         /// <summary>
-        ///     Gets a value indicating whether this player has admin mode enabled.
+        ///     Gets a value indicating whether this player has staff mode enabled.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if this player has admin mode enabled; otherwise, <c>false</c>.
+        ///     <c>true</c> if this player has staff mode enabled; otherwise, <c>false</c>.
         /// </value>
-        public bool AdminMode { get; internal set; }
-
-        /// <summary>
-        ///     Gets a value indicating whether this player has moderator mode enabled.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this player has moderator mode enabled; otherwise, <c>false</c>.
-        /// </value>
-        public bool ModMode { get; internal set; }
+        public bool StaffMode { get; internal set; }
 
         /// <summary>
         ///     Gets a value indicating whether this player is the bot user's friend.
@@ -342,8 +334,6 @@ namespace BotBits
         public bool Muted { get; set; }
 
         public bool GoldBorder { get; set; }
-
-        public bool StaffMode => this.AdminMode || this.ModMode;
 
         public bool CanToggleGod => this.HasGodRights | this.HasEditRights;
 
