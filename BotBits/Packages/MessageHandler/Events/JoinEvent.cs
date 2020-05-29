@@ -23,7 +23,7 @@ namespace BotBits.Events
             this.X = message.GetDouble(4);
             this.Y = message.GetDouble(5);
             this.GodMode = message.GetBoolean(6);
-            this.AdminMode = message.GetBoolean(7);
+            this.StaffMode = message.GetBoolean(7);
             this.HasChat = message.GetBoolean(8);
             this.Coins = message.GetInteger(9);
             this.BlueCoins = message.GetInteger(10);
@@ -99,10 +99,10 @@ namespace BotBits.Events
         public uint ChatColor { get; set; }
 
         /// <summary>
-        ///     Gets or sets whether the user is in admin mode or not.
+        ///     Gets or sets whether the user is in staff mode or not.
         /// </summary>
-        /// <value><c>true</c> if the player has activated admin mode; otherwise, <c>false</c>.</value>
-        public bool AdminMode { get; set; }
+        /// <value><c>true</c> if the player has activated staff mode; otherwise, <c>false</c>.</value>
+        public bool StaffMode { get; set; }
 
         /// <summary>
         ///     Gets or sets the amount of yellow coins the player has.

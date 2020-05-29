@@ -277,10 +277,10 @@ namespace BotBits
         public bool CrewMember { get; internal set; }
 
         /// <summary>
-        ///     Gets a value indicating whether this player is flying using god mode, admin mode or moderator mode.
+        ///     Gets a value indicating whether this player is flying using god mode or staff mode.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if this player is flying using god mode, admin mode or moderator mode; otherwise, <c>false</c>.
+        ///     <c>true</c> if this player is flying using god mode or staff mode; otherwise, <c>false</c>.
         /// </value>
         public bool Flying => this.GodMode || this.StaffMode;
 

@@ -3,12 +3,12 @@ using PlayerIOClient;
 namespace BotBits.SendMessages
 {
     /// <summary>
-    ///     Sent to toggle moderator mode.
+    ///     Sent to toggle staff mode.
     /// </summary>
     /// <seealso cref="SendMessage{T}" />
-    public sealed class ModModeSendMessage : SendMessage<ModModeSendMessage>
+    public sealed class StaffModeSendMessage : SendMessage<StaffModeSendMessage>
     {
-        public ModModeSendMessage()
+        public StaffModeSendMessage()
         {
             
         }
