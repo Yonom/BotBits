@@ -14,8 +14,9 @@ namespace BotBits.Events
             : base(client, message)
         {
             this.Effect = (Effect)message.GetInt(1);
-            this.Enabled = message.GetBoolean(2);
 
+            if (message.Count < 3) return;
+            this.Enabled = message.GetBoolean(2);
             if (message.Count < 4) return;
             this.TimeLeft = TimeSpan.FromSeconds(message.GetDouble(3));
             if (message.Count < 5) return;

@@ -289,6 +289,13 @@ namespace BotBits
         {
             var p = e.Player;
 
+            if (e.Effect == Effect.Reset)
+            {
+                p.ResetAllEffects();
+                return;
+            }
+                
+
             if (e.Enabled)
             {
                 var effect = new ActiveEffect(e.Effect, e.Expires, e.TimeLeft, e.Duration);

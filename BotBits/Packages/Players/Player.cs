@@ -460,6 +460,14 @@ namespace BotBits
             }
         }
 
+        internal void ResetAllEffects()
+        {
+            lock (this._effects)
+            {
+                this._effects.Clear();
+            }
+        }
+
         [Pure]
         public bool HasGoldCoin(Point loc)
         {

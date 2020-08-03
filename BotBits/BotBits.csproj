@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net471</TargetFramework>
-    <Version>262.0.1</Version>
+    <Version>262.0.2</Version>
     <PackageId>BotBits</PackageId>
     <Description>An Everybody Edits framework designed for performance and reliability.</Description>
   </PropertyGroup>
