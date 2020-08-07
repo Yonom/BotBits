@@ -176,27 +176,23 @@ namespace BotBits
                 if (channel.LastSent == e.Text) channel.LastReceived = e.Text;
             }
         }
+        [EventListener]
+        private void On(PrivateMessageEvent e)
+        {
+            if (e.Incoming == false)
+            {
+                var username = e.Player.Username;
+                var message = $"/pm {username} {e.Message}";
+
+                var channel = this.GetChatChannel(username);
+                if (channel.LastSent == message) channel.LastReceived = message;
+            }
+        }
 
         [EventListener]
         private void On(WriteEvent e)
         {
-            if (e.Type == WriteType.ReceivedPrivateMessage)
-            {
-                var username = e.GetUser();
-                var message = e.Text.TrimEnd(' '); // Bug ingame, space after each private message
-
-                new PrivateMessageEvent(username, message)
-                    .RaiseIn(this.BotBits);
-            }
-            else if (e.Type == WriteType.SentPrivateMessage)
-            {
-                var username = e.GetUser();
-                var message = $"/pm {username} {e.Text.TrimEnd(' ')}"; // Bug ingame, space after each private message
-                
-                var channel = this.GetChatChannel(username);
-                if (channel.LastSent == message) channel.LastReceived = message;
-            }
-            else if (e.Type == WriteType.ChattingTooFast)
+            if (e.Type == WriteType.ChattingTooFast)
             {
                 this._warning = true;
             }

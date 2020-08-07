@@ -4,8 +4,8 @@
     {
         Unrecognized,
 
-        SentPrivateMessage,
-        ReceivedPrivateMessage,
+        Magic,
+        IncomingUpdate,
         ChattingTooFast
     }
 }
