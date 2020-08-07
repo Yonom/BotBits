@@ -10,9 +10,7 @@ namespace BotBits.Events
     public sealed class WriteEvent : ReceiveEvent<WriteEvent>
     {
         const string SystemPrefix = "* SYSTEM";
-        const string PmPrefix = "* ";
-        const string PmSuffix = " > you";
-        const string PmSendPrefix = "* you > ";
+        const string MagicPrefix = "* MAGIC";
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="WriteEvent" /> class.
@@ -48,15 +46,16 @@ namespace BotBits.Events
                     {
                         case "You are trying to chat too fast, spamming the chat room is not nice!":
                             return WriteType.ChattingTooFast;
+                        case "Everybody Edits is about to get updated. Please save your world now.":
+                            return WriteType.IncomingUpdate;
                     }
+
+                    if (this.Text.StartsWith("Final Warning. You have said the same thing"))
+                        return WriteType.ChattingTooFast;
                 }
-                else if (this.Title.StartsWith(PmPrefix) && this.Title.EndsWith(PmSuffix))
+                else if (this.Title == MagicPrefix)
                 {
-                    return WriteType.ReceivedPrivateMessage;
-                }
-                else if (this.Title.StartsWith(PmSendPrefix))
-                {
-                    return WriteType.SentPrivateMessage;
+                    return WriteType.Magic;
                 }
 
                 return WriteType.Unrecognized;
@@ -67,10 +66,8 @@ namespace BotBits.Events
         {
             switch (this.Type)
             {
-                case WriteType.ReceivedPrivateMessage:
-                    return this.Title.Substring(PmPrefix.Length, this.Title.Length - PmPrefix.Length - PmSuffix.Length);
-                case WriteType.SentPrivateMessage:
-                    return this.Title.Substring(PmSendPrefix.Length);
+                case WriteType.Magic:
+                    return this.Text.Split(' ')[0].ToLower();
 
                 default:
                     throw new InvalidOperationException();
